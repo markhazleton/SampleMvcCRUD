@@ -1,0 +1,25 @@
+﻿@{
+    string Version = ViewContext.HttpContext.Server.MachineName.ToString();
+    Version = String.Format("{0}.{1} ({2}.{3})",
+        ViewContext.Controller.GetType().Assembly.GetName().Version.Major,
+        ViewContext.Controller.GetType().Assembly.GetName().Version.Minor,
+        ViewContext.Controller.GetType().Assembly.GetName().Version.Build,
+        Version.Substring(Version.Length - 4));
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        @RenderBody()
+    </div>
+</body>
+</html>
