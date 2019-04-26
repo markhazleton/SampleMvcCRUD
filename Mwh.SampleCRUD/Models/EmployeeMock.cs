@@ -15,6 +15,29 @@
                 new Employee() { Name="Alan", Age = 53, State = "Texas", Country = "USA", EmployeeID=2 },
                 new Employee() { Name="Lesley", Age = 50, State = "Texas", Country = "USA", EmployeeID=3 },
             };
+
+
+            foreach (var emp in _list)
+            {
+                emp.JobList.Add(new JobAssignment()
+                {
+                    CompLevel = 1,
+                    StartDate = DateTime.Now.Date.AddDays(-100),
+                    EndDate = DateTime.Now.Date.AddDays(-50),
+                    OutcomeCode = 2,
+                    Title = "Solution Architect"
+                });
+                emp.JobList.Add(new JobAssignment()
+                {
+                    CompLevel = 2,
+                    StartDate = DateTime.Now.Date.AddDays(-49),
+                    EndDate = DateTime.Now.Date.AddDays(-1),
+                    OutcomeCode = 3,
+                    Title = "Developer"
+                });
+            }
+
+
         }
 
         //Method for Deleting an Employee
