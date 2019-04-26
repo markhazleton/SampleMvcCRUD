@@ -1,7 +1,11 @@
-﻿using System;
-
-namespace SampleCRUD.Models
+﻿namespace SampleCRUD.Models
 {
+    using System;
+    using System.Collections.Generic;
+
+    public class JobAssignmentList : List<JobAssignment>
+    {
+    }
     public class JobAssignment
     {
         public int CompLevel { get; set; }
