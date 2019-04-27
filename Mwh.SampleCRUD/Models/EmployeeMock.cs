@@ -55,7 +55,9 @@
         /// <returns></returns>
         public Employee Get(int id)
         {
-            return _list.Find(x => x.EmployeeID.Equals(id));
+            var myEmp = _list.Where(w => w.EmployeeID == id).FirstOrDefault();
+            if (myEmp == null) return new Employee();
+            return myEmp;
         }
 
         //Return list of all Employees
