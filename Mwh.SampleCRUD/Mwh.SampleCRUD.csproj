@@ -147,6 +147,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\EmployeeDepartment.cs" />
     <Compile Include="Models\EmployeeMock.cs" />
     <Compile Include="Models\IEmployeeDB.cs" />
     <Compile Include="Models\JobAssignment.cs" />
@@ -171,6 +172,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Employee\_EmployeeList.cshtml" />
+    <Content Include="Views\Employee\_EmployeeEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

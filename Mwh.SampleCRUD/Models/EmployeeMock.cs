@@ -11,9 +11,9 @@
         {
             _list = new List<Employee>()
             {
-                new Employee() { Name="Mark", Age = 50, State = "Texas", Country = "USA", EmployeeID=1 },
-                new Employee() { Name="Alan", Age = 53, State = "Texas", Country = "USA", EmployeeID=2 },
-                new Employee() { Name="Lesley", Age = 50, State = "Texas", Country = "USA", EmployeeID=3 },
+                new Employee() { Name="Bob", Age = 50, Department= EmployeeDepartment.IT, State = "Texas", Country = "USA", EmployeeID=1 },
+                new Employee() { Name="Sam", Age = 53, Department=EmployeeDepartment.Marketing, State = "Texas", Country = "USA", EmployeeID=2 },
+                new Employee() { Name="Frank", Age = 50, Department=EmployeeDepartment.Executive, State = "Texas", Country = "USA", EmployeeID=3 },
             };
 
 
@@ -88,6 +88,7 @@
 
                 myEmp.Name = emp.Name;
                 myEmp.Age = emp.Age;
+                myEmp.Department = emp.Department;
                 myEmp.Country = emp.Country;
                 myEmp.State = emp.State;
                 return myEmp.EmployeeID;

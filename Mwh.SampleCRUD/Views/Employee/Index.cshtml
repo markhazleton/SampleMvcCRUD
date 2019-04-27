@@ -4,53 +4,48 @@
     ViewBag.Title = "Employee MVC";
 }
 
-    <h2>Employee MVC</h2>
+<h2>Employee MVC with Ajax</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Edit", new { id = 0 },new { @class = "btn btn-primary"})
+    <a href="#" class="btn btn-primary" onclick="return loadEmployeeEdit('0')">Create New</a>
 </p>
-<table class="table table-bordered table-hover">
-    <thead>
 
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Age)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div id="content-employeelist">
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Age)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.State)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Country)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
-                </td>
-            </tr>
-        }
-    </tbody>
-    <tfoot></tfoot>
-</table>
+</div>
+
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+            loadEmployeeList();
+        });
+
+        //Load Employee List
+        function loadEmployeeList() {
+            $.ajax({
+                url: '/Employee/GetEmployeeList',
+                type: 'get',
+                dataType: 'html',
+                success: function (data) {
+                    $("#content-employeelist").html(data);
+                },
+                error: function (errormessage) { alert(errormessage.responseText); }
+            })
+        };
+
+        //Load Employee Edit
+        function loadEmployeeEdit(EmpID) {
+            $.ajax({
+                url: '/Employee/GetEmployeeEdit/' + EmpID,
+                type: 'get',
+                dataType: 'html',
+                success: function (data) {
+                    $("#content-employeelist").html(data);
+                },
+                error: function (errormessage) { alert(errormessage.responseText); }
+            })
+        };
+
+    </script>
+}
