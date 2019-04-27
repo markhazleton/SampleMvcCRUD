@@ -11,12 +11,12 @@ namespace SampleCRUD.Controllers
         {
             get
             {
-                if (Session == null) return new EmployeeMock();
+                if (HttpContext.Application == null) return new EmployeeMock();
 
-                if ((EmployeeMock)Session["EmployeeDB"] == null)
-                    Session["EmployeeDB"] = new EmployeeMock();
+                if ((EmployeeMock)HttpContext.Application["EmployeeDB"] == null)
+                    HttpContext.Application["EmployeeDB"] = new EmployeeMock();
 
-                return ((EmployeeMock)Session["EmployeeDB"]);
+                return ((EmployeeMock)HttpContext.Application["EmployeeDB"]);
             }
         }
     }
