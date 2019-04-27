@@ -35,11 +35,8 @@
                     @Html.DisplayFor(modelItem => item.Country)
                 </td>
                 <td>
-                    <a href="#" class="btn btn-primary" onclick="return loadEmployeeEdit('@item.EmployeeID')">Edit</a>
-
-
-                     |
-@Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+                    <a href="#" class="btn btn-primary" onclick="return loadEmployeeEdit('@item.EmployeeID')">Edit</a>  |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
                 </td>
             </tr>
         }
