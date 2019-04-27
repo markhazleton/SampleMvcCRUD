@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (@Html.BeginForm("Save", "Employee", FormMethod.Post, new { @id = "frmEmployee" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.EmployeeID)
@@ -51,11 +51,13 @@
     </div>
 }
 
-<div>
-    @Html.EditorFor(e=>e.JobList)
-</div>
+@if (Model.EmployeeID > 0)
+{
+    <div>
+        @Html.EditorFor(e => e.JobList)
+    </div>
+}
 
-
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
 </div>
