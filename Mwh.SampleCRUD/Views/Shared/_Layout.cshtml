@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Web.Optimization
+@{
     string Version = ViewContext.HttpContext.Server.MachineName.ToString();
     Version = String.Format("{0}.{1} ({2}.{3})",
         ViewContext.Controller.GetType().Assembly.GetName().Version.Major,
@@ -15,10 +16,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="MVC Sample CRUD - Mark Hazleton">
     <meta name="author" content="Mark Hazleton">
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+
+    @Styles.Render("~/bundles/style")
+
+
 </head>
 
 <body id="page-top">
@@ -44,10 +46,7 @@
     </nav>
 
     <section class="container-fluid" style="padding-top:25px;margin-top:25px;margin-bottom:25px;padding-bottom:25px;">
-
-            @RenderBody()
-
-
+        @RenderBody()
     </section>
 
     <!-- Footer -->
@@ -56,6 +55,10 @@
             <p class="m-0 text-center text-white">Copyright &copy; Mark Hazleton 2019</p>
         </div>
     </footer>
+
+    @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryval")
+
+    @RenderSection("scripts", required: false)
 
 
 </body>
