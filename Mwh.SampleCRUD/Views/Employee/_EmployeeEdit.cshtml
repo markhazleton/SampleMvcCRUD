@@ -60,20 +60,3 @@
     </div>
 }
 
-
-<script type="text/javascript">
-
-    function SaveEmployee(id) {
-        $.ajax({
-            url: '/employee/save',
-            type: 'post',
-            data: $('form#frmEmployee').serialize(),
-            dataType: 'html',
-            success: function (data) {
-                loadEmployeeList();
-            },
-            error: function (errormessage) { alert(errormessage.responseText); }
-        });
-    }
-
-</script>
