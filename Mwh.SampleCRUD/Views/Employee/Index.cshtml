@@ -8,11 +8,22 @@
 
 <p>
     <a href="#" class="btn btn-primary" onclick="return loadEmployeeEdit('0')">Create New</a>
+    <a href="#" class="btn btn-primary" onclick="return loadEmployeeList()">Reload List</a>
 </p>
 
 <div id="content-employeelist">
 
 </div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id="modalContent" class="modal-content">
+
+        </div>
+    </div>
+</div>
+
 
 @section scripts {
 
@@ -23,12 +34,14 @@
 
         //Load Employee List
         function loadEmployeeList() {
+            $('#myModal').modal('hide');
             $.ajax({
                 url: '/Employee/GetEmployeeList',
                 type: 'get',
                 dataType: 'html',
                 success: function (data) {
                     $("#content-employeelist").html(data);
+                    $("#content-employeelist").fadeIn();
                 },
                 error: function (errormessage) { alert(errormessage.responseText); }
             })
@@ -41,7 +54,10 @@
                 type: 'get',
                 dataType: 'html',
                 success: function (data) {
-                    $("#content-employeelist").html(data);
+                    $("#modalContent").html(data);
+                    $('#myModal').modal('show');
+                    $('#btnUpdate').show();
+                    $('#btnAdd').hide();
                 },
                 error: function (errormessage) { alert(errormessage.responseText); }
             })

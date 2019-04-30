@@ -19,14 +19,14 @@ namespace SampleCRUD.Controllers
         {
             return View(empDB.Get(id));
         }
-        public ActionResult Edit(int id=0)
+        public ActionResult Edit(int id = 0)
         {
             return View(empDB.Get(id));
         }
 
         public ActionResult GetEmployeeEdit(int id = 0)
         {
-            return PartialView("_EmployeeEdit",empDB.Get(id));
+            return PartialView("_EmployeeEdit", empDB.Get(id));
         }
 
         public ActionResult GetEmployeeList()
@@ -35,11 +35,12 @@ namespace SampleCRUD.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(Employee postEmployee)
+        public JsonResult Save(Employee postEmployee)
         {
             var myResult = empDB.Update(postEmployee);
-            return View("Index", empDB.ListAll());
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
+
         // GET: Employee
         public ActionResult Index()
         {
