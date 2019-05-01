@@ -173,6 +173,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Employee\_EmployeeList.cshtml" />
     <Content Include="Views\Employee\_EmployeeEdit.cshtml" />
+    <Content Include="Views\Employee\_EmployeeDelete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
