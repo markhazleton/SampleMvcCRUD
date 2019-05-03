@@ -62,19 +62,47 @@
             })
         };
 
-        function SaveEmployee(id) {
-        $.ajax({
-            url: '/employee/save',
-            type: 'post',
-            data: $('form#frmEmployee').serialize(),
-            dataType: 'html',
-            success: function (data) {
-                loadEmployeeList();
-            },
-            error: function (errormessage) { alert(errormessage.responseText); }
-        });
-    }
+        //Load Employee Delete
+        function loadEmployeeDelete(EmpID) {
+            $.ajax({
+                url: '/Employee/GetEmployeeDelete/' + EmpID,
+                type: 'get',
+                dataType: 'html',
+                success: function (data) {
+                    $("#modalContent").html(data);
+                    $('#myModal').modal('show');
+                    $('#btnUpdate').show();
+                    $('#btnAdd').hide();
+                },
+                error: function (errormessage) { alert(errormessage.responseText); }
+            })
+        };
 
+        function SaveEmployee(id) {
+            $.ajax({
+                url: '/employee/save',
+                type: 'post',
+                data: $('form#frmEmployee').serialize(),
+                dataType: 'html',
+                success: function (data) {
+                    loadEmployeeList();
+                },
+                error: function (errormessage) { alert(errormessage.responseText); }
+            });
+        }
+
+        function DeleteEmployee(id) {
+            $.ajax({
+                url: '/employee/delete',
+                type: 'post',
+                data: $('form#frmEmployee').serialize(),
+                dataType: 'html',
+                success: function (data) {
+                    loadEmployeeList();
+                },
+                error: function (errormessage) { alert(errormessage.responseText); }
+            });
+        }
 
 
 
