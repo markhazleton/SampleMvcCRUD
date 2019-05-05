@@ -1,27 +1,21 @@
-﻿using SampleCRUD.Models;
-using System;
-using System.Linq;
-using System.Web.Mvc;
-
-namespace SampleCRUD.Controllers
+﻿namespace SampleCRUD.Controllers
 {
+    using SampleCRUD.Models;
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+
     public class EmployeeController : BaseController
     {
-        public ActionResult Create()
+        [HttpPost]
+        public JsonResult Delete(int id)
         {
-            return View("Edit", new Employee());
+            var myResult = empDB.Delete(id);
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Delete(int id)
+        public ActionResult GetEmployeeDelete(int id = 0)
         {
-            return View(empDB.Get(id));
-        }
-        public ActionResult Details(int id)
-        {
-            return View(empDB.Get(id));
-        }
-        public ActionResult Edit(int id = 0)
-        {
-            return View(empDB.Get(id));
+            return PartialView("_EmployeeDelete", empDB.Get(id));
         }
 
         public ActionResult GetEmployeeEdit(int id = 0)
@@ -34,17 +28,17 @@ namespace SampleCRUD.Controllers
             return PartialView("_EmployeeList", empDB.ListAll());
         }
 
+        // GET: Employee
+        public ActionResult Index()
+        {
+            return View(empDB.ListAll());
+        }
+
         [HttpPost]
         public JsonResult Save(Employee postEmployee)
         {
             var myResult = empDB.Update(postEmployee);
             return Json(true, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: Employee
-        public ActionResult Index()
-        {
-            return View(empDB.ListAll());
         }
     }
 }

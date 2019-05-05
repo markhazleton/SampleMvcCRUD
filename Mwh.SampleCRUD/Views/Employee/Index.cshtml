@@ -93,9 +93,8 @@
 
         function DeleteEmployee(id) {
             $.ajax({
-                url: '/employee/delete',
+                url: '/employee/delete/' + id,
                 type: 'post',
-                data: $('form#frmEmployee').serialize(),
                 dataType: 'html',
                 success: function (data) {
                     loadEmployeeList();
