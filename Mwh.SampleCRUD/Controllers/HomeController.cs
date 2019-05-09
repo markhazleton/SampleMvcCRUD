@@ -1,8 +1,6 @@
 ﻿namespace SampleCRUD.Controllers
 {
     using SampleCRUD.Models;
-    using System;
-    using System.Linq;
     using System.Web.Mvc;
 
     public class HomeController : BaseController
@@ -23,9 +21,13 @@
             var Employee = empDB.Get(id);
             return Json(Employee, JsonRequestBehavior.AllowGet);
         }
-
-        // GET: Home
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        [Route("/home/EmpSinglePage/")]
+        public ActionResult EmpSinglePage()
         {
             return View();
         }

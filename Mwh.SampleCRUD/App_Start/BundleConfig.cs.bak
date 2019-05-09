@@ -1,4 +1,4 @@
-namespace SampleCRUD.App_Start
+﻿namespace SampleCRUD.App_Start
 {
     using System;
     using System.Linq;
@@ -18,7 +18,7 @@ namespace SampleCRUD.App_Start
         {
             //Scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery")
-                .Include("~/Scripts/jquery-3.4.1.js",
+                .Include("~/Scripts/jquery-{version}.js",
                 "~/Scripts/bootstrap.js", 
                 "~/Scripts/jquery.unobtrusive-ajax.js"
                 ));

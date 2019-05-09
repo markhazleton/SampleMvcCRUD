@@ -1,4 +1,4 @@
-@using System.Web.Optimization
+﻿@using System.Web.Optimization
 @{
     string Version = ViewContext.HttpContext.Server.MachineName.ToString();
     Version = String.Format("{0}.{1} ({2}.{3})",
@@ -21,8 +21,6 @@
     @Styles.Render("~/bundles/style")
 
 
-	@Styles.Render("~/Content/DevExtremeBundle")
-	@Scripts.Render("~/Scripts/DevExtremeBundle")
 </head>
 
 <body id="page-top">
