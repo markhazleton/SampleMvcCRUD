@@ -14,19 +14,18 @@ namespace SampleCRUD.App_Start
 
         /// </summary>
         /// <param name="bundles"></param>
-        public static void RegisterBundles(BundleCollection bundles)
-        {
-            //Scripts
-            bundles.Add(new ScriptBundle("~/bundles/jquery")
+                public static void RegisterBundles(BundleCollection bundles)
+                {
+                    //Scripts
+                    bundles.Add(new ScriptBundle("~/bundles/jquery")
                 .Include("~/Scripts/jquery-3.4.1.js",
-                "~/Scripts/bootstrap.js", 
-                "~/Scripts/jquery.unobtrusive-ajax.js"
-                ));
+                         "~/Scripts/bootstrap.js",
+                         "~/Scripts/jquery.unobtrusive-ajax.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
+                    bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 
-            //CSS
-            bundles.Add(new StyleBundle("~/bundles/style").Include("~/Content/bootstrap.css"));
-        }
+                    //CSS
+                    bundles.Add(new StyleBundle("~/bundles/style").Include("~/Content/bootstrap.css"));
+                }
     }
 }

@@ -11,9 +11,10 @@ namespace SampleCRUD.Controllers
         {
             get
             {
-                if (HttpContext.Application == null) return new EmployeeMock();
+                if(HttpContext.Application == null)
+                    return new EmployeeMock();
 
-                if ((EmployeeMock)HttpContext.Application["EmployeeDB"] == null)
+                if((EmployeeMock)HttpContext.Application["EmployeeDB"] == null)
                     HttpContext.Application["EmployeeDB"] = new EmployeeMock();
 
                 return ((EmployeeMock)HttpContext.Application["EmployeeDB"]);

@@ -1,6 +1,5 @@
 namespace SampleCRUD
 {
-    using Mwh_SampleCRUD;
     using SampleCRUD.App_Start;
     using System.Web;
     using System.Web.Mvc;
@@ -11,7 +10,6 @@ namespace SampleCRUD
     {
         protected void Application_Start()
         {
-            DevExtremeBundleConfig.RegisterBundles(BundleTable.Bundles);
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
