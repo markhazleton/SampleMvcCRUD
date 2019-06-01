@@ -1,4 +1,4 @@
-﻿namespace SampleCRUD.Models
+﻿namespace Mwh.SampleCRUD.BL.Models
 {
     public class Employee
     {

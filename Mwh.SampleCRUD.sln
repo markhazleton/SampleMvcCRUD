@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.SampleCRUD", "Mwh.SampleCRUD\Mwh.SampleCRUD.csproj", "{0DD3D05D-3059-4EB3-9FC0-6EBD01CAC300}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.SampleCRUD.BL", "Mwh.SampleCRUD.BL\Mwh.SampleCRUD.BL.csproj", "{590571EB-6121-48B7-AE15-6AC6EE4BFD5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0DD3D05D-3059-4EB3-9FC0-6EBD01CAC300}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DD3D05D-3059-4EB3-9FC0-6EBD01CAC300}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DD3D05D-3059-4EB3-9FC0-6EBD01CAC300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{590571EB-6121-48B7-AE15-6AC6EE4BFD5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{590571EB-6121-48B7-AE15-6AC6EE4BFD5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{590571EB-6121-48B7-AE15-6AC6EE4BFD5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{590571EB-6121-48B7-AE15-6AC6EE4BFD5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

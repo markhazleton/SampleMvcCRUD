@@ -1,6 +1,6 @@
 ﻿namespace SampleCRUD.Controllers
 {
-    using SampleCRUD.Models;
+    using Mwh.SampleCRUD.BL.Models;
     using System;
     using System.Linq;
     using System.Web.Mvc;

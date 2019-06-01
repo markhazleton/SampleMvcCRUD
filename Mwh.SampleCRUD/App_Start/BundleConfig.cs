@@ -18,9 +18,9 @@ namespace SampleCRUD.App_Start
                 {
                     //Scripts
                     bundles.Add(new ScriptBundle("~/bundles/jquery")
-                .Include("~/Scripts/jquery-3.4.1.js",
-                         "~/Scripts/bootstrap.js",
-                         "~/Scripts/jquery.unobtrusive-ajax.js"));
+        .Include("~/Scripts/jquery-3.4.1.js",
+                 "~/Scripts/bootstrap.js",
+                 "~/Scripts/jquery.unobtrusive-ajax.js"));
 
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 

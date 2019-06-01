@@ -1,4 +1,4 @@
-﻿using SampleCRUD.Models;
+﻿using Mwh.SampleCRUD.BL.Repositories;
 using System;
 using System.Linq;
 using System.Web.Mvc;
