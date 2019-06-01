@@ -37,6 +37,7 @@
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeDepartment.cs" />
     <Compile Include="Models\JobAssignment.cs" />
+    <Compile Include="Models\JobAssignmentList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EmployeeMock.cs" />
     <Compile Include="Repositories\IEmployeeDB.cs" />
