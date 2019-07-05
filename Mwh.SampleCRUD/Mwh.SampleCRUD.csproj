@@ -238,6 +238,7 @@
     <Content Include="Views\Employee\_EmployeeEdit.cshtml" />
     <Content Include="Views\Employee\_EmployeeDelete.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\ReactHome\Index.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -249,7 +250,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\ReactHome\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -264,13 +264,13 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Mwh.SampleCRUD.BL\Mwh.SampleCRUD.BL.csproj">
       <Project>{590571eb-6121-48b7-ae15-6ac6ee4bfd5d}</Project>
       <Name>Mwh.SampleCRUD.BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
