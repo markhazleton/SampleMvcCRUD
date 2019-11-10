@@ -48,7 +48,7 @@
         // GET: Employee
         public ActionResult Index()
         {
-            return View(empDB.ListAll());
+            return View();
         }
 
         public JsonResult List()

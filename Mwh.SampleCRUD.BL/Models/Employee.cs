@@ -1,4 +1,6 @@
-﻿namespace Mwh.SampleCRUD.BL.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Mwh.SampleCRUD.BL.Models
 {
     public class Employee
     {
@@ -18,8 +20,10 @@
 
         public JobAssignmentList JobList { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string State { get; set; }
     }
 }
