@@ -1,8 +1,6 @@
 ﻿namespace SampleCRUD.Controllers
 {
     using Mwh.SampleCRUD.BL.Models;
-    using System;
-    using System.Linq;
     using System.Web.Mvc;
 
     public class EmployeeController : BaseController

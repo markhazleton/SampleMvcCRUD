@@ -1,6 +1,4 @@
 ﻿using Mwh.SampleCRUD.BL.Repositories;
-using System;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace SampleCRUD.Controllers
@@ -11,10 +9,10 @@ namespace SampleCRUD.Controllers
         {
             get
             {
-                if(HttpContext.Application == null)
+                if (HttpContext.Application == null)
                     return new EmployeeMock();
 
-                if((EmployeeMock)HttpContext.Application["EmployeeDB"] == null)
+                if ((EmployeeMock)HttpContext.Application["EmployeeDB"] == null)
                     HttpContext.Application["EmployeeDB"] = new EmployeeMock();
 
                 return ((EmployeeMock)HttpContext.Application["EmployeeDB"]);
