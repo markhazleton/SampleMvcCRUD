@@ -1,5 +1,7 @@
+﻿using System.Web;
 using System.Web.Optimization;
-namespace SampleCRUD.App_Start
+
+namespace Mwh.Sample.WebApi
 {
     public class BundleConfig
     {
