@@ -32,3 +32,8 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: CRAnalyzeTask@192
+  inputs:
+    solution: '**/*.sln'
+    sendLogs: true
