@@ -2,8 +2,14 @@
 
 namespace Mwh.SampleCRUD.BL.Models
 {
+    /// <summary>
+    /// Employee Model
+    /// </summary>
     public class Employee
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Employee()
         {
             JobList = new JobAssignmentList();
