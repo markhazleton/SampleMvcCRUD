@@ -19,6 +19,10 @@ namespace Mwh.Sample.WebApi.Controllers
 
         }
 
+        /// <summary>
+        /// Get List of Employees
+        /// </summary>
+        /// <returns></returns>
         [Route("")]
         [HttpGet]
         public IEnumerable<Employee> Get()
@@ -27,6 +31,11 @@ namespace Mwh.Sample.WebApi.Controllers
         }
 
 
+        /// <summary>
+        /// Get Employee by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("{id}")]
         [HttpGet]
         public Employee Get(int id)
@@ -34,12 +43,29 @@ namespace Mwh.Sample.WebApi.Controllers
             return EmpDB.Get(id);
         }
 
+        /// <summary>
+        /// Add / Update Employee
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns>Employee</returns>
         [Route("")]
         [HttpPost]
         public Employee Post(Employee employee)
         {
             var updateID = EmpDB.Update(employee);
             return EmpDB.Get(updateID);
+        }
+
+        /// <summary>
+        /// Delete Employee by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("{id}")]
+        [HttpDelete]
+        public int Delete(int id)
+        {
+            return EmpDB.Delete(id);
         }
     }
 }

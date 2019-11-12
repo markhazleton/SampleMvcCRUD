@@ -1,7 +1,10 @@
-﻿namespace Mwh.SampleCRUD.BL.Models
+﻿using System;
+
+namespace Mwh.SampleCRUD.BL.Models
 {
-    using System;
-    using System.Collections.Generic;
+    /// <summary>
+    /// Job Assignment
+    /// </summary>
     public class JobAssignment
     {
         public int CompLevel { get; set; }
