@@ -1,14 +1,20 @@
-﻿namespace Mwh.SampleCRUD.BL.Repositories
-{
-    using Mwh.SampleCRUD.BL.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+﻿using Mwh.SampleCRUD.BL.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Mwh.SampleCRUD.BL.Repositories
+{
+    /// <summary>
+    /// Employee Mock Repository
+    /// </summary>
     public class EmployeeMock : IEmployeeDB
     {
         private List<Employee> _list;
 
+        /// <summary>
+        /// Contructor
+        /// </summary>
         public EmployeeMock()
         {
             _list = new List<Employee>()
@@ -43,9 +49,9 @@
             };
 
 
-            foreach (var emp in _list)
+            foreach(var emp in _list)
             {
-                if (emp == null)
+                if(emp == null)
                     continue;
 
                 emp.JobList
@@ -69,25 +75,29 @@
             }
         }
 
-        //Method for Deleting an Employee
+        /// <summary>
+        /// Method for Deleting an Employee
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public int Delete(int ID)
         {
             var myEmp = _list.Where(w => w.EmployeeID == ID).FirstOrDefault();
-            if (myEmp == null)
+            if(myEmp == null)
                 return -1;
             _list.Remove(myEmp);
             return 1;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public Employee Get(int id)
         {
             var myEmp = _list.Where(w => w.EmployeeID == id).FirstOrDefault();
-            if (myEmp == null)
+            if(myEmp == null)
                 return new Employee();
             return myEmp;
         }
@@ -100,24 +110,23 @@
 
         //Method for Updating Employee record
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="emp"></param>
         /// <returns></returns>
         public int Update(Employee emp)
         {
-            if (emp.EmployeeID == 0)
+            if(emp.EmployeeID == 0)
             {
                 int nextID = _list.OrderByDescending(o => o.EmployeeID).Select(s => s.EmployeeID).FirstOrDefault() + 1;
                 emp.EmployeeID = nextID;
                 _list.Add(emp);
                 return nextID;
-            }
-            else
+            } else
             {
                 var myEmp = _list.Where(w => w.EmployeeID == emp.EmployeeID).FirstOrDefault();
 
-                if (myEmp == null)
+                if(myEmp == null)
                     return -1;
 
                 myEmp.Name = emp.Name;

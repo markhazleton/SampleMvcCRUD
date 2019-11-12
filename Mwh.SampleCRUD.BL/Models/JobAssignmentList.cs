@@ -1,7 +1,11 @@
-﻿namespace Mwh.SampleCRUD.BL.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace Mwh.SampleCRUD.BL.Models
 {
-    using System;
-    using System.Collections.Generic;
+    /// <summary>
+    /// Job Assignment List
+    /// </summary>
     public class JobAssignmentList : List<JobAssignment>
     {
     }
