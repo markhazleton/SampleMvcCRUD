@@ -12,10 +12,10 @@ namespace Mwh.SampleCRUD.BL.Repositories
     {
         int Delete(int ID);
 
-        Employee Get(int id);
+        EmployeeModel Get(int id);
 
-        List<Employee> ListAll();
+        List<EmployeeModel> ListAll();
 
-        int Update(Employee emp);
+        int Update(EmployeeModel emp);
     }
 }

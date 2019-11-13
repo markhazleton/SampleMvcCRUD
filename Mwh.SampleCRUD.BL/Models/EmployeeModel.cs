@@ -5,12 +5,12 @@ namespace Mwh.SampleCRUD.BL.Models
     /// <summary>
     /// Employee Model
     /// </summary>
-    public class Employee
+    public class EmployeeModel
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public Employee()
+        public EmployeeModel()
         {
             JobList = new JobAssignmentList();
             Department = EmployeeDepartment.Unknown;
