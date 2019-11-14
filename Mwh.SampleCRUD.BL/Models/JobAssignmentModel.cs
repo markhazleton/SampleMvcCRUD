@@ -5,7 +5,7 @@ namespace Mwh.SampleCRUD.BL.Models
     /// <summary>
     /// Job Assignment
     /// </summary>
-    public class JobAssignment
+    public class JobAssignmentModel
     {
         public int CompLevel { get; set; }
 

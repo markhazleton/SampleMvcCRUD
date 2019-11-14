@@ -6,8 +6,12 @@ namespace Mwh.Sample.WebApi.Controllers
 
     public class EmployeeController : BaseController
     {
-        public JsonResult Add(Employee emp)
+        public JsonResult Add(EmployeeModel emp)
         {
+            if (emp == null)
+            {
+                return Json(-1, JsonRequestBehavior.AllowGet);
+            }
             emp.EmployeeID = 0;
             return Json(EmpDB.Update(emp), JsonRequestBehavior.AllowGet);
         }
@@ -16,7 +20,7 @@ namespace Mwh.Sample.WebApi.Controllers
         public JsonResult Delete(int id)
         {
             var myResult = EmpDB.Delete(id);
-            return Json(true, JsonRequestBehavior.AllowGet);
+            return Json(myResult, JsonRequestBehavior.AllowGet);
         }
 
         [Route("/home/EmpSinglePage/")]
@@ -58,13 +62,13 @@ namespace Mwh.Sample.WebApi.Controllers
         }
 
         [HttpPost]
-        public JsonResult Save(Employee postEmployee)
+        public JsonResult Save(EmployeeModel postEmployee)
         {
             var myResult = EmpDB.Update(postEmployee);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Update(Employee emp)
+        public JsonResult Update(EmployeeModel emp)
         {
             return Json(EmpDB.Update(emp), JsonRequestBehavior.AllowGet);
         }

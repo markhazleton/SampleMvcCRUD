@@ -1,11 +1,11 @@
-﻿namespace Mwh.SampleCRUD.BL.Tests.Repositories
-{
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Mwh.SampleCRUD.BL.Models;
-    using System;
-    using System.Linq;
-    using Mwh.SampleCRUD.BL.Repositories;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mwh.SampleCRUD.BL.Models;
+using Mwh.SampleCRUD.BL.Repositories;
+using System;
+using System.Linq;
 
+namespace Mwh.SampleCRUD.BL.Tests.Repositories
+{
     [TestClass()]
     public class EmployeeMockTests
     {
@@ -41,6 +41,7 @@
             Employee.Get(myEmp.EmployeeID);
             Assert.AreEqual(myEmp.Name, Employee.Get(myEmp.EmployeeID).Name);
         }
+
         [TestMethod()]
         public void GetTestEmployeeIDZero()
         {
@@ -65,16 +66,15 @@
             Employee.Update(myEmp);
             Assert.AreEqual(NewName, Employee.Get(myEmp.EmployeeID).Name);
         }
+
         [TestMethod()]
         public void UpdateTestInvalidEmployeeID()
         {
             var Employee = new EmployeeMock();
-            var myEmp = new Employee
-            {
-                EmployeeID = 99999
-            };
+            var myEmp = new EmployeeModel { EmployeeID = 99999 };
             Assert.AreEqual(-1, Employee.Update(myEmp));
         }
+
         [TestMethod()]
         public void UpdateTestNewEmployee()
         {

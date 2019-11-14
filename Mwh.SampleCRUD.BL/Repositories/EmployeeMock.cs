@@ -10,16 +10,16 @@ namespace Mwh.SampleCRUD.BL.Repositories
     /// </summary>
     public class EmployeeMock : IEmployeeDB
     {
-        private List<Employee> _list;
+        private List<EmployeeModel> _list;
 
         /// <summary>
-        /// Contructor
+        /// Constructor
         /// </summary>
         public EmployeeMock()
         {
-            _list = new List<Employee>()
+            _list = new List<EmployeeModel>()
             {
-                new Employee()
+                new EmployeeModel()
                 {
                     Name = "Bob",
                     Age = 50,
@@ -28,7 +28,7 @@ namespace Mwh.SampleCRUD.BL.Repositories
                     Country = "USA",
                     EmployeeID = 1
                 },
-                new Employee()
+                new EmployeeModel()
                 {
                     Name = "Sam",
                     Age = 53,
@@ -37,7 +37,7 @@ namespace Mwh.SampleCRUD.BL.Repositories
                     Country = "USA",
                     EmployeeID = 2
                 },
-                new Employee()
+                new EmployeeModel()
                 {
                     Name = "Frank",
                     Age = 50,
@@ -49,13 +49,13 @@ namespace Mwh.SampleCRUD.BL.Repositories
             };
 
 
-            foreach(var emp in _list)
+            foreach (var emp in _list)
             {
-                if(emp == null)
+                if (emp == null)
                     continue;
 
                 emp.JobList
-                    .Add(new JobAssignment()
+                    .Add(new JobAssignmentModel()
                     {
                         CompLevel = 1,
                         StartDate = DateTime.Now.Date.AddDays(-100),
@@ -64,7 +64,7 @@ namespace Mwh.SampleCRUD.BL.Repositories
                         Title = "Solution Architect"
                     });
                 emp.JobList
-                    .Add(new JobAssignment()
+                    .Add(new JobAssignmentModel()
                     {
                         CompLevel = 2,
                         StartDate = DateTime.Now.Date.AddDays(-49),
@@ -83,10 +83,13 @@ namespace Mwh.SampleCRUD.BL.Repositories
         public int Delete(int ID)
         {
             var myEmp = _list.Where(w => w.EmployeeID == ID).FirstOrDefault();
-            if(myEmp == null)
+            if (myEmp == null)
                 return -1;
-            _list.Remove(myEmp);
-            return 1;
+            if (_list.Remove(myEmp))
+            { 
+                return 1; 
+            }
+            return 0; 
         }
 
         /// <summary>
@@ -94,16 +97,16 @@ namespace Mwh.SampleCRUD.BL.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Employee Get(int id)
+        public EmployeeModel Get(int id)
         {
             var myEmp = _list.Where(w => w.EmployeeID == id).FirstOrDefault();
-            if(myEmp == null)
-                return new Employee();
+            if (myEmp == null)
+                return new EmployeeModel();
             return myEmp;
         }
 
         //Return list of all Employees
-        public List<Employee> ListAll()
+        public List<EmployeeModel> ListAll()
         {
             return _list;
         }
@@ -114,19 +117,22 @@ namespace Mwh.SampleCRUD.BL.Repositories
         /// </summary>
         /// <param name="emp"></param>
         /// <returns></returns>
-        public int Update(Employee emp)
+        public int Update(EmployeeModel emp)
         {
-            if(emp.EmployeeID == 0)
+            if (emp == null) return -1;
+
+            if (emp.EmployeeID == 0)
             {
                 int nextID = _list.OrderByDescending(o => o.EmployeeID).Select(s => s.EmployeeID).FirstOrDefault() + 1;
                 emp.EmployeeID = nextID;
                 _list.Add(emp);
                 return nextID;
-            } else
+            }
+            else
             {
                 var myEmp = _list.Where(w => w.EmployeeID == emp.EmployeeID).FirstOrDefault();
 
-                if(myEmp == null)
+                if (myEmp == null)
                     return -1;
 
                 myEmp.Name = emp.Name;

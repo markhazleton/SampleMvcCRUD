@@ -25,7 +25,7 @@ namespace Mwh.Sample.WebApi.Controllers
         /// <returns></returns>
         [Route("")]
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public IEnumerable<EmployeeModel> Get()
         {
             return EmpDB.ListAll();
         }
@@ -38,7 +38,7 @@ namespace Mwh.Sample.WebApi.Controllers
         /// <returns></returns>
         [Route("{id}")]
         [HttpGet]
-        public Employee Get(int id)
+        public EmployeeModel Get(int id)
         {
             return EmpDB.Get(id);
         }
@@ -50,7 +50,7 @@ namespace Mwh.Sample.WebApi.Controllers
         /// <returns>Employee</returns>
         [Route("")]
         [HttpPost]
-        public Employee Post(Employee employee)
+        public EmployeeModel Post(EmployeeModel employee)
         {
             var updateID = EmpDB.Update(employee);
             return EmpDB.Get(updateID);
