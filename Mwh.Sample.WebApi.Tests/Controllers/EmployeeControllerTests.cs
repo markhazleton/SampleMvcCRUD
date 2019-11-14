@@ -16,9 +16,8 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
             controller = new EmployeeController();
         }
 
-
         [TestMethod]
-        public void Add_StateUnderTest_ExpectedBehavior()
+        public void Add_StateUnderTest_NullBehavior()
         {
             // Arrange
             EmployeeModel emp = null;
@@ -29,6 +28,38 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
             Int32.TryParse(result.Data.ToString(), out data);
             // Assert
             Assert.AreEqual(-1, data);
+        }
+
+        [TestMethod]
+        public void Add_StateUnderTest_ExpectedBehavior()
+        {
+            // Arrange
+            var emp = new EmployeeModel()
+            {
+                EmployeeID = 0,
+                Age = 25,
+                Name = "Bill",
+                Country = "USA",
+                State = "Texas",
+                Department = EmployeeDepartment.IT,
+                JobList = new JobAssignmentList()
+            };
+
+            // Act
+            var result = controller.Add(emp);
+            int data = 0;
+            Int32.TryParse(result.Data.ToString(), out data);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(0< data);
+            Assert.AreEqual(emp.Country, "USA");
+            Assert.AreEqual(emp.Name, "Bill");
+            Assert.AreEqual(emp.State, "Texas");
+            Assert.AreEqual(emp.Department, EmployeeDepartment.IT);
+            Assert.AreEqual(emp.Age, 25);
+
+
+
         }
 
         [TestMethod]
@@ -58,7 +89,7 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void GetbyID_StateUnderTest_ExpectedBehavior()
+        public void GetbyID_StateUnderTest_IdIsZero()
         {
             // Arrange
             int id = 0;
@@ -67,9 +98,29 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
             var result = controller.GetbyID(id);
             var emp = (EmployeeModel)result.Data;
 
+            result = controller.GetbyID(id);
+            var emp2 = (EmployeeModel)result.Data;
+
             // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(emp.EmployeeID, 0);
+            Assert.AreEqual(emp.EmployeeID, emp2.EmployeeID);
+            Assert.AreEqual(0, emp.EmployeeID);
+        }
+
+        [TestMethod]
+        public void GetbyID_StateUnderTest_ExpectedBehaviorFromCache()
+        {
+            // Arrange
+            int id = 3;
+
+            // Act
+            var result = controller.GetbyID(id);
+            var emp = (EmployeeModel)result.Data;
+
+            result = controller.GetbyID(id);
+            var emp2 = (EmployeeModel)result.Data;
+
+            // Assert
+            Assert.AreEqual(emp.EmployeeID, emp2.EmployeeID);
         }
 
         [TestMethod]

@@ -8,10 +8,10 @@ namespace Mwh.SampleCRUD.BL.Tests.Models
     public class JobAssignmentModelTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void JobAssignmentModel_Test()
         {
             // Arrange
-            var jobAssignmentModel = new JobAssignmentModel()
+            var jobAssignment = new JobAssignmentModel()
             {
                 Title = "Title",
                 StartDate = DateTime.Now.Date.AddDays(-100),
@@ -20,10 +20,22 @@ namespace Mwh.SampleCRUD.BL.Tests.Models
                 OutcomeCode = 1
             };
 
+            jobAssignment.Title = "Title Update";
+            jobAssignment.StartDate = DateTime.Now.Date.AddDays(-200);
+            jobAssignment.EndDate = DateTime.Now.Date;
+            jobAssignment.CompLevel = 60;
+            jobAssignment.OutcomeCode = 2;
+
             // Act
 
             // Assert
-            Assert.IsNotNull(jobAssignmentModel);
+            Assert.IsNotNull(jobAssignment);
+            Assert.AreEqual(jobAssignment.Title, "Title Update");
+            Assert.AreEqual(jobAssignment.StartDate, DateTime.Now.Date.AddDays(-200));
+            Assert.AreEqual(jobAssignment.EndDate, DateTime.Now.Date);
+            Assert.AreEqual(jobAssignment.CompLevel, 60);
+            Assert.AreEqual(jobAssignment.OutcomeCode, 2);
+
         }
     }
 }

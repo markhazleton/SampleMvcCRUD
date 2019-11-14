@@ -7,7 +7,7 @@ namespace Mwh.SampleCRUD.BL.Tests.Models
     public class EmployeeModelTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void EmployeeModel_Validate()
         {
             // Arrange
             var employeeModel = new EmployeeModel()
