@@ -1,18 +1,21 @@
-﻿namespace Mwh.SampleCRUD.BL.Repositories
-{
-    using Mwh.SampleCRUD.BL.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+﻿using Mwh.SampleCRUD.BL.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Mwh.SampleCRUD.BL.Repositories
+{
+    /// <summary>
+    /// Employee DAL Interface
+    /// </summary>
     public interface IEmployeeDB
     {
         int Delete(int ID);
 
-        Employee Get(int id);
+        EmployeeModel Get(int id);
 
-        List<Employee> ListAll();
+        List<EmployeeModel> ListAll();
 
-        int Update(Employee emp);
+        int Update(EmployeeModel emp);
     }
 }

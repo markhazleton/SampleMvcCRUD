@@ -1,19 +1,25 @@
-﻿namespace Mwh.SampleCRUD.BL.Repositories
-{
-    using Mwh.SampleCRUD.BL.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+﻿using Mwh.SampleCRUD.BL.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Mwh.SampleCRUD.BL.Repositories
+{
+    /// <summary>
+    /// Employee Mock Repository
+    /// </summary>
     public class EmployeeMock : IEmployeeDB
     {
-        private List<Employee> _list;
+        private List<EmployeeModel> _list;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public EmployeeMock()
         {
-            _list = new List<Employee>()
+            _list = new List<EmployeeModel>()
             {
-                new Employee()
+                new EmployeeModel()
                 {
                     Name = "Bob",
                     Age = 50,
@@ -22,7 +28,7 @@
                     Country = "USA",
                     EmployeeID = 1
                 },
-                new Employee()
+                new EmployeeModel()
                 {
                     Name = "Sam",
                     Age = 53,
@@ -31,7 +37,7 @@
                     Country = "USA",
                     EmployeeID = 2
                 },
-                new Employee()
+                new EmployeeModel()
                 {
                     Name = "Frank",
                     Age = 50,
@@ -49,7 +55,7 @@
                     continue;
 
                 emp.JobList
-                    .Add(new JobAssignment()
+                    .Add(new JobAssignmentModel()
                     {
                         CompLevel = 1,
                         StartDate = DateTime.Now.Date.AddDays(-100),
@@ -58,7 +64,7 @@
                         Title = "Solution Architect"
                     });
                 emp.JobList
-                    .Add(new JobAssignment()
+                    .Add(new JobAssignmentModel()
                     {
                         CompLevel = 2,
                         StartDate = DateTime.Now.Date.AddDays(-49),
@@ -69,43 +75,52 @@
             }
         }
 
-        //Method for Deleting an Employee
+        /// <summary>
+        /// Method for Deleting an Employee
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public int Delete(int ID)
         {
             var myEmp = _list.Where(w => w.EmployeeID == ID).FirstOrDefault();
             if (myEmp == null)
                 return -1;
-            _list.Remove(myEmp);
-            return 1;
+            if (_list.Remove(myEmp))
+            { 
+                return 1; 
+            }
+            return 0; 
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Employee Get(int id)
+        public EmployeeModel Get(int id)
         {
             var myEmp = _list.Where(w => w.EmployeeID == id).FirstOrDefault();
             if (myEmp == null)
-                return new Employee();
+                return new EmployeeModel();
             return myEmp;
         }
 
         //Return list of all Employees
-        public List<Employee> ListAll()
+        public List<EmployeeModel> ListAll()
         {
             return _list;
         }
 
         //Method for Updating Employee record
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="emp"></param>
         /// <returns></returns>
-        public int Update(Employee emp)
+        public int Update(EmployeeModel emp)
         {
+            if (emp == null) return -1;
+
             if (emp.EmployeeID == 0)
             {
                 int nextID = _list.OrderByDescending(o => o.EmployeeID).Select(s => s.EmployeeID).FirstOrDefault() + 1;
