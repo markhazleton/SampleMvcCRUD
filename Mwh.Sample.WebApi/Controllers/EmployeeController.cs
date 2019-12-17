@@ -23,39 +23,45 @@ namespace Mwh.Sample.WebApi.Controllers
             return Json(myResult, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         [Route("/home/EmpSinglePage/")]
         public ActionResult EmpSinglePage()
         {
             return View();
         }
 
+        [HttpGet]
         public JsonResult GetbyID(int id)
         {
             var Employee = EmpDB.Get(id);
             return Json(Employee, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public ActionResult GetEmployeeDelete(int id = 0)
         {
             return PartialView("_EmployeeDelete", EmpDB.Get(id));
         }
 
+        [HttpGet]
         public ActionResult GetEmployeeEdit(int id = 0)
         {
             return PartialView("_EmployeeEdit", EmpDB.Get(id));
         }
 
+        [HttpGet]
         public ActionResult GetEmployeeList()
         {
             return PartialView("_EmployeeList", EmpDB.ListAll());
         }
 
-        // GET: Employee
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public JsonResult List()
         {
             return Json(EmpDB.ListAll(), JsonRequestBehavior.AllowGet);
@@ -68,6 +74,7 @@ namespace Mwh.Sample.WebApi.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult Update(EmployeeModel emp)
         {
             return Json(EmpDB.Update(emp), JsonRequestBehavior.AllowGet);
