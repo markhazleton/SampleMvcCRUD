@@ -16,20 +16,16 @@ namespace Mwh.SampleCRUD.BL.Models
             Department = EmployeeDepartment.Unknown;
         }
 
-        public EmployeeDepartment Department { get; set; }
-
-        public int Age { get; set; }
-
-        public string Country { get; set; }
-
+        [Key]
         public int EmployeeID { get; set; }
-
-        public JobAssignmentList JobList { get; set; }
-
         [Required]
         public string Name { get; set; }
-
         [Required]
         public string State { get; set; }
+        public EmployeeDepartment Department { get; set; }
+        public int Age { get; set; }
+        public string Country { get; set; }
+        public JobAssignmentList JobList { get; set; }
+
     }
 }
