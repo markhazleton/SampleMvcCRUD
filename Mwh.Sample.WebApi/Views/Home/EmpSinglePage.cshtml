@@ -83,7 +83,7 @@
         //Load Data function
         function loadData() {
             $.ajax({
-                url: "/Employee/List",
+                url: "/api/Employee",
                 type: "GET",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
@@ -96,7 +96,7 @@
                         html += '<td>' + item.Age + '</td>';
                         html += '<td>' + item.State + '</td>';
                         html += '<td>' + item.Country + '</td>';
-                        html += '<td><a href="#" onclick="return getbyID(' + item.EmployeeID + ')">Edit</a> | <a href="#" onclick="Delete(' + item.EmployeeID + ')">Delete</a></td>';
+                        html += '<td><a href="#" onclick="return getEmployeeByID(' + item.EmployeeID + ')">Edit</a> | <a href="#" onclick="Delete(' + item.EmployeeID + ')">Delete</a></td>';
                         html += '</tr>';
                     });
                     $('.tbody').html(html);
@@ -121,7 +121,7 @@
                 Country: $('#Country').val()
             };
             $.ajax({
-                url: "/Employee/Add",
+                url: "/api/Employee/",
                 data: JSON.stringify(empObj),
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
@@ -137,13 +137,13 @@
         }
 
         //Function for getting the Data Based upon Employee ID
-        function getbyID(EmpID) {
+        function getEmployeeByID(EmpID) {
             $('#Name').css('border-color', 'lightgrey');
             $('#Age').css('border-color', 'lightgrey');
             $('#State').css('border-color', 'lightgrey');
             $('#Country').css('border-color', 'lightgrey');
             $.ajax({
-                url: "/Employee/getbyID/" + EmpID,
+                url: "/api/Employee/" + EmpID,
                 typr: "GET",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
@@ -179,7 +179,7 @@
                 Country: $('#Country').val(),
             };
             $.ajax({
-                url: "/Employee/Update",
+                url: "/api/Employee",
                 data: JSON.stringify(empObj),
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
@@ -204,8 +204,8 @@
             var ans = confirm("Are you sure you want to delete this Record?");
             if (ans) {
                 $.ajax({
-                    url: "/Employee/Delete/" + ID,
-                    type: "POST",
+                    url: "/api/Employee/" + ID,
+                    type: "DELETE",
                     contentType: "application/json;charset=UTF-8",
                     dataType: "json",
                     success: function (result) {

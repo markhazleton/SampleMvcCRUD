@@ -16,5 +16,11 @@ namespace Mwh.Sample.WebApi.Controllers
 
             return View();
         }
+        [HttpGet]
+        [Route("/home/EmpSinglePage/")]
+        public ActionResult EmpSinglePage()
+        {
+            return View();
+        }
     }
 }

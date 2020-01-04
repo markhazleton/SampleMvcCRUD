@@ -2,23 +2,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.WebApi.Controllers;
 using Mwh.SampleCRUD.BL.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Web.Http;
 
 namespace Mwh.Sample.WebApi.Tests.Controllers
 {
     [TestClass]
-    public class EmployeeApiControllerTests
+    public class EmployeeApiControllerTests : IDisposable
     {
         private EmployeeApiController controller;
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            controller = new EmployeeApiController();
-            controller.Request = new System.Net.Http.HttpRequestMessage();
-            controller.Configuration = new System.Web.Http.HttpConfiguration();
-        }
 
         [TestMethod]
         public void Delete()
@@ -35,7 +28,7 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void Delete_StateUnderTest_InvalidId()
+        public void DeleteStateUnderTestInvalidId()
         {
             // Arrange
             int id = 0;
@@ -49,7 +42,25 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void Get_StateUnderTest_ExpectedBehavior()
+        public void GetById()
+        {
+            // Arrange
+
+            // Act
+            EmployeeModel result = controller.Get(1);
+
+            // Assert
+            Assert.IsNotNull(result);
+            if (result != null)
+            {
+                Assert.AreEqual(result.Name, "Bob");
+                Assert.AreEqual(result.Age, 50);
+                Assert.AreEqual(result.State, "Texas");
+            }
+        }
+
+        [TestMethod]
+        public void GetStateUnderTestExpectedBehavior()
         {
             // Arrange
 
@@ -61,7 +72,7 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void Get_StateUnderTest_ExpectedBehavior1()
+        public void GetStateUnderTestExpectedBehavior1()
         {
             // Arrange
             int id = 3;
@@ -72,21 +83,6 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(3, result.EmployeeID);
-        }
-
-        [TestMethod]
-        public void GetById()
-        {
-            // Arrange
-
-            // Act
-            EmployeeModel result = controller.Get(1);
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(result.Name, "Bob");
-            Assert.AreEqual(result.Age, 50);
-            Assert.AreEqual(result.State, "Texas");
         }
 
         [TestMethod]
@@ -116,7 +112,7 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void Post_StateUnderTest_ExpectedBehavior()
+        public void PostStateUnderTestExpectedBehavior()
         {
             // Arrange
             EmployeeModel employee = null;
@@ -154,5 +150,36 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
             Assert.AreEqual(result.Age, 25);
             Assert.AreEqual(result.State, "Texas");
         }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            controller = new EmployeeApiController
+            { Request = new HttpRequestMessage(), Configuration = new HttpConfiguration() };
+        }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    controller.Dispose();
+                }
+                disposedValue = true;
+            }
+        }
+
+        ~EmployeeApiControllerTests() { Dispose(false); }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }
