@@ -35,8 +35,8 @@
                     @Html.DisplayFor(modelItem => item.Country)
                 </td>
                 <td>
-                    <a href="#" class="btn btn-primary" onclick="return loadEmployeeEdit('@item.EmployeeID')">Edit</a>  |
-                    <a href="#" class="btn btn-primary" onclick="return loadEmployeeDelete('@item.EmployeeID')">Delete</a>
+                    <a href="#" class="btn btn-primary" onclick="return loadEmployeeEdit('@item.EmployeeID')">Edit</a>  
+                    <a href="#" class="btn btn-warning" onclick="return loadEmployeeDelete('@item.EmployeeID')">Delete</a>
                 </td>
             </tr>
         }

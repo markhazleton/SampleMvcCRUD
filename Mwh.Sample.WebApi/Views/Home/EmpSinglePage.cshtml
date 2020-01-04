@@ -3,7 +3,7 @@
 }
 
 <div class="container">
-    <h2>Employees JavaScript AJAX JSON Results</h2>
+    <h2>JavaScript AJAX using MVC Api</h2>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New Employee</button><br /><br />
     <table class="table table-bordered table-hover">
         <thead>
@@ -65,7 +65,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Add</button>
                 <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -96,7 +96,7 @@
                         html += '<td>' + item.Age + '</td>';
                         html += '<td>' + item.State + '</td>';
                         html += '<td>' + item.Country + '</td>';
-                        html += '<td><a href="#" onclick="return getEmployeeByID(' + item.EmployeeID + ')">Edit</a> | <a href="#" onclick="Delete(' + item.EmployeeID + ')">Delete</a></td>';
+                        html += '<td><a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + item.EmployeeID + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + item.EmployeeID + ')">Delete</a></td>';
                         html += '</tr>';
                     });
                     $('.tbody').html(html);
