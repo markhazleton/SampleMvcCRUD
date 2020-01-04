@@ -2,7 +2,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.WebApi.Controllers;
 using Mwh.SampleCRUD.BL.Models;
 using System;
-using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 

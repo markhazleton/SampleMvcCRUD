@@ -1,5 +1,4 @@
-﻿using Mwh.SampleCRUD.BL.Models;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Mwh.Sample.WebApi.Controllers
 {

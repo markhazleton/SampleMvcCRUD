@@ -78,9 +78,9 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
             }
         }
         ~EmployeeControllerTests()
-         {
-           Dispose(false);
-         }
+        {
+            Dispose(false);
+        }
 
         public void Dispose()
         {

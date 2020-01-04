@@ -86,10 +86,10 @@ namespace Mwh.SampleCRUD.BL.Repositories
             if (myEmp == null)
                 return -1;
             if (_list.Remove(myEmp))
-            { 
-                return 1; 
+            {
+                return 1;
             }
-            return 0; 
+            return 0;
         }
 
         /// <summary>

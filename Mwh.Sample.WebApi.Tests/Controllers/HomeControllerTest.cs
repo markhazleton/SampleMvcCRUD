@@ -1,8 +1,7 @@
-﻿using System;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mwh.Sample.WebApi;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.WebApi.Controllers;
+using System;
+using System.Web.Mvc;
 
 namespace Mwh.Sample.WebApi.Tests.Controllers
 {

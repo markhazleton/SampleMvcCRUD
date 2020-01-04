@@ -1,11 +1,9 @@
 ﻿@using System.Web.Optimization
 @{
-    string Version = ViewContext.HttpContext.Server.MachineName.ToString();
-    Version = String.Format("{0}.{1} ({2}.{3})",
+    string Version = String.Format("{0}.{1} ({2})",
         ViewContext.Controller.GetType().Assembly.GetName().Version.Major,
         ViewContext.Controller.GetType().Assembly.GetName().Version.Minor,
-        ViewContext.Controller.GetType().Assembly.GetName().Version.Build,
-        Version.Substring(Version.Length - 4));
+        ViewContext.Controller.GetType().Assembly.GetName().Version.Build);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -51,23 +49,19 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Mark Hazleton 2019</p>
-            <div class="LI-profile-badge" data-version="v1" data-size="medium" data-locale="en_US" data-type="horizontal" data-theme="dark" data-vanity="markhazleton">
-                <a class="LI-simple-link" href='https://www.linkedin.com/in/markhazleton?trk=profile-badge'>Mark Hazleton</a>
+            <p class="m-0 text-center text-white">Copyright &copy; Mark Hazleton 2019-2020 <br/> @Version</p>
+            <div class="LI-profile-badge" data-version="v1" data-size="medium" data-locale="en_US" data-type="horizontal" data-theme="dark" data-vanity="markhazleton" data-rendered="true" data-uid="613068">
+                <a class="LI-simple-link" href="https://www.linkedin.com/in/markhazleton?trk=profile-badge">Mark Hazleton</a>
+                <div>
+                    <script src="https://static-exp1.licdn.com/sc/h/3qk7aqkysw7gz575y2ma1e5ky" type="text/javascript"></script><code id="__pageContext__" style="display: none;"><!--{"baseScdsUrl":"https://static-exp1.licdn.com/scds","contextPath":"/","pageInstance":"urn:li:page:profile-badge-view;7AU3aJ2bQOe1CgIGVCxEDQ==","isProd":true,"brotliBaseSparkUrlForHashes":"https://static-exp1.licdn.com/sc/h/br","linkedInDustJsUrl":"https://static-exp1.licdn.com/sc/h/3qk7aqkysw7gz575y2ma1e5ky","baseSparkUrlForHashes":"https://static-exp1.licdn.com/sc/h","isCsUser":false,"appName":"badger-frontend","fizzyJsUrl":"https://static-exp1.licdn.com/scds/common/u/lib/fizzy/fz-1.3.3-min.js","mpName":"badger-frontend","scHashesUrl":"https://static-exp1.licdn.com/sc/p/com.linkedin.badger-frontend%3Abadger-frontend-static-content%2B0.1.131/f/%2Fbadger-frontend%2Fsc-hashes%2Fsc-hashes_en_US.js","dustDebug":"control","baseMediaUrl":"https://media-exp1.licdn.com/media","isBrotliEnabled":false,"useCdn":true,"locale":"en_US","version":"0.1.131","useScHashesJs":true,"cdnUrl":"https://static-exp1.licdn.com","baseMprUrl":"https://media-exp1.licdn.com/mpr/mpr","playUtilsUrl":"https://static-exp1.licdn.com/sc/h/v0un52v653evxg2c5l1ap5la","useNativeXmsg":false,"hashesDisabledByQueryParam":false,"baseAssetsUrl":"https://static-exp1.licdn.com/sc/p/com.linkedin.badger-frontend%3Abadger-frontend-static-content%2B0.1.131/f","csrfToken":null,"intlPolyfillUrl":"https://static-exp1.licdn.com/sc/h/1fw1ey0jfgqapy4dndtgrr7y1","serveT8WithDust":false,"disableDynamicConcat":false,"baseSparkUrlForFiles":"https://static-exp1.licdn.com/sc/p/com.linkedin.badger-frontend%3Abadger-frontend-static-content%2B0.1.131/f","dustUtilsUrl":"https://static-exp1.licdn.com/sc/h/19dd5wwuyhbk7uttxpuelttdg","linkedInDustI18nJsUrl":"https://static-exp1.licdn.com/sc/h/epy983tzfexddbwygtwyxyavv","baseMediaProxyUrl":"https://media-exp1.licdn.com/media-proxy"}--></code>
+                    <script src="https://static-exp1.licdn.com/sc/p/com.linkedin.badger-frontend%3Abadger-frontend-static-content%2B0.1.131/f/%2Fbadger-frontend%2Fsc-hashes%2Fsc-hashes_en_US.js"></script>
+                    <script src="https://static-exp1.licdn.com/sc/h/19dd5wwuyhbk7uttxpuelttdg"></script><link rel="stylesheet" href="https://static-exp1.licdn.com/sc/h/5qdq5h6xnumnzahdm6n8eud1f"><div dir="ltr" class="LI-badge-container-horizontal-dark LI-badge-container horizontal dark medium" style="display: none"> <div class="LI-profile-badge-header LI-name-container LI-row"><div class="LI-col"><div class="LI-profile-pic-container"><img src="https://media.licdn.com/dms/image/C4E03AQEItrLdt1fg4w/profile-displayphoto-shrink_200_200/0?e=1583366400&amp;v=beta&amp;t=YdC44SuBw3rFPIimGK9xkwJbsUksMUvCu1Qujobg7Ys" class="LI-profile-pic" alt="Mark Hazleton"></div></div><div class="LI-col LI-header"><div class="LI-name"><a href="https://www.linkedin.com/in/markhazleton?trk=profile-badge-name">Mark Hazleton</a></div><div class="LI-title">Digital Solutions Architect</div></div></div><ul class="LI-more-info"><li class="LI-field"><img src="https://media.licdn.com/dms/image/C4D0BAQEx69MIs4J_Ng/company-logo_200_200/0?e=1586390400&amp;v=beta&amp;t=hfBfoirzVnbFoVDJvg9sFqkSyvInxeZM_yAR81Mg5wU" class="LI-field-icon" alt="CEC Entertainment"><a href="https://www.linkedin.com/company/cec-entertainment?trk=profile-badge-company">CEC Entertainment</a></li><li class="LI-field"><img src="https://media.licdn.com/dms/image/C560BAQEWg2OaOf8MSg/company-logo_200_200/0?e=1586390400&amp;v=beta&amp;t=0IqMOVEEAQqdOjrVeq60HqqZYugDUTpBl9QYzjFYOL8" class="LI-field-icon" alt="University of North Texas"><a href="https://www.linkedin.com/edu/university-of-north-texas-19538?trk=profile-badge-school">University of North Texas</a></li></ul><div class="LI-footer LI-row"><a href="https://www.linkedin.com/in/markhazleton?trk=profile-badge-cta" class="LI-view-profile">View profile</a><span class="LI-logo"><img src="https://static-exp1.licdn.com/scds/common/u/images/logos/linkedin/logo_linkedin_flat_white_93x21.png" alt="LinkedIn" class="LI-icon"></span></div></div>
+                </div>
             </div>
-
         </div>
-
-
-
     </footer>
 
     @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryval")
-
     @RenderSection("scripts", required: false)
-
-    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
-
 </body>
-
 </html>

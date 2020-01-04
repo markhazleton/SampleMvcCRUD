@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.SampleCRUD.BL.Models;
 using Mwh.SampleCRUD.BL.Repositories;
-using System;
 using System.Linq;
 
 namespace Mwh.SampleCRUD.BL.Tests.Repositories
