@@ -14,7 +14,7 @@ namespace Mwh.Sample.WebApi.Controllers
 
         }
 
-        public IEmployeeDB EmpDB
+        public static IEmployeeDB EmpDB
         {
             get
             {

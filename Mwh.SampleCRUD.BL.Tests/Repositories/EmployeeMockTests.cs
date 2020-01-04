@@ -82,10 +82,9 @@ namespace Mwh.SampleCRUD.BL.Tests.Repositories
             var myEmp = Employee.ListAll().FirstOrDefault();
             var NewName = "NewName";
             myEmp.Name = NewName;
-            myEmp.EmployeeID = 0;
             myEmp.EmployeeID = Employee.Update(myEmp);
             Assert.AreEqual(NewName, Employee.Get(myEmp.EmployeeID).Name);
-            Assert.AreEqual(4, Employee.ListAll().Count);
+            Assert.AreEqual(3, Employee.ListAll().Count);
         }
     }
 }
