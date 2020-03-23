@@ -32,6 +32,6 @@ Mark Hazleton
 
 ## Copyright and License
 
-Copyright 2018-2019 Mark Hazleton
+Copyright 2018-2020 Mark Hazleton
 
 Code released under the MIT License.
