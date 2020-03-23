@@ -21,6 +21,15 @@ namespace Mwh.SampleCRUD.BL.Repositories
             {
                 new EmployeeModel()
                 {
+                    Name = "Jim",
+                    Age = 35,
+                    Department = EmployeeDepartment.IT,
+                    State = "Florida",
+                    Country = "USA",
+                    EmployeeID = 4
+                },
+                new EmployeeModel()
+                {
                     Name = "Bob",
                     Age = 50,
                     Department = EmployeeDepartment.IT,
@@ -49,9 +58,9 @@ namespace Mwh.SampleCRUD.BL.Repositories
             };
 
 
-            foreach (var emp in _list)
+            foreach(var emp in _list)
             {
-                if (emp == null)
+                if(emp == null)
                     continue;
 
                 emp.JobList
@@ -83,9 +92,9 @@ namespace Mwh.SampleCRUD.BL.Repositories
         public int Delete(int ID)
         {
             var myEmp = _list.Where(w => w.EmployeeID == ID).FirstOrDefault();
-            if (myEmp == null)
+            if(myEmp == null)
                 return -1;
-            if (_list.Remove(myEmp))
+            if(_list.Remove(myEmp))
             {
                 return 1;
             }
@@ -100,7 +109,7 @@ namespace Mwh.SampleCRUD.BL.Repositories
         public EmployeeModel Get(int id)
         {
             var myEmp = _list.Where(w => w.EmployeeID == id).FirstOrDefault();
-            if (myEmp == null)
+            if(myEmp == null)
                 return new EmployeeModel();
             return myEmp;
         }
@@ -119,20 +128,20 @@ namespace Mwh.SampleCRUD.BL.Repositories
         /// <returns></returns>
         public int Update(EmployeeModel emp)
         {
-            if (emp == null) return -1;
+            if(emp == null)
+                return -1;
 
-            if (emp.EmployeeID == 0)
+            if(emp.EmployeeID == 0)
             {
                 int nextID = _list.OrderByDescending(o => o.EmployeeID).Select(s => s.EmployeeID).FirstOrDefault() + 1;
                 emp.EmployeeID = nextID;
                 _list.Add(emp);
                 return nextID;
-            }
-            else
+            } else
             {
                 var myEmp = _list.Where(w => w.EmployeeID == emp.EmployeeID).FirstOrDefault();
 
-                if (myEmp == null)
+                if(myEmp == null)
                     return -1;
 
                 myEmp.Name = emp.Name;
