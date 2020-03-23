@@ -12,7 +12,7 @@ namespace Mwh.SampleCRUD.BL.Tests.Repositories
         public void EmployeeMockTest()
         {
             var Employee = new EmployeeMock();
-            Assert.AreEqual(3, Employee.ListAll().Count);
+            Assert.AreNotEqual(0, Employee.ListAll().Count);
         }
 
         [TestMethod()]
@@ -20,16 +20,19 @@ namespace Mwh.SampleCRUD.BL.Tests.Repositories
         {
             var Employee = new EmployeeMock();
             var myEmp = Employee.ListAll().FirstOrDefault();
+            var count = Employee.ListAll().Count;
+
             Employee.Delete(myEmp.EmployeeID);
-            Assert.AreEqual(2, Employee.ListAll().Count);
+            Assert.AreEqual(count-1, Employee.ListAll().Count);
         }
 
         [TestMethod()]
         public void DeleteTestEmployeeIDZero()
         {
             var Employee = new EmployeeMock();
+            var count = Employee.ListAll().Count;
             Employee.Delete(0);
-            Assert.AreEqual(3, Employee.ListAll().Count);
+            Assert.AreEqual(count, Employee.ListAll().Count);
         }
 
         [TestMethod()]
@@ -52,7 +55,7 @@ namespace Mwh.SampleCRUD.BL.Tests.Repositories
         public void ListAllTest()
         {
             var Employee = new EmployeeMock();
-            Assert.AreEqual(3, Employee.ListAll().Count);
+            Assert.AreNotEqual(0, Employee.ListAll().Count);
         }
 
         [TestMethod()]
@@ -78,12 +81,13 @@ namespace Mwh.SampleCRUD.BL.Tests.Repositories
         public void UpdateTestNewEmployee()
         {
             var Employee = new EmployeeMock();
+            var count = Employee.ListAll().Count;
             var myEmp = Employee.ListAll().FirstOrDefault();
             var NewName = "NewName";
             myEmp.Name = NewName;
             myEmp.EmployeeID = Employee.Update(myEmp);
             Assert.AreEqual(NewName, Employee.Get(myEmp.EmployeeID).Name);
-            Assert.AreEqual(3, Employee.ListAll().Count);
+            Assert.AreEqual(count, Employee.ListAll().Count);
         }
     }
 }

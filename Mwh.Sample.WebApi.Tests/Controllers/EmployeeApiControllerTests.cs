@@ -104,7 +104,6 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.EmployeeID, 4);
             Assert.AreEqual(result.Name, "Bill");
             Assert.AreEqual(result.Age, 25);
             Assert.AreEqual(result.State, "Texas");
@@ -144,7 +143,6 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.EmployeeID, 5);
             Assert.AreEqual(result.Name, "Bill");
             Assert.AreEqual(result.Age, 25);
             Assert.AreEqual(result.State, "Texas");
