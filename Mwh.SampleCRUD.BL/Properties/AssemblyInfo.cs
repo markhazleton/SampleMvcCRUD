@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Mwh.SampleCRUD.BL")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyCulture("en-us")]
 [assembly: ComVisible(false)]
 [assembly: Guid("590571eb-6121-48b7-ae15-6ac6ee4bfd5d")]
 [assembly: AssemblyVersion("2.1.*")]
