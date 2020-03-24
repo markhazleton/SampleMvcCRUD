@@ -6,8 +6,14 @@ using System.Web.Routing;
 
 namespace Mwh.Sample.WebApi
 {
+    /// <summary>
+    /// WebApiApplication
+    /// </summary>
     public class WebApiApplication : HttpApplication
     {
+        /// <summary>
+        /// Application_Start
+        /// </summary>
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

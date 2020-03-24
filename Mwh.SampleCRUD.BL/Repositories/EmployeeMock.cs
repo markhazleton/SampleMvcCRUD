@@ -106,7 +106,7 @@ namespace Mwh.SampleCRUD.BL.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public EmployeeModel Get(int id)
+        public EmployeeModel Employee(int id)
         {
             var myEmp = _list.Where(w => w.EmployeeID == id).FirstOrDefault();
             if(myEmp == null)
@@ -115,7 +115,7 @@ namespace Mwh.SampleCRUD.BL.Repositories
         }
 
         //Return list of all Employees
-        public List<EmployeeModel> ListAll()
+        public List<EmployeeModel> EmployeeCollection()
         {
             return _list;
         }

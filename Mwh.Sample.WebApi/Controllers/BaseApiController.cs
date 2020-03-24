@@ -5,13 +5,22 @@ using System.Web.Http;
 
 namespace Mwh.Sample.WebApi.Controllers
 {
+    /// <summary>
+    /// BaseApiController
+    /// </summary>
     public abstract class BaseApiController : ApiController
     {
 
+        /// <summary>
+        /// BaseApiController Constructor
+        /// </summary>
         protected BaseApiController()
         {
 
         }
+        /// <summary>
+        /// Employee Database Mock
+        /// </summary>
         public static IEmployeeDB EmpDB
         {
             get

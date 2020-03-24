@@ -7,104 +7,149 @@ using System.Web.Mvc;
 
 namespace Mwh.Sample.WebApi.Controllers
 {
+    /// <summary>
+    /// MvcEmployeeController
+    /// </summary>
     public class MvcEmployeeController : BaseController
     {
-        // GET: MvcEmployee
+        
+        /// <summary>
+        /// Default Page for MvcEmployeeController
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Index()
         {
-            return View(EmpDB.ListAll());
+            return View(EmpDB.EmployeeCollection());
         }
 
-        // GET: MvcEmployee/Details/5
+        
+        /// <summary>
+        /// View Employee Details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Details(int id)
         {
-            return View(EmpDB.Get(id));
+            return View(EmpDB.Employee(id));
         }
 
-        // GET: MvcEmployee/Create
+        
+        /// <summary>
+        /// Load Page to Create A New Employee
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Create()
         {
             return View(new EmployeeModel());
         }
 
-        // POST: MvcEmployee/Create
+        
+        /// <summary>
+        /// Save New Employee
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(EmployeeModel employee)
         {
-            try
+            if (employee != null)
             {
-                if (employee != null)
-                {
-                    employee.EmployeeID = EmpDB.Update(employee);
-                }
-                return RedirectToAction("Index");
+                employee.EmployeeID = EmpDB.Update(employee);
             }
-            catch
-            {
-                if (employee != null)
-                {
-                    return View(employee);
-                }
-                return View(new EmployeeModel());
-            }
+            return RedirectToAction("Index");
+            //try
+            //{
+
+            //}
+            //catch
+            //{
+            //    if (employee != null)
+            //    {
+            //        return View(employee);
+            //    }
+            //    return View(new EmployeeModel());
+            //}
         }
 
-        // GET: MvcEmployee/Edit/5
+        
+        /// <summary>
+        /// Edit an employee by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View(EmpDB.Get(id));
+            return View(EmpDB.Employee(id));
         }
 
-        // POST: MvcEmployee/Edit/5
+        
+        /// <summary>
+        /// Save Employee 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, EmployeeModel employee)
         {
-            try
+            if (employee != null)
             {
-                if (employee != null)
-                {
-                    if (employee.EmployeeID == id)
-                        EmpDB.Update(employee);
-                }
-                return RedirectToAction("Index");
+                if (employee.EmployeeID == id)
+                    EmpDB.Update(employee);
             }
-            catch
-            {
-                return View(EmpDB.Get(id));
-            }
+            return RedirectToAction("Index");
+            //try
+            //{
+
+            //}
+            //catch
+            //{
+            //    return View(EmpDB.Employee(id));
+            //}
         }
 
-        // GET: MvcEmployee/Delete/5
+        
+        /// <summary>
+        /// Select an Employee to delete
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View(EmpDB.Get(id));
+            return View(EmpDB.Employee(id));
         }
 
-        // POST: MvcEmployee/Delete/5
+        
+        /// <summary>
+        /// Delete Employee
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, EmployeeModel employee)
         {
-            try
+            if (employee != null)
             {
-                if (employee != null)
-                {
-                    if (employee.EmployeeID == id)
-                        _ = EmpDB.Delete(employee.EmployeeID);
-                }
-                return RedirectToAction("Index");
+                if (employee.EmployeeID == id)
+                    _ = EmpDB.Delete(employee.EmployeeID);
             }
-            catch
-            {
-                return View(EmpDB.Get(id));
-            }
+            return RedirectToAction("Index");
+            //try
+            //{
+            //}
+            //catch
+            //{
+            //    return View(EmpDB.Employee(id));
+            //}
         }
     }
 }

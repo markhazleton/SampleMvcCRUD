@@ -3,9 +3,9 @@
 namespace Mwh.SampleCRUD.BL.Models
 {
     /// <summary>
-    /// Job Assignment List
+    ///     JobAssignmentCollection
     /// </summary>
-    public class JobAssignmentList : List<JobAssignmentModel>
+    public class JobAssignmentCollection : List<JobAssignmentModel>
     {
     }
 }

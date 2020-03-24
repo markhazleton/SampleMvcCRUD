@@ -12,7 +12,7 @@ namespace Mwh.SampleCRUD.BL.Models
         /// </summary>
         public EmployeeModel()
         {
-            JobList = new JobAssignmentList();
+            JobList = new JobAssignmentCollection();
             Department = EmployeeDepartment.Unknown;
         }
 
@@ -31,6 +31,6 @@ namespace Mwh.SampleCRUD.BL.Models
 
         public string Country { get; set; }
 
-        public JobAssignmentList JobList { get; set; }
+        public JobAssignmentCollection JobList { get; }
     }
 }

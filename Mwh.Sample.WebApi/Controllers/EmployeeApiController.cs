@@ -5,28 +5,34 @@ using System.Web.Http;
 namespace Mwh.Sample.WebApi.Controllers
 {
 
+    /// <summary>
+    /// EmployeeApiController
+    /// </summary>
     [RoutePrefix("api/employee")]
     public class EmployeeApiController : BaseApiController
     {
+        /// <summary>
+        /// EmployeeApiController
+        /// </summary>
         public EmployeeApiController()
         {
 
         }
 
         /// <summary>
-        /// Get List of Employees
+        /// Employee List of Employees
         /// </summary>
         /// <returns></returns>
         [Route("")]
         [HttpGet]
         public IEnumerable<EmployeeModel> Get()
         {
-            return EmpDB.ListAll();
+            return EmpDB.EmployeeCollection();
         }
 
 
         /// <summary>
-        /// Get Employee by Id
+        /// Employee Employee by Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -34,7 +40,7 @@ namespace Mwh.Sample.WebApi.Controllers
         [HttpGet]
         public EmployeeModel Get(int id)
         {
-            return EmpDB.Get(id);
+            return EmpDB.Employee(id);
         }
 
         /// <summary>
@@ -47,7 +53,7 @@ namespace Mwh.Sample.WebApi.Controllers
         public EmployeeModel Post(EmployeeModel employee)
         {
             var updateID = EmpDB.Update(employee);
-            return EmpDB.Get(updateID);
+            return EmpDB.Employee(updateID);
         }
 
         /// <summary>

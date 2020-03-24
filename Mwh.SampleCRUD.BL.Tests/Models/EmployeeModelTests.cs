@@ -17,7 +17,6 @@ namespace Mwh.SampleCRUD.BL.Tests.Models
                 Country = "Country",
                 Department = EmployeeDepartment.Marketing,
                 EmployeeID = 0,
-                JobList = new JobAssignmentList(),
                 Name = "Name"
             };
 

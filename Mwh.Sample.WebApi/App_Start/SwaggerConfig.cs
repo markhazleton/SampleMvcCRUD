@@ -12,8 +12,14 @@ using System.Web.Http.Description;
 
 namespace Mwh.Sample.WebApi
 {
+    /// <summary>
+    /// Swagger Configuration
+    /// </summary>
     public class SwaggerConfig
     {
+        /// <summary>
+        /// Register
+        /// </summary>
         public static void Register()
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
@@ -304,9 +310,16 @@ namespace Mwh.Sample.WebApi
                     });
         }
 
+        /// <summary>
+        /// ResolveVersionSupportByRouteConstraint
+        /// </summary>
+        /// <param name="apiDesc"></param>
+        /// <param name="targetApiVersion"></param>
+        /// <returns></returns>
         public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
         {
-            return (apiDesc.Route.RouteTemplate.ToLower().Contains(targetApiVersion.ToLower()));
+            if (apiDesc == null || targetApiVersion == null) return false;
+            return apiDesc.Route.RouteTemplate.ToLower().Contains(targetApiVersion.ToLower());
         }
 
         private class ApplyDocumentVendorExtensions : IDocumentFilter
@@ -319,10 +332,20 @@ namespace Mwh.Sample.WebApi
             }
         }
 
+        /// <summary>
+        /// AssignOAuth2SecurityRequirements
+        /// </summary>
         public class AssignOAuth2SecurityRequirements : IOperationFilter
         {
+            /// <summary>
+            /// Apply
+            /// </summary>
+            /// <param name="operation"></param>
+            /// <param name="schemaRegistry"></param>
+            /// <param name="apiDescription"></param>
             public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
             {
+                if (apiDescription == null || operation == null || schemaRegistry==null) return;
                 // Correspond each "Authorize" role to an oauth2 scope
                 var scopes = apiDescription.ActionDescriptor.GetFilterPipeline()
                     .Select(filterInfo => filterInfo.Instance)

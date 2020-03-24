@@ -2,6 +2,9 @@
 
 namespace Mwh.Sample.WebApi
 {
+    /// <summary>
+    /// Bundle Configuration
+    /// </summary>
     public class BundleConfig
     {
         /// <summary>
@@ -14,6 +17,7 @@ namespace Mwh.Sample.WebApi
         /// <param name="bundles"></param>
         public static void RegisterBundles(BundleCollection bundles)
         {
+            if (bundles == null) return;
             //Scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery")
                 .Include("~/Scripts/jquery-3.4.1.js",

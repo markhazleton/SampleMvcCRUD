@@ -97,8 +97,7 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
                 Name = "Bill",
                 Country = "USA",
                 State = "Texas",
-                Department = EmployeeDepartment.IT,
-                JobList = new JobAssignmentList()
+                Department = EmployeeDepartment.IT
             };
             var result = controller.Post(newEmployee);
 
@@ -134,8 +133,7 @@ namespace Mwh.Sample.WebApi.Tests.Controllers
                 Name = "Bill",
                 Country = "USA",
                 State = "Texas",
-                Department = EmployeeDepartment.IT,
-                JobList = new JobAssignmentList()
+                Department = EmployeeDepartment.IT
             };
 
             // Act

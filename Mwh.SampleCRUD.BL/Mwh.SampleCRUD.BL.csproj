@@ -48,12 +48,15 @@
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\EmployeeDepartment.cs" />
     <Compile Include="Models\JobAssignmentModel.cs" />
-    <Compile Include="Models\JobAssignmentList.cs" />
+    <Compile Include="Models\JobAssignmentCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EmployeeMock.cs" />
     <Compile Include="Repositories\IEmployeeDB.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

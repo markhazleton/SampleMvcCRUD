@@ -5,14 +5,23 @@ using System.Web.Mvc;
 
 namespace Mwh.Sample.WebApi.Controllers
 {
+    /// <summary>
+    /// BaseController
+    /// </summary>
     public abstract class BaseController : Controller
     {
-        /// <summary>Initializes a new instance of the <see cref="BaseController" /> class.</summary>
+
+        /// <summary>
+        /// BaseController
+        /// </summary>
         protected BaseController()
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static IEmployeeDB EmpDB
         {
             get
