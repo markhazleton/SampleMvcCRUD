@@ -45,10 +45,19 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Desk.cs" />
+    <Compile Include="DataInterface\IDeskBookingRepository.cs" />
+    <Compile Include="DataInterface\IDeskRepository.cs" />
+    <Compile Include="Models\DeskBooking.cs" />
+    <Compile Include="Models\DeskBookingBase.cs" />
+    <Compile Include="Models\DeskBookingRequest.cs" />
+    <Compile Include="Models\DeskBookingResult.cs" />
+    <Compile Include="Models\DeskBookingResultCode.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\EmployeeDepartment.cs" />
     <Compile Include="Models\JobAssignmentModel.cs" />
     <Compile Include="Models\JobAssignmentCollection.cs" />
+    <Compile Include="Processor\DeskBookingRequestProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EmployeeMock.cs" />
     <Compile Include="Repositories\IEmployeeDB.cs" />

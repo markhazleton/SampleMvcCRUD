@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mwh.Sample.WebApi.Controllers;
 using System;
 using System.Web.Mvc;
 
-namespace Mwh.Sample.WebApi.Tests.Controllers
+namespace Mwh.Sample.WebApi.Controllers
 {
     [TestClass]
     public class HomeControllerTest : IDisposable

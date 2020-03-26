@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.SampleCRUD.BL.Models;
-using Mwh.SampleCRUD.BL.Repositories;
 using System.Linq;
 
-namespace Mwh.SampleCRUD.BL.Tests.Repositories
+namespace Mwh.SampleCRUD.BL.Repositories
 {
     [TestClass()]
     public class EmployeeMockTests
@@ -23,7 +22,7 @@ namespace Mwh.SampleCRUD.BL.Tests.Repositories
             var count = Employee.EmployeeCollection().Count;
 
             Employee.Delete(myEmp.EmployeeID);
-            Assert.AreEqual(count-1, Employee.EmployeeCollection().Count);
+            Assert.AreEqual(count - 1, Employee.EmployeeCollection().Count);
         }
 
         [TestMethod()]

@@ -1,8 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mwh.SampleCRUD.BL.Models;
 using System;
 
-namespace Mwh.SampleCRUD.BL.Tests.Models
+namespace Mwh.SampleCRUD.BL.Models
 {
     [TestClass]
     public class JobAssignmentModelTests

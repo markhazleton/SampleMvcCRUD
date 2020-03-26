@@ -1,11 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mwh.Sample.WebApi.Controllers;
 using Mwh.SampleCRUD.BL.Models;
 using System;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Mwh.Sample.WebApi.Tests.Controllers
+namespace Mwh.Sample.WebApi.Controllers
 {
     [TestClass]
     public class EmployeeApiControllerTests : IDisposable

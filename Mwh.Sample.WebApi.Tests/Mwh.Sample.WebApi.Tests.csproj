@@ -14,7 +14,7 @@
     <ProjectGuid>{E63C5245-F179-4009-BB40-E84451C102FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mwh.Sample.WebApi.Tests</RootNamespace>
+    <RootNamespace>Mwh.Sample.WebApi</RootNamespace>
     <AssemblyName>Mwh.Sample.WebApi.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
