@@ -1,0 +1,62 @@
+﻿@page "/editemployee/{id}"
+@inject NavigationManager NavigationManager
+@inject IEmployeeService EmployeeService
+
+<h2>Edit Employee</h2>
+<hr />
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input for="Name" class="form-control" @bind="@employee.Name" />
+            </div>
+            <div class="form-group">
+                <label for="Department" class="control-label">Department</label>
+                <input for="Department" class="form-control" @bind="@employee.Department" />
+            </div>
+            <div class="form-group">
+                <label for="Designation" class="control-label">Designation</label>
+                <input for="Designation" class="form-control" @bind="@employee.Designation" />
+            </div>
+            <div class="form-group">
+                <label for="Company" class="control-label">Company</label>
+                <input for="Company" class="form-control" @bind="@employee.Company" />
+            </div>
+            <div class="form-group">
+                <label for="City" class="control-label">City</label>
+                <input for="City" class="form-control" @bind="@employee.City" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@UpdateEmployee" value="Update" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</form>
+
+@code {
+
+    [Parameter]
+    public string id { get; set; }
+
+    Employee employee = new Employee();
+
+    protected override async Task OnInitializedAsync()
+    {
+        employee = await EmployeeService.SingleEmployee(id);
+    }
+
+    protected async Task UpdateEmployee()
+    {
+        await EmployeeService.EditEmployee(id, employee);
+        NavigationManager.NavigateTo("listemployees");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listemployees");
+    }
+}   

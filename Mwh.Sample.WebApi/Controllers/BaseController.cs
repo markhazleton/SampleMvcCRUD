@@ -1,4 +1,4 @@
-﻿using Mwh.SampleCRUD.BL.Repositories;
+﻿using Mwh.Sample.Common.Repositories;
 using System;
 using System.Runtime.Caching;
 using System.Web.Mvc;

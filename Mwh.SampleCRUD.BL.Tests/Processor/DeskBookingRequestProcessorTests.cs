@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Mwh.SampleCRUD.BL.DataInterface;
-using Mwh.SampleCRUD.BL.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

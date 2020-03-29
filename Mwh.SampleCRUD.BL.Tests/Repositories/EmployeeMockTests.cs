@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mwh.SampleCRUD.BL.Models;
+
 using System.Linq;
 
 namespace Mwh.SampleCRUD.BL.Repositories

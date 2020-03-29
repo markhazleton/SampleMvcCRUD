@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mwh.SampleCRUD.BL.Models;
 
 namespace Mwh.SampleCRUD.BL.Models
 {

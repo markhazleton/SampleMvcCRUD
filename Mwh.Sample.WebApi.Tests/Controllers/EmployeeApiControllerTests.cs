@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mwh.SampleCRUD.BL.Models;
+using Mwh.Sample.Common.Models;
 using System;
 using System.Net.Http;
 using System.Web.Http;

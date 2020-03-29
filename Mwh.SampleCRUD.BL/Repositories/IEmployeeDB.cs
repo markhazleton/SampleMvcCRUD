@@ -1,4 +1,4 @@
-﻿using Mwh.SampleCRUD.BL.Models;
+﻿
 using System.Collections.Generic;
 
 namespace Mwh.SampleCRUD.BL.Repositories
