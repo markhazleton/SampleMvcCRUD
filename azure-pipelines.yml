@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: ''**/Mwh.SampleCRUD.sln''
+  solution: '**/Mwh.SampleCRUD.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
