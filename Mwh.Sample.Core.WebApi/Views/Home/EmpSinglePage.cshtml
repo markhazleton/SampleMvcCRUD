@@ -8,24 +8,13 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    name
-                </th>
-                <th>
-                    age
-                </th>
-                <th>
-                    state
-                </th>
-                <th>
-                    country
-                </th>
-                <th>
-                    Action
-                </th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Department</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody class="tbody"></tbody>
@@ -41,28 +30,29 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="employeeId">ID</label>
-                        <input type="text" class="form-control" id="employeeID" placeholder="Id" disabled="disabled" />
-                    </div>
-                    <div class="form-group">
-                        <label for="name">name</label>
+                        <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" placeholder="name" />
                     </div>
                     <div class="form-group">
-                        <label for="age">age</label>
+                        <label for="age">Age</label>
                         <input type="text" class="form-control" id="age" placeholder="age" />
                     </div>
                     <div class="form-group">
-                        <label for="state">state</label>
+                        <label for="state">State</label>
                         <input type="text" class="form-control" id="state" placeholder="state" />
                     </div>
                     <div class="form-group">
-                        <label for="country">country</label>
+                        <label for="country">Country</label>
                         <input type="text" class="form-control" id="country" placeholder="country" />
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <input type="text" class="form-control" id="department" placeholder="department" />
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
+                <input type="hidden" id="employeeID" />
                 <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Add</button>
                 <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
                 <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
@@ -96,6 +86,7 @@
                         html += '<td>' + item.age + '</td>';
                         html += '<td>' + item.state + '</td>';
                         html += '<td>' + item.country + '</td>';
+                        html += '<td>' + item.department + '</td>';
                         html += '<td><a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + item.employeeID + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + item.employeeID + ')">Delete</a></td>';
                         html += '</tr>';
                     });
@@ -113,16 +104,20 @@
             if (res == false) {
                 return false;
             }
-            var empObj = {
-                employeeID: $('#employeeID').val(),
-                name: $('#name').val(),
-                age: $('#age').val(),
-                state: $('#state').val(),
-                country: $('#country').val()
+            var employee = {
+                EmployeeID: $('#employeeID').val(),
+                Name: $('#name').val(),
+                Age: $('#age').val(),
+                State: $('#state').val(),
+                Country: $('#country').val(),
+                Department: $('#department').val()
             };
+
+            var jsonEmpObj = JSON.stringify(employee)
+
             $.ajax({
-                url: "/EmployeeApi/",
-                data: JSON.stringify(empObj),
+                url: "/EmployeeApi",
+                data: jsonEmpObj,
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
@@ -153,6 +148,7 @@
                     $('#age').val(result.age);
                     $('#state').val(result.state);
                     $('#country').val(result.country);
+                    $('#department').val(result.department);
 
                     $('#myModal').modal('show');
                     $('#btnUpdate').show();
@@ -171,16 +167,17 @@
             if (res == false) {
                 return false;
             }
-            var empObj = {
-                employeeID: $('#employeeID').val(),
-                name: $('#name').val(),
-                age: $('#age').val(),
-                state: $('#state').val(),
-                country: $('#country').val(),
+            var employee = {
+                EmployeeID: $('#employeeID').val(),
+                Name: $('#name').val(),
+                Age: $('#age').val(),
+                State: $('#state').val(),
+                Country: $('#country').val(),
+                Department: $('#department').val()
             };
             $.ajax({
                 url: "/EmployeeApi",
-                data: JSON.stringify(empObj),
+                data: JSON.stringify(employee),
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
@@ -192,6 +189,7 @@
                     $('#age').val("");
                     $('#state').val("");
                     $('#country').val("");
+                    $('#department').val("");
                 },
                 error: function (errormessage) {
                     alert(errormessage.responseText);
@@ -225,12 +223,14 @@
             $('#age').val("");
             $('#state').val("");
             $('#country').val("");
+            $('#department').val("");
             $('#btnUpdate').hide();
             $('#btnAdd').show();
             $('#name').css('border-color', 'lightgrey');
             $('#age').css('border-color', 'lightgrey');
             $('#state').css('border-color', 'lightgrey');
             $('#country').css('border-color', 'lightgrey');
+            $('#department').css('border-color', 'lightgrey');
         }
         //Valdidation using jquery
         function validate() {
@@ -262,6 +262,13 @@
             }
             else {
                 $('#country').css('border-color', 'lightgrey');
+            }
+            if ($('#department').val().trim() == "") {
+                $('#department').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#department').css('border-color', 'lightgrey');
             }
             return isValid;
         }

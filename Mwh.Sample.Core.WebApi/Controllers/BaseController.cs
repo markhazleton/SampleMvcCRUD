@@ -14,6 +14,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     {
         private IMemoryCache _cache;
         private readonly ILogger<HomeController> _logger;
+        private readonly IEmployeeDB employeeDB;
 
         /// <summary>
         /// BaseController
@@ -22,6 +23,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         {
             _cache = memoryCache;
             _logger = logger;
+            employeeDB = new EmployeeMock();
         }
 
         /// <summary>
@@ -42,7 +44,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
                     // Set cache options.
                     var cacheEntryOptions = new MemoryCacheEntryOptions()
                         // Keep in cache for this time, reset time if accessed.
-                        .SetSlidingExpiration(TimeSpan.FromSeconds(3));
+                        .SetSlidingExpiration(TimeSpan.FromSeconds(5000));
 
                     // Save data in cache.
                     _cache.Set(CacheKeys.Entry, cacheEntry, cacheEntryOptions);

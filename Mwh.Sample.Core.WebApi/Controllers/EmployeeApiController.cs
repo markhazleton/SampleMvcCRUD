@@ -35,7 +35,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
 
 
         /// <summary>
-        /// Employee Employee by Id
+        /// Employee by Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

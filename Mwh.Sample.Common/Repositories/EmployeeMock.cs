@@ -5,11 +5,21 @@ using System.Linq;
 
 namespace Mwh.Sample.Common.Repositories
 {
+
     /// <summary>
     /// Employee Mock Repository
     /// </summary>
     public class EmployeeMock : IEmployeeDB
     {
+        private static readonly EmployeeMock _instance = new EmployeeMock();
+        public static EmployeeMock Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+
         private List<EmployeeModel> _list;
 
         /// <summary>
@@ -131,7 +141,9 @@ namespace Mwh.Sample.Common.Repositories
             if(emp == null)
                 return -1;
 
-            if(emp.EmployeeID == 0)
+            if (!emp.IsValid) return -1;
+
+            if (emp.EmployeeID == 0)
             {
                 int nextID = _list.OrderByDescending(o => o.EmployeeID).Select(s => s.EmployeeID).FirstOrDefault() + 1;
                 emp.EmployeeID = nextID;

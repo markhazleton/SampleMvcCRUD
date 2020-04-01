@@ -1,18 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Swashbuckle.AspNetCore.Swagger;
+using Mwh.Sample.Common.Repositories;
 
 namespace Mwh.Sample.Core.WebApi
 {
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -26,12 +21,7 @@ namespace Mwh.Sample.Core.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            });
-
+            services.AddSingleton<IEmployeeDB, EmployeeMock>();
             services.AddMemoryCache();
             services.AddControllersWithViews();
         }
@@ -51,11 +41,8 @@ namespace Mwh.Sample.Core.WebApi
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSwagger();
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
