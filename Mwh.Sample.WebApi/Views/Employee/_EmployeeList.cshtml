@@ -3,18 +3,11 @@
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Department
-            </th>
-            <th>
-                State
-            </th>
-            <th>
-                Country
-            </th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Department</th>
             <th></th>
         </tr>
     </thead>
@@ -26,13 +19,16 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @item.Department.ToString()
+                    @item.Age
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.State)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @item.Department
                 </td>
                 <td>
                     <a href="#" class="btn btn-primary" onclick="return loadEmployeeEdit('@item.EmployeeID')">Edit</a>  
