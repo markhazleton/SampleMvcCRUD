@@ -27,7 +27,7 @@ namespace Mwh.Sample.WebApi
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 
             //CSS
-            bundles.Add(new StyleBundle("~/bundles/style").Include("~/Content/bootstrap.css"));
+            bundles.Add(new StyleBundle("~/bundles/style").Include("~/Content/bootstrap.css","~/Content/site.css"));
         }
     }
 }
