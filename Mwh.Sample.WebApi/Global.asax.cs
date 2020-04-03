@@ -22,5 +22,22 @@ namespace Mwh.Sample.WebApi
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        protected void Application_Error()
+        {
+            HttpContext ctx = HttpContext.Current;
+            ctx.Response.Clear();
+            RequestContext rc = ((MvcHandler)ctx.CurrentHandler).RequestContext;
+            rc.RouteData.Values["action"] = "Index";
+            rc.RouteData.Values["controller"] = "Error";
+            rc.RouteData.Values["id"] = "";
+
+            IControllerFactory factory = ControllerBuilder.Current.GetControllerFactory();
+            IController controller = factory.CreateController(rc, "Error");
+            controller.Execute(rc);
+            ctx.Server.ClearError();
+        }
     }
 }

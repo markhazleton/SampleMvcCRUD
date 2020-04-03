@@ -22,6 +22,19 @@ namespace Mwh.Sample.WebApi
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "RootPage",
+                url: "",
+                defaults: new { controller = "Home", action = "Index" }
+                );
+            
+            routes.MapRoute(
+                name: "Not Found",
+                url: "{slug}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+
         }
     }
 }
