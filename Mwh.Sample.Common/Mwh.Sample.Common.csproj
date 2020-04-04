@@ -4,10 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Initial Release of Mwh Sample Common Library</PackageReleaseNotes>
+    <PackageReleaseNotes>Add Extension Methods and Unit Tests</PackageReleaseNotes>
     <RepositoryType>GIT</RepositoryType>
     <RepositoryUrl>https://github.com/markhazleton/SampleMvcCRUD</RepositoryUrl>
     <PackageProjectUrl>https://github.com/markhazleton/SampleMvcCRUD</PackageProjectUrl>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

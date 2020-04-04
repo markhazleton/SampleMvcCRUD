@@ -53,6 +53,9 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Mwh.Sample.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mwh.Sample.Common.1.0.0\lib\netstandard2.0\Mwh.Sample.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -108,10 +111,6 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mwh.Sample.Common\Mwh.Sample.Common.csproj">
-      <Project>{E160E001-C794-4B49-B0A7-E2F03F91F939}</Project>
-      <Name>Mwh.Sample.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Mwh.Sample.WebApi\Mwh.Sample.WebApi.csproj">
       <Project>{C2448DF1-D91B-4B36-8BB9-4F270239E5E5}</Project>
       <Name>Mwh.Sample.WebApi</Name>

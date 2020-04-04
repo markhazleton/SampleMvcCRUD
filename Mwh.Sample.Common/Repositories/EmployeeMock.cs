@@ -5,21 +5,11 @@ using System.Linq;
 
 namespace Mwh.Sample.Common.Repositories
 {
-
     /// <summary>
     /// Employee Mock Repository
     /// </summary>
     public class EmployeeMock : IEmployeeDB
     {
-        private static readonly EmployeeMock _instance = new EmployeeMock();
-        public static EmployeeMock Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
-
         private List<EmployeeModel> _list;
 
         /// <summary>
@@ -68,9 +58,9 @@ namespace Mwh.Sample.Common.Repositories
             };
 
 
-            foreach(var emp in _list)
+            foreach (var emp in _list)
             {
-                if(emp == null)
+                if (emp == null)
                     continue;
 
                 emp.JobList
@@ -94,6 +84,8 @@ namespace Mwh.Sample.Common.Repositories
             }
         }
 
+        public static EmployeeMock Instance { get; } = new EmployeeMock();
+
         /// <summary>
         /// Method for Deleting an Employee
         /// </summary>
@@ -102,9 +94,9 @@ namespace Mwh.Sample.Common.Repositories
         public int Delete(int ID)
         {
             var myEmp = _list.Where(w => w.EmployeeID == ID).FirstOrDefault();
-            if(myEmp == null)
+            if (myEmp == null)
                 return -1;
-            if(_list.Remove(myEmp))
+            if (_list.Remove(myEmp))
             {
                 return 1;
             }
@@ -119,16 +111,13 @@ namespace Mwh.Sample.Common.Repositories
         public EmployeeModel Employee(int id)
         {
             var myEmp = _list.Where(w => w.EmployeeID == id).FirstOrDefault();
-            if(myEmp == null)
+            if (myEmp == null)
                 return new EmployeeModel();
             return myEmp;
         }
 
         //Return list of all Employees
-        public List<EmployeeModel> EmployeeCollection()
-        {
-            return _list;
-        }
+        public List<EmployeeModel> EmployeeCollection() { return _list; }
 
         //Method for Updating Employee record
         /// <summary>
@@ -138,10 +127,11 @@ namespace Mwh.Sample.Common.Repositories
         /// <returns></returns>
         public int Update(EmployeeModel emp)
         {
-            if(emp == null)
+            if (emp == null)
                 return -1;
 
-            if (!emp.IsValid) return -1;
+            if (!emp.IsValid)
+                return -1;
 
             if (emp.EmployeeID == 0)
             {
@@ -149,11 +139,12 @@ namespace Mwh.Sample.Common.Repositories
                 emp.EmployeeID = nextID;
                 _list.Add(emp);
                 return nextID;
-            } else
+            }
+            else
             {
                 var myEmp = _list.Where(w => w.EmployeeID == emp.EmployeeID).FirstOrDefault();
 
-                if(myEmp == null)
+                if (myEmp == null)
                     return -1;
 
                 myEmp.Name = emp.Name;

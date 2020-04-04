@@ -6,10 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Mwh.Sample.Common\Mwh.Sample.Common.csproj" />
+    <PackageReference Include="Mwh.Sample.Common" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
