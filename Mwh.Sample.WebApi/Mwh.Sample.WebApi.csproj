@@ -71,8 +71,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mwh.Sample.Common, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mwh.Sample.Common.1.2.0\lib\netstandard2.0\Mwh.Sample.Common.dll</HintPath>
+    <Reference Include="Mwh.Sample.Common, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mwh.Sample.Common.1.4.0\lib\netstandard2.0\Mwh.Sample.Common.dll</HintPath>
     </Reference>
     <Reference Include="netstandard" />
   </ItemGroup>
