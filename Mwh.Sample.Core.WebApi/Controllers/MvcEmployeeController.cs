@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Mwh.Sample.Common.Models;
+using Mwh.Sample.Common.Repositories;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
@@ -10,7 +10,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// </summary>
     public class MvcEmployeeController : BaseController
     {
-        public MvcEmployeeController(ILogger<HomeController> logger, IMemoryCache memoryCache) : base(logger, memoryCache)
+        public MvcEmployeeController(ILogger<HomeController> logger, IEmployeeDB employee) : base(logger, employee)
         {
         }
         /// <summary>
@@ -20,7 +20,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(EmpDB.EmployeeCollection());
+            return View(employeeDB.EmployeeCollection());
         }
 
 
@@ -32,7 +32,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            return View(EmpDB.Employee(id));
+            return View(employeeDB.Employee(id));
         }
 
 
@@ -58,7 +58,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         {
             if (employee != null)
             {
-                employee.EmployeeID = EmpDB.Update(employee);
+                employee.EmployeeID = employeeDB.Update(employee);
             }
             return RedirectToAction("Index");
 
@@ -73,7 +73,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View(EmpDB.Employee(id));
+            return View(employeeDB.Employee(id));
         }
 
 
@@ -90,7 +90,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             if (employee != null)
             {
                 if (employee.EmployeeID == id)
-                    EmpDB.Update(employee);
+                    employeeDB.Update(employee);
             }
             return RedirectToAction("Index");
 
@@ -105,7 +105,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View(EmpDB.Employee(id));
+            return View(employeeDB.Employee(id));
         }
 
 
@@ -122,7 +122,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             if (employee != null)
             {
                 if (employee.EmployeeID == id)
-                    _ = EmpDB.Delete(employee.EmployeeID);
+                    _ = employeeDB.Delete(employee.EmployeeID);
             }
             return RedirectToAction("Index");
         }

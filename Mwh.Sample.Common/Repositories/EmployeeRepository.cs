@@ -7,9 +7,9 @@ namespace Mwh.Sample.Common.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly EmployeeMock _emp;
+        private readonly IEmployeeDB _emp;
 
-        public EmployeeRepository() { _emp = new EmployeeMock(); }
+        public EmployeeRepository(IEmployeeDB employeeDB) { _emp = employeeDB; }
 
         public async Task AddAsync(EmployeeModel employee, CancellationToken token)
         {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Mwh.Sample.Common.Repositories;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
@@ -10,7 +10,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// </summary>
     public class EmployeeController : BaseController
     {
-        public EmployeeController(ILogger<HomeController> logger, IMemoryCache memoryCache) : base(logger, memoryCache)
+        public EmployeeController(ILogger<HomeController> logger,IEmployeeDB employee) : base(logger, employee)
         {
         }
 
@@ -22,7 +22,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public ActionResult GetEmployeeDelete(int id = 0)
         {
-            return PartialView("_EmployeeDelete", EmpDB.Employee(id));
+            return PartialView("_EmployeeDelete", employeeDB.Employee(id));
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public ActionResult GetEmployeeEdit(int id = 0)
         {
-            return PartialView("_EmployeeEdit", EmpDB.Employee(id));
+            return PartialView("_EmployeeEdit", employeeDB.Employee(id));
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public ActionResult GetEmployeeList()
         {
-            return PartialView("_EmployeeList", EmpDB.EmployeeCollection());
+            return PartialView("_EmployeeList", employeeDB.EmployeeCollection());
         }
 
         /// <summary>

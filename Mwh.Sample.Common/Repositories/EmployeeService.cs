@@ -20,6 +20,11 @@ namespace Mwh.Sample.Common.Repositories
             return _employeeRepository.ListAsync(token);
         }
 
+        public Task<EmployeeModel> FindByIDAsync(int id, CancellationToken token)
+        {
+            return _employeeRepository.FindByIdAsync(id,token);
+        }
+
         public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
         {
             try

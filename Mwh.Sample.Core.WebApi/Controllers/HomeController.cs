@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Mwh.Sample.Common.Repositories;
 using Mwh.Sample.Core.WebApi.Models;
 using System.Diagnostics;
 
@@ -9,7 +9,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     public class HomeController : BaseController
     {
 
-        public HomeController(ILogger<HomeController> logger, IMemoryCache memoryCache) : base(logger, memoryCache)
+        public HomeController(ILogger<HomeController> logger, IEmployeeDB employee) : base(logger, employee)
         {
         }
 
