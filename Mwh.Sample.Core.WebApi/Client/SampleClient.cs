@@ -30,14 +30,16 @@ namespace Mwh.Sample.Core.WebApi
             return await Get<List<EmployeeModel>>($"/api/employee").ConfigureAwait(true);
         }
 
-        public Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
+        public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
         {
-            throw new System.NotImplementedException();
+            var resp = await Post<EmployeeResponse>($"/api/employee",employee).ConfigureAwait(true);
+            return resp;
         }
 
-        public Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
+        public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
         {
-            throw new System.NotImplementedException();
+            var resp = await Put<EmployeeResponse>($"/api/employee/{id}", employee).ConfigureAwait(true);
+            return resp;
         }
     }
 }

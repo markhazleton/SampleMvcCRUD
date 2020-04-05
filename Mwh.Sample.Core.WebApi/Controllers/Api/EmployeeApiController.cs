@@ -20,8 +20,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// <summary>
         /// EmployeeApiController
         /// </summary>
-        public EmployeeApiController(IEmployeeService employeeService) : base()
-        { _employeeService = employeeService; }
+        public EmployeeApiController(IEmployeeService employeeService) : base() { _employeeService = employeeService; }
 
         /// <summary>
         /// Deletes a given employee according to an identifier.
@@ -43,22 +42,11 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             return Ok(result);
         }
 
-        ///// <summary>
-        ///// Lists all employees.
-        ///// </summary>
-        ///// <returns>List os employees.</returns>
-        [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<EmployeeModel>), 200)]
-        public async Task<IEnumerable<EmployeeModel>> ListAsync()
-        {
-            CancellationTokenSource cts = new CancellationTokenSource();
-            var employees = await _employeeService.ListAsync(cts.Token).ConfigureAwait(true);
-            return employees;
-        }
-        ///// <summary>
-        ///// Get Single Employee.
-        ///// </summary>
-        ///// <returns>List os employees.</returns>
+        /// <summary>
+        /// Returns Single Employee according to an identifier.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(EmployeeModel), 200)]
         [ProducesResponseType(typeof(ErrorResource), 400)]
@@ -73,8 +61,22 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             }
             return Ok(result);
         }
+
         /// <summary>
-        /// Saves a new employee.
+        /// Returns collection of all employees
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<EmployeeModel>), 200)]
+        public async Task<IEnumerable<EmployeeModel>> ListAsync()
+        {
+            CancellationTokenSource cts = new CancellationTokenSource();
+            var employees = await _employeeService.ListAsync(cts.Token).ConfigureAwait(true);
+            return employees;
+        }
+
+        /// <summary>
+        /// Creates a new employee.
         /// </summary>
         /// <param name="employee">Employee data.</param>
         /// <returns>Response for the request.</returns>

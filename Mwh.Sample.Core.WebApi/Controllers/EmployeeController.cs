@@ -12,7 +12,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// </summary>
     public class EmployeeController : BaseController
     {
-        public EmployeeController(ILogger<HomeController> logger,IEmployeeDB employee) : base(logger, employee)
+        public EmployeeController(ILogger<HomeController> logger) : base(logger)
         {
         }
 

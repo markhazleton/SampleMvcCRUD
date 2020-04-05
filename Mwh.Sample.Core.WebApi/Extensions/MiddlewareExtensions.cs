@@ -17,7 +17,7 @@ namespace Mwh.Sample.Core.WebApi.Extensions
                 {
                     Title = "Mwh.Sample.WebAPI",
                     Version = "v1",
-                    Description = "Simple RESTful API built with ASP.NET Core 3.1 to show how to create RESTful services using a decoupled, maintainable architecture.",
+                    Description = "Simple RESTful API built with ASP.NET Core 3.1 to show how to create RESTful services using a decoupled, maintainable architecture. <br/><a href='/'>Back To Home</a>",
                     Contact = new OpenApiContact
                     {
                         Name = "Mark Hazleton",

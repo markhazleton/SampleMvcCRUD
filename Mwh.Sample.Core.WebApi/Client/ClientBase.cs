@@ -146,6 +146,61 @@ namespace Mwh.Sample.Core.WebApi
             }
             return default;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="urlSegment"></param>
+        /// <param name="requestBody"></param>
+        /// <returns></returns>
+        protected async Task<T> Put<T>(string urlSegment, object requestBody)
+        {
+            try
+            {
+                restRequest.Resource = urlSegment.TrimStart('/');
+                restRequest.AddJsonBody(requestBody);
+                restRequest.Method = Method.PUT;
+                IRestResponse response = await Client().ExecuteAsync(restRequest).ConfigureAwait(true);
+                var jser = new JsonSerializer();
+                var requestResponse = jser.Deserialize<T>(response);
+                return requestResponse;
+            }
+            catch (Exception ex)
+            {
+                IsError = true;
+            }
+            return default;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="urlSegment"></param>
+        /// <param name="requestBody"></param>
+        /// <returns></returns>
+        protected async Task<T> Post<T>(string urlSegment, object requestBody)
+        {
+
+            try
+            {
+                restRequest.Resource = urlSegment.TrimStart('/');
+                restRequest.AddJsonBody(requestBody);
+                restRequest.Method = Method.POST;
+                IRestResponse response = await Client().ExecuteAsync(restRequest).ConfigureAwait(true);
+                var jser = new JsonSerializer();
+                var requestResponse = jser.Deserialize<T>(response);
+                return requestResponse;
+            }
+            catch (Exception ex)
+            {
+                IsError = true;
+            }
+            return default;
+        }
+
+
+
+
 
         /// <summary>
         /// Return the HttpClient to be used to make requests to API
