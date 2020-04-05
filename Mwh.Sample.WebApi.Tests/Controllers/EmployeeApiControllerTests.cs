@@ -22,7 +22,7 @@ namespace Mwh.Sample.WebApi.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(true, result);
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@ namespace Mwh.Sample.WebApi.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(-1, result);
+            Assert.AreEqual(false, result);
         }
 
         [TestMethod]
