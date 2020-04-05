@@ -20,7 +20,7 @@ namespace Mwh.Sample.Common.Repositories
             return _employeeRepository.ListAsync(token);
         }
 
-        public Task<EmployeeModel> FindByIDAsync(int id, CancellationToken token)
+        public Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
         {
             return _employeeRepository.FindByIdAsync(id,token);
         }
@@ -47,13 +47,9 @@ namespace Mwh.Sample.Common.Repositories
             if (existingEmployee == null)
                 return new EmployeeResponse("Employee not found.");
 
-            existingEmployee.Name = employee.Name;
-
             try
             {
-                _employeeRepository.Update(existingEmployee);
-
-                return new EmployeeResponse(existingEmployee);
+                return new EmployeeResponse(_employeeRepository.Update(employee));
             }
             catch (Exception ex)
             {

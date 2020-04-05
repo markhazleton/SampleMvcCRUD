@@ -4,11 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Add Find By ID to Employee Service</PackageReleaseNotes>
+    <PackageReleaseNotes>Maek Empoyee DB more fluent, return model from update and bool for delete</PackageReleaseNotes>
     <RepositoryType>GIT</RepositoryType>
     <RepositoryUrl>https://github.com/markhazleton/SampleMvcCRUD</RepositoryUrl>
     <PackageProjectUrl>https://github.com/markhazleton/SampleMvcCRUD</PackageProjectUrl>
-    <Version>1.6.0</Version>
+    <Version>1.8.0</Version>
     <PackageIcon>ProjectMechanicsLogo.png</PackageIcon>
     <PackageLicenseExpression>CDDL-1.0</PackageLicenseExpression>
     <Company>Mark Hazleton</Company>

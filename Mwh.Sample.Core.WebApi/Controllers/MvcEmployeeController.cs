@@ -58,7 +58,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         {
             if (employee != null)
             {
-                employee.EmployeeID = employeeDB.Update(employee);
+                employee = employeeDB.Update(employee);
             }
             return RedirectToAction("Index");
 

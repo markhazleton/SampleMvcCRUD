@@ -29,8 +29,8 @@ namespace Mwh.Sample.Common.Repositories
             return Task.Run(() => (IEnumerable<EmployeeModel>)_emp.EmployeeCollection());
         }
 
-        public void Remove(EmployeeModel employee) { _emp.Delete(employee.EmployeeID); }
+        public bool Remove(EmployeeModel employee) {return _emp.Delete(employee.EmployeeID); }
 
-        public void Update(EmployeeModel employee) { _emp.Update(employee); }
+        public EmployeeModel Update(EmployeeModel employee) { return _emp.Update(employee); }
     }
 }

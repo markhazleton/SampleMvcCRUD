@@ -18,7 +18,7 @@ namespace Mwh.Sample.Common.Repositories
             var result = employeeMock.Delete(ID);
 
             // Assert
-            Assert.AreEqual(result, -1);
+            Assert.AreEqual(result, false);
         }
 
         [TestMethod()]
@@ -110,7 +110,7 @@ namespace Mwh.Sample.Common.Repositories
             var result = employeeMock.Update(emp);
 
             // Assert
-            Assert.AreEqual(result, -1);
+            Assert.AreEqual(result.EmployeeID, 0);
         }
 
         [TestMethod()]
@@ -129,7 +129,7 @@ namespace Mwh.Sample.Common.Repositories
         {
             var Employee = new EmployeeMock();
             var myEmp = new EmployeeModel { EmployeeID = 99999 };
-            Assert.AreEqual(-1, Employee.Update(myEmp));
+            Assert.AreEqual(99999, Employee.Update(myEmp).EmployeeID);
         }
 
         [TestMethod()]
@@ -140,7 +140,7 @@ namespace Mwh.Sample.Common.Repositories
             var myEmp = Employee.EmployeeCollection().FirstOrDefault();
             var NewName = "NewName";
             myEmp.Name = NewName;
-            myEmp.EmployeeID = Employee.Update(myEmp);
+            myEmp = Employee.Update(myEmp);
             Assert.AreEqual(NewName, Employee.Employee(myEmp.EmployeeID).Name);
             Assert.AreEqual(count, Employee.EmployeeCollection().Count);
         }

@@ -2,7 +2,6 @@
 using Mwh.Sample.Common.Models;
 using Mwh.Sample.Common.Repositories;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -62,13 +61,17 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         ///// <returns>List os employees.</returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(EmployeeModel), 200)]
-        public async Task<EmployeeModel> GetAsync(int id)
+        [ProducesResponseType(typeof(ErrorResource), 400)]
+        public async Task<IActionResult> FindByIdAsync(int id)
         {
             CancellationTokenSource cts = new CancellationTokenSource();
-            var employeeList = await _employeeService.ListAsync(cts.Token).ConfigureAwait(true);
+            var result = await _employeeService.FindByIdAsync(id, cts.Token).ConfigureAwait(true);
 
-
-            return employeeList.Where(w => w.EmployeeID == id).FirstOrDefault();
+            if (result.EmployeeID != id)
+            {
+                return BadRequest(new ErrorResource("Employee Not Found"));
+            }
+            return Ok(result);
         }
         /// <summary>
         /// Saves a new employee.

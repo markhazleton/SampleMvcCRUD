@@ -8,6 +8,7 @@ namespace Mwh.Sample.Common.Repositories
     public interface IEmployeeService
     {
         Task<IEnumerable<EmployeeModel>> ListAsync(CancellationToken token);
+        Task<EmployeeModel> FindByIdAsync(int id,CancellationToken token);
         Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token);
         Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token);
         Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token);

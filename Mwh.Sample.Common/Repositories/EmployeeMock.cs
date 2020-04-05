@@ -91,16 +91,16 @@ namespace Mwh.Sample.Common.Repositories
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public int Delete(int ID)
+        public bool Delete(int ID)
         {
             var myEmp = _list.Where(w => w.EmployeeID == ID).FirstOrDefault();
             if (myEmp == null)
-                return -1;
+                return false;
             if (_list.Remove(myEmp))
             {
-                return 1;
+                return true;
             }
-            return 0;
+            return false;
         }
 
         /// <summary>
@@ -125,34 +125,34 @@ namespace Mwh.Sample.Common.Repositories
         /// </summary>
         /// <param name="emp"></param>
         /// <returns></returns>
-        public int Update(EmployeeModel emp)
+        public EmployeeModel Update(EmployeeModel emp)
         {
             if (emp == null)
-                return -1;
+                return new EmployeeModel();
 
             if (!emp.IsValid)
-                return -1;
+                return emp;
 
             if (emp.EmployeeID == 0)
             {
                 int nextID = _list.OrderByDescending(o => o.EmployeeID).Select(s => s.EmployeeID).FirstOrDefault() + 1;
                 emp.EmployeeID = nextID;
                 _list.Add(emp);
-                return nextID;
+                return emp;
             }
             else
             {
                 var myEmp = _list.Where(w => w.EmployeeID == emp.EmployeeID).FirstOrDefault();
 
                 if (myEmp == null)
-                    return -1;
+                    return new EmployeeModel();
 
                 myEmp.Name = emp.Name;
                 myEmp.Age = emp.Age;
                 myEmp.Department = emp.Department;
                 myEmp.Country = emp.Country;
                 myEmp.State = emp.State;
-                return myEmp.EmployeeID;
+                return myEmp;
             }
         }
     }

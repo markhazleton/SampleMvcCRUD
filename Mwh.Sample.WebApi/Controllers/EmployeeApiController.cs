@@ -52,8 +52,7 @@ namespace Mwh.Sample.WebApi.Controllers
         [HttpPost]
         public EmployeeModel Post(EmployeeModel employee)
         {
-            var updateID = EmpDB.Update(employee);
-            return EmpDB.Employee(updateID);
+            return EmpDB.Update(employee);
         }
 
         /// <summary>
@@ -63,7 +62,7 @@ namespace Mwh.Sample.WebApi.Controllers
         /// <returns></returns>
         [Route("{id}")]
         [HttpDelete]
-        public int Delete(int id)
+        public bool Delete(int id)
         {
             return EmpDB.Delete(id);
         }
