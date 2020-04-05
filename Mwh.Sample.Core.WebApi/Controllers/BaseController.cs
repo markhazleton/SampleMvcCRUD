@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Mwh.Sample.Core.WebApi.Extensions;
 using System.Threading;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
@@ -18,7 +19,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// </summary>
         protected BaseController(ILogger<HomeController> logger)
         {
-            client = new SampleClient("https://localhost:44377/","Sample");
+            client = new SampleClient(MyHttpContext.AppBaseUrl, "Sample");
             cts = new CancellationTokenSource();
 
             _logger = logger;

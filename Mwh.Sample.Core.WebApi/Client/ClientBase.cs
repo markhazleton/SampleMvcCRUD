@@ -1,3 +1,4 @@
+using Mwh.Sample.Core.WebApi.Extensions;
 using RestSharp;
 using RestSharp.Serialization.Json;
 using System;
@@ -32,7 +33,6 @@ namespace Mwh.Sample.Core.WebApi
         /// </summary>
         public int UserID = 0;
 
-
         /// <summary>
         /// ClientBase constructor used to set Application Name and Base Url for requests
         /// </summary>
@@ -41,7 +41,9 @@ namespace Mwh.Sample.Core.WebApi
         protected ClientBase(string baseUrl, string appName)
         {
             if (string.IsNullOrEmpty(baseUrl))
-                baseUrl = "MISSING";
+            {
+                baseUrl = MyHttpContext.AppBaseUrl;
+            }
             if (string.IsNullOrEmpty(appName))
                 baseUrl = "MISSING";
 
@@ -63,7 +65,9 @@ namespace Mwh.Sample.Core.WebApi
         protected ClientBase(string baseUrl, string appName, int userId)
         {
             if (string.IsNullOrEmpty(baseUrl))
-                baseUrl = "MISSING";
+            {
+                baseUrl = MyHttpContext.AppBaseUrl;
+            }
             if (string.IsNullOrEmpty(appName))
                 baseUrl = "MISSING";
 
