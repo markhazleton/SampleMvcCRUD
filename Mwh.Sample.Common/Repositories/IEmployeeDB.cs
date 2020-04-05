@@ -8,12 +8,12 @@ namespace Mwh.Sample.Common.Repositories
     /// </summary>
     public interface IEmployeeDB
     {
-        int Delete(int ID);
+        bool Delete(int ID);
 
         EmployeeModel Employee(int id);
 
         List<EmployeeModel> EmployeeCollection();
 
-        int Update(EmployeeModel emp);
+        EmployeeModel Update(EmployeeModel emp);
     }
 }

@@ -4,11 +4,16 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Add Extension Methods and Unit Tests</PackageReleaseNotes>
+    <PackageReleaseNotes>Maek Empoyee DB more fluent, return model from update and bool for delete</PackageReleaseNotes>
     <RepositoryType>GIT</RepositoryType>
     <RepositoryUrl>https://github.com/markhazleton/SampleMvcCRUD</RepositoryUrl>
     <PackageProjectUrl>https://github.com/markhazleton/SampleMvcCRUD</PackageProjectUrl>
-    <Version>1.1.0</Version>
+    <Version>1.8.0</Version>
+    <PackageIcon>ProjectMechanicsLogo.png</PackageIcon>
+    <PackageLicenseExpression>CDDL-1.0</PackageLicenseExpression>
+    <Company>Mark Hazleton</Company>
+    <Authors>Mark Hazleton</Authors>
+    <Copyright>Copyright 2020 Mark Hazleton</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +27,17 @@
     <Reference Include="System.ComponentModel.DataAnnotations">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.ComponentModel.DataAnnotations.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="ProjectMechanicsLogo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

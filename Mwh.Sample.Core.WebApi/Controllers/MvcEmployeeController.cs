@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Mwh.Sample.Common.Models;
+using Mwh.Sample.Common.Repositories;
+using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
@@ -10,7 +11,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// </summary>
     public class MvcEmployeeController : BaseController
     {
-        public MvcEmployeeController(ILogger<HomeController> logger, IMemoryCache memoryCache) : base(logger, memoryCache)
+        public MvcEmployeeController(ILogger<HomeController> logger) : base(logger)
         {
         }
         /// <summary>
@@ -18,11 +19,11 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(EmpDB.EmployeeCollection());
+            var list = await client.ListAsync(cts.Token).ConfigureAwait(true);
+            return View(list);
         }
-
 
         /// <summary>
         /// View Employee Details
@@ -30,9 +31,10 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View(EmpDB.Employee(id));
+            var emp = await client.FindByIdAsync(id,cts.Token).ConfigureAwait(true);
+            return View(emp);
         }
 
 
@@ -54,16 +56,16 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EmployeeModel employee)
+        public async Task<ActionResult> Create(EmployeeModel employee)
         {
+            EmployeeResponse reqResponse;
             if (employee != null)
             {
-                employee.EmployeeID = EmpDB.Update(employee);
+                reqResponse = await client.SaveAsync(employee, cts.Token).ConfigureAwait(true);
             }
             return RedirectToAction("Index");
 
         }
-
 
         /// <summary>
         /// Edit an employee by ID
@@ -71,9 +73,10 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View(EmpDB.Employee(id));
+            var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(true);
+            return View(emp);
         }
 
 
@@ -85,17 +88,17 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, EmployeeModel employee)
+        public async Task<ActionResult> Edit(int id, EmployeeModel employee)
         {
+            EmployeeResponse reqResponse;
             if (employee != null)
             {
                 if (employee.EmployeeID == id)
-                    EmpDB.Update(employee);
+                    reqResponse = await client.UpdateAsync(id, employee, cts.Token).ConfigureAwait(true);
             }
             return RedirectToAction("Index");
 
         }
-
 
         /// <summary>
         /// Select an Employee to delete
@@ -103,9 +106,10 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View(EmpDB.Employee(id));
+            var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(true);
+            return View(emp);
         }
 
 
@@ -121,8 +125,8 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         {
             if (employee != null)
             {
-                if (employee.EmployeeID == id)
-                    _ = EmpDB.Delete(employee.EmployeeID);
+                //if (employee.EmployeeID == id)
+                //    _ = employeeDB.Delete(employee.EmployeeID);
             }
             return RedirectToAction("Index");
         }
