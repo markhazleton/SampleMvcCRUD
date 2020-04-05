@@ -1,14 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Mwh.Sample.Common.Models;
 using Mwh.Sample.Common.Repositories;
 using Mwh.Sample.Core.WebApi.Models;
+using RestSharp;
+using RestSharp.Serialization.Json;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
     public class HomeController : BaseController
     {
-
         public HomeController(ILogger<HomeController> logger, IEmployeeDB employee) : base(logger, employee)
         {
         }

@@ -10,7 +10,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// <summary>
     /// EmployeeApiController
     /// </summary>
-    [Route("/api/employees")]
+    [Route("/api/employee")]
     [Produces("application/json")]
     [ApiController]
     public class EmployeeApiController : Controller

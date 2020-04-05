@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Mwh.Sample.Common.Repositories;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
@@ -20,9 +22,10 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult GetEmployeeDelete(int id = 0)
+        public async Task<ActionResult> GetEmployeeDelete(int id = 0)
         {
-            return PartialView("_EmployeeDelete", employeeDB.Employee(id));
+            var employee = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(true);
+            return PartialView("_EmployeeDelete", employee);
         }
 
         /// <summary>
@@ -31,9 +34,10 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult GetEmployeeEdit(int id = 0)
+        public async Task<ActionResult> GetEmployeeEdit(int id = 0)
         {
-            return PartialView("_EmployeeEdit", employeeDB.Employee(id));
+            var employee = await client.FindByIdAsync(id,cts.Token).ConfigureAwait(true);
+            return PartialView("_EmployeeEdit", employee);
         }
 
         /// <summary>
@@ -41,9 +45,10 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult GetEmployeeList()
+        public async Task<ActionResult> GetEmployeeList()
         {
-            return PartialView("_EmployeeList", employeeDB.EmployeeCollection());
+            var list = await client.ListAsync(cts.Token).ConfigureAwait(true);
+            return PartialView("_EmployeeList", list);
         }
 
         /// <summary>

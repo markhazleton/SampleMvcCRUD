@@ -2,11 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Extensions
 {
@@ -18,13 +15,14 @@ namespace Mwh.Sample.Core.WebApi.Extensions
             {
                 cfg.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Employee API",
-                    Version = "v3",
+                    Title = "Mwh.Sample.WebAPI",
+                    Version = "v1",
                     Description = "Simple RESTful API built with ASP.NET Core 3.1 to show how to create RESTful services using a decoupled, maintainable architecture.",
                     Contact = new OpenApiContact
                     {
                         Name = "Mark Hazleton",
-                        Url = new Uri("https://linkedin.com/in/markhazleton/")
+                        Url = new Uri("https://linkedin.com/in/markhazleton/"),
+                        Email = "mark.hazleton@gmail.com"
                     },
                     License = new OpenApiLicense
                     {
