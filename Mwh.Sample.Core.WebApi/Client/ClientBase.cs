@@ -9,10 +9,6 @@ namespace Mwh.Sample.Core.WebApi
     public abstract class ClientBase : IDisposable
     {
         /// <summary>
-        /// Lazy Client used to instantiate when needed rather than during constructor
-        /// </summary>
-        private Lazy<RestClient> _lazyClient;
-        /// <summary>
         /// The Name of the Client Application making the API Call
         /// </summary>
         public string AppName = string.Empty;
@@ -32,6 +28,12 @@ namespace Mwh.Sample.Core.WebApi
         /// The User ID that is used to make the request, this defaults to Web Account
         /// </summary>
         public int UserID = 0;
+
+        protected RestRequest restRequest;
+        /// <summary>
+        /// Lazy Client used to instantiate when needed rather than during constructor
+        /// </summary>
+        private Lazy<RestClient> _lazyClient;
 
         /// <summary>
         /// ClientBase constructor used to set Application Name and Base Url for requests
@@ -56,6 +58,7 @@ namespace Mwh.Sample.Core.WebApi
             restRequest.AddHeader("Application", AppName);
             restRequest.AddHeader("MachineName", Environment.MachineName);
         }
+
         /// <summary>
         /// Client Base constructor that adds Reservation User ID
         /// </summary>
@@ -81,18 +84,13 @@ namespace Mwh.Sample.Core.WebApi
             restRequest.AddHeader("UserID", UserID.ToString());
             restRequest.AddHeader("Application", AppName);
             restRequest.AddHeader("MachineName", Environment.MachineName);
-
         }
-        protected RestRequest restRequest;
 
 
         /// <summary>
         /// Client Base Destructor part of the IDisposable implementation
         /// </summary>
-        ~ClientBase()
-        {
-            Dispose(false);
-        }
+        ~ClientBase() { Dispose(false); }
 
         /// <summary>
         /// Client Base Dispose Property part of the IDisposable implementation
@@ -104,7 +102,8 @@ namespace Mwh.Sample.Core.WebApi
         }
 
         /// <summary>
-        /// Gets the HttpClient for this class,a lazy pattern is used to create an instance when needed but never more than a single instance
+        /// Gets the HttpClient for this class,a lazy pattern is used to create an instance when needed but never more
+        /// than a single instance
         /// </summary>
         /// <returns></returns>
         protected RestClient Client()
@@ -113,6 +112,7 @@ namespace Mwh.Sample.Core.WebApi
                 throw new ObjectDisposedException("RestClient has been disposed");
             return _lazyClient.Value;
         }
+
         /// <summary>
         /// Client Base Dispose Property part of the IDisposable implementation
         /// </summary>
@@ -127,6 +127,7 @@ namespace Mwh.Sample.Core.WebApi
             // There are no unmanaged resources to release, but
             // if we add them, they need to be released here.
         }
+
         /// <summary>
         /// Execute HttpGet and return results
         /// </summary>
@@ -144,14 +145,73 @@ namespace Mwh.Sample.Core.WebApi
                 var requestResponse = jser.Deserialize<T>(response);
                 return requestResponse;
             }
-            catch (Exception ex)
+            catch
+            {
+                IsError = true;
+            }
+            return default;
+        }
+
+
+        /// <summary>
+        /// Return the HttpClient to be used to make requests to API
+        /// </summary>
+        /// <returns></returns>
+        protected virtual RestClient GetRestClient()
+        {
+            RestClient client = new RestClient { BaseUrl = new Uri(BaseAPIUrl), Timeout = Int32.MaxValue };
+
+            if (client == null)
+            {
+                return null;
+            }
+            return client;
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="urlSegment"></param>
+        /// <param name="requestBody"></param>
+        /// <returns></returns>
+        protected async Task<T> Post<T>(string urlSegment, object requestBody)
+        {
+            try
+            {
+                restRequest.Resource = urlSegment.TrimStart('/');
+                restRequest.AddJsonBody(requestBody);
+                restRequest.Method = Method.POST;
+                IRestResponse response = await Client().ExecuteAsync(restRequest).ConfigureAwait(true);
+                var jser = new JsonSerializer();
+                var requestResponse = jser.Deserialize<T>(response);
+                return requestResponse;
+            }
+            catch
+            {
+                IsError = true;
+            }
+            return default;
+        }
+        protected async Task<T> Delete<T>(string urlSegment)
+        {
+            try
+            {
+                restRequest.Resource = urlSegment.TrimStart('/');
+                restRequest.Method = Method.DELETE;
+                IRestResponse response = await Client().ExecuteAsync(restRequest).ConfigureAwait(true);
+                var jser = new JsonSerializer();
+                var requestResponse = jser.Deserialize<T>(response);
+                return requestResponse;
+            }
+            catch
             {
                 IsError = true;
             }
             return default;
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="urlSegment"></param>
@@ -169,60 +229,11 @@ namespace Mwh.Sample.Core.WebApi
                 var requestResponse = jser.Deserialize<T>(response);
                 return requestResponse;
             }
-            catch (Exception ex)
+            catch
             {
                 IsError = true;
             }
             return default;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="urlSegment"></param>
-        /// <param name="requestBody"></param>
-        /// <returns></returns>
-        protected async Task<T> Post<T>(string urlSegment, object requestBody)
-        {
-
-            try
-            {
-                restRequest.Resource = urlSegment.TrimStart('/');
-                restRequest.AddJsonBody(requestBody);
-                restRequest.Method = Method.POST;
-                IRestResponse response = await Client().ExecuteAsync(restRequest).ConfigureAwait(true);
-                var jser = new JsonSerializer();
-                var requestResponse = jser.Deserialize<T>(response);
-                return requestResponse;
-            }
-            catch (Exception ex)
-            {
-                IsError = true;
-            }
-            return default;
-        }
-
-
-
-
-
-        /// <summary>
-        /// Return the HttpClient to be used to make requests to API
-        /// </summary>
-        /// <returns></returns>
-        protected virtual RestClient GetRestClient()
-        {
-            RestClient client = new RestClient
-            {
-                BaseUrl = new Uri(BaseAPIUrl),
-                Timeout = Int32.MaxValue
-            };
-
-            if (client == null)
-            {
-                return null;
-            }
-            return client;
         }
     }
 }

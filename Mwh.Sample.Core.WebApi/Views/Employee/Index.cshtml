@@ -1,7 +1,7 @@
 ﻿
 
 @{
-    ViewBag.Title = "Employee MVC";
+    ViewBag.Title = "Employee AJAX";
 }
 <div class="container">
     <h2>MVC with Ajax</h2>
@@ -77,15 +77,34 @@
         };
 
         function SaveEmployee(id) {
+
+
+            var empId = +$('#EmployeeID').val();
+            var depId = +$('#Department').val();
+            var ageId = +$('#Age').val();
+
+            var employee = {
+                employeeID: empId,
+                name: $('#Name').val(),
+                age: ageId,
+                state: $('#State').val(),
+                country: $('#Country').val(),
+                department: depId
+            };
+
+            var jsonEmpObj = JSON.stringify(employee)
+
             $.ajax({
-                url: '/api/employee',
-                type: 'post',
-                data: $('form#frmEmployee').serialize(),
-                dataType: 'html',
-                success: function (data) {
+                url: "/api/employee",
+                data: jsonEmpObj,
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
                     loadEmployeeList();
+                    $('#myModal').modal('hide');
                 },
-                error: function (errormessage) { alert(errormessage.responseText); }
+                error: function (errormessage) {alert(errormessage.responseText);}
             });
         }
 

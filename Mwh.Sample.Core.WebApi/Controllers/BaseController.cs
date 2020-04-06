@@ -8,6 +8,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// <summary>
     /// BaseController
     /// </summary>
+    [ApiExplorerSettings(IgnoreApi = true)]
     public abstract class BaseController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -21,7 +22,6 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         {
             client = new SampleClient(MyHttpContext.AppBaseUrl, "Sample");
             cts = new CancellationTokenSource();
-
             _logger = logger;
         }
     }

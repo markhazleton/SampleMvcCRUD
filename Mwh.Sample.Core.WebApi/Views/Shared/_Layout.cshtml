@@ -1,55 +1,72 @@
-﻿<!DOCTYPE html>
+﻿@{
+
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Mwh.Sample.Core.WebApi - Mark Hazleton">
+    <meta name="author" content="Mark Hazleton">
     <title>@ViewData["Title"] - Mwh.Sample.Core.WebApi</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body id="page-top">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Mwh.Sample.Core.WebApi</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EmpSinglePage">Single Page JavaScript</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="EmpSinglePage">Single Page JavaScript</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MvcEmployee" asp-action="Index">Mvc Employee</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="MvcEmployee" asp-action="Index">Mvc Employee</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Employee</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Employee" asp-action="Index">Employee</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="swagger" asp-action="index">API</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="swagger" asp-action="index">API</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <main role="main" class="pb-3">
+        <section class="container-fluid" style="padding-top:25px;margin-top:25px;margin-bottom:25px;padding-bottom:25px;">
             @RenderBody()
-        </main>
-    </div>
+        </section>
+    </main>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Mwh.Sample.Core.WebApi - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="container-fluid bg-dark">
+        <div class="row">
+            <div class="col-3 text-left text-white">
+                <img src="https://feeds.dev.azure.com/markhazleton/_apis/public/Packaging/Feeds/6ac44785-fc47-4a95-8196-f1b9a21d15ed/Packages/c5c4bcb3-672e-4735-a02b-0f5193aaca34/Badge" />
+            </div>
+            <div class="col-6 text-center text-white">
+                &copy; 2020 - Mwh.Sample.Core.WebApi - 
+                <a href="https://linkedin.com/in/markhazleton" target="_blank">Mark Hazleton LinkedIn</a> -
+                <a href="https://github.com/markhazleton" target="_blank">GitHub</a>
+            </div>
+            <div class="col-3 text-right text-white">
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+
+    <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

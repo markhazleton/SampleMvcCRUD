@@ -33,7 +33,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult> Details(int id)
         {
-            var emp = await client.FindByIdAsync(id,cts.Token).ConfigureAwait(true);
+            var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(true);
             return View(emp);
         }
 
@@ -121,12 +121,14 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, EmployeeModel employee)
+        public async Task<ActionResult> Delete(int id, EmployeeModel employee)
         {
             if (employee != null)
             {
-                //if (employee.EmployeeID == id)
-                //    _ = employeeDB.Delete(employee.EmployeeID);
+                if (employee.EmployeeID == id)
+                {
+                    var result = await client.DeleteAsync(id, cts.Token).ConfigureAwait(true);
+                }
             }
             return RedirectToAction("Index");
         }

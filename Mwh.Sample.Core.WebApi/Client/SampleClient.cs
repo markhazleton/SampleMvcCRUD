@@ -15,9 +15,10 @@ namespace Mwh.Sample.Core.WebApi
         { 
 
         }
-        public Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
+        public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
         {
-            throw new System.NotImplementedException();
+            var resp = await Delete<EmployeeResponse>($"/api/employee/{id}").ConfigureAwait(true);
+            return resp;
         }
 
         public async Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
