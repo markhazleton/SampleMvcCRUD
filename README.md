@@ -1,7 +1,7 @@
 # SampleMvcCRUD
 An MVC Application to demonstrate multiple ways of implementing a simple maintenance (CRUD) user interface
 
-Currently hosted on [Azure](https://mwhsamplecrud.azurewebsites.net/)
+Currently hosted at [Azure-MwhSampleCRUD](https://mwhsamplecrud.azurewebsites.net/) and [Azure-MwhSampleCore](https://mwhsamplecore.azurewebsites.net/) 
 ## Usage
 
 The purpose of this application is to demonstrate various techniques in ASP.Net MVC Framework to do common maintenance activities (also known as Create, Read, Update, Delete or CRUD). 
