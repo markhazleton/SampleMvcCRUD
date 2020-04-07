@@ -49,7 +49,8 @@ namespace Mwh.Sample.Common.Repositories
 
             try
             {
-                return new EmployeeResponse(_employeeRepository.Update(employee));
+                var response = await _employeeRepository.Update(employee,token).ConfigureAwait(true);
+                return new EmployeeResponse(response);
             }
             catch (Exception ex)
             {
@@ -67,7 +68,10 @@ namespace Mwh.Sample.Common.Repositories
 
             try
             {
-                _employeeRepository.Remove(existingEmployee);
+                var response = await _employeeRepository.Remove(existingEmployee,token).ConfigureAwait(true);
+
+                if (response)
+                    existingEmployee.EmployeeID = 0;
 
                 return new EmployeeResponse(existingEmployee);
             }

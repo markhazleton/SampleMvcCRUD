@@ -1,10 +1,10 @@
 ﻿
 
 @{
-    ViewBag.Title = "Employee MVC";
+    ViewBag.Title = "Employee JQuery AJAX";
 }
 <div class="container">
-    <h2>MVC with Ajax</h2>
+    <h2>MVC with JQuery AJAX</h2>
     <p>
         <a href="#" class="btn btn-primary" onclick="return loadEmployeeEdit('0')">Add New Employee</a>
         <a href="#" class="btn btn-info" onclick="return loadEmployeeList()">Reload List</a>
@@ -77,13 +77,57 @@
         };
 
         function SaveEmployee(id) {
+            var empId = +$('#EmployeeID').val();
+            var depId = +$('#Department').val();
+            var ageId = +$('#Age').val();
+
+            var employee = {
+                employeeID: empId,
+                name: $('#Name').val(),
+                age: ageId,
+                state: $('#State').val(),
+                country: $('#Country').val(),
+                department: depId
+            };
+
+            var jsonEmpObj = JSON.stringify(employee)
+
+            if (id === 0)
+            {
+                AddEmployee(jsonEmpObj);
+            }
+            else
+            {
+                UpdateEmployee(id, jsonEmpObj);
+            }
+        }
+
+        function AddEmployee(jsonEmpObj) {
             $.ajax({
-                url: '/api/employee',
-                type: 'post',
-                data: $('form#frmEmployee').serialize(),
-                dataType: 'html',
-                success: function (data) {
+                url: '/api/employee/',
+                data: jsonEmpObj,
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
                     loadEmployeeList();
+                    $('#myModal').modal('hide');
+                },
+                error: function (errormessage) { alert(errormessage.responseText); }
+            });
+        }
+
+
+        function UpdateEmployee(id, jsonEmpObj) {
+            $.ajax({
+                url: '/api/employee/' + id,
+                data: jsonEmpObj,
+                type: "PUT",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    loadEmployeeList();
+                    $('#myModal').modal('hide');
                 },
                 error: function (errormessage) { alert(errormessage.responseText); }
             });

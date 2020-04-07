@@ -10,7 +10,7 @@ namespace Mwh.Sample.Common.Repositories
         Task<IEnumerable<EmployeeModel>> ListAsync(CancellationToken token);
         Task AddAsync(EmployeeModel employee, CancellationToken token);
         Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token);
-        EmployeeModel Update(EmployeeModel employee);
-        bool Remove(EmployeeModel employee);
+        Task<EmployeeModel> Update(EmployeeModel employee, CancellationToken token);
+        Task<bool> Remove(EmployeeModel employee, CancellationToken token);
     }
 }

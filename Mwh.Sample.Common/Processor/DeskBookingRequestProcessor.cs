@@ -1,5 +1,5 @@
-﻿using Mwh.Sample.Common.DataInterface;
-using Mwh.Sample.Common.Models;
+﻿using Mwh.Sample.Common.Models;
+using Mwh.Sample.Common.Repositories;
 using System;
 using System.Linq;
 
