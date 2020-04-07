@@ -22,7 +22,7 @@ steps:
     command: 'restore'
     restoreSolution: '$(solution)'
     feedsToUse: 'select'
-    vstsFeed: '6ac44785-fc47-4a95-8196-f1b9a21d15ed'
+    vstsFeed: '52953e95-65a4-4450-8eff-a58467dbdad7/e094850c-c6d7-4dda-969a-ea258be913a9'
 
 - task: VSBuild@1
   inputs:
