@@ -1,10 +1,9 @@
-using Mwh.Sample.Core.WebApi.Extensions;
-using RestSharp;
+﻿using RestSharp;
 using RestSharp.Serialization.Json;
 using System;
 using System.Threading.Tasks;
 
-namespace Mwh.Sample.Core.WebApi
+namespace Mwh.Sample.Client
 {
     public abstract class ClientBase : IDisposable
     {
@@ -42,10 +41,6 @@ namespace Mwh.Sample.Core.WebApi
         /// <param name="appName"></param>
         protected ClientBase(string baseUrl, string appName)
         {
-            if (string.IsNullOrEmpty(baseUrl))
-            {
-                baseUrl = MyHttpContext.AppBaseUrl;
-            }
             if (string.IsNullOrEmpty(appName))
                 baseUrl = "MISSING";
 
@@ -69,11 +64,10 @@ namespace Mwh.Sample.Core.WebApi
         {
             if (string.IsNullOrEmpty(baseUrl))
             {
-                baseUrl = MyHttpContext.AppBaseUrl;
+                baseUrl = "MISSING";
             }
             if (string.IsNullOrEmpty(appName))
-                baseUrl = "MISSING";
-
+                appName = "MISSING";
 
             UserID = userId;
             AppName = appName;

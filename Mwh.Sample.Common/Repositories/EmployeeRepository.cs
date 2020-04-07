@@ -29,8 +29,16 @@ namespace Mwh.Sample.Common.Repositories
             return Task.Run(() => (IEnumerable<EmployeeModel>)_emp.EmployeeCollection());
         }
 
-        public bool Remove(EmployeeModel employee) {return _emp.Delete(employee.EmployeeID); }
+        public Task<bool> Remove(EmployeeModel employee, CancellationToken token)
+        {
+            token.ThrowIfCancellationRequested();
+            return Task.Run(() => (bool)_emp.Delete(employee.EmployeeID));
+        }
 
-        public EmployeeModel Update(EmployeeModel employee) { return _emp.Update(employee); }
+        public Task<EmployeeModel> Update(EmployeeModel employee, CancellationToken token)
+        {
+            token.ThrowIfCancellationRequested();
+            return Task.Run(() => (EmployeeModel)_emp.Update(employee));
+        }
     }
 }

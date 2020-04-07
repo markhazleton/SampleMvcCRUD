@@ -1,18 +1,15 @@
-using Mwh.Sample.Common.Models;
+﻿using Mwh.Sample.Common.Models;
 using Mwh.Sample.Common.Repositories;
-using RestSharp;
-using RestSharp.Serialization.Json;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mwh.Sample.Core.WebApi
+namespace Mwh.Sample.Client
 {
     public class SampleClient : ClientBase, IEmployeeService
     {
-        public SampleClient(string apiPath,string appName):base(apiPath,appName)
-        { 
+        public SampleClient(string apiPath, string appName) : base(apiPath, appName)
+        {
 
         }
         public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
@@ -33,7 +30,7 @@ namespace Mwh.Sample.Core.WebApi
 
         public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
         {
-            var resp = await Post<EmployeeResponse>($"/api/employee",employee).ConfigureAwait(true);
+            var resp = await Post<EmployeeResponse>($"/api/employee", employee).ConfigureAwait(true);
             return resp;
         }
 

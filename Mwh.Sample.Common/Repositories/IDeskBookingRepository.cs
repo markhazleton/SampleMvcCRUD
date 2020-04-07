@@ -1,6 +1,6 @@
 ﻿using Mwh.Sample.Common.Models;
 
-namespace Mwh.Sample.Common.DataInterface
+namespace Mwh.Sample.Common.Repositories
 {
     public interface IDeskBookingRepository
     {

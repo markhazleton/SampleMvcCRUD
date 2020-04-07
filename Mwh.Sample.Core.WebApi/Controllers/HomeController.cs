@@ -10,7 +10,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// </summary>
     public class HomeController : BaseController
     {
-        public HomeController(ILogger<HomeController> logger) : base(logger) { }
+        public HomeController() : base() { }
 
         /// <summary>
         /// Employee Single Page Applications

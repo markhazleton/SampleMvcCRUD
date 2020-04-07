@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mwh.Sample.Common.DataInterface
+namespace Mwh.Sample.Common.Repositories
 {
     public interface IDeskRepository
     {
