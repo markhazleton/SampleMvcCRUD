@@ -1,13 +1,10 @@
 ﻿@page "/fetchdata"
 
-@using Mwh.Sample.Blazor.Data
-@inject WeatherForecastService ForecastService
+@using Mwh.Sample.Common.Repositories
 
-<h1>Weather forecast</h1>
+<h1>Employee List</h1>
 
-<p>This component demonstrates fetching data from a service.</p>
-
-@if (forecasts == null)
+@if (employeeList == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -16,20 +13,20 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>State</th>
+                <th>Country</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var forecast in employeeList)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@forecast.Name</td>
+                    <td>@forecast.Age</td>
+                    <td>@forecast.State</td>
+                    <td>@forecast.Country</td>
                 </tr>
             }
         </tbody>
@@ -37,10 +34,11 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    private EmployeeModel[] employeeList;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        var mock = new EmployeeMock();
+        employeeList = mock.EmployeeCollection().ToArray();
     }
 }
