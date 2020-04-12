@@ -1,0 +1,42 @@
+﻿{
+  "ProviderId": "Microsoft.VisualStudio.ConnectedService.Wcf",
+  "Version": "15.0.40203.910",
+  "GettingStartedDocument": {
+    "Uri": "https://go.microsoft.com/fwlink/?linkid=858517"
+  },
+  "ExtendedData": {
+    "inputs": [
+      "http://ws.controlorigins.com/Service.asmx"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "messageContract": true,
+    "namespaceMappings": [
+      "*, ControlOrigins"
+    ],
+    "references": [
+      "DevExpress.Blazor, {DevExpress.Blazor, 19.2.4}",
+      "DevExtreme.AspNet.Data, {DevExtreme.AspNet.Data, 2.5.1}",
+      "Microsoft.AspNetCore.Authorization, {Microsoft.AspNetCore.Authorization, 3.1.2}",
+      "Microsoft.AspNetCore.Components, {Microsoft.AspNetCore.Components, 3.1.2}",
+      "Microsoft.AspNetCore.Components.Forms, {Microsoft.AspNetCore.Components.Forms, 3.1.2}",
+      "Microsoft.AspNetCore.Components.Web, {Microsoft.AspNetCore.Components.Web, 3.1.2}",
+      "Microsoft.AspNetCore.Metadata, {Microsoft.AspNetCore.Metadata, 3.1.2}",
+      "Microsoft.Extensions.DependencyInjection, {Microsoft.Extensions.DependencyInjection, 3.1.2}",
+      "Microsoft.Extensions.DependencyInjection.Abstractions, {Microsoft.Extensions.DependencyInjection.Abstractions, 3.1.2}",
+      "Microsoft.Extensions.Logging.Abstractions, {Microsoft.Extensions.Logging.Abstractions, 3.1.2}",
+      "Microsoft.Extensions.Options, {Microsoft.Extensions.Options, 3.1.2}",
+      "Microsoft.Extensions.Primitives, {Microsoft.Extensions.Primitives, 3.1.2}",
+      "Microsoft.JSInterop, {Microsoft.JSInterop, 3.1.2}",
+      "Mwh.Sample.Client, {Mwh.Sample.Client, 1.1.0}",
+      "Mwh.Sample.Common, {Mwh.Sample.Common, 1.9.0}",
+      "Newtonsoft.Json, {Newtonsoft.Json, 11.0.1}",
+      "RestSharp, {RestSharp, 106.10.1}"
+    ],
+    "sync": true,
+    "targetFramework": "netcoreapp3.1",
+    "typeReuseMode": "All"
+  }
+}
