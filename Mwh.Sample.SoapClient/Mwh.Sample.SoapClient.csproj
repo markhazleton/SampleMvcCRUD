@@ -10,9 +10,10 @@
     <PackageIcon>ProjectMechanicsLogo.png</PackageIcon>
     <RepositoryUrl>https://github.com/markhazleton/SampleMvcCRUD</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
-    <PackageReleaseNotes>Initial Package Creation</PackageReleaseNotes>
+    <PackageReleaseNotes>Add More Methods to Soap Client</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

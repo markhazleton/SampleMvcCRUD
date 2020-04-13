@@ -1,0 +1,183 @@
+﻿@model ControlOrigins.Survey.SurveyItem
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<style type="text/css">
+    label {
+        display: block;
+    }
+
+    textarea {
+        display: block;
+        width: 100%;
+    }
+</style>
+
+<div class="card">
+    <div class="card-header bg-primary text-light">
+        Survey Mainenance
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header bg-light text-dark ">
+                        Survey
+                    </div>
+                    <div class="card-body">
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.SurveyID)
+
+                            <div class="">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group ">
+                                    @Html.LabelFor(model => model.SurveyNM, "Survey:", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.SurveyNM, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SurveyNM, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SurveyShortNM, "Short Name:", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.SurveyShortNM, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SurveyShortNM, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SurveyDS, "Description:", htmlAttributes: new { @class = "control-label" })
+                                    @Html.TextAreaFor(model => model.SurveyDS, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SurveyDS, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CompletionMessage, "Completion Message:", htmlAttributes: new { @class = "control-label" })
+                                    @Html.TextAreaFor(model => model.CompletionMessage, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompletionMessage, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.StartDT, "Start Date:", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.StartDT, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.StartDT, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.EndDT, "End Date:", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.EndDT, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EndDT, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SurveyType.SurveyTypeID, "Category:", htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.SurveyType.SurveyTypeID, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SurveyType.SurveyTypeID, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div>
+                            @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-info" })
+                        </div>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div id="QuestionGroups" runat="server" class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-light text-dark">
+                                Question Groups
+                            </div>
+                            <div class="card-body">
+                                <table id="QuestionGroupsTable" class="table table-striped table-bordered" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Order</th>
+                                            <th>Group</th>
+                                            <th>Weight</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var questionGroup in Model.QuestionGroupList.OrderBy(o => o.QuestionGroupOrder))
+                                        {
+                                            <tr>
+                                                <td>@questionGroup.QuestionGroupOrder</td>
+                                                <td>@questionGroup.QuestionGroupNM</td>
+                                                <td>@questionGroup.QuestionGroupWeight</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="QuestionGroups" runat="server" class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-light text-dark">
+                                Questions
+                            </div>
+                            <div class="card-body">
+                                <table id="QuestionsTable" class="table table-striped table-bordered" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Question</th>
+                                            <th>Group</th>
+                                            <th>Member Weight</th>
+                                            <th>Display Order</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var question in Model.QuestionList.OrderBy(o => o.SurveyDisplayOrder))
+                                        {
+                                        <tr>
+                                            <td>@question.QuestionNM</td>
+                                            <td>@question.QuestionGroupMember.QuestionGroupNM</td>
+                                            <td>@question.QuestionGroupMember.QuestionWeight</td>
+                                            <td>@question.SurveyDisplayOrder</td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#QuestionGroupsTable').DataTable();
+            $('#QuestionsTable').DataTable();
+        });
+    </script>
+
+}
+
+
+

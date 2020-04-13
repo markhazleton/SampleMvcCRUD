@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Survey";
+}
+@model ControlOrigins.Survey.SurveyItem[]
+
+<div class="container-fluid">
+    <h2 class="">Survey List (<a href="/">New Survey</a>)</h2>
+
+    <table id="example" class="table table-striped table-bordered"  style="width:100%">
+        <thead>
+            <tr>
+                <th>Survey Name</th>
+                <th>Survey Short Name</th>
+                <th>Application Count</th>
+                <th>Survey Response Count</th>
+                <th>Question Count</th>
+                <th>Question Group Count</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var survey in Model)
+            {
+            <tr>
+                <td><a href="/survey/@survey.SurveyID">@survey.SurveyNM</a></td>
+                <td>@survey.SurveyShortNM</td>
+                <td>@survey.ApplicationLookup.Count()</td>
+                <td>@survey.SurveyResponseCount</td>
+                <td>@survey.QuestionList.Count()</td>
+                <td>@survey.QuestionGroupList.Count()</td>
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+
+}
