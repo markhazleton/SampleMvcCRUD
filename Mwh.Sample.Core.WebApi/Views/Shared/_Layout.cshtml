@@ -9,7 +9,7 @@
     <meta name="description" content="Mwh.Sample.Core.WebApi - Mark Hazleton">
     <meta name="author" content="Mark Hazleton">
     <title>@ViewData["Title"] - Mwh.Sample.Core.WebApi</title>
-    
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/b-1.6.1/r-2.2.3/datatables.min.css" />
@@ -28,18 +28,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="EmpSinglePage">Single Page JavaScript</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navEmployeeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Employee Sample
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navEmployeeDropdown">
+                                <a class="dropdown-item " asp-area="" asp-controller="Home" asp-action="EmpSinglePage">Single Page JavaScript</a>
+                                <a class="dropdown-item " asp-area="" asp-controller="MvcEmployee" asp-action="Index">Mvc Employee</a>
+                                <a class="dropdown-item " asp-area="" asp-controller="Employee" asp-action="Index">Employee</a>
+                                <a class="dropdown-item " asp-area="" asp-controller="swagger" asp-action="index">API</a>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="MvcEmployee" asp-action="Index">Mvc Employee</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navControlOriginsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ControlOrigins Sample
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navControlOriginsDropdown">
+                                <a class="dropdown-item " asp-area="" asp-controller="Survey" asp-action="Index">Survey</a>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Employee" asp-action="Index">Employee</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="swagger" asp-action="index">API</a>
-                        </li>
+
+
                     </ul>
                 </div>
             </div>

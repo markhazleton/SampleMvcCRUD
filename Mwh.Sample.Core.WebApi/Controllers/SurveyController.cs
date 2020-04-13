@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class SurveyController : Controller
     {
         private SoapClient.Services.SurveyService surveyService;
