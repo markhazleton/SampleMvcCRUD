@@ -3,15 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Copyright>Copyright 2020 Mark Hazleton</Copyright>
+    <Copyright>Copyright ©2020 Mark Hazleton</Copyright>
     <PackageIcon>ProjectMechanicsLogo.png</PackageIcon>
-    <PackageLicenseExpression>CDDL-1.0</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/markhazleton/SampleMvcCRUD</PackageProjectUrl>
     <RepositoryUrl>https://github.com/markhazleton/SampleMvcCRUD</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
-    <PackageReleaseNotes>Update to 1.9 of Common Package</PackageReleaseNotes>
+    <PackageReleaseNotes>Add Comments</PackageReleaseNotes>
     <Description>The client libraries for making API calls to Sample API from .Net applications</Description>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
