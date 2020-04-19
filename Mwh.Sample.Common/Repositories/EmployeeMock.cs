@@ -1,4 +1,17 @@
-﻿using Mwh.Sample.Common.Models;
+﻿// ***********************************************************************
+// Assembly         : Mwh.Sample.Common
+// Author           : mark
+// Created          : 04-01-2020
+//
+// Last Modified By : mark
+// Last Modified On : 04-05-2020
+// ***********************************************************************
+// <copyright file="EmployeeMock.cs" company="Mark Hazleton">
+//     Copyright 2020 Mark Hazleton
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using Mwh.Sample.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +23,9 @@ namespace Mwh.Sample.Common.Repositories
     /// </summary>
     public class EmployeeMock : IEmployeeDB
     {
+        /// <summary>
+        /// The list
+        /// </summary>
         private List<EmployeeModel> _list;
 
         /// <summary>
@@ -84,13 +100,17 @@ namespace Mwh.Sample.Common.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets the instance.
+        /// </summary>
+        /// <value>The instance.</value>
         public static EmployeeMock Instance { get; } = new EmployeeMock();
 
         /// <summary>
         /// Method for Deleting an Employee
         /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <param name="ID">The identifier.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool Delete(int ID)
         {
             var myEmp = _list.Where(w => w.EmployeeID == ID).FirstOrDefault();
@@ -104,10 +124,10 @@ namespace Mwh.Sample.Common.Repositories
         }
 
         /// <summary>
-        ///
+        /// Employees the specified identifier.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>EmployeeModel.</returns>
         public EmployeeModel Employee(int id)
         {
             var myEmp = _list.Where(w => w.EmployeeID == id).FirstOrDefault();
@@ -117,14 +137,18 @@ namespace Mwh.Sample.Common.Repositories
         }
 
         //Return list of all Employees
+        /// <summary>
+        /// Employees the collection.
+        /// </summary>
+        /// <returns>List&lt;EmployeeModel&gt;.</returns>
         public List<EmployeeModel> EmployeeCollection() { return _list; }
 
         //Method for Updating Employee record
         /// <summary>
-        ///
+        /// Updates the specified emp.
         /// </summary>
-        /// <param name="emp"></param>
-        /// <returns></returns>
+        /// <param name="emp">The emp.</param>
+        /// <returns>EmployeeModel.</returns>
         public EmployeeModel Update(EmployeeModel emp)
         {
             if (emp == null)

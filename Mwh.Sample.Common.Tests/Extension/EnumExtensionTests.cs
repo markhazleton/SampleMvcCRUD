@@ -1,22 +1,53 @@
+// ***********************************************************************
+// Assembly         : Mwh.Sample.Common.Tests
+// Author           : mark
+// Created          : 04-04-2020
+//
+// Last Modified By : mark
+// Last Modified On : 04-04-2020
+// ***********************************************************************
+// <copyright file="EnumExtensionTests.cs" company="Mwh.Sample.Common.Tests">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.DataAnnotations;
 
 namespace Mwh.Sample.Common.Extension
 {
+    /// <summary>
+    /// Enum TestEnum
+    /// </summary>
     public enum TestEnum
     {
+        /// <summary>
+        /// The unknown
+        /// </summary>
         [Display(Name = "Unknown", Description = "Unknown")]
         Unknown = 0,
+        /// <summary>
+        /// The first
+        /// </summary>
         [Display(Name = "1st", Description = "The First One")]
         First = 1,
+        /// <summary>
+        /// The second
+        /// </summary>
         Second = 2
     }
 
 
+    /// <summary>
+    /// Defines test class EnumExtensionTests.
+    /// </summary>
     [TestClass]
     public class EnumExtensionTests
     {
 
+        /// <summary>
+        /// Defines the test method EnumGetDisplayNameExpectedBehavior.
+        /// </summary>
         [TestMethod]
         public void EnumGetDisplayNameExpectedBehavior()
         {
@@ -29,6 +60,9 @@ namespace Mwh.Sample.Common.Extension
             // Assert
             Assert.AreEqual(result, "1st");
         }
+        /// <summary>
+        /// Defines the test method EnumGetDisplayNameMissingDisplayName.
+        /// </summary>
         [TestMethod]
         public void EnumGetDisplayNameMissingDisplayName()
         {
@@ -41,6 +75,9 @@ namespace Mwh.Sample.Common.Extension
             // Assert
             Assert.AreEqual(result, "Second");
         }
+        /// <summary>
+        /// Defines the test method EnumToDictionaryExpectedBehavior.
+        /// </summary>
         [TestMethod]
         public void EnumToDictionaryExpectedBehavior()
         {

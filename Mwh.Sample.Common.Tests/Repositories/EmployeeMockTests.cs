@@ -1,12 +1,31 @@
+// ***********************************************************************
+// Assembly         : Mwh.Sample.Common.Tests
+// Author           : mark
+// Created          : 04-04-2020
+//
+// Last Modified By : mark
+// Last Modified On : 04-05-2020
+// ***********************************************************************
+// <copyright file="EmployeeMockTests.cs" company="Mwh.Sample.Common.Tests">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.Common.Models;
 using System.Linq;
 
 namespace Mwh.Sample.Common.Repositories
 {
+    /// <summary>
+    /// Defines test class EmployeeMockTests.
+    /// </summary>
     [TestClass]
     public class EmployeeMockTests
     {
+        /// <summary>
+        /// Defines the test method DeleteExpectedBehavior.
+        /// </summary>
         [TestMethod]
         public void DeleteExpectedBehavior()
         {
@@ -21,6 +40,9 @@ namespace Mwh.Sample.Common.Repositories
             Assert.AreEqual(result, false);
         }
 
+        /// <summary>
+        /// Defines the test method DeleteTest.
+        /// </summary>
         [TestMethod()]
         public void DeleteTest()
         {
@@ -32,6 +54,9 @@ namespace Mwh.Sample.Common.Repositories
             Assert.AreEqual(count - 1, Employee.EmployeeCollection().Count);
         }
 
+        /// <summary>
+        /// Defines the test method DeleteTestEmployeeIDZero.
+        /// </summary>
         [TestMethod()]
         public void DeleteTestEmployeeIDZero()
         {
@@ -41,6 +66,9 @@ namespace Mwh.Sample.Common.Repositories
             Assert.AreEqual(count, Employee.EmployeeCollection().Count);
         }
 
+        /// <summary>
+        /// Defines the test method EmployeeCollectionExpectedBehavior.
+        /// </summary>
         [TestMethod]
         public void EmployeeCollectionExpectedBehavior()
         {
@@ -54,6 +82,9 @@ namespace Mwh.Sample.Common.Repositories
             Assert.AreNotEqual(result.Count, 0);
         }
 
+        /// <summary>
+        /// Defines the test method EmployeeExpectedBehavior.
+        /// </summary>
         [TestMethod]
         public void EmployeeExpectedBehavior()
         {
@@ -69,6 +100,9 @@ namespace Mwh.Sample.Common.Repositories
         }
 
 
+        /// <summary>
+        /// Defines the test method EmployeeMockTest.
+        /// </summary>
         [TestMethod()]
         public void EmployeeMockTest()
         {
@@ -76,6 +110,9 @@ namespace Mwh.Sample.Common.Repositories
             Assert.AreNotEqual(0, Employee.EmployeeCollection().Count);
         }
 
+        /// <summary>
+        /// Defines the test method GetTest.
+        /// </summary>
         [TestMethod()]
         public void GetTest()
         {
@@ -85,6 +122,9 @@ namespace Mwh.Sample.Common.Repositories
             Assert.AreEqual(myEmp.Name, Employee.Employee(myEmp.EmployeeID).Name);
         }
 
+        /// <summary>
+        /// Defines the test method GetTestEmployeeIDZero.
+        /// </summary>
         [TestMethod()]
         public void GetTestEmployeeIDZero()
         {
@@ -92,6 +132,9 @@ namespace Mwh.Sample.Common.Repositories
             Assert.AreEqual(null, Employee.Employee(0).Name);
         }
 
+        /// <summary>
+        /// Defines the test method ListAllTest.
+        /// </summary>
         [TestMethod()]
         public void ListAllTest()
         {
@@ -99,6 +142,9 @@ namespace Mwh.Sample.Common.Repositories
             Assert.AreNotEqual(0, Employee.EmployeeCollection().Count);
         }
 
+        /// <summary>
+        /// Defines the test method UpdateExpectedBehavior.
+        /// </summary>
         [TestMethod]
         public void UpdateExpectedBehavior()
         {
@@ -113,6 +159,9 @@ namespace Mwh.Sample.Common.Repositories
             Assert.AreEqual(result.EmployeeID, 0);
         }
 
+        /// <summary>
+        /// Defines the test method UpdateTest.
+        /// </summary>
         [TestMethod()]
         public void UpdateTest()
         {
@@ -124,6 +173,9 @@ namespace Mwh.Sample.Common.Repositories
             Assert.AreEqual(NewName, Employee.Employee(myEmp.EmployeeID).Name);
         }
 
+        /// <summary>
+        /// Defines the test method UpdateTestInvalidEmployeeID.
+        /// </summary>
         [TestMethod()]
         public void UpdateTestInvalidEmployeeID()
         {
@@ -132,6 +184,9 @@ namespace Mwh.Sample.Common.Repositories
             Assert.AreEqual(99999, Employee.Update(myEmp).EmployeeID);
         }
 
+        /// <summary>
+        /// Defines the test method UpdateTestNewEmployee.
+        /// </summary>
         [TestMethod()]
         public void UpdateTestNewEmployee()
         {

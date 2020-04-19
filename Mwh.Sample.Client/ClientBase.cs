@@ -1,10 +1,28 @@
-﻿using RestSharp;
+﻿// ***********************************************************************
+// Assembly         : Mwh.Sample.Client
+// Author           : mark
+// Created          : 04-07-2020
+//
+// Last Modified By : mark
+// Last Modified On : 04-07-2020
+// ***********************************************************************
+// <copyright file="ClientBase.cs" company="Mwh.Sample.Client">
+//     Copyright 2020 Mark Hazleton
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using RestSharp;
 using RestSharp.Serialization.Json;
 using System;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.Client
 {
+    /// <summary>
+    /// Class ClientBase.
+    /// Implements the <see cref="System.IDisposable" />
+    /// </summary>
+    /// <seealso cref="System.IDisposable" />
     public abstract class ClientBase : IDisposable
     {
         /// <summary>
@@ -28,6 +46,9 @@ namespace Mwh.Sample.Client
         /// </summary>
         public int UserID = 0;
 
+        /// <summary>
+        /// The rest request
+        /// </summary>
         protected RestRequest restRequest;
         /// <summary>
         /// Lazy Client used to instantiate when needed rather than during constructor
@@ -37,8 +58,8 @@ namespace Mwh.Sample.Client
         /// <summary>
         /// ClientBase constructor used to set Application Name and Base Url for requests
         /// </summary>
-        /// <param name="baseUrl"></param>
-        /// <param name="appName"></param>
+        /// <param name="baseUrl">The base URL.</param>
+        /// <param name="appName">Name of the application.</param>
         protected ClientBase(string baseUrl, string appName)
         {
             if (string.IsNullOrEmpty(appName))
@@ -57,9 +78,9 @@ namespace Mwh.Sample.Client
         /// <summary>
         /// Client Base constructor that adds Reservation User ID
         /// </summary>
-        /// <param name="baseUrl"></param>
-        /// <param name="appName"></param>
-        /// <param name="userId"></param>
+        /// <param name="baseUrl">The base URL.</param>
+        /// <param name="appName">Name of the application.</param>
+        /// <param name="userId">The user identifier.</param>
         protected ClientBase(string baseUrl, string appName, int userId)
         {
             if (string.IsNullOrEmpty(baseUrl))
@@ -99,7 +120,8 @@ namespace Mwh.Sample.Client
         /// Gets the HttpClient for this class,a lazy pattern is used to create an instance when needed but never more
         /// than a single instance
         /// </summary>
-        /// <returns></returns>
+        /// <returns>RestClient.</returns>
+        /// <exception cref="ObjectDisposedException">RestClient has been disposed</exception>
         protected RestClient Client()
         {
             if (_lazyClient == null)
@@ -110,6 +132,7 @@ namespace Mwh.Sample.Client
         /// <summary>
         /// Client Base Dispose Property part of the IDisposable implementation
         /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (_lazyClient != null)
@@ -126,8 +149,8 @@ namespace Mwh.Sample.Client
         /// Execute HttpGet and return results
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="urlSegment"></param>
-        /// <returns></returns>
+        /// <param name="urlSegment">The URL segment.</param>
+        /// <returns>T.</returns>
         protected async Task<T> Get<T>(string urlSegment)
         {
             try
@@ -150,7 +173,7 @@ namespace Mwh.Sample.Client
         /// <summary>
         /// Return the HttpClient to be used to make requests to API
         /// </summary>
-        /// <returns></returns>
+        /// <returns>RestClient.</returns>
         protected virtual RestClient GetRestClient()
         {
             RestClient client = new RestClient { BaseUrl = new Uri(BaseAPIUrl), Timeout = Int32.MaxValue };
@@ -163,12 +186,12 @@ namespace Mwh.Sample.Client
         }
 
         /// <summary>
-        ///
+        /// Posts the specified URL segment.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="urlSegment"></param>
-        /// <param name="requestBody"></param>
-        /// <returns></returns>
+        /// <param name="urlSegment">The URL segment.</param>
+        /// <param name="requestBody">The request body.</param>
+        /// <returns>T.</returns>
         protected async Task<T> Post<T>(string urlSegment, object requestBody)
         {
             try
@@ -187,6 +210,12 @@ namespace Mwh.Sample.Client
             }
             return default;
         }
+        /// <summary>
+        /// Deletes the specified URL segment.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="urlSegment">The URL segment.</param>
+        /// <returns>T.</returns>
         protected async Task<T> Delete<T>(string urlSegment)
         {
             try
@@ -205,12 +234,12 @@ namespace Mwh.Sample.Client
             return default;
         }
         /// <summary>
-        ///
+        /// Puts the specified URL segment.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="urlSegment"></param>
-        /// <param name="requestBody"></param>
-        /// <returns></returns>
+        /// <param name="urlSegment">The URL segment.</param>
+        /// <param name="requestBody">The request body.</param>
+        /// <returns>T.</returns>
         protected async Task<T> Put<T>(string urlSegment, object requestBody)
         {
             try

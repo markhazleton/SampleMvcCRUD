@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : Mwh.Sample.Common
+// Author           : mark
+// Created          : 04-04-2020
+//
+// Last Modified By : mark
+// Last Modified On : 04-04-2020
+// ***********************************************************************
+// <copyright file="LogExtensions.cs" company="Mark Hazleton">
+//     Copyright 2020 Mark Hazleton
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,8 +31,8 @@ namespace Mwh.Sample.Common.Extension
         /// GetSerializeObjectString
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="objectToSerialize"></param>
-        /// <returns></returns>
+        /// <param name="objectToSerialize">The object to serialize.</param>
+        /// <returns>System.String.</returns>
         public static string GetSerializeObjectString<T>(this T objectToSerialize)
         {
             try
@@ -43,8 +56,8 @@ namespace Mwh.Sample.Common.Extension
         /// GetSerializeObjectString
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="lstObjectToSerialize"></param>
-        /// <returns></returns>
+        /// <param name="lstObjectToSerialize">The LST object to serialize.</param>
+        /// <returns>System.String.</returns>
         public static string GetSerializeObjectString<T>(this List<T> lstObjectToSerialize)
         {
             try
@@ -67,8 +80,8 @@ namespace Mwh.Sample.Common.Extension
         /// <summary>
         /// IsSimpleType
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type.</param>
+        /// <returns><c>true</c> if [is simple type] [the specified type]; otherwise, <c>false</c>.</returns>
         public static bool IsSimpleType(this Type type)
         {
             return

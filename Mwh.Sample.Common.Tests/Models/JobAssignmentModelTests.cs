@@ -1,11 +1,30 @@
+// ***********************************************************************
+// Assembly         : Mwh.Sample.Common.Tests
+// Author           : mark
+// Created          : 04-04-2020
+//
+// Last Modified By : mark
+// Last Modified On : 04-04-2020
+// ***********************************************************************
+// <copyright file="JobAssignmentModelTests.cs" company="Mwh.Sample.Common.Tests">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace Mwh.Sample.Common.Models
 {
+    /// <summary>
+    /// Defines test class JobAssignmentModelTests.
+    /// </summary>
     [TestClass]
     public class JobAssignmentModelTests
     {
+        /// <summary>
+        /// Defines the test method JobAssignmentModelTest.
+        /// </summary>
         [TestMethod]
         public void JobAssignmentModelTest()
         {

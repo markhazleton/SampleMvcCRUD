@@ -1,12 +1,31 @@
+// ***********************************************************************
+// Assembly         : Mwh.Sample.Common.Tests
+// Author           : mark
+// Created          : 04-04-2020
+//
+// Last Modified By : mark
+// Last Modified On : 04-04-2020
+// ***********************************************************************
+// <copyright file="StringExtensionsTests.cs" company="Mwh.Sample.Common.Tests">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace Mwh.Sample.Common.Extension
 {
+    /// <summary>
+    /// Defines test class StringExtensionsTests.
+    /// </summary>
     [TestClass()]
     public class StringExtensionsTests
     {
 
+        /// <summary>
+        /// Defines the test method GetDecimalFromStringTest.
+        /// </summary>
         [TestMethod()]
         public void GetDecimalFromStringTest()
         {
@@ -17,6 +36,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual((decimal)1.99, myValue);
         }
 
+        /// <summary>
+        /// Defines the test method GetDecimalFromStringTestInvalidString.
+        /// </summary>
         [TestMethod()]
         public void GetDecimalFromStringTestInvalidString()
         {
@@ -26,6 +48,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(myDefault, myValue);
         }
 
+        /// <summary>
+        /// Defines the test method GetDecimalFromStringTestNullString.
+        /// </summary>
         [TestMethod()]
         public void GetDecimalFromStringTestNullString()
         {
@@ -35,6 +60,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(myDefault, myValue);
         }
 
+        /// <summary>
+        /// Defines the test method GetIntFromStringTest.
+        /// </summary>
         [TestMethod()]
         public void GetIntFromStringTest()
         {
@@ -45,6 +73,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(1, myValue);
         }
 
+        /// <summary>
+        /// Defines the test method GetIntFromStringTestInvalidString.
+        /// </summary>
         [TestMethod()]
         public void GetIntFromStringTestInvalidString()
         {
@@ -54,6 +85,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(myDefault, myValue);
         }
 
+        /// <summary>
+        /// Defines the test method GetIntFromStringTestNullDefault.
+        /// </summary>
         [TestMethod()]
         public void GetIntFromStringTestNullDefault()
         {
@@ -63,6 +97,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(myDefault, myValue);
         }
 
+        /// <summary>
+        /// Defines the test method GetIntFromStringTestNullString.
+        /// </summary>
         [TestMethod()]
         public void GetIntFromStringTestNullString()
         {
@@ -72,6 +109,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(myDefault, myValue);
         }
 
+        /// <summary>
+        /// Defines the test method GetNullIntFromStringTest.
+        /// </summary>
         [TestMethod()]
         public void GetNullIntFromStringTest()
         {
@@ -80,6 +120,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(1, myValue);
         }
 
+        /// <summary>
+        /// Defines the test method GetNullIntFromStringTestInvalidString.
+        /// </summary>
         [TestMethod()]
         public void GetNullIntFromStringTestInvalidString()
         {
@@ -88,6 +131,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(0, myValue);
         }
 
+        /// <summary>
+        /// Defines the test method GetNullIntFromStringTestNullString.
+        /// </summary>
         [TestMethod()]
         public void GetNullIntFromStringTestNullString()
         {
@@ -96,6 +142,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(0, myValue);
         }
 
+        /// <summary>
+        /// Defines the test method IndexOfNthTest.
+        /// </summary>
         [TestMethod()]
         public void IndexOfNthTest()
         {
@@ -103,6 +152,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(3, myTest.IndexOfNth("3", 1));
         }
 
+        /// <summary>
+        /// Defines the test method IndexOfNthTestMultipleFind.
+        /// </summary>
         [TestMethod()]
         public void IndexOfNthTestMultipleFind()
         {
@@ -110,6 +162,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(2, myTest.IndexOfNth("3", 3));
         }
 
+        /// <summary>
+        /// Defines the test method IndexOfNthTestSourceNull.
+        /// </summary>
         [TestMethod()]
         public void IndexOfNthTestSourceNull()
         {
@@ -117,6 +172,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(0, myTest.IndexOfNth("3", 3));
         }
 
+        /// <summary>
+        /// Defines the test method IndexOfNthTestValueNegativeNth.
+        /// </summary>
         [TestMethod()]
         [ExpectedException(typeof(ArgumentException))]
         public void IndexOfNthTestValueNegativeNth()
@@ -125,6 +183,9 @@ namespace Mwh.Sample.Common.Extension
             var RunTest = myTest.IndexOfNth("3", -1);
         }
 
+        /// <summary>
+        /// Defines the test method IndexOfNthTestValueNull.
+        /// </summary>
         [TestMethod()]
         public void IndexOfNthTestValueNull()
         {
@@ -132,6 +193,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(0, myTest.IndexOfNth(null, 3));
         }
 
+        /// <summary>
+        /// Defines the test method LeftTest.
+        /// </summary>
         [TestMethod()]
         public void LeftTest()
         {
@@ -139,6 +203,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual("01", myTest.Left(2));
         }
 
+        /// <summary>
+        /// Defines the test method LeftTestNullShortString.
+        /// </summary>
         [TestMethod()]
         public void LeftTestNullShortString()
         {
@@ -146,6 +213,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual("01", myTest.Left(8));
         }
 
+        /// <summary>
+        /// Defines the test method LeftTestNullString.
+        /// </summary>
         [TestMethod()]
         public void LeftTestNullString()
         {
@@ -153,6 +223,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(string.Empty, myTest.Left(2));
         }
 
+        /// <summary>
+        /// Defines the test method RightTest.
+        /// </summary>
         [TestMethod()]
         public void RightTest()
         {
@@ -160,6 +233,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual("89", myTest.Right(2));
         }
 
+        /// <summary>
+        /// Defines the test method RightTestNullString.
+        /// </summary>
         [TestMethod()]
         public void RightTestNullString()
         {
@@ -167,12 +243,18 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual(string.Empty, myTest.Right(2));
         }
 
+        /// <summary>
+        /// Defines the test method RightTestToShort.
+        /// </summary>
         [TestMethod()]
         public void RightTestToShort()
         {
             string myTest = "01";
             Assert.AreEqual("01", myTest.Right(8));
         }
+        /// <summary>
+        /// Defines the test method TrimIfNotNullTest.
+        /// </summary>
         [TestMethod()]
         public void TrimIfNotNullTest()
         {
@@ -180,6 +262,9 @@ namespace Mwh.Sample.Common.Extension
             Assert.AreEqual("MyTest", myTest.TrimIfNotNull());
         }
 
+        /// <summary>
+        /// Defines the test method TrimIfNotNullTestWithNull.
+        /// </summary>
         [TestMethod()]
         public void TrimIfNotNullTestWithNull()
         {

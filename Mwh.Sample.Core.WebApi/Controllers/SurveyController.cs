@@ -1,7 +1,5 @@
-﻿using ControlOrigins.Survey;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
@@ -21,8 +19,8 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [Route("/survey/{surveyId}")]
         public async Task<IActionResult> Edit(int surveyId)
         {
-            var list = await surveyService.GetSurveyBySurveyId(surveyId).ConfigureAwait(true);
-            return View("Edit",list);
+            var survey = await surveyService.GetSurveyBySurveyId(surveyId).ConfigureAwait(true);
+            return View("Edit", survey);
         }
     }
 }

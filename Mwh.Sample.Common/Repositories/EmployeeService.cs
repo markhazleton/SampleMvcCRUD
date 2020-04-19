@@ -1,4 +1,17 @@
-﻿using Mwh.Sample.Common.Models;
+﻿// ***********************************************************************
+// Assembly         : Mwh.Sample.Common
+// Author           : mark
+// Created          : 04-05-2020
+//
+// Last Modified By : mark
+// Last Modified On : 04-07-2020
+// ***********************************************************************
+// <copyright file="EmployeeService.cs" company="Mark Hazleton">
+//     Copyright 2020 Mark Hazleton
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using Mwh.Sample.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -6,25 +19,54 @@ using System.Threading.Tasks;
 
 namespace Mwh.Sample.Common.Repositories
 {
+    /// <summary>
+    /// Class EmployeeService.
+    /// Implements the <see cref="Mwh.Sample.Common.Repositories.IEmployeeService" />
+    /// </summary>
+    /// <seealso cref="Mwh.Sample.Common.Repositories.IEmployeeService" />
     public class EmployeeService : IEmployeeService
     {
+        /// <summary>
+        /// The employee repository
+        /// </summary>
         private readonly IEmployeeRepository _employeeRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmployeeService"/> class.
+        /// </summary>
+        /// <param name="employeeRepository">The employee repository.</param>
         public EmployeeService(IEmployeeRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
         }
 
+        /// <summary>
+        /// Lists the asynchronous.
+        /// </summary>
+        /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Task&lt;IEnumerable&lt;EmployeeModel&gt;&gt;.</returns>
         public Task<IEnumerable<EmployeeModel>> ListAsync(CancellationToken token)
         {
             return _employeeRepository.ListAsync(token);
         }
 
+        /// <summary>
+        /// Finds the by identifier asynchronous.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Task&lt;EmployeeModel&gt;.</returns>
         public Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
         {
             return _employeeRepository.FindByIdAsync(id,token);
         }
 
+        /// <summary>
+        /// save as an asynchronous operation.
+        /// </summary>
+        /// <param name="employee">The employee.</param>
+        /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>EmployeeResponse.</returns>
         public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
         {
             try
@@ -40,6 +82,13 @@ namespace Mwh.Sample.Common.Repositories
             }
         }
 
+        /// <summary>
+        /// update as an asynchronous operation.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="employee">The employee.</param>
+        /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>EmployeeResponse.</returns>
         public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
         {
             var existingEmployee = await _employeeRepository.FindByIdAsync(id, token).ConfigureAwait(true);
@@ -59,6 +108,12 @@ namespace Mwh.Sample.Common.Repositories
             }
         }
 
+        /// <summary>
+        /// delete as an asynchronous operation.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>EmployeeResponse.</returns>
         public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
         {
             var existingEmployee = await _employeeRepository.FindByIdAsync(id, token).ConfigureAwait(true);

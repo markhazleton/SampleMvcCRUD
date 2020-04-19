@@ -1,9 +1,22 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : Mwh.Sample.Common
+// Author           : mark
+// Created          : 04-04-2020
+//
+// Last Modified By : mark
+// Last Modified On : 04-04-2020
+// ***********************************************************************
+// <copyright file="StringExtensions.cs" company="Mark Hazleton">
+//     Copyright 2020 Mark Hazleton
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 
 namespace Mwh.Sample.Common.Extension
 {
     /// <summary>
-    /// Extensions to <see cref="DateTime"/>
+    /// Extensions to <see cref="DateTime" />
     /// </summary>
     public static class StringExtensions
     {
@@ -21,6 +34,12 @@ namespace Mwh.Sample.Common.Extension
             return string.Empty;
         }
 
+        /// <summary>
+        /// Lefts the specified length.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="length">The length.</param>
+        /// <returns>System.String.</returns>
         public static string Left(this string str, int length)
         {
             if (str == null)
@@ -30,6 +49,12 @@ namespace Mwh.Sample.Common.Extension
             return str.Substring(0, Math.Min(length, str.Length));
         }
 
+        /// <summary>
+        /// Rights the specified length.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="length">The length.</param>
+        /// <returns>System.String.</returns>
         public static string Right(this string str, int length)
         {
             if (str == null)
@@ -39,6 +64,14 @@ namespace Mwh.Sample.Common.Extension
             return str.Substring(str.Length - Math.Min(length, str.Length));
         }
 
+        /// <summary>
+        /// Indexes the of NTH.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="nth">The NTH.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="ArgumentException">Can not find the zeroth index of substring in string. Must start with 1</exception>
         public static int IndexOfNth(this string str, string value, int nth = 1)
         {
             if (str == null)
@@ -62,6 +95,12 @@ namespace Mwh.Sample.Common.Extension
             return offset;
         }
 
+        /// <summary>
+        /// Gets the int from string.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns>System.Nullable&lt;System.Int32&gt;.</returns>
         public static int? GetIntFromString(this string str, int? defaultValue)
         {
             int returnInt = defaultValue ?? 0;
@@ -76,6 +115,12 @@ namespace Mwh.Sample.Common.Extension
             }
         }
 
+        /// <summary>
+        /// Gets the int from string.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns>System.Int32.</returns>
         public static int GetIntFromString(this string str, int defaultValue)
         {
             int returnInt = defaultValue;
@@ -85,6 +130,12 @@ namespace Mwh.Sample.Common.Extension
             return returnInt;
         }
 
+        /// <summary>
+        /// Gets the decimal from string.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns>System.Decimal.</returns>
         public static decimal GetDecimalFromString(this string str, decimal defaultValue)
         {
             decimal returnDecimal = defaultValue;

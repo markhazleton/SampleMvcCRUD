@@ -1,4 +1,17 @@
-﻿using Mwh.Sample.Common.Models;
+﻿// ***********************************************************************
+// Assembly         : Mwh.Sample.Common
+// Author           : mark
+// Created          : 04-01-2020
+//
+// Last Modified By : mark
+// Last Modified On : 04-07-2020
+// ***********************************************************************
+// <copyright file="DeskBookingRequestProcessor.cs" company="Mark Hazleton">
+//     Copyright 2020 Mark Hazleton
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using Mwh.Sample.Common.Models;
 using Mwh.Sample.Common.Repositories;
 using System;
 using System.Linq;
@@ -10,19 +23,32 @@ namespace Mwh.Sample.Common.Processor
     /// </summary>
     public class DeskBookingRequestProcessor
     {
+        /// <summary>
+        /// The desk booking repository
+        /// </summary>
         private readonly IDeskBookingRepository _deskBookingRepository;
+        /// <summary>
+        /// The desk repository
+        /// </summary>
         private readonly IDeskRepository _deskRepository;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="DeskBookingRequestProcessor"/> class.
         /// </summary>
-        /// <param name="deskBookingRepository"></param>
+        /// <param name="deskBookingRepository">The desk booking repository.</param>
+        /// <param name="deskRepository">The desk repository.</param>
         public DeskBookingRequestProcessor(IDeskBookingRepository deskBookingRepository, IDeskRepository deskRepository)
         {
             _deskBookingRepository = deskBookingRepository;
             _deskRepository = deskRepository;
         }
 
+        /// <summary>
+        /// Books the desk.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns>DeskBookingResult.</returns>
+        /// <exception cref="ArgumentNullException">request</exception>
         public DeskBookingResult BookDesk(DeskBookingRequest request)
         {
             if (request == null)
@@ -52,6 +78,12 @@ namespace Mwh.Sample.Common.Processor
 
         }
 
+        /// <summary>
+        /// Creates the specified request.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="request">The request.</param>
+        /// <returns>T.</returns>
         private static T Create<T>(DeskBookingRequest request) where T : DeskBookingBase, new()
         {
             return new T

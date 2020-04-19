@@ -6,17 +6,19 @@
 // Last Modified By : mark
 // Last Modified On : 04-19-2020
 // ***********************************************************************
-// <copyright file="SurveyService.cs" company="Mark Hazleton">
+// <copyright file="ISurveyService.cs" company="Mark Hazleton">
 //     Copyright 2020 Mark Hazleton
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using ControlOrigins.Survey;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.SoapClient.Services
 {
+    /// <summary>
+    /// Interface ISurveyService
+    /// </summary>
     public interface ISurveyService
     {
         /// <summary>
