@@ -1,132 +1,260 @@
-﻿using ControlOrigins.Survey;
+﻿// ***********************************************************************
+// Assembly         : Mwh.Sample.SoapClient
+// Author           : mark
+// Created          : 04-12-2020
+//
+// Last Modified By : mark
+// Last Modified On : 04-19-2020
+// ***********************************************************************
+// <copyright file="SurveyService.cs" company="Mark Hazleton">
+//     Copyright 2020 Mark Hazleton
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using ControlOrigins.Survey;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.SoapClient.Services
 {
-    public class SurveyService: ISurveyService
+    /// <summary>
+    /// Class SurveyService.
+    /// </summary>
+    public class SurveyService : ISurveyService
     {
+        /// <summary>
+        /// The client
+        /// </summary>
         protected ServiceSoapClient _client;
+        /// <summary>
+        /// The user key
+        /// </summary>
         protected string _UserKey;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SurveyService"/> class.
+        /// </summary>
+        /// <param name="userKey">The user key.</param>
         public SurveyService(string userKey)
         {
             _client = new ServiceSoapClient(ServiceSoapClient.EndpointConfiguration.ServiceSoap);
             _UserKey = userKey;
         }
 
+        /// <summary>
+        /// Gets the application by application identifier.
+        /// </summary>
+        /// <param name="ApplicationId">The application identifier.</param>
+        /// <returns>ApplicationItem.</returns>
         public async Task<ApplicationItem> GetApplicationByApplicationID(int ApplicationId)
         {
-            GetApplicationByApplicationIDRequestBody reqBody = new GetApplicationByApplicationIDRequestBody(ApplicationId,
-                                                                                                            _UserKey);
-            GetApplicationByApplicationIDRequest request = new GetApplicationByApplicationIDRequest(reqBody);
+            var request = new GetApplicationByApplicationIDRequest();
+            request.Body = new GetApplicationByApplicationIDRequestBody(ApplicationId, _UserKey);
             var x = await _client.GetApplicationByApplicationIDAsync(request).ConfigureAwait(true);
             return x.Body.GetApplicationByApplicationIDResult;
         }
 
-        public async Task<ApplicationItem[]> GetApplicationCollection()
+        /// <summary>
+        /// Gets the application item collection.
+        /// </summary>
+        /// <returns>ApplicationItem[].</returns>
+        public async Task<ApplicationItem[]> GetApplicationItemCollection()
         {
-            GetApplicationListRequestBody reqBody = new GetApplicationListRequestBody(_UserKey);
-            GetApplicationListRequest request = new GetApplicationListRequest(reqBody);
+            var request = new GetApplicationListRequest();
+            request.Body = new GetApplicationListRequestBody(_UserKey);
             var x = await _client.GetApplicationListAsync(request).ConfigureAwait(true);
             return x.Body.GetApplicationListResult.ToArray();
         }
 
+        /// <summary>
+        /// Gets the application type by application type identifier.
+        /// </summary>
+        /// <param name="applicationTypeId">The application type identifier.</param>
+        /// <returns>ApplicationTypeItem.</returns>
+        public async Task<ApplicationTypeItem> GetApplicationTypeByApplicationTypeID(int applicationTypeId)
+        {
+            var request = new GetApplicationTypeRequest();
+            request.Body = new GetApplicationTypeRequestBody(applicationTypeId, _UserKey);
+            var x = await _client.GetApplicationTypeAsync(request).ConfigureAwait(true);
+            return x.Body.GetApplicationTypeResult;
+        }
+
+        /// <summary>
+        /// Gets the application type by application type identifier.
+        /// </summary>
+        /// <param name="applicationType">Type of the application.</param>
+        /// <returns>ApplicationTypeItem.</returns>
+        public async Task<ApplicationTypeItem> GetApplicationTypeByApplicationTypeID(ApplicationTypeItem applicationType)
+        {
+            var request = new PutApplicationTypeRequest();
+            request.Body = new PutApplicationTypeRequestBody(applicationType, _UserKey);
+            var x = await _client.PutApplicationTypeAsync(request).ConfigureAwait(true);
+            return x.Body.PutApplicationTypeResult;
+        }
+
+        /// <summary>
+        /// Gets the application type collection.
+        /// </summary>
+        /// <returns>ApplicationTypeItem[].</returns>
         public async Task<ApplicationTypeItem[]> GetApplicationTypeCollection()
         {
-            GetApplicationTypeListRequestBody reqBody = new GetApplicationTypeListRequestBody(_UserKey);
-            GetApplicationTypeListRequest request = new GetApplicationTypeListRequest(reqBody);
+            var request = new GetApplicationTypeListRequest();
+            request.Body = new GetApplicationTypeListRequestBody(_UserKey);
             var x = await _client.GetApplicationTypeListAsync(request).ConfigureAwait(true);
             return x.Body.GetApplicationTypeListResult.ToArray();
         }
 
+        /// <summary>
+        /// Gets the company by company identifier.
+        /// </summary>
+        /// <param name="CompanyId">The company identifier.</param>
+        /// <returns>CompanyItem.</returns>
         public async Task<CompanyItem> GetCompanyByCompanyId(int CompanyId)
         {
-            GetCompanyRequestBody reqBody = new GetCompanyRequestBody(CompanyId, _UserKey);
-            GetCompanyRequest request = new GetCompanyRequest(reqBody);
+            var request = new GetCompanyRequest();
+            request.Body = new GetCompanyRequestBody(CompanyId, _UserKey);
             var x = await _client.GetCompanyAsync(request).ConfigureAwait(true);
             return x.Body.GetCompanyResult;
         }
 
+        /// <summary>
+        /// Gets the company collection.
+        /// </summary>
+        /// <returns>CompanyItem[].</returns>
         public async Task<CompanyItem[]> GetCompanyCollection()
         {
-            GetCompanyListRequestBody reqBody = new GetCompanyListRequestBody(_UserKey);
-            GetCompanyListRequest request = new GetCompanyListRequest(reqBody);
+            var request = new GetCompanyListRequest();
+            request.Body = new GetCompanyListRequestBody(_UserKey);
             var x = await _client.GetCompanyListAsync(request).ConfigureAwait(true);
             return x.Body.GetCompanyListResult.ToArray();
         }
 
+        /// <summary>
+        /// Gets the survey by survey identifier.
+        /// </summary>
+        /// <param name="surveyId">The survey identifier.</param>
+        /// <returns>SurveyItem.</returns>
         public async Task<SurveyItem> GetSurveyBySurveyId(int surveyId)
         {
-            GetSurveyRequest request = new GetSurveyRequest();
+            var request = new GetSurveyRequest();
             request.Body = new GetSurveyRequestBody(surveyId, _UserKey);
             var x = await _client.GetSurveyAsync(request).ConfigureAwait(true);
             return x.Body.GetSurveyResult;
         }
 
 
+        /// <summary>
+        /// Gets the survey collection.
+        /// </summary>
+        /// <returns>SurveyItem[].</returns>
         public async Task<SurveyItem[]> GetSurveyCollection()
         {
-            GetSurveysRequest request = new GetSurveysRequest();
+            var request = new GetSurveysRequest();
             request.Body = new GetSurveysRequestBody(new SQLFilterClause[0], _UserKey);
             var x = await _client.GetSurveysAsync(request).ConfigureAwait(true);
             return x.Body.GetSurveysResult.ToArray();
         }
 
 
+        /// <summary>
+        /// Gets the type of the survey.
+        /// </summary>
+        /// <param name="surveyTypeId">The survey type identifier.</param>
+        /// <returns>SurveyTypeItem.</returns>
         public async Task<SurveyTypeItem> GetSurveyType(int surveyTypeId)
         {
-            GetSurveyTypeRequest request = new GetSurveyTypeRequest();
+            var request = new GetSurveyTypeRequest();
             request.Body = new GetSurveyTypeRequestBody(surveyTypeId, _UserKey);
             var x = await _client.GetSurveyTypeAsync(request).ConfigureAwait(true);
             return x.Body.GetSurveyTypeResult;
         }
 
+        /// <summary>
+        /// Gets the survey type collection.
+        /// </summary>
+        /// <param name="surveyTypeId">The survey type identifier.</param>
+        /// <returns>SurveyTypeItem[].</returns>
         public async Task<SurveyTypeItem[]> GetSurveyTypeCollection(int surveyTypeId)
         {
-            GetSurveyTypeListRequest request = new GetSurveyTypeListRequest();
+            var request = new GetSurveyTypeListRequest();
             request.Body = new GetSurveyTypeListRequestBody(_UserKey);
             var x = await _client.GetSurveyTypeListAsync(request).ConfigureAwait(true);
             return x.Body.GetSurveyTypeListResult;
         }
 
+        /// <summary>
+        /// Gets the user by identifier.
+        /// </summary>
+        /// <param name="Id">The identifier.</param>
+        /// <returns>ApplicationUserItem.</returns>
         public async Task<ApplicationUserItem> GetUserById(int Id)
         {
-            GetApplicationUserByApplicationUserIDRequestBody reqBody = new GetApplicationUserByApplicationUserIDRequestBody(_UserKey,
-                                                                                                                            Id);
-            GetApplicationUserByApplicationUserIDRequest request = new GetApplicationUserByApplicationUserIDRequest(reqBody);
+            var request = new GetApplicationUserByApplicationUserIDRequest();
+            request.Body = new GetApplicationUserByApplicationUserIDRequestBody(_UserKey, Id);
             var x = await _client.GetApplicationUserByApplicationUserIDAsync(request).ConfigureAwait(true);
             return x.Body.GetApplicationUserByApplicationUserIDResult;
         }
 
+        /// <summary>
+        /// Gets the user collection.
+        /// </summary>
+        /// <returns>ApplicationUserItem[].</returns>
         public async Task<ApplicationUserItem[]> GetUserCollection()
         {
-            GetApplicationUserListRequestBody reqBody = new GetApplicationUserListRequestBody(_UserKey);
-            GetApplicationUserListRequest request = new GetApplicationUserListRequest(reqBody);
+            var request = new GetApplicationUserListRequest();
+            request.Body = new GetApplicationUserListRequestBody(_UserKey);
             var x = await _client.GetApplicationUserListAsync(request).ConfigureAwait(true);
             return x.Body.GetApplicationUserListResult.ToArray();
         }
 
-        public async Task<CompanyItem> PutCompany(CompanyItem company)
+        /// <summary>
+        /// Puts the application.
+        /// </summary>
+        /// <param name="applicationItem">The application item.</param>
+        /// <returns>ApplicationItem.</returns>
+        public async Task<ApplicationItem> PutApplication(ApplicationItem applicationItem)
         {
-            GetCompanyRequestBody reqBody = new GetCompanyRequestBody();
-            GetCompanyRequest request = new GetCompanyRequest(reqBody);
-            var x = await _client.GetCompanyAsync(request).ConfigureAwait(true);
-            return x.Body.GetCompanyResult;
+            var request = new PutApplicationItemRequest();
+            request.Body = new PutApplicationItemRequestBody();
+            var x = await _client.PutApplicationItemAsync(request).ConfigureAwait(true);
+            return x.Body.PutApplicationItemResult;
         }
 
-        public async Task<SurveyItem> PutSurveyBySurveyId(SurveyItem survey)
+        /// <summary>
+        /// Puts the company.
+        /// </summary>
+        /// <param name="company">The company.</param>
+        /// <returns>CompanyItem.</returns>
+        public async Task<CompanyItem> PutCompany(CompanyItem company)
         {
-            PutSurveyItemRequest request = new PutSurveyItemRequest();
+            var request = new PutCompanyRequest();
+            request.Body = new PutCompanyRequestBody(company, _UserKey);
+            var x = await _client.PutCompanyAsync(request).ConfigureAwait(true);
+            return x.Body.PutCompanyResult;
+        }
+
+        /// <summary>
+        /// Puts the survey.
+        /// </summary>
+        /// <param name="survey">The survey.</param>
+        /// <returns>SurveyItem.</returns>
+        public async Task<SurveyItem> PutSurvey(SurveyItem survey)
+        {
+            var request = new PutSurveyItemRequest();
             request.Body = new PutSurveyItemRequestBody(survey, _UserKey);
             var x = await _client.PutSurveyItemAsync(request).ConfigureAwait(true);
             return x.Body.PutSurveyItemResult;
         }
 
+        /// <summary>
+        /// Puts the user.
+        /// </summary>
+        /// <param name="userItem">The user item.</param>
+        /// <returns>ApplicationUserItem.</returns>
         public async Task<ApplicationUserItem> PutUser(ApplicationUserItem userItem)
         {
-            PutApplicationUserRequestBody reqBody = new PutApplicationUserRequestBody(_UserKey, userItem);
-            PutApplicationUserRequest request = new PutApplicationUserRequest(reqBody);
+            var request = new PutApplicationUserRequest();
+            request.Body = new PutApplicationUserRequestBody(_UserKey, userItem);
             var x = await _client.PutApplicationUserAsync(request).ConfigureAwait(true);
             return x.Body.PutApplicationUserResult;
         }
