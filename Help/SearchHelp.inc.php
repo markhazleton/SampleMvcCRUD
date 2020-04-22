@@ -143,8 +143,8 @@ function Search($keywords, $fileInfo, $wordDictionary, $sortByTitle)
     {
         $f = $r->filename;
         $t = $r->pageTitle;
-        $sb .= "<div class=\"TreeItem\">\r\n<img src=\"../Item.gif\"/>" .
-            "<a class=\"UnselectedNode\" target=\"_self\" " .
+        $sb .= "<div class=\"TreeItem\">\r\n<img src=\"Item.gif\"/>" .
+            "<a class=\"UnselectedNode\" target=\"TopicContent\" " .
             "href=\"$f\" onclick=\"javascript: SelectSearchNode(this);\">" .
             "$t</a>\r\n</div>\r\n";
     }

@@ -6,17 +6,17 @@ function setActiveTab(baseClass,activeClassName,activeTab) {
   var classElements = getElementsByClass("CodeSnippetContainerTab", null, 'div');
   if(classElements != null) {
     for(i=0; i<classElements.length; i++) {       
- 	  classElements[i].style.backgroundColor = "#fff";
- 	  classElements[i].style.borderTop = "1px solid #939393";
- 	  classElements[i].style.borderBottom = "1px solid #939393";
+ 	  classElements[i].style.backgroundColor = "#dfedfe";
+ 	  classElements[i].style.borderTop = "1px solid #bbb";
+ 	  classElements[i].style.borderBottom = "2px solid #d0d2d2";
     }
   }
   var classElements = getElementsByClass("CodeSnippetContainerTabFirst", null, 'div');
   if(classElements != null) {
     for(i=0; i<classElements.length; i++) {       
- 	  classElements[i].style.backgroundColor = "#fff";
- 	  classElements[i].style.borderTop = "1px solid #939393";
- 	  classElements[i].style.borderBottom = "1px solid #939393";
+ 	  classElements[i].style.backgroundColor = "#dfedfe";
+ 	  classElements[i].style.borderTop = "1px solid #bbb";
+ 	  classElements[i].style.borderBottom = "2px solid #d0d2d2";
     }
   }
   

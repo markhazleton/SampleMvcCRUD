@@ -14,8 +14,7 @@
 }
 
 pre.libCScode {
-    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-	font-size: 92.3%;
+    font-family: Consolas, "Courier New", monospace;
 	white-space:-moz-pre-wrap;
 	word-wrap:break-word;
 	overflow:hidden;
@@ -56,125 +55,118 @@ div.CodeSnippetContainerTabs {
 	vertical-align:middle;
 	font-family:'Segoe UI', Verdana, Arial;
 	font-size:10pt!important;
-	height:192.3%;
+	height:169.2%;
 	position:relative;
 	z-index:1
 }
-.codeSnippetContainerTabs>div:first-child{
-	border-left:1px solid #939393;
-}
-.codeSnippetContainerTabs>div:last-child {
-    border-right: 1px solid #939393;
-    border-top-right-radius: 4px;
-}
 .CodeSnippetContainerTabLeft, .CodeSnippetContainerTabRight, .CodeSnippetContainerTabLeftActive, .CodeSnippetContainerTabRightActive, .CodeSnippetContainerTabRightActiveDisabled, .CodeSnippetContainerTabLeftUnrecognized, .CodeSnippetContainerTabRightUnrecognized, .CodeSnippetContainerTabLeftDisabled, .CodeSnippetContainerTabRightDisabled {
 	width:6px;
-	height:23px;
+	height:20px;
 	float:left;
-	border-bottom:none;
+	border-bottom:solid 2px #d0d2d2
 }
 .CodeSnippetContainerTabLeft {
-	background-image:url(../Images/LT_tab_white.gif)
+	background-image:url(../Images/LT_tab.gif)
 }
 .CodeSnippetContainerTabRight {
-	background-image:url(../Images/RT_tab_white.gif)
+	background-image:url(../Images/RT_tab.gif)
 }
 .CodeSnippetContainerTabLeftActive {
-	height:184.6%;
+	height:169.2%;
 	border-bottom:none;
-	background-image:url(../Images/LT_tab_white.gif)
+	background-image:url(../Images/LT_tab_Active.gif)
 }
 .CodeSnippetContainerTabRightActive, .CodeSnippetContainerTabRightActiveDisabled {
-	height:184.6%;
+	height:169.2%;
 	border-bottom:none;
-	background-image:url(../Images/RT_tab_white.gif)
+	background-image:url(../Images/RT_tab_Active.gif)
 }
 .CodeSnippetContainerTabLeftUnrecognized {
-	height:184.6%;
+	height:169.2%;
 	border-bottom:none;
-	background-image:url(../Images/LT_tab_white.gif)
+	background-image:url(../Images/LT_tab_Unrecognized.gif)
 }
 .CodeSnippetContainerTabRightUnrecognized {
-	height:184.6%;
+	height:169.2%;
 	border-bottom:none;
-	background-image:url(../Images/RT_tab_white.gif)
+	background-image:url(../Images/RT_tab_Unrecognized.gif)
 }
 .CodeSnippetContainerTabLeftDisabled {
-	background-image:url(../Images/LT_tab_white.gif)
+	background-image:url(../Images/LT_tab_Disabled.gif)
 }
 .CodeSnippetContainerTabRightDisabled {
-	background-image:url(../Images/RT_tab_white.gif)
+	background-image:url(../Images/RT_tab_Disabled.gif)
 }
 .CodeSnippetContainerTabFirst, .CodeSnippetContainerTab, .CodeSnippetContainerTabUnrecognized, .CodeSnippetContainerTabUnrecognizedNotFirst, .CodeSnippetContainerTabActive, .CodeSnippetContainerTabActiveNotFirst, .CodeSnippetContainerTabDisabled, .CodeSnippetContainerTabDisabledNotFirst, .CodeSnippetContainerTabDisabledActive, .CodeSnippetContainerTabDisabledActiveNotFirst {
-	height:161.5%;
+	height:146.2%;
 	float:left;
 	width:auto;
-	border-top:solid 1px #939393;
-	border-bottom:solid 1px #939393;
+	border-top:solid 1px #bbb;
+	border-bottom:solid 2px #d0d2d2;
 	padding:0 12px 0 12px;
-	background: #fff;
+	background:#dfedfe
 }
 .CodeSnippetContainerTabDisabledActive A {
 	FONT-WEIGHT:bold;
-	COLOR:#707070;
+	COLOR:#e66a38;
 	TEXT-DECORATION:none
 }
 .CodeSnippetContainerTabFirst {
 	padding:0 12px 0 6px
 }
 .CodeSnippetContainerTabDisabled, .CodeSnippetContainerTabDisabledNotFirst {
-	background:#fff;
+	background:#dfedfe
 }
 .CodeSnippetContainerTabActive, .CodeSnippetContainerTabActiveNotFirst, .CodeSnippetContainerTabDisabledActive, .CodeSnippetContainerTabDisabledActiveNotFirst {
 	background:#fff;
-	border-bottom:solid 1px #fff
+	border-bottom:solid 2px #fff
 }
 .CodeSnippetContainerTabUnrecognized {
-	background:#fff;
+	background:#dfedfe;
 	border-bottom:solid 2px #fff
 }
 .CodeSnippetContainerTab, .CodeSnippetContainerTabUnrecognizedNotFirst, .CodeSnippetContainerTabActiveNotFirst, .CodeSnippetContainerTabDisabledNotFirst, .CodeSnippetContainerTabDisabledActiveNotFirst {
-	border-left:solid 1px #939393;
+	border-left:solid 1px #929292
 }
 div.CodeSnippetContainerTabUnrecognized a, div.CodeSnippetContainerTabActive a, div.CodeSnippetContainerTabActiveNotFirst a, div.CodeSnippetContainerTabDisabledActiveNotFirst a {
-	color:#000;
+	color:#e66a38;
 	font-weight:bold;
 	text-decoration:none
 }
 div.CodeSnippetContainerTab a, div.CodeSnippetContainerTab a:link, div.CodeSnippetContainerTab a:visited, div.CodeSnippetContainerTab a:active {
-	color:#3390b1;
+	color:#2178e0;
 	font-weight:bold;
 	text-decoration:none
 }
 div.CodeSnippetContainerTab a:hover {
-	color:#707070
+	color:#e66a38
 }
 div.CodeSnippetContainerTabFirst a:link, div.CodeSnippetContainerTabFirst a:visited, div.CodeSnippetContainerTabFirst a:active {
-	color:#3390b1;
+	color:#2178e0;
 	font-weight:bold;
 	text-decoration:none
 }
 div.CodeSnippetContainerTabFirst a:hover {
 	font-weight:bold;
-	color:#707070
+	color:#e66a38
 }
 div.CodeSnippetContainerTabDisabled a, div.CodeSnippetContainerTabDisabledNotFirst a {
-	color:#3390b1;
+	color:#2178e0;
 	text-decoration:none
 }
 div.CodeSnippetContainerTabDisabled a, div.CodeSnippetContainerTabDisabledNotFirst a {
-	color:#3390b1;
+	color:#2178e0;
 	text-decoration:none
 }
 div.CodeSnippetContainerTabDisabledNotFirst a:hover {
-	color:#707070
+	color:#e66a38
 }
 .CodeSnippetToolBar {
 	width:auto;
 	height:auto;
-	border-top:solid 1px #939393;
-	border-left:solid 0px #939393;
-	border-right:solid 0px #939393;
+	border-top:solid 3px #e5e5e5;
+	border-left:solid 1px #bbb;
+	border-right:solid 3px #e5e5e5
 }
 .CodeSnippetToolBarText {
 	float:right;
@@ -192,7 +184,7 @@ div.CodeSnippetToolBarText a:link, div.CodeSnippetToolBarText a:visited, div.Cod
 	margin-left:5px;
 	margin-right:5px;
 	text-decoration:none;
-	color:#3390b1;
+	color:#2178e0;
 	font-family:'Segoe UI', Verdana, Arial;
 	font-size:10pt;
 	background-color:White
@@ -201,14 +193,14 @@ div.CodeSnippetToolBarText a:hover {
 	margin-left:5px;
 	margin-right:5px;
 	text-decoration:none;
-	color:#707070;
+	color:#e66a38;
 	font-family:'Segoe UI', Verdana, Arial;
 	font-size:10pt
 }
 .CodeSnippetContainerCodeCollection {
-	border-left:solid 1px #939393;
-	border-bottom:solid 1px #939393;
-	border-right:solid 1px #939393;
+	border-left:solid 1px #bbb;
+	border-bottom:solid 3px #e5e5e5;
+	border-right:solid 3px #e5e5e5;
 	clear:both;
 	margin-bottom:12px;
 	position:relative;

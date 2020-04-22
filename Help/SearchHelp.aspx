@@ -1,7 +1,4 @@
 ﻿<%@ Page Language="C#" EnableViewState="False" %>
-<%@Import Namespace="System.IO" %> 
-<%@Import Namespace="System.Globalization" %> 
-<%@Import Namespace="System.Web.Script.Serialization" %> 
 
 <script runat="server">
 //=============================================================================
@@ -224,9 +221,9 @@ private string Search(List<string> keywords, List<string> fileInfo,
 
     // Format the file list and return the results
     foreach(Ranking r in rankings)
-        sb.AppendFormat("<div class=\"TreeItem\">\r\n<img src=\"../Item.gif\"/>" +
-            "<a class=\"UnselectedNode\" target=\"_self\" " +
-			"href=\"{0}\" onclick=\"javascript: SelectSearchNode(this);\">" +
+        sb.AppendFormat("<div class=\"TreeItem\">\r\n<img src=\"Item.gif\"/>" +
+            "<a class=\"UnselectedNode\" target=\"TopicContent\" " +
+			"href=\"html/{0}\" onclick=\"javascript: SelectSearchNode(this);\">" +
             "{1}</a>\r\n</div>\r\n", r.Filename, r.PageTitle);
 
     // Return the keywords used as well in a hidden span
