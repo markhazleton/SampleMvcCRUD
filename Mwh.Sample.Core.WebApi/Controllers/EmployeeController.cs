@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
-
     /// <summary>
     /// EmployeeController
     /// </summary>

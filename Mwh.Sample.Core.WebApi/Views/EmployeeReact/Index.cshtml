@@ -1,0 +1,52 @@
+﻿
+
+@{
+    ViewBag.Title = "Employee JQuery AJAX";
+}
+@section HeadScripts {
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+}
+
+<div class="container" id="root">
+</div>
+
+<script type="text/babel">
+
+    class App extends React.Component {
+    render() {
+    return (
+    <div>
+        <h1>React Employee CRUD</h1>
+        <div className="row">
+            <div className="col-3">
+            </div>
+            <div className="col-8 offset-md-1">
+                <h2>View employees</h2>
+
+            </div>
+        </div>
+        <div>
+            <h2>Helpful Articles</h2>
+            <ul>
+                <li>
+                    <a target="_blank" href='https://www.taniarascia.com/crud-app-in-react-with-hooks/'>CRUD App in React with hooks</a>
+                </li>
+            </ul>
+        </div>
+    </div>)
+    }
+    }
+
+    ReactDOM.render(
+    <App />, document.getElementById('root'))
+
+</script>
+
+@section scripts {
+
+}
+
+
