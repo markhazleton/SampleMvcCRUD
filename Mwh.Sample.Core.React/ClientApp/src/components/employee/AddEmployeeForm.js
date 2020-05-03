@@ -41,7 +41,7 @@ export const AddEmployeeForm = props => {
                 />
             </div>
             <div className="form-group">
-                <button name="submit" type="submit" className="btn btn-primary">Submit</button>
+                <button name="submit" type="submit" className="btn btn-primary">Add</button>
             </div>
             </form>
             </>

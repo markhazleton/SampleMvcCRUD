@@ -6,7 +6,7 @@ import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import AuthorQuizApp from './components/AuthorQuiz';
 import { GitHubApp } from './components/GitHubApp';
-import EmployeeCRUDApp from './components/employee/EmployeeCRUD';
+import EmployeeCRUDApp from './components/employee/EmployeeCRUDApp';
 import './custom.css'
 
 export default class App extends Component {
