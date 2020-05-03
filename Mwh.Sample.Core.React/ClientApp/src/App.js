@@ -6,6 +6,7 @@ import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import AuthorQuizApp from './components/AuthorQuiz';
 import { GitHubApp } from './components/GitHubApp';
+import EmployeeCRUDApp from './components/employee/EmployeeCRUD';
 import './custom.css'
 
 export default class App extends Component {
@@ -18,6 +19,7 @@ export default class App extends Component {
               <Route path='/fetch-data' component={FetchData} />
               <Route path='/author-quiz' component={AuthorQuizApp} />
               <Route path='/github' component={GitHubApp} />
+              <Route path='/employee-crud' component={EmployeeCRUDApp}/>
           </Layout>
       );
     }
