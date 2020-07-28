@@ -6,6 +6,8 @@
     <Version>1.1.0</Version>
     <Copyright>Copyright © 2020 Mark Hazleton</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <UserSecretsId>628ab996-ec3e-413e-88de-44fc253af54c</UserSecretsId>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -16,13 +18,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.76" />
     <PackageReference Include="Mwh.Sample.Client" Version="1.2.0" />
     <PackageReference Include="Mwh.Sample.Common" Version="2.0.0" />
     <PackageReference Include="Mwh.Sample.SoapClient" Version="1.3.0" />
-    <PackageReference Include="RestSharp" Version="106.10.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
+    <PackageReference Include="RestSharp" Version="106.11.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
   </ItemGroup>
 
 
