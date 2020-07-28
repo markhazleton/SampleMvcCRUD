@@ -9,7 +9,7 @@ namespace Mwh.Sample.WebApi
     {
         /// <summary>
         ///     <link href="~/Content/bootstrap.css" rel="stylesheet" />
-        ///         <script src = "~/Scripts/jquery-3.3.1.js" ></ script >
+        ///         <script src = "~/Scripts/jquery-3.5.1.js" ></ script >
         ///         < script src="~/Scripts/bootstrap.js"></script>
         ///         <script src = "~/Scripts/jquery.unobtrusive-ajax.js" ></ script >
 
@@ -20,7 +20,7 @@ namespace Mwh.Sample.WebApi
             if (bundles == null) return;
             //Scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery")
-                .Include("~/Scripts/jquery-3.4.1.js",
+                .Include("~/Scripts/jquery-3.5.1.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/jquery.unobtrusive-ajax.js"));
 
