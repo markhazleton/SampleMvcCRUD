@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Mwh.Sample.Common.Models;
 using Mwh.Sample.Common.Repositories;
 using System.Threading.Tasks;
@@ -21,7 +20,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var list = await client.ListAsync(cts.Token).ConfigureAwait(true);
+            var list = await client.ListAsync(cts.Token).ConfigureAwait(false);
             return View(list);
         }
 
@@ -33,7 +32,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult> Details(int id)
         {
-            var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(true);
+            var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
             return View(emp);
         }
 
@@ -43,10 +42,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Create()
-        {
-            return View(new EmployeeModel());
-        }
+        public ActionResult Create() { return View(new EmployeeModel()); }
 
 
         /// <summary>
@@ -59,12 +55,11 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public async Task<ActionResult> Create(EmployeeModel employee)
         {
             EmployeeResponse reqResponse;
-            if (employee != null)
+            if(employee != null)
             {
-                reqResponse = await client.SaveAsync(employee, cts.Token).ConfigureAwait(true);
+                reqResponse = await client.SaveAsync(employee, cts.Token).ConfigureAwait(false);
             }
             return RedirectToAction("Index");
-
         }
 
         /// <summary>
@@ -75,13 +70,13 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
-            var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(true);
+            var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
             return View(emp);
         }
 
 
         /// <summary>
-        /// Save Employee 
+        /// Save Employee
         /// </summary>
         /// <param name="id"></param>
         /// <param name="employee"></param>
@@ -91,13 +86,12 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public async Task<ActionResult> Edit(int id, EmployeeModel employee)
         {
             EmployeeResponse reqResponse;
-            if (employee != null)
+            if(employee != null)
             {
-                if (employee.EmployeeID == id)
-                    reqResponse = await client.UpdateAsync(id, employee, cts.Token).ConfigureAwait(true);
+                if(employee.EmployeeID == id)
+                    reqResponse = await client.UpdateAsync(id, employee, cts.Token).ConfigureAwait(false);
             }
             return RedirectToAction("Index");
-
         }
 
         /// <summary>
@@ -108,7 +102,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(int id)
         {
-            var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(true);
+            var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
             return View(emp);
         }
 
@@ -123,11 +117,11 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id, EmployeeModel employee)
         {
-            if (employee != null)
+            if(employee != null)
             {
-                if (employee.EmployeeID == id)
+                if(employee.EmployeeID == id)
                 {
-                    var result = await client.DeleteAsync(id, cts.Token).ConfigureAwait(true);
+                    var result = await client.DeleteAsync(id, cts.Token).ConfigureAwait(false);
                 }
             }
             return RedirectToAction("Index");

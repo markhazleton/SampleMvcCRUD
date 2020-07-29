@@ -14,8 +14,14 @@ using Swagger.Net;
 
 namespace Mwh.Sample.WebApi
 {
+    /// <summary>
+    /// SwaggerConfig
+    /// </summary>
     public class SwaggerConfig
     {
+        /// <summary>
+        /// Register the Swagger Service
+        /// </summary>
         public static void Register()
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
@@ -306,11 +312,24 @@ namespace Mwh.Sample.WebApi
                     });
         }
 
+        /// <summary>
+        /// ResolveVersionSupportByRouteConstraint
+        /// </summary>
+        /// <param name="apiDesc"></param>
+        /// <param name="targetApiVersion"></param>
+        /// <returns></returns>
         public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
         {
-            return (apiDesc.Route.RouteTemplate.ToLower().Contains(targetApiVersion.ToLower()));
+            if (apiDesc is null) return false;
+
+            if (string.IsNullOrEmpty(targetApiVersion)) return false;
+
+            return apiDesc.Route.RouteTemplate.ToLower().Contains(targetApiVersion.ToLower());
         }
 
+        /// <summary>
+        /// ApplyDocumentVendorExtensions 
+        /// </summary>
         private class ApplyDocumentVendorExtensions : IDocumentFilter
         {
             public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
@@ -321,10 +340,23 @@ namespace Mwh.Sample.WebApi
             }
         }
 
+        /// <summary>
+        /// AssignOAuth2SecurityRequirements
+        /// </summary>
         public class AssignOAuth2SecurityRequirements : IOperationFilter
         {
+            /// <summary>
+            /// Apply OAuth 
+            /// </summary>
+            /// <param name="operation"></param>
+            /// <param name="schemaRegistry"></param>
+            /// <param name="apiDescription"></param>
             public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
             {
+                if (operation is null) return;
+                if (schemaRegistry is null) return;
+                if (apiDescription is null) return;
+
                 // Correspond each "Authorize" role to an oauth2 scope
                 var scopes = apiDescription.ActionDescriptor.GetFilterPipeline()
                     .Select(filterInfo => filterInfo.Instance)

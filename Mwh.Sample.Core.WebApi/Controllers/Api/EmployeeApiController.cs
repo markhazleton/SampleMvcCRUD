@@ -33,9 +33,9 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public async Task<IActionResult> DeleteAsync(int id)
         {
             CancellationTokenSource cts = new CancellationTokenSource();
-            var result = await _employeeService.DeleteAsync(id, cts.Token).ConfigureAwait(true);
+            var result = await _employeeService.DeleteAsync(id, cts.Token).ConfigureAwait(false);
 
-            if (!result.Success)
+            if(!result.Success)
             {
                 return BadRequest(new ErrorResource(result.Message));
             }
@@ -53,9 +53,9 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public async Task<IActionResult> FindByIdAsync(int id)
         {
             CancellationTokenSource cts = new CancellationTokenSource();
-            var result = await _employeeService.FindByIdAsync(id, cts.Token).ConfigureAwait(true);
+            var result = await _employeeService.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
 
-            if (result.EmployeeID != id)
+            if(result.EmployeeID != id)
             {
                 return BadRequest(new ErrorResource("Employee Not Found"));
             }
@@ -71,7 +71,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public async Task<IEnumerable<EmployeeModel>> ListAsync()
         {
             CancellationTokenSource cts = new CancellationTokenSource();
-            var employees = await _employeeService.ListAsync(cts.Token).ConfigureAwait(true);
+            var employees = await _employeeService.ListAsync(cts.Token).ConfigureAwait(false);
             return employees;
         }
 
@@ -86,9 +86,9 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public async Task<IActionResult> PostAsync([FromBody] EmployeeModel employee)
         {
             CancellationTokenSource cts = new CancellationTokenSource();
-            var result = await _employeeService.SaveAsync(employee, cts.Token).ConfigureAwait(true);
+            var result = await _employeeService.SaveAsync(employee, cts.Token).ConfigureAwait(false);
 
-            if (!result.Success)
+            if(!result.Success)
             {
                 return BadRequest(new ErrorResource(result.Message));
             }
@@ -107,8 +107,8 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public async Task<IActionResult> PutAsync(int id, [FromBody] EmployeeModel employee)
         {
             CancellationTokenSource cts = new CancellationTokenSource();
-            var result = await _employeeService.UpdateAsync(id, employee, cts.Token).ConfigureAwait(true);
-            if (!result.Success)
+            var result = await _employeeService.UpdateAsync(id, employee, cts.Token).ConfigureAwait(false);
+            if(!result.Success)
             {
                 return BadRequest(new ErrorResource(result.Message));
             }

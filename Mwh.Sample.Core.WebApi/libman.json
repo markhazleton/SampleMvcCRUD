@@ -9,7 +9,7 @@
         "jquery.js",
         "jquery.min.map"
       ],
-      "library": "jquery@3.5.0"
+      "library": "jquery@3.5.1"
     },
     {
       "destination": "wwwroot/lib/jquery-validation-unobtrusive/",
@@ -17,7 +17,7 @@
     },
     {
       "destination": "wwwroot/lib/bootstrap/",
-      "library": "bootstrap@4.4.1",
+      "library": "bootstrap@4.5.0",
       "provider": "unpkg"
     }
   ]
