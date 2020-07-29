@@ -70,7 +70,7 @@
         });
 
         //Load Employee List
-        function loadData() {
+        const loadData = () => {
             $.ajax({
                 url: "/api/employee",
                 type: "GET",
@@ -97,7 +97,7 @@
         }
 
         //Show Add Employee Dialog
-        function Add() {
+        const Add =()=> {
             var res = validate();
             if (res == false) {
                 return false;
@@ -134,7 +134,7 @@
         }
 
         // Get Employee based on Employee ID
-        function getEmployeeByID(EmpID) {
+        const getEmployeeByID = (EmpID) => {
             $('#name').css('border-color', 'lightgrey');
             $('#age').css('border-color', 'lightgrey');
             $('#state').css('border-color', 'lightgrey');
@@ -166,7 +166,7 @@
         }
 
         // Update existing Employee record
-        function Update() {
+        const Update = () => {
             var res = validate();
             if (res == false) {
                 return false;
@@ -207,7 +207,7 @@
         }
 
         // Delete Employee by Employee ID
-        function Delete(ID) {
+        const Delete= (ID) =>  {
             var ans = confirm("Are you sure you want to delete this Record?");
             if (ans) {
                 $.ajax({
@@ -226,7 +226,7 @@
         }
 
         // Clear the Employee Form
-        function clearTextBox() {
+        const  clearTextBox = () => {
             $('#myModalLabel').html('Add Employee');
             $('#employeeID').val("0");
             $('#name').val("");
@@ -243,7 +243,7 @@
             $('#department').css('border-color', 'lightgrey');
         }
         // JQuery Validate
-        function validate() {
+        const validate =()=> {
             var isValid = true;
             if ($('#name').val().trim() == "") {
                 $('#name').css('border-color', 'Red');
