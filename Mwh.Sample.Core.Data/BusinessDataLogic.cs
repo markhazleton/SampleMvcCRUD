@@ -35,12 +35,12 @@ namespace Mwh.Sample.Core.Data
         public void Dispose() { ((IDisposable)_context).Dispose(); }
 
         public async Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
-        { return Create(await _context.Employees.FindAsync(id).ConfigureAwait(true)); }
+        { return Create(await _context.Employees.FindAsync(id).ConfigureAwait(false)); }
 
         public EmployeeModel[] GetEmployeeCollection() { return CreateCollection(_context.Employees.ToList()); }
 
         public async Task<IEnumerable<EmployeeModel>> ListAsync(CancellationToken token)
-        { return CreateCollection(await _context.Employees.ToListAsync().ConfigureAwait(true)); }
+        { return CreateCollection(await _context.Employees.ToListAsync().ConfigureAwait(false)); }
 
         public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
         {
@@ -124,7 +124,7 @@ namespace Mwh.Sample.Core.Data
 
         public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
         {
-            var emp = await SaveEmployeeAsync(employee).ConfigureAwait(true);
+            var emp = await SaveEmployeeAsync(employee).ConfigureAwait(false);
             return new EmployeeResponse(emp);
         }
 

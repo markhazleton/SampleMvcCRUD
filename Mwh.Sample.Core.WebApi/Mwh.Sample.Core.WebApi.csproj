@@ -8,6 +8,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <UserSecretsId>628ab996-ec3e-413e-88de-44fc253af54c</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -24,6 +26,7 @@
     <PackageReference Include="Mwh.Sample.Client" Version="1.2.0" />
     <PackageReference Include="Mwh.Sample.Common" Version="2.0.0" />
     <PackageReference Include="Mwh.Sample.SoapClient" Version="1.3.0" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="RestSharp" Version="106.11.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
   </ItemGroup>
