@@ -62,7 +62,7 @@ const EmployeeCRUDApp = () => {
                 <h2>Helpful Articles</h2>
                 <ul>
                     <li>
-                        <a target="_blank" href='https://www.taniarascia.com/crud-app-in-react-with-hooks/'>CRUD App in React with hooks</a>
+                        <a target="_blank" rel="noopener noreferrer"  href='https://www.taniarascia.com/crud-app-in-react-with-hooks/'>CRUD App in React with hooks</a>
                     </li>
                 </ul>
             </div>

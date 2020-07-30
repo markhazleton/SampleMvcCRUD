@@ -70,7 +70,6 @@ export class Counter extends Component {
     }
 }
 
-
 function MyApp() {
     const [counter, setCounter] = useState(0);
     const incrementCounter = (incrementValue) => setCounter(counter + incrementValue);
@@ -80,6 +79,7 @@ function MyApp() {
             <MyButton onClickFunction={incrementCounter} increment={5} />
             <MyButton onClickFunction={incrementCounter} increment={10} />
             <MyButton onClickFunction={incrementCounter} increment={100} />
+            <MyButton onClickFunction={incrementCounter} increment={1000} />
             <MyDisplay message={counter} />
         </div>
     );
