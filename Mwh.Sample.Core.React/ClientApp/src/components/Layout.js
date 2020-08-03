@@ -16,7 +16,7 @@ export class Layout extends Component {
             <Navbar color="dark" dark>
                 <Container>
                     <NavbarBrand>Mwh Sample Core React</NavbarBrand>
-                    <a target="_blank" href="https://linkedin.com/in/markhazleton">Mark Hazleton</a>
+                        <a target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/markhazleton">Mark Hazleton</a>
                 </Container>
             </Navbar>
         </div>

@@ -3,7 +3,7 @@
     margin: 1rem;
 }
     .github-profile img {
-        width: 75px;
+        max-width: 250px;
     }
     .github-profile .info {
         display: inline-block;
