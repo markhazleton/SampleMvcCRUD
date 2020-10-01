@@ -15,6 +15,7 @@
     <Authors>Mark Hazleton</Authors>
     <Copyright>Copyright ©2020 Mark Hazleton</Copyright>
     <Description>The domain models for the Mwh.Sample project</Description>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

@@ -12,6 +12,7 @@
     <PackageReleaseNotes>Add Comments</PackageReleaseNotes>
     <Description>The client libraries for making API calls to Sample API from .Net applications</Description>
     <Version>1.2.0</Version>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
