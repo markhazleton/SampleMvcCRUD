@@ -1,5 +1,8 @@
 ﻿using Mwh.Sample.Common.Models;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace Mwh.Sample.WebApi.Controllers
@@ -20,6 +23,18 @@ namespace Mwh.Sample.WebApi.Controllers
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Route("Simple/Test")]
+        [HttpGet]
+        public IHttpActionResult TestResult()
+        {
+            return LogRequest();
+
+        }
+
+        /// <summary>
         /// Employee List of Employees
         /// </summary>
         /// <returns></returns>
@@ -30,9 +45,8 @@ namespace Mwh.Sample.WebApi.Controllers
             return EmpDB.EmployeeCollection();
         }
 
-
         /// <summary>
-        /// Employee Employee by Id
+        /// Get Employee by Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

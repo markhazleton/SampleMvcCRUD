@@ -1,10 +1,18 @@
 ﻿using Mwh.Sample.Common.Repositories;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Runtime.Caching;
+using System.Web;
 using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Mvc;
 
 namespace Mwh.Sample.WebApi.Controllers
 {
+
     /// <summary>
     /// BaseApiController
     /// </summary>
@@ -18,6 +26,32 @@ namespace Mwh.Sample.WebApi.Controllers
         {
 
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected IHttpActionResult LogRequest()
+        {
+
+            var actionMember = ((HttpActionDescriptor[])this.ControllerContext.RouteData.Route.DataTokens.ToList()
+                .Where(w => w.Key.ToLower() == "actions")
+                .FirstOrDefault().Value)
+                .FirstOrDefault();
+
+            var myDict = new Dictionary<string, string>()  {
+                {"user",User.Identity.Name },
+                {"RouteTemplate",Request.GetRouteData().Route.RouteTemplate },
+                { "ActionName",actionMember?.ActionName},
+                {"ControllerName",actionMember?.ControllerDescriptor?.ControllerName }
+            };
+
+            return Ok(JsonConvert.SerializeObject(myDict));
+
+        }
+
+
+
+
         /// <summary>
         /// Employee Database Mock
         /// </summary>
