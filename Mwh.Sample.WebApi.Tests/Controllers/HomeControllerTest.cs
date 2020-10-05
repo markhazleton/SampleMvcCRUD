@@ -9,10 +9,16 @@ namespace Mwh.Sample.WebApi.Controllers
     {
         private HomeController controller;
 
-        [TestInitialize]
-        public void TestInitialize()
+        [TestMethod]
+        public void EmpSinglePageStateUnderTestExpectedBehavior()
         {
-            controller = new HomeController();
+            // Arrange
+
+            // Act
+            var result = controller.EmpSinglePage();
+
+            // Assert
+            Assert.IsNotNull(result);
         }
 
 
@@ -28,20 +34,15 @@ namespace Mwh.Sample.WebApi.Controllers
             Assert.IsNotNull(result);
             Assert.AreEqual("Home Page", result.ViewBag.Title);
         }
-        [TestMethod]
-        public void EmpSinglePageStateUnderTestExpectedBehavior()
+
+        [TestInitialize]
+        public void TestInitialize()
         {
-            // Arrange
-
-            // Act
-            var result = controller.EmpSinglePage();
-
-            // Assert
-            Assert.IsNotNull(result);
+            controller = new HomeController();
         }
 
         #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
+        private bool disposedValue; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
         {

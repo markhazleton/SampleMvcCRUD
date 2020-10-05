@@ -5,10 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Caching;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
-using System.Web.Mvc;
 
 namespace Mwh.Sample.WebApi.Controllers
 {
@@ -24,32 +22,30 @@ namespace Mwh.Sample.WebApi.Controllers
         /// </summary>
         protected BaseApiController()
         {
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         protected IHttpActionResult LogRequest()
         {
-
-            var actionMember = ((HttpActionDescriptor[])this.ControllerContext.RouteData.Route.DataTokens.ToList()
-                .Where(w => w.Key.ToLower() == "actions")
-                .FirstOrDefault().Value)
+            var actionMember = ((HttpActionDescriptor[])this.ControllerContext.RouteData.Route.DataTokens
+                .ToList()
+                .Where(w => string.Compare(w.Key.ToLower(), "actions", StringComparison.Ordinal) == 0)
+                .FirstOrDefault()
+                .Value)
                 .FirstOrDefault();
 
-            var myDict = new Dictionary<string, string>()  {
-                {"user",User.Identity.Name },
-                {"RouteTemplate",Request.GetRouteData().Route.RouteTemplate },
-                { "ActionName",actionMember?.ActionName},
-                {"ControllerName",actionMember?.ControllerDescriptor?.ControllerName }
+            var myDict = new Dictionary<string, string>()
+            {
+                { "user", User.Identity.Name },
+                { "RouteTemplate", Request.GetRouteData()?.Route?.RouteTemplate },
+                { "ActionName", actionMember?.ActionName },
+                { "ControllerName", actionMember?.ControllerDescriptor?.ControllerName }
             };
 
             return Ok(JsonConvert.SerializeObject(myDict));
-
         }
-
-
 
 
         /// <summary>
@@ -60,15 +56,13 @@ namespace Mwh.Sample.WebApi.Controllers
             get
             {
                 var cache = MemoryCache.Default;
-                if (cache.Get("dataCache") == null)
+                if(cache.Get("dataCache") == null)
                 {
-                    var cachePolicty = new CacheItemPolicy();
-                    cachePolicty.AbsoluteExpiration = DateTime.Now.AddDays(1);
+                    var cachePolicty = new CacheItemPolicy() { AbsoluteExpiration = DateTime.Now.AddDays(1) };
                     var data = new EmployeeMock();
                     cache.Add("dataCache", data, cachePolicty);
                     return data;
-                }
-                else
+                } else
                 {
                     IEmployeeDB data = (IEmployeeDB)cache.Get("dataCache");
                     return data;

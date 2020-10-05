@@ -13,7 +13,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     [Route("/api/employee")]
     [Produces("application/json")]
     [ApiController]
-    public class EmployeeApiController : Controller
+    public class EmployeeApiController : BaseApiController
     {
         private readonly IEmployeeService _employeeService;
 
@@ -35,7 +35,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             CancellationTokenSource cts = new CancellationTokenSource();
             var result = await _employeeService.DeleteAsync(id, cts.Token).ConfigureAwait(false);
 
-            if(!result.Success)
+            if (!result.Success)
             {
                 return BadRequest(new ErrorResource(result.Message));
             }
@@ -55,7 +55,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             CancellationTokenSource cts = new CancellationTokenSource();
             var result = await _employeeService.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
 
-            if(result.EmployeeID != id)
+            if (result.EmployeeID != id)
             {
                 return BadRequest(new ErrorResource("Employee Not Found"));
             }
@@ -88,7 +88,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             CancellationTokenSource cts = new CancellationTokenSource();
             var result = await _employeeService.SaveAsync(employee, cts.Token).ConfigureAwait(false);
 
-            if(!result.Success)
+            if (!result.Success)
             {
                 return BadRequest(new ErrorResource(result.Message));
             }
@@ -108,7 +108,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         {
             CancellationTokenSource cts = new CancellationTokenSource();
             var result = await _employeeService.UpdateAsync(id, employee, cts.Token).ConfigureAwait(false);
-            if(!result.Success)
+            if (!result.Success)
             {
                 return BadRequest(new ErrorResource(result.Message));
             }

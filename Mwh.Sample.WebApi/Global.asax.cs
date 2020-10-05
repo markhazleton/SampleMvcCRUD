@@ -12,17 +12,6 @@ namespace Mwh.Sample.WebApi
     public class WebApiApplication : HttpApplication
     {
         /// <summary>
-        /// Application_Start
-        /// </summary>
-        protected void Application_Start()
-        {
-            AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-        }
-        /// <summary>
         /// 
         /// </summary>
         protected void Application_Error()
@@ -32,12 +21,23 @@ namespace Mwh.Sample.WebApi
             RequestContext rc = ((MvcHandler)ctx.CurrentHandler).RequestContext;
             rc.RouteData.Values["action"] = "Index";
             rc.RouteData.Values["controller"] = "Error";
-            rc.RouteData.Values["id"] = "";
+            rc.RouteData.Values["id"] = string.Empty;
 
             IControllerFactory factory = ControllerBuilder.Current.GetControllerFactory();
             IController controller = factory.CreateController(rc, "Error");
             controller.Execute(rc);
             ctx.Server.ClearError();
+        }
+        /// <summary>
+        /// Application_Start
+        /// </summary>
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }
