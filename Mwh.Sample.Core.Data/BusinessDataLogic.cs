@@ -13,9 +13,38 @@ namespace Mwh.Sample.Core.Data
     public class BusinessDataLogic : IDisposable, IEmployeeService
     {
         private SampleContext _context;
+
         public BusinessDataLogic() { _context = new SampleContext(); }
         public BusinessDataLogic(SampleContext context) { _context = context; }
         public BusinessDataLogic(DbContextOptions options) { _context = new SampleContext(options); }
+
+        private EmployeeModel Create(Employee item)
+        {
+            return new EmployeeModel()
+            {
+                Name = item.Name,
+                State = item.State,
+                Country = item.Country,
+                Age = item.Age,
+                Department = (EmployeeDepartment)item.DepartmentId,
+                EmployeeID = item.EmployeeId
+            };
+        }
+        private Employee Create(EmployeeModel item)
+        {
+            return new Employee()
+            {
+                Name = item.Name,
+                State = item.State,
+                Country = item.Country,
+                Age = item.Age,
+                DepartmentId = (int)item.Department,
+                EmployeeId = item.EmployeeID
+            };
+        }
+
+        private EmployeeModel[] CreateCollection(List<Employee> list) { return list.Select(s => Create(s)).ToArray(); }
+        private Employee[] CreateCollection(List<EmployeeModel> list) { return list.Select(s => Create(s)).ToArray(); }
 
         public int AddMultipleEmployees(string[] namelist)
         {
@@ -84,9 +113,7 @@ namespace Mwh.Sample.Core.Data
             {
                 if (item.EmployeeID > 0)
                 {
-                    dbEmp =  _context.Employees
-                        .Where(w => w.EmployeeId == item.EmployeeID)
-                        .FirstOrDefault();
+                    dbEmp = _context.Employees.Where(w => w.EmployeeId == item.EmployeeID).FirstOrDefault();
 
                     if (dbEmp == null)
                     {
@@ -102,7 +129,6 @@ namespace Mwh.Sample.Core.Data
                         _context.SaveChanges();
 
                         var list = _context.Employees.ToList();
-
                     }
                 }
                 else
@@ -114,10 +140,13 @@ namespace Mwh.Sample.Core.Data
             }
             catch (Exception ex)
             {
-                
+
             }
 
-            var newEmp = await _context.Employees.Where(w => w.EmployeeId == dbEmp.EmployeeId).FirstOrDefaultAsync().ConfigureAwait(true);
+            var newEmp = await _context.Employees
+                .Where(w => w.EmployeeId == dbEmp.EmployeeId)
+                .FirstOrDefaultAsync()
+                .ConfigureAwait(true);
 
             return Create(newEmp);
         }
@@ -127,33 +156,5 @@ namespace Mwh.Sample.Core.Data
             var emp = await SaveEmployeeAsync(employee).ConfigureAwait(false);
             return new EmployeeResponse(emp);
         }
-
-        private EmployeeModel Create(Employee item)
-        {
-            return new EmployeeModel()
-            {
-                Name = item.Name,
-                State = item.State,
-                Country = item.Country,
-                Age = item.Age,
-                Department = (EmployeeDepartment)item.DepartmentId,
-                EmployeeID = item.EmployeeId
-            };
-        }
-        private Employee Create(EmployeeModel item)
-        {
-            return new Employee()
-            {
-                Name = item.Name,
-                State = item.State,
-                Country = item.Country,
-                Age = item.Age,
-                DepartmentId = (int)item.Department,
-                EmployeeId = item.EmployeeID
-            };
-        }
-
-        private EmployeeModel[] CreateCollection(List<Employee> list) { return list.Select(s => Create(s)).ToArray(); }
-        private Employee[] CreateCollection(List<EmployeeModel> list) { return list.Select(s => Create(s)).ToArray(); }
     }
 }

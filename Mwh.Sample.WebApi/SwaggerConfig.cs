@@ -1,14 +1,12 @@
+using Mwh.Sample.WebApi;
+using Swagger.Net;
+using Swagger.Net.Application;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Routing.Constraints;
-using System.Collections.Generic;
-
-using Mwh.Sample.WebApi;
-using Swagger.Net.Application;
-using Swagger.Net;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -318,27 +316,27 @@ namespace Mwh.Sample.WebApi
         /// <param name="apiDesc"></param>
         /// <param name="targetApiVersion"></param>
         /// <returns></returns>
-        public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
-        {
-            if (apiDesc is null) return false;
+        //public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
+        //{
+        //    if (apiDesc is null) return false;
 
-            if (string.IsNullOrEmpty(targetApiVersion)) return false;
+        //    if (string.IsNullOrEmpty(targetApiVersion)) return false;
 
-            return apiDesc.Route.RouteTemplate.ToLower().Contains(targetApiVersion.ToLower());
-        }
+        //    return apiDesc.Route.RouteTemplate.ToLower().Contains(targetApiVersion.ToLower());
+        //}
 
         /// <summary>
         /// ApplyDocumentVendorExtensions 
         /// </summary>
-        private class ApplyDocumentVendorExtensions : IDocumentFilter
-        {
-            public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
-            {
-                // Include the given data type in the final SwaggerDocument
-                //
-                //schemaRegistry.GetOrRegister(typeof(ExtraType));
-            }
-        }
+        //private class ApplyDocumentVendorExtensions : IDocumentFilter
+        //{
+        //    public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
+        //    {
+        //        // Include the given data type in the final SwaggerDocument
+        //        //
+        //        //schemaRegistry.GetOrRegister(typeof(ExtraType));
+        //    }
+        //}
 
         /// <summary>
         /// AssignOAuth2SecurityRequirements
@@ -379,28 +377,28 @@ namespace Mwh.Sample.WebApi
             }
         }
 
-        private class ApplySchemaVendorExtensions : ISchemaFilter
-        {
-            public void Apply(Schema schema, SchemaRegistry schemaRegistry, Type type)
-            {
-                // Modify the example values in the final SwaggerDocument
-                //
-                if (schema.properties != null)
-                {
-                    foreach (var p in schema.properties)
-                    {
-                        switch (p.Value.format)
-                        {
-                            case "int32":
-                                p.Value.example = 123;
-                                break;
-                            case "double":
-                                p.Value.example = 9858.216;
-                                break;
-                        }
-                    }
-                }
-            }
-        }
+        //private class ApplySchemaVendorExtensions : ISchemaFilter
+        //{
+        //    public void Apply(Schema schema, SchemaRegistry schemaRegistry, Type type)
+        //    {
+        //        // Modify the example values in the final SwaggerDocument
+        //        //
+        //        if (schema.properties != null)
+        //        {
+        //            foreach (var p in schema.properties)
+        //            {
+        //                switch (p.Value.format)
+        //                {
+        //                    case "int32":
+        //                        p.Value.example = 123;
+        //                        break;
+        //                    case "double":
+        //                        p.Value.example = 9858.216;
+        //                        break;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
