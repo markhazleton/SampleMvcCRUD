@@ -24,7 +24,7 @@ namespace Mwh.Sample.WebApi
             rc.RouteData.Values["id"] = string.Empty;
 
             IControllerFactory factory = ControllerBuilder.Current.GetControllerFactory();
-            IController controller = factory.CreateController(rc, "Error");
+            IController controller = factory?.CreateController(rc, "Error");
             controller.Execute(rc);
             ctx.Server.ClearError();
         }
