@@ -32,7 +32,7 @@ namespace Mwh.Sample.WebApi.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual("Home Page", result.ViewBag.Title);
+            Assert.AreEqual("Home Page", result?.ViewBag?.Title);
         }
 
         [TestInitialize]

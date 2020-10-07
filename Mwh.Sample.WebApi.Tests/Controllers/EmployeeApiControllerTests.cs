@@ -80,7 +80,7 @@ namespace Mwh.Sample.WebApi.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.EmployeeID);
+            Assert.AreEqual(3, result?.EmployeeID);
         }
 
         [TestMethod]
@@ -102,9 +102,9 @@ namespace Mwh.Sample.WebApi.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.Name, "Bill");
-            Assert.AreEqual(result.Age, 25);
-            Assert.AreEqual(result.State, "Texas");
+            Assert.AreEqual(result?.Name, "Bill");
+            Assert.AreEqual(result?.Age, 25);
+            Assert.AreEqual(result?.State, "Texas");
         }
 
         [TestMethod]
@@ -118,7 +118,7 @@ namespace Mwh.Sample.WebApi.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(0, result.EmployeeID);
+            Assert.AreEqual(0, result?.EmployeeID);
         }
 
         [TestMethod]
@@ -140,9 +140,9 @@ namespace Mwh.Sample.WebApi.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.Name, "Bill");
-            Assert.AreEqual(result.Age, 25);
-            Assert.AreEqual(result.State, "Texas");
+            Assert.AreEqual(result?.Name, "Bill");
+            Assert.AreEqual(result?.Age, 25);
+            Assert.AreEqual(result?.State, "Texas");
         }
 
         [TestInitialize]

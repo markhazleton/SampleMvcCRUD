@@ -57,9 +57,7 @@ namespace Mwh.Sample.WebApi.Controllers
         public ActionResult Create(EmployeeModel employee)
         {
             if (employee != null)
-            {
-                employee= EmpDB.Update(employee);
-            }
+                _ = EmpDB.Update(employee);
             return RedirectToAction("Index");
             //try
             //{

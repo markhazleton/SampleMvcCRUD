@@ -311,34 +311,6 @@ namespace Mwh.Sample.WebApi
         }
 
         /// <summary>
-        /// ResolveVersionSupportByRouteConstraint
-        /// </summary>
-        /// <param name="apiDesc"></param>
-        /// <param name="targetApiVersion"></param>
-        /// <returns></returns>
-        //public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
-        //{
-        //    if (apiDesc is null) return false;
-
-        //    if (string.IsNullOrEmpty(targetApiVersion)) return false;
-
-        //    return apiDesc.Route.RouteTemplate.ToLower().Contains(targetApiVersion.ToLower());
-        //}
-
-        /// <summary>
-        /// ApplyDocumentVendorExtensions 
-        /// </summary>
-        //private class ApplyDocumentVendorExtensions : IDocumentFilter
-        //{
-        //    public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
-        //    {
-        //        // Include the given data type in the final SwaggerDocument
-        //        //
-        //        //schemaRegistry.GetOrRegister(typeof(ExtraType));
-        //    }
-        //}
-
-        /// <summary>
         /// AssignOAuth2SecurityRequirements
         /// </summary>
         public class AssignOAuth2SecurityRequirements : IOperationFilter
@@ -376,29 +348,5 @@ namespace Mwh.Sample.WebApi
                 }
             }
         }
-
-        //private class ApplySchemaVendorExtensions : ISchemaFilter
-        //{
-        //    public void Apply(Schema schema, SchemaRegistry schemaRegistry, Type type)
-        //    {
-        //        // Modify the example values in the final SwaggerDocument
-        //        //
-        //        if (schema.properties != null)
-        //        {
-        //            foreach (var p in schema.properties)
-        //            {
-        //                switch (p.Value.format)
-        //                {
-        //                    case "int32":
-        //                        p.Value.example = 123;
-        //                        break;
-        //                    case "double":
-        //                        p.Value.example = 9858.216;
-        //                        break;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
     }
 }
