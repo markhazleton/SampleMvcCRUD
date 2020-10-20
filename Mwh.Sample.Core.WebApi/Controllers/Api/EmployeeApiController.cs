@@ -85,6 +85,8 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [ProducesResponseType(typeof(ErrorResource), 400)]
         public async Task<IActionResult> PostAsync([FromBody] EmployeeModel employee)
         {
+            if (employee == null) return BadRequest("Employee was null");
+
             CancellationTokenSource cts = new CancellationTokenSource();
             var result = await _employeeService.SaveAsync(employee, cts.Token).ConfigureAwait(false);
 

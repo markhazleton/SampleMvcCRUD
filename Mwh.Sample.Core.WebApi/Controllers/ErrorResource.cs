@@ -14,7 +14,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         {
             Messages = new List<string>();
 
-            if(!string.IsNullOrWhiteSpace(message))
+            if (!string.IsNullOrWhiteSpace(message))
             {
                 Messages.Add(message);
             }
