@@ -17,16 +17,19 @@ namespace Mwh.Sample.WebApi
         protected void Application_Error()
         {
             HttpContext ctx = HttpContext.Current;
-            ctx.Response.Clear();
-            RequestContext rc = ((MvcHandler)ctx.CurrentHandler).RequestContext;
-            rc.RouteData.Values["action"] = "Index";
-            rc.RouteData.Values["controller"] = "Error";
-            rc.RouteData.Values["id"] = string.Empty;
+            ctx?.Response?.Clear();
+            RequestContext rc = ((MvcHandler)ctx?.CurrentHandler)?.RequestContext;
+            if (rc != null)
+            {
+                rc.RouteData.Values["action"] = "Index";
+                rc.RouteData.Values["controller"] = "Error";
+                rc.RouteData.Values["id"] = string.Empty;
 
-            IControllerFactory factory = ControllerBuilder.Current.GetControllerFactory();
-            IController controller = factory?.CreateController(rc, "Error");
-            controller.Execute(rc);
-            ctx.Server.ClearError();
+                IControllerFactory factory = ControllerBuilder.Current.GetControllerFactory();
+                IController controller = factory?.CreateController(rc, "Error");
+                controller?.Execute(rc);
+                ctx?.Server?.ClearError();
+            }
         }
         /// <summary>
         /// Application_Start

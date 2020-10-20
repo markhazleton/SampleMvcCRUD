@@ -55,7 +55,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public async Task<ActionResult> Create(EmployeeModel employee)
         {
             EmployeeResponse reqResponse;
-            if(employee != null)
+            if (employee != null)
             {
                 reqResponse = await client.SaveAsync(employee, cts.Token).ConfigureAwait(false);
             }
@@ -86,9 +86,9 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public async Task<ActionResult> Edit(int id, EmployeeModel employee)
         {
             EmployeeResponse reqResponse;
-            if(employee != null)
+            if (employee != null)
             {
-                if(employee.EmployeeID == id)
+                if (employee.EmployeeID == id)
                     reqResponse = await client.UpdateAsync(id, employee, cts.Token).ConfigureAwait(false);
             }
             return RedirectToAction("Index");
@@ -117,9 +117,9 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id, EmployeeModel employee)
         {
-            if(employee != null)
+            if (employee != null)
             {
-                if(employee.EmployeeID == id)
+                if (employee.EmployeeID == id)
                 {
                     var result = await client.DeleteAsync(id, cts.Token).ConfigureAwait(false);
                 }

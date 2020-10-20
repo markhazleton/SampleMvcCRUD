@@ -1,12 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.Common.Models;
-using Mwh.Sample.Common.Repositories;
 using Mwh.Sample.Core.Data;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.Tests
 {
@@ -52,7 +49,7 @@ namespace Mwh.Sample.Core.Tests
 
                 list.Clear();
                 list.AddRange(bizlogic.GetEmployeeCollection());
-              
+
             }
             Assert.AreEqual(employeeNames.Length, list.Count);
             Assert.AreEqual(emp.Name, "Test Mark");
