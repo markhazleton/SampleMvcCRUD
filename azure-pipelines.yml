@@ -37,6 +37,12 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: CRAnalyzeTask@201
+  inputs:
+    solution: '$(solution)'
+    sendLogs: true
+
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
