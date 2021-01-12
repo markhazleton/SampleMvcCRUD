@@ -17,7 +17,7 @@
     },
     {
       "destination": "wwwroot/lib/bootstrap/",
-      "library": "bootstrap@4.5.0",
+      "library": "bootstrap@4.5.3",
       "provider": "unpkg"
     }
   ]
