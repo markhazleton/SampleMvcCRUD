@@ -1,25 +1,21 @@
-using Mwh.Sample.WebApi;
-using Swagger.Net;
-using Swagger.Net.Application;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Routing.Constraints;
+using System.Collections.Generic;
+
+using Mwh.Sample.WebApi;
+using Swagger.Net.Application;
+using Swagger.Net;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
 namespace Mwh.Sample.WebApi
 {
-    /// <summary>
-    /// SwaggerConfig
-    /// </summary>
     public class SwaggerConfig
     {
-        /// <summary>
-        /// Register the Swagger Service
-        /// </summary>
         public static void Register()
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
@@ -47,11 +43,11 @@ namespace Mwh.Sample.WebApi
 
                         // Taking to long to load the swagger docs? Enable this option to start caching it
                         //
-                        c.AllowCachingSwaggerDoc();
+                        //c.AllowCachingSwaggerDoc();
 
                         // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
                         //
-                        c.PrettyPrint();
+                        //c.PrettyPrint();
 
                         // If your API has multiple versions, use "MultipleApiVersions" instead of "SingleApiVersion".
                         // In this case, you must provide a lambda that tells Swagger-Net which actions should be
@@ -143,7 +139,7 @@ namespace Mwh.Sample.WebApi
                         // Swagger docs and UI. However, if you have multiple types in your API with the same class name, you'll
                         // need to opt out of this behavior to avoid Schema Id conflicts.
                         //
-                        c.UseFullTypeNameInSchemaIds();
+                        //c.UseFullTypeNameInSchemaIds();
 
                         // Alternatively, you can provide your own custom strategy for inferring SchemaId's for
                         // describing "complex" types in your API.
@@ -310,23 +306,25 @@ namespace Mwh.Sample.WebApi
                     });
         }
 
-        /// <summary>
-        /// AssignOAuth2SecurityRequirements
-        /// </summary>
+        public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
+        {
+            return (apiDesc.Route.RouteTemplate.ToLower().Contains(targetApiVersion.ToLower()));
+        }
+
+        private class ApplyDocumentVendorExtensions : IDocumentFilter
+        {
+            public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
+            {
+                // Include the given data type in the final SwaggerDocument
+                //
+                //schemaRegistry.GetOrRegister(typeof(ExtraType));
+            }
+        }
+
         public class AssignOAuth2SecurityRequirements : IOperationFilter
         {
-            /// <summary>
-            /// Apply OAuth 
-            /// </summary>
-            /// <param name="operation"></param>
-            /// <param name="schemaRegistry"></param>
-            /// <param name="apiDescription"></param>
             public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
             {
-                if (operation is null) return;
-                if (schemaRegistry is null) return;
-                if (apiDescription is null) return;
-
                 // Correspond each "Authorize" role to an oauth2 scope
                 var scopes = apiDescription.ActionDescriptor.GetFilterPipeline()
                     .Select(filterInfo => filterInfo.Instance)
@@ -345,6 +343,30 @@ namespace Mwh.Sample.WebApi
                     };
 
                     operation.security.Add(oAuthRequirements);
+                }
+            }
+        }
+
+        private class ApplySchemaVendorExtensions : ISchemaFilter
+        {
+            public void Apply(Schema schema, SchemaRegistry schemaRegistry, Type type)
+            {
+                // Modify the example values in the final SwaggerDocument
+                //
+                if (schema.properties != null)
+                {
+                    foreach (var p in schema.properties)
+                    {
+                        switch (p.Value.format)
+                        {
+                            case "int32":
+                                p.Value.example = 123;
+                                break;
+                            case "double":
+                                p.Value.example = 9858.216;
+                                break;
+                        }
+                    }
                 }
             }
         }
