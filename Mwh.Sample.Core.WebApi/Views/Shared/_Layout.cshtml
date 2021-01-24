@@ -1,4 +1,5 @@
 ﻿@{
+    var currentYear = DateTime.Now.Year.ToString();
 
 }
 <!DOCTYPE html>
@@ -71,11 +72,12 @@
                 Mwh.Sample.Common: <img src="https://feeds.dev.azure.com/markhazleton/52953e95-65a4-4450-8eff-a58467dbdad7/_apis/public/Packaging/Feeds/e094850c-c6d7-4dda-969a-ea258be913a9/Packages/5aec8961-a948-4a73-8554-23446d76a991/Badge" />
             </div>
             <div class="col-6 text-center text-white">
-                &copy; 2020 - Mwh.Sample.Core.WebApi -
+                &copy; 2020-@currentYear Mwh.Sample.Core.WebApi -
                 <a href="https://linkedin.com/in/markhazleton" target="_blank">Mark Hazleton LinkedIn</a> -
                 <a href="https://github.com/markhazleton" target="_blank">GitHub</a>
             </div>
             <div class="col-3 text-right text-white">
+                Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>
             </div>
         </div>
     </footer>
