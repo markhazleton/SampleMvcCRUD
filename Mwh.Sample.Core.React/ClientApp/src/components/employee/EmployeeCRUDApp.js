@@ -53,6 +53,8 @@ const EmployeeCRUDApp = () => {
                             </div>
                         )}
                 </div>
+            </div>
+            <div className="row">
                 <div className="col">
                     <h2>View employees</h2>
                     <EmployeeTable employees={employees} deleteEmployee={deleteEmployee} editRow={editRow} />
