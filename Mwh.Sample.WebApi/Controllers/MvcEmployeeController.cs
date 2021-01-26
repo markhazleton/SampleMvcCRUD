@@ -1,8 +1,4 @@
 ﻿using Mwh.Sample.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Mwh.Sample.WebApi.Controllers
@@ -12,7 +8,7 @@ namespace Mwh.Sample.WebApi.Controllers
     /// </summary>
     public class MvcEmployeeController : BaseController
     {
-        
+
         /// <summary>
         /// Default Page for MvcEmployeeController
         /// </summary>
@@ -23,7 +19,7 @@ namespace Mwh.Sample.WebApi.Controllers
             return View(EmpDB.EmployeeCollection());
         }
 
-        
+
         /// <summary>
         /// View Employee Details
         /// </summary>
@@ -35,7 +31,7 @@ namespace Mwh.Sample.WebApi.Controllers
             return View(EmpDB.Employee(id));
         }
 
-        
+
         /// <summary>
         /// Load Page to Create A New Employee
         /// </summary>
@@ -46,7 +42,7 @@ namespace Mwh.Sample.WebApi.Controllers
             return View(new EmployeeModel());
         }
 
-        
+
         /// <summary>
         /// Save New Employee
         /// </summary>
@@ -73,7 +69,7 @@ namespace Mwh.Sample.WebApi.Controllers
             //}
         }
 
-        
+
         /// <summary>
         /// Edit an employee by ID
         /// </summary>
@@ -85,7 +81,7 @@ namespace Mwh.Sample.WebApi.Controllers
             return View(EmpDB.Employee(id));
         }
 
-        
+
         /// <summary>
         /// Save Employee 
         /// </summary>
@@ -112,7 +108,7 @@ namespace Mwh.Sample.WebApi.Controllers
             //}
         }
 
-        
+
         /// <summary>
         /// Select an Employee to delete
         /// </summary>
@@ -124,7 +120,7 @@ namespace Mwh.Sample.WebApi.Controllers
             return View(EmpDB.Employee(id));
         }
 
-        
+
         /// <summary>
         /// Delete Employee
         /// </summary>

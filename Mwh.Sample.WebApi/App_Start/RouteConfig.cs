@@ -24,10 +24,10 @@ namespace Mwh.Sample.WebApi
             );
             routes.MapRoute(
                 name: "RootPage",
-                url: "",
+                url: string.Empty,
                 defaults: new { controller = "Home", action = "Index" }
                 );
-            
+
             routes.MapRoute(
                 name: "Not Found",
                 url: "{slug}/{id}",

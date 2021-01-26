@@ -1,8 +1,5 @@
 ﻿using Mwh.Sample.Common.Models;
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace Mwh.Sample.WebApi.Controllers
@@ -64,6 +61,7 @@ namespace Mwh.Sample.WebApi.Controllers
         /// <returns>Employee</returns>
         [Route("")]
         [HttpPost]
+        [HttpPut]
         public EmployeeModel Post(EmployeeModel employee)
         {
             return EmpDB.Update(employee);

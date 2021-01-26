@@ -56,13 +56,14 @@ namespace Mwh.Sample.WebApi.Controllers
             get
             {
                 var cache = MemoryCache.Default;
-                if(cache.Get("dataCache") == null)
+                if (cache.Get("dataCache") == null)
                 {
                     var cachePolicty = new CacheItemPolicy() { AbsoluteExpiration = DateTime.Now.AddDays(1) };
                     var data = new EmployeeMock();
                     cache.Add("dataCache", data, cachePolicty);
                     return data;
-                } else
+                }
+                else
                 {
                     IEmployeeDB data = (IEmployeeDB)cache.Get("dataCache");
                     return data;
