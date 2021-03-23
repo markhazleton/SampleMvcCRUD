@@ -2,12 +2,12 @@
 using System.Web.Mvc;
 
 namespace Mwh.Sample.WebApi.Controllers
-{
+    {
     /// <summary>
     /// MvcEmployeeController
     /// </summary>
     public class MvcEmployeeController : BaseController
-    {
+        {
 
         /// <summary>
         /// Default Page for MvcEmployeeController
@@ -15,9 +15,9 @@ namespace Mwh.Sample.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Index()
-        {
+            {
             return View(EmpDB.EmployeeCollection());
-        }
+            }
 
 
         /// <summary>
@@ -27,9 +27,9 @@ namespace Mwh.Sample.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Details(int id)
-        {
+            {
             return View(EmpDB.Employee(id));
-        }
+            }
 
 
         /// <summary>
@@ -38,9 +38,9 @@ namespace Mwh.Sample.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Create()
-        {
+            {
             return View(new EmployeeModel());
-        }
+            }
 
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Mwh.Sample.WebApi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(EmployeeModel employee)
-        {
+            {
             if (employee != null)
                 _ = EmpDB.Update(employee);
             return RedirectToAction("Index");
@@ -67,7 +67,7 @@ namespace Mwh.Sample.WebApi.Controllers
             //    }
             //    return View(new EmployeeModel());
             //}
-        }
+            }
 
 
         /// <summary>
@@ -77,9 +77,9 @@ namespace Mwh.Sample.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Edit(int id)
-        {
+            {
             return View(EmpDB.Employee(id));
-        }
+            }
 
 
         /// <summary>
@@ -91,12 +91,12 @@ namespace Mwh.Sample.WebApi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, EmployeeModel employee)
-        {
-            if (employee != null)
             {
+            if (employee != null)
+                {
                 if (employee.EmployeeID == id)
                     EmpDB.Update(employee);
-            }
+                }
             return RedirectToAction("Index");
             //try
             //{
@@ -106,7 +106,7 @@ namespace Mwh.Sample.WebApi.Controllers
             //{
             //    return View(EmpDB.Employee(id));
             //}
-        }
+            }
 
 
         /// <summary>
@@ -116,9 +116,9 @@ namespace Mwh.Sample.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Delete(int id)
-        {
+            {
             return View(EmpDB.Employee(id));
-        }
+            }
 
 
         /// <summary>
@@ -130,12 +130,12 @@ namespace Mwh.Sample.WebApi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, EmployeeModel employee)
-        {
-            if (employee != null)
             {
+            if (employee != null)
+                {
                 if (employee.EmployeeID == id)
                     _ = EmpDB.Delete(employee.EmployeeID);
-            }
+                }
             return RedirectToAction("Index");
             //try
             //{
@@ -144,6 +144,6 @@ namespace Mwh.Sample.WebApi.Controllers
             //{
             //    return View(EmpDB.Employee(id));
             //}
+            }
         }
     }
-}

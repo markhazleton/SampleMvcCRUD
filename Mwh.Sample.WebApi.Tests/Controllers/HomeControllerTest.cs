@@ -3,15 +3,15 @@ using System;
 using System.Web.Mvc;
 
 namespace Mwh.Sample.WebApi.Controllers
-{
+    {
     [TestClass]
     public class HomeControllerTest : IDisposable
-    {
+        {
         private HomeController controller;
 
         [TestMethod]
         public void EmpSinglePageStateUnderTestExpectedBehavior()
-        {
+            {
             // Arrange
 
             // Act
@@ -19,12 +19,12 @@ namespace Mwh.Sample.WebApi.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-        }
+            }
 
 
         [TestMethod]
         public void Index()
-        {
+            {
             // Arrange
 
             // Act
@@ -33,42 +33,42 @@ namespace Mwh.Sample.WebApi.Controllers
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual("Home Page", result?.ViewBag?.Title);
-        }
+            }
 
         [TestInitialize]
         public void TestInitialize()
-        {
+            {
             controller = new HomeController();
-        }
+            }
 
         #region IDisposable Support
         private bool disposedValue; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
             {
-                if (disposing)
+            if (!disposedValue)
                 {
+                if (disposing)
+                    {
                     controller.Dispose();
-                }
+                    }
                 disposedValue = true;
+                }
             }
-        }
 
         ~HomeControllerTest()
-        {
+            {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(false);
-        }
+            }
 
         // This code added to correctly implement the disposable pattern.
         public void Dispose()
-        {
+            {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
             GC.SuppressFinalize(this);
-        }
+            }
         #endregion
+        }
     }
-}

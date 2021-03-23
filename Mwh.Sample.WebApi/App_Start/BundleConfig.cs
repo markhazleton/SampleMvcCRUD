@@ -1,12 +1,12 @@
 ﻿using System.Web.Optimization;
 
 namespace Mwh.Sample.WebApi
-{
+    {
     /// <summary>
     /// Bundle Configuration
     /// </summary>
     public class BundleConfig
-    {
+        {
         /// <summary>
         ///     <link href="~/Content/bootstrap.css" rel="stylesheet" />
         ///         <script src = "~/Scripts/jquery-3.5.1.js" ></ script >
@@ -16,7 +16,7 @@ namespace Mwh.Sample.WebApi
         /// </summary>
         /// <param name="bundles"></param>
         public static void RegisterBundles(BundleCollection bundles)
-        {
+            {
             if (bundles == null) return;
             //Scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery")
@@ -28,6 +28,6 @@ namespace Mwh.Sample.WebApi
 
             //CSS
             bundles.Add(new StyleBundle("~/bundles/style").Include("~/Content/bootstrap.css", "~/Content/site.css"));
+            }
         }
     }
-}

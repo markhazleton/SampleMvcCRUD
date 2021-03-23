@@ -9,27 +9,27 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 
 namespace Mwh.Sample.WebApi.Controllers
-{
+    {
 
     /// <summary>
     /// BaseApiController
     /// </summary>
     public abstract class BaseApiController : ApiController
-    {
+        {
 
         /// <summary>
         /// BaseApiController Constructor
         /// </summary>
         protected BaseApiController()
-        {
-        }
+            {
+            }
 
         /// <summary>
         ///
         /// </summary>
         protected IHttpActionResult LogRequest()
-        {
-            var actionMember = ((HttpActionDescriptor[])this.ControllerContext.RouteData.Route.DataTokens
+            {
+            var actionMember = ((HttpActionDescriptor[])ControllerContext.RouteData.Route.DataTokens
                 .ToList()
                 .Where(w => string.Compare(w.Key.ToLower(), "actions", StringComparison.Ordinal) == 0)
                 .FirstOrDefault()
@@ -45,30 +45,30 @@ namespace Mwh.Sample.WebApi.Controllers
             };
 
             return Ok(JsonConvert.SerializeObject(myDict));
-        }
+            }
 
 
         /// <summary>
         /// Employee Database Mock
         /// </summary>
         public static IEmployeeDB EmpDB
-        {
-            get
             {
+            get
+                {
                 var cache = MemoryCache.Default;
                 if (cache.Get("dataCache") == null)
-                {
+                    {
                     var cachePolicty = new CacheItemPolicy() { AbsoluteExpiration = DateTime.Now.AddDays(1) };
                     var data = new EmployeeMock();
                     cache.Add("dataCache", data, cachePolicty);
                     return data;
-                }
+                    }
                 else
-                {
+                    {
                     IEmployeeDB data = (IEmployeeDB)cache.Get("dataCache");
                     return data;
+                    }
                 }
             }
         }
     }
-}
