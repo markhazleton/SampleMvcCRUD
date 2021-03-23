@@ -4,13 +4,13 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
 trigger:
-- master
+- develop
 
 pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/Mwh.SampleCRUD.sln'
+  solution: '**/Mwh.Sample.Common.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
