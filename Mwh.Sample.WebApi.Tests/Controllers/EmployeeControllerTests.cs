@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MvcFakes;
 using System;
+using System.Web.SessionState;
 
 namespace Mwh.Sample.WebApi.Controllers
     {
@@ -60,7 +62,13 @@ namespace Mwh.Sample.WebApi.Controllers
             }
 
         [TestInitialize]
-        public void TestInitialize() { controller = new EmployeeController(); }
+        public void TestInitialize()
+            {
+            controller = new EmployeeController();
+            var sessionItems = new SessionStateItemCollection();
+            sessionItems["item1"] = "wow!";
+            controller.ControllerContext = new FakeControllerContext(controller, sessionItems);
+            }
 
         #region IDisposable Support
         private bool disposedValue; // To detect redundant calls

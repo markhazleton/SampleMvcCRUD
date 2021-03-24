@@ -1,8 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MvcFakes;
 using Mwh.Sample.Common.Models;
 using System;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.SessionState;
 
 namespace Mwh.Sample.WebApi.Controllers
     {
@@ -145,12 +147,14 @@ namespace Mwh.Sample.WebApi.Controllers
             Assert.AreEqual(result?.State, "Texas");
             }
 
+
         [TestInitialize]
         public void TestInitialize()
             {
             controller = new EmployeeApiController
                 { Request = new HttpRequestMessage(), Configuration = new HttpConfiguration() };
             }
+
 
         #region IDisposable Support
         private bool disposedValue; // To detect redundant calls

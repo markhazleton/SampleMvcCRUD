@@ -140,6 +140,7 @@
   <ItemGroup>
     <Compile Include="Controllers\EmployeeApiControllerTests.cs" />
     <Compile Include="Controllers\EmployeeControllerTests.cs" />
+    <Compile Include="Controllers\MvcEmployeeControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -147,6 +148,10 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MvcFakes\MvcFakes.csproj">
+      <Project>{46d6e263-be6c-4b23-abf2-b174eade40d9}</Project>
+      <Name>MvcFakes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mwh.Sample.WebApi\Mwh.Sample.WebApi.csproj">
       <Project>{C2448DF1-D91B-4B36-8BB9-4F270239E5E5}</Project>
       <Name>Mwh.Sample.WebApi</Name>

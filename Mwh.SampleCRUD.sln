@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.Sample.WebApi.Tests", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8C5B7535-1688-40B6-AC99-926B6E78A529}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcFakes", "MvcFakes\MvcFakes.csproj", "{46D6E263-BE6C-4B23-ABF2-B174EADE40D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,12 +27,17 @@ Global
 		{E63C5245-F179-4009-BB40-E84451C102FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E63C5245-F179-4009-BB40-E84451C102FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E63C5245-F179-4009-BB40-E84451C102FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46D6E263-BE6C-4B23-ABF2-B174EADE40D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46D6E263-BE6C-4B23-ABF2-B174EADE40D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46D6E263-BE6C-4B23-ABF2-B174EADE40D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46D6E263-BE6C-4B23-ABF2-B174EADE40D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E63C5245-F179-4009-BB40-E84451C102FF} = {A3E9C9F4-9FA9-4AE0-A561-2D18A9AB57A7}
+		{46D6E263-BE6C-4B23-ABF2-B174EADE40D9} = {A3E9C9F4-9FA9-4AE0-A561-2D18A9AB57A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE55042F-9B52-403E-A410-A9BE1A1A42B8}

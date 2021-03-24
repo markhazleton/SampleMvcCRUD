@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MvcFakes;
 using System;
 using System.Web.Mvc;
+using System.Web.SessionState;
 
 namespace Mwh.Sample.WebApi.Controllers
     {
@@ -8,6 +10,17 @@ namespace Mwh.Sample.WebApi.Controllers
     public class HomeControllerTest : IDisposable
         {
         private HomeController controller;
+
+
+        [TestInitialize]
+        public void TestInitialize()
+            {
+            controller = new HomeController();
+            var sessionItems = new SessionStateItemCollection();
+            sessionItems["item1"] = "wow!";
+            controller.ControllerContext = new FakeControllerContext(controller, sessionItems);
+            }
+
 
         [TestMethod]
         public void EmpSinglePageStateUnderTestExpectedBehavior()
@@ -35,11 +48,6 @@ namespace Mwh.Sample.WebApi.Controllers
             Assert.AreEqual("Home Page", result?.ViewBag?.Title);
             }
 
-        [TestInitialize]
-        public void TestInitialize()
-            {
-            controller = new HomeController();
-            }
 
         #region IDisposable Support
         private bool disposedValue; // To detect redundant calls
