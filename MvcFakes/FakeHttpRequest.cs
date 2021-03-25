@@ -3,47 +3,47 @@ using System.Collections.Specialized;
 using System.Web;
 
 namespace MvcFakes
-{
+    {
 
     public class FakeHttpRequest : HttpRequestBase
-    {
+        {
         private readonly NameValueCollection _formParams;
         private readonly NameValueCollection _queryStringParams;
         private readonly HttpCookieCollection _cookies;
 
         public FakeHttpRequest(NameValueCollection formParams, NameValueCollection queryStringParams, HttpCookieCollection cookies)
-        {
+            {
             _formParams = formParams;
             _queryStringParams = queryStringParams;
             _cookies = cookies;
-        }
+            }
 
         public override NameValueCollection Form
-        {
-            get
             {
+            get
+                {
                 return _formParams;
+                }
             }
-        }
 
         public override NameValueCollection QueryString
-        {
-            get
             {
+            get
+                {
                 return _queryStringParams;
+                }
             }
-        }
 
         public override HttpCookieCollection Cookies
-        {
-            get
             {
+            get
+                {
                 return _cookies;
+                }
             }
+
         }
 
+
+
     }
-
-
-
-}

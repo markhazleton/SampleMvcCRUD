@@ -140,6 +140,7 @@
   <ItemGroup>
     <Compile Include="Controllers\EmployeeApiControllerTests.cs" />
     <Compile Include="Controllers\EmployeeControllerTests.cs" />
+    <Compile Include="Controllers\ErrorControllerTests.cs" />
     <Compile Include="Controllers\MvcEmployeeControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />

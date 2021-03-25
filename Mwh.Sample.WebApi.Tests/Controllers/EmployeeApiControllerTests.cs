@@ -1,10 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MvcFakes;
 using Mwh.Sample.Common.Models;
 using System;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.SessionState;
 
 namespace Mwh.Sample.WebApi.Controllers
     {
