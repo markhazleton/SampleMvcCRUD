@@ -9,7 +9,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [ApiController]
-    public class BaseApiController : Controller
+    public abstract class BaseApiController : Controller
     {
     }
 }
