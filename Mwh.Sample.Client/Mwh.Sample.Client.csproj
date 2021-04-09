@@ -11,12 +11,12 @@
     <RepositoryType>GIT</RepositoryType>
     <PackageReleaseNotes>Add Comments</PackageReleaseNotes>
     <Description>The client libraries for making API calls to Sample API from .Net applications</Description>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mwh.Sample.Common" Version="2.0.0" />
+    <PackageReference Include="Mwh.Sample.Common" Version="2.0.1" />
     <PackageReference Include="RestSharp" Version="106.11.7" />
   </ItemGroup>
 

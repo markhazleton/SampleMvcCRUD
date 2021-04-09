@@ -13,7 +13,7 @@
     <PackageReleaseNotes>Add More Methods to Soap Client, Add Comments</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
@@ -22,10 +22,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.ServiceModel.Duplex" Version="4.8.0" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.8.0" />
-    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.0" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.8.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.8.1" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.8.1" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.1" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>

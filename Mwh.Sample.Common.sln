@@ -8,6 +8,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8C5B7535-1688-40B6-AC99-926B6E78A529}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		README.md = README.md
+		SECURITY.md = SECURITY.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Common", "Mwh.Sample.Common\Mwh.Sample.Common.csproj", "{E160E001-C794-4B49-B0A7-E2F03F91F939}"
@@ -16,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Common.Tests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Client", "Mwh.Sample.Client\Mwh.Sample.Client.csproj", "{906CBD4E-82CF-445B-9983-A9D40D89F753}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.Sample.SoapClient", "Mwh.Sample.SoapClient\Mwh.Sample.SoapClient.csproj", "{010D7F75-3072-4560-BCE1-BCA62CDE7DE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.SoapClient", "Mwh.Sample.SoapClient\Mwh.Sample.SoapClient.csproj", "{010D7F75-3072-4560-BCE1-BCA62CDE7DE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
