@@ -20,7 +20,7 @@ namespace Mwh.Sample.WebApi
             if (bundles == null) return;
             //Scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery")
-                .Include("~/Scripts/jquery-3.5.1.js",
+                .Include("~/Scripts/jquery-3.6.0.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/jquery.unobtrusive-ajax.js"));
 
