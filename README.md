@@ -1,8 +1,7 @@
 # SampleMvcCRUD
-An MVC Application to demonstrate multiple ways of implementing a simple maintenance (CRUD) user interface
+An Asp.Net Application to demonstrate multiple patterns for implementing a simple maintenance (CRUD) user interface
 
 For deployments there is an [Azure DevOps project](https://dev.azure.com/markhazleton/SampleMvcCRUD) with Continuous Integration/Continuous Deployment (CI/CD) pipelines to Azure App Services
-
 
 Currently hosted at [Azure-MwhSampleCRUD](https://mwhsamplecrud.azurewebsites.net/) and [Azure-MwhSampleCore](https://mwhsamplecore.azurewebsites.net/) 
 ## Usage
@@ -32,9 +31,10 @@ Mark Hazleton
 + https://github.com/markhazleton
 
 ## Thanks
+To the many other teachers and developers that post sample code under open source license.
 
 ## Copyright and License
 
-Copyright 2018-2020 Mark Hazleton
+Copyright 2018-2021 Mark Hazleton
 
 Code released under the MIT License.
