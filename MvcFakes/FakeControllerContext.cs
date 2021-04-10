@@ -90,7 +90,7 @@ namespace MvcFakes
             HttpCookieCollection cookies,
             SessionStateItemCollection sessionItems) : base(
             new FakeHttpContext(
-                new FakePrincipal(userName, roles),
+                new FakePrincipal(userName??"fake", roles),
                 formParams,
                 queryStringParams,
                 cookies,
