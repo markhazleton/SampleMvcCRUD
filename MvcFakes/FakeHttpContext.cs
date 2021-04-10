@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Security.Principal;
 using System.Web;
 using System.Web.SessionState;
 
 namespace MvcFakes
 {
-
-
     public class FakeHttpContext : HttpContextBase
     {
-        private readonly FakePrincipal _principal;
-        private readonly NameValueCollection _formParams;
-        private readonly NameValueCollection _queryStringParams;
         private readonly HttpCookieCollection _cookies;
+        private readonly NameValueCollection _formParams;
+        private readonly FakePrincipal _principal;
+        private readonly NameValueCollection _queryStringParams;
         private readonly SessionStateItemCollection _sessionItems;
 
-        public FakeHttpContext(FakePrincipal principal, NameValueCollection formParams, NameValueCollection queryStringParams, HttpCookieCollection cookies, SessionStateItemCollection sessionItems )
+        public FakeHttpContext(FakePrincipal principal, NameValueCollection formParams, NameValueCollection queryStringParams, HttpCookieCollection cookies, SessionStateItemCollection sessionItems)
         {
             _principal = principal;
             _formParams = formParams;
@@ -33,6 +30,14 @@ namespace MvcFakes
             }
         }
 
+        public override HttpSessionStateBase Session
+        {
+            get
+            {
+                return new FakeHttpSessionState(_sessionItems);
+            }
+        }
+
         public override IPrincipal User
         {
             get
@@ -44,16 +49,5 @@ namespace MvcFakes
                 throw new System.NotImplementedException();
             }
         }
-
-        public override HttpSessionStateBase Session
-        {
-            get
-            {
-                return new FakeHttpSessionState(_sessionItems);
-            }
-        }
-
     }
-
-
 }

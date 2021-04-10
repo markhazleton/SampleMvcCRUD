@@ -1,34 +1,35 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using System.Security.Claims;
 using System.Security.Principal;
 
 namespace MvcFakes
 {
-
-    public class FakePrincipal : IPrincipal
+    public class FakePrincipal : ClaimsPrincipal
     {
-        private readonly IIdentity _identity;
+        private readonly FakeIdentity _identity;
         private readonly string[] _roles;
 
-        public FakePrincipal(IIdentity identity, string[] roles)
+        public FakePrincipal(string name, string role)
         {
-            _identity = identity;
+            _identity = new FakeIdentity(name);
+            _roles = new string[] { role };
+            AddIdentity(_identity);
+        }
+
+        public FakePrincipal(string name, string[] roles)
+        {
+            _identity = new FakeIdentity(name);
             _roles = roles;
+            AddIdentity(_identity);
         }
 
-        public IIdentity Identity
-        {
-            get { return _identity; }
-        }
-
-        public bool IsInRole(string role)
+        public override bool IsInRole(string role)
         {
             if (_roles == null)
                 return false;
             return _roles.Contains(role);
         }
+
+        public override IIdentity Identity { get { return _identity; } }
     }
-
-
-
 }

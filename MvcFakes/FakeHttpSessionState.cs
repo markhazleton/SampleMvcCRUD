@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.SessionState;
 
@@ -18,17 +14,31 @@ namespace MvcFakes
             _sessionItems = sessionItems;
         }
 
+        public override object this[string name]
+        {
+            get { return _sessionItems[name]; }
+            set { _sessionItems[name] = value; }
+        }
+
+        public override object this[int index]
+        {
+            get { return _sessionItems[index]; }
+            set { _sessionItems[index] = value; }
+        }
+
+        public override void Abandon()
+        {
+            _sessionItems.Clear();
+        }
+
         public override void Add(string name, object value)
         {
             _sessionItems[name] = value;
         }
 
-        public override int Count
+        public override void Clear()
         {
-            get
-            {
-                return _sessionItems.Count;
-            }
+            _sessionItems.Clear();
         }
 
         public override IEnumerator GetEnumerator()
@@ -36,53 +46,13 @@ namespace MvcFakes
             return _sessionItems.GetEnumerator();
         }
 
-        public override NameObjectCollectionBase.KeysCollection Keys
-        {
-            get
-            {
-                return _sessionItems.Keys;
-            }
-        }
-
-        public override object this[string name]
-        {
-            get
-            {
-                return _sessionItems[name];
-            }
-            set
-            {
-                _sessionItems[name] = value;
-            }
-        }
-
-        public override object this[int index]
-        {
-            get
-            {
-                return _sessionItems[index];
-            }
-            set
-            {
-                _sessionItems[index] = value;
-            }
-        }
-
         public override void Remove(string name)
         {
             _sessionItems.Remove(name);
         }
-        public override void Abandon()
-        {
-            _sessionItems.Clear();
-        }
-        public override void Clear()
-        {
-            _sessionItems.Clear();
-        }
+
+        public override int Count { get { return _sessionItems.Count; } }
+
+        public override NameObjectCollectionBase.KeysCollection Keys { get { return _sessionItems.Keys; } }
     }
-
-   
-
-
 }
