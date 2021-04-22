@@ -1,5 +1,6 @@
 # SampleMvcCRUD
-An Asp.Net Application to demonstrate multiple patterns for implementing a simple maintenance (CRUD) user interface
+
+A collection of Asp.Net projects to demonstrate multiple patterns for implementing a simple maintenance (CRUD) user interface
 
 For deployments there is an [Azure DevOps project](https://dev.azure.com/markhazleton/SampleMvcCRUD) with Continuous Integration/Continuous Deployment (CI/CD) pipelines to Azure App Services
 
