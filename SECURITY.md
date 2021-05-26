@@ -10,4 +10,6 @@ There is currently no support for the repository.
 
 ## Reporting a Vulnerability
 
-Create an isssue in this repository.
+We use GitHub issues to track vulnerabilities. Report a vulnerability by [opening a new issue](); it's that easy!
+
+
