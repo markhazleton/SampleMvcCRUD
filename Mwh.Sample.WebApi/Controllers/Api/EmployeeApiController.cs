@@ -20,7 +20,7 @@ namespace Mwh.Sample.WebApi.Controllers
             }
 
         /// <summary>
-        /// 
+        /// Simple Test for RESTful API 
         /// </summary>
         /// <returns></returns>
         [Route("Simple/Test")]
