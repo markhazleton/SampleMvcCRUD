@@ -91,8 +91,10 @@ namespace Mwh.Sample.Common.Repositories
         /// <returns>EmployeeResponse.</returns>
         public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
         {
-            var existingEmployee = await _employeeRepository.FindByIdAsync(id, token).ConfigureAwait(true);
+            if (employee.EmployeeID != id)
+                return new EmployeeResponse($"Mismatch in id({id}) && employee_id({employee.EmployeeID}).");
 
+            var existingEmployee = await _employeeRepository.FindByIdAsync(id, token).ConfigureAwait(true);
             if (existingEmployee == null)
                 return new EmployeeResponse("Employee not found.");
 

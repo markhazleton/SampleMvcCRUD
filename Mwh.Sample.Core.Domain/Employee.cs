@@ -1,4 +1,6 @@
-﻿namespace Mwh.Sample.Core.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Mwh.Sample.Core.Domain
 {
     public class Employee
     {
@@ -31,6 +33,7 @@
         /// Gets or sets the employee identifier.
         /// </summary>
         /// <value>The employee identifier.</value>
+        [Key]
         public int EmployeeId { get; set; }
 
         /// <summary>

@@ -153,6 +153,9 @@ namespace Mwh.Sample.Core.Data
 
         public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
         {
+            if (employee.EmployeeID != id)
+                return new EmployeeResponse($"Mismatch in id({id}) && employee_id({employee.EmployeeID}).");
+
             var emp = await SaveEmployeeAsync(employee).ConfigureAwait(false);
             return new EmployeeResponse(emp);
         }

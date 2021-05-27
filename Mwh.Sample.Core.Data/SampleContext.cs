@@ -1,16 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Mwh.Sample.Common.Models;
+using Mwh.Sample.Common.Repositories;
 using Mwh.Sample.Core.Domain;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Mwh.Sample.Core.Data
 {
     public class SampleContext : DbContext
     {
-        private string connectionString = "Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = MwhSampleTest";
-
         public SampleContext() { }
 
         public SampleContext(DbContextOptions options) : base(options)
-        { 
+        {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
@@ -20,12 +22,13 @@ namespace Mwh.Sample.Core.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(connectionString);
+                optionsBuilder.UseSqlite(@"Data Source=AppData/employeeContext.db");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().ToTable("Employees");
+
         }
     }
 }

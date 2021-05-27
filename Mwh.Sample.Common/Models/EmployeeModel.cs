@@ -1,18 +1,6 @@
-﻿// ***********************************************************************
-// Assembly         : Mwh.Sample.Common
-// Author           : mark
-// Created          : 04-01-2020
-//
-// Last Modified By : mark
-// Last Modified On : 04-04-2020
-// ***********************************************************************
-// <copyright file="EmployeeModel.cs" company="Mark Hazleton">
-//     Copyright 2020 Mark Hazleton
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using Mwh.Sample.Common.Extension;
+﻿using Mwh.Sample.Common.Extension;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Mwh.Sample.Common.Models
 {
@@ -34,25 +22,28 @@ namespace Mwh.Sample.Common.Models
         /// Gets or sets the age.
         /// </summary>
         /// <value>The age.</value>
+        [JsonPropertyName("age")]
         public int Age { get; set; }
 
         /// <summary>
         /// Gets or sets the country.
         /// </summary>
         /// <value>The country.</value>
+        [JsonPropertyName("country")]
         public string Country { get; set; }
 
         /// <summary>
         /// Gets or sets the department.
         /// </summary>
         /// <value>The department.</value>
+        [JsonPropertyName("department")]
         public EmployeeDepartment Department { get; set; }
 
         /// <summary>
         /// Gets or sets the employee identifier.
         /// </summary>
         /// <value>The employee identifier.</value>
-        [Key]
+        [JsonPropertyName("employee_id")]
         public int EmployeeID { get; set; }
 
         /// <summary>
@@ -81,6 +72,7 @@ namespace Mwh.Sample.Common.Models
         /// Gets the job list.
         /// </summary>
         /// <value>The job list.</value>
+        [JsonPropertyName("job_list")]
         public JobAssignmentCollection JobList { get; }
 
         /// <summary>
@@ -88,6 +80,7 @@ namespace Mwh.Sample.Common.Models
         /// </summary>
         /// <value>The name.</value>
         [Required]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -95,6 +88,7 @@ namespace Mwh.Sample.Common.Models
         /// </summary>
         /// <value>The state.</value>
         [Required]
+        [JsonPropertyName("state")]
         public string State { get; set; }
     }
 }

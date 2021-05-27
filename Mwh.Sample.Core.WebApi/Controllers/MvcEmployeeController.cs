@@ -21,6 +21,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public async Task<ActionResult> Index()
         {
             var list = await client.ListAsync(cts.Token).ConfigureAwait(false);
+
             return View(list);
         }
 

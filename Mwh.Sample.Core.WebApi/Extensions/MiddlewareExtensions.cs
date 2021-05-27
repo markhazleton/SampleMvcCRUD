@@ -8,30 +8,6 @@ using System.Reflection;
 
 namespace Mwh.Sample.Core.WebApi.Extensions
 {
-    public class MyHttpContext
-    {
-        private static IHttpContextAccessor m_httpContextAccessor;
-
-        public static HttpContext Current => m_httpContextAccessor.HttpContext;
-
-        public static string AppBaseUrl => $"{Current.Request.Scheme}://{Current.Request.Host}{Current.Request.PathBase}";
-
-        internal static void Configure(IHttpContextAccessor contextAccessor)
-        { m_httpContextAccessor = contextAccessor; }
-    }
-
-    public static class HttpContextExtensions
-    {
-        public static void AddHttpContextAccessor(this IServiceCollection services)
-        { services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); }
-
-        public static IApplicationBuilder UseHttpContext(this IApplicationBuilder app)
-        {
-            MyHttpContext.Configure(app.ApplicationServices.GetRequiredService<IHttpContextAccessor>());
-            return app;
-        }
-    }
-
     public static class MiddlewareExtensions
     {
         public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
@@ -44,7 +20,7 @@ namespace Mwh.Sample.Core.WebApi.Extensions
                                    Title = "Mwh.Sample.WebAPI",
                                    Version = "v1",
                                    Description =
-                    "Simple RESTful API built with ASP.NET Core 3.1 to show how to create RESTful services using a decoupled, maintainable architecture. <br/><a href='/'>Back To Home</a>",
+                    "Simple RESTful API built with ASP.NET 5.0 to show how to create RESTful services using a decoupled, maintainable architecture. <br/><a href='/'>Back To Home</a>",
                                    Contact =
                     new OpenApiContact
                     {

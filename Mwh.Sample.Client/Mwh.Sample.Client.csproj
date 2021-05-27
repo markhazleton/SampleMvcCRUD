@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright>Copyright ©2020 Mark Hazleton</Copyright>
     <PackageIcon>ProjectMechanicsLogo.png</PackageIcon>
@@ -16,7 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mwh.Sample.Common" Version="2.0.1" />
     <PackageReference Include="RestSharp" Version="106.11.7" />
   </ItemGroup>
 
@@ -29,6 +28,10 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mwh.Sample.Common\Mwh.Sample.Common.csproj" />
   </ItemGroup>
 
 </Project>

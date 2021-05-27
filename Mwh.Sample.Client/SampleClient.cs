@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Mwh.Sample.Client
-// Author           : mark
-// Created          : 04-07-2020
-//
-// Last Modified By : mark
-// Last Modified On : 04-07-2020
-// ***********************************************************************
-// <copyright file="SampleClient.cs" company="Mwh.Sample.Client">
-//     Copyright 2020 Mark Hazleton
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using Mwh.Sample.Common.Models;
+﻿using Mwh.Sample.Common.Models;
 using Mwh.Sample.Common.Repositories;
 using System.Collections.Generic;
 using System.Threading;
@@ -91,6 +78,9 @@ namespace Mwh.Sample.Client
         /// <returns>EmployeeResponse.</returns>
         public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
         {
+            if (employee.EmployeeID != id)
+                return new EmployeeResponse($"Mismatch in id({id}) && employee_id({employee.EmployeeID}).");
+
             var resp = await Put<EmployeeResponse>($"/api/employee/{id}", employee).ConfigureAwait(true);
             return resp;
         }

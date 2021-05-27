@@ -85,7 +85,7 @@
                         html += '<td>' + item.state + '</td>';
                         html += '<td>' + item.country + '</td>';
                         html += '<td>' + item.department + '</td>';
-                        html += '<td><a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + item.employeeID + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + item.employeeID + ')">Delete</a></td>';
+                        html += '<td><a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + item.employee_id + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + item.employee_id + ')">Delete</a></td>';
                         html += '</tr>';
                     });
                     $('.tbody').html(html);
@@ -107,7 +107,7 @@
             var ageId = +$('#age').val();
 
             var employee = {
-                employeeID: empId,
+                employee_id: empId,
                 name: $('#name').val(),
                 age: ageId,
                 state: $('#state').val(),
@@ -145,7 +145,7 @@
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function (result) {
-                    $('#employeeID').val(result.employeeID);
+                    $('#employeeID').val(result.employee_id);
                     $('#name').val(result.name);
                     $('#age').val(result.age);
                     $('#state').val(result.state);
@@ -176,7 +176,7 @@
             var ageId = +$('#age').val();
 
             var employee = {
-                employeeID: empId,
+                employee_id: empId,
                 name: $('#name').val(),
                 age: ageId,
                 state: $('#state').val(),
