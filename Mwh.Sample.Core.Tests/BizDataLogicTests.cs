@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.Common.Models;
-using Mwh.Sample.Core.Data;
+using Mwh.Sample.Core.Data.Services;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +16,7 @@ namespace Mwh.Sample.Core.Tests
             var builder = new DbContextOptionsBuilder();
             builder.UseInMemoryDatabase("AddMultipleEmployees");
 
-            using (var bizlogic = new BusinessDataLogic(builder.Options))
+            using (var bizlogic = new EmployeeService(builder.Options))
             {
                 var employeeNames = new string[] { "Lesley", "Mark", "Marlis", "Berit", "Ian" };
                 var newEmployeesCreated = bizlogic.AddMultipleEmployees(employeeNames);
@@ -37,7 +37,7 @@ namespace Mwh.Sample.Core.Tests
             builder.UseInMemoryDatabase("GetEmployeeCollectionAsync");
             builder.EnableSensitiveDataLogging();
 
-            using (var bizlogic = new BusinessDataLogic(builder.Options))
+            using (var bizlogic = new EmployeeService(builder.Options))
             {
                 newEmployeesCreated = bizlogic.AddMultipleEmployees(employeeNames);
                 list.AddRange(bizlogic.GetEmployeeCollection());
@@ -63,7 +63,7 @@ namespace Mwh.Sample.Core.Tests
             builder.UseInMemoryDatabase("CanInsertEmployee");
             builder.EnableSensitiveDataLogging();
 
-            using (BusinessDataLogic context = new BusinessDataLogic(builder.Options))
+            using (EmployeeService context = new EmployeeService(builder.Options))
             {
                 var employee = new EmployeeModel()
                 {

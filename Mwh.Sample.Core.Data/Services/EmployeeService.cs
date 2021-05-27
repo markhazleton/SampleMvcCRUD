@@ -1,24 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mwh.Sample.Common.Models;
 using Mwh.Sample.Common.Repositories;
-using Mwh.Sample.Core.Domain;
+using Mwh.Sample.Core.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mwh.Sample.Core.Data
+namespace Mwh.Sample.Core.Data.Services
 {
-    public class BusinessDataLogic : IDisposable, IEmployeeService
+    public class EmployeeService : IDisposable, IEmployeeService
     {
-        private SampleContext _context;
+        private Models.EmployeeContext _context;
 
-        public BusinessDataLogic() { _context = new SampleContext(); }
-        public BusinessDataLogic(SampleContext context) { _context = context; }
-        public BusinessDataLogic(DbContextOptions options) { _context = new SampleContext(options); }
+        public EmployeeService() { _context = new EmployeeContext(); }
+        public EmployeeService(Models.EmployeeContext context) { _context = context; }
+        public EmployeeService(DbContextOptions options) { _context = new EmployeeContext(options); }
 
-        private EmployeeModel Create(Employee item)
+        private EmployeeModel Create(Models.Employee item)
         {
             return new EmployeeModel()
             {
@@ -30,7 +30,7 @@ namespace Mwh.Sample.Core.Data
                 EmployeeID = item.EmployeeId
             };
         }
-        private Employee Create(EmployeeModel item)
+        private Models.Employee Create(EmployeeModel item)
         {
             return new Employee()
             {
@@ -43,12 +43,12 @@ namespace Mwh.Sample.Core.Data
             };
         }
 
-        private EmployeeModel[] CreateCollection(List<Employee> list) { return list.Select(s => Create(s)).ToArray(); }
-        private Employee[] CreateCollection(List<EmployeeModel> list) { return list.Select(s => Create(s)).ToArray(); }
+        private EmployeeModel[] CreateCollection(List<Models.Employee> list) { return list.Select(s => Create(s)).ToArray(); }
+        private Models.Employee[] CreateCollection(List<EmployeeModel> list) { return list.Select(s => Create(s)).ToArray(); }
 
         public int AddMultipleEmployees(string[] namelist)
         {
-            var list = new List<Employee>();
+            var list = new List<Models.Employee>();
             foreach (var name in namelist)
             {
                 list.Add(new Employee() { Name = name, Age = 33, Country = "USA", DepartmentId = 1, State = "TX" });
@@ -79,7 +79,7 @@ namespace Mwh.Sample.Core.Data
 
         public EmployeeModel SaveEmployee(EmployeeModel item)
         {
-            Employee dbEmp;
+            Models.Employee dbEmp;
             if (item.EmployeeID > 0)
             {
                 dbEmp = _context.Employees.Where(w => w.EmployeeId == item.EmployeeID).FirstOrDefault();
@@ -108,7 +108,7 @@ namespace Mwh.Sample.Core.Data
 
         public async Task<EmployeeModel> SaveEmployeeAsync(EmployeeModel item)
         {
-            Employee dbEmp = new Employee();
+            Models.Employee dbEmp = new Employee();
             try
             {
                 if (item.EmployeeID > 0)

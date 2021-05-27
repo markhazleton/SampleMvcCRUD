@@ -59,32 +59,6 @@ namespace Mwh.Sample.Common.Repositories
                     EmployeeID = 3
                 },
             };
-
-
-            foreach (var emp in _list)
-            {
-                if (emp == null)
-                    continue;
-
-                emp.JobList
-                    .Add(new JobAssignmentModel()
-                    {
-                        CompLevel = 1,
-                        StartDate = DateTime.Now.Date.AddDays(-100),
-                        EndDate = DateTime.Now.Date.AddDays(-50),
-                        OutcomeCode = 2,
-                        Title = "Solution Architect"
-                    });
-                emp.JobList
-                    .Add(new JobAssignmentModel()
-                    {
-                        CompLevel = 2,
-                        StartDate = DateTime.Now.Date.AddDays(-49),
-                        EndDate = DateTime.Now.Date.AddDays(-1),
-                        OutcomeCode = 3,
-                        Title = "Developer"
-                    });
-            }
         }
 
         /// <summary>

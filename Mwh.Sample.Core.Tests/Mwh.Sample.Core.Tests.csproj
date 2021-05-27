@@ -18,9 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mwh.Sample.Core.Console\Mwh.Sample.Core.Console.csproj" />
     <ProjectReference Include="..\Mwh.Sample.Core.Data\Mwh.Sample.Core.Data.csproj" />
-    <ProjectReference Include="..\Mwh.Sample.Core.Domain\Mwh.Sample.Core.Domain.csproj" />
     <ProjectReference Include="..\Mwh.Sample.Core.WebApi\Mwh.Sample.Core.WebApi.csproj" />
   </ItemGroup>
 

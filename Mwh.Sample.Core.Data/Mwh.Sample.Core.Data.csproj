@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mwh.Sample.Common\Mwh.Sample.Common.csproj" />
-    <ProjectReference Include="..\Mwh.Sample.Core.Domain\Mwh.Sample.Core.Domain.csproj" />
   </ItemGroup>
 
 </Project>

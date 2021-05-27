@@ -14,7 +14,6 @@ namespace Mwh.Sample.Common.Models
         /// </summary>
         public EmployeeModel()
         {
-            JobList = new JobAssignmentCollection();
             Department = EmployeeDepartment.Unknown;
         }
 
@@ -67,13 +66,6 @@ namespace Mwh.Sample.Common.Models
                 return true;
             }
         }
-
-        /// <summary>
-        /// Gets the job list.
-        /// </summary>
-        /// <value>The job list.</value>
-        [JsonPropertyName("job_list")]
-        public JobAssignmentCollection JobList { get; }
 
         /// <summary>
         /// Gets or sets the name.

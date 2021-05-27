@@ -4,16 +4,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using System;
-using System.IO;
-using System.Reflection;
-using Mwh.Sample.Common.Repositories;
-using Mwh.Sample.Core.WebApi.Extensions;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Mwh.Sample.Core.Data;
-using Mwh.Sample.Core.Domain;
+using Microsoft.Extensions.Hosting;
+using Mwh.Sample.Common.Repositories;
+using Mwh.Sample.Core.Data.Models;
+using Mwh.Sample.Core.Data.Repository;
+using Mwh.Sample.Core.WebApi.Extensions;
 
 namespace Mwh.Sample.Core.WebApi
 {
@@ -28,10 +24,10 @@ namespace Mwh.Sample.Core.WebApi
 
         private void ConfirmDatabaseCreation()
         {
-            var dbOptions = new DbContextOptionsBuilder<SampleContext>()
+            var dbOptions = new DbContextOptionsBuilder<Data.Models.EmployeeContext>()
                 .UseSqlite(@"Data Source=AppData/employeeContext.db")
                 .Options;
-            var context = new SampleContext(dbOptions);
+            var context = new EmployeeContext(dbOptions);
             context.Database.EnsureDeletedAsync();
             context.Database.EnsureCreatedAsync();
             context.Employees.Add(new Employee() { Name = "John Doe", Age = 25, Country = "USA", DepartmentId = 1, State = "TX" });
@@ -79,7 +75,7 @@ namespace Mwh.Sample.Core.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SampleContext>(options => options
+            services.AddDbContext<Data.Models.EmployeeContext>(options => options
                 .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging"))
                 .UseSqlite(@"Data Source=AppData/employeeContext.db"));
 

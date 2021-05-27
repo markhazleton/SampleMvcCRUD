@@ -1,24 +1,24 @@
 ﻿using Mwh.Sample.Common.Models;
 using Mwh.Sample.Common.Repositories;
-using Mwh.Sample.Core.Domain;
+using Mwh.Sample.Core.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Mwh.Sample.Core.Data
+namespace Mwh.Sample.Core.Data.Repository
 {
     public class EmployeeDB : IEmployeeDB
     {
-        SampleContext _context;
-        public EmployeeDB(SampleContext context)
+        Models.EmployeeContext _context;
+        public EmployeeDB(Models.EmployeeContext context)
         {
             _context = context;
         }
-        private List<EmployeeModel> Create(List<Employee> list)
+        private List<EmployeeModel> Create(List<Models.Employee> list)
         {
             if (list == null) return new List<EmployeeModel>();
             return list.Select(item => Create(item)).OrderBy(x => x.Name).ToList();
         }
-        private EmployeeModel Create(Employee s)
+        private EmployeeModel Create(Models.Employee s)
         {
             if (s == null) return new EmployeeModel();
 

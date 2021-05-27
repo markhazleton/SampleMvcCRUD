@@ -91,6 +91,9 @@ namespace Mwh.Sample.Common.Repositories
         /// <returns>EmployeeResponse.</returns>
         public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
         {
+            if (employee == null)
+                return new EmployeeResponse("Employee is null.");
+
             if (employee.EmployeeID != id)
                 return new EmployeeResponse($"Mismatch in id({id}) && employee_id({employee.EmployeeID}).");
 
