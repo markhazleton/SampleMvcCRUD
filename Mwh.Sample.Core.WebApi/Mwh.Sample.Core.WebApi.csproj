@@ -22,7 +22,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
-    <PackageReference Include="Mwh.Sample.SoapClient" Version="2.0.1" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="RestSharp" Version="106.11.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
@@ -43,6 +42,7 @@
     <ProjectReference Include="..\Mwh.Sample.Client\Mwh.Sample.Client.csproj" />
     <ProjectReference Include="..\Mwh.Sample.Common\Mwh.Sample.Common.csproj" />
     <ProjectReference Include="..\Mwh.Sample.Core.Data\Mwh.Sample.Core.Data.csproj" />
+    <ProjectReference Include="..\Mwh.Sample.SoapClient\Mwh.Sample.SoapClient.csproj" />
   </ItemGroup>
 
 
