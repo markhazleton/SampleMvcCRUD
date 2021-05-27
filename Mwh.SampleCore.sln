@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		SECURITY.md = SECURITY.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.Sample.Common.Tests", "Mwh.Sample.Common.Tests\Mwh.Sample.Common.Tests.csproj", "{676ADA33-1D60-48EA-B291-F2A1377A17DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{46D6E263-BE6C-4B23-ABF2-B174EADE40D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46D6E263-BE6C-4B23-ABF2-B174EADE40D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46D6E263-BE6C-4B23-ABF2-B174EADE40D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{676ADA33-1D60-48EA-B291-F2A1377A17DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{676ADA33-1D60-48EA-B291-F2A1377A17DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{676ADA33-1D60-48EA-B291-F2A1377A17DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{676ADA33-1D60-48EA-B291-F2A1377A17DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{C2448DF1-D91B-4B36-8BB9-4F270239E5E5} = {ADB1128C-6ACB-4DB6-A40A-17FEAC0246D7}
 		{F88E8766-8EAF-4716-A2D6-1E9E428372E3} = {5BA6BEE1-1249-4AB0-8F3F-B619B781C1CD}
 		{46D6E263-BE6C-4B23-ABF2-B174EADE40D9} = {ADB1128C-6ACB-4DB6-A40A-17FEAC0246D7}
+		{676ADA33-1D60-48EA-B291-F2A1377A17DE} = {64426EDF-804B-425B-90C3-E23CB31A15E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE55042F-9B52-403E-A410-A9BE1A1A42B8}

@@ -17,8 +17,6 @@ using System.Linq;
 
 namespace Mwh.Sample.Common.Extension
 {
-
-
     /// <summary>
     /// Defines test class AjaxDictionaryTests.
     /// </summary>
