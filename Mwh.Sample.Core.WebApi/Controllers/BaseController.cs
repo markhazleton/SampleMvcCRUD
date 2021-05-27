@@ -11,7 +11,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public abstract class BaseController : Controller
     {
-        public readonly SampleClient client;
+        public readonly EmployeeClient client;
         public readonly CancellationTokenSource cts;
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// </summary>
         protected BaseController()
         {
-            client = new SampleClient(MyHttpContext.AppBaseUrl, "Sample");
+            client = new EmployeeClient(MyHttpContext.AppBaseUrl, "Sample");
             cts = new CancellationTokenSource();
         }
     }

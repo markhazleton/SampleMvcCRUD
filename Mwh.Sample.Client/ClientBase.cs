@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Mwh.Sample.Client
-// Author           : mark
-// Created          : 04-07-2020
-//
-// Last Modified By : mark
-// Last Modified On : 04-07-2020
-// ***********************************************************************
-// <copyright file="ClientBase.cs" company="Mwh.Sample.Client">
-//     Copyright 2020 Mark Hazleton
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using RestSharp;
+﻿using RestSharp;
 using RestSharp.Serialization.Json;
 using System;
 using System.Threading.Tasks;

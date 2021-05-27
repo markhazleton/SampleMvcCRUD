@@ -13,14 +13,14 @@ namespace Mwh.Sample.Client
     /// </summary>
     /// <seealso cref="Mwh.Sample.Client.ClientBase" />
     /// <seealso cref="Mwh.Sample.Common.Repositories.IEmployeeService" />
-    public class SampleClient : ClientBase, IEmployeeService
+    public class EmployeeClient : ClientBase, IEmployeeService
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SampleClient"/> class.
+        /// Initializes a new instance of the <see cref="EmployeeClient"/> class.
         /// </summary>
         /// <param name="apiPath">The API path.</param>
         /// <param name="appName">Name of the application.</param>
-        public SampleClient(string apiPath, string appName) : base(apiPath, appName)
+        public EmployeeClient(string apiPath, string appName) : base(apiPath, appName)
         {
 
         }

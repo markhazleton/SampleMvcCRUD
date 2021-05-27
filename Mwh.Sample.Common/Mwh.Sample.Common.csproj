@@ -19,8 +19,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Processor\**" />
     <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Processor\**" />
     <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Processor\**" />
     <None Remove="Properties\**" />
   </ItemGroup>
 
@@ -43,10 +46,6 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Processor\" />
   </ItemGroup>
 
 </Project>
