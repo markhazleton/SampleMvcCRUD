@@ -15,13 +15,12 @@ namespace Mwh.Sample.Core.Data.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlite(@"Data Source=AppData/employeeContext.db");
+                optionsBuilder.UseInMemoryDatabase("DefaultDatabase");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().ToTable("Employees");
-
         }
 
         public DbSet<Employee> Employees { get; set; }

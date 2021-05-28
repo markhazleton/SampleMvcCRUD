@@ -20,6 +20,8 @@ namespace Mwh.Sample.Core.Data.Services
 
         private EmployeeModel Create(Models.Employee item)
         {
+            if (item == null) return new EmployeeModel();
+
             return new EmployeeModel()
             {
                 Name = item.Name,
@@ -49,6 +51,9 @@ namespace Mwh.Sample.Core.Data.Services
         public int AddMultipleEmployees(string[] namelist)
         {
             var list = new List<Models.Employee>();
+
+            if (namelist == null) return -1;
+
             foreach (var name in namelist)
             {
                 list.Add(new Employee() { Name = name, Age = 33, Country = "USA", DepartmentId = 1, State = "TX" });
@@ -58,8 +63,36 @@ namespace Mwh.Sample.Core.Data.Services
             return dbResult;
         }
 
-        public Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
-        { throw new NotImplementedException(); }
+        public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
+        {
+            var response = new EmployeeResponse("Init");
+
+            if (id > 0)
+            {
+                var dbEmp = await _context.Employees
+                    .Where(w => w.EmployeeId == id)
+                    .FirstOrDefaultAsync()
+                    .ConfigureAwait(true);
+
+                if (dbEmp == null)
+                {
+                    response = new EmployeeResponse("Employee Not Found");
+                }
+                else
+                {
+                    _context.Employees.Remove(dbEmp);
+                    await _context.SaveChangesAsync()
+                        .ConfigureAwait(true);
+
+                    return new EmployeeResponse(new EmployeeModel());
+                }
+            }
+            else
+            {
+                return new EmployeeResponse("Invalid Employee Id for delete");
+            }
+            return response;
+        }
 
         public void Dispose() { ((IDisposable)_context).Dispose(); }
 
@@ -73,19 +106,24 @@ namespace Mwh.Sample.Core.Data.Services
 
         public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
         {
-            var emp = SaveEmployee(employee);
-            return new EmployeeResponse(emp);
+            if (employee == null) return new EmployeeResponse("Employee can not be null");
+
+            var emp = await SaveEmployeeAsync(employee).ConfigureAwait(true);
+            return emp;
         }
 
-        public EmployeeModel SaveEmployee(EmployeeModel item)
+        public EmployeeResponse SaveEmployee(EmployeeModel item)
         {
+            if (item == null)
+                return new EmployeeResponse("Employee can not be null");
+
             Models.Employee dbEmp;
             if (item.EmployeeID > 0)
             {
                 dbEmp = _context.Employees.Where(w => w.EmployeeId == item.EmployeeID).FirstOrDefault();
                 if (dbEmp == null)
                 {
-                    return item;
+                    return new EmployeeResponse("Employee Not Found");
                 }
                 else
                 {
@@ -103,21 +141,27 @@ namespace Mwh.Sample.Core.Data.Services
                 _context.Employees.Add(dbEmp);
                 _context.SaveChanges();
             }
-            return Create(dbEmp);
+            return new EmployeeResponse(Create(dbEmp));
         }
 
-        public async Task<EmployeeModel> SaveEmployeeAsync(EmployeeModel item)
+        public async Task<EmployeeResponse> SaveEmployeeAsync(EmployeeModel item)
         {
-            Models.Employee dbEmp = new Employee();
+            if (item == null)
+                return new EmployeeResponse("Employee can not be null");
+
+            var dbEmp = new Employee();
             try
             {
                 if (item.EmployeeID > 0)
                 {
-                    dbEmp = _context.Employees.Where(w => w.EmployeeId == item.EmployeeID).FirstOrDefault();
+                    dbEmp = await _context.Employees
+                        .Where(w => w.EmployeeId == item.EmployeeID)
+                        .FirstOrDefaultAsync()
+                        .ConfigureAwait(true);
 
                     if (dbEmp == null)
                     {
-                        return item;
+                        return new EmployeeResponse("Employee Not Found");
                     }
                     else
                     {
@@ -126,16 +170,20 @@ namespace Mwh.Sample.Core.Data.Services
                         dbEmp.DepartmentId = (int)item.Department;
                         dbEmp.Name = item.Name;
                         dbEmp.State = item.State;
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync()
+                            .ConfigureAwait(true);
 
-                        var list = _context.Employees.ToList();
+                        var list = await _context.Employees
+                            .ToListAsync()
+                            .ConfigureAwait(true);
                     }
                 }
                 else
                 {
                     dbEmp = Create(item);
-                    _context.Employees.Add(dbEmp);
-                    _context.SaveChanges();
+                    await _context.Employees.AddAsync(dbEmp);
+                    await _context.SaveChangesAsync()
+                        .ConfigureAwait(true);
                 }
             }
             catch (Exception ex)
@@ -148,16 +196,21 @@ namespace Mwh.Sample.Core.Data.Services
                 .FirstOrDefaultAsync()
                 .ConfigureAwait(true);
 
-            return Create(newEmp);
+            return new EmployeeResponse(Create(dbEmp));
         }
 
         public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
         {
+            if (employee ==null)
+                return new EmployeeResponse($"Can not update null employee");
+
             if (employee.EmployeeID != id)
                 return new EmployeeResponse($"Mismatch in id({id}) && employee_id({employee.EmployeeID}).");
 
-            var emp = await SaveEmployeeAsync(employee).ConfigureAwait(false);
-            return new EmployeeResponse(emp);
+            if (employee.EmployeeID == 0)
+                return new EmployeeResponse($"Can not update employee with id({id})");
+
+            return await SaveEmployeeAsync(employee).ConfigureAwait(false);
         }
     }
 }

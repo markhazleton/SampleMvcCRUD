@@ -57,7 +57,7 @@ namespace Mwh.Sample.Core.Data.Repository
 
         public EmployeeModel Update(EmployeeModel emp)
         {
-            if (emp == null) return null;
+            if (emp == null) return new EmployeeModel();
 
             if (emp.EmployeeID == 0)
             {

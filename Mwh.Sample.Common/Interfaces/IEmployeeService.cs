@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Mwh.Sample.Common
-// Author           : mark
-// Created          : 04-05-2020
-//
-// Last Modified By : mark
-// Last Modified On : 04-05-2020
-// ***********************************************************************
-// <copyright file="IEmployeeService.cs" company="Mark Hazleton">
-//     Copyright 2020 Mark Hazleton
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using Mwh.Sample.Common.Models;
+﻿using Mwh.Sample.Common.Models;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
