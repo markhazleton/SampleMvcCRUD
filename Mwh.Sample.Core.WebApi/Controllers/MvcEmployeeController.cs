@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Mwh.Sample.Common.Models;
-using Mwh.Sample.Common.Repositories;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Controllers

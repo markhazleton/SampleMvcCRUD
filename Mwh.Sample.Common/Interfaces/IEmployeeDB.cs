@@ -1,7 +1,7 @@
 ﻿using Mwh.Sample.Common.Models;
 using System.Collections.Generic;
 
-namespace Mwh.Sample.Common.Repositories
+namespace Mwh.Sample.Common.Interfaces
 {
     /// <summary>
     /// Employee DAL Interface

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Mwh.Sample.Common.Interfaces;
 using Mwh.Sample.Common.Models;
-using Mwh.Sample.Common.Repositories;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mwh.Sample.Common.Models;
 
-namespace Mwh.Sample.Common.Models
+namespace Mwh.Sample.Common.Tests.Models
 {
     /// <summary>
     /// Defines test class EmployeeModelTests.

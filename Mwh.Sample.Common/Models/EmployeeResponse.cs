@@ -1,6 +1,5 @@
-﻿using Mwh.Sample.Common.Models;
-
-namespace Mwh.Sample.Common.Repositories
+﻿
+namespace Mwh.Sample.Common.Models
 {
     /// <summary>
     /// Class EmployeeResponse.

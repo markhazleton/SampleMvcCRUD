@@ -1,4 +1,5 @@
-﻿using Mwh.Sample.Common.Models;
+﻿using Mwh.Sample.Common.Interfaces;
+using Mwh.Sample.Common.Models;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,10 +29,11 @@ namespace Mwh.Sample.Common.Repositories
         /// </summary>
         /// <param name="employee">The employee.</param>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task AddAsync(EmployeeModel employee, CancellationToken token)
+        public async Task<EmployeeModel> AddAsync(EmployeeModel employee, CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-            await Task.Run(() => _emp.Update(employee)).ConfigureAwait(true);
+            return await Task.Run(() => _emp.Update(employee)).ConfigureAwait(true);
+
         }
 
         /// <summary>

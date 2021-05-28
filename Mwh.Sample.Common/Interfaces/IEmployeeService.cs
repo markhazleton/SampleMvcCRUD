@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mwh.Sample.Common.Repositories
+namespace Mwh.Sample.Common.Interfaces
 {
     /// <summary>
     /// Interface IEmployeeService

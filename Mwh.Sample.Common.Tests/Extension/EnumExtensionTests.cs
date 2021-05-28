@@ -13,8 +13,9 @@
 // ***********************************************************************
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.DataAnnotations;
+using Mwh.Sample.Common.Extension;
 
-namespace Mwh.Sample.Common.Extension
+namespace Mwh.Sample.Common.Tests.Extension
 {
     /// <summary>
     /// Enum TestEnum

@@ -1,16 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Mwh.Sample.Common
-// Author           : mark
-// Created          : 04-05-2020
-//
-// Last Modified By : mark
-// Last Modified On : 04-07-2020
-// ***********************************************************************
-// <copyright file="EmployeeService.cs" company="Mark Hazleton">
-//     Copyright 2020 Mark Hazleton
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
+﻿using Mwh.Sample.Common.Interfaces;
 using Mwh.Sample.Common.Models;
 using System;
 using System.Collections.Generic;
@@ -124,6 +112,9 @@ namespace Mwh.Sample.Common.Repositories
             var existingEmployee = await _employeeRepository.FindByIdAsync(id, token).ConfigureAwait(true);
 
             if (existingEmployee == null)
+                return new EmployeeResponse("Employee not found.");
+
+            if (!existingEmployee.IsValid)
                 return new EmployeeResponse("Employee not found.");
 
             try

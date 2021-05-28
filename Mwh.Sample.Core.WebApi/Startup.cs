@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using Mwh.Sample.Common.Interfaces;
 using Mwh.Sample.Common.Repositories;
 using Mwh.Sample.Core.Data.Models;
 using Mwh.Sample.Core.Data.Repository;

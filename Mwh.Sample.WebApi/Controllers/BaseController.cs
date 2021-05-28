@@ -1,4 +1,5 @@
-﻿using Mwh.Sample.Common.Repositories;
+﻿using Mwh.Sample.Common.Interfaces;
+using Mwh.Sample.Common.Repositories;
 using System;
 using System.Runtime.Caching;
 using System.Web.Mvc;

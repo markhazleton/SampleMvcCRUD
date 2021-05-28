@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Mwh.Sample.Common
-// Author           : mark
-// Created          : 04-04-2020
-//
-// Last Modified By : mark
-// Last Modified On : 04-04-2020
-// ***********************************************************************
-// <copyright file="LogExtensions.cs" company="Mark Hazleton">
-//     Copyright 2020 Mark Hazleton
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

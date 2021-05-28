@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Mwh.Sample.Common.Interfaces;
 using Mwh.Sample.Common.Models;
-using Mwh.Sample.Common.Repositories;
 using Mwh.Sample.Core.Data.Models;
 using System;
 using System.Collections.Generic;

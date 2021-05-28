@@ -1,22 +1,9 @@
-﻿// ***********************************************************************
-// Assembly         : Mwh.Sample.Common
-// Author           : mark
-// Created          : 04-05-2020
-//
-// Last Modified By : mark
-// Last Modified On : 04-07-2020
-// ***********************************************************************
-// <copyright file="IEmployeeRepository.cs" company="Mark Hazleton">
-//     Copyright 2020 Mark Hazleton
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using Mwh.Sample.Common.Models;
+﻿using Mwh.Sample.Common.Models;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mwh.Sample.Common.Repositories
+namespace Mwh.Sample.Common.Interfaces
 {
     /// <summary>
     /// Interface IEmployeeRepository
@@ -35,7 +22,7 @@ namespace Mwh.Sample.Common.Repositories
         /// <param name="employee">The employee.</param>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Task.</returns>
-        Task AddAsync(EmployeeModel employee, CancellationToken token);
+        Task<EmployeeModel> AddAsync(EmployeeModel employee, CancellationToken token);
         /// <summary>
         /// Finds the by identifier asynchronous.
         /// </summary>

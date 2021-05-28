@@ -1,21 +1,9 @@
-// ***********************************************************************
-// Assembly         : Mwh.Sample.Common.Tests
-// Author           : mark
-// Created          : 04-04-2020
-//
-// Last Modified By : mark
-// Last Modified On : 04-05-2020
-// ***********************************************************************
-// <copyright file="EmployeeMockTests.cs" company="Mwh.Sample.Common.Tests">
-//     Copyright (c) . All rights reserved.
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.Common.Models;
 using System.Linq;
+using Mwh.Sample.Common.Repositories;
 
-namespace Mwh.Sample.Common.Repositories
+namespace Mwh.Sample.Common.Tests.Repositories
 {
     /// <summary>
     /// Defines test class EmployeeMockTests.
@@ -129,7 +117,7 @@ namespace Mwh.Sample.Common.Repositories
         public void GetTestEmployeeIDZero()
         {
             var Employee = new EmployeeMock();
-            Assert.AreEqual(null, Employee.Employee(0).Name);
+            Assert.AreEqual(null, Employee.Employee(0)?.Name);
         }
 
         /// <summary>
