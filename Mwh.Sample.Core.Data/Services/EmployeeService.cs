@@ -188,6 +188,7 @@ namespace Mwh.Sample.Core.Data.Services
             }
             catch (Exception ex)
             {
+                return new EmployeeResponse($"Exception:{ex.Message}");
 
             }
 
