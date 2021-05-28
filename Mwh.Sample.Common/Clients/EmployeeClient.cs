@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mwh.Sample.Client
+namespace Mwh.Sample.Common.Clients
 {
     /// <summary>
     /// Class SampleClient.
@@ -32,8 +32,9 @@ namespace Mwh.Sample.Client
         /// <returns>EmployeeResponse.</returns>
         public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
         {
+            token.ThrowIfCancellationRequested();
             var resp = await Delete<EmployeeResponse>($"/api/employee/{id}").ConfigureAwait(true);
-            return resp;
+            return resp == null ? new EmployeeResponse("Null Returned from REST Call to Delete") : resp;
         }
 
         /// <summary>
@@ -44,7 +45,8 @@ namespace Mwh.Sample.Client
         /// <returns>EmployeeModel.</returns>
         public async Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
         {
-            return await Get<EmployeeModel>($"/api/employee/{id}").ConfigureAwait(true);
+            token.ThrowIfCancellationRequested();
+            return await GetAsync<EmployeeModel>($"/api/employee/{id}").ConfigureAwait(true);
         }
 
         /// <summary>
@@ -54,7 +56,8 @@ namespace Mwh.Sample.Client
         /// <returns>IEnumerable&lt;EmployeeModel&gt;.</returns>
         public async Task<IEnumerable<EmployeeModel>> ListAsync(CancellationToken token)
         {
-            return await Get<List<EmployeeModel>>($"/api/employee").ConfigureAwait(true);
+            token.ThrowIfCancellationRequested();
+            return await GetAsync<List<EmployeeModel>>($"/api/employee").ConfigureAwait(true);
         }
 
         /// <summary>
@@ -65,6 +68,7 @@ namespace Mwh.Sample.Client
         /// <returns>EmployeeResponse.</returns>
         public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
         {
+            token.ThrowIfCancellationRequested();
             var resp = await Post<EmployeeResponse>($"/api/employee", employee).ConfigureAwait(true);
             return resp;
         }
@@ -78,6 +82,8 @@ namespace Mwh.Sample.Client
         /// <returns>EmployeeResponse.</returns>
         public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
         {
+            token.ThrowIfCancellationRequested();
+
             if (employee.EmployeeID != id)
                 return new EmployeeResponse($"Mismatch in id({id}) && employee_id({employee.EmployeeID}).");
 

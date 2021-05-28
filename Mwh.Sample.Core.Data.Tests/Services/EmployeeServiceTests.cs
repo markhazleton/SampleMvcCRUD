@@ -17,7 +17,7 @@ namespace Mwh.Sample.Core.Data.Tests.Services
         public void Initialize()
         {
             service = new EmployeeService();
-            token = default(global::System.Threading.CancellationToken);
+            token = default;
         }
 
 
@@ -85,6 +85,7 @@ namespace Mwh.Sample.Core.Data.Tests.Services
             var result = service.GetEmployeeCollection();
 
             // Assert
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]

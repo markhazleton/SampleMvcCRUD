@@ -26,15 +26,15 @@ namespace Mwh.Sample.Common.Extension
     public static class EnumExtension
     {
         /// <summary>
-        /// Converts to descriptionstring.
+        /// Converts to Description String.
         /// </summary>
         /// <typeparam name="TEnum">The type of the t enum.</typeparam>
         /// <param name="enum">The enum.</param>
         /// <returns>System.String.</returns>
         public static string ToDescriptionString<TEnum>(this TEnum @enum)
         {
-            FieldInfo info = @enum.GetType().GetField(@enum.ToString());
-            var attributes = (DescriptionAttribute[])info.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            FieldInfo info = @enum.GetType()?.GetField(@enum.ToString());
+            var attributes = (DescriptionAttribute[])info?.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
             return attributes?[0].Description ?? @enum.ToString();
         }
@@ -49,12 +49,11 @@ namespace Mwh.Sample.Common.Extension
             if (e == null)
                 return string.Empty;
 
-            var fieldInfo = e.GetType().GetField(e.ToString());
+            var fieldInfo = e.GetType()?.GetField(e.ToString());
 
-            var descriptionAttributes = fieldInfo.GetCustomAttributes(typeof(DisplayAttribute), false) as DisplayAttribute[];
-
-            if (descriptionAttributes == null)
+            if (!(fieldInfo?.GetCustomAttributes(typeof(DisplayAttribute), false) is DisplayAttribute[] descriptionAttributes))
                 return string.Empty;
+
             return (descriptionAttributes.Length > 0) ? descriptionAttributes[0].Name : e.ToString();
         }
         /// <summary>

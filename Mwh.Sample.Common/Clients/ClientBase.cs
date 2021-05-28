@@ -3,7 +3,7 @@ using RestSharp.Serialization.Json;
 using System;
 using System.Threading.Tasks;
 
-namespace Mwh.Sample.Client
+namespace Mwh.Sample.Common.Clients
 {
     /// <summary>
     /// Class ClientBase.
@@ -23,7 +23,7 @@ namespace Mwh.Sample.Client
         /// <summary>
         /// Public Flag for when the API Encounters and Error
         /// </summary>
-        public bool IsError = false;
+        public bool IsError;
         /// <summary>
         /// The Status of the last request made from the API Client
         /// </summary>
@@ -31,7 +31,7 @@ namespace Mwh.Sample.Client
         /// <summary>
         /// The User ID that is used to make the request, this defaults to Web Account
         /// </summary>
-        public int UserID = 0;
+        public int UserID;
 
         /// <summary>
         /// The rest request
@@ -138,7 +138,7 @@ namespace Mwh.Sample.Client
         /// <typeparam name="T"></typeparam>
         /// <param name="urlSegment">The URL segment.</param>
         /// <returns>T.</returns>
-        protected async Task<T> Get<T>(string urlSegment)
+        protected async Task<T> GetAsync<T>(string urlSegment)
         {
             try
             {

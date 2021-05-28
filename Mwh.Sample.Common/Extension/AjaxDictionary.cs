@@ -22,10 +22,6 @@ namespace Mwh.Sample.Common.Extension
         /// <summary>
         /// Initializes a new instance of the <see cref="AjaxDictionary{TKey, TValue}"/> class.
         /// </summary>
-        /// <param name="info">The information.</param>
-        /// <param name="context">The context.</param>
-        public AjaxDictionary(SerializationInfo info, StreamingContext context)
-        { _Dictionary = new Dictionary<TKey, TValue>(); }
 
         /// <summary>
         /// Gets or sets the <see cref="TValue"/> with the specified key.
@@ -36,14 +32,12 @@ namespace Mwh.Sample.Common.Extension
         {
             get
             {
-                TValue vOut;
-                _Dictionary.TryGetValue(key, out vOut);
+                _Dictionary.TryGetValue(key, out TValue vOut);
                 return vOut;
             }
             set
             {
-                TValue vOut;
-                _Dictionary.TryGetValue(key, out vOut);
+                _Dictionary.TryGetValue(key, out TValue vOut);
                 if (vOut == null)
                 {
                     _Dictionary.Add(key, value);
@@ -76,7 +70,7 @@ namespace Mwh.Sample.Common.Extension
             List<string> list = new List<string>();
             foreach (var item in _Dictionary)
             {
-                list.Add(string.Format("{0} - {1}", item.Key, item.Value));
+                list.Add($"{item.Key} - {item.Value}");
             }
             return list;
         }
@@ -85,8 +79,7 @@ namespace Mwh.Sample.Common.Extension
         /// Gets the object data.
         /// </summary>
         /// <param name="info">The information.</param>
-        /// <param name="context">The context.</param>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public void GetObjectData(SerializationInfo info)
         {
             foreach (TKey key in _Dictionary.Keys)
             {

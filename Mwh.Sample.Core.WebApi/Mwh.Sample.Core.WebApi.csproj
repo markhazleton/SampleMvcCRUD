@@ -39,7 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mwh.Sample.Client\Mwh.Sample.Client.csproj" />
     <ProjectReference Include="..\Mwh.Sample.Common\Mwh.Sample.Common.csproj" />
     <ProjectReference Include="..\Mwh.Sample.Core.Data\Mwh.Sample.Core.Data.csproj" />
     <ProjectReference Include="..\Mwh.Sample.SoapClient\Mwh.Sample.SoapClient.csproj" />

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Mwh.Sample.Client;
+using Mwh.Sample.Common.Clients;
 using Mwh.Sample.Core.WebApi.Extensions;
 using System.Threading;
 
