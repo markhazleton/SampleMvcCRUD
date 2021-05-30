@@ -11,8 +11,6 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// EmployeeApiController
     /// </summary>
     [Route("/api/employee")]
-    [Produces("application/json")]
-    [ApiController]
     public class EmployeeApiController : BaseApiController
     {
         private readonly IEmployeeService _employeeService;
