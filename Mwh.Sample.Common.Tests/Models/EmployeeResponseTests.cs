@@ -12,7 +12,7 @@ namespace Mwh.Sample.Common.Tests.Models
             // Arrange
             var employee = new EmployeeModel() 
             { 
-                EmployeeID=1,
+                id=1,
                 Age = 20,
                 Name = "Test Employee",
                 State = "TX",

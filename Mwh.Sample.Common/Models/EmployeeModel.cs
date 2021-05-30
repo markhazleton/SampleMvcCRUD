@@ -42,8 +42,8 @@ namespace Mwh.Sample.Common.Models
         /// Gets or sets the employee identifier.
         /// </summary>
         /// <value>The employee identifier.</value>
-        [JsonPropertyName("employee_id")]
-        public int EmployeeID { get; set; }
+        [JsonPropertyName("id")]
+        public int id { get; set; }
 
         /// <summary>
         /// Returns true if ... is valid.

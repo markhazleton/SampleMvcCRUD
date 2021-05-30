@@ -34,7 +34,7 @@ namespace Mwh.Sample.Core.Data.Models
         /// </summary>
         /// <value>The employee identifier.</value>
         [Key]
-        public int EmployeeId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the name.

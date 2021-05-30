@@ -22,7 +22,7 @@ namespace Mwh.Sample.Common.Tests.Models
                 State = "State",
                 Country = "Country",
                 Department = EmployeeDepartment.Marketing,
-                EmployeeID = 0,
+                id = 0,
                 Name = "Name"
             };
 

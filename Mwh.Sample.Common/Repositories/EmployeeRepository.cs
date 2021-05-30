@@ -68,7 +68,7 @@ namespace Mwh.Sample.Common.Repositories
         public Task<bool> Remove(EmployeeModel employee, CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-            return Task.Run(() => (bool)_emp.Delete(employee.EmployeeID));
+            return Task.Run(() => (bool)_emp.Delete(employee.id));
         }
 
         /// <summary>

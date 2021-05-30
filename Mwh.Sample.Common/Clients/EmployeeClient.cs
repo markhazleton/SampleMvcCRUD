@@ -84,8 +84,8 @@ namespace Mwh.Sample.Common.Clients
         {
             token.ThrowIfCancellationRequested();
 
-            if (employee.EmployeeID != id)
-                return new EmployeeResponse($"Mismatch in id({id}) && employee_id({employee.EmployeeID}).");
+            if (employee.id != id)
+                return new EmployeeResponse($"Mismatch in id({id}) && id({employee.id}).");
 
             var resp = await Put<EmployeeResponse>($"/api/employee/{id}", employee).ConfigureAwait(true);
             return resp;

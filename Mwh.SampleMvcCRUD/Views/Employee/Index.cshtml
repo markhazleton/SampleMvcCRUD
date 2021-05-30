@@ -77,12 +77,12 @@
         };
 
         function SaveEmployee(id) {
-            var empId = +$('#EmployeeID').val();
+            var empId = +$('#id').val();
             var depId = +$('#Department').val();
             var ageId = +$('#Age').val();
 
             var employee = {
-                employee_id: empId,
+                id: empId,
                 name: $('#Name').val(),
                 age: ageId,
                 state: $('#State').val(),

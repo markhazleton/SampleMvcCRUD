@@ -3,7 +3,7 @@
 @using (@Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmployee" }))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.EmployeeID)
+    @Html.HiddenFor(model => model.id)
 
     <div class="form-horizontal">
         <h4>Employee</h4>
@@ -46,7 +46,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <a href="#" onclick="SaveEmployee(@Model.EmployeeID)" class="btn btn-primary ">Save</a>
+                <a href="#" onclick="SaveEmployee(@Model.id)" class="btn btn-primary ">Save</a>
                 <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
             </div>
         </div>

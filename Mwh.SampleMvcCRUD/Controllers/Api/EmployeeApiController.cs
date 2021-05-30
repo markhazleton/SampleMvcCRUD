@@ -55,7 +55,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             CancellationTokenSource cts = new CancellationTokenSource();
             var result = await _employeeService.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
 
-            if (result.EmployeeID != id)
+            if (result.id != id)
             {
                 return BadRequest(new ErrorResource("Employee Not Found"));
             }

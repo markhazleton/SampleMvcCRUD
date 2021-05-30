@@ -29,7 +29,7 @@ namespace Mwh.Sample.Core.Data.Services
                 Country = item.Country,
                 Age = item.Age,
                 Department = (EmployeeDepartment)item.DepartmentId,
-                EmployeeID = item.EmployeeId
+                id = item.Id
             };
         }
         private Models.Employee Create(EmployeeModel item)
@@ -41,7 +41,7 @@ namespace Mwh.Sample.Core.Data.Services
                 Country = item.Country,
                 Age = item.Age,
                 DepartmentId = (int)item.Department,
-                EmployeeId = item.EmployeeID
+                Id = item.id
             };
         }
 
@@ -70,7 +70,7 @@ namespace Mwh.Sample.Core.Data.Services
             if (id > 0)
             {
                 var dbEmp = await _context.Employees
-                    .Where(w => w.EmployeeId == id)
+                    .Where(w => w.Id == id)
                     .FirstOrDefaultAsync()
                     .ConfigureAwait(true);
 
@@ -118,9 +118,9 @@ namespace Mwh.Sample.Core.Data.Services
                 return new EmployeeResponse("Employee can not be null");
 
             Models.Employee dbEmp;
-            if (item.EmployeeID > 0)
+            if (item.id > 0)
             {
-                dbEmp = _context.Employees.Where(w => w.EmployeeId == item.EmployeeID).FirstOrDefault();
+                dbEmp = _context.Employees.Where(w => w.Id == item.id).FirstOrDefault();
                 if (dbEmp == null)
                 {
                     return new EmployeeResponse("Employee Not Found");
@@ -152,10 +152,10 @@ namespace Mwh.Sample.Core.Data.Services
             var dbEmp = new Employee();
             try
             {
-                if (item.EmployeeID > 0)
+                if (item.id > 0)
                 {
                     dbEmp = await _context.Employees
-                        .Where(w => w.EmployeeId == item.EmployeeID)
+                        .Where(w => w.Id == item.id)
                         .FirstOrDefaultAsync()
                         .ConfigureAwait(true);
 
@@ -193,7 +193,7 @@ namespace Mwh.Sample.Core.Data.Services
             }
 
             var newEmp = await _context.Employees
-                .Where(w => w.EmployeeId == dbEmp.EmployeeId)
+                .Where(w => w.Id == dbEmp.Id)
                 .FirstOrDefaultAsync()
                 .ConfigureAwait(true);
 
@@ -205,10 +205,10 @@ namespace Mwh.Sample.Core.Data.Services
             if (employee ==null)
                 return new EmployeeResponse($"Can not update null employee");
 
-            if (employee.EmployeeID != id)
-                return new EmployeeResponse($"Mismatch in id({id}) && employee_id({employee.EmployeeID}).");
+            if (employee.id != id)
+                return new EmployeeResponse($"Mismatch in id({id}) && id({employee.id}).");
 
-            if (employee.EmployeeID == 0)
+            if (employee.id == 0)
                 return new EmployeeResponse($"Can not update employee with id({id})");
 
             return await SaveEmployeeAsync(employee).ConfigureAwait(false);

@@ -49,7 +49,7 @@
                         <label for="department">Department</label>
                         <input type="number" class="form-control" id="department" placeholder="department" />
                     </div>
-                    <input type="hidden" id="employeeID" value="0" />
+                    <input type="hidden" id="id" value="0" />
                 </form>
             </div>
             <div class="modal-footer">
@@ -85,7 +85,7 @@
                         html += '<td>' + item.state + '</td>';
                         html += '<td>' + item.country + '</td>';
                         html += '<td>' + item.department + '</td>';
-                        html += '<td><a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + item.employee_id + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + item.employee_id + ')">Delete</a></td>';
+                        html += '<td><a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + item.id + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + item.id + ')">Delete</a></td>';
                         html += '</tr>';
                     });
                     $('.tbody').html(html);
@@ -102,12 +102,12 @@
             if (res == false) {
                 return false;
             }
-            var empId = +$('#employeeID').val();
+            var empId = +$('#id').val();
             var depId = +$('#department').val();
             var ageId = +$('#age').val();
 
             var employee = {
-                employee_id: empId,
+                id: empId,
                 name: $('#name').val(),
                 age: ageId,
                 state: $('#state').val(),
@@ -145,7 +145,7 @@
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function (result) {
-                    $('#employeeID').val(result.employee_id);
+                    $('#id').val(result.id);
                     $('#name').val(result.name);
                     $('#age').val(result.age);
                     $('#state').val(result.state);
@@ -171,12 +171,12 @@
             if (res == false) {
                 return false;
             }
-            var empId = +$('#employeeID').val();
+            var empId = +$('#id').val();
             var depId = +$('#department').val();
             var ageId = +$('#age').val();
 
             var employee = {
-                employee_id: empId,
+                id: empId,
                 name: $('#name').val(),
                 age: ageId,
                 state: $('#state').val(),
@@ -193,7 +193,7 @@
                     loadData();
                     $('#myModalLabel').html('Add Employee');
                     $('#myModal').modal('hide');
-                    $('#employeeID').val("0");
+                    $('#id').val("0");
                     $('#name').val("");
                     $('#age').val("");
                     $('#state').val("");
@@ -228,7 +228,7 @@
         // Clear the Employee Form
         const  clearTextBox = () => {
             $('#myModalLabel').html('Add Employee');
-            $('#employeeID').val("0");
+            $('#id').val("0");
             $('#name').val("");
             $('#age').val("");
             $('#state').val("");

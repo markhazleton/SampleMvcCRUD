@@ -15,7 +15,7 @@ namespace Mwh.Sample.Core.Data.Tests.Models
                 Age = 20,
                 Country = "USA",
                 DepartmentId = 1,
-                EmployeeId = 1,
+                Id = 1,
                 Name = "Test Employee",
                 State = "TX"
             };

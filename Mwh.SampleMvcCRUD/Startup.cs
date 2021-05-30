@@ -26,7 +26,7 @@ namespace Mwh.Sample.Core.WebApi
         private void ConfirmDatabaseCreation()
         {
             var dbOptions = new DbContextOptionsBuilder<Data.Models.EmployeeContext>()
-                .UseSqlite(@"Data Source=AppData/employeeContext.db")
+                .UseInMemoryDatabase("employee")
                 .Options;
             var context = new EmployeeContext(dbOptions);
             context.Database.EnsureDeletedAsync();
@@ -78,7 +78,7 @@ namespace Mwh.Sample.Core.WebApi
         {
             services.AddDbContext<Data.Models.EmployeeContext>(options => options
                 .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging"))
-                .UseSqlite(@"Data Source=AppData/employeeContext.db"));
+                .UseInMemoryDatabase("employee"));
 
             services.AddScoped<IEmployeeDB, EmployeeDB>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
@@ -87,6 +87,7 @@ namespace Mwh.Sample.Core.WebApi
             services.AddCustomSwagger();
             services.AddMvc();
             services.AddControllersWithViews();
+            services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
         }
     }
 }

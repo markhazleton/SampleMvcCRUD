@@ -30,7 +30,7 @@ namespace Mwh.Sample.Common.Repositories
                     Department = EmployeeDepartment.IT,
                     State = "Florida",
                     Country = "USA",
-                    EmployeeID = 4
+                    id = 4
                 },
                 new EmployeeModel()
                 {
@@ -39,7 +39,7 @@ namespace Mwh.Sample.Common.Repositories
                     Department = EmployeeDepartment.IT,
                     State = "Texas",
                     Country = "USA",
-                    EmployeeID = 1
+                    id = 1
                 },
                 new EmployeeModel()
                 {
@@ -48,7 +48,7 @@ namespace Mwh.Sample.Common.Repositories
                     Department = EmployeeDepartment.Marketing,
                     State = "Texas",
                     Country = "USA",
-                    EmployeeID = 2
+                    id = 2
                 },
                 new EmployeeModel()
                 {
@@ -57,7 +57,7 @@ namespace Mwh.Sample.Common.Repositories
                     Department = EmployeeDepartment.Executive,
                     State = "Texas",
                     Country = "USA",
-                    EmployeeID = 3
+                    id = 3
                 },
             };
         }
@@ -75,7 +75,7 @@ namespace Mwh.Sample.Common.Repositories
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool Delete(int ID)
         {
-            var myEmp = _list.Where(w => w.EmployeeID == ID).FirstOrDefault();
+            var myEmp = _list.Where(w => w.id == ID).FirstOrDefault();
             if (myEmp == null)
                 return false;
             if (_list.Remove(myEmp))
@@ -92,7 +92,7 @@ namespace Mwh.Sample.Common.Repositories
         /// <returns>EmployeeModel.</returns>
         public EmployeeModel Employee(int id)
         {
-            var myEmp = _list.Where(w => w.EmployeeID == id).FirstOrDefault();
+            var myEmp = _list.Where(w => w.id == id).FirstOrDefault();
             if (myEmp == null)
                 return new EmployeeModel();
             return myEmp;
@@ -119,16 +119,16 @@ namespace Mwh.Sample.Common.Repositories
             if (!emp.IsValid)
                 return emp;
 
-            if (emp.EmployeeID == 0)
+            if (emp.id == 0)
             {
-                int nextID = _list.OrderByDescending(o => o.EmployeeID).Select(s => s.EmployeeID).FirstOrDefault() + 1;
-                emp.EmployeeID = nextID;
+                int nextID = _list.OrderByDescending(o => o.id).Select(s => s.id).FirstOrDefault() + 1;
+                emp.id = nextID;
                 _list.Add(emp);
                 return emp;
             }
             else
             {
-                var myEmp = _list.Where(w => w.EmployeeID == emp.EmployeeID).FirstOrDefault();
+                var myEmp = _list.Where(w => w.id == emp.id).FirstOrDefault();
 
                 if (myEmp == null)
                     return new EmployeeModel();

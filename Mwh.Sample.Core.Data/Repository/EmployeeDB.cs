@@ -24,7 +24,7 @@ namespace Mwh.Sample.Core.Data.Repository
 
             return new EmployeeModel()
             {
-                EmployeeID = s.EmployeeId,
+                id = s.Id,
                 State = s.State,
                 Age = s.Age,
                 Country = s.Country,
@@ -35,7 +35,7 @@ namespace Mwh.Sample.Core.Data.Repository
 
         public bool Delete(int ID)
         {
-            var delEmployee = _context.Employees.Where(w => w.EmployeeId == ID).FirstOrDefault();
+            var delEmployee = _context.Employees.Where(w => w.Id == ID).FirstOrDefault();
             if (delEmployee != null)
             {
                 _context.Employees.Remove(delEmployee);
@@ -47,7 +47,7 @@ namespace Mwh.Sample.Core.Data.Repository
 
         public EmployeeModel Employee(int id)
         {
-            return Create(_context.Employees.Where(w => w.EmployeeId == id).FirstOrDefault());
+            return Create(_context.Employees.Where(w => w.Id == id).FirstOrDefault());
         }
 
         public List<EmployeeModel> EmployeeCollection()
@@ -59,7 +59,7 @@ namespace Mwh.Sample.Core.Data.Repository
         {
             if (emp == null) return new EmployeeModel();
 
-            if (emp.EmployeeID == 0)
+            if (emp.id == 0)
             {
                 var saveUser = new Employee()
                 {
@@ -71,11 +71,11 @@ namespace Mwh.Sample.Core.Data.Repository
                 };
                 _context.Employees.Add(saveUser);
                 _context.SaveChanges();
-                emp.EmployeeID = saveUser.EmployeeId;
+                emp.id = saveUser.Id;
             }
             else
             {
-                var saveUser = _context.Employees.Where(w => w.EmployeeId == emp.EmployeeID).FirstOrDefault();
+                var saveUser = _context.Employees.Where(w => w.Id == emp.id).FirstOrDefault();
                 if (saveUser != null)
                 {
 
@@ -88,7 +88,7 @@ namespace Mwh.Sample.Core.Data.Repository
                     _context.SaveChanges();
                 }
             }
-            return Employee(emp.EmployeeID);
+            return Employee(emp.id);
         }
     }
 }

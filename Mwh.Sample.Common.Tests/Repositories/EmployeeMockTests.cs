@@ -38,15 +38,15 @@ namespace Mwh.Sample.Common.Tests.Repositories
             var myEmp = Employee.EmployeeCollection().FirstOrDefault();
             var count = Employee.EmployeeCollection().Count;
 
-            Employee.Delete(myEmp.EmployeeID);
+            Employee.Delete(myEmp.id);
             Assert.AreEqual(count - 1, Employee.EmployeeCollection().Count);
         }
 
         /// <summary>
-        /// Defines the test method DeleteTestEmployeeIDZero.
+        /// Defines the test method DeleteTestIDZero.
         /// </summary>
         [TestMethod()]
-        public void DeleteTestEmployeeIDZero()
+        public void DeleteTestIDZero()
         {
             var Employee = new EmployeeMock();
             var count = Employee.EmployeeCollection().Count;
@@ -106,15 +106,15 @@ namespace Mwh.Sample.Common.Tests.Repositories
         {
             var Employee = new EmployeeMock();
             var myEmp = Employee.EmployeeCollection().FirstOrDefault();
-            Employee.Employee(myEmp.EmployeeID);
-            Assert.AreEqual(myEmp.Name, Employee.Employee(myEmp.EmployeeID).Name);
+            Employee.Employee(myEmp.id);
+            Assert.AreEqual(myEmp.Name, Employee.Employee(myEmp.id).Name);
         }
 
         /// <summary>
-        /// Defines the test method GetTestEmployeeIDZero.
+        /// Defines the test method GetTestIDZero.
         /// </summary>
         [TestMethod()]
-        public void GetTestEmployeeIDZero()
+        public void GetTestIDZero()
         {
             var Employee = new EmployeeMock();
             Assert.AreEqual(null, Employee.Employee(0)?.Name);
@@ -144,7 +144,7 @@ namespace Mwh.Sample.Common.Tests.Repositories
             var result = employeeMock.Update(emp);
 
             // Assert
-            Assert.AreEqual(result.EmployeeID, 0);
+            Assert.AreEqual(result.id, 0);
         }
 
         /// <summary>
@@ -158,18 +158,18 @@ namespace Mwh.Sample.Common.Tests.Repositories
             var NewName = "NewName";
             myEmp.Name = NewName;
             Employee.Update(myEmp);
-            Assert.AreEqual(NewName, Employee.Employee(myEmp.EmployeeID).Name);
+            Assert.AreEqual(NewName, Employee.Employee(myEmp.id).Name);
         }
 
         /// <summary>
-        /// Defines the test method UpdateTestInvalidEmployeeID.
+        /// Defines the test method UpdateTestInvalidId.
         /// </summary>
         [TestMethod()]
-        public void UpdateTestInvalidEmployeeID()
+        public void UpdateTestInvalidId()
         {
             var Employee = new EmployeeMock();
-            var myEmp = new EmployeeModel { EmployeeID = 99999 };
-            Assert.AreEqual(99999, Employee.Update(myEmp).EmployeeID);
+            var myEmp = new EmployeeModel { id = 99999 };
+            Assert.AreEqual(99999, Employee.Update(myEmp).id);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Mwh.Sample.Common.Tests.Repositories
             var NewName = "NewName";
             myEmp.Name = NewName;
             myEmp = Employee.Update(myEmp);
-            Assert.AreEqual(NewName, Employee.Employee(myEmp.EmployeeID).Name);
+            Assert.AreEqual(NewName, Employee.Employee(myEmp.id).Name);
             Assert.AreEqual(count, Employee.EmployeeCollection().Count);
         }
     }

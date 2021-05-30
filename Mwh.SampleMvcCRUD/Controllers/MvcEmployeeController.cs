@@ -88,7 +88,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             EmployeeResponse reqResponse;
             if (employee != null)
             {
-                if (employee.EmployeeID == id)
+                if (employee.id == id)
                     reqResponse = await client.UpdateAsync(id, employee, cts.Token).ConfigureAwait(false);
             }
             return RedirectToAction("Index");
@@ -119,7 +119,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         {
             if (employee != null)
             {
-                if (employee.EmployeeID == id)
+                if (employee.id == id)
                 {
                     var result = await client.DeleteAsync(id, cts.Token).ConfigureAwait(false);
                 }

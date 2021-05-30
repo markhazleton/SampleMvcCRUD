@@ -82,8 +82,8 @@ namespace Mwh.Sample.Common.Repositories
             if (employee == null)
                 return new EmployeeResponse("Employee is null.");
 
-            if (employee.EmployeeID != id)
-                return new EmployeeResponse($"Mismatch in id({id}) && employee_id({employee.EmployeeID}).");
+            if (employee.id != id)
+                return new EmployeeResponse($"Mismatch in id({id}) && id({employee.id}).");
 
             var existingEmployee = await _employeeRepository.FindByIdAsync(id, token).ConfigureAwait(true);
             if (existingEmployee == null)
@@ -122,7 +122,7 @@ namespace Mwh.Sample.Common.Repositories
                 var response = await _employeeRepository.Remove(existingEmployee,token).ConfigureAwait(true);
 
                 if (response)
-                    existingEmployee.EmployeeID = 0;
+                    existingEmployee.id = 0;
 
                 return new EmployeeResponse(existingEmployee);
             }

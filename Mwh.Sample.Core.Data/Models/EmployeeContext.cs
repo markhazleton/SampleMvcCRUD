@@ -20,7 +20,7 @@ namespace Mwh.Sample.Core.Data.Models
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>().ToTable("Employees");
+            // modelBuilder.Entity<Employee>().ToTable("Employees");
         }
 
         public DbSet<Employee> Employees { get; set; }
