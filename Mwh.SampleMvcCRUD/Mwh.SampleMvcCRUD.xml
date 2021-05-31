@@ -15,36 +15,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Mwh.Sample.Core.WebApi.Controllers.BaseApiController.BuildVersion">
-            <summary>
-            Build Version
-            </summary>
-        </member>
-        <member name="P:Mwh.Sample.Core.WebApi.Controllers.BaseApiController.BuildVersion.Build">
-            <summary>
-            Build
-            </summary>
-        </member>
-        <member name="P:Mwh.Sample.Core.WebApi.Controllers.BaseApiController.BuildVersion.BuildDate">
-            <summary>
-            Date of Build
-            </summary>
-        </member>
-        <member name="P:Mwh.Sample.Core.WebApi.Controllers.BaseApiController.BuildVersion.MajorVersion">
-            <summary>
-            Major Version
-            </summary>
-        </member>
-        <member name="P:Mwh.Sample.Core.WebApi.Controllers.BaseApiController.BuildVersion.MinorVersion">
-            <summary>
-            Minor Version
-            </summary>
-        </member>
-        <member name="P:Mwh.Sample.Core.WebApi.Controllers.BaseApiController.BuildVersion.Revision">
-            <summary>
-            Revision
-            </summary>
-        </member>
         <member name="T:Mwh.Sample.Core.WebApi.Controllers.EmployeeApiController">
             <summary>
             EmployeeApiController
@@ -90,7 +60,7 @@
             <param name="employee">Updated employee data.</param>
             <returns>Response for the request.</returns>
         </member>
-        <member name="M:Mwh.Sample.Core.WebApi.Controllers.StatusController.GetAsync">
+        <member name="M:Mwh.Sample.Core.WebApi.Controllers.StatusController.Get">
             <summary>
             Returns Current Application Status
             </summary>
@@ -218,6 +188,13 @@
             </summary>
             <param name="id"></param>
             <param name="employee"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mwh.Sample.Core.WebApi.Extensions.MiddlewareExtensions.AddCustomSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
             <returns></returns>
         </member>
     </members>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
@@ -10,6 +9,11 @@ namespace Mwh.Sample.Core.WebApi.Extensions
 {
     public static class MiddlewareExtensions
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(cfg =>
@@ -26,7 +30,7 @@ namespace Mwh.Sample.Core.WebApi.Extensions
                     {
                         Name = "Mark Hazleton",
                         Url = new Uri("https://linkedin.com/in/markhazleton/"),
-                        Email = "mark.hazleton@gmail.com"
+                        Email = "mark.hazleton@controlorigins.com"
                     },
                                    License = new OpenApiLicense { Name = "MIT", },
                                });

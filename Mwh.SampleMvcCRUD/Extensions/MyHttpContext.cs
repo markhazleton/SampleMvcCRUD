@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
 
 namespace Mwh.Sample.Core.WebApi.Extensions
 {
@@ -13,5 +12,6 @@ namespace Mwh.Sample.Core.WebApi.Extensions
 
         internal static void Configure(IHttpContextAccessor contextAccessor)
         { m_httpContextAccessor = contextAccessor; }
+
     }
 }

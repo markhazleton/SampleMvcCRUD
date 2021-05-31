@@ -13,7 +13,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Company>Mark Hazleton</Company>
     <Authors>Mark Hazleton</Authors>
-    <Copyright>Copyright ©2020 Mark Hazleton</Copyright>
+    <Copyright>Copyright ©2021 Mark Hazleton</Copyright>
     <Description>The domain models for the Mwh.Sample project</Description>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>

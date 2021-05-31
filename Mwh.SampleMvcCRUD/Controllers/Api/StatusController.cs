@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Mwh.Sample.Common.Models;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
@@ -16,7 +15,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<EmployeeModel>), 200)]
-        public ApplicationStatus GetAsync()
+        public ApplicationStatus Get()
         {
             return GetApplicationStatus();
         }
