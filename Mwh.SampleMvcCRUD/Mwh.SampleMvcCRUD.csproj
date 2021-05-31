@@ -8,10 +8,11 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <UserSecretsId>628ab996-ec3e-413e-88de-44fc253af54c</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
-    <AssemblyVersion>1.4.0.0</AssemblyVersion>
-    <FileVersion>1.4.0.0</FileVersion>
+    <AssemblyVersion>1.4.*</AssemblyVersion>
+    <Deterministic>false</Deterministic>
     <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
   </PropertyGroup>
+
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>D:\GitHub\markhazleton\SampleMvcCRUD\Mwh.SampleMvcCRUD\Mwh.SampleMvcCRUD.xml</DocumentationFile>
