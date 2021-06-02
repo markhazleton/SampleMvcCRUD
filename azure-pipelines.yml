@@ -21,6 +21,15 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'select'
 
+- task: MSBuild@1
+  inputs:
+    solution: '($soluition)'
+    msbuildArchitecture: 'x64'
+    clean: true
+    restoreNugetPackages: true
+    logProjectEvents: true
+    createLogFile: true
+    logFileVerbosity: 'diagnostic'
 
 - task: DotNetCoreCLI@2
   inputs:
