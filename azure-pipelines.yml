@@ -21,6 +21,7 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'select'
 
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
@@ -31,10 +32,6 @@ steps:
     command: 'test'
     projects: '**/*.csproj'
 
-- task: CRAnalyzeTask@201
-  inputs:
-    solution: '$(solution)'
-    sendLogs: true
 
 - task: DotNetCoreCLI@2
   inputs:
