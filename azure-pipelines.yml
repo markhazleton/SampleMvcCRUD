@@ -18,28 +18,19 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
-    projects: '**/*.csproj'
+    projects: '**/Mwh.SampleCore.sln'
     feedsToUse: 'select'
 
-- task: MSBuild@1
-  inputs:
-    solution: '($soluition)'
-    msbuildArchitecture: 'x64'
-    clean: true
-    restoreNugetPackages: true
-    logProjectEvents: true
-    createLogFile: true
-    logFileVerbosity: 'diagnostic'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: '**/*.csproj'
+    projects: '**/Mwh.SampleCore.sln'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: '**/*.csproj'
+    projects: '**/Mwh.SampleCore.sln'
 
 
 - task: DotNetCoreCLI@2
