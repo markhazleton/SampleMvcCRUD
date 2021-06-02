@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Mwh.Sample.Common.Interfaces;
 using Mwh.Sample.Common.Models;
 using System.Threading.Tasks;
 
@@ -9,8 +10,10 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// </summary>
     public class MvcEmployeeController : BaseController
     {
-        public MvcEmployeeController() : base()
+        private readonly IEmployeeClient client;
+        public MvcEmployeeController(IEmployeeClient employeeClient) : base()
         {
+                client = employeeClient;
         }
         /// <summary>
         /// Default Page for MvcEmployeeController

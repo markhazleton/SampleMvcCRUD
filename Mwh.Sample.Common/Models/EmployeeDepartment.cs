@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Mwh.Sample.Common
-// Author           : mark
-// Created          : 04-01-2020
-//
-// Last Modified By : mark
-// Last Modified On : 04-04-2020
-// ***********************************************************************
-// <copyright file="EmployeeDepartment.cs" company="Mark Hazleton">
-//     Copyright 2020 Mark Hazleton
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-namespace Mwh.Sample.Common.Models
+﻿namespace Mwh.Sample.Common.Models
 {
     /// <summary>
     /// Enum EmployeeDepartment

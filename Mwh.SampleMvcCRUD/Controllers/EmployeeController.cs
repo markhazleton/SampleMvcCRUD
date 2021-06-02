@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Mwh.Sample.Common.Interfaces;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
@@ -8,8 +9,11 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// </summary>
     public class EmployeeController : BaseController
     {
-        public EmployeeController() : base()
+        private readonly IEmployeeClient client;
+
+        public EmployeeController(IEmployeeClient employeeClient) : base()
         {
+            client = employeeClient;
         }
 
         /// <summary>

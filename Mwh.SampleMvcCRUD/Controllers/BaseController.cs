@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Mwh.Sample.Common.Clients;
-using Mwh.Sample.Core.WebApi.Extensions;
 using System.Threading;
+using Mwh.Sample.Core.WebApi.Extensions;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
@@ -11,7 +10,6 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public abstract class BaseController : Controller
     {
-        public readonly EmployeeClient client;
         public readonly CancellationTokenSource cts;
 
         /// <summary>
@@ -19,7 +17,6 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// </summary>
         protected BaseController()
         {
-            client = new EmployeeClient(MyHttpContext.AppBaseUrl, "Sample");
             cts = new CancellationTokenSource();
         }
     }

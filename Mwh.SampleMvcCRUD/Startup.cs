@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using Mwh.Sample.Common.Clients;
 using Mwh.Sample.Common.Interfaces;
 using Mwh.Sample.Common.Repositories;
 using Mwh.Sample.Core.Data.Models;
@@ -84,6 +85,7 @@ namespace Mwh.Sample.Core.WebApi
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.TryAddSingleton<IEmployeeClient, EmployeeClient>();
             services.AddCustomSwagger();
             services.AddMvc();
             services.AddControllersWithViews();

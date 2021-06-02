@@ -1,4 +1,5 @@
-﻿using Mwh.Sample.Common.Interfaces;
+﻿using Microsoft.AspNetCore.Http;
+using Mwh.Sample.Common.Interfaces;
 using Mwh.Sample.Common.Models;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,14 +8,13 @@ using System.Threading.Tasks;
 namespace Mwh.Sample.Common.Clients
 {
     /// <summary>
-    /// Class SampleClient.
-    /// Implements the <see cref="Mwh.Sample.Client.ClientBase" />
-    /// Implements the <see cref="Mwh.Sample.Common.Repositories.IEmployeeService" />
+    /// 
     /// </summary>
-    /// <seealso cref="Mwh.Sample.Client.ClientBase" />
-    /// <seealso cref="Mwh.Sample.Common.Repositories.IEmployeeService" />
-    public class EmployeeClient : ClientBase, IEmployeeService
+    public class EmployeeClient : ClientBase, IEmployeeClient
     {
+        public EmployeeClient(IHttpContextAccessor httpContextAccessor) : base($"{httpContextAccessor.HttpContext.Request.Scheme}://{httpContextAccessor.HttpContext.Request.Host}{httpContextAccessor.HttpContext.Request.PathBase}", "employee")
+        {
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeClient"/> class.
         /// </summary>
