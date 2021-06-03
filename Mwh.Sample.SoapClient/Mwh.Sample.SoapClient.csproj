@@ -13,7 +13,7 @@
     <PackageReleaseNotes>Add More Methods to Soap Client, Add Comments</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <Version>2.0.2</Version>
+    <Version>5.0.0</Version>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 

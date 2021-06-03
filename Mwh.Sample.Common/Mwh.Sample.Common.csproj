@@ -8,7 +8,7 @@
     <RepositoryType>GIT</RepositoryType>
     <RepositoryUrl>https://github.com/markhazleton/SampleMvcCRUD</RepositoryUrl>
     <PackageProjectUrl>https://github.com/markhazleton/SampleMvcCRUD</PackageProjectUrl>
-    <Version>2.0.2</Version>
+    <Version>5.0.2</Version>
     <PackageIcon>ProjectMechanicsLogo.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Company>Mark Hazleton</Company>
