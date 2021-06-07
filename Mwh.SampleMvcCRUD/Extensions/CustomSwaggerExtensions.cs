@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Mwh.Sample.Core.WebApi.Extensions
 {
-    public static class MiddlewareExtensions
+    public static class CustomSwaggerExtensions
     {
         /// <summary>
         /// 

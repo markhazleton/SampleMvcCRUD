@@ -23,7 +23,6 @@ namespace Mwh.Sample.Core.WebApi
             ConfirmDatabaseCreation();
         }
 
-
         private void ConfirmDatabaseCreation()
         {
             var dbOptions = new DbContextOptionsBuilder<Data.Models.EmployeeContext>()
@@ -33,13 +32,12 @@ namespace Mwh.Sample.Core.WebApi
             context.Database.EnsureDeletedAsync();
             context.Database.EnsureCreatedAsync();
             context.Employees.Add(new Employee() { Name = "John Doe", Age = 25, Country = "USA", DepartmentId = 1, State = "TX" });
-            context.Employees.Add(new Employee() { Name = "Sam Spade", Age = 45, Country = "USA", DepartmentId = 1, State = "TX" });
-            context.Employees.Add(new Employee() { Name = "Rick Blaine", Age = 55, Country = "USA", DepartmentId = 1, State = "TX" });
+            context.Employees.Add(new Employee() { Name = "Sam Spade", Age = 35, Country = "USA", DepartmentId = 1, State = "TX" });
+            context.Employees.Add(new Employee() { Name = "Rick Blaine", Age = 45, Country = "USA", DepartmentId = 1, State = "TX" });
             context.Employees.Add(new Employee() { Name = "Victor Laszlo", Age = 55, Country = "USA", DepartmentId = 2, State = "TX" });
-            context.Employees.Add(new Employee() { Name = "Louis Renault", Age = 50, Country = "USA", DepartmentId = 3, State = "TX" });
+            context.Employees.Add(new Employee() { Name = "Louis Renault", Age = 65, Country = "USA", DepartmentId = 3, State = "TX" });
             context.SaveChanges();
         }
-
 
         public IConfiguration Configuration { get; }
 

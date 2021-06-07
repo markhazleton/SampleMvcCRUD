@@ -190,7 +190,7 @@
             <param name="employee"></param>
             <returns></returns>
         </member>
-        <member name="M:Mwh.Sample.Core.WebApi.Extensions.MiddlewareExtensions.AddCustomSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Mwh.Sample.Core.WebApi.Extensions.CustomSwaggerExtensions.AddCustomSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             
             </summary>
