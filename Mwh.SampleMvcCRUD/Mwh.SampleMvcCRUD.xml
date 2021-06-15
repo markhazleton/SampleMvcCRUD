@@ -60,6 +60,11 @@
             <param name="employee">Updated employee data.</param>
             <returns>Response for the request.</returns>
         </member>
+        <member name="T:Mwh.Sample.Core.WebApi.Controllers.StatusController">
+            <summary>
+            Status Controller
+            </summary>
+        </member>
         <member name="M:Mwh.Sample.Core.WebApi.Controllers.StatusController.Get">
             <summary>
             Returns Current Application Status
@@ -71,6 +76,11 @@
             BaseController
             </summary>
         </member>
+        <member name="F:Mwh.Sample.Core.WebApi.Controllers.BaseController.cts">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Mwh.Sample.Core.WebApi.Controllers.BaseController.#ctor">
             <summary>
             BaseController
@@ -80,6 +90,17 @@
             <summary>
             EmployeeController
             </summary>
+        </member>
+        <member name="F:Mwh.Sample.Core.WebApi.Controllers.EmployeeController.client">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mwh.Sample.Core.WebApi.Controllers.EmployeeController.#ctor(Mwh.Sample.Common.Interfaces.IEmployeeClient)">
+            <summary>
+            
+            </summary>
+            <param name="employeeClient"></param>
         </member>
         <member name="M:Mwh.Sample.Core.WebApi.Controllers.EmployeeController.GetEmployeeDelete(System.Int32)">
             <summary>
@@ -109,7 +130,12 @@
         </member>
         <member name="T:Mwh.Sample.Core.WebApi.Controllers.EmployeeReactController">
             <summary>
-            EmployeeController
+            EmployeeReact
+            </summary>
+        </member>
+        <member name="M:Mwh.Sample.Core.WebApi.Controllers.EmployeeReactController.#ctor">
+            <summary>
+            EmployeeReact
             </summary>
         </member>
         <member name="M:Mwh.Sample.Core.WebApi.Controllers.EmployeeReactController.Index">
@@ -117,6 +143,33 @@
             Default Page for Employee React Controller
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Mwh.Sample.Core.WebApi.Controllers.ErrorResource">
+            <summary>
+            Error Resource
+            </summary>
+        </member>
+        <member name="M:Mwh.Sample.Core.WebApi.Controllers.ErrorResource.#ctor(System.Collections.Generic.List{System.String})">
+            <summary>
+            
+            </summary>
+            <param name="messages"></param>
+        </member>
+        <member name="M:Mwh.Sample.Core.WebApi.Controllers.ErrorResource.#ctor(System.String)">
+            <summary>
+            Error Resource
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="P:Mwh.Sample.Core.WebApi.Controllers.ErrorResource.Messages">
+            <summary>
+            Messages
+            </summary>
+        </member>
+        <member name="P:Mwh.Sample.Core.WebApi.Controllers.ErrorResource.Success">
+            <summary>
+            Success
+            </summary>
         </member>
         <member name="T:Mwh.Sample.Core.WebApi.Controllers.HomeController">
             <summary>

@@ -69,7 +69,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public async Task<IEnumerable<EmployeeModel>> ListAsync()
         {
             CancellationTokenSource cts = new CancellationTokenSource();
-            var employees = await _employeeService.ListAsync(cts.Token).ConfigureAwait(false);
+            var employees = await _employeeService.GetAsync(cts.Token).ConfigureAwait(false);
             return employees;
         }
 

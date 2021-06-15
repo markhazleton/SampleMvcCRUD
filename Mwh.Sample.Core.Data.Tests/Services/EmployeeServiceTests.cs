@@ -2,6 +2,7 @@
 using Mwh.Sample.Common.Models;
 using Mwh.Sample.Core.Data.Services;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,16 +14,8 @@ namespace Mwh.Sample.Core.Data.Tests.Services
         private EmployeeService service;
         private CancellationToken token;
 
-        [TestInitialize]
-        public void Initialize()
-        {
-            service = new EmployeeService();
-            token = default;
-        }
-
-
         [TestMethod]
-        public void AddMultipleEmployees_StateUnderTest_ExpectedBehavior()
+        public void AddMultiple_StateUnderTest_Null()
         {
             // Arrange
             string[] namelist = null;
@@ -32,7 +25,24 @@ namespace Mwh.Sample.Core.Data.Tests.Services
                 namelist);
 
             // Assert
-            Assert.AreEqual(-1,result);
+            Assert.AreEqual(-1, result);
+        }
+
+        [TestMethod]
+        public void AddMultiple_StateUnderTest_Valid()
+        {
+            // Arrange
+            string[] namelist = new string[] { "Mark", "Lesley", "Marlis" };
+
+            // Act
+            var result = service.AddMultipleEmployees(namelist);
+            var employee = service.Get();
+            var test = employee.Where(w => w.Name == "Mark").FirstOrDefault();
+
+            // Assert
+            Assert.IsNotNull(test);
+            Assert.AreEqual(3, result);
+            Assert.AreEqual(employee.Count(), result);
         }
 
         [TestMethod]
@@ -47,7 +57,7 @@ namespace Mwh.Sample.Core.Data.Tests.Services
                 token);
 
             // Assert
-            Assert.AreEqual(result.Success,false);
+            Assert.AreEqual(result.Success, false);
         }
 
         [TestMethod]
@@ -68,7 +78,7 @@ namespace Mwh.Sample.Core.Data.Tests.Services
             int id = 0;
 
             // Act
-            var result = await service.FindByIdAsync(id,token);
+            var result = await service.FindByIdAsync(id, token);
 
             // Assert
             Assert.IsNotNull(result);
@@ -77,39 +87,110 @@ namespace Mwh.Sample.Core.Data.Tests.Services
         }
 
         [TestMethod]
-        public void GetEmployeeCollection_StateUnderTest_ExpectedBehavior()
+        public void Get_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
 
             // Act
-            var result = service.GetEmployeeCollection();
+            var result = service.Get();
 
             // Assert
             Assert.IsNotNull(result);
         }
 
         [TestMethod]
-        public async Task ListAsync_StateUnderTest_ExpectedBehavior()
+        public async Task GetAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
 
             // Act
-            var result = await service.ListAsync(
-                token);
+            var result = await service.GetAsync(token);
 
             // Assert
             Assert.IsNotNull(result);
         }
 
+        [TestInitialize]
+        public void Initialize()
+        {
+            service = new EmployeeService();
+            token = default;
+        }
+
         [TestMethod]
-        public async Task SaveAsync_StateUnderTest_ExpectedBehavior()
+        public void Save_StateUnderTest_Null()
         {
             // Arrange
-            EmployeeModel employee = null;
+            EmployeeModel item = null;
+
+            // Act
+            var result = service.Save(
+                item);
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public async Task Save_StateUnderTest_ValidNew()
+        {
+            // Arrange
+            EmployeeModel item = new EmployeeModel()
+            {
+                Name = "Test",
+                Age = 25,
+                State = "Texas",
+                Country = "USA",
+                Department = EmployeeDepartment.IT,
+            };
+
+            // Act
+            var result = service.Save(item);
+
+            var UpdateEmp = await service.FindByIdAsync(result.Resource.id,token).ConfigureAwait(true);
+
+            UpdateEmp.Age = 50;
+
+            var UpdateResult = service.Save(UpdateEmp);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Success);
+            Assert.IsNotNull(UpdateEmp);
+            Assert.IsNotNull(UpdateResult);
+            Assert.IsTrue(UpdateResult.Success);
+            Assert.AreEqual(50, UpdateResult.Resource?.Age);
+        }
+
+        [TestMethod]
+        public async Task SaveAsync_StateUnderTest_Valid()
+        {
+            // Arrange
+            EmployeeModel item = new EmployeeModel()
+            {
+                Name = "Test",
+                Age = 25,
+                State = "Texas",
+                Country = "USA",
+                Department = EmployeeDepartment.IT,
+            };
+
+            // Act
+            var result = await service.SaveAsync(item);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Success);
+        }
+
+        [TestMethod]
+        public async Task SaveAsync_StateUnderTest_Null()
+        {
+            // Arrange
+            EmployeeModel item = null;
 
             // Act
             var result = await service.SaveAsync(
-                employee,
+                item,
                 token);
 
             // Assert
@@ -118,34 +199,6 @@ namespace Mwh.Sample.Core.Data.Tests.Services
 
         }
 
-        [TestMethod]
-        public void SaveEmployee_StateUnderTest_ExpectedBehavior()
-        {
-            // Arrange
-            EmployeeModel item = null;
-
-            // Act
-            var result = service.SaveEmployee(
-                item);
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
-        public async Task SaveEmployeeAsync_StateUnderTest_ExpectedBehavior()
-        {
-            // Arrange
-            var service = new EmployeeService();
-            EmployeeModel item = null;
-
-            // Act
-            var result = await service.SaveEmployeeAsync(
-                item);
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
 
         [TestMethod]
         public async Task UpdateAsync_StateUnderTest_ExpectedBehavior()

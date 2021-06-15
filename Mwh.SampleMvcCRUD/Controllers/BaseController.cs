@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading;
-using Mwh.Sample.Core.WebApi.Extensions;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
@@ -10,6 +9,9 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public abstract class BaseController : Controller
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly CancellationTokenSource cts;
 
         /// <summary>

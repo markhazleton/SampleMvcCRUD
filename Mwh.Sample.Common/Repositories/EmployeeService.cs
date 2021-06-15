@@ -33,7 +33,7 @@ namespace Mwh.Sample.Common.Repositories
         /// </summary>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Task&lt;IEnumerable&lt;EmployeeModel&gt;&gt;.</returns>
-        public Task<IEnumerable<EmployeeModel>> ListAsync(CancellationToken token)
+        public Task<IEnumerable<EmployeeModel>> GetAsync(CancellationToken token)
         {
             return _employeeRepository.ListAsync(token);
         }

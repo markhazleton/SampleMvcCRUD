@@ -45,8 +45,7 @@ namespace Mwh.Sample.Core.Data.Services
             };
         }
 
-        private EmployeeModel[] CreateCollection(List<Models.Employee> list) { return list.Select(s => Create(s)).ToArray(); }
-        private Models.Employee[] CreateCollection(List<EmployeeModel> list) { return list.Select(s => Create(s)).ToArray(); }
+        private EmployeeModel[] Get(List<Models.Employee> list) { return list.Select(s => Create(s)).ToArray(); }
 
         public int AddMultipleEmployees(string[] namelist)
         {
@@ -99,20 +98,20 @@ namespace Mwh.Sample.Core.Data.Services
         public async Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
         { return Create(await _context.Employees.FindAsync(id).ConfigureAwait(false)); }
 
-        public EmployeeModel[] GetEmployeeCollection() { return CreateCollection(_context.Employees.ToList()); }
+        public EmployeeModel[] Get() { return Get(_context.Employees.ToList()); }
 
-        public async Task<IEnumerable<EmployeeModel>> ListAsync(CancellationToken token)
-        { return CreateCollection(await _context.Employees.ToListAsync().ConfigureAwait(false)); }
+        public async Task<IEnumerable<EmployeeModel>> GetAsync(CancellationToken token)
+        { return Get(await _context.Employees.ToListAsync().ConfigureAwait(false)); }
 
         public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
         {
             if (employee == null) return new EmployeeResponse("Employee can not be null");
 
-            var emp = await SaveEmployeeAsync(employee).ConfigureAwait(true);
+            var emp = await SaveAsync(employee).ConfigureAwait(true);
             return emp;
         }
 
-        public EmployeeResponse SaveEmployee(EmployeeModel item)
+        public EmployeeResponse Save(EmployeeModel item)
         {
             if (item == null)
                 return new EmployeeResponse("Employee can not be null");
@@ -144,7 +143,7 @@ namespace Mwh.Sample.Core.Data.Services
             return new EmployeeResponse(Create(dbEmp));
         }
 
-        public async Task<EmployeeResponse> SaveEmployeeAsync(EmployeeModel item)
+        public async Task<EmployeeResponse> SaveAsync(EmployeeModel item)
         {
             if (item == null)
                 return new EmployeeResponse("Employee can not be null");
@@ -211,7 +210,7 @@ namespace Mwh.Sample.Core.Data.Services
             if (employee.id == 0)
                 return new EmployeeResponse($"Can not update employee with id({id})");
 
-            return await SaveEmployeeAsync(employee).ConfigureAwait(false);
+            return await SaveAsync(employee).ConfigureAwait(false);
         }
     }
 }

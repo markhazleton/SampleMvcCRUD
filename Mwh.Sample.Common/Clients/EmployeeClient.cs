@@ -54,7 +54,7 @@ namespace Mwh.Sample.Common.Clients
         /// </summary>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>IEnumerable&lt;EmployeeModel&gt;.</returns>
-        public async Task<IEnumerable<EmployeeModel>> ListAsync(CancellationToken token)
+        public async Task<IEnumerable<EmployeeModel>> GetAsync(CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
             return await GetAsync<List<EmployeeModel>>($"/api/employee").ConfigureAwait(true);

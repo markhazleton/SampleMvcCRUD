@@ -29,7 +29,7 @@ namespace Mwh.Sample.Common.Interfaces
         /// </summary>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Task&lt;IEnumerable&lt;EmployeeModel&gt;&gt;.</returns>
-        Task<IEnumerable<EmployeeModel>> ListAsync(CancellationToken token);
+        Task<IEnumerable<EmployeeModel>> GetAsync(CancellationToken token);
         /// <summary>
         /// Saves the asynchronous.
         /// </summary>

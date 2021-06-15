@@ -9,8 +9,15 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// </summary>
     public class EmployeeController : BaseController
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly IEmployeeClient client;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="employeeClient"></param>
         public EmployeeController(IEmployeeClient employeeClient) : base()
         {
             client = employeeClient;
@@ -47,7 +54,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult> GetEmployeeList()
         {
-            var list = await client.ListAsync(cts.Token).ConfigureAwait(false);
+            var list = await client.GetAsync(cts.Token).ConfigureAwait(false);
             return PartialView("_EmployeeList", list);
         }
 

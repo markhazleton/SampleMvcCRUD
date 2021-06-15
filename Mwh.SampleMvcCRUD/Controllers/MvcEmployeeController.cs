@@ -13,7 +13,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         private readonly IEmployeeClient client;
         public MvcEmployeeController(IEmployeeClient employeeClient) : base()
         {
-                client = employeeClient;
+            client = employeeClient;
         }
         /// <summary>
         /// Default Page for MvcEmployeeController
@@ -22,7 +22,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var list = await client.ListAsync(cts.Token).ConfigureAwait(false);
+            var list = await client.GetAsync(cts.Token).ConfigureAwait(false);
 
             return View(list);
         }

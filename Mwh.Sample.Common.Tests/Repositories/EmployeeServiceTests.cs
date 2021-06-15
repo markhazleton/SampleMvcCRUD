@@ -56,7 +56,7 @@ namespace Mwh.Sample.Common.Tests.Repositories
             // Arrange
 
             // Act
-            var result = await service.ListAsync(token);
+            var result = await service.GetAsync(token);
 
             // Assert
             Assert.IsNotNull(result);

@@ -3,10 +3,13 @@
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
     /// <summary>
-    /// EmployeeController
+    /// EmployeeReact
     /// </summary>
     public class EmployeeReactController : BaseController
     {
+        /// <summary>
+        /// EmployeeReact
+        /// </summary>
         public EmployeeReactController() : base()
         {
         }

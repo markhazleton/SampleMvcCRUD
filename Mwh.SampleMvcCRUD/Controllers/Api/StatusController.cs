@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
+    /// <summary>
+    /// Status Controller
+    /// </summary>
     [Route("/status")]
     public class StatusController : BaseApiController
     {
