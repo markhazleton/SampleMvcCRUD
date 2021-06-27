@@ -29,6 +29,9 @@
             <summary>
             Deletes a given employee according to an identifier.
             </summary>
+            /// <remarks>
+            Id must be a valid employee 
+            </remarks>
             <param name="id">Employee identifier.</param>
             <returns>Response for the request.</returns>
         </member>

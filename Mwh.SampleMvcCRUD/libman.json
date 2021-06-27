@@ -21,7 +21,7 @@
     },
     {
       "destination": "wwwroot/lib/bootstrap/",
-      "library": "bootstrap@5.0.1",
+      "library": "bootstrap@5.0.2",
       "provider": "unpkg"
     }
   ]
