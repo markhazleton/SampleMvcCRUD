@@ -1,10 +1,16 @@
 {
   "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "",
+      "suggestion": "true",
+      "ignored": "true"
+    },
     "appInsights1": {
       "type": "appInsights",
       "connectionId": "APPINSIGHTS_CONNECTIONSTRING"
     },
-    "secrets2": {
+    "secrets1": {
       "type": "secrets",
       "connectionId": "VaultUri"
     }

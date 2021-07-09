@@ -1,22 +1,22 @@
 {
   "dependencies": {
-    "appInsights1": {
-      "secretStore": "LocalSecretsFile",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/MwhSample",
-      "type": "appInsights.azure",
-      "connectionId": "APPINSIGHTS_CONNECTIONSTRING"
-    },
     "mssql1": {
-      "ignored": "true",
-      "suggestion": "true",
       "type": "mssql",
-      "connectionId": ""
+      "connectionId": "",
+      "suggestion": "true",
+      "ignored": "true"
     },
-    "secrets2": {
-      "secretStore": null,
+    "appInsights1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/MwhSampleMvcCRUD",
+      "type": "appInsights.azure",
+      "connectionId": "APPINSIGHTS_CONNECTIONSTRING",
+      "secretStore": "LocalSecretsFile"
+    },
+    "secrets1": {
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/HellioWorldKeyVault",
       "type": "secrets.keyVault",
-      "connectionId": "VaultUri"
+      "connectionId": "VaultUri",
+      "secretStore": null
     }
   }
 }
