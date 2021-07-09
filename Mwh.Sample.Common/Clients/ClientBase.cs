@@ -12,35 +12,40 @@ namespace Mwh.Sample.Common.Clients
     /// <seealso cref="System.IDisposable" />
     public abstract class ClientBase : IDisposable
     {
+
         /// <summary>
-        /// The Name of the Client Application making the API Call
+        /// Lazy Client used to instantiate when needed rather than during constructor
         /// </summary>
-        public string AppName = string.Empty;
-        /// <summary>
-        /// The Root of the Domain with the API
-        /// </summary>
-        public string BaseAPIUrl = string.Empty;
-        /// <summary>
-        /// Public Flag for when the API Encounters and Error
-        /// </summary>
-        public bool IsError;
-        /// <summary>
-        /// The Status of the last request made from the API Client
-        /// </summary>
-        public string status = string.Empty;
-        /// <summary>
-        /// The User ID that is used to make the request, this defaults to Web Account
-        /// </summary>
-        public int UserID;
+        private Lazy<RestClient> _lazyClient;
 
         /// <summary>
         /// The rest request
         /// </summary>
         protected RestRequest restRequest;
         /// <summary>
-        /// Lazy Client used to instantiate when needed rather than during constructor
+        /// The Name of the Client Application making the API Call
         /// </summary>
-        private Lazy<RestClient> _lazyClient;
+        public string AppName = string.Empty;
+
+        /// <summary>
+        /// The Root of the Domain with the API
+        /// </summary>
+        public string BaseAPIUrl = string.Empty;
+
+        /// <summary>
+        /// Public Flag for when the API Encounters and Error
+        /// </summary>
+        public bool IsError;
+
+        /// <summary>
+        /// The Status of the last request made from the API Client
+        /// </summary>
+        public string status = string.Empty;
+
+        /// <summary>
+        /// The User ID that is used to make the request, this defaults to Web Account
+        /// </summary>
+        public int UserID;
 
         /// <summary>
         /// ClientBase constructor used to set Application Name and Base Url for requests
@@ -88,20 +93,10 @@ namespace Mwh.Sample.Common.Clients
             restRequest.AddHeader("MachineName", Environment.MachineName);
         }
 
-
         /// <summary>
         /// Client Base Destructor part of the IDisposable implementation
         /// </summary>
         ~ClientBase() { Dispose(false); }
-
-        /// <summary>
-        /// Client Base Dispose Property part of the IDisposable implementation
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(false);
-            GC.SuppressFinalize(this);
-        }
 
         /// <summary>
         /// Gets the HttpClient for this class,a lazy pattern is used to create an instance when needed but never more
@@ -114,6 +109,34 @@ namespace Mwh.Sample.Common.Clients
             if (_lazyClient == null)
                 throw new ObjectDisposedException("RestClient has been disposed");
             return _lazyClient.Value;
+        }
+
+        /// <summary>
+        /// Deletes the specified URL segment.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="urlSegment">The URL segment.</param>
+        /// <returns>T.</returns>
+        protected async Task<T> Delete<T>(string urlSegment)
+        {
+            try
+            {
+                restRequest = new RestRequest();
+                restRequest.AddHeader("UserID", UserID.ToString());
+                restRequest.AddHeader("Application", AppName);
+                restRequest.AddHeader("MachineName", Environment.MachineName);
+                restRequest.Resource = urlSegment.TrimStart('/');
+                restRequest.Method = Method.DELETE;
+                IRestResponse response = await Client().ExecuteAsync(restRequest).ConfigureAwait(true);
+                var jser = new JsonSerializer();
+                var requestResponse = jser.Deserialize<T>(response);
+                return requestResponse;
+            }
+            catch
+            {
+                IsError = true;
+            }
+            return default;
         }
 
         /// <summary>
@@ -142,6 +165,10 @@ namespace Mwh.Sample.Common.Clients
         {
             try
             {
+                restRequest = new RestRequest();
+                restRequest.AddHeader("UserID", UserID.ToString());
+                restRequest.AddHeader("Application", AppName);
+                restRequest.AddHeader("MachineName", Environment.MachineName);
                 restRequest.Resource = urlSegment.TrimStart('/');
                 restRequest.Method = Method.GET;
                 IRestResponse response = await Client().ExecuteAsync(restRequest).ConfigureAwait(true);
@@ -155,7 +182,6 @@ namespace Mwh.Sample.Common.Clients
             }
             return default;
         }
-
 
         /// <summary>
         /// Return the HttpClient to be used to make requests to API
@@ -183,6 +209,10 @@ namespace Mwh.Sample.Common.Clients
         {
             try
             {
+                restRequest = new RestRequest();
+                restRequest.AddHeader("UserID", UserID.ToString());
+                restRequest.AddHeader("Application", AppName);
+                restRequest.AddHeader("MachineName", Environment.MachineName);
                 restRequest.Resource = urlSegment.TrimStart('/');
                 restRequest.AddJsonBody(requestBody);
                 restRequest.Method = Method.POST;
@@ -197,29 +227,7 @@ namespace Mwh.Sample.Common.Clients
             }
             return default;
         }
-        /// <summary>
-        /// Deletes the specified URL segment.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="urlSegment">The URL segment.</param>
-        /// <returns>T.</returns>
-        protected async Task<T> Delete<T>(string urlSegment)
-        {
-            try
-            {
-                restRequest.Resource = urlSegment.TrimStart('/');
-                restRequest.Method = Method.DELETE;
-                IRestResponse response = await Client().ExecuteAsync(restRequest).ConfigureAwait(true);
-                var jser = new JsonSerializer();
-                var requestResponse = jser.Deserialize<T>(response);
-                return requestResponse;
-            }
-            catch
-            {
-                IsError = true;
-            }
-            return default;
-        }
+
         /// <summary>
         /// Puts the specified URL segment.
         /// </summary>
@@ -231,6 +239,10 @@ namespace Mwh.Sample.Common.Clients
         {
             try
             {
+                restRequest = new RestRequest();
+                restRequest.AddHeader("UserID", UserID.ToString());
+                restRequest.AddHeader("Application", AppName);
+                restRequest.AddHeader("MachineName", Environment.MachineName);
                 restRequest.Resource = urlSegment.TrimStart('/');
                 restRequest.AddJsonBody(requestBody);
                 restRequest.Method = Method.PUT;
@@ -244,6 +256,15 @@ namespace Mwh.Sample.Common.Clients
                 IsError = true;
             }
             return default;
+        }
+
+        /// <summary>
+        /// Client Base Dispose Property part of the IDisposable implementation
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(false);
+            GC.SuppressFinalize(this);
         }
     }
 }

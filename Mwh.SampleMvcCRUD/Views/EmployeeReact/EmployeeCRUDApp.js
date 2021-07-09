@@ -4,7 +4,6 @@ import { AddEmployeeForm } from './AddEmployeeForm'
 import { EditEmployeeForm } from './EditEmployeeForm'
 
 const EmployeeCRUDApp = () => {
-
     const employeesData = [
         { id: 1, name: 'Tania', username: 'floppydiskette' },
         { id: 2, name: 'Craig', username: 'siliconeidolon' },
@@ -48,10 +47,10 @@ const EmployeeCRUDApp = () => {
                             />
                         </div>
                     ) : (
-                            <div>
-                                <AddEmployeeForm addEmployee={addEmployee} />
-                            </div>
-                        )}
+                        <div>
+                            <AddEmployeeForm addEmployee={addEmployee} />
+                        </div>
+                    )}
                 </div>
                 <div className="col">
                     <h2>View employees</h2>

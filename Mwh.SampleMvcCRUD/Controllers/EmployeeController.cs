@@ -10,12 +10,12 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     public class EmployeeController : BaseController
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         private readonly IEmployeeClient client;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="employeeClient"></param>
         public EmployeeController(IEmployeeClient employeeClient) : base()

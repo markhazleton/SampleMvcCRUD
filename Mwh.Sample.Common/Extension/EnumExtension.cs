@@ -43,6 +43,7 @@ namespace Mwh.Sample.Common.Extension
 
             return (descriptionAttributes.Length > 0) ? descriptionAttributes[0].Name : e.ToString();
         }
+
         /// <summary>
         /// Returns whether the given enum value is a defined value for its type.
         /// </summary>
@@ -77,4 +78,3 @@ namespace Mwh.Sample.Common.Extension
         }
     }
 }
-

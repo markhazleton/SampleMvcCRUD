@@ -15,7 +15,7 @@ namespace Mwh.Sample.Common.Tests.Repositories
         private EmployeeRepository employeeRepository;
 
         [TestInitialize]
-        public void Initialize() 
+        public void Initialize()
         {
             mockEmployee = new EmployeeMock();
             employeeRepository = new EmployeeRepository(mockEmployee);
@@ -29,7 +29,7 @@ namespace Mwh.Sample.Common.Tests.Repositories
             // Arrange
 
             // Act
-            var emp =  await employeeRepository.AddAsync(employee,token);
+            var emp = await employeeRepository.AddAsync(employee, token);
 
             // Assert
             Assert.IsNotNull(emp);

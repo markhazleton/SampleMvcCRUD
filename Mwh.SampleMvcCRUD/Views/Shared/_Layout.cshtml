@@ -14,12 +14,11 @@
     <meta name="author" content="Mark Hazleton">
     <title>@ViewData["Title"] - Employee CRUD</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/lib/datatables.net-bs/dataTables.bootstrap5.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
     @RenderSection("HeadScripts", required: false)
-
 </head>
 <body id="page-top">
     <header>
@@ -66,26 +65,14 @@
         </section>
     </main>
 
-    <footer class="container-fluid bg-dark">
-        <div class="row">
-            <div class="col-3 text-left text-white" style="float:left">
-                Version: @status.BuildVersion.ToString()
-            </div>
-            <div class="col-6 text-center text-white">
-                &copy; 2020-@currentYear EmployeeMvcCRUD -
-                <a href="https://linkedin.com/in/markhazleton" target="_blank">Mark Hazleton LinkedIn</a> -
-                <a href="https://github.com/markhazleton" target="_blank">GitHub</a>
-            </div>
-            <div class="col-3 text-right text-white" style="float:right;">
-                Last Built: @status.BuildVersion.BuildDate.ToLocalTime().ToLongDateString() <br />
-            </div>
-        </div>
+    <footer class="container-fluid mt-auto border-top footer text-muted bg-dark d-print-none">
+        @await Html.PartialAsync("_Footer")
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.js" asp-append-version="true"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" asp-append-version="true"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/lib/jquery/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/lib/datatables/jquery.dataTables.min.js" asp-append-version="true"></script>
+    <script src="~/lib/datatables.net-bs/dataTables.bootstrap5.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

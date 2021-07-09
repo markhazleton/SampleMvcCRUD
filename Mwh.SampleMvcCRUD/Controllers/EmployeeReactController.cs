@@ -13,6 +13,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         public EmployeeReactController() : base()
         {
         }
+
         /// <summary>
         /// Default Page for Employee React Controller
         /// </summary>

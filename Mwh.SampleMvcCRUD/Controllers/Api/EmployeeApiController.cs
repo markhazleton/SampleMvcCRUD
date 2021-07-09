@@ -24,11 +24,11 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         /// Deletes a given employee according to an identifier.
         /// </summary>
         /// /// <remarks>
-        /// Id must be a valid employee 
+        /// Id must be a valid employee
         /// </remarks>
         /// <param name="id">Employee identifier.</param>
         /// <returns>Response for the request.</returns>
-        [HttpDelete("{id}", Name ="DeleteEmployee")]
+        [HttpDelete("{id}", Name = "DeleteEmployee")]
         [ProducesResponseType(typeof(EmployeeModel), 200)]
         [ProducesResponseType(typeof(ErrorResource), 400)]
         public async Task<IActionResult> DeleteAsync(int id)

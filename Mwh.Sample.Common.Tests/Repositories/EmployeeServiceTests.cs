@@ -49,7 +49,6 @@ namespace Mwh.Sample.Common.Tests.Repositories
             token = default(global::System.Threading.CancellationToken);
         }
 
-
         [TestMethod]
         public async Task ListAsync_StateUnderTest_ExpectedBehavior()
         {

@@ -84,7 +84,6 @@
                     </div>
                     <div class="card-footer"></div>
                 </div>
-
             </div>
             <div class="col-8">
                 <div class="row">
@@ -113,7 +112,6 @@
                                         }
                                     </tbody>
                                     <tfoot>
-
                                     </tfoot>
                                 </table>
                             </div>
@@ -141,16 +139,15 @@
                                     <tbody>
                                         @foreach (var question in Model.QuestionList.OrderBy(o => o.SurveyDisplayOrder))
                                         {
-                                        <tr>
-                                            <td>@question.QuestionNM</td>
-                                            <td>@question.QuestionGroupMember.QuestionGroupNM</td>
-                                            <td>@question.QuestionGroupMember.QuestionWeight</td>
-                                            <td>@question.SurveyDisplayOrder</td>
-                                        </tr>
+                                            <tr>
+                                                <td>@question.QuestionNM</td>
+                                                <td>@question.QuestionGroupMember.QuestionGroupNM</td>
+                                                <td>@question.QuestionGroupMember.QuestionWeight</td>
+                                                <td>@question.SurveyDisplayOrder</td>
+                                            </tr>
                                         }
                                     </tbody>
                                     <tfoot>
-
                                     </tfoot>
                                 </table>
                             </div>
@@ -163,10 +160,8 @@
         </div>
     </div>
     <div class="card-footer">
-
     </div>
 </div>
-
 
 @section scripts
 {
@@ -178,6 +173,3 @@
     </script>
 
 }
-
-
-

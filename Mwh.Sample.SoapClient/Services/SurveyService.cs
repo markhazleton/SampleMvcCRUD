@@ -26,6 +26,7 @@ namespace Mwh.Sample.SoapClient.Services
         /// The client
         /// </summary>
         protected ServiceSoapClient _client;
+
         /// <summary>
         /// The user key
         /// </summary>
@@ -142,7 +143,6 @@ namespace Mwh.Sample.SoapClient.Services
             return x.Body.GetSurveyResult;
         }
 
-
         /// <summary>
         /// Gets the survey collection.
         /// </summary>
@@ -154,7 +154,6 @@ namespace Mwh.Sample.SoapClient.Services
             var x = await _client.GetSurveysAsync(request).ConfigureAwait(true);
             return x.Body.GetSurveysResult.ToArray();
         }
-
 
         /// <summary>
         /// Gets the type of the survey.

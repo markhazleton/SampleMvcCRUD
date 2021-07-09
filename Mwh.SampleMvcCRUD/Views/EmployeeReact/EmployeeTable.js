@@ -16,15 +16,12 @@ export const EmployeeTable = props => (
                         <td>{employee.name}</td>
                         <td>{employee.username}</td>
                         <td>
-                            <button onClick={() => {props.editRow(employee) }} className="btn btn-primary">Edit</button> | 
+                            <button onClick={() => { props.editRow(employee) }} className="btn btn-primary">Edit</button> |
                             <button onClick={() => props.deleteEmployee(employee.id)} className="btn btn-primary">Delete</button>
                         </td>
-                    </tr>))):(<tr><td colSpan={3}>no employees</td></tr>)
+                    </tr>))) : (<tr><td colSpan={3}>no employees</td></tr>)
             }
 
         </tbody>
     </table >
 );
-
-
-

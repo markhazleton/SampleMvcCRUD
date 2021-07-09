@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "Employee JQuery AJAX";
 }
 <div class="container">
@@ -11,7 +9,6 @@
     </p>
 
     <div id="content-employeelist">
-
     </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -117,7 +114,6 @@
             });
         }
 
-
         function UpdateEmployee(id, jsonEmpObj) {
             $.ajax({
                 url: '/api/employee/' + id,
@@ -144,6 +140,5 @@
                 error: function (errormessage) { alert(errormessage.responseText); }
             });
         }
-
     </script>
 }

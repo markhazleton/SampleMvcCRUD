@@ -46,7 +46,7 @@ namespace Mwh.Sample.Common.Repositories
         /// <returns>Task&lt;EmployeeModel&gt;.</returns>
         public Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
         {
-            return _employeeRepository.FindByIdAsync(id,token);
+            return _employeeRepository.FindByIdAsync(id, token);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Mwh.Sample.Common.Repositories
 
             try
             {
-                var response = await _employeeRepository.Update(employee,token).ConfigureAwait(true);
+                var response = await _employeeRepository.Update(employee, token).ConfigureAwait(true);
                 return new EmployeeResponse(response);
             }
             catch (Exception ex)
@@ -119,7 +119,7 @@ namespace Mwh.Sample.Common.Repositories
 
             try
             {
-                var response = await _employeeRepository.Remove(existingEmployee,token).ConfigureAwait(true);
+                var response = await _employeeRepository.Remove(existingEmployee, token).ConfigureAwait(true);
 
                 if (response)
                     existingEmployee.id = 0;

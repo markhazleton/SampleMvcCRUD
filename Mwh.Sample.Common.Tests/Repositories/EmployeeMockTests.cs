@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.Common.Models;
-using System.Linq;
 using Mwh.Sample.Common.Repositories;
+using System.Linq;
 
 namespace Mwh.Sample.Common.Tests.Repositories
 {
@@ -86,7 +86,6 @@ namespace Mwh.Sample.Common.Tests.Repositories
             // Assert
             Assert.IsFalse(result.IsValid);
         }
-
 
         /// <summary>
         /// Defines the test method EmployeeMockTest.

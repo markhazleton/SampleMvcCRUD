@@ -4,7 +4,9 @@ namespace Mwh.Sample.Core.Data.Models
 {
     public class EmployeeContext : DbContext
     {
-        public EmployeeContext() { }
+        public EmployeeContext()
+        {
+        }
 
         public EmployeeContext(DbContextOptions options) : base(options)
         {
@@ -18,6 +20,7 @@ namespace Mwh.Sample.Core.Data.Models
                 optionsBuilder.UseInMemoryDatabase("DefaultDatabase");
             }
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // modelBuilder.Entity<Employee>().ToTable("Employees");

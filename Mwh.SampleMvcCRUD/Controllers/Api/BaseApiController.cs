@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Mwh.Sample.Common.Models;
 using System.Reflection;
 
@@ -20,8 +19,5 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         {
             return new ApplicationStatus(Assembly.GetExecutingAssembly());
         }
-
-
     }
-
 }

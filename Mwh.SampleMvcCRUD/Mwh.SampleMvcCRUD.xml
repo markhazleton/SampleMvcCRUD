@@ -30,7 +30,7 @@
             Deletes a given employee according to an identifier.
             </summary>
             /// <remarks>
-            Id must be a valid employee 
+            Id must be a valid employee
             </remarks>
             <param name="id">Employee identifier.</param>
             <returns>Response for the request.</returns>
@@ -80,9 +80,9 @@
             </summary>
         </member>
         <member name="F:Mwh.Sample.Core.WebApi.Controllers.BaseController.cts">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="M:Mwh.Sample.Core.WebApi.Controllers.BaseController.#ctor">
             <summary>
@@ -95,15 +95,15 @@
             </summary>
         </member>
         <member name="F:Mwh.Sample.Core.WebApi.Controllers.EmployeeController.client">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="M:Mwh.Sample.Core.WebApi.Controllers.EmployeeController.#ctor(Mwh.Sample.Common.Interfaces.IEmployeeClient)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="employeeClient"></param>
+             </summary>
+             <param name="employeeClient"></param>
         </member>
         <member name="M:Mwh.Sample.Core.WebApi.Controllers.EmployeeController.GetEmployeeDelete(System.Int32)">
             <summary>
@@ -153,10 +153,10 @@
             </summary>
         </member>
         <member name="M:Mwh.Sample.Core.WebApi.Controllers.ErrorResource.#ctor(System.Collections.Generic.List{System.String})">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="messages"></param>
+             </summary>
+             <param name="messages"></param>
         </member>
         <member name="M:Mwh.Sample.Core.WebApi.Controllers.ErrorResource.#ctor(System.String)">
             <summary>
@@ -247,11 +247,11 @@
             <returns></returns>
         </member>
         <member name="M:Mwh.Sample.Core.WebApi.Extensions.CustomSwaggerExtensions.AddCustomSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
+             </summary>
+             <param name="services"></param>
+             <returns></returns>
         </member>
     </members>
 </doc>

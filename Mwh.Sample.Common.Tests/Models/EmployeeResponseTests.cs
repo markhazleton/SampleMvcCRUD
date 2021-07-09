@@ -10,9 +10,9 @@ namespace Mwh.Sample.Common.Tests.Models
         public void EmployeeResponse_Expected()
         {
             // Arrange
-            var employee = new EmployeeModel() 
-            { 
-                id=1,
+            var employee = new EmployeeModel()
+            {
+                id = 1,
                 Age = 20,
                 Name = "Test Employee",
                 State = "TX",
@@ -25,7 +25,7 @@ namespace Mwh.Sample.Common.Tests.Models
 
             // Assert
             Assert.IsNotNull(employeeResponse);
-            Assert.AreEqual(employeeResponse.Success,true);
+            Assert.AreEqual(employeeResponse.Success, true);
         }
     }
 }

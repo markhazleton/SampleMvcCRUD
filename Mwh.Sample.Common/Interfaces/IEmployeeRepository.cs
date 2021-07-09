@@ -16,6 +16,7 @@ namespace Mwh.Sample.Common.Interfaces
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Task&lt;IEnumerable&lt;EmployeeModel&gt;&gt;.</returns>
         Task<IEnumerable<EmployeeModel>> ListAsync(CancellationToken token);
+
         /// <summary>
         /// Adds the asynchronous.
         /// </summary>
@@ -23,6 +24,7 @@ namespace Mwh.Sample.Common.Interfaces
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Task.</returns>
         Task<EmployeeModel> AddAsync(EmployeeModel employee, CancellationToken token);
+
         /// <summary>
         /// Finds the by identifier asynchronous.
         /// </summary>
@@ -30,6 +32,7 @@ namespace Mwh.Sample.Common.Interfaces
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Task&lt;EmployeeModel&gt;.</returns>
         Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token);
+
         /// <summary>
         /// Updates the specified employee.
         /// </summary>
@@ -37,6 +40,7 @@ namespace Mwh.Sample.Common.Interfaces
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Task&lt;EmployeeModel&gt;.</returns>
         Task<EmployeeModel> Update(EmployeeModel employee, CancellationToken token);
+
         /// <summary>
         /// Removes the specified employee.
         /// </summary>

@@ -39,3 +39,13 @@ To the many other teachers and developers that post sample code under open sourc
 Copyright 2018-2021 Mark Hazleton
 
 Code released under the MIT License.
+
+## Azure Key Vault
+- [AZ Identity](https://azidentity.azurewebsites.net/) 
+- [Key Vault - 401](https://azidentity.azurewebsites.net/post/2019/07/31/key-vault-client-why-am-i-seeing-http-401)
+- [Azure KeyVault ReadMe](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0/sdk/keyvault/Azure.Security.KeyVault.Secrets/README.md)
+
+
+## Other
+
+

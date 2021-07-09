@@ -10,7 +10,7 @@ namespace Mwh.Sample.Core.WebApi.Extensions
     public static class CustomSwaggerExtensions
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>

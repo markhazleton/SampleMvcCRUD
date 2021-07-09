@@ -14,9 +14,20 @@ namespace Mwh.Sample.Core.Data.Services
     {
         private Models.EmployeeContext _context;
 
-        public EmployeeService() { _context = new EmployeeContext(); }
-        public EmployeeService(Models.EmployeeContext context) { _context = context; }
-        public EmployeeService(DbContextOptions options) { _context = new EmployeeContext(options); }
+        public EmployeeService()
+        {
+            _context = new EmployeeContext();
+        }
+
+        public EmployeeService(Models.EmployeeContext context)
+        {
+            _context = context;
+        }
+
+        public EmployeeService(DbContextOptions options)
+        {
+            _context = new EmployeeContext(options);
+        }
 
         private EmployeeModel Create(Models.Employee item)
         {
@@ -32,6 +43,7 @@ namespace Mwh.Sample.Core.Data.Services
                 id = item.Id
             };
         }
+
         private Models.Employee Create(EmployeeModel item)
         {
             return new Employee()
@@ -45,7 +57,10 @@ namespace Mwh.Sample.Core.Data.Services
             };
         }
 
-        private EmployeeModel[] Get(List<Models.Employee> list) { return list.Select(s => Create(s)).ToArray(); }
+        private EmployeeModel[] Get(List<Models.Employee> list)
+        {
+            return list.Select(s => Create(s)).ToArray();
+        }
 
         public int AddMultipleEmployees(string[] namelist)
         {
@@ -93,12 +108,18 @@ namespace Mwh.Sample.Core.Data.Services
             return response;
         }
 
-        public void Dispose() { ((IDisposable)_context).Dispose(); }
+        public void Dispose()
+        {
+            ((IDisposable)_context).Dispose();
+        }
 
         public async Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
         { return Create(await _context.Employees.FindAsync(id).ConfigureAwait(false)); }
 
-        public EmployeeModel[] Get() { return Get(_context.Employees.ToList()); }
+        public EmployeeModel[] Get()
+        {
+            return Get(_context.Employees.ToList());
+        }
 
         public async Task<IEnumerable<EmployeeModel>> GetAsync(CancellationToken token)
         { return Get(await _context.Employees.ToListAsync().ConfigureAwait(false)); }
@@ -188,7 +209,6 @@ namespace Mwh.Sample.Core.Data.Services
             catch (Exception ex)
             {
                 return new EmployeeResponse($"Exception:{ex.Message}");
-
             }
 
             var newEmp = await _context.Employees
@@ -201,7 +221,7 @@ namespace Mwh.Sample.Core.Data.Services
 
         public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
         {
-            if (employee ==null)
+            if (employee == null)
                 return new EmployeeResponse($"Can not update null employee");
 
             if (employee.id != id)

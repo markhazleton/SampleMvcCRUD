@@ -9,10 +9,13 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     public class SurveyController : Controller
     {
         private SurveyService surveyService;
+
         public SurveyController()
         { surveyService = new SurveyService(Guid.Parse("85AAA903-3C57-4FB0-B91D-B46633C7C637").ToString()); }
+
         public async Task<IActionResult> Index()
         { return View(await surveyService.GetSurveyCollection().ConfigureAwait(false)); }
+
         [Route("/survey/{surveyId}")]
         public async Task<IActionResult> Edit(int surveyId)
         {

@@ -14,7 +14,6 @@ namespace Mwh.Sample.Core.Data.Tests.Models
 
             // Act
 
-
             // Assert
             Assert.IsNotNull(employeeContext);
         }

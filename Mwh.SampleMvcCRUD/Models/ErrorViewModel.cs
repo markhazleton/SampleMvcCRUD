@@ -1,5 +1,3 @@
-using System;
-
 namespace Mwh.Sample.Core.WebApi.Models
 {
     public class ErrorViewModel

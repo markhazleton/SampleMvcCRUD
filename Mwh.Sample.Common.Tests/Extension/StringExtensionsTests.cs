@@ -12,8 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using Mwh.Sample.Common.Extension;
+using System;
 
 namespace Mwh.Sample.Common.Tests.Extension
 {
@@ -23,7 +23,6 @@ namespace Mwh.Sample.Common.Tests.Extension
     [TestClass()]
     public class StringExtensionsTests
     {
-
         /// <summary>
         /// Defines the test method GetDecimalFromStringTest.
         /// </summary>
@@ -253,6 +252,7 @@ namespace Mwh.Sample.Common.Tests.Extension
             string myTest = "01";
             Assert.AreEqual("01", myTest.Right(8));
         }
+
         /// <summary>
         /// Defines the test method TrimIfNotNullTest.
         /// </summary>

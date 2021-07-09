@@ -19,6 +19,7 @@ namespace Mwh.Sample.Common.Extension
         /// Initializes a new instance of the <see cref="AjaxDictionary{TKey, TValue}"/> class.
         /// </summary>
         public AjaxDictionary() { _Dictionary = new Dictionary<TKey, TValue>(); }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AjaxDictionary{TKey, TValue}"/> class.
         /// </summary>
@@ -54,6 +55,7 @@ namespace Mwh.Sample.Common.Extension
         /// </summary>
         /// <param name="value">The value.</param>
         public void Add(Dictionary<TKey, TValue> value) { _Dictionary = value; }
+
         /// <summary>
         /// Adds the specified key.
         /// </summary>

@@ -16,8 +16,12 @@
       "library": "jquery-validation-unobtrusive@3.2.12"
     },
     {
-      "library": "datatables.net@2.1.1",
-      "destination": "wwwroot/lib/datatables"
+      "destination": "wwwroot/lib/datatables",
+      "library": "datatables.net@2.1.1"
+    },
+    {
+      "destination": "wwwroot/lib/datatables.net-bs/",
+      "library": "datatables.net-bs5@1.10.25"
     },
     {
       "destination": "wwwroot/lib/bootstrap/",

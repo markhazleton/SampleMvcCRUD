@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Mwh.Sample.Common.Models;
 using System.Collections.Generic;
 
@@ -11,7 +10,6 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     [Route("/status")]
     public class StatusController : BaseApiController
     {
-
         /// <summary>
         /// Returns Current Application Status
         /// </summary>
@@ -22,6 +20,5 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         {
             return GetApplicationStatus();
         }
-
     }
 }

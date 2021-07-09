@@ -1,5 +1,4 @@
-﻿
-namespace Mwh.Sample.Common.Models
+﻿namespace Mwh.Sample.Common.Models
 {
     /// <summary>
     /// Class EmployeeResponse.
@@ -8,6 +7,10 @@ namespace Mwh.Sample.Common.Models
     /// <seealso cref="Mwh.Sample.Common.Repositories.BaseResponse{Mwh.Sample.Common.Models.EmployeeModel}" />
     public class EmployeeResponse : BaseResponse<EmployeeModel>
     {
+        public EmployeeResponse()
+        { 
+        }
+
         /// <summary>
         /// Creates a success response.
         /// </summary>

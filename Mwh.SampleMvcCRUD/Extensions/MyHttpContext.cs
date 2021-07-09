@@ -12,6 +12,5 @@ namespace Mwh.Sample.Core.WebApi.Extensions
 
         internal static void Configure(IHttpContextAccessor contextAccessor)
         { m_httpContextAccessor = contextAccessor; }
-
     }
 }

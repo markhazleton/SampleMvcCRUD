@@ -7,7 +7,7 @@ namespace Mwh.Sample.Common.Models
 {
     public class ApplicationStatus
     {
-        Assembly _assembly;
+        private Assembly _assembly;
 
         public ApplicationStatus(Assembly assembly)
         {
@@ -30,7 +30,6 @@ namespace Mwh.Sample.Common.Models
                 Tests.Add("Employee Database", "Failure");
                 Messages.Add(EE.ToString());
             }
-
         }
 
         private DateTime GetBuildDate()

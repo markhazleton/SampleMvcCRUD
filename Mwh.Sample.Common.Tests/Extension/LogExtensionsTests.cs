@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.Common.Extension;
 using Mwh.Sample.Common.Models;
-using System;
 using System.Collections.Generic;
 
 namespace Mwh.Sample.Common.Tests.Extension
@@ -22,6 +21,7 @@ namespace Mwh.Sample.Common.Tests.Extension
             // Assert
             Assert.IsNotNull(result);
         }
+
         [TestMethod]
         public void GetSerializeObjectString_StateUnderTest_ExpectedBehaviorNull()
         {
@@ -49,6 +49,7 @@ namespace Mwh.Sample.Common.Tests.Extension
             // Assert
             Assert.IsNotNull(result);
         }
+
         [TestMethod]
         public void IsSimpleType_StateUnderTest_ExpectedBehaviorFalse()
         {
@@ -62,7 +63,6 @@ namespace Mwh.Sample.Common.Tests.Extension
             // Assert
             Assert.IsNotNull(result);
             Assert.IsFalse(result);
-
         }
 
         [TestMethod]
@@ -78,7 +78,6 @@ namespace Mwh.Sample.Common.Tests.Extension
             // Assert
             Assert.IsNotNull(result);
             Assert.IsTrue(result);
-
         }
     }
 }

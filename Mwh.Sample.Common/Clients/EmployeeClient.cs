@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 namespace Mwh.Sample.Common.Clients
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class EmployeeClient : ClientBase, IEmployeeClient
     {
         public EmployeeClient(IHttpContextAccessor httpContextAccessor) : base($"{httpContextAccessor.HttpContext.Request.Scheme}://{httpContextAccessor.HttpContext.Request.Host}{httpContextAccessor.HttpContext.Request.PathBase}", "employee")
         {
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeeClient"/> class.
         /// </summary>
@@ -22,8 +23,8 @@ namespace Mwh.Sample.Common.Clients
         /// <param name="appName">Name of the application.</param>
         public EmployeeClient(string apiPath, string appName) : base(apiPath, appName)
         {
-
         }
+
         /// <summary>
         /// delete as an asynchronous operation.
         /// </summary>

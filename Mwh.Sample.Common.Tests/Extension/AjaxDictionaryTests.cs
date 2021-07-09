@@ -12,9 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
 using Mwh.Sample.Common.Extension;
+using System.Linq;
 
 namespace Mwh.Sample.Common.Tests.Extension
 {
@@ -24,7 +23,6 @@ namespace Mwh.Sample.Common.Tests.Extension
     [TestClass()]
     public class AjaxDictionaryTests
     {
-
         /// <summary>
         /// Defines the test method AddTest.
         /// </summary>
@@ -46,6 +44,7 @@ namespace Mwh.Sample.Common.Tests.Extension
             myTest.Add(1, "test");
             Assert.AreEqual("test", myTest[1]);
         }
+
         /// <summary>
         /// Defines the test method AjaxDictionaryTest.
         /// </summary>

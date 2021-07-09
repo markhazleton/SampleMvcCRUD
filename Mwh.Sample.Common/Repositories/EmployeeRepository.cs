@@ -33,7 +33,6 @@ namespace Mwh.Sample.Common.Repositories
         {
             token.ThrowIfCancellationRequested();
             return await Task.Run(() => _emp.Update(employee)).ConfigureAwait(true);
-
         }
 
         /// <summary>

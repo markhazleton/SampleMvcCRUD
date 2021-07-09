@@ -40,7 +40,7 @@ export const EditEmployeeForm = props => {
                 </div>
                 <div className="form-group">
                     <button name="submit" type="submit" className="btn btn-primary">Update</button>
-                    <button name="cancel" onClick={()=> props.setEditing(false)} className="btn btn-warning">Cancel</button>
+                    <button name="cancel" onClick={() => props.setEditing(false)} className="btn btn-warning">Cancel</button>
                 </div>
             </form>
         </>

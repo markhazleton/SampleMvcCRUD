@@ -11,10 +11,12 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     public class MvcEmployeeController : BaseController
     {
         private readonly IEmployeeClient client;
+
         public MvcEmployeeController(IEmployeeClient employeeClient) : base()
         {
             client = employeeClient;
         }
+
         /// <summary>
         /// Default Page for MvcEmployeeController
         /// </summary>
@@ -39,14 +41,12 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             return View(emp);
         }
 
-
         /// <summary>
         /// Load Page to Create A New Employee
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         public ActionResult Create() { return View(new EmployeeModel()); }
-
 
         /// <summary>
         /// Save New Employee
@@ -76,7 +76,6 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
             return View(emp);
         }
-
 
         /// <summary>
         /// Save Employee
@@ -108,7 +107,6 @@ namespace Mwh.Sample.Core.WebApi.Controllers
             var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
             return View(emp);
         }
-
 
         /// <summary>
         /// Delete Employee

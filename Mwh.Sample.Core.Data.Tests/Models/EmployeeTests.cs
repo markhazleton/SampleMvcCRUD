@@ -22,7 +22,6 @@ namespace Mwh.Sample.Core.Data.Tests.Models
             // Act
             employee.Age = 21;
 
-
             // Assert
             Assert.IsNotNull(employee);
         }

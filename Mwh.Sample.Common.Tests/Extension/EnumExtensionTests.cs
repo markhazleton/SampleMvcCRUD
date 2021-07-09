@@ -12,8 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.ComponentModel.DataAnnotations;
 using Mwh.Sample.Common.Extension;
+using System.ComponentModel.DataAnnotations;
 
 namespace Mwh.Sample.Common.Tests.Extension
 {
@@ -27,17 +27,18 @@ namespace Mwh.Sample.Common.Tests.Extension
         /// </summary>
         [Display(Name = "Unknown", Description = "Unknown")]
         Unknown = 0,
+
         /// <summary>
         /// The first
         /// </summary>
         [Display(Name = "1st", Description = "The First One")]
         First = 1,
+
         /// <summary>
         /// The second
         /// </summary>
         Second = 2
     }
-
 
     /// <summary>
     /// Defines test class EnumExtensionTests.
@@ -45,7 +46,6 @@ namespace Mwh.Sample.Common.Tests.Extension
     [TestClass]
     public class EnumExtensionTests
     {
-
         /// <summary>
         /// Defines the test method EnumGetDisplayNameExpectedBehavior.
         /// </summary>
@@ -61,6 +61,7 @@ namespace Mwh.Sample.Common.Tests.Extension
             // Assert
             Assert.AreEqual(result, "1st");
         }
+
         /// <summary>
         /// Defines the test method EnumGetDisplayNameMissingDisplayName.
         /// </summary>
@@ -76,6 +77,7 @@ namespace Mwh.Sample.Common.Tests.Extension
             // Assert
             Assert.AreEqual(result, "Second");
         }
+
         /// <summary>
         /// Defines the test method EnumToDictionaryExpectedBehavior.
         /// </summary>

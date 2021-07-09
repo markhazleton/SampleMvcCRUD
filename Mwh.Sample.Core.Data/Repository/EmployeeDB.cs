@@ -8,16 +8,19 @@ namespace Mwh.Sample.Core.Data.Repository
 {
     public class EmployeeDB : IEmployeeDB
     {
-        Models.EmployeeContext _context;
+        private Models.EmployeeContext _context;
+
         public EmployeeDB(Models.EmployeeContext context)
         {
             _context = context;
         }
+
         private List<EmployeeModel> Create(List<Models.Employee> list)
         {
             if (list == null) return new List<EmployeeModel>();
             return list.Select(item => Create(item)).OrderBy(x => x.Name).ToList();
         }
+
         private EmployeeModel Create(Models.Employee s)
         {
             if (s == null) return new EmployeeModel();
@@ -78,7 +81,6 @@ namespace Mwh.Sample.Core.Data.Repository
                 var saveUser = _context.Employees.Where(w => w.Id == emp.id).FirstOrDefault();
                 if (saveUser != null)
                 {
-
                     _context.Attach(saveUser);
                     saveUser.Name = emp.Name;
                     saveUser.State = emp.State;

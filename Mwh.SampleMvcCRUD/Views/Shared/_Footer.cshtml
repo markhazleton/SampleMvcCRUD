@@ -1,0 +1,23 @@
+﻿@using Mwh.Sample.Common.Models;
+@using System.Reflection;
+
+@{
+    var currentYear = DateTime.Now.Year.ToString();
+    var status = new ApplicationStatus(Assembly.GetExecutingAssembly());
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12" style="float:left">
+            Version: @status.BuildVersion.ToString()
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12" style="text-align:center;">
+            &copy; 2020-@currentYear EmployeeMvcCRUD -
+            <a href="https://linkedin.com/in/markhazleton" target="_blank">Mark Hazleton LinkedIn</a> -
+            <a href="https://github.com/markhazleton" target="_blank">GitHub</a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12" style="float:right">
+            Last Built: @status.BuildVersion.BuildDate.ToLocalTime().ToLongDateString() <br />
+        </div>
+    </div>
+</div>

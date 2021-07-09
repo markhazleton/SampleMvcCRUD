@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.Common.Models;
 using Mwh.Sample.Core.Data.Repository;
-using System;
 
 namespace Mwh.Sample.Core.Data.Tests.Repository
 {
@@ -18,8 +17,6 @@ namespace Mwh.Sample.Core.Data.Tests.Repository
             _ = builder.UseInMemoryDatabase("AddMultipleEmployees");
             employeeDB = new EmployeeDB(new Data.Models.EmployeeContext());
         }
-
-
 
         [TestMethod]
         public void Delete_StateUnderTest_ExpectedBehavior()

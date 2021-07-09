@@ -10,7 +10,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     public abstract class BaseController : Controller
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public readonly CancellationTokenSource cts;
 

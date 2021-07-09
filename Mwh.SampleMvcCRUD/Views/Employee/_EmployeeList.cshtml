@@ -1,44 +1,44 @@
 ﻿@model IEnumerable<Mwh.Sample.Common.Models.EmployeeModel>
 
-    <table class="table table-bordered table-hover">
-        <thead class="thead-dark">
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Department</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>State</th>
-                <th>Country</th>
-                <th>Department</th>
-                <th></th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @item.Age
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @item.Department
+                </td>
+                <td>
+                    <a href="#" class="btn btn-primary" onclick="return loadEmployeeEdit('@item.id')">Edit</a>
+                    <a href="#" class="btn btn-warning" onclick="return loadEmployeeDelete('@item.id')">Delete</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @item.Age
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.State)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Country)
-                    </td>
-                    <td>
-                        @item.Department
-                    </td>
-                    <td>
-                        <a href="#" class="btn btn-primary" onclick="return loadEmployeeEdit('@item.id')">Edit</a>
-                        <a href="#" class="btn btn-warning" onclick="return loadEmployeeDelete('@item.id')">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-        <tfoot></tfoot>
-    </table>
+        }
+    </tbody>
+    <tfoot></tfoot>
+</table>
 <script type="text/javascript">
     $('.table').DataTable();
 </script>

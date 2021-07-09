@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.Common.Models;
 using Mwh.Sample.Core.Data.Services;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -42,7 +41,7 @@ namespace Mwh.Sample.Core.Data.Tests.Services
             // Assert
             Assert.IsNotNull(test);
             Assert.AreEqual(3, result);
-            Assert.AreEqual(employee.Count(), result);
+            Assert.AreEqual(employee.Length, result);
         }
 
         [TestMethod]
@@ -83,7 +82,6 @@ namespace Mwh.Sample.Core.Data.Tests.Services
             // Assert
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsValid);
-
         }
 
         [TestMethod]
@@ -130,11 +128,12 @@ namespace Mwh.Sample.Core.Data.Tests.Services
             // Assert
             Assert.IsNotNull(result);
         }
+
         [TestMethod]
         public async Task Save_StateUnderTest_ValidNew()
         {
             // Arrange
-            EmployeeModel item = new EmployeeModel()
+            EmployeeModel item = new()
             {
                 Name = "Test",
                 Age = 25,
@@ -146,7 +145,7 @@ namespace Mwh.Sample.Core.Data.Tests.Services
             // Act
             var result = service.Save(item);
 
-            var UpdateEmp = await service.FindByIdAsync(result.Resource.id,token).ConfigureAwait(true);
+            var UpdateEmp = await service.FindByIdAsync(result.Resource.id, token).ConfigureAwait(true);
 
             UpdateEmp.Age = 50;
 
@@ -165,7 +164,7 @@ namespace Mwh.Sample.Core.Data.Tests.Services
         public async Task SaveAsync_StateUnderTest_Valid()
         {
             // Arrange
-            EmployeeModel item = new EmployeeModel()
+            EmployeeModel item = new()
             {
                 Name = "Test",
                 Age = 25,
@@ -196,9 +195,7 @@ namespace Mwh.Sample.Core.Data.Tests.Services
             // Assert
             Assert.IsNotNull(result);
             Assert.IsFalse(result.Success);
-
         }
-
 
         [TestMethod]
         public async Task UpdateAsync_StateUnderTest_ExpectedBehavior()

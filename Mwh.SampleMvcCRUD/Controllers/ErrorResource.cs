@@ -7,9 +7,8 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     /// </summary>
     public class ErrorResource
     {
-
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="messages"></param>
         public ErrorResource(List<string> messages) { Messages = messages ?? new List<string>(); }
@@ -27,6 +26,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
                 Messages.Add(message);
             }
         }
+
         /// <summary>
         /// Messages
         /// </summary>
