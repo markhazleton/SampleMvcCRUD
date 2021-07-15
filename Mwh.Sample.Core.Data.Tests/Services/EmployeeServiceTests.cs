@@ -31,17 +31,17 @@ namespace Mwh.Sample.Core.Data.Tests.Services
         public void AddMultiple_StateUnderTest_Valid()
         {
             // Arrange
-            string[] namelist = new string[] { "Mark", "Lesley", "Marlis" };
+            string[] namelist = new string[] { "TestMultiple1", "TestMultiple2", "TestMultiple3" };
 
             // Act
+            var initResults = service.Get();
             var result = service.AddMultipleEmployees(namelist);
-            var employee = service.Get();
-            var test = employee.Where(w => w.Name == "Mark").FirstOrDefault();
+            var afterResults = service.Get();
+            var test = afterResults.Where(w => w.Name == "TestMultiple3").FirstOrDefault();
 
             // Assert
             Assert.IsNotNull(test);
-            Assert.AreEqual(3, result);
-            Assert.AreEqual(employee.Length, result);
+            Assert.AreEqual((initResults.Length+3), afterResults.Length);
         }
 
         [TestMethod]

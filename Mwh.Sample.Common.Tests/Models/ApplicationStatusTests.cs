@@ -13,11 +13,14 @@ namespace Mwh.Sample.Common.Tests.Models
             // Arrange
             var applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
 
+            var mytest = applicationStatus.BuildVersion.ToString();
+
             // Act
 
 
             // Assert
             Assert.IsNotNull(applicationStatus);
+            Assert.IsNotNull(mytest);
         }
     }
 }

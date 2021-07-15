@@ -51,17 +51,28 @@ namespace Mwh.Sample.Common.Extension
         }
 
         /// <summary>
-        /// Adds the specified value.
+        /// Adds the specified dictionary into the current dictionary
         /// </summary>
         /// <param name="value">The value.</param>
-        public void Add(Dictionary<TKey, TValue> value) { _Dictionary = value; }
+        public void Add(Dictionary<TKey, TValue> value) {
+            foreach (var item in value.Keys)
+            {
+                Add(item,value[item]);
+            }
+        }
 
         /// <summary>
         /// Adds the specified key.
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        public void Add(TKey key, TValue value) { _Dictionary.Add(key, value); }
+        public void Add(TKey key, TValue value)
+        {
+            if (_Dictionary.ContainsKey(key))
+                _Dictionary[key] = value;
+            else
+                _Dictionary.Add(key, value);
+        }
 
         /// <summary>
         /// Gets the list.

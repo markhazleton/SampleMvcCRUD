@@ -5,10 +5,17 @@ using System.Reflection;
 
 namespace Mwh.Sample.Common.Models
 {
+    /// <summary>
+    /// ApplicationStatus
+    /// </summary>
     public class ApplicationStatus
     {
         private Assembly _assembly;
 
+        /// <summary>
+        /// ApplicationStatus
+        /// </summary>
+        /// <param name="assembly"></param>
         public ApplicationStatus(Assembly assembly)
         {
             _assembly = assembly;
@@ -21,15 +28,6 @@ namespace Mwh.Sample.Common.Models
                 Revision = oVer.Revision,
                 BuildDate = GetBuildDate()
             };
-            try
-            {
-                Tests.Add("Employee Database", "Success");
-            }
-            catch (Exception EE)
-            {
-                Tests.Add("Employee Database", "Failure");
-                Messages.Add(EE.ToString());
-            }
         }
 
         private DateTime GetBuildDate()
@@ -53,11 +51,29 @@ namespace Mwh.Sample.Common.Models
             return default;
         }
 
+        /// <summary>
+        /// BuildVersion
+        /// </summary>
         public BuildVersion BuildVersion { get; set; }
+        /// <summary>
+        /// Features
+        /// </summary>
         public Dictionary<string, string> Features { get; set; } = new Dictionary<string, string>();
+        /// <summary>
+        /// Messages
+        /// </summary>
         public List<string> Messages { get; set; } = new List<string>();
+        /// <summary>
+        /// Region
+        /// </summary>
         public string Region { get; set; } = System.Environment.GetEnvironmentVariable("Region") ?? System.Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME");
+        /// <summary>
+        /// Status 
+        /// </summary>
         public ServiceStatus Status { get; set; } = ServiceStatus.Online;
+        /// <summary>
+        /// Tests 
+        /// </summary>
         public Dictionary<string, string> Tests { get; set; } = new Dictionary<string, string>();
     }
 }

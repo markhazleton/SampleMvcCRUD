@@ -13,6 +13,7 @@
 // ***********************************************************************
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.Common.Extension;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Mwh.Sample.Common.Tests.Extension
@@ -38,11 +39,25 @@ namespace Mwh.Sample.Common.Tests.Extension
         /// Defines the test method AddTest1.
         /// </summary>
         [TestMethod()]
-        public void AddTest1()
+        public void AddTest_Duplicate ()
         {
             var myTest = new AjaxDictionary<int, string>();
             myTest.Add(1, "test");
-            Assert.AreEqual("test", myTest[1]);
+            myTest[2] = "test";
+            myTest.Add(3, "initial");
+
+            var tempDic = new Dictionary<int, string>();
+            tempDic.Add(3, "test3");
+            tempDic.Add(4, "test4");
+            myTest.Add(tempDic);
+
+            myTest.Add(1, "test1");
+            myTest[2] = "test2";
+
+            Assert.AreEqual("test1", myTest[1]);
+            Assert.AreEqual("test2", myTest[2]);
+            Assert.AreEqual("test3", myTest[3]);
+            Assert.AreEqual("test4", myTest[4]);
         }
 
         /// <summary>
