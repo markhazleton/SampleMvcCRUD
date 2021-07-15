@@ -5,6 +5,10 @@
     <Copyright>Copyright © 2019-2021 Mark Hazleton</Copyright>
     <IsPackable>false</IsPackable>
     <Version>5.0.0</Version>
+    <AssemblyVersion>5.0.*</AssemblyVersion>
+    <Deterministic>false</Deterministic>
+    <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
+    <ApplicationInsightsResourceId>/subscriptions/1e3f18e4-ceb9-4033-8ce0-f17b8af6225f/resourceGroups/HelloWorld/providers/microsoft.insights/components/MwhSampleMvcCRUD</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>

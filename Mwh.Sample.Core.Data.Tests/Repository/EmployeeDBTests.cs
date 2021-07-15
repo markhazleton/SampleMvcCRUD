@@ -18,8 +18,43 @@ namespace Mwh.Sample.Core.Data.Tests.Repository
             employeeDB = new EmployeeDB(new Data.Models.EmployeeContext());
         }
 
+
         [TestMethod]
-        public void Delete_StateUnderTest_ExpectedBehavior()
+        public void Delete_StateUnderTest_ExpectedBehaviorNewEmployee()
+        {
+            // Arrange
+            var newEmp = new EmployeeModel()
+            {
+                Age = 33,
+                Name = "Test User",
+                State = "Texas",
+                Country = "USA",
+                Department = EmployeeDepartment.IT
+            };
+
+            // Act
+
+            // Get Current count of employees
+            var initResult = employeeDB.EmployeeCollection().ToArray();
+
+            // Add New Employee with Update
+            var addResult = employeeDB.Update(newEmp);
+            // Get updated count of employees
+            var updatedResult = employeeDB.EmployeeCollection().ToArray();
+            /// Delete the Employee
+            var result = employeeDB.Delete(addResult.id);
+            // Get result after delete
+            var finalResult = employeeDB.EmployeeCollection().ToArray();
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(finalResult.Length,initResult.Length);
+
+        }
+
+
+        [TestMethod]
+        public void Delete_StateUnderTest_ExpectedBehaviorNotFound()
         {
             // Arrange
             int ID = 0;
@@ -57,7 +92,48 @@ namespace Mwh.Sample.Core.Data.Tests.Repository
         }
 
         [TestMethod]
-        public void Update_StateUnderTest_ExpectedBehavior()
+        public void Update_StateUnderTest_ExpectedBehaviorNewEmployee()
+        {
+            // Arrange
+            var newEmp = new EmployeeModel()
+            {
+                Age = 33,
+                Name = "Test User",
+                State = "Texas",
+                Country = "USA",
+                Department = EmployeeDepartment.IT
+            };
+
+            // Act
+
+            // Get Current count of employees
+            var initResult = employeeDB.EmployeeCollection().ToArray();
+
+            // Add New Employee with Update
+            var addResult = employeeDB.Update(newEmp);
+
+            // Get updated count of employees
+            var updatedResult = employeeDB.EmployeeCollection().ToArray();
+            /// Update the Employee
+            addResult.Name = "Test User 2";
+            addResult.Age = 44;
+            addResult.State = "FL";
+            addResult.Department = EmployeeDepartment.Accounting;
+            var result = employeeDB.Update(addResult);
+            // Get result after update
+            var finalResult = employeeDB.Employee(result.id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(addResult.id,result.id);
+            Assert.AreNotEqual(initResult.Length, updatedResult.Length);
+            Assert.AreEqual(finalResult.Age, 44);
+            Assert.AreEqual(finalResult.State, "FL");
+
+        }
+
+        [TestMethod]
+        public void Update_StateUnderTest_ExpectedBehaviorNull()
         {
             // Arrange
             EmployeeModel emp = null;

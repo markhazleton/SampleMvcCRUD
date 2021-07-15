@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : Mwh.Sample.Common
-// Author           : mark
-// Created          : 04-04-2020
-//
-// Last Modified By : mark
-// Last Modified On : 04-04-2020
-// ***********************************************************************
-// <copyright file="StringExtensions.cs" company="Mark Hazleton">
-//     Copyright 2020 Mark Hazleton
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System;
+﻿using System;
 
 namespace Mwh.Sample.Common.Extension
 {
@@ -20,79 +7,20 @@ namespace Mwh.Sample.Common.Extension
     /// </summary>
     public static class StringExtensions
     {
-        /// <summary>
-        /// Extension Method for String to Trim and Check for null in a single function
-        /// </summary>
-        /// <param name="value">The String to be trimmed</param>
-        /// <returns>Trimmed string or string.empty is the value was null</returns>
-        public static string TrimIfNotNull(this string value)
-        {
-            if (value != null)
-            {
-                return value.Trim();
-            }
-            return string.Empty;
-        }
 
         /// <summary>
-        /// Lefts the specified length.
+        /// Gets the decimal from string.
         /// </summary>
         /// <param name="str">The string.</param>
-        /// <param name="length">The length.</param>
-        /// <returns>System.String.</returns>
-        public static string Left(this string str, int length)
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns>System.Decimal.</returns>
+        public static decimal GetDecimalFromString(this string str, decimal defaultValue)
         {
-            if (str == null)
-                return string.Empty;
-            if (str.Length <= length)
-                return str;
-            return str.Substring(0, Math.Min(length, str.Length));
-        }
-
-        /// <summary>
-        /// Rights the specified length.
-        /// </summary>
-        /// <param name="str">The string.</param>
-        /// <param name="length">The length.</param>
-        /// <returns>System.String.</returns>
-        public static string Right(this string str, int length)
-        {
-            if (str == null)
-                return string.Empty;
-            if (str.Length <= length)
-                return str;
-            return str.Substring(str.Length - Math.Min(length, str.Length));
-        }
-
-        /// <summary>
-        /// Indexes the of NTH.
-        /// </summary>
-        /// <param name="str">The string.</param>
-        /// <param name="value">The value.</param>
-        /// <param name="nth">The NTH.</param>
-        /// <returns>System.Int32.</returns>
-        /// <exception cref="ArgumentException">Can not find the zeroth index of substring in string. Must start with 1</exception>
-        public static int IndexOfNth(this string str, string value, int nth = 1)
-        {
-            if (str == null)
-                return 0;
-
-            if (value == null)
-                return 0;
-
-            if (nth <= 0)
-                throw new ArgumentException("Can not find the zeroth index of substring in string. Must start with 1");
-
-            int offset = str.IndexOf(value);
-
-            for (int i = 1; i < nth; i++)
-            {
-                if (offset == -1)
-                    return -1;
-                offset = str.IndexOf(value, offset + 1);
-            }
-
-            return offset;
+            decimal returnDecimal = defaultValue;
+            Boolean parsed = Decimal.TryParse(str, out returnDecimal);
+            if (!parsed)
+                returnDecimal = defaultValue;
+            return returnDecimal;
         }
 
         /// <summary>
@@ -131,18 +59,77 @@ namespace Mwh.Sample.Common.Extension
         }
 
         /// <summary>
-        /// Gets the decimal from string.
+        /// Indexes the of NTH.
         /// </summary>
         /// <param name="str">The string.</param>
-        /// <param name="defaultValue">The default value.</param>
-        /// <returns>System.Decimal.</returns>
-        public static decimal GetDecimalFromString(this string str, decimal defaultValue)
+        /// <param name="value">The value.</param>
+        /// <param name="nth">The NTH.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="ArgumentException">Can not find the zeroth index of substring in string. Must start with 1</exception>
+        public static int IndexOfNth(this string str, string value, int nth = 1)
         {
-            decimal returnDecimal = defaultValue;
-            Boolean parsed = Decimal.TryParse(str, out returnDecimal);
-            if (!parsed)
-                returnDecimal = defaultValue;
-            return returnDecimal;
+            if (str == null)
+                return 0;
+
+            if (value == null)
+                return 0;
+
+            if (nth <= 0)
+                throw new ArgumentException("Can not find the zeroth index of substring in string. Must start with 1");
+
+            int offset = str.IndexOf(value);
+
+            for (int i = 1; i < nth; i++)
+            {
+                if (offset == -1)
+                    return -1;
+                offset = str.IndexOf(value, offset + 1);
+            }
+
+            return offset;
+        }
+
+        /// <summary>
+        /// Lefts the specified length.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="length">The length.</param>
+        /// <returns>System.String.</returns>
+        public static string Left(this string str, int length)
+        {
+            if (str == null)
+                return string.Empty;
+            if (str.Length <= length)
+                return str;
+            return str.Substring(0, Math.Min(length, str.Length));
+        }
+
+        /// <summary>
+        /// Rights the specified length.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="length">The length.</param>
+        /// <returns>System.String.</returns>
+        public static string Right(this string str, int length)
+        {
+            if (str == null)
+                return string.Empty;
+            if (str.Length <= length)
+                return str;
+            return str.Substring(str.Length - Math.Min(length, str.Length));
+        }
+        /// <summary>
+        /// Extension Method for String to Trim and Check for null in a single function
+        /// </summary>
+        /// <param name="value">The String to be trimmed</param>
+        /// <returns>Trimmed string or string.empty is the value was null</returns>
+        public static string TrimIfNotNull(this string value)
+        {
+            if (value != null)
+            {
+                return value.Trim();
+            }
+            return string.Empty;
         }
     }
 }
