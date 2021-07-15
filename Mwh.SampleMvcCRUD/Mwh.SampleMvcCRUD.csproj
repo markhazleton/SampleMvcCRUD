@@ -16,7 +16,7 @@
 
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\GitHub\markhazleton\SampleMvcCRUD\Mwh.SampleMvcCRUD\Mwh.SampleMvcCRUD.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\net5.0\Mwh.SampleMvcCRUD.xml</DocumentationFile>
     <OutputPath>bin\Debug\net5.0\</OutputPath>
     <NoWarn>1701;1702;1591;</NoWarn>
   </PropertyGroup>
@@ -41,10 +41,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
   <ItemGroup>
