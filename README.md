@@ -1,13 +1,17 @@
 # SampleMvcCRUD
-
-A collection of Asp.Net projects to demonstrate multiple patterns for implementing a simple maintenance (CRUD) user interface
+An Asp.Net MVC Application to demonstrate multiple ways of implementing a simple maintenance (CRUD) user interface
 
 For deployments there is an [Azure DevOps project](https://dev.azure.com/markhazleton/SampleMvcCRUD) with Continuous Integration/Continuous Deployment (CI/CD) pipelines to Azure App Services
 
-Currently hosted at [Azure-MwhSampleCRUD](https://mwhsamplecrud.azurewebsites.net/) and [Azure-MwhSampleCore](https://mwhsamplecore.azurewebsites.net/) 
-## Usage
+The Net5 Web application is hosted:
+- IIS on a Amazon Virtual Machine [EmployeeMvcCrud.controlorigins.com](https://employeemvccrud.controlorigins.com/)
+- Microsoft Azure AppService [https://mwhemployeemvccrud.azurewebsites.net/](https://mwhemployeemvccrud.azurewebsites.net/)
 
-The purpose of this application is to demonstrate various techniques in ASP.Net MVC Framework to do common maintenance activities (also known as Create, Read, Update, Delete or CRUD). 
+Older versions of the applications may still be hosted on Azure (old account)
+- [Azure-MwhSampleCRUD - Framework 4.8](https://mwhsamplecrud.azurewebsites.net/) 
+- [Azure-MwhSampleCore Core 3.1](https://mwhsamplecore.azurewebsites.net/) 
+
+Source code is maintained on GitHub [SampleMvcCRUD](https://github.com/markhazleton/SampleMvcCRUD)
 
 
 ## Customization
