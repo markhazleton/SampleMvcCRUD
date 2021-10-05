@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Mwh.Sample.Common.Interfaces;
 using Mwh.Sample.Common.Models;
+using Mwh.Sample.SoapClient.Services;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
 {
+
+
     /// <summary>
     /// EmployeeApiController
     /// </summary>
@@ -33,7 +36,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [ProducesResponseType(typeof(ErrorResource), 400)]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            CancellationTokenSource cts = new CancellationTokenSource();
+            CancellationTokenSource cts = new();
             var result = await _employeeService.DeleteAsync(id, cts.Token).ConfigureAwait(false);
 
             if (!result.Success)
@@ -53,7 +56,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [ProducesResponseType(typeof(ErrorResource), 400)]
         public async Task<IActionResult> FindByIdAsync(int id)
         {
-            CancellationTokenSource cts = new CancellationTokenSource();
+            CancellationTokenSource cts = new();
             var result = await _employeeService.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
 
             if (result.id != id)
@@ -71,7 +74,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [ProducesResponseType(typeof(IEnumerable<EmployeeModel>), 200)]
         public async Task<IEnumerable<EmployeeModel>> ListAsync()
         {
-            CancellationTokenSource cts = new CancellationTokenSource();
+            CancellationTokenSource cts = new();
             var employees = await _employeeService.GetAsync(cts.Token).ConfigureAwait(false);
             return employees;
         }
@@ -88,7 +91,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         {
             if (employee == null) return BadRequest("Employee was null");
 
-            CancellationTokenSource cts = new CancellationTokenSource();
+            CancellationTokenSource cts = new();
             var result = await _employeeService.SaveAsync(employee, cts.Token).ConfigureAwait(false);
 
             if (!result.Success)
@@ -109,7 +112,7 @@ namespace Mwh.Sample.Core.WebApi.Controllers
         [ProducesResponseType(typeof(ErrorResource), 400)]
         public async Task<IActionResult> PutAsync(int id, [FromBody] EmployeeModel employee)
         {
-            CancellationTokenSource cts = new CancellationTokenSource();
+            CancellationTokenSource cts = new();
             var result = await _employeeService.UpdateAsync(id, employee, cts.Token).ConfigureAwait(false);
             if (!result.Success)
             {

@@ -189,7 +189,7 @@ namespace Mwh.Sample.Common.Clients
         /// <returns>RestClient.</returns>
         protected virtual RestClient GetRestClient()
         {
-            RestClient client = new RestClient { BaseUrl = new Uri(BaseAPIUrl), Timeout = Int32.MaxValue };
+            RestClient client = new() { BaseUrl = new Uri(BaseAPIUrl), Timeout = Int32.MaxValue };
 
             if (client == null)
             {

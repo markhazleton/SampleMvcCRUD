@@ -18,11 +18,6 @@ namespace Mwh.Sample.Common.Models
         public int Build { get; set; }
 
         /// <summary>
-        /// Date of Build
-        /// </summary>
-        public DateTime BuildDate { get; set; }
-
-        /// <summary>
         /// Major Version
         /// </summary>
         public int MajorVersion { get; set; }

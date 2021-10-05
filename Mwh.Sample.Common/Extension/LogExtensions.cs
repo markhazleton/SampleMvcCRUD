@@ -24,9 +24,9 @@ namespace Mwh.Sample.Common.Extension
         {
             try
             {
-                using (StringWriter writer = new StringWriter())
+                using (StringWriter writer = new())
                 {
-                    XmlSerializer oXS = new XmlSerializer(typeof(T));
+                    XmlSerializer oXS = new(typeof(T));
                     var myXML = new XmlDocument();
                     oXS.Serialize(writer, objectToSerialize);
                     myXML.LoadXml(writer.ToString());
@@ -49,9 +49,9 @@ namespace Mwh.Sample.Common.Extension
         {
             try
             {
-                using (StringWriter writer = new StringWriter())
+                using (StringWriter writer = new())
                 {
-                    XmlSerializer oXS = new XmlSerializer(typeof(List<T>));
+                    XmlSerializer oXS = new(typeof(List<T>));
                     var myXML = new XmlDocument();
                     oXS.Serialize(writer, lstObjectToSerialize);
                     myXML.LoadXml(writer.ToString());
@@ -98,7 +98,7 @@ namespace Mwh.Sample.Common.Extension
 
             Type type = record.GetType();
             PropertyInfo[] properties = type.GetProperties();
-            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            Dictionary<string, object> dictionary = new();
             foreach (PropertyInfo propertyInfo in properties)
             {
                 if (propertyInfo != null)
@@ -120,7 +120,7 @@ namespace Mwh.Sample.Common.Extension
         /// <returns>String</returns>
         private static string GetTextObjectString(this object record)
         {
-            StringBuilder recordLog = new StringBuilder();
+            StringBuilder recordLog = new();
             Dictionary<string, object> recordDictionary = GetDictionaryWithPropertiesForOneRecord(record);
             int propertyCounter = 0;
             try

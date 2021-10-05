@@ -74,7 +74,7 @@ namespace Mwh.Sample.Common.Extension
             /// <summary>
             /// The defined values
             /// </summary>
-            public static readonly HashSet<T> DefinedValues = new HashSet<T>((T[])Enum.GetValues(typeof(T)));
+            public static readonly HashSet<T> DefinedValues = new((T[])Enum.GetValues(typeof(T)));
         }
     }
 }

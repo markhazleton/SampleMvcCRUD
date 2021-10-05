@@ -10,7 +10,9 @@ namespace Mwh.Sample.Common.Models
     /// </summary>
     public class ApplicationStatus
     {
-        private Assembly _assembly;
+        private readonly Assembly _assembly;
+
+        public DateTime BuildDate { get; set; }
 
         /// <summary>
         /// ApplicationStatus
@@ -19,17 +21,18 @@ namespace Mwh.Sample.Common.Models
         public ApplicationStatus(Assembly assembly)
         {
             _assembly = assembly;
-            System.Version oVer = assembly?.GetName().Version;
+            BuildDate = GetBuildDate();
+            Version oVer = assembly?.GetName().Version;
             BuildVersion = new BuildVersion()
             {
                 MajorVersion = oVer.Major,
                 MinorVersion = oVer.Minor,
                 Build = oVer.Build,
-                Revision = oVer.Revision,
-                BuildDate = GetBuildDate()
+                Revision = oVer.Revision
             };
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Spellchecker", "CRRSP06:A misspelled word has been found", Justification = "<Pending>")]
         private DateTime GetBuildDate()
         {
             const string BuildVersionMetadataPrefix = "+build";
@@ -41,7 +44,7 @@ namespace Mwh.Sample.Common.Models
                 var index = value.IndexOf(BuildVersionMetadataPrefix);
                 if (index > 0)
                 {
-                    value = value.Substring(index + BuildVersionMetadataPrefix.Length);
+                    value = value[(index + BuildVersionMetadataPrefix.Length)..];
                     if (DateTime.TryParseExact(value, "yyyyMMddHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out var result))
                     {
                         return result;

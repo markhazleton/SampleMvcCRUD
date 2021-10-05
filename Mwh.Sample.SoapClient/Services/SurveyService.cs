@@ -1,17 +1,5 @@
-﻿// ***********************************************************************
-// Assembly         : Mwh.Sample.SoapClient
-// Author           : mark
-// Created          : 04-12-2020
-//
-// Last Modified By : mark
-// Last Modified On : 04-19-2020
-// ***********************************************************************
-// <copyright file="SurveyService.cs" company="Mark Hazleton">
-//     Copyright 2020 Mark Hazleton
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using ControlOrigins.Survey;
+﻿using ControlOrigins.Survey;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,7 +19,11 @@ namespace Mwh.Sample.SoapClient.Services
         /// The user key
         /// </summary>
         protected string _UserKey;
-
+        public SurveyService()
+        {
+            _client = new ServiceSoapClient(ServiceSoapClient.EndpointConfiguration.ServiceSoap);
+            _UserKey = Guid.Parse(Resources.ServiceGUID).ToString();
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="SurveyService"/> class.
         /// </summary>
@@ -49,8 +41,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>ApplicationItem.</returns>
         public async Task<ApplicationItem> GetApplicationByApplicationID(int ApplicationId)
         {
-            var request = new GetApplicationByApplicationIDRequest();
-            request.Body = new GetApplicationByApplicationIDRequestBody(ApplicationId, _UserKey);
+            var request = new GetApplicationByApplicationIDRequest
+            {
+                Body = new GetApplicationByApplicationIDRequestBody(ApplicationId, _UserKey)
+            };
             var x = await _client.GetApplicationByApplicationIDAsync(request).ConfigureAwait(true);
             return x.Body.GetApplicationByApplicationIDResult;
         }
@@ -61,8 +55,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>ApplicationItem[].</returns>
         public async Task<ApplicationItem[]> GetApplicationItemCollection()
         {
-            var request = new GetApplicationListRequest();
-            request.Body = new GetApplicationListRequestBody(_UserKey);
+            var request = new GetApplicationListRequest
+            {
+                Body = new GetApplicationListRequestBody(_UserKey)
+            };
             var x = await _client.GetApplicationListAsync(request).ConfigureAwait(true);
             return x.Body.GetApplicationListResult.ToArray();
         }
@@ -74,8 +70,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>ApplicationTypeItem.</returns>
         public async Task<ApplicationTypeItem> GetApplicationTypeByApplicationTypeID(int applicationTypeId)
         {
-            var request = new GetApplicationTypeRequest();
-            request.Body = new GetApplicationTypeRequestBody(applicationTypeId, _UserKey);
+            var request = new GetApplicationTypeRequest
+            {
+                Body = new GetApplicationTypeRequestBody(applicationTypeId, _UserKey)
+            };
             var x = await _client.GetApplicationTypeAsync(request).ConfigureAwait(true);
             return x.Body.GetApplicationTypeResult;
         }
@@ -87,8 +85,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>ApplicationTypeItem.</returns>
         public async Task<ApplicationTypeItem> GetApplicationTypeByApplicationTypeID(ApplicationTypeItem applicationType)
         {
-            var request = new PutApplicationTypeRequest();
-            request.Body = new PutApplicationTypeRequestBody(applicationType, _UserKey);
+            var request = new PutApplicationTypeRequest
+            {
+                Body = new PutApplicationTypeRequestBody(applicationType, _UserKey)
+            };
             var x = await _client.PutApplicationTypeAsync(request).ConfigureAwait(true);
             return x.Body.PutApplicationTypeResult;
         }
@@ -99,8 +99,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>ApplicationTypeItem[].</returns>
         public async Task<ApplicationTypeItem[]> GetApplicationTypeCollection()
         {
-            var request = new GetApplicationTypeListRequest();
-            request.Body = new GetApplicationTypeListRequestBody(_UserKey);
+            var request = new GetApplicationTypeListRequest
+            {
+                Body = new GetApplicationTypeListRequestBody(_UserKey)
+            };
             var x = await _client.GetApplicationTypeListAsync(request).ConfigureAwait(true);
             return x.Body.GetApplicationTypeListResult.ToArray();
         }
@@ -112,8 +114,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>CompanyItem.</returns>
         public async Task<CompanyItem> GetCompanyByCompanyId(int CompanyId)
         {
-            var request = new GetCompanyRequest();
-            request.Body = new GetCompanyRequestBody(CompanyId, _UserKey);
+            var request = new GetCompanyRequest
+            {
+                Body = new GetCompanyRequestBody(CompanyId, _UserKey)
+            };
             var x = await _client.GetCompanyAsync(request).ConfigureAwait(true);
             return x.Body.GetCompanyResult;
         }
@@ -124,8 +128,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>CompanyItem[].</returns>
         public async Task<CompanyItem[]> GetCompanyCollection()
         {
-            var request = new GetCompanyListRequest();
-            request.Body = new GetCompanyListRequestBody(_UserKey);
+            var request = new GetCompanyListRequest
+            {
+                Body = new GetCompanyListRequestBody(_UserKey)
+            };
             var x = await _client.GetCompanyListAsync(request).ConfigureAwait(true);
             return x.Body.GetCompanyListResult.ToArray();
         }
@@ -137,8 +143,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>SurveyItem.</returns>
         public async Task<SurveyItem> GetSurveyBySurveyId(int surveyId)
         {
-            var request = new GetSurveyRequest();
-            request.Body = new GetSurveyRequestBody(surveyId, _UserKey);
+            var request = new GetSurveyRequest
+            {
+                Body = new GetSurveyRequestBody(surveyId, _UserKey)
+            };
             var x = await _client.GetSurveyAsync(request).ConfigureAwait(true);
             return x.Body.GetSurveyResult;
         }
@@ -149,8 +157,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>SurveyItem[].</returns>
         public async Task<SurveyItem[]> GetSurveyCollection()
         {
-            var request = new GetSurveysRequest();
-            request.Body = new GetSurveysRequestBody(new SQLFilterClause[0], _UserKey);
+            var request = new GetSurveysRequest
+            {
+                Body = new GetSurveysRequestBody(Array.Empty<SQLFilterClause>(), _UserKey)
+            };
             var x = await _client.GetSurveysAsync(request).ConfigureAwait(true);
             return x.Body.GetSurveysResult.ToArray();
         }
@@ -162,8 +172,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>SurveyTypeItem.</returns>
         public async Task<SurveyTypeItem> GetSurveyType(int surveyTypeId)
         {
-            var request = new GetSurveyTypeRequest();
-            request.Body = new GetSurveyTypeRequestBody(surveyTypeId, _UserKey);
+            var request = new GetSurveyTypeRequest
+            {
+                Body = new GetSurveyTypeRequestBody(surveyTypeId, _UserKey)
+            };
             var x = await _client.GetSurveyTypeAsync(request).ConfigureAwait(true);
             return x.Body.GetSurveyTypeResult;
         }
@@ -175,8 +187,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>SurveyTypeItem[].</returns>
         public async Task<SurveyTypeItem[]> GetSurveyTypeCollection(int surveyTypeId)
         {
-            var request = new GetSurveyTypeListRequest();
-            request.Body = new GetSurveyTypeListRequestBody(_UserKey);
+            var request = new GetSurveyTypeListRequest
+            {
+                Body = new GetSurveyTypeListRequestBody(_UserKey)
+            };
             var x = await _client.GetSurveyTypeListAsync(request).ConfigureAwait(true);
             return x.Body.GetSurveyTypeListResult;
         }
@@ -188,8 +202,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>ApplicationUserItem.</returns>
         public async Task<ApplicationUserItem> GetUserById(int Id)
         {
-            var request = new GetApplicationUserByApplicationUserIDRequest();
-            request.Body = new GetApplicationUserByApplicationUserIDRequestBody(_UserKey, Id);
+            var request = new GetApplicationUserByApplicationUserIDRequest
+            {
+                Body = new GetApplicationUserByApplicationUserIDRequestBody(_UserKey, Id)
+            };
             var x = await _client.GetApplicationUserByApplicationUserIDAsync(request).ConfigureAwait(true);
             return x.Body.GetApplicationUserByApplicationUserIDResult;
         }
@@ -200,8 +216,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>ApplicationUserItem[].</returns>
         public async Task<ApplicationUserItem[]> GetUserCollection()
         {
-            var request = new GetApplicationUserListRequest();
-            request.Body = new GetApplicationUserListRequestBody(_UserKey);
+            var request = new GetApplicationUserListRequest
+            {
+                Body = new GetApplicationUserListRequestBody(_UserKey)
+            };
             var x = await _client.GetApplicationUserListAsync(request).ConfigureAwait(true);
             return x.Body.GetApplicationUserListResult.ToArray();
         }
@@ -213,8 +231,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>ApplicationItem.</returns>
         public async Task<ApplicationItem> PutApplication(ApplicationItem applicationItem)
         {
-            var request = new PutApplicationItemRequest();
-            request.Body = new PutApplicationItemRequestBody();
+            var request = new PutApplicationItemRequest
+            {
+                Body = new PutApplicationItemRequestBody()
+            };
             var x = await _client.PutApplicationItemAsync(request).ConfigureAwait(true);
             return x.Body.PutApplicationItemResult;
         }
@@ -226,8 +246,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>CompanyItem.</returns>
         public async Task<CompanyItem> PutCompany(CompanyItem company)
         {
-            var request = new PutCompanyRequest();
-            request.Body = new PutCompanyRequestBody(company, _UserKey);
+            var request = new PutCompanyRequest
+            {
+                Body = new PutCompanyRequestBody(company, _UserKey)
+            };
             var x = await _client.PutCompanyAsync(request).ConfigureAwait(true);
             return x.Body.PutCompanyResult;
         }
@@ -239,8 +261,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>SurveyItem.</returns>
         public async Task<SurveyItem> PutSurvey(SurveyItem survey)
         {
-            var request = new PutSurveyItemRequest();
-            request.Body = new PutSurveyItemRequestBody(survey, _UserKey);
+            var request = new PutSurveyItemRequest
+            {
+                Body = new PutSurveyItemRequestBody(survey, _UserKey)
+            };
             var x = await _client.PutSurveyItemAsync(request).ConfigureAwait(true);
             return x.Body.PutSurveyItemResult;
         }
@@ -252,8 +276,10 @@ namespace Mwh.Sample.SoapClient.Services
         /// <returns>ApplicationUserItem.</returns>
         public async Task<ApplicationUserItem> PutUser(ApplicationUserItem userItem)
         {
-            var request = new PutApplicationUserRequest();
-            request.Body = new PutApplicationUserRequestBody(_UserKey, userItem);
+            var request = new PutApplicationUserRequest
+            {
+                Body = new PutApplicationUserRequestBody(_UserKey, userItem)
+            };
             var x = await _client.PutApplicationUserAsync(request).ConfigureAwait(true);
             return x.Body.PutApplicationUserResult;
         }

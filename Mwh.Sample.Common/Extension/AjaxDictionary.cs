@@ -80,7 +80,7 @@ namespace Mwh.Sample.Common.Extension
         /// <returns>List&lt;System.String&gt;.</returns>
         public List<string> GetList()
         {
-            List<string> list = new List<string>();
+            List<string> list = new();
             foreach (var item in _Dictionary)
             {
                 list.Add($"{item.Key} - {item.Value}");

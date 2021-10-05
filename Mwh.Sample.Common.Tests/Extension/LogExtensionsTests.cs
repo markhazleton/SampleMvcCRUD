@@ -40,7 +40,7 @@ namespace Mwh.Sample.Common.Tests.Extension
         public void GetSerializeObjectString_StateUnderTest_ExpectedBehavior1()
         {
             // Arrange
-            List<EmployeeModel> lstObjectToSerialize = new List<EmployeeModel>();
+            List<EmployeeModel> lstObjectToSerialize = new();
 
             // Act
             var result = LogExtensions.GetSerializeObjectString(
@@ -54,7 +54,7 @@ namespace Mwh.Sample.Common.Tests.Extension
         public void IsSimpleType_StateUnderTest_ExpectedBehaviorFalse()
         {
             // Arrange
-            EmployeeModel type = new EmployeeModel();
+            EmployeeModel type = new();
 
             // Act
             var result = LogExtensions.IsSimpleType(
