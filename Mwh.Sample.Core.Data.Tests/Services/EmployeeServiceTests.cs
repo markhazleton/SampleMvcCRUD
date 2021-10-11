@@ -41,7 +41,7 @@ namespace Mwh.Sample.Core.Data.Tests.Services
 
             // Assert
             Assert.IsNotNull(test);
-            Assert.AreEqual((initResults.Length+3), afterResults.Length);
+            Assert.AreEqual((initResults.Length + 3), afterResults.Length);
         }
 
         [TestMethod]

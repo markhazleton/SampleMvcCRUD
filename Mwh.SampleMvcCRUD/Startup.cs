@@ -13,7 +13,6 @@ using Mwh.Sample.Core.Data.Models;
 using Mwh.Sample.Core.Data.Repository;
 using Mwh.Sample.Core.WebApi.Extensions;
 using Mwh.Sample.SoapClient.Services;
-using System;
 
 namespace Mwh.Sample.Core.WebApi
 {
@@ -82,7 +81,7 @@ namespace Mwh.Sample.Core.WebApi
                 .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging"))
                 .UseInMemoryDatabase("employee"));
 
-            services.AddScoped<ISurveyService,SurveyService>();
+            services.AddScoped<ISurveyService, SurveyService>();
             services.AddScoped<IEmployeeDB, EmployeeDB>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IEmployeeService, EmployeeService>();

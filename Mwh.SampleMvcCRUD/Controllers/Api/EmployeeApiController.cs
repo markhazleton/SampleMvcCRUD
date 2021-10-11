@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Mwh.Sample.Common.Interfaces;
 using Mwh.Sample.Common.Models;
-using Mwh.Sample.SoapClient.Services;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

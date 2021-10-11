@@ -8,7 +8,7 @@
     public class EmployeeResponse : BaseResponse<EmployeeModel>
     {
         public EmployeeResponse()
-        { 
+        {
         }
 
         /// <summary>

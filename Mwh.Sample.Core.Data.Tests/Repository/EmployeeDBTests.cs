@@ -48,7 +48,7 @@ namespace Mwh.Sample.Core.Data.Tests.Repository
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(finalResult.Length,initResult.Length);
+            Assert.AreEqual(finalResult.Length, initResult.Length);
 
         }
 
@@ -125,7 +125,7 @@ namespace Mwh.Sample.Core.Data.Tests.Repository
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(addResult.id,result.id);
+            Assert.AreEqual(addResult.id, result.id);
             Assert.AreNotEqual(initResult.Length, updatedResult.Length);
             Assert.AreEqual(finalResult.Age, 44);
             Assert.AreEqual(finalResult.State, "FL");

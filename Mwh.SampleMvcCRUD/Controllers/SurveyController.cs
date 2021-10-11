@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Mwh.Sample.SoapClient.Services;
-using System;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.Core.WebApi.Controllers
@@ -10,16 +9,30 @@ namespace Mwh.Sample.Core.WebApi.Controllers
     {
         private readonly ISurveyService surveyService;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SurveyService"></param>
         public SurveyController(ISurveyService SurveyService)
         { surveyService = SurveyService; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Route("/survey/")]
         public async Task<IActionResult> Index()
         { return View(await surveyService.GetSurveyCollection().ConfigureAwait(false)); }
 
-        [Route("/survey/{surveyId}")]
-        public async Task<IActionResult> Edit(int surveyId)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [Route("/survey/{Id}")]
+        public async Task<IActionResult> Edit(int Id)
         {
-            var survey = await surveyService.GetSurveyBySurveyId(surveyId).ConfigureAwait(false);
+            var survey = await surveyService.GetSurveyBySurveyId(Id).ConfigureAwait(false);
             return View("Edit", survey);
         }
     }

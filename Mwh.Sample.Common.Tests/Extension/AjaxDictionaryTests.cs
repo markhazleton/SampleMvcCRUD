@@ -39,7 +39,7 @@ namespace Mwh.Sample.Common.Tests.Extension
         /// Defines the test method AddTest1.
         /// </summary>
         [TestMethod()]
-        public void AddTest_Duplicate ()
+        public void AddTest_Duplicate()
         {
             var myTest = new AjaxDictionary<int, string>();
             myTest.Add(1, "test");

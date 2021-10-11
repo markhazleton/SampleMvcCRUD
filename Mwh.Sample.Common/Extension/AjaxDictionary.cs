@@ -54,10 +54,11 @@ namespace Mwh.Sample.Common.Extension
         /// Adds the specified dictionary into the current dictionary
         /// </summary>
         /// <param name="value">The value.</param>
-        public void Add(Dictionary<TKey, TValue> value) {
+        public void Add(Dictionary<TKey, TValue> value)
+        {
             foreach (var item in value.Keys)
             {
-                Add(item,value[item]);
+                Add(item, value[item]);
             }
         }
 

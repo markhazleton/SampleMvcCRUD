@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Mwh.Sample.Common.Models
+﻿namespace Mwh.Sample.Common.Models
 {
     /// <summary>
     /// Build Version
