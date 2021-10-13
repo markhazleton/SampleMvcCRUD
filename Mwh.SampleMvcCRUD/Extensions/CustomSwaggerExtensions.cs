@@ -47,8 +47,8 @@ namespace Mwh.Sample.Core.WebApi.Extensions
             app.UseSwagger()
                 .UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Employee API");
-                    options.DocumentTitle = "Employee API";
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
+                    options.DocumentTitle = "API";
                 });
             return app;
         }
