@@ -2,7 +2,7 @@
 using Mwh.Sample.Common.Interfaces;
 using System.Threading.Tasks;
 
-namespace Mwh.Sample.Core.WebApi.Controllers
+namespace Mwh.SampleMvcCRUD.Controllers
 {
     /// <summary>
     /// EmployeeController

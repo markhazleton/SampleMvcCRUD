@@ -2,7 +2,7 @@
 using Mwh.Sample.Common.Models;
 using System.Collections.Generic;
 
-namespace Mwh.Sample.Core.WebApi.Controllers
+namespace Mwh.SampleMvcCRUD.Controllers.Api
 {
     /// <summary>
     /// Status Controller

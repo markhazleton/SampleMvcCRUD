@@ -26,7 +26,7 @@ namespace Mwh.Sample.Core.WebApi
 
         private void ConfirmDatabaseCreation()
         {
-            var dbOptions = new DbContextOptionsBuilder<Data.Models.EmployeeContext>()
+            var dbOptions = new DbContextOptionsBuilder<EmployeeContext>()
                 .UseInMemoryDatabase("employee")
                 .Options;
             var context = new EmployeeContext(dbOptions);
@@ -77,7 +77,7 @@ namespace Mwh.Sample.Core.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Data.Models.EmployeeContext>(options => options
+            services.AddDbContext<EmployeeContext>(options => options
                 .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging"))
                 .UseInMemoryDatabase("employee"));
 

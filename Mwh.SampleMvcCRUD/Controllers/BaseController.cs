@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 
-namespace Mwh.Sample.Core.WebApi.Controllers
+namespace Mwh.SampleMvcCRUD.Controllers
 {
     /// <summary>
     /// BaseController

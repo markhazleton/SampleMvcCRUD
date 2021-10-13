@@ -2,7 +2,7 @@
 using Mwh.Sample.SoapClient.Services;
 using System.Threading.Tasks;
 
-namespace Mwh.Sample.Core.WebApi.Controllers
+namespace Mwh.SampleMvcCRUD.Controllers
 {
     [ApiExplorerSettings(IgnoreApi = true)]
     public class SurveyController : Controller

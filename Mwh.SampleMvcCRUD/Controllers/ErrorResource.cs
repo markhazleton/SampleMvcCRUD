@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Mwh.Sample.Core.WebApi.Controllers
+namespace Mwh.SampleMvcCRUD.Controllers
 {
     /// <summary>
     /// Error Resource

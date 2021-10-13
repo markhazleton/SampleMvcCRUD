@@ -2,7 +2,7 @@
 using Mwh.Sample.Core.WebApi.Models;
 using System.Diagnostics;
 
-namespace Mwh.Sample.Core.WebApi.Controllers
+namespace Mwh.SampleMvcCRUD.Controllers
 {
     /// <summary>
     /// Home Controller

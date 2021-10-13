@@ -3,7 +3,7 @@ using Mwh.Sample.Common.Interfaces;
 using Mwh.Sample.Common.Models;
 using System.Threading.Tasks;
 
-namespace Mwh.Sample.Core.WebApi.Controllers
+namespace Mwh.SampleMvcCRUD.Controllers
 {
     /// <summary>
     /// MvcEmployeeController

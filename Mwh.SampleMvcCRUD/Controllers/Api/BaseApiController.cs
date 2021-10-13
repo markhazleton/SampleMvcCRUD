@@ -2,7 +2,7 @@
 using Mwh.Sample.Common.Models;
 using System.Reflection;
 
-namespace Mwh.Sample.Core.WebApi.Controllers
+namespace Mwh.SampleMvcCRUD.Controllers.Api
 {
     /// <summary>
     /// Base for all Api Controllers in this project
