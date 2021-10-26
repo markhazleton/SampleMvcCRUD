@@ -13,11 +13,16 @@ namespace Mwh.Sample.Common.Models
     /// </summary>
     public sealed class ApplicationStatus
     {
-        /// <summary>
-        /// ApplicationStatus
-        /// </summary>
-        /// <param name="assembly"></param>
-        public ApplicationStatus(Assembly assembly)
+        public ApplicationStatus(Assembly assembly, Dictionary<string, string> tests = null, List<string> messages = null, ServiceStatus status = ServiceStatus.Online)
+        {
+            BuildDate = GetBuildDate(assembly);
+            BuildVersion = new BuildVersion(assembly);
+            Tests = tests ?? new Dictionary<string, string>();
+            Messages = messages ?? new List<string>();
+            Status = status;
+        }
+
+        private DateTime GetBuildDate(Assembly assembly)
         {
             const string BuildVersionMetadataPrefix = "+build";
             var attribute = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
@@ -30,11 +35,11 @@ namespace Mwh.Sample.Common.Models
                     value = value[(index + BuildVersionMetadataPrefix.Length)..];
                     if (DateTime.TryParseExact(value, "yyyyMMddHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out var result))
                     {
-                        BuildDate = result;
+                        return result;
                     }
                 }
             }
-            BuildVersion = new BuildVersion(assembly);
+            return DateTime.MinValue;
         }
 
         public DateTime BuildDate { get; }
