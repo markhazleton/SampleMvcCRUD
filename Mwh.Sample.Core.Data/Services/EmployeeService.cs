@@ -12,14 +12,14 @@ namespace Mwh.Sample.Core.Data.Services
 {
     public class EmployeeService : IDisposable, IEmployeeService
     {
-        private Models.EmployeeContext _context;
+        private EmployeeContext _context;
 
         public EmployeeService()
         {
             _context = new EmployeeContext();
         }
 
-        public EmployeeService(Models.EmployeeContext context)
+        public EmployeeService(EmployeeContext context)
         {
             _context = context;
         }
@@ -29,7 +29,7 @@ namespace Mwh.Sample.Core.Data.Services
             _context = new EmployeeContext(options);
         }
 
-        private EmployeeModel Create(Models.Employee item)
+        private EmployeeModel Create(Employee item)
         {
             if (item == null) return new EmployeeModel();
 
@@ -44,7 +44,7 @@ namespace Mwh.Sample.Core.Data.Services
             };
         }
 
-        private Models.Employee Create(EmployeeModel item)
+        private Employee Create(EmployeeModel item)
         {
             return new Employee()
             {
@@ -57,14 +57,14 @@ namespace Mwh.Sample.Core.Data.Services
             };
         }
 
-        private EmployeeModel[] Get(List<Models.Employee> list)
+        private EmployeeModel[] Get(List<Employee> list)
         {
             return list.Select(s => Create(s)).ToArray();
         }
 
         public int AddMultipleEmployees(string[] namelist)
         {
-            var list = new List<Models.Employee>();
+            var list = new List<Employee>();
 
             if (namelist == null) return -1;
 
@@ -137,7 +137,7 @@ namespace Mwh.Sample.Core.Data.Services
             if (item == null)
                 return new EmployeeResponse("Employee can not be null");
 
-            Models.Employee dbEmp;
+            Employee dbEmp;
             if (item.id > 0)
             {
                 dbEmp = _context.Employees.Where(w => w.Id == item.id).FirstOrDefault();

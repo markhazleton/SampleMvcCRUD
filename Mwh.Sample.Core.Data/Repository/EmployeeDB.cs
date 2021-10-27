@@ -8,20 +8,20 @@ namespace Mwh.Sample.Core.Data.Repository
 {
     public class EmployeeDB : IEmployeeDB
     {
-        private Models.EmployeeContext _context;
+        private EmployeeContext _context;
 
-        public EmployeeDB(Models.EmployeeContext context)
+        public EmployeeDB(EmployeeContext context)
         {
             _context = context;
         }
 
-        private List<EmployeeModel> Create(List<Models.Employee> list)
+        private List<EmployeeModel> Create(List<Employee> list)
         {
             if (list == null) return new List<EmployeeModel>();
             return list.Select(item => Create(item)).OrderBy(x => x.Name).ToList();
         }
 
-        private EmployeeModel Create(Models.Employee s)
+        private EmployeeModel Create(Employee s)
         {
             if (s == null) return new EmployeeModel();
 

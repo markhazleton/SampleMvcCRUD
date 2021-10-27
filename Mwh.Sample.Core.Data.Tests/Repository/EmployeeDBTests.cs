@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mwh.Sample.Common.Models;
+using Mwh.Sample.Core.Data.Models;
 using Mwh.Sample.Core.Data.Repository;
 
 namespace Mwh.Sample.Core.Data.Tests.Repository
@@ -15,7 +16,7 @@ namespace Mwh.Sample.Core.Data.Tests.Repository
         {
             var builder = new DbContextOptionsBuilder();
             _ = builder.UseInMemoryDatabase("AddMultipleEmployees");
-            employeeDB = new EmployeeDB(new Data.Models.EmployeeContext());
+            employeeDB = new EmployeeDB(new EmployeeContext());
         }
 
 
