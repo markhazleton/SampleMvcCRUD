@@ -86,10 +86,7 @@ namespace Mwh.Sample.Core.WebApi
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.TryAddSingleton<IEmployeeClient, EmployeeClient>();
             services.AddCustomSwagger();
-
             services.AddSession();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             services.AddMvc();
             services.AddControllersWithViews();
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
