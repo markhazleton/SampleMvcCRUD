@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Mwh.Sample.Common.Clients;
+using Mwh.Sample.Common.HttpClientFactory.Clients;
 using Mwh.Sample.Common.Interfaces;
 using Mwh.Sample.Common.Repositories;
 using Mwh.Sample.Core.Data.Models;
@@ -79,12 +79,12 @@ namespace Mwh.Sample.Core.WebApi
             services.AddDbContext<EmployeeContext>(options => options
                 .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging"))
                 .UseInMemoryDatabase("employee"));
-
+            services.AddHttpClient();
             services.AddScoped<IEmployeeDB, EmployeeDB>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeeClient, EmployeeRestClient>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.TryAddSingleton<IEmployeeClient, EmployeeClient>();
             services.AddCustomSwagger();
             services.AddSession();
             services.AddMvc();
