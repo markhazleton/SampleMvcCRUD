@@ -68,7 +68,7 @@ namespace Mwh.Sample.Common.Tests.Repositories
             // Arrange
 
             // Act
-            var result = await employeeRepository.Remove(
+            var result = await employeeRepository.RemoveAsync(
                 employee,
                 token);
 
@@ -82,7 +82,7 @@ namespace Mwh.Sample.Common.Tests.Repositories
             // Arrange
 
             // Act
-            var result = await employeeRepository.Update(
+            var result = await employeeRepository.UpdateAsync(
                 employee,
                 token);
 

@@ -85,7 +85,7 @@ namespace Mwh.Sample.Core.Data.Services
             {
                 var dbEmp = await _context.Employees
                     .Where(w => w.Id == id)
-                    .FirstOrDefaultAsync()
+                    .FirstOrDefaultAsync(cancellationToken: token)
                     .ConfigureAwait(true);
 
                 if (dbEmp == null)
@@ -95,7 +95,7 @@ namespace Mwh.Sample.Core.Data.Services
                 else
                 {
                     _context.Employees.Remove(dbEmp);
-                    await _context.SaveChangesAsync()
+                    await _context.SaveChangesAsync(token)
                         .ConfigureAwait(true);
 
                     return new EmployeeResponse(new EmployeeModel());
@@ -114,7 +114,7 @@ namespace Mwh.Sample.Core.Data.Services
         }
 
         public async Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
-        { return Create(await _context.Employees.FindAsync(id).ConfigureAwait(false)); }
+        { return Create(await _context.Employees.FindAsync(new object[] { id }, cancellationToken: token).ConfigureAwait(false)); }
 
         public EmployeeModel[] Get()
         {
@@ -122,14 +122,13 @@ namespace Mwh.Sample.Core.Data.Services
         }
 
         public async Task<IEnumerable<EmployeeModel>> GetAsync(CancellationToken token)
-        { return Get(await _context.Employees.ToListAsync().ConfigureAwait(false)); }
+        { return Get(await _context.Employees.ToListAsync(cancellationToken: token).ConfigureAwait(false)); }
 
         public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
         {
             if (employee == null) return new EmployeeResponse("Employee can not be null");
 
-            var emp = await SaveAsync(employee).ConfigureAwait(true);
-            return emp;
+            return await SaveAsync(employee,token).ConfigureAwait(true);
         }
 
         public EmployeeResponse Save(EmployeeModel item)
@@ -230,7 +229,7 @@ namespace Mwh.Sample.Core.Data.Services
             if (employee.id == 0)
                 return new EmployeeResponse($"Can not update employee with id({id})");
 
-            return await SaveAsync(employee).ConfigureAwait(false);
+            return await SaveAsync(employee, token).ConfigureAwait(false);
         }
     }
 }

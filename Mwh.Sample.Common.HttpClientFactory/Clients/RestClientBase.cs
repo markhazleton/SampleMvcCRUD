@@ -3,6 +3,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.Common.HttpClientFactory.Clients
@@ -43,6 +44,15 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// </summary>
         ~RestClientBase() { Dispose(false); }
 
+        private HttpRequestMessage GetRequestMessage(string urlSegment, HttpMethod method)
+        {
+            var request = new HttpRequestMessage(method, new Uri($"{BaseAPIUrl}{urlSegment}"));
+            request.Headers.TryAddWithoutValidation("UserID", UserID.ToString());
+            request.Headers.TryAddWithoutValidation("Application", AppName);
+            request.Headers.TryAddWithoutValidation("MachineName", Environment.MachineName);
+            return request;
+        }
+
         /// <summary>
         /// Gets the HttpClient for this class,a lazy pattern is used to create an instance when needed but never more
         /// than a single instance
@@ -52,7 +62,7 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         protected HttpClient Client()
         {
             if (_clientFactory == null)
-                throw new ObjectDisposedException("RestClient has been disposed");
+                throw new ObjectDisposedException("Client Factory has been disposed");
             return _clientFactory.CreateClient();
         }
 
@@ -62,16 +72,18 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// <typeparam name="T"></typeparam>
         /// <param name="urlSegment">The URL segment.</param>
         /// <returns>T.</returns>
-        protected async Task<T> Delete<T>(string urlSegment)
+        protected async Task<T> DeleteAsync<T>(string urlSegment, CancellationToken token)
         {
+            token.ThrowIfCancellationRequested();
+
             HttpRequestMessage request = GetRequestMessage(urlSegment, HttpMethod.Delete);
-            using var response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            using var response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 // perhaps check some headers before deserializing
                 try
                 {
-                    return await response.Content.ReadFromJsonAsync<T>();
+                    return await response.Content.ReadFromJsonAsync<T>(cancellationToken: token).ConfigureAwait(false);
                 }
                 catch (NotSupportedException) // When content type is not valid
                 {
@@ -103,16 +115,17 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// <typeparam name="T"></typeparam>
         /// <param name="urlSegment">The URL segment.</param>
         /// <returns>T.</returns>
-        protected async Task<T> GetAsync<T>(string urlSegment)
+        protected async Task<T> GetAsync<T>(string urlSegment, CancellationToken token)
         {
+            token.ThrowIfCancellationRequested();
             HttpRequestMessage request = GetRequestMessage(urlSegment, HttpMethod.Get);
-            using var response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            using var response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 // perhaps check some headers before deserializing
                 try
                 {
-                    return await response.Content.ReadFromJsonAsync<T>();
+                    return await response.Content.ReadFromJsonAsync<T>(cancellationToken: token).ConfigureAwait(false);
                 }
                 catch (NotSupportedException) // When content type is not valid
                 {
@@ -128,15 +141,6 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
             return default;
         }
 
-        private HttpRequestMessage GetRequestMessage(string urlSegment, HttpMethod method)
-        {
-            var request = new HttpRequestMessage(method, new Uri($"{BaseAPIUrl}{urlSegment}"));
-            request.Headers.TryAddWithoutValidation("UserID", UserID.ToString());
-            request.Headers.TryAddWithoutValidation("Application", AppName);
-            request.Headers.TryAddWithoutValidation("MachineName", Environment.MachineName);
-            return request;
-        }
-
         /// <summary>
         /// Posts the specified URL segment.
         /// </summary>
@@ -144,17 +148,18 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// <param name="urlSegment">The URL segment.</param>
         /// <param name="requestBody">The request body.</param>
         /// <returns>T.</returns>
-        protected async Task<T> Post<T>(string urlSegment, object requestBody)
+        protected async Task<T> PostAsync<T>(string urlSegment, object requestBody, CancellationToken token)
         {
+            token.ThrowIfCancellationRequested();
             HttpRequestMessage request = GetRequestMessage(urlSegment, HttpMethod.Post);
             request.Content = JsonContent.Create(requestBody);
-            using var response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            using var response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 // perhaps check some headers before deserializing
                 try
                 {
-                    return await response.Content.ReadFromJsonAsync<T>();
+                    return await response.Content.ReadFromJsonAsync<T>(cancellationToken: token).ConfigureAwait(false);
                 }
                 catch (NotSupportedException) // When content type is not valid
                 {
@@ -178,17 +183,18 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// <param name="urlSegment">The URL segment.</param>
         /// <param name="requestBody">The request body.</param>
         /// <returns>T.</returns>
-        protected async Task<T> Put<T>(string urlSegment, object requestBody)
+        protected async Task<T> PutAsync<T>(string urlSegment, object requestBody, CancellationToken token)
         {
+            token.ThrowIfCancellationRequested();
             HttpRequestMessage request = GetRequestMessage(urlSegment, HttpMethod.Put);
             request.Content = JsonContent.Create(requestBody);
-            using var response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            using var response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 // perhaps check some headers before deserializing
                 try
                 {
-                    return await response.Content.ReadFromJsonAsync<T>();
+                    return await response.Content.ReadFromJsonAsync<T>(cancellationToken: token).ConfigureAwait(false);
                 }
                 catch (NotSupportedException) // When content type is not valid
                 {

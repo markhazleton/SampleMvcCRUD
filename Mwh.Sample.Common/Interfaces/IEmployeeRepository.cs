@@ -39,7 +39,7 @@ namespace Mwh.Sample.Common.Interfaces
         /// <param name="employee">The employee.</param>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Task&lt;EmployeeModel&gt;.</returns>
-        Task<EmployeeModel> Update(EmployeeModel employee, CancellationToken token);
+        Task<EmployeeModel> UpdateAsync(EmployeeModel employee, CancellationToken token);
 
         /// <summary>
         /// Removes the specified employee.
@@ -47,6 +47,6 @@ namespace Mwh.Sample.Common.Interfaces
         /// <param name="employee">The employee.</param>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Task&lt;System.Boolean&gt;.</returns>
-        Task<bool> Remove(EmployeeModel employee, CancellationToken token);
+        Task<bool> RemoveAsync(EmployeeModel employee, CancellationToken token);
     }
 }

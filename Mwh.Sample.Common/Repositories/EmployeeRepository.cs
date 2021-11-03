@@ -29,10 +29,10 @@ namespace Mwh.Sample.Common.Repositories
         /// </summary>
         /// <param name="employee">The employee.</param>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<EmployeeModel> AddAsync(EmployeeModel employee, CancellationToken token)
+        public Task<EmployeeModel> AddAsync(EmployeeModel employee, CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-            return await Task.Run(() => _emp.Update(employee)).ConfigureAwait(true);
+            return Task.Run(() => _emp.Update(employee));
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Mwh.Sample.Common.Repositories
         /// <param name="employee">The employee.</param>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Task&lt;System.Boolean&gt;.</returns>
-        public Task<bool> Remove(EmployeeModel employee, CancellationToken token)
+        public Task<bool> RemoveAsync(EmployeeModel employee, CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
             return Task.Run(() => _emp.Delete(employee.id));
@@ -76,7 +76,7 @@ namespace Mwh.Sample.Common.Repositories
         /// <param name="employee">The employee.</param>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Task&lt;EmployeeModel&gt;.</returns>
-        public Task<EmployeeModel> Update(EmployeeModel employee, CancellationToken token)
+        public Task<EmployeeModel> UpdateAsync(EmployeeModel employee, CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
             return Task.Run(() => _emp.Update(employee));

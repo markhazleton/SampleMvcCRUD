@@ -32,11 +32,10 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// <param name="id">The identifier.</param>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>EmployeeResponse.</returns>
-        public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
+        public Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-            var resp = await Delete<EmployeeResponse>($"/api/employee/{id}").ConfigureAwait(true);
-            return resp == null ? new EmployeeResponse("Null Returned from REST Call to Delete") : resp;
+            return DeleteAsync<EmployeeResponse>($"/api/employee/{id}",token);
         }
 
         /// <summary>
@@ -45,10 +44,10 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// <param name="id">The identifier.</param>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>EmployeeModel.</returns>
-        public async Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
+        public Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-            return await GetAsync<EmployeeModel>($"/api/employee/{id}").ConfigureAwait(true);
+            return GetAsync<EmployeeModel>($"/api/employee/{id}",token);
         }
 
         /// <summary>
@@ -56,10 +55,10 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// </summary>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>IEnumerable&lt;EmployeeModel&gt;.</returns>
-        public async Task<IEnumerable<EmployeeModel>> GetAsync(CancellationToken token)
+        public Task<IEnumerable<EmployeeModel>> GetAsync(CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-            return await GetAsync<List<EmployeeModel>>($"/api/employee").ConfigureAwait(true);
+            return GetAsync<IEnumerable<EmployeeModel>>($"/api/employee",token);
         }
 
         /// <summary>
@@ -68,11 +67,10 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// <param name="employee">The employee.</param>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>EmployeeResponse.</returns>
-        public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
+        public Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-            var resp = await Post<EmployeeResponse>($"/api/employee", employee).ConfigureAwait(true);
-            return resp;
+            return PostAsync<EmployeeResponse>($"/api/employee", employee,token);
         }
 
         /// <summary>
@@ -82,15 +80,18 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// <param name="employee">The employee.</param>
         /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>EmployeeResponse.</returns>
-        public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
+        public Task<EmployeeResponse> UpdateAsync(int id, 
+            EmployeeModel employee, 
+            CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-
-            if (employee.id != id)
-                return new EmployeeResponse($"Mismatch in id({id}) && id({employee.id}).");
-
-            var resp = await Put<EmployeeResponse>($"/api/employee/{id}", employee).ConfigureAwait(true);
-            return resp;
+            if (employee.id == id)
+            {
+                return PutAsync<EmployeeResponse>($"/api/employee/{id}", employee,token);
+            }
+            return Task.Run(() => { 
+                return new EmployeeResponse($"Mismatch in id({id}) && id({employee.id})."); 
+            });
         }
     }
 }

@@ -122,6 +122,8 @@ namespace Mwh.Sample.Common.Extension
         {
             StringBuilder recordLog = new();
             Dictionary<string, object> recordDictionary = GetDictionaryWithPropertiesForOneRecord(record);
+            if (recordDictionary is null) return string.Empty;
+
             int propertyCounter = 0;
             try
             {
@@ -131,11 +133,11 @@ namespace Mwh.Sample.Common.Extension
                     object thePropertyValue = recordDictionary[keyValuePair.Key];
                     if (thePropertyValue != null)
                     {
-                        recordLog.AppendFormat("{0}:{1}|", keyValuePair.Key, keyValuePair.Value);
+                        recordLog.Append($"{keyValuePair.Key}:{keyValuePair.Value}|");
                     }
                     else
                     {
-                        recordLog.AppendFormat("{0}:{1}| ", keyValuePair.Key, "[NULL]");
+                        recordLog.Append($"{keyValuePair.Key}:{"[NULL]"}| ");
                     }
                 }
             }

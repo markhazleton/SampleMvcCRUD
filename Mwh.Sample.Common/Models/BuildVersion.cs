@@ -19,7 +19,7 @@ namespace Mwh.Sample.Common.Models
 
         public override string ToString()
         {
-            return MajorVersion.ToString() + "." + MinorVersion.ToString() + "." + Build.ToString() + "." + Revision.ToString();
+            return $"{MajorVersion}.{MinorVersion}.{Build}.{Revision}";
         }
 
         /// <summary>

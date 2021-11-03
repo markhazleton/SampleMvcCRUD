@@ -57,11 +57,14 @@ namespace Mwh.Sample.Common.Repositories
         /// <returns>EmployeeResponse.</returns>
         public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
         {
+            if (employee == null) return new EmployeeResponse("Employee is null");
             try
             {
-                await _employeeRepository.AddAsync(employee, token).ConfigureAwait(true);
+                var response = await _employeeRepository.AddAsync(employee, token).ConfigureAwait(true);
 
-                return new EmployeeResponse(employee);
+                if (response == null) return new EmployeeResponse("Repository Response was null");
+
+                return new EmployeeResponse(response);
             }
             catch (Exception ex)
             {
@@ -91,7 +94,10 @@ namespace Mwh.Sample.Common.Repositories
 
             try
             {
-                var response = await _employeeRepository.Update(employee, token).ConfigureAwait(true);
+                var response = await _employeeRepository.UpdateAsync(employee, token).ConfigureAwait(true);
+
+                if (response == null) return new EmployeeResponse("Repository Response was null");
+
                 return new EmployeeResponse(response);
             }
             catch (Exception ex)
@@ -119,7 +125,7 @@ namespace Mwh.Sample.Common.Repositories
 
             try
             {
-                var response = await _employeeRepository.Remove(existingEmployee, token).ConfigureAwait(true);
+                var response = await _employeeRepository.RemoveAsync(existingEmployee, token).ConfigureAwait(true);
 
                 if (response)
                     existingEmployee.id = 0;
