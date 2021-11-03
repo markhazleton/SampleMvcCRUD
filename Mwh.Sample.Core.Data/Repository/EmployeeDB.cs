@@ -89,6 +89,22 @@ namespace Mwh.Sample.Core.Data.Repository
                     saveUser.DepartmentId = (int)emp.Department;
                     _context.SaveChanges();
                 }
+                else
+                {
+                    saveUser = new Employee()
+                    {
+                        Id = emp.id,
+                        Name = emp.Name,
+                        State = emp.State,
+                        Age = emp.Age,
+                        Country = emp.Country,
+                        DepartmentId = (int)emp.Department
+                    };
+                    _context.Employees.Add(saveUser);
+                    _context.SaveChanges();
+                    emp.id = saveUser.Id;
+
+                }
             }
             return Employee(emp.id);
         }
