@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Mwh.Sample.Common.HttpClientFactory.Clients
 {
+    // Blog Post On using HttpClientFactory: https://www.assemblyai.com/blog/getting-started-with-httpclientfactory-in-c-sharp-and-net-5/
+    // Microsoft Docs: https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests 
+
     /// <summary>
     /// Class ClientBase.
     /// Implements the <see cref="System.IDisposable" />
@@ -18,7 +21,7 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// <summary>
         /// Lazy Client used to instantiate when needed rather than during constructor
         /// </summary>
-        private IHttpClientFactory _lazyClient;
+        private IHttpClientFactory _clientFactory;
 
         /// <summary>
         /// ClientBase constructor used to set Application Name and Base Url for requests
@@ -32,7 +35,7 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
 
             AppName = appName;
             BaseAPIUrl = baseUrl.Trim('/');
-            _lazyClient = clientFactory;
+            _clientFactory = clientFactory;
         }
 
         /// <summary>
@@ -48,9 +51,9 @@ namespace Mwh.Sample.Common.HttpClientFactory.Clients
         /// <exception cref="ObjectDisposedException">RestClient has been disposed</exception>
         protected HttpClient Client()
         {
-            if (_lazyClient == null)
+            if (_clientFactory == null)
                 throw new ObjectDisposedException("RestClient has been disposed");
-            return _lazyClient.CreateClient();
+            return _clientFactory.CreateClient();
         }
 
         /// <summary>
