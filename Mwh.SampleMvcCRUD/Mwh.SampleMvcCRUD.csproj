@@ -8,9 +8,12 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <UserSecretsId>628ab996-ec3e-413e-88de-44fc253af54c</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
-    <AssemblyVersion>5.0.*</AssemblyVersion>
     <Deterministic>false</Deterministic>
     <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
+    <VersionPrefix>5</VersionPrefix>
+    <VersionSuffix>$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</VersionSuffix>
+    <Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix).0.0.1</Version>
+    <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix).$(VersionSuffix)</Version>  
     <ApplicationInsightsResourceId>/subscriptions/1e3f18e4-ceb9-4033-8ce0-f17b8af6225f/resourceGroups/HelloWorld/providers/microsoft.insights/components/MwhSampleMvcCRUD</ApplicationInsightsResourceId>
   </PropertyGroup>
 
