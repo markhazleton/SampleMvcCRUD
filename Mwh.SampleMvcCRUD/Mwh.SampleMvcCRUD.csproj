@@ -4,7 +4,6 @@
     <TargetFramework>net5.0</TargetFramework>
     <Copyright>Copyright © 2019-2021 Mark Hazleton</Copyright>
     <IsPackable>false</IsPackable>
-    <Version>5.0.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <UserSecretsId>628ab996-ec3e-413e-88de-44fc253af54c</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
