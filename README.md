@@ -4,8 +4,10 @@ An Asp.Net MVC Application to demonstrate multiple ways of implementing a simple
 For deployments there is an [Azure DevOps project](https://dev.azure.com/markhazleton/SampleMvcCRUD) with Continuous Integration/Continuous Deployment (CI/CD) pipelines to Azure App Services
 
 The Net5 Web application is hosted:
-- IIS on a Amazon Virtual Machine [EmployeeMvcCrud.controlorigins.com](https://employeemvccrud.controlorigins.com/)
-- Microsoft Azure AppService [https://mwhemployeemvccrud.azurewebsites.net/](https://mwhemployeemvccrud.azurewebsites.net/)
+- The Old .Net 5 version is hosted on IIS on a Amazon Virtual Machine [EmployeeMvcCrud.controlorigins.com](https://employeemvccrud.controlorigins.com/)
+- Microsoft Azure AppService .Net 6 verion [app-samplemvccrudweb](https://app-samplemvccrudweb.azurewebsites.net/) - (Swagger not working....yet)
+
+
 
 Older versions of the applications may still be hosted on Azure (old azure account)
 [Archive Branch](https://github.com/markhazleton/SampleMvcCRUD/tree/archive/NetFramework)
