@@ -42,9 +42,8 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
-    
 
-    - task: CRAnalyzeTask@201
-      inputs:
-        solution: '**/Mwh.SampleCore.sln'
-        sendLogs: true
+- task: CRAnalyzeTask@201
+  inputs:
+      solution: '**/Mwh.SampleCore.sln'
+      sendLogs: true
