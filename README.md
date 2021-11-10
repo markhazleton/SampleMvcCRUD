@@ -9,11 +9,8 @@ The Net5 Web application is hosted:
 
 Older versions of the applications may still be hosted on Azure (old azure account)
 [Archive Branch](https://github.com/markhazleton/SampleMvcCRUD/tree/archive/NetFramework)
-- [Azure-MwhSampleCRUD - Framework 4.8](https://mwhsamplecrud.azurewebsites.net/) 
-- [Azure-MwhSampleCore Core 3.1](https://mwhsamplecore.azurewebsites.net/) 
 
 Source code is maintained on GitHub [SampleMvcCRUD](https://github.com/markhazleton/SampleMvcCRUD)
-
 
 ## Customization
 
