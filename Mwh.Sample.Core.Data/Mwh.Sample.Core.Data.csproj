@@ -1,14 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <Copyright>Copyright © 2019-2021 Mark Hazleton</Copyright>
-    <IsPackable>false</IsPackable>
-    <Version>5.0.0</Version>
-  </PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+	  <IsPackable>false</IsPackable>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	  <PackageReleaseNotes>Add Comments</PackageReleaseNotes>
+	  <RepositoryType>GIT</RepositoryType>
+	  <RepositoryUrl>https://github.com/markhazleton/SampleMvcCRUD</RepositoryUrl>
+	  <PackageProjectUrl>https://github.com/markhazleton/SampleMvcCRUD</PackageProjectUrl>
+	  <PackageIcon>ProjectMechanicsLogo.png</PackageIcon>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <Company>Mark Hazleton</Company>
+	  <Authors>Mark Hazleton</Authors>
+	  <Description>Data Implementation for Mwh.Sample project</Description>
+	  <ApplicationIcon>favicon.ico</ApplicationIcon>
+	  <Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Deterministic>false</Deterministic>
+	  <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
+	  <VersionPrefix>5</VersionPrefix>
+	  <VersionSuffix>$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</VersionSuffix>
+	  <Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix).0.0.1</Version>
+	  <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix).$(VersionSuffix)</Version>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>  </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

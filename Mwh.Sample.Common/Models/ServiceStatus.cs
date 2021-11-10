@@ -1,9 +1,20 @@
-﻿namespace Mwh.Sample.Common.Models
+﻿namespace Mwh.Sample.Common.Models;
+
+/// <summary>
+/// Service Status Values
+/// </summary>
+public enum ServiceStatus
 {
-    public enum ServiceStatus
-    {
-        Degraded,
-        Offline,
-        Online
-    }
+    /// <summary>
+    /// Some sub-set of the system is not working
+    /// </summary>
+    Degraded,
+    /// <summary>
+    /// The system is not available
+    /// </summary>
+    Offline,
+    /// <summary>
+    /// The system is fully online 
+    /// </summary>
+    Online
 }

@@ -1,0 +1,29 @@
+﻿@model Mwh.Sample.Common.Models.EmployeeModel
+@{
+    ViewBag.Title = "Employee Details";
+}
+<div class="container">
+    <h2>Employee Details</h2>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+            <dd>@Html.DisplayFor(model => model.Name)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Age)</dt>
+            <dd>@Html.DisplayFor(model => model.Age)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.State)</dt>
+            <dd>@Html.DisplayFor(model => model.State)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Country)</dt>
+            <dd>@Html.DisplayFor(model => model.Country)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Department)</dt>
+            <dd>@Html.DisplayFor(model => model.Department)</dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-info" })
+    </p>
+</div>
