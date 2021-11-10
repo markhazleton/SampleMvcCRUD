@@ -1,13 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mwh.Sample.Common.Models;
-using Mwh.Sample.Core.Data.Services;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿namespace Mwh.Sample.Core.Data.Tests.Services;
 
-namespace Mwh.Sample.Core.Data.Tests.Services
-{
-    [TestClass]
+[TestClass]
     public class EmployeeServiceTests
     {
         private EmployeeService service;
@@ -215,4 +208,3 @@ namespace Mwh.Sample.Core.Data.Tests.Services
             Assert.IsFalse(result.Success);
         }
     }
-}

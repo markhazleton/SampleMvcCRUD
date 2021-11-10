@@ -1,21 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mwh.Sample.Core.Data.Models;
-
-namespace Mwh.Sample.Core.Data.Tests.Models
+﻿namespace Mwh.Sample.Core.Data.Tests.Models;
+[TestClass]
+public class EmployeeContextTests
 {
-    [TestClass]
-    public class EmployeeContextTests
+    [TestMethod]
+    public void EmployeeContext_ExpectedBehavior()
     {
-        [TestMethod]
-        public void EmployeeContext_ExpectedBehavior()
-        {
-            // Arrange
-            var employeeContext = new EmployeeContext();
+        // Arrange
+        var employeeContext = new EmployeeContext();
 
-            // Act
+        // Act
 
-            // Assert
-            Assert.IsNotNull(employeeContext);
-        }
+        // Assert
+        Assert.IsNotNull(employeeContext);
     }
 }
