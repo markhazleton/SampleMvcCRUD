@@ -11,11 +11,15 @@
 		<Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix).0.0.1</Version>
 		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix).$(VersionSuffix)</Version>
 		<UserSecretsId>90ba3d65-6f73-4306-99f9-8b3d90cd84c4</UserSecretsId>
-		<ApplicationInsightsResourceId>/subscriptions/99d8f664-6f80-4f58-b376-6f8fa975cc8a/resourceGroups/MwhSample/providers/microsoft.insights/components/MwhTexeconWebCore</ApplicationInsightsResourceId>
+		<ApplicationInsightsResourceId>/subscriptions/1e3f18e4-ceb9-4033-8ce0-f17b8af6225f/resourcegroups/HelloWorld/providers/Microsoft.Insights/components/SampleMvcCRUDWeb</ApplicationInsightsResourceId>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>wwwroot\api.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
+		<PackageReference Include="Azure.Identity" Version="1.4.0" />
+		<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.2.0" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.19.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
@@ -23,6 +27,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.21" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 	</ItemGroup>
@@ -43,13 +48,12 @@
 
 	<ItemGroup>
 		<EmbeddedResource Update="Properties\Resources.resx">
-			<Generator>ResXFileCodeGenerator</Generator>
+			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\" />
 	  <Folder Include="wwwroot\images\" />
 	</ItemGroup>
 

@@ -1,13 +1,16 @@
 {
   "dependencies": {
-    "secrets1": {
-      "type": "secrets.user"
-    },
     "appInsights1": {
       "secretStore": "LocalSecretsFile",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/MwhTexeconWebCore",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Insights/components/SampleMvcCRUDWeb",
       "type": "appInsights.azure",
       "connectionId": "APPINSIGHTS_CONNECTIONSTRING"
+    },
+    "secrets1": {
+      "secretStore": null,
+      "resourceId": null,
+      "type": "secrets.user",
+      "connectionId": null
     }
   }
 }

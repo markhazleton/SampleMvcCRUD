@@ -1,5 +1,4 @@
 namespace SampleMvcCRUD.Web.Models;
-
 /// <summary>
 /// 
 /// </summary>

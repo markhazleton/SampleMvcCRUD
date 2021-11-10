@@ -1,5 +1,11 @@
+// Helpful URLs
+// https://www.wardvanbesien.info/post/using-key-vault-when-developing-locally/ 
+// 
 
 var builder = WebApplication.CreateBuilder(args);
+
+var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
+builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 
 // Add services to the container.
 SeedDatabase.ConfirmDatabaseCreation();

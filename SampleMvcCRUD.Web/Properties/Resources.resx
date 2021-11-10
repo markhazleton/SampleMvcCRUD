@@ -120,4 +120,7 @@
   <data name="employee" xml:space="preserve">
     <value>employee</value>
   </data>
+  <data name="VaultUri" xml:space="preserve">
+    <value>http://127.0.0.1:10001/</value>
+  </data>
 </root>

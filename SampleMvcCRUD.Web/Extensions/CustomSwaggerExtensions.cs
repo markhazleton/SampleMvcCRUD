@@ -31,8 +31,8 @@ public static class CustomSwaggerExtensions
                                License = new OpenApiLicense { Name = "MIT", },
                            });
 
-            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            var xmlFile = $"api.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory,"", xmlFile);
             cfg.IncludeXmlComments(xmlPath);
         });
         return services;
