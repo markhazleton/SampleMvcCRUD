@@ -18,7 +18,8 @@ steps:
   displayName: 'Use .NET Core sdk 6.0.100'
   inputs:
     packageType: 'sdk'
-    version: '6.0.100'
+    version: '6.0.100' 
+    performMultiLevelLookup: true
     includePreviewVersions: true
 
 - task: NuGetToolInstaller@1
