@@ -13,8 +13,14 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-
 steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk 6.0.100'
+  inputs:
+    packageType: 'sdk'
+    version: '6.0.100'
+    includePreviewVersions: true
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
@@ -32,3 +38,8 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: CRAnalyzeTask@201
+  inputs:
+      solution: '**/*.sln'
+      sendLogs: true
