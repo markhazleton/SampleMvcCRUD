@@ -12,6 +12,7 @@ pool:
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
+  dotNetVersion: '6.0.x'
   buildConfiguration: 'Release'
 steps:
 - task: UseDotNet@2
@@ -28,11 +29,12 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: VSBuild@1
+- task: UseDotNet@2
   inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    version: $(dotNetVersion)
+    includePreviewVersions: true
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'Build .NET 6 Application'
 
 - task: VSTest@2
   inputs:
