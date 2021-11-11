@@ -15,7 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{867FA215
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Core.Data.Tests", "Mwh.Sample.Core.Data.Tests\Mwh.Sample.Core.Data.Tests.csproj", "{13FB74C0-0489-4C38-9FCF-4E5198CDEE70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMvcCRUD.Web", "SampleMvcCRUD.Web\SampleMvcCRUD.Web.csproj", "{B3B28942-930C-4CE6-9BE5-723D5CAA5832}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleMvcCRUD.Web", "SampleMvcCRUD.Web\SampleMvcCRUD.Web.csproj", "{B3B28942-930C-4CE6-9BE5-723D5CAA5832}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{2E18C8B3-20AB-42BB-97B6-00B1AEA5CEB9}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
