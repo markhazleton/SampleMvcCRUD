@@ -4,18 +4,18 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Deterministic>false</Deterministic>
-		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
-		<VersionPrefix>5</VersionPrefix>
-		<VersionSuffix>$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</VersionSuffix>
-		<Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix).0.0.1</Version>
-		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix).$(VersionSuffix)</Version>
 		<UserSecretsId>90ba3d65-6f73-4306-99f9-8b3d90cd84c4</UserSecretsId>
 		<ApplicationInsightsResourceId>/subscriptions/1e3f18e4-ceb9-4033-8ce0-f17b8af6225f/resourcegroups/HelloWorld/providers/Microsoft.Insights/components/SampleMvcCRUDWeb</ApplicationInsightsResourceId>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<DocumentationFile>wwwroot\SampleMvcCRUD.Web.xml</DocumentationFile>
 	</PropertyGroup>
-
+	
+	<PropertyGroup>
+		<Deterministic>false</Deterministic>
+		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
+		<AssemblyVersion>6.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
+	</PropertyGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
 		<PackageReference Include="Azure.Identity" Version="1.4.0" />

@@ -1,0 +1,288 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <h2>JavaScript AJAX using MVC Api</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New Employee</button><br /><br />
+    <table id="EmpSinglePage" class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Department</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="tbody"></tbody>
+        <tfoot></tfoot>
+    </table>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Add Employee</h4>
+                <button type="button" style="float:right;" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" class="form-control" id="age" placeholder="age" />
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" id="state" placeholder="state" />
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" class="form-control" id="country" placeholder="country" />
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <input type="number" class="form-control" id="department" placeholder="department" />
+                    </div>
+                    <input type="hidden" id="id" value="0" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Add</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script type="text/javascript">
+        //Load Data in Table when documents is ready
+        $(document).ready(function () {
+            loadData();
+        });
+
+
+
+        //Load Employee List
+        const loadData = () => {
+            $.ajax({
+                url: "/api/employee",
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    var html = '';
+                    $.each(result, function (key, item) {
+                        html += '<tr>';
+                        html += '<td>' + item.name + '</td>';
+                        html += '<td>' + item.age + '</td>';
+                        html += '<td>' + item.state + '</td>';
+                        html += '<td>' + item.country + '</td>';
+                        html += '<td>' + item.department + '</td>';
+                        html += '<td><a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + item.id + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + item.id + ')">Delete</a></td>';
+                        html += '</tr>';
+                    });
+                    $('.tbody').html(html);
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+        //Show Add Employee Dialog
+        const Add =()=> {
+            var res = validate();
+            if (res == false) {
+                return false;
+            }
+            var empId = +$('#id').val();
+            var depId = +$('#department').val();
+            var ageId = +$('#age').val();
+
+            var employee = {
+                id: empId,
+                name: $('#name').val(),
+                age: ageId,
+                state: $('#state').val(),
+                country: $('#country').val(),
+                department: depId
+            };
+
+            var jsonEmpObj = JSON.stringify(employee)
+
+            $.ajax({
+                url: "/api/employee",
+                data: jsonEmpObj,
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    loadData();
+                    $('#myModal').modal('hide');
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+        // Get Employee based on Employee ID
+        const getEmployeeByID = (EmpID) => {
+            $('#name').css('border-color', 'lightgrey');
+            $('#age').css('border-color', 'lightgrey');
+            $('#state').css('border-color', 'lightgrey');
+            $('#country').css('border-color', 'lightgrey');
+            $.ajax({
+                url: "/api/employee/" + EmpID,
+                typr: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    $('#id').val(result.id);
+                    $('#name').val(result.name);
+                    $('#age').val(result.age);
+                    $('#state').val(result.state);
+                    $('#country').val(result.country);
+                    $('#department').val(result.department);
+
+                    $('#myModalLabel').html('Update Employee');
+
+                    $('#myModal').modal('show');
+                    $('#btnUpdate').show();
+                    $('#btnAdd').hide();
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+            return false;
+        }
+
+        // Update existing Employee record
+        const Update = () => {
+            var res = validate();
+            if (res == false) {
+                return false;
+            }
+            var empId = +$('#id').val();
+            var depId = +$('#department').val();
+            var ageId = +$('#age').val();
+
+            var employee = {
+                id: empId,
+                name: $('#name').val(),
+                age: ageId,
+                state: $('#state').val(),
+                country: $('#country').val(),
+                department: depId
+            };
+            $.ajax({
+                url: "/api/employee/" + empId,
+                data: JSON.stringify(employee),
+                type: "PUT",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    loadData();
+                    $('#myModalLabel').html('Add Employee');
+                    $('#myModal').modal('hide');
+                    $('#id').val("0");
+                    $('#name').val("");
+                    $('#age').val("");
+                    $('#state').val("");
+                    $('#country').val("");
+                    $('#department').val("");
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+        // Delete Employee by Employee ID
+        const Delete= (ID) =>  {
+            var ans = confirm("Are you sure you want to delete this Record?");
+            if (ans) {
+                $.ajax({
+                    url: "/api/employee/" + ID,
+                    type: "DELETE",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        loadData();
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            }
+        }
+
+        // Clear the Employee Form
+        const  clearTextBox = () => {
+            $('#myModalLabel').html('Add Employee');
+            $('#id').val("0");
+            $('#name').val("");
+            $('#age').val("");
+            $('#state').val("");
+            $('#country').val("");
+            $('#department').val("");
+            $('#btnUpdate').hide();
+            $('#btnAdd').show();
+            $('#name').css('border-color', 'lightgrey');
+            $('#age').css('border-color', 'lightgrey');
+            $('#state').css('border-color', 'lightgrey');
+            $('#country').css('border-color', 'lightgrey');
+            $('#department').css('border-color', 'lightgrey');
+        }
+        // JQuery Validate
+        const validate =()=> {
+            var isValid = true;
+            if ($('#name').val().trim() == "") {
+                $('#name').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#name').css('border-color', 'lightgrey');
+            }
+            if ($('#age').val().trim() == "") {
+                $('#age').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#age').css('border-color', 'lightgrey');
+            }
+            if ($('#state').val().trim() == "") {
+                $('#state').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#state').css('border-color', 'lightgrey');
+            }
+            if ($('#country').val().trim() == "") {
+                $('#country').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#country').css('border-color', 'lightgrey');
+            }
+            if ($('#department').val().trim() == "") {
+                $('#department').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#department').css('border-color', 'lightgrey');
+            }
+            return isValid;
+        }
+    </script>
+}

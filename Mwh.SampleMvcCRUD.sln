@@ -15,12 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{867FA215
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Core.Data.Tests", "Mwh.Sample.Core.Data.Tests\Mwh.Sample.Core.Data.Tests.csproj", "{13FB74C0-0489-4C38-9FCF-4E5198CDEE70}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleMvcCRUD.Web", "SampleMvcCRUD.Web\SampleMvcCRUD.Web.csproj", "{B3B28942-930C-4CE6-9BE5-723D5CAA5832}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{2E18C8B3-20AB-42BB-97B6-00B1AEA5CEB9}"
 	ProjectSection(SolutionItems) = preProject
 		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleMvcCRUD.Web", "SampleMvcCRUD.Web\SampleMvcCRUD.Web.csproj", "{530DA01A-1CA9-4063-8E61-A2EA68CBC60E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +48,10 @@ Global
 		{13FB74C0-0489-4C38-9FCF-4E5198CDEE70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13FB74C0-0489-4C38-9FCF-4E5198CDEE70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13FB74C0-0489-4C38-9FCF-4E5198CDEE70}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3B28942-930C-4CE6-9BE5-723D5CAA5832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3B28942-930C-4CE6-9BE5-723D5CAA5832}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3B28942-930C-4CE6-9BE5-723D5CAA5832}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3B28942-930C-4CE6-9BE5-723D5CAA5832}.Release|Any CPU.Build.0 = Release|Any CPU
+		{530DA01A-1CA9-4063-8E61-A2EA68CBC60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{530DA01A-1CA9-4063-8E61-A2EA68CBC60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{530DA01A-1CA9-4063-8E61-A2EA68CBC60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{530DA01A-1CA9-4063-8E61-A2EA68CBC60E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

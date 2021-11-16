@@ -18,15 +18,13 @@
 		<ApplicationIcon>favicon.ico</ApplicationIcon>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Deterministic>false</Deterministic>
-		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
-		<VersionPrefix>5</VersionPrefix>
-		<VersionSuffix>$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</VersionSuffix>
-		<Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix).0.0.1</Version>
-		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix).$(VersionSuffix)</Version>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
-
+	<PropertyGroup>
+		<Deterministic>false</Deterministic>
+		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
+		<AssemblyVersion>6.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
+	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="Processor\**" />
 		<Compile Remove="Properties\**" />
