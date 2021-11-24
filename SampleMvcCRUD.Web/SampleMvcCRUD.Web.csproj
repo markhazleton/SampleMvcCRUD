@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>90ba3d65-6f73-4306-99f9-8b3d90cd84c4</UserSecretsId>
-		<ApplicationInsightsResourceId>/subscriptions/1e3f18e4-ceb9-4033-8ce0-f17b8af6225f/resourcegroups/HelloWorld/providers/Microsoft.Insights/components/SampleMvcCRUDWeb</ApplicationInsightsResourceId>
+		<ApplicationInsightsResourceId>/subscriptions/1e3f18e4-ceb9-4033-8ce0-f17b8af6225f/resourceGroups/HelloWorld/providers/microsoft.insights/components/SampleMvcCRUDWeb</ApplicationInsightsResourceId>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<DocumentationFile>wwwroot\SampleMvcCRUD.Web.xml</DocumentationFile>
 	</PropertyGroup>

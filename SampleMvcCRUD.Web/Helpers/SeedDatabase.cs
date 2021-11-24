@@ -8,10 +8,10 @@ public static class SeedDatabase
     /// <summary>
     /// ConfirmDatabaseCreation
     /// </summary>
-    public static void ConfirmDatabaseCreation()
+    public static void ConfirmDatabaseCreation(string DatabaseName)
     {
         var dbOptions = new DbContextOptionsBuilder<EmployeeContext>()
-            .UseInMemoryDatabase(Properties.Resources.employee)
+            .UseInMemoryDatabase(DatabaseName)
             .Options;
         var context = new EmployeeContext(dbOptions);
         context.Database.EnsureDeletedAsync();
