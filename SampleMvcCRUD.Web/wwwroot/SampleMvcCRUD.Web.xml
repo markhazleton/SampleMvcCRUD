@@ -280,7 +280,7 @@
             See Employee Database
             </summary>
         </member>
-        <member name="M:SampleMvcCRUD.Web.Helpers.SeedDatabase.ConfirmDatabaseCreation">
+        <member name="M:SampleMvcCRUD.Web.Helpers.SeedDatabase.ConfirmDatabaseCreation(System.String)">
             <summary>
             ConfirmDatabaseCreation
             </summary>
