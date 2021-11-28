@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
+  solution: 'Mwh.Sample.Web.sln'
   buildPlatform: 'Any CPU'
   dotNetVersion: '6.0.x'
   buildConfiguration: 'Release'
@@ -33,7 +33,7 @@ steps:
   inputs:
     version: $(dotNetVersion)
     includePreviewVersions: true
-- script: dotnet build --configuration $(buildConfiguration)
+- script: dotnet build Mwh.Sample.Web.sln --configuration $(buildConfiguration)
   displayName: 'Build .NET 6 Application'
 
 - task: VSTest@2
@@ -43,5 +43,5 @@ steps:
 
 - task: CRAnalyzeTask@201
   inputs:
-      solution: '**/*.sln'
+      solution: 'Mwh.Sample.Web.sln'
       sendLogs: true

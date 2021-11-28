@@ -7,7 +7,7 @@ namespace Mwh.Sample.Web.Extensions;
 public static class CustomSwaggerExtensions
 {
     /// <summary>
-    ///
+    /// Custom Swagger for Services
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
@@ -48,6 +48,11 @@ public static class CustomSwaggerExtensions
         return services;
     }
 
+    /// <summary>
+    /// Custom Swagger for App Builder
+    /// </summary>
+    /// <param name="app"></param>
+    /// <returns></returns>
     public static IApplicationBuilder UseCustomSwagger(this IApplicationBuilder app)
     {
         app.UseSwagger()

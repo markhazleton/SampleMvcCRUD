@@ -8,6 +8,10 @@ public class MvcEmployeeController : BaseController
 {
     private readonly IEmployeeClient client;
 
+    /// <summary>
+    /// Mvc Employee Controller Constructor
+    /// </summary>
+    /// <param name="employeeClient"></param>
     public MvcEmployeeController(IEmployeeClient employeeClient) : base()
     {
         client = employeeClient;

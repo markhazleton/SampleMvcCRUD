@@ -27,7 +27,7 @@ employeeMock.EmployeeCollection()?.ForEach(async emp =>
 {
     responseList.Add(await employeeService.SaveAsync(emp));
 });
-Console.WriteLine($"Success List Count:{responseList?.Where(w=>w.Success==true).ToArray().Count()}");
+Console.WriteLine($"Success List Count:{responseList?.Where(w => w.Success == true).ToArray().Count()}");
 
 
 list = await employeeService.GetAsync(new CancellationToken());

@@ -5,7 +5,16 @@ namespace Mwh.Sample.Web.Models;
 /// </summary>
 public enum KeyVaultUsage
 {
+    /// <summary>
+    /// 
+    /// </summary>
     UseLocalSecretStore,
+    /// <summary>
+    /// 
+    /// </summary>
     UseClientSecret,
+    /// <summary>
+    /// 
+    /// </summary>
     UseMsi
 }

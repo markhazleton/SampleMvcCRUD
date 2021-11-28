@@ -1,9 +1,24 @@
 
 namespace Mwh.Sample.Web.Models;
+/// <summary>
+/// KeyVaultOptions
+/// </summary>
 public class KeyVaultOptions
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public KeyVaultUsage Mode { get; set; }
-    public string KeyVaultUri { get; set; }
-    public string ClientId { get; set; }
-    public string ClientSecret { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    public string? KeyVaultUri { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    public string? ClientId { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    public string? ClientSecret { get; set; }
 }

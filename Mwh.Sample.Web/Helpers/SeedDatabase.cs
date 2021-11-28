@@ -9,7 +9,7 @@ public static class SeedDatabase
     /// <summary>
     /// ConfirmDatabaseCreation
     /// </summary>
-    /// <param name="employee"></param>
+    /// <param name="databaseName"></param>
     public static void ConfirmDatabaseCreation(string databaseName)
     {
         var dbOptions = new DbContextOptionsBuilder<EmployeeContext>()

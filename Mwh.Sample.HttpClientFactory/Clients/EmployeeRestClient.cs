@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.HttpClientFactory.Clients;
+﻿
+namespace Mwh.Sample.HttpClientFactory.Clients;
 
 /// <summary>
 ///

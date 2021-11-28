@@ -5,13 +5,25 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Web", "Mwh.Sample.Web\Mwh.Sample.Web.csproj", "{3FB84645-02F1-4536-B249-B67022BC09F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.Sample.Domain", "Mwh.Sample.Domain\Mwh.Sample.Domain.csproj", "{3B4D5BEC-4510-4AE9-98C0-0D4B7E511852}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Domain", "Mwh.Sample.Domain\Mwh.Sample.Domain.csproj", "{3B4D5BEC-4510-4AE9-98C0-0D4B7E511852}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.Sample.Repository", "Mwh.Sample.Repository\Mwh.Sample.Repository.csproj", "{C1E798D6-F766-4CA6-B578-9982BC7A0C03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Repository", "Mwh.Sample.Repository\Mwh.Sample.Repository.csproj", "{C1E798D6-F766-4CA6-B578-9982BC7A0C03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.Sample.Console", "Mwh.Sample.Console\Mwh.Sample.Console.csproj", "{B6CB25A6-CE83-4036-8B1B-BFBC45D9FFEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Console", "Mwh.Sample.Console\Mwh.Sample.Console.csproj", "{B6CB25A6-CE83-4036-8B1B-BFBC45D9FFEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.Sample.HttpClientFactory", "Mwh.Sample.HttpClientFactory\Mwh.Sample.HttpClientFactory.csproj", "{64140CBB-B8DF-4238-B870-ADEFB3178D36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.HttpClientFactory", "Mwh.Sample.HttpClientFactory\Mwh.Sample.HttpClientFactory.csproj", "{64140CBB-B8DF-4238-B870-ADEFB3178D36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{838DB9FB-51A6-4AC8-BC6D-1EC1699D4262}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines-6.yml = azure-pipelines-6.yml
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FEF2D847-3252-439D-A3D7-18D8FA064F5C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Domain.Tests", "Mwh.Sample.Domain.Tests\Mwh.Sample.Domain.Tests.csproj", "{43995839-3522-4F9B-ADFF-CC2CEA3A5FC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +51,16 @@ Global
 		{64140CBB-B8DF-4238-B870-ADEFB3178D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64140CBB-B8DF-4238-B870-ADEFB3178D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64140CBB-B8DF-4238-B870-ADEFB3178D36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43995839-3522-4F9B-ADFF-CC2CEA3A5FC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43995839-3522-4F9B-ADFF-CC2CEA3A5FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43995839-3522-4F9B-ADFF-CC2CEA3A5FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43995839-3522-4F9B-ADFF-CC2CEA3A5FC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{43995839-3522-4F9B-ADFF-CC2CEA3A5FC6} = {FEF2D847-3252-439D-A3D7-18D8FA064F5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B2A0641-6870-4024-9243-A475FBD5DB21}

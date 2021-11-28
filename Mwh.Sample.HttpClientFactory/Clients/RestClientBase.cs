@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.HttpClientFactory.Clients;
+﻿
+namespace Mwh.Sample.HttpClientFactory.Clients;
 
 // Blog Post On using HttpClientFactory: https://www.assemblyai.com/blog/getting-started-with-httpclientfactory-in-c-sharp-and-net-5/
 // Microsoft Docs: https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests 
@@ -74,7 +75,7 @@ public abstract class RestClientBase : IDisposable, IRestClientBase
     /// <param name="urlSegment">The URL segment.</param>
     /// <param name="requestBody">The request body.</param>
     /// <returns>T.</returns>
-    protected async Task<T> ExecuteAsync<T>(string urlSegment, object requestBody, HttpMethod httpMethod, CancellationToken token)
+    protected async Task<T?> ExecuteAsync<T>(string urlSegment, object requestBody, HttpMethod httpMethod, CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
         HttpRequestMessage request = GetRequestMessage(urlSegment, httpMethod);

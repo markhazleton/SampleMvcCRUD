@@ -10,40 +10,40 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/Mwh.SampleCore.sln'
+  solution: 'Mwh.SampleMvcCRUD.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Debug'
-
+  buildPlatform: 'Any CPU'
+  dotNetVersion: '6.0.x'
+  buildConfiguration: 'Release'
 steps:
 - task: UseDotNet@2
   displayName: 'Use .NET Core sdk 6.0.100'
   inputs:
     packageType: 'sdk'
-    version: '6.0.100'
+    version: '6.0.100' 
+    performMultiLevelLookup: true
     includePreviewVersions: true
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-    feedsToUse: 'select'
+- task: NuGetToolInstaller@1
 
-- task: DotNetCoreCLI@2
+- task: NuGetCommand@2
   inputs:
-    command: 'build'
-    projects: '**/*.csproj'
+    restoreSolution: '$(solution)'
 
-- task: DotNetCoreCLI@2
+- task: UseDotNet@2
   inputs:
-    command: 'test'
-    projects: '**/*.csproj'
+    version: $(dotNetVersion)
+    includePreviewVersions: true
+- script: dotnet build Mwh.SampleMvcCRUD.sln --configuration $(buildConfiguration)
+  displayName: 'Build .NET 6 Application'
 
-- task: DotNetCoreCLI@2
+- task: VSTest@2
   inputs:
-    command: 'publish'
-    publishWebProjects: true
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
 
 - task: CRAnalyzeTask@201
   inputs:
-      solution: '**/Mwh.SampleCore.sln'
+      solution: '$(solution)'
       sendLogs: true
