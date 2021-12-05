@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'Mwh.SampleMvcCRUD.sln'
+  solution: 'Mwh.Sample.Web.sln'
   buildPlatform: 'Any CPU'
   dotNetVersion: '6.0.x'
   buildConfiguration: 'Release'
@@ -44,5 +44,4 @@ steps:
 - task: CRAnalyzeTask@201
   inputs:
       solution: 'Mwh.Sample.Web.sln'
-      solution: 'Mwh.SampleMvcCRUD.sln'
       sendLogs: true
