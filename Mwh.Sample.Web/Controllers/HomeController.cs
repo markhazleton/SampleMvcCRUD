@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Web.Controllers;
+﻿
+namespace Mwh.Sample.Web.Controllers;
 /// <summary>
 /// Home Controller
 /// </summary>

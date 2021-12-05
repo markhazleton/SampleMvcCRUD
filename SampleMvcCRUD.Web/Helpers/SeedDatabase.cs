@@ -1,4 +1,5 @@
-﻿namespace SampleMvcCRUD.Web.Helpers;
+﻿
+namespace SampleMvcCRUD.Web.Helpers;
 
 /// <summary>
 /// See Employee Database

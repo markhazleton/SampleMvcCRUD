@@ -1,3 +1,4 @@
+
 namespace SampleMvcCRUD.Web.Models;
 public class KeyVaultOptions
 {

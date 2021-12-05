@@ -1,4 +1,5 @@
-﻿namespace SampleMvcCRUD.Web.Controllers.Api.Employee;
+﻿
+namespace SampleMvcCRUD.Web.Controllers.Api.Employee;
 
 /// <summary>
 /// Employee Api Controller

@@ -1,4 +1,5 @@
-namespace SampleMvcCRUD.Web.Models; 
+
+namespace SampleMvcCRUD.Web.Models;
 /// <summary>
 /// Key Vault Usage
 /// </summary>

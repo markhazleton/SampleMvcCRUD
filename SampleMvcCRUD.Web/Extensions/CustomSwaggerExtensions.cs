@@ -1,4 +1,5 @@
-﻿namespace SampleMvcCRUD.Web.Extensions;
+﻿
+namespace SampleMvcCRUD.Web.Extensions;
 
 /// <summary>
 /// Custom Swagger
@@ -34,13 +35,13 @@ public static class CustomSwaggerExtensions
             var xmlFile = $"SampleMvcCRUD.Web.xml";
             string xmlPath = String.Empty;
 
-            if(File.Exists(Path.Combine(AppContext.BaseDirectory,"wwwroot")))
+            if (File.Exists(Path.Combine(AppContext.BaseDirectory, "wwwroot")))
             {
-                xmlPath = Path.Combine(AppContext.BaseDirectory,"wwwroot",xmlFile);
+                xmlPath = Path.Combine(AppContext.BaseDirectory, "wwwroot", xmlFile);
             }
             else
             {
-                xmlPath = Path.Combine(AppContext.BaseDirectory, "", xmlFile);
+                xmlPath = Path.Combine(AppContext.BaseDirectory, string.Empty, xmlFile);
             }
             cfg.IncludeXmlComments(xmlPath);
         });

@@ -1,4 +1,5 @@
-﻿namespace SampleMvcCRUD.Web.Extensions;
+﻿
+namespace SampleMvcCRUD.Web.Extensions;
 
 /// <summary>
 /// 

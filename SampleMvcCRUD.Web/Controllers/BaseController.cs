@@ -1,4 +1,5 @@
-﻿namespace SampleMvcCRUD.Web.Controllers;
+﻿
+namespace SampleMvcCRUD.Web.Controllers;
 
 /// <summary>
 /// BaseController

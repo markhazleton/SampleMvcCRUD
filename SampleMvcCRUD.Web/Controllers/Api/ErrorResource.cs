@@ -1,4 +1,5 @@
-﻿namespace SampleMvcCRUD.Web.Controllers.Api;
+﻿
+namespace SampleMvcCRUD.Web.Controllers.Api;
 /// <summary>
 /// Error Resource
 /// </summary>
