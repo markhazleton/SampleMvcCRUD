@@ -5,6 +5,18 @@
       "suggestion": "true",
       "type": "mssql",
       "connectionId": ""
+    },
+    "appInsights1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/MwhTexeconWebCore",
+      "type": "appInsights.azure",
+      "connectionId": "APPINSIGHTS_CONNECTIONSTRING"
+    },
+    "secrets1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/MwhTexeconWebCorevault",
+      "type": "secrets.keyVault",
+      "connectionId": "VaultUri"
     }
   }
 }

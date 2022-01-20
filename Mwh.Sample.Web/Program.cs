@@ -1,4 +1,11 @@
+using Azure.Identity;
 var builder = WebApplication.CreateBuilder(args);
+var vaultUri = Environment.GetEnvironmentVariable("VaultUri");
+if (vaultUri != null)
+{
+    var keyVaultEndpoint = new Uri(vaultUri);
+    builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+}
 
 // Add services to the container.
 SeedDatabase.ConfirmDatabaseCreation("Employee");
