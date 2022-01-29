@@ -21,7 +21,7 @@
     },
     {
       "destination": "wwwroot/lib/datatables.net-bs/",
-      "library": "datatables.net-bs5@1.11.3"
+      "library": "datatables.net-bs5@1.11.4"
     },
     {
       "destination": "wwwroot/lib/bootstrap/",
