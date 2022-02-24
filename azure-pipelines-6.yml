@@ -45,3 +45,8 @@ steps:
   inputs:
       solution: 'Mwh.Sample.Web.sln'
       sendLogs: true
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
