@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Core.Data.Tests.Models;
+﻿
+namespace Mwh.Sample.Core.Data.Tests.Models;
 
 [TestClass]
 public class EmployeeTests

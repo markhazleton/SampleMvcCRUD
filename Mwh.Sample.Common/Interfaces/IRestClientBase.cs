@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Common.Clients;
+﻿
+namespace Mwh.Sample.Common.Clients;
 /// <summary>
 /// REST Client Base Interface
 /// </summary>

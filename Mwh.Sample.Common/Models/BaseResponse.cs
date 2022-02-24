@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Common.Models;
+﻿
+namespace Mwh.Sample.Common.Models;
 
 /// <summary>
 /// Class BaseResponse.

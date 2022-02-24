@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Common.Extension;
+﻿
+namespace Mwh.Sample.Common.Extension;
 /// <summary>
 /// Special Dictionary for Use with Restful / AJAX Calls
 /// </summary>

@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Core.Data.Repository;
+﻿
+namespace Mwh.Sample.Core.Data.Repository;
 
 public class EmployeeDB : IEmployeeDB
 {

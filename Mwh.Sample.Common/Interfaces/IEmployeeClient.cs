@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Common.Interfaces;
+﻿
+namespace Mwh.Sample.Common.Interfaces;
 /// <summary>
 ///
 /// </summary>

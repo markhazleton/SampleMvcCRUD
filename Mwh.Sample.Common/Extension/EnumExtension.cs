@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Common.Extension;
+﻿
+namespace Mwh.Sample.Common.Extension;
 
 /// <summary>
 /// ENUM Extension Methods

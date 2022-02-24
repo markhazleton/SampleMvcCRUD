@@ -1,3 +1,4 @@
+
 namespace Mwh.Sample.Domain.Tests.Extension;
 
 /// <summary>

@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Common.Repositories;
+﻿
+namespace Mwh.Sample.Common.Repositories;
 /// <summary>
 /// Class EmployeeService.
 /// Implements the <see cref="Mwh.Sample.Common.Repositories.IEmployeeService" />

@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Core.Data.Tests.Services;
+﻿
+namespace Mwh.Sample.Core.Data.Tests.Services;
 
 [TestClass]
 public class EmployeeServiceTests
@@ -153,10 +154,15 @@ public class EmployeeServiceTests
         Assert.AreEqual(50, UpdateResult.Resource?.Age);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     [TestMethod]
     public async Task SaveAsync_StateUnderTest_Valid()
     {
         // Arrange
+        CancellationToken cancellationToken = default;
         EmployeeModel item = new()
         {
             Name = "Test",
@@ -167,7 +173,7 @@ public class EmployeeServiceTests
         };
 
         // Act
-        var result = await service.SaveAsync(item);
+        var result = await service.SaveAsync(item, cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);

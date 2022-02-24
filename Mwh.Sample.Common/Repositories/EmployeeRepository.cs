@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Common.Repositories;
+﻿
+namespace Mwh.Sample.Common.Repositories;
 
 /// <summary>
 /// Class EmployeeRepository.

@@ -1,25 +1,40 @@
-﻿namespace Mwh.Sample.Core.Data.Services;
+﻿
+namespace Mwh.Sample.Core.Data.Services;
 
+/// <summary>
+/// 
+/// </summary>
 public class EmployeeService : IDisposable, IEmployeeService
 {
     private EmployeeContext _context;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public EmployeeService()
     {
         _context = new EmployeeContext();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
     public EmployeeService(EmployeeContext context)
     {
         _context = context;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="options"></param>
     public EmployeeService(DbContextOptions options)
     {
         _context = new EmployeeContext(options);
     }
 
-    private EmployeeModel Create(Employee item)
+    private EmployeeModel Create(Employee? item)
     {
         if (item == null) return new EmployeeModel();
 
@@ -34,7 +49,7 @@ public class EmployeeService : IDisposable, IEmployeeService
         };
     }
 
-    private Employee Create(EmployeeModel item)
+    private static Employee Create(EmployeeModel item)
     {
         return new Employee()
         {
@@ -52,6 +67,11 @@ public class EmployeeService : IDisposable, IEmployeeService
         return list.Select(s => Create(s)).ToArray();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="namelist"></param>
+    /// <returns></returns>
     public int AddMultipleEmployees(string[] namelist)
     {
         var list = new List<Employee>();
@@ -67,6 +87,12 @@ public class EmployeeService : IDisposable, IEmployeeService
         return dbResult;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
     public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
     {
         var response = new EmployeeResponse("Init");
@@ -98,11 +124,20 @@ public class EmployeeService : IDisposable, IEmployeeService
         return response;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void Dispose()
     {
         ((IDisposable)_context).Dispose();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
     public async Task<EmployeeModel> FindByIdAsync(int id, CancellationToken token)
     { return Create(await _context.Employees.FindAsync(new object[] { id }, cancellationToken: token).ConfigureAwait(false)); }
 
@@ -111,22 +146,25 @@ public class EmployeeService : IDisposable, IEmployeeService
         return Get(_context.Employees.ToList());
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="token"></param>
+    /// <returns></returns>
     public async Task<IEnumerable<EmployeeModel>> GetAsync(CancellationToken token)
     { return Get(await _context.Employees.ToListAsync(cancellationToken: token).ConfigureAwait(false)); }
 
-    public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
-    {
-        if (employee == null) return new EmployeeResponse("Employee can not be null");
-
-        return await SaveAsync(employee, token).ConfigureAwait(true);
-    }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     public EmployeeResponse Save(EmployeeModel item)
     {
         if (item == null)
             return new EmployeeResponse("Employee can not be null");
 
-        Employee dbEmp;
+        Employee? dbEmp;
         if (item.id > 0)
         {
             dbEmp = _context.Employees.Where(w => w.Id == item.id).FirstOrDefault();
@@ -153,7 +191,13 @@ public class EmployeeService : IDisposable, IEmployeeService
         return new EmployeeResponse(Create(dbEmp));
     }
 
-    public async Task<EmployeeResponse> SaveAsync(EmployeeModel item)
+    /// <summary>
+    /// Save Employee
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<EmployeeResponse> SaveAsync(EmployeeModel item, CancellationToken cancellationToken)
     {
         if (item == null)
             return new EmployeeResponse("Employee can not be null");
@@ -165,7 +209,7 @@ public class EmployeeService : IDisposable, IEmployeeService
             {
                 dbEmp = await _context.Employees
                     .Where(w => w.Id == item.id)
-                    .FirstOrDefaultAsync()
+                    .FirstOrDefaultAsync(cancellationToken)
                     .ConfigureAwait(true);
 
                 if (dbEmp == null)
@@ -179,11 +223,11 @@ public class EmployeeService : IDisposable, IEmployeeService
                     dbEmp.DepartmentId = (int)item.Department;
                     dbEmp.Name = item.Name;
                     dbEmp.State = item.State;
-                    await _context.SaveChangesAsync()
+                    await _context.SaveChangesAsync(cancellationToken)
                         .ConfigureAwait(true);
 
                     var list = await _context.Employees
-                        .ToListAsync()
+                        .ToListAsync(cancellationToken)
                         .ConfigureAwait(true);
                 }
             }
@@ -191,7 +235,7 @@ public class EmployeeService : IDisposable, IEmployeeService
             {
                 dbEmp = Create(item);
                 await _context.Employees.AddAsync(dbEmp);
-                await _context.SaveChangesAsync()
+                await _context.SaveChangesAsync(cancellationToken)
                     .ConfigureAwait(true);
             }
         }
@@ -202,12 +246,19 @@ public class EmployeeService : IDisposable, IEmployeeService
 
         var newEmp = await _context.Employees
             .Where(w => w.Id == dbEmp.Id)
-            .FirstOrDefaultAsync()
+            .FirstOrDefaultAsync(cancellationToken)
             .ConfigureAwait(true);
 
         return new EmployeeResponse(Create(dbEmp));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="employee"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
     public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
     {
         if (employee == null)

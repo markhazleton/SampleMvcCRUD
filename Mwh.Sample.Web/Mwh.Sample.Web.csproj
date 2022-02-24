@@ -25,9 +25,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Mwh.Sample.Common.HttpClientFactory\Mwh.Sample.Common.HttpClientFactory.csproj" />
-		<ProjectReference Include="..\Mwh.Sample.Common\Mwh.Sample.Common.csproj" />
-		<ProjectReference Include="..\Mwh.Sample.Core.Data\Mwh.Sample.Core.Data.csproj" />
 		<ProjectReference Include="..\Mwh.Sample.Domain\Mwh.Sample.Domain.csproj" />
 		<ProjectReference Include="..\Mwh.Sample.HttpClientFactory\Mwh.Sample.HttpClientFactory.csproj" />
 		<ProjectReference Include="..\Mwh.Sample.Repository\Mwh.Sample.Repository.csproj" />
