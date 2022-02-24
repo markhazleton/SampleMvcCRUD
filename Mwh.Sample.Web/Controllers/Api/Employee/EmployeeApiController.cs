@@ -89,7 +89,7 @@ public class EmployeeApiController : BaseApiController
         {
             return BadRequest(new ErrorResource(result.Message));
         }
-        return Ok(result);
+        return Created($"/api/Employee/{employee.id}", employee);
     }
 
     /// <summary>

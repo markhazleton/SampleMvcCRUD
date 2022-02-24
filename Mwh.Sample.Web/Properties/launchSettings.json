@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -10,19 +10,22 @@
   "profiles": {
     "Mwh.Sample.Web": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7023;http://localhost:5023",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "sqlDebugging": true,
+      "applicationUrl": "https://localhost:7023;http://localhost:5023",
+      "dotnetRunMessages": true,
+      "nativeDebugging": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "sqlDebugging": true,
+      "nativeDebugging": false
     }
   }
 }
