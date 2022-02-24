@@ -27,13 +27,13 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(solution)'
+    restoreSolution: 'Mwh.Sample.Web.sln'
 
 - task: UseDotNet@2
   inputs:
     version: $(dotNetVersion)
     includePreviewVersions: true
-- script: dotnet build Mwh.SampleMvcCRUD.sln --configuration $(buildConfiguration)
+- script: dotnet build Mwh.Sample.Web.sln --configuration $(buildConfiguration)
   displayName: 'Build .NET 6 Application'
 
 - task: VSTest@2
