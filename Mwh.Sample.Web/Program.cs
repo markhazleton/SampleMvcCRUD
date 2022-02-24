@@ -35,13 +35,13 @@ builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPINSIG
 
 var app = builder.Build();
 
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    app.UseCustomSwagger();
 }
+
+app.UseCustomSwagger();
 
 app.UseHttpsRedirection();
 

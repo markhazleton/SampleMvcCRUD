@@ -8,11 +8,11 @@
     },
     "appInsights1": {
       "type": "appInsights",
-      "connectionId": "APPINSIGHTS_CONNECTIONSTRING"
+      "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING"
     },
     "secrets1": {
       "type": "secrets",
-      "connectionId": null
+      "connectionId": "VaultUri"
     }
   }
 }
