@@ -35,7 +35,13 @@ steps:
     includePreviewVersions: true
 - script: dotnet build Mwh.Sample.Web.sln --configuration $(buildConfiguration)
   displayName: 'Build .NET 6 Application'
-
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Release.zip'
+    replaceExistingArchive: true
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
