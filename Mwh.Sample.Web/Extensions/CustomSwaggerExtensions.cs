@@ -21,7 +21,7 @@ public static class CustomSwaggerExtensions
                                Title = "Mwh.Sample.WebAPI",
                                Version = "v1",
                                Description =
-                "Simple RESTful API built with ASP.NET 6.0 to show how to create RESTful services using a decoupled, maintainable architecture. <br/><a href='/'>Back To Home</a>",
+                "<a href='/'>Back To Home</a><p>Simple RESTful API built with ASP.NET 6.0 to show how to create RESTful services using a decoupled, maintainable architecture.</p> ",
                                Contact =
                 new OpenApiContact
                 {
