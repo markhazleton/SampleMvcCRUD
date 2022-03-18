@@ -1,4 +1,6 @@
 
+using System.Runtime.Serialization;
+
 namespace Mwh.Sample.Common.Tests.Extension;
 /// <summary>
 /// Defines test class AjaxDictionaryTests.
@@ -74,10 +76,4 @@ public class AjaxDictionaryTests
         var myResult = myTest.GetList().FirstOrDefault();
         Assert.AreEqual("1 - one", myResult);
     }
-
-    /// <summary>
-    /// Defines the test method GetObjectDataTest.
-    /// </summary>
-    [TestMethod()]
-    public void GetObjectDataTest() { }
 }

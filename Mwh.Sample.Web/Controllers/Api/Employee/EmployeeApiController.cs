@@ -8,7 +8,6 @@ namespace Mwh.Sample.Web.Controllers.Api.Employee;
 public class EmployeeApiController : BaseApiController
 {
     private readonly IEmployeeService _employeeService;
-
     /// <summary>
     /// EmployeeApiController
     /// </summary>

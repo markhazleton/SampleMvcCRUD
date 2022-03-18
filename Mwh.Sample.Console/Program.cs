@@ -13,7 +13,7 @@ Console.WriteLine("Database is Setup");
 
 var employeeService = new EmployeeDatabaseService(context);
 
-var list = await employeeService.GetAsync(new CancellationToken());
+var list = await employeeService.GetAsync(new CancellationToken()).ConfigureAwait(false);
 
 Console.WriteLine($"Service List Count:{list?.Count()}");
 
@@ -25,12 +25,12 @@ var responseList = new List<EmployeeResponse>();
 Console.WriteLine("Add sample Employees to new database");
 employeeMock.EmployeeCollection()?.ForEach(async emp =>
 {
-    responseList.Add(await employeeService.SaveAsync(emp));
+    responseList.Add(await employeeService.SaveAsync(emp).ConfigureAwait(false));
 });
-Console.WriteLine($"Success List Count:{responseList?.Where(w => w.Success == true).ToArray().Count()}");
+Console.WriteLine($"Success List Count:{responseList?.Where(w => w.Success == true).ToArray().Length}");
 
 
-list = await employeeService.GetAsync(new CancellationToken());
+list = await employeeService.GetAsync(new CancellationToken()).ConfigureAwait(false);
 Console.WriteLine($"Service List Count:{list?.Count()}");
 
 Console.WriteLine("Complete");

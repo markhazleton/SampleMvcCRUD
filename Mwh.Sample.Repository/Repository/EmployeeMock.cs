@@ -30,7 +30,7 @@ public class EmployeeMock : IEmployeeDB
                 {
                     Name = "Bob",
                     Age = 50,
-                    Department = EmployeeDepartment.IT,
+                    Department = EmployeeDepartment.HR,
                     State = "Texas",
                     Country = "USA",
                     id = 1
