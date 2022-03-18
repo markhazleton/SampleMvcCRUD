@@ -1,12 +1,17 @@
 ﻿
 namespace Mwh.Sample.Common.Models;
-[SuppressMessage("Spellchecker", "CRRSP06:A misspelled word has been found", Justification = "<Pending>")]
-
 /// <summary>
-/// ApplicationStatus
+/// 
 /// </summary>
 public sealed class ApplicationStatus
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="assembly"></param>
+    /// <param name="tests"></param>
+    /// <param name="messages"></param>
+    /// <param name="status"></param>
     public ApplicationStatus(Assembly assembly, Dictionary<string, string> tests = null, List<string> messages = null, ServiceStatus status = ServiceStatus.Online)
     {
         BuildDate = GetBuildDate(assembly);
