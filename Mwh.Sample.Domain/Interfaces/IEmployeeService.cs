@@ -6,6 +6,12 @@ namespace Mwh.Sample.Domain.Interfaces;
 public interface IEmployeeService
 {
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="namelist"></param>
+    /// <returns></returns>
+    Task<int> AddMultipleEmployeesAsync(string[]? namelist);
+    /// <summary>
     /// Deletes the asynchronous.
     /// </summary>
     /// <param name="id">The identifier.</param>

@@ -55,7 +55,7 @@ public class EmployeeModel
                 return false;
             if (string.IsNullOrEmpty(Country))
                 return false;
-            if (!Department.IsDefined())
+            if (Department==EmployeeDepartment.Unknown)
                 return false;
             if ((Age < 1))
                 return false;

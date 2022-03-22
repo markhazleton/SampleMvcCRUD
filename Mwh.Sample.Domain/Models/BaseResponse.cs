@@ -1,6 +1,4 @@
-﻿
-namespace Mwh.Sample.Domain.Models;
-
+﻿namespace Mwh.Sample.Domain.Models;
 
 /// <summary>
 /// Class BaseResponse.
@@ -50,7 +48,7 @@ public abstract class BaseResponse<T>
     /// Gets the resource.
     /// </summary>
     /// <value>The resource.</value>
-    public T Resource { get; private set; }
+    public T? Resource { get; private set; }
 
     /// <summary>
     /// Gets a value indicating whether this <see cref="BaseResponse{T}"/> is success.

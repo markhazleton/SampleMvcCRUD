@@ -1,5 +1,4 @@
-﻿
-namespace Mwh.Sample.Core.Data.Tests.Repository;
+﻿namespace Mwh.Sample.Core.Data.Tests.Repository;
 
 [TestClass]
 public class EmployeeDBTests
@@ -127,9 +126,56 @@ public class EmployeeDBTests
         Assert.AreEqual(finalResult.State, "FL");
 
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    [TestMethod]
+    public void Update_NewEmployee()
+    {
+        // Arrange
+        EmployeeModel emp = new EmployeeModel()
+        { 
+            Age =22,
+            Name ="Test",
+            State = "TX",
+            Country="USA",
+            Department = EmployeeDepartment.IT
+        };
+
+        // Act
+        var result = employeeDB.Update(emp);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result.id>0);
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    [TestMethod]
+    public void Update_NewEmployeeWithId98()
+    {
+        // Arrange
+        EmployeeModel emp = new EmployeeModel()
+        {
+            Age = 22,
+            Name = "Test",
+            State = "TX",
+            Country = "USA",
+            Department = EmployeeDepartment.IT,
+            id=98
+        };
+
+        // Act
+        var result = employeeDB.Update(emp);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(98,result.id);
+    }
 
     [TestMethod]
-    public void Update_StateUnderTest_ExpectedBehaviorNull()
+    public void Update_NullEmployee()
     {
         // Arrange
         EmployeeModel emp = null;

@@ -72,7 +72,7 @@ public class EmployeeServiceContext : IDisposable, IEmployeeService
     /// </summary>
     /// <param name="namelist"></param>
     /// <returns></returns>
-    public int AddMultipleEmployees(string[]? namelist)
+    public async Task<int> AddMultipleEmployeesAsync(string[]? namelist)
     {
         var list = new List<Employee>();
 
@@ -83,7 +83,7 @@ public class EmployeeServiceContext : IDisposable, IEmployeeService
             list.Add(new Employee() { Name = name, Age = 33, Country = "USA", DepartmentId = 1, State = "TX" });
         }
         _context.Employees.AddRange(list);
-        var dbResult = _context.SaveChanges();
+        var dbResult = await _context.SaveChangesAsync();
         return dbResult;
     }
 
@@ -154,50 +154,13 @@ public class EmployeeServiceContext : IDisposable, IEmployeeService
     public async Task<IEnumerable<EmployeeModel>> GetAsync(CancellationToken token)
     { return Get(await _context.Employees.ToListAsync(cancellationToken: token).ConfigureAwait(false)); }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public EmployeeResponse Save(EmployeeModel item)
-    {
-        if (item == null)
-            return new EmployeeResponse("Employee can not be null");
-
-        Employee? dbEmp;
-        if (item.id > 0)
-        {
-            dbEmp = _context.Employees.Where(w => w.Id == item.id).FirstOrDefault();
-            if (dbEmp == null)
-            {
-                return new EmployeeResponse("Employee Not Found");
-            }
-            else
-            {
-                dbEmp.Age = item.Age;
-                dbEmp.Country = item.Country;
-                dbEmp.DepartmentId = (int)item.Department;
-                dbEmp.Name = item.Name;
-                dbEmp.State = item.State;
-                _context.SaveChanges();
-            }
-        }
-        else
-        {
-            dbEmp = Create(item);
-            _context.Employees.Add(dbEmp);
-            _context.SaveChanges();
-        }
-        return new EmployeeResponse(Create(dbEmp));
-    }
-
-    /// <summary>
+     /// <summary>
     /// Save Employee
     /// </summary>
     /// <param name="item"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<EmployeeResponse> SaveAsync(EmployeeModel item, CancellationToken cancellationToken)
+    public async Task<EmployeeResponse> SaveAsync(EmployeeModel? item, CancellationToken cancellationToken)
     {
         if (item == null)
             return new EmployeeResponse("Employee can not be null");

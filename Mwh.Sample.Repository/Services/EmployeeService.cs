@@ -129,4 +129,9 @@ public class EmployeeService : IEmployeeService
             return new EmployeeResponse($"An error occurred when deleting the employee: {ex.Message}");
         }
     }
+
+    public Task<int> AddMultipleEmployeesAsync(string[]? namelist)
+    {
+        throw new NotImplementedException();
+    }
 }

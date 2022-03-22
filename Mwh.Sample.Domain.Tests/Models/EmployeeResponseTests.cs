@@ -25,4 +25,17 @@ public class EmployeeResponseTests
         Assert.IsNotNull(employeeResponse);
         Assert.AreEqual(employeeResponse.Success, true);
     }
+    [TestMethod]
+    public void EmployeeResponse_EmptyConstructor()
+    {
+        // Arrange
+        var employeeResponse = new EmployeeResponse();
+
+        // Act
+
+        // Assert
+        Assert.IsNotNull(employeeResponse);
+        Assert.AreEqual("Empty Initialize", employeeResponse.Message);
+        Assert.AreEqual(employeeResponse.Success, false);
+    }
 }

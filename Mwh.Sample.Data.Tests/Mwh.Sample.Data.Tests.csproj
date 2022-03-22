@@ -14,7 +14,7 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Company>Mark Hazleton</Company>
 		<Authors>Mark Hazleton</Authors>
-		<Description>The domain models for the Mwh.Sample project</Description>
+		<Description>The Data Tests for the Mwh.Sample project</Description>
 		<ApplicationIcon>favicon.ico</ApplicationIcon>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -25,31 +25,20 @@
 		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
 		<AssemblyVersion>6.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
 	</PropertyGroup>
+
 	<ItemGroup>
-		<Compile Remove="Processor\**" />
-		<Compile Remove="Properties\**" />
-		<EmbeddedResource Remove="Processor\**" />
-		<EmbeddedResource Remove="Properties\**" />
-		<None Remove="Processor\**" />
-		<None Remove="Properties\**" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.3" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
+		<PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
+		<PackageReference Include="coverlet.collector" Version="3.1.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-		<PackageReference Include="System.Text.Json" Version="6.0.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Reference Include="System.ComponentModel.DataAnnotations">
-			<HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.ComponentModel.DataAnnotations.dll</HintPath>
-		</Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="ProjectMechanicsLogo.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
+		<ProjectReference Include="..\Mwh.Sample.Data\Mwh.Sample.Data.csproj" />
 	</ItemGroup>
 
 </Project>

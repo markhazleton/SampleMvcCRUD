@@ -20,6 +20,11 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     {
     }
 
+    public Task<int> AddMultipleEmployeesAsync(string[]? namelist)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// delete as an asynchronous operation.
     /// </summary>

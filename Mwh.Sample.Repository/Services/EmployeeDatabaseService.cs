@@ -225,4 +225,9 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
         return await SaveAsync(employee, token).ConfigureAwait(false);
     }
+
+    public Task<int> AddMultipleEmployeesAsync(string[]? namelist)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -12,12 +12,17 @@ public static class EnumExtension
     /// <typeparam name="TEnum">The type of the t enum.</typeparam>
     /// <param name="enum">The enum.</param>
     /// <returns>System.String.</returns>
-    public static string ToDescriptionString<TEnum>(this TEnum @enum)
+    public static string GetDescription(this Enum e)
     {
-        FieldInfo info = @enum.GetType()?.GetField(@enum.ToString());
-        var attributes = (DescriptionAttribute[])info?.GetCustomAttributes(typeof(DescriptionAttribute), false);
+        if (e == null)
+            return string.Empty;
 
-        return attributes?[0].Description ?? @enum.ToString();
+        var fieldInfo = e.GetType()?.GetField(e.ToString());
+
+        if (!(fieldInfo?.GetCustomAttributes(typeof(DisplayAttribute), false) is DisplayAttribute[] descriptionAttributes))
+            return string.Empty;
+
+        return (descriptionAttributes.Length > 0) ? descriptionAttributes[0].Description : e.ToString();
     }
 
     /// <summary>

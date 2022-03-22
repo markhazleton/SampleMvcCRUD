@@ -30,10 +30,25 @@ public enum TestEnum
 public class EnumExtensionTests
 {
     /// <summary>
-    /// Defines the test method EnumGetDisplayNameExpectedBehavior.
+    /// Defines the test method EnumGetDisplayName_ExpectedBehavior.
     /// </summary>
     [TestMethod]
-    public void EnumGetDisplayNameExpectedBehavior()
+    public void EnumGetDescription_NullEnum()
+    {
+        // Arrange
+        TestEnum? myTest = null;
+
+        // Act
+        var result = myTest.GetDescription();
+
+        // Assert
+        Assert.AreEqual(result, string.Empty);
+    }
+    /// <summary>
+    /// Defines the test method EnumGetDisplayName_ExpectedBehavior.
+    /// </summary>
+    [TestMethod]
+    public void EnumGetDisplayName_ExpectedBehavior()
     {
         // Arrange
         var myTest = TestEnum.First;
@@ -44,7 +59,36 @@ public class EnumExtensionTests
         // Assert
         Assert.AreEqual(result, "1st");
     }
+    /// <summary>
+    /// Defines the test method EnumGetDisplayNameMissingDisplayName.
+    /// </summary>
+    [TestMethod]
+    public void EnumGetDisplayName_Null()
+    {
+        // Arrange
+        TestEnum? myTest = null;
 
+        // Act
+        var result = myTest.GetDisplayName();
+
+        // Assert
+        Assert.AreEqual(result, string.Empty);
+    }
+    /// <summary>
+    /// Defines the test method EnumGetDisplayNameMissingDisplayName.
+    /// </summary>
+    [TestMethod]
+    public void EnumGetDescriptionMissingDisplayName()
+    {
+        // Arrange
+        var myTest = TestEnum.Second;
+
+        // Act
+        var result = myTest.GetDescription();
+
+        // Assert
+        Assert.AreEqual(result, "Second");
+    }
     /// <summary>
     /// Defines the test method EnumGetDisplayNameMissingDisplayName.
     /// </summary>
@@ -60,7 +104,21 @@ public class EnumExtensionTests
         // Assert
         Assert.AreEqual(result, "Second");
     }
+    /// <summary>
+    /// Defines the test method EnumGetDisplayNameExpectedBehavior.
+    /// </summary>
+    [TestMethod]
+    public void EnumToDescriptionString_ExpectedBehavior()
+    {
+        // Arrange
+        var myTest = TestEnum.First;
 
+        // Act
+        var result = myTest.GetDescription();
+
+        // Assert
+        Assert.AreEqual(result, "The First One");
+    }
     /// <summary>
     /// Defines the test method EnumToDictionaryExpectedBehavior.
     /// </summary>
