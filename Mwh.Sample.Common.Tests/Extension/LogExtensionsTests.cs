@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Common.Tests.Extension;
+﻿
+namespace Mwh.Sample.Common.Tests.Extension;
 
 /// <summary>
 /// Test the Log Extension Methods

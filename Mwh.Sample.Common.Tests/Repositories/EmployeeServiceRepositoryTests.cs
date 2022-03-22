@@ -5,17 +5,17 @@ namespace Mwh.Sample.Common.Tests.Repositories;
 /// 
 /// </summary>
 [TestClass]
-public class EmployeeServiceTests
+public class EmployeeServiceRepositoryTests
 {
-    private EmployeeService service;
+    private EmployeeServiceRepository service;
     private CancellationToken token;
 
     /// <summary>
     /// 
     /// </summary>
-    public EmployeeServiceTests()
+    public EmployeeServiceRepositoryTests()
     {
-        service = new EmployeeService(new EmployeeRepository(new EmployeeMock()));
+        service = new EmployeeServiceRepository(new EmployeeRepository(new EmployeeMock()));
         token = default;
     }
 
@@ -64,7 +64,7 @@ public class EmployeeServiceTests
     [TestInitialize]
     public void Initialize()
     {
-        service = new EmployeeService(new EmployeeRepository(new EmployeeMock()));
+        service = new EmployeeServiceRepository(new EmployeeRepository(new EmployeeMock()));
         token = default;
     }
 

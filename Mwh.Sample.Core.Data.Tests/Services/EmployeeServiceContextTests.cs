@@ -1,11 +1,18 @@
-﻿namespace Mwh.Sample.Core.Data.Tests.Services;
+﻿
+namespace Mwh.Sample.Core.Data.Tests.Services;
 
+/// <summary>
+/// 
+/// </summary>
 [TestClass]
-public class EmployeeServiceTests
+public class EmployeeServiceContextTests
 {
-    private EmployeeService employeeService;
+    private EmployeeServiceContext employeeService;
     private CancellationToken cancellationToken;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [TestMethod]
     public void AddMultiple_StateUnderTest_Null()
     {
@@ -104,7 +111,7 @@ public class EmployeeServiceTests
     [TestInitialize]
     public void Initialize()
     {
-        employeeService = new EmployeeService();
+        employeeService = new EmployeeServiceContext();
         cancellationToken = default;
     }
 
@@ -166,13 +173,13 @@ public class EmployeeServiceTests
         };
 
         // Act
-        var result = await employeeService.SaveAsync(item,cancellationToken);
+        var result = await employeeService.SaveAsync(item, cancellationToken);
 
         var UpdateEmp = await employeeService.FindByIdAsync(result.Resource.id, cancellationToken).ConfigureAwait(true);
 
         UpdateEmp.Age = 50;
 
-        var UpdateResult = await employeeService.SaveAsync(UpdateEmp,cancellationToken);
+        var UpdateResult = await employeeService.SaveAsync(UpdateEmp, cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -251,12 +258,12 @@ public class EmployeeServiceTests
         // Arrange
         int id = 0;
         EmployeeModel? employee = new EmployeeModel()
-        { 
-            id=0,
-            Name="Test",
-            Age=25,
-            State="TX",
-            Country="USA",
+        {
+            id = 0,
+            Name = "Test",
+            Age = 25,
+            State = "TX",
+            Country = "USA",
             Department = EmployeeDepartment.IT
         };
 

@@ -4,7 +4,7 @@ namespace Mwh.Sample.Common.Repositories;
 /// <summary>
 /// Employee Service
 /// </summary>
-public class EmployeeService : IEmployeeService
+public class EmployeeServiceRepository : IEmployeeService
 {
     /// <summary>
     /// The employee repository
@@ -12,10 +12,10 @@ public class EmployeeService : IEmployeeService
     private readonly IEmployeeRepository _employeeRepository;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="EmployeeService"/> class.
+    /// Initializes a new instance of the <see cref="EmployeeServiceRepository"/> class.
     /// </summary>
     /// <param name="employeeRepository">The employee repository.</param>
-    public EmployeeService(IEmployeeRepository employeeRepository)
+    public EmployeeServiceRepository(IEmployeeRepository employeeRepository)
     {
         _employeeRepository = employeeRepository;
     }

@@ -4,14 +4,14 @@ namespace Mwh.Sample.Core.Data.Services;
 /// <summary>
 /// 
 /// </summary>
-public class EmployeeService : IDisposable, IEmployeeService
+public class EmployeeServiceContext : IDisposable, IEmployeeService
 {
     private EmployeeContext _context;
 
     /// <summary>
     /// 
     /// </summary>
-    public EmployeeService()
+    public EmployeeServiceContext()
     {
         _context = new EmployeeContext();
     }
@@ -20,7 +20,7 @@ public class EmployeeService : IDisposable, IEmployeeService
     /// 
     /// </summary>
     /// <param name="context"></param>
-    public EmployeeService(EmployeeContext context)
+    public EmployeeServiceContext(EmployeeContext context)
     {
         _context = context;
     }
@@ -29,7 +29,7 @@ public class EmployeeService : IDisposable, IEmployeeService
     /// 
     /// </summary>
     /// <param name="options"></param>
-    public EmployeeService(DbContextOptions options)
+    public EmployeeServiceContext(DbContextOptions options)
     {
         _context = new EmployeeContext(options);
     }
