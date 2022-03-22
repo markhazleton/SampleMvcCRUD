@@ -1,11 +1,10 @@
-﻿
-namespace Mwh.Sample.Core.Data.Tests.Services;
+﻿namespace Mwh.Sample.Core.Data.Tests.Services;
 
 [TestClass]
 public class EmployeeServiceTests
 {
-    private EmployeeService service;
-    private CancellationToken token;
+    private EmployeeService employeeService;
+    private CancellationToken cancellationToken;
 
     [TestMethod]
     public void AddMultiple_StateUnderTest_Null()
@@ -14,7 +13,7 @@ public class EmployeeServiceTests
         string[] namelist = null;
 
         // Act
-        var result = service.AddMultipleEmployees(
+        var result = employeeService.AddMultipleEmployees(
             namelist);
 
         // Assert
@@ -28,9 +27,9 @@ public class EmployeeServiceTests
         string[] namelist = new string[] { "TestMultiple1", "TestMultiple2", "TestMultiple3" };
 
         // Act
-        var initResults = service.Get();
-        var result = service.AddMultipleEmployees(namelist);
-        var afterResults = service.Get();
+        var initResults = employeeService.Get();
+        var result = employeeService.AddMultipleEmployees(namelist);
+        var afterResults = employeeService.Get();
         var test = afterResults.Where(w => w.Name == "TestMultiple3").FirstOrDefault();
 
         // Assert
@@ -45,9 +44,9 @@ public class EmployeeServiceTests
         int id = 0;
 
         // Act
-        var result = await service.DeleteAsync(
+        var result = await employeeService.DeleteAsync(
             id,
-            token);
+            cancellationToken);
 
         // Assert
         Assert.AreEqual(result.Success, false);
@@ -59,7 +58,7 @@ public class EmployeeServiceTests
         // Arrange
 
         // Act
-        service.Dispose();
+        employeeService.Dispose();
 
         // Assert
     }
@@ -71,7 +70,7 @@ public class EmployeeServiceTests
         int id = 0;
 
         // Act
-        var result = await service.FindByIdAsync(id, token);
+        var result = await employeeService.FindByIdAsync(id, cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -84,7 +83,7 @@ public class EmployeeServiceTests
         // Arrange
 
         // Act
-        var result = service.Get();
+        var result = employeeService.Get();
 
         // Assert
         Assert.IsNotNull(result);
@@ -96,7 +95,7 @@ public class EmployeeServiceTests
         // Arrange
 
         // Act
-        var result = await service.GetAsync(token);
+        var result = await employeeService.GetAsync(cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -105,8 +104,8 @@ public class EmployeeServiceTests
     [TestInitialize]
     public void Initialize()
     {
-        service = new EmployeeService();
-        token = default;
+        employeeService = new EmployeeService();
+        cancellationToken = default;
     }
 
     [TestMethod]
@@ -116,7 +115,7 @@ public class EmployeeServiceTests
         EmployeeModel item = null;
 
         // Act
-        var result = service.Save(
+        var result = employeeService.Save(
             item);
 
         // Assert
@@ -137,13 +136,13 @@ public class EmployeeServiceTests
         };
 
         // Act
-        var result = service.Save(item);
+        var result = employeeService.Save(item);
 
-        var UpdateEmp = await service.FindByIdAsync(result.Resource.id, token).ConfigureAwait(true);
+        var UpdateEmp = await employeeService.FindByIdAsync(result.Resource.id, cancellationToken).ConfigureAwait(true);
 
         UpdateEmp.Age = 50;
 
-        var UpdateResult = service.Save(UpdateEmp);
+        var UpdateResult = employeeService.Save(UpdateEmp);
 
         // Assert
         Assert.IsNotNull(result);
@@ -153,7 +152,36 @@ public class EmployeeServiceTests
         Assert.IsTrue(UpdateResult.Success);
         Assert.AreEqual(50, UpdateResult.Resource?.Age);
     }
+    [TestMethod]
+    public async Task SaveAsync_StateUnderTest_ValidNew()
+    {
+        // Arrange
+        EmployeeModel item = new()
+        {
+            Name = "Test",
+            Age = 25,
+            State = "Texas",
+            Country = "USA",
+            Department = EmployeeDepartment.IT,
+        };
 
+        // Act
+        var result = await employeeService.SaveAsync(item,cancellationToken);
+
+        var UpdateEmp = await employeeService.FindByIdAsync(result.Resource.id, cancellationToken).ConfigureAwait(true);
+
+        UpdateEmp.Age = 50;
+
+        var UpdateResult = await employeeService.SaveAsync(UpdateEmp,cancellationToken);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result.Success);
+        Assert.IsNotNull(UpdateEmp);
+        Assert.IsNotNull(UpdateResult);
+        Assert.IsTrue(UpdateResult.Success);
+        Assert.AreEqual(50, UpdateResult.Resource?.Age);
+    }
     /// <summary>
     /// 
     /// </summary>
@@ -173,7 +201,7 @@ public class EmployeeServiceTests
         };
 
         // Act
-        var result = await service.SaveAsync(item, cancellationToken);
+        var result = await employeeService.SaveAsync(item, cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -187,9 +215,9 @@ public class EmployeeServiceTests
         EmployeeModel item = null;
 
         // Act
-        var result = await service.SaveAsync(
+        var result = await employeeService.SaveAsync(
             item,
-            token);
+            cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -197,20 +225,133 @@ public class EmployeeServiceTests
     }
 
     [TestMethod]
-    public async Task UpdateAsync_StateUnderTest_ExpectedBehavior()
+    public async Task UpdateAsync_NullEmployeeIdZero()
     {
         // Arrange
         int id = 0;
         EmployeeModel employee = null;
 
         // Act
-        var result = await service.UpdateAsync(
+        var result = await employeeService.UpdateAsync(
             id,
             employee,
-            token);
+            cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
         Assert.IsFalse(result.Success);
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [TestMethod]
+    public async Task UpdateAsync_EmployeeId0()
+    {
+        // Arrange
+        int id = 0;
+        EmployeeModel? employee = new EmployeeModel()
+        { 
+            id=0,
+            Name="Test",
+            Age=25,
+            State="TX",
+            Country="USA",
+            Department = EmployeeDepartment.IT
+        };
+
+        // Act
+        var result = await employeeService.UpdateAsync(
+            id,
+            employee,
+            cancellationToken);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsFalse(result.Success);
+        Assert.AreEqual("Can not update employee with id(0)", result.Message);
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [TestMethod]
+    public async Task UpdateAsync_NullEmployeeId99()
+    {
+        // Arrange
+        int id = 99;
+        EmployeeModel? employee = null;
+
+        // Act
+        var result = await employeeService.UpdateAsync(
+            id,
+            employee,
+            cancellationToken);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsFalse(result.Success);
+        Assert.AreEqual("Can not update null employee", result.Message);
+    }    /// <summary>
+         /// 
+         /// </summary>
+         /// <returns></returns>
+    [TestMethod]
+    public async Task UpdateAsync_LookupEmployeeId99_NoMatch()
+    {
+        // Arrange
+        int id = 999;
+        // Act
+        EmployeeModel item = new()
+        {
+            id = 1,
+            Name = "Test",
+            Age = 25,
+            State = "Texas",
+            Country = "USA",
+            Department = EmployeeDepartment.IT,
+        };
+
+
+        var result = await employeeService.UpdateAsync(
+            id,
+            item,
+            cancellationToken);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsFalse(result.Success);
+        Assert.AreEqual("Mismatch in id(999) && id(1).", result.Message);
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [TestMethod]
+    public async Task UpdateAsync_LookupEmployeeId99_NotFound()
+    {
+        // Arrange
+        int id = 99;
+        // Act
+        EmployeeModel item = new()
+        {
+            id = 99,
+            Name = "Test",
+            Age = 25,
+            State = "Texas",
+            Country = "USA",
+            Department = EmployeeDepartment.IT,
+        };
+
+
+        var result = await employeeService.UpdateAsync(
+            id,
+            item,
+            cancellationToken);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsFalse(result.Success);
+        Assert.AreEqual("Employee Not Found", result.Message);
     }
 }

@@ -5,7 +5,7 @@ namespace Mwh.Sample.Common.Repositories;
 /// Class EmployeeRepository.
 /// Implements the <see cref="Repositories.IEmployeeRepository" />
 /// </summary>
-/// <seealso cref="Mwh.Sample.Common.Repositories.IEmployeeRepository" />
+/// <seealso cref="Repositories.IEmployeeRepository" />
 public class EmployeeRepository : IEmployeeRepository
 {
     /// <summary>

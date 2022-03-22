@@ -1,6 +1,4 @@
 
-using System.Runtime.Serialization;
-
 namespace Mwh.Sample.Common.Tests.Extension;
 /// <summary>
 /// Defines test class AjaxDictionaryTests.

@@ -3,9 +3,9 @@ namespace Mwh.Sample.Common.Models;
 
 /// <summary>
 /// Class EmployeeResponse.
-/// Implements the <see cref="Repositories.BaseResponse{Mwh.Sample.Common.Models.EmployeeModel}" />
+/// Implements the <see cref="Repositories.BaseResponse{Models.EmployeeModel}" />
 /// </summary>
-/// <seealso cref="Repositories.BaseResponse{Mwh.Sample.Common.Models.EmployeeModel}" />
+/// <seealso cref="Repositories.BaseResponse{Models.EmployeeModel}" />
 public class EmployeeResponse : BaseResponse<EmployeeModel>
 {
     public EmployeeResponse()

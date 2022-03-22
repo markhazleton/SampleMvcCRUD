@@ -15,7 +15,7 @@ public class EmployeeRepositoryTests
         mockEmployee = new EmployeeMock();
         employeeRepository = new EmployeeRepository(mockEmployee);
         employee = new EmployeeModel();
-        token = default(global::System.Threading.CancellationToken);
+        token = default(CancellationToken);
     }
 
     [TestMethod]

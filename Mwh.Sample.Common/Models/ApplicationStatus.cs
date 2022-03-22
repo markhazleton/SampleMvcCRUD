@@ -41,6 +41,9 @@ public sealed class ApplicationStatus
         return DateTime.MinValue;
     }
 
+    /// <summary>
+    /// Date the Application was last built
+    /// </summary>
     public DateTime BuildDate { get; }
     /// <summary>
     /// BuildVersion

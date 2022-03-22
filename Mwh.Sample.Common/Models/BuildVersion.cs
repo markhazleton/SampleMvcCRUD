@@ -7,16 +7,16 @@ namespace Mwh.Sample.Common.Models;
 public sealed class BuildVersion
 {
     /// <summary>
-    /// Build Version
+    /// Build Version from assembly if null set all to 0
     /// </summary>
     /// <param name="assembly"></param>
     public BuildVersion(Assembly assembly)
     {
-        var oVer = assembly?.GetName().Version;
-        MajorVersion = oVer.Major;
-        MinorVersion = oVer.Minor;
-        Build = oVer.Build;
-        Revision = oVer.Revision;
+        Version? oVer = assembly?.GetName().Version;
+        MajorVersion = oVer?.Major??0;
+        MinorVersion = oVer?.Minor??0;
+        Build = oVer?.Build??0;
+        Revision = oVer?.Revision??0;
     }
 
     /// <summary>

@@ -6,9 +6,9 @@ namespace Mwh.Sample.HttpClientFactory.Clients;
 
 /// <summary>
 /// Class ClientBase.
-/// Implements the <see cref="System.IDisposable" />
+/// Implements the <see cref="IDisposable" />
 /// </summary>
-/// <seealso cref="System.IDisposable" />
+/// <seealso cref="IDisposable" />
 public abstract class RestClientBase : IDisposable, IRestClientBase
 {
     /// <summary>

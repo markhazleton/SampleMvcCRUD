@@ -11,22 +11,20 @@ public static class LogExtensions
     /// <typeparam name="T"></typeparam>
     /// <param name="objectToSerialize">The object to serialize.</param>
     /// <returns>System.String.</returns>
-    public static string GetSerializeObjectString<T>(this T objectToSerialize)
+    public static string? GetSerializeObjectString<T>(this T objectToSerialize)
     {
         try
         {
-            using (StringWriter writer = new())
-            {
-                XmlSerializer oXS = new(typeof(T));
-                var myXML = new XmlDocument();
-                oXS.Serialize(writer, objectToSerialize);
-                myXML.LoadXml(writer.ToString());
-                return myXML.OuterXml.ToString();
-            }
+            using StringWriter writer = new();
+            XmlSerializer oXS = new(typeof(T));
+            var myXML = new XmlDocument();
+            oXS.Serialize(writer, objectToSerialize);
+            myXML.LoadXml(writer.ToString());
+            return myXML.OuterXml.ToString();
         }
         catch
         {
-            return objectToSerialize.GetTextObjectString();
+            return objectToSerialize?.GetTextObjectString();
         }
     }
 
@@ -40,14 +38,12 @@ public static class LogExtensions
     {
         try
         {
-            using (StringWriter writer = new())
-            {
-                XmlSerializer oXS = new(typeof(List<T>));
-                var myXML = new XmlDocument();
-                oXS.Serialize(writer, lstObjectToSerialize);
-                myXML.LoadXml(writer.ToString());
-                return myXML.OuterXml.ToString();
-            }
+            using StringWriter writer = new();
+            XmlSerializer oXS = new(typeof(List<T>));
+            var myXML = new XmlDocument();
+            oXS.Serialize(writer, lstObjectToSerialize);
+            myXML.LoadXml(writer.ToString());
+            return myXML.OuterXml.ToString();
         }
         catch
         {

@@ -72,7 +72,7 @@ public class EmployeeService : IDisposable, IEmployeeService
     /// </summary>
     /// <param name="namelist"></param>
     /// <returns></returns>
-    public int AddMultipleEmployees(string[] namelist)
+    public int AddMultipleEmployees(string[]? namelist)
     {
         var list = new List<Employee>();
 
@@ -259,7 +259,7 @@ public class EmployeeService : IDisposable, IEmployeeService
     /// <param name="employee"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
+    public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel? employee, CancellationToken token)
     {
         if (employee == null)
             return new EmployeeResponse($"Can not update null employee");

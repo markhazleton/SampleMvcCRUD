@@ -1,10 +1,9 @@
 ﻿
 namespace Mwh.Sample.Common.Repositories;
+
 /// <summary>
-/// Class EmployeeService.
-/// Implements the <see cref="Mwh.Sample.Common.Repositories.IEmployeeService" />
+/// Employee Service
 /// </summary>
-/// <seealso cref="Mwh.Sample.Common.Repositories.IEmployeeService" />
 public class EmployeeService : IEmployeeService
 {
     /// <summary>
@@ -48,7 +47,7 @@ public class EmployeeService : IEmployeeService
     /// <param name="employee">The employee.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>EmployeeResponse.</returns>
-    public async Task<EmployeeResponse> SaveAsync(EmployeeModel employee, CancellationToken token)
+    public async Task<EmployeeResponse> SaveAsync(EmployeeModel? employee, CancellationToken token)
     {
         if (employee == null) return new EmployeeResponse("Employee is null");
         try
@@ -73,7 +72,7 @@ public class EmployeeService : IEmployeeService
     /// <param name="employee">The employee.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>EmployeeResponse.</returns>
-    public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel employee, CancellationToken token)
+    public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeModel? employee, CancellationToken token)
     {
         if (employee == null)
             return new EmployeeResponse("Employee is null.");
