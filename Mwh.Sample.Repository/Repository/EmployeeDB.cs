@@ -15,19 +15,18 @@ public class EmployeeDB : IEmployeeDB
         if (list == null) return new List<EmployeeModel>();
         return list.Select(item => Create(item)).OrderBy(x => x.Name).ToList();
     }
-
-    private EmployeeModel Create(Employee s)
+    private EmployeeModel Create(Employee? entity)
     {
-        if (s == null) return new EmployeeModel();
+        if (entity == null) return new EmployeeModel();
 
         return new EmployeeModel()
         {
-            id = s.Id,
-            State = s.State,
-            Age = s.Age,
-            Country = s.Country,
-            Department = (EmployeeDepartment)s.DepartmentId,
-            Name = s.Name
+            id = entity.Id,
+            State = entity.State,
+            Age = entity.Age,
+            Country = entity.Country,
+            Department = (EmployeeDepartment)entity.DepartmentId,
+            Name = entity.Name
         };
     }
 

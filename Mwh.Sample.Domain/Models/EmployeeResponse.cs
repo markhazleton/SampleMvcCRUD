@@ -6,23 +6,18 @@ namespace Mwh.Sample.Domain.Models;
 /// </summary>
 public class EmployeeResponse : BaseResponse<EmployeeModel>
 {
-    public EmployeeResponse()
-    {
-    }
-
+    public EmployeeResponse() {}
     /// <summary>
     /// Creates a success response.
     /// </summary>
     /// <param name="employee">Saved employee.</param>
     /// <returns>Response.</returns>
-    public EmployeeResponse(EmployeeModel employee) : base(employee)
-    { }
+    public EmployeeResponse(EmployeeModel employee) : base(employee){ }
 
     /// <summary>
     /// Creates am error response.
     /// </summary>
     /// <param name="message">Error message.</param>
     /// <returns>Response.</returns>
-    public EmployeeResponse(string message) : base(message)
-    { }
+    public EmployeeResponse(string message) : base(message){ }
 }
