@@ -31,4 +31,8 @@
 		<ProjectReference Include="..\Mwh.Sample.Repository\Mwh.Sample.Repository.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\lib\" />
+	</ItemGroup>
+
 </Project>

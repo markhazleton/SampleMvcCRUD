@@ -1,13 +1,16 @@
 ﻿
 using Mwh.Sample.Domain.Interfaces;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace Mwh.Sample.Core.Data.Tests.Services;
+namespace Mwh.Sample.Repository.Tests.Services;
 
 /// <summary>
 /// 
 /// </summary>
 [TestClass]
-public class EmployeeServiceContextTests
+public class EmployeeDatabaseServiceTests
 {
     private CancellationToken cancellationToken;
     private IEmployeeService employeeService;
@@ -22,8 +25,7 @@ public class EmployeeServiceContextTests
         string[] namelist = null;
 
         // Act
-        var result = await employeeService.AddMultipleEmployeesAsync(
-            namelist);
+        var result = await employeeService.AddMultipleEmployeesAsync(namelist);
 
         // Assert
         Assert.AreEqual(-1, result);
@@ -36,9 +38,9 @@ public class EmployeeServiceContextTests
         string[] namelist = new string[] { "TestMultiple1", "TestMultiple2", "TestMultiple3" };
 
         // Act
-        var initResults = await employeeService.GetAsync(cancellationToken);
+        var initResults = await employeeService.GetEmployeesAsync(cancellationToken);
         var result = await employeeService.AddMultipleEmployeesAsync(namelist);
-        var afterResults = await employeeService.GetAsync(cancellationToken);
+        var afterResults = await employeeService.GetEmployeesAsync(cancellationToken);
         var test = afterResults.Where(w => w.Name == "TestMultiple3").FirstOrDefault();
 
         // Assert
@@ -49,13 +51,13 @@ public class EmployeeServiceContextTests
     public async Task DeleteAsync_ExpectedBehavior()
     {
         // Arrange
-        var employee = new EmployeeModel()
+        var employee = new EmployeeDto()
         {
             Name = "TestDelete",
             Age = 20,
             State = "TX",
             Country = "USA",
-            Department = EmployeeDepartment.IT,
+            Department = EmployeeDepartmentEnum.IT,
         };
 
         // Act
@@ -93,7 +95,7 @@ public class EmployeeServiceContextTests
         int id = 0;
 
         // Act
-        var result = await employeeService.FindByIdAsync(id, cancellationToken);
+        var result = await employeeService.FindEmployeeByIdAsync(id, cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -106,7 +108,7 @@ public class EmployeeServiceContextTests
         // Arrange
 
         // Act
-        var result = await employeeService.GetAsync(cancellationToken);
+        var result = await employeeService.GetEmployeesAsync(cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -118,7 +120,7 @@ public class EmployeeServiceContextTests
         // Arrange
 
         // Act
-        var result = await employeeService.GetAsync(cancellationToken);
+        var result = await employeeService.GetEmployeesAsync(cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -127,7 +129,8 @@ public class EmployeeServiceContextTests
     [TestInitialize]
     public void Initialize()
     {
-        employeeService = new EmployeeServiceContext();
+        var context = new EmployeeContext();
+        employeeService = new EmployeeDatabaseService(context);
         cancellationToken = default;
     }
 
@@ -135,19 +138,19 @@ public class EmployeeServiceContextTests
     public async Task Save_StateUnderTest_ValidNew()
     {
         // Arrange
-        EmployeeModel item = new()
+        EmployeeDto item = new()
         {
             Name = "Test",
             Age = 25,
             State = "Texas",
             Country = "USA",
-            Department = EmployeeDepartment.IT,
+            Department = EmployeeDepartmentEnum.IT,
         };
 
         // Act
         var result = await employeeService.SaveAsync(item, cancellationToken);
 
-        var UpdateEmp = await employeeService.FindByIdAsync(result.Resource.id, cancellationToken).ConfigureAwait(true);
+        var UpdateEmp = await employeeService.FindEmployeeByIdAsync(result.Resource.id, cancellationToken).ConfigureAwait(true);
 
         UpdateEmp.Age = 50;
 
@@ -166,7 +169,7 @@ public class EmployeeServiceContextTests
     public async Task SaveAsync_StateUnderTest_Null()
     {
         // Arrange
-        EmployeeModel? item = null;
+        EmployeeDto? item = null;
 
         // Act
         var result = await employeeService.SaveAsync(item, cancellationToken);
@@ -183,13 +186,13 @@ public class EmployeeServiceContextTests
     {
         // Arrange
         CancellationToken cancellationToken = default;
-        EmployeeModel item = new()
+        EmployeeDto item = new()
         {
             Name = "Test",
             Age = 25,
             State = "Texas",
             Country = "USA",
-            Department = EmployeeDepartment.IT,
+            Department = EmployeeDepartmentEnum.IT,
         };
 
         // Act
@@ -203,19 +206,19 @@ public class EmployeeServiceContextTests
     public async Task SaveAsync_StateUnderTest_ValidNew()
     {
         // Arrange
-        EmployeeModel item = new()
+        EmployeeDto item = new()
         {
             Name = "Test",
             Age = 25,
             State = "Texas",
             Country = "USA",
-            Department = EmployeeDepartment.IT,
+            Department = EmployeeDepartmentEnum.IT,
         };
 
         // Act
         var result = await employeeService.SaveAsync(item, cancellationToken);
 
-        var UpdateEmp = await employeeService.FindByIdAsync(result.Resource.id, cancellationToken).ConfigureAwait(true);
+        var UpdateEmp = await employeeService.FindEmployeeByIdAsync(result.Resource.id, cancellationToken).ConfigureAwait(true);
 
         UpdateEmp.Age = 50;
 
@@ -238,14 +241,14 @@ public class EmployeeServiceContextTests
     {
         // Arrange
         int id = 0;
-        EmployeeModel? employee = new EmployeeModel()
+        EmployeeDto? employee = new EmployeeDto()
         {
             id = 0,
             Name = "Test",
             Age = 25,
             State = "TX",
             Country = "USA",
-            Department = EmployeeDepartment.IT
+            Department = EmployeeDepartmentEnum.IT
         };
 
         // Act
@@ -269,14 +272,14 @@ public class EmployeeServiceContextTests
         // Arrange
         int id = 999;
         // Act
-        EmployeeModel item = new()
+        EmployeeDto item = new()
         {
             id = 1,
             Name = "Test",
             Age = 25,
             State = "Texas",
             Country = "USA",
-            Department = EmployeeDepartment.IT,
+            Department = EmployeeDepartmentEnum.IT,
         };
 
 
@@ -300,14 +303,14 @@ public class EmployeeServiceContextTests
         // Arrange
         int id = 999;
         // Act
-        EmployeeModel item = new()
+        EmployeeDto item = new()
         {
             id = 999,
             Name = "Test",
             Age = 25,
             State = "Texas",
             Country = "USA",
-            Department = EmployeeDepartment.IT,
+            Department = EmployeeDepartmentEnum.IT,
         };
 
 
@@ -318,8 +321,8 @@ public class EmployeeServiceContextTests
 
         // Assert
         Assert.IsNotNull(result);
-        Assert.IsFalse(result.Success);
-        Assert.AreEqual("Employee Not Found", result.Message);
+        Assert.IsTrue(result.Success);
+        Assert.AreEqual(string.Empty, result.Message);
     }
     /// <summary>
     /// 
@@ -330,7 +333,7 @@ public class EmployeeServiceContextTests
     {
         // Arrange
         int id = 99;
-        EmployeeModel? employee = null;
+        EmployeeDto? employee = null;
 
         // Act
         var result = await employeeService.UpdateAsync(
@@ -348,7 +351,7 @@ public class EmployeeServiceContextTests
     {
         // Arrange
         int id = 0;
-        EmployeeModel employee = null;
+        EmployeeDto employee = null;
 
         // Act
         var result = await employeeService.UpdateAsync(

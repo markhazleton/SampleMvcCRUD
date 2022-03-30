@@ -14,12 +14,12 @@ public class EmployeeModelTests
     public void EmployeeModel_Validate()
     {
         // Arrange
-        var employeeModel = new EmployeeModel()
+        var employeeModel = new EmployeeDto()
         {
             Age = 20,
             State = "State",
             Country = "Country",
-            Department = EmployeeDepartment.Marketing,
+            Department = EmployeeDepartmentEnum.Marketing,
             id = 0,
             Name = "Name"
         };
@@ -32,7 +32,7 @@ public class EmployeeModelTests
         Assert.AreEqual(employeeModel.Name, "Name");
         Assert.AreEqual(employeeModel.State, "State");
         Assert.AreEqual(employeeModel.Country, "Country");
-        Assert.AreEqual(employeeModel.Department, EmployeeDepartment.Marketing);
+        Assert.AreEqual(employeeModel.Department, EmployeeDepartmentEnum.Marketing);
         Assert.AreEqual(employeeModel.Age, 20);
     }
     /// <summary>
@@ -42,12 +42,12 @@ public class EmployeeModelTests
     public void EmployeeModel_IsValidFalse_Name()
     {
         // Arrange
-        var employeeModel = new EmployeeModel()
+        var employeeModel = new EmployeeDto()
         {
             Age = 20,
             State = "State",
             Country = "Country",
-            Department = EmployeeDepartment.Marketing,
+            Department = EmployeeDepartmentEnum.Marketing,
             id = 0,
             Name = String.Empty
         };
@@ -65,12 +65,12 @@ public class EmployeeModelTests
     public void EmployeeModel_IsValidFalse_State()
     {
         // Arrange
-        var employeeModel = new EmployeeModel()
+        var employeeModel = new EmployeeDto()
         {
             Age = 20,
             State = string.Empty,
             Country = "Country",
-            Department = EmployeeDepartment.Marketing,
+            Department = EmployeeDepartmentEnum.Marketing,
             id = 0,
             Name = "Test"
         };
@@ -88,12 +88,12 @@ public class EmployeeModelTests
     public void EmployeeModel_IsValidFalse_Country()
     {
         // Arrange
-        var employeeModel = new EmployeeModel()
+        var employeeModel = new EmployeeDto()
         {
             Age = 20,
             State = "TX",
             Country = string.Empty,
-            Department = EmployeeDepartment.Marketing,
+            Department = EmployeeDepartmentEnum.Marketing,
             id = 0,
             Name = "Test"
         };
@@ -111,12 +111,12 @@ public class EmployeeModelTests
     public void EmployeeModel_IsValidFalse_Age()
     {
         // Arrange
-        var employeeModel = new EmployeeModel()
+        var employeeModel = new EmployeeDto()
         {
             Age = 0,
             State = "TX",
             Country = "USA",
-            Department = EmployeeDepartment.Marketing,
+            Department = EmployeeDepartmentEnum.Marketing,
             id = 0,
             Name = "Test"
         };
@@ -134,7 +134,7 @@ public class EmployeeModelTests
     public void EmployeeModel_IsValidFalse_Department()
     {
         // Arrange
-        var employeeModel = new EmployeeModel()
+        var employeeModel = new EmployeeDto()
         {
             Age = 20,
             State = "TX",

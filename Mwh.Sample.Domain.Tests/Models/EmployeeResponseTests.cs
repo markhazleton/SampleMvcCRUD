@@ -8,14 +8,14 @@ public class EmployeeResponseTests
     public void EmployeeResponse_Expected()
     {
         // Arrange
-        var employee = new EmployeeModel()
+        var employee = new EmployeeDto()
         {
             id = 1,
             Age = 20,
             Name = "Test Employee",
             State = "TX",
             Country = "USA",
-            Department = EmployeeDepartment.IT
+            Department = EmployeeDepartmentEnum.IT
         };
         var employeeResponse = new EmployeeResponse(employee);
 

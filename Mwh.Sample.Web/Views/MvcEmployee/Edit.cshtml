@@ -1,4 +1,4 @@
-﻿@model Mwh.Sample.Domain.Models.EmployeeModel
+﻿@model Mwh.Sample.Domain.Models.EmployeeDto
 
 @{
     ViewBag.Title = "Edit";
@@ -48,7 +48,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <select asp-for="Department" asp-items="Html.GetEnumSelectList(typeof (Mwh.Sample.Domain.Models.EmployeeDepartment))"></select>
+                    <select asp-for="Department" asp-items="Html.GetEnumSelectList(typeof (Mwh.Sample.Domain.Models.EmployeeDepartmentEnum))"></select>
                     @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
                 </div>
             </div>

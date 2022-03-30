@@ -10,4 +10,7 @@
 		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
 		<AssemblyVersion>6.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Interfaces\IEmployeeRepository.cs" />
+	</ItemGroup>
 </Project>

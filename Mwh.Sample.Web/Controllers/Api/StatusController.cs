@@ -20,6 +20,15 @@ public class StatusController : BaseApiController
     }
 
     /// <summary>
+    /// GetApplicationStatus
+    /// </summary>
+    /// <returns></returns>
+    protected ApplicationStatus GetApplicationStatus()
+    {
+        return new ApplicationStatus(Assembly.GetExecutingAssembly());
+    }
+
+    /// <summary>
     /// Returns Current Application Status
     /// </summary>
     /// <returns></returns>
@@ -39,19 +48,6 @@ public class StatusController : BaseApiController
         return Ok(result);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public class ApiExplorerModel
-    {
-        public string GroupName { get; set; }
-        public List<ApiDescriptionModel> GroupItems { get; set; }
-    }
-    public class ApiDescriptionModel
-    {
-        public string RelativePath { get; set; }
-    }
-
 
 
 
@@ -66,6 +62,19 @@ public class StatusController : BaseApiController
     public ApplicationStatus ApplicationStatus()
     {
         return GetApplicationStatus();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ApiExplorerModel
+    {
+        public List<ApiDescriptionModel> GroupItems { get; set; }
+        public string GroupName { get; set; }
+    }
+    public class ApiDescriptionModel
+    {
+        public string RelativePath { get; set; }
     }
 
 

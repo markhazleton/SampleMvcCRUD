@@ -11,6 +11,11 @@
 		<AssemblyVersion>6.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="Repository\EmployeeRepository.cs" />
+	  <Compile Remove="Services\EmployeeService.cs" />
+	  <Compile Remove="Services\EmployeeServiceContext.cs" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.3" />

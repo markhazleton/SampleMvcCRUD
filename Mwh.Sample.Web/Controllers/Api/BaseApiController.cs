@@ -6,14 +6,7 @@ namespace Mwh.Sample.Web.Controllers.Api;
 /// </summary>
 [Produces("application/json")]
 [ApiController]
-public abstract class BaseApiController : Controller
+public abstract class BaseApiController : ControllerBase
 {
-    /// <summary>
-    /// GetApplicationStatus
-    /// </summary>
-    /// <returns></returns>
-    protected ApplicationStatus GetApplicationStatus()
-    {
-        return new ApplicationStatus(Assembly.GetExecutingAssembly());
-    }
+
 }

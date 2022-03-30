@@ -22,9 +22,9 @@ public class EmployeeApiController : BaseApiController
     /// <param name="id">Employee identifier.</param>
     /// <returns>Response for the request.</returns>
     [HttpDelete("{id}", Name = "DeleteEmployee")]
-    [ProducesResponseType(typeof(EmployeeModel), 200)]
+    [ProducesResponseType(typeof(EmployeeDto), 200)]
     [ProducesResponseType(typeof(ErrorResource), 400)]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<ActionResult<EmployeeResponse>> DeleteAsync(int id)
     {
         CancellationTokenSource cts = new();
         var result = await _employeeService.DeleteAsync(id, cts.Token).ConfigureAwait(false);
@@ -42,12 +42,12 @@ public class EmployeeApiController : BaseApiController
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(EmployeeModel), 200)]
+    [ProducesResponseType(typeof(EmployeeDto), 200)]
     [ProducesResponseType(typeof(ErrorResource), 400)]
-    public async Task<IActionResult> FindByIdAsync(int id)
+    public async Task<ActionResult<EmployeeDto>> FindByIdAsync(int id)
     {
         CancellationTokenSource cts = new();
-        var result = await _employeeService.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
+        var result = await _employeeService.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
 
         if (result.id != id)
         {
@@ -61,12 +61,12 @@ public class EmployeeApiController : BaseApiController
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<EmployeeModel>), 200)]
-    public async Task<IEnumerable<EmployeeModel>> ListAsync()
+    [ProducesResponseType(typeof(IEnumerable<EmployeeDto>), 200)]
+    public async Task<ActionResult<IEnumerable<EmployeeDto>>> ListAsync()
     {
         CancellationTokenSource cts = new();
-        var employees = await _employeeService.GetAsync(cts.Token).ConfigureAwait(false);
-        return employees;
+        var employees = await _employeeService.GetEmployeesAsync(cts.Token).ConfigureAwait(false);
+        return Ok(employees);
     }
 
     /// <summary>
@@ -75,9 +75,9 @@ public class EmployeeApiController : BaseApiController
     /// <param name="employee">Employee data.</param>
     /// <returns>Response for the request.</returns>
     [HttpPost]
-    [ProducesResponseType(typeof(EmployeeModel), 201)]
+    [ProducesResponseType(typeof(EmployeeDto), 201)]
     [ProducesResponseType(typeof(ErrorResource), 400)]
-    public async Task<IActionResult> PostAsync([FromBody] EmployeeModel employee)
+    public async Task<ActionResult> PostAsync([FromBody] EmployeeDto employee)
     {
         if (employee == null) return BadRequest("Employee was null");
 
@@ -98,9 +98,9 @@ public class EmployeeApiController : BaseApiController
     /// <param name="employee">Updated employee data.</param>
     /// <returns>Response for the request.</returns>
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(EmployeeModel), 200)]
+    [ProducesResponseType(typeof(EmployeeDto), 200)]
     [ProducesResponseType(typeof(ErrorResource), 400)]
-    public async Task<IActionResult> PutAsync(int id, [FromBody] EmployeeModel employee)
+    public async Task<ActionResult<EmployeeResponse>> PutAsync(int id, [FromBody] EmployeeDto employee)
     {
         CancellationTokenSource cts = new();
         var result = await _employeeService.UpdateAsync(id, employee, cts.Token).ConfigureAwait(false);

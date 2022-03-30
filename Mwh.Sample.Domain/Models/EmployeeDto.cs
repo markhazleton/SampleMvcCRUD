@@ -3,14 +3,17 @@ namespace Mwh.Sample.Domain.Models;
 /// <summary>
 /// Employee Model
 /// </summary>
-public class EmployeeModel
+public class EmployeeDto
 {
     /// <summary>
     /// Constructor
     /// </summary>
-    public EmployeeModel()
+    public EmployeeDto()
     {
-        Department = EmployeeDepartment.Unknown;
+        Department = EmployeeDepartmentEnum.Unknown;
+        Country = string.Empty;
+        State = string.Empty;
+        Name = string.Empty;
     }
 
     /// <summary>
@@ -32,7 +35,7 @@ public class EmployeeModel
     /// </summary>
     /// <value>The department.</value>
     [JsonPropertyName("department")]
-    public EmployeeDepartment Department { get; set; }
+    public EmployeeDepartmentEnum Department { get; set; }
 
     /// <summary>
     /// Gets or sets the employee identifier.
@@ -55,7 +58,7 @@ public class EmployeeModel
                 return false;
             if (string.IsNullOrEmpty(Country))
                 return false;
-            if (Department==EmployeeDepartment.Unknown)
+            if (Department==EmployeeDepartmentEnum.Unknown)
                 return false;
             if ((Age < 1))
                 return false;

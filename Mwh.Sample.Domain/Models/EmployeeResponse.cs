@@ -4,7 +4,7 @@ namespace Mwh.Sample.Domain.Models;
 /// <summary>
 /// Class EmployeeResponse.
 /// </summary>
-public class EmployeeResponse : BaseResponse<EmployeeModel>
+public class EmployeeResponse : BaseResponse<EmployeeDto>
 {
     public EmployeeResponse() {}
     /// <summary>
@@ -12,7 +12,7 @@ public class EmployeeResponse : BaseResponse<EmployeeModel>
     /// </summary>
     /// <param name="employee">Saved employee.</param>
     /// <returns>Response.</returns>
-    public EmployeeResponse(EmployeeModel employee) : base(employee){ }
+    public EmployeeResponse(EmployeeDto employee) : base(employee){ }
 
     /// <summary>
     /// Creates am error response.

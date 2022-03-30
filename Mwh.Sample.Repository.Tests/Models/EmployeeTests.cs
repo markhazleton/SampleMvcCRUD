@@ -1,5 +1,4 @@
-﻿
-namespace Mwh.Sample.Core.Data.Tests.Models;
+﻿namespace Mwh.Sample.Repository.Tests.Models;
 
 [TestClass]
 public class EmployeeTests
@@ -15,7 +14,13 @@ public class EmployeeTests
             DepartmentId = 1,
             Id = 1,
             Name = "Test Employee",
-            State = "TX"
+            State = "TX",
+            Department = new Department()
+            { 
+                Id = 1,
+                Name="Test",
+                Description ="Test"
+            }
         };
         // Act
         employee.Age = 21;

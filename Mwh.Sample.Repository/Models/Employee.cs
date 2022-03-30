@@ -1,15 +1,7 @@
 ﻿
 namespace Mwh.Sample.Repository.Models;
-
-public class Employee
+public class Employee : BaseEntity
 {
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    public Employee()
-    {
-    }
-
     /// <summary>
     /// Gets or sets the age.
     /// </summary>
@@ -21,19 +13,13 @@ public class Employee
     /// </summary>
     /// <value>The country.</value>
     public string Country { get; set; }
+    public virtual Department Department { get; set; }
 
     /// <summary>
     /// Gets or sets the department.
     /// </summary>
     /// <value>The department.</value>
     public int DepartmentId { get; set; }
-
-    /// <summary>
-    /// Gets or sets the employee identifier.
-    /// </summary>
-    /// <value>The employee identifier.</value>
-    [Key]
-    public int Id { get; set; }
 
     /// <summary>
     /// Gets or sets the name.

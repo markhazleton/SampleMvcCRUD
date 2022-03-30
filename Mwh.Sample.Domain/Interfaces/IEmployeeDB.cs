@@ -1,7 +1,7 @@
 ﻿
 namespace Mwh.Sample.Domain.Interfaces;
 /// <summary>
-/// Employee DAL Interface
+/// Employee Database  Interface
 /// </summary>
 public interface IEmployeeDB
 {
@@ -10,25 +10,42 @@ public interface IEmployeeDB
     /// </summary>
     /// <param name="ID">The identifier.</param>
     /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-    bool Delete(int ID);
+    Task<bool> DeleteEmployeeAsync(int ID);
 
     /// <summary>
     /// Employees the specified identifier.
     /// </summary>
     /// <param name="id">The identifier.</param>
     /// <returns>EmployeeModel.</returns>
-    EmployeeModel Employee(int id);
+    Task<EmployeeDto> EmployeeAsync(int id);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    Task<DepartmentDto> DepartmentAsync(int id);
 
     /// <summary>
     /// Employees the collection.
     /// </summary>
     /// <returns>List&lt;EmployeeModel&gt;.</returns>
-    List<EmployeeModel> EmployeeCollection();
+    Task<List<EmployeeDto>> EmployeeCollectionAsync();
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    Task<List<DepartmentDto>> DepartmentCollectionAsync();
 
     /// <summary>
     /// Updates the specified emp.
     /// </summary>
-    /// <param name="emp">The emp.</param>
+    /// <param name="employee">The emp.</param>
     /// <returns>EmployeeModel.</returns>
-    EmployeeModel Update(EmployeeModel emp);
+    Task<EmployeeDto> UpdateAsync(EmployeeDto employee);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="department"></param>
+    /// <returns></returns>
+    Task<DepartmentDto> UpdateAsync(DepartmentDto department);
 }

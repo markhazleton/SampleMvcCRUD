@@ -6,7 +6,7 @@ namespace Mwh.Sample.Domain.Models;
 /// </summary>
 public sealed class ApplicationStatus
 {
-    public ApplicationStatus(Assembly assembly, Dictionary<string, string> tests = null, List<string> messages = null, ServiceStatus status = ServiceStatus.Online)
+    public ApplicationStatus(Assembly assembly, Dictionary<string, string>? tests = null, List<string>? messages = null, ServiceStatus status = ServiceStatus.Online)
     {
         BuildDate = GetBuildDate(assembly);
         BuildVersion = new BuildVersion(assembly);
@@ -51,7 +51,7 @@ public sealed class ApplicationStatus
     /// <summary>
     /// Region
     /// </summary>
-    public string Region { get; } = Environment.GetEnvironmentVariable("Region") ?? Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME");
+    public string Region { get; } = Environment.GetEnvironmentVariable("Region") ?? Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME") ?? String.Empty;
     /// <summary>
     /// Status 
     /// </summary>

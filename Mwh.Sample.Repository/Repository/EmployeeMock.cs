@@ -1,59 +1,49 @@
 ﻿
-namespace Mwh.Sample.Repository;
+namespace Mwh.Sample.Repository.Repository;
 /// <summary>
 /// Employee Mock Repository
 /// </summary>
 public class EmployeeMock : IEmployeeDB
 {
+    private List<DepartmentDto> _depts;
     /// <summary>
     /// The list
     /// </summary>
-    private List<EmployeeModel> _list;
+    private List<EmployeeDto> _emps;
 
     /// <summary>
     /// Constructor
     /// </summary>
     public EmployeeMock()
     {
-        _list = new List<EmployeeModel>()
+        _depts = new List<DepartmentDto>();
+        foreach (var dept in Enum.GetValues(typeof(EmployeeDepartmentEnum)))
+        {
+            _depts.Add(new DepartmentDto()
             {
-                new EmployeeModel()
-                {
-                    Name = "Jim",
-                    Age = 35,
-                    Department = EmployeeDepartment.IT,
-                    State = "Florida",
-                    Country = "USA",
-                    id = 4
-                },
-                new EmployeeModel()
-                {
-                    Name = "Bob",
-                    Age = 50,
-                    Department = EmployeeDepartment.HR,
-                    State = "Texas",
-                    Country = "USA",
-                    id = 1
-                },
-                new EmployeeModel()
-                {
-                    Name = "Sam",
-                    Age = 53,
-                    Department = EmployeeDepartment.Marketing,
-                    State = "Texas",
-                    Country = "USA",
-                    id = 2
-                },
-                new EmployeeModel()
-                {
-                    Name = "Frank",
-                    Age = 50,
-                    Department = EmployeeDepartment.Executive,
-                    State = "Texas",
-                    Country = "USA",
-                    id = 3
-                },
+                Id = (int)dept,
+                Name = dept?.ToString() ?? "UNKNOWN",
+                Description = dept?.ToString() ?? "UNKNOWN",
+            });
+        }
+        _emps = new List<EmployeeDto>()
+            {
+            new EmployeeDto() { Name = "Ilsa Lund", Age = 25, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "TX" },
+            new EmployeeDto() { Name = "Major Strasser", Age = 35, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "TX" },
+            new EmployeeDto() { Name = "Rick Blaine", Age = 45, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "TX" },
+            new EmployeeDto() { Name = "Victor Laszlo", Age = 55, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "TX" },
+            new EmployeeDto() { Name = "Louis Renault", Age = 65, Country = "France", Department = EmployeeDepartmentEnum.IT, State = "TX" },
+            new EmployeeDto() { Name = "Sam Spade", Age = 55, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "TX" },
+            new EmployeeDto() { Name = "Jim",Age = 35,Department = EmployeeDepartmentEnum.IT,State = "Florida",Country = "USA"},
+            new EmployeeDto() { Name = "Bob",Age = 50,Department = EmployeeDepartmentEnum.HR,State = "Texas",Country = "USA"},
+            new EmployeeDto() { Name = "Sam",Age = 53,Department = EmployeeDepartmentEnum.Marketing,State = "Texas",Country = "USA"},
+            new EmployeeDto() { Name = "Frank",Age = 50,Department = EmployeeDepartmentEnum.Executive,State = "Texas",Country = "USA"},
             };
+
+        for (int i = 0; i < _emps.Count; i++)
+        {
+            _emps[i].id = i + 1;
+        }
     }
 
     /// <summary>
@@ -63,27 +53,54 @@ public class EmployeeMock : IEmployeeDB
     /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     public bool Delete(int ID)
     {
-        var myEmp = _list.Where(w => w.id == ID).FirstOrDefault();
+        var myEmp = _emps.Where(w => w.id == ID).FirstOrDefault();
         if (myEmp == null)
             return false;
-        if (_list.Remove(myEmp))
+        if (_emps.Remove(myEmp))
         {
             return true;
         }
         return false;
     }
 
-    /// <summary>
-    /// Employees the specified identifier.
-    /// </summary>
-    /// <param name="id">The identifier.</param>
-    /// <returns>EmployeeModel.</returns>
-    public EmployeeModel Employee(int id)
+    public async Task<bool> DeleteEmployeeAsync(int ID)
     {
-        var myEmp = _list.Where(w => w.id == id).FirstOrDefault();
-        if (myEmp == null)
-            return new EmployeeModel();
-        return myEmp;
+        return false;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<DepartmentDto> DepartmentAsync(int id)
+    {
+        return _depts?.Where(w => w.Id == id).FirstOrDefault() ?? new DepartmentDto();
+
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public List<DepartmentDto> DepartmentCollection() { return _depts; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public async Task<List<DepartmentDto>> DepartmentCollectionAsync() { return _depts; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public async Task<EmployeeDto> EmployeeAsync(int id)
+    {
+        return _emps?.Where(w => w.id == id).FirstOrDefault() ?? new EmployeeDto();
     }
 
     //Return list of all Employees
@@ -91,35 +108,39 @@ public class EmployeeMock : IEmployeeDB
     /// Employees the collection.
     /// </summary>
     /// <returns>List&lt;EmployeeModel&gt;.</returns>
-    public List<EmployeeModel> EmployeeCollection() { return _list; }
+    public List<EmployeeDto> EmployeeCollection() { return _emps; }
 
+    public async Task<List<EmployeeDto>> EmployeeCollectionAsync()
+    {
+        return _emps;
+    }
     //Method for Updating Employee record
     /// <summary>
     /// Updates the specified emp.
     /// </summary>
     /// <param name="emp">The emp.</param>
     /// <returns>EmployeeModel.</returns>
-    public EmployeeModel Update(EmployeeModel emp)
+    public async Task<EmployeeDto> UpdateAsync(EmployeeDto emp)
     {
         if (emp == null)
-            return new EmployeeModel();
+            return new EmployeeDto();
 
         if (!emp.IsValid)
             return emp;
 
         if (emp.id == 0)
         {
-            int nextID = _list.OrderByDescending(o => o.id).Select(s => s.id).FirstOrDefault() + 1;
+            int nextID = _emps.OrderByDescending(o => o.id).Select(s => s.id).FirstOrDefault() + 1;
             emp.id = nextID;
-            _list.Add(emp);
+            _emps.Add(emp);
             return emp;
         }
         else
         {
-            var myEmp = _list.Where(w => w.id == emp.id).FirstOrDefault();
+            var myEmp = _emps.Where(w => w.id == emp.id).FirstOrDefault();
 
             if (myEmp == null)
-                return new EmployeeModel();
+                return new EmployeeDto();
 
             myEmp.Name = emp.Name;
             myEmp.Age = emp.Age;
@@ -128,6 +149,11 @@ public class EmployeeMock : IEmployeeDB
             myEmp.State = emp.State;
             return myEmp;
         }
+    }
+
+    public async Task<DepartmentDto> UpdateAsync(DepartmentDto emp)
+    {
+        return emp;
     }
 
     /// <summary>

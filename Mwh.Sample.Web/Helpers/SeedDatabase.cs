@@ -1,4 +1,6 @@
 ﻿
+using Mwh.Sample.Repository.Repository;
+
 namespace Mwh.Sample.Web.Helpers;
 
 /// <summary>
@@ -9,23 +11,30 @@ public static class SeedDatabase
     /// <summary>
     /// ConfirmDatabaseCreation
     /// </summary>
-    /// <param name="databaseName"></param>
-    public static void ConfirmDatabaseCreation(string databaseName)
+    public static async void DatabaseInitialization()
     {
-        var dbOptions = new DbContextOptionsBuilder<EmployeeContext>()
-            .UseInMemoryDatabase(databaseName)
-            .Options;
-        var context = new EmployeeContext(dbOptions);
-        context.Database.EnsureDeletedAsync();
-        context.Database.EnsureCreatedAsync();
-        context.Employees.Add(new Employee() { Name = "Ilsa Lund", Age = 25, Country = "Germany", DepartmentId = 1, State = "TX" });
-        context.Employees.Add(new Employee() { Name = "Major Strasser", Age = 35, Country = "Germany", DepartmentId = 1, State = "TX" });
-        context.Employees.Add(new Employee() { Name = "Rick Blaine", Age = 45, Country = "USA", DepartmentId = 1, State = "TX" });
-        context.Employees.Add(new Employee() { Name = "Victor Laszlo", Age = 55, Country = "Germany", DepartmentId = 2, State = "TX" });
-        context.Employees.Add(new Employee() { Name = "Louis Renault", Age = 65, Country = "France", DepartmentId = 3, State = "TX" });
-        context.Employees.Add(new Employee() { Name = "Sam", Age = 55, Country = "USA", DepartmentId = 1, State = "TX" });
-        context.SaveChanges();
+        try
+        {
+            var context = new EmployeeContext();
+            var employeeService = new EmployeeDatabaseService(context);
+            var token = new CancellationToken();
+            var employeeMock = new EmployeeMock();
+            var deptResultList = new List<DepartmentResponse>();
+            foreach (var dept in employeeMock.DepartmentCollection())
+            {
+                deptResultList.Add(await employeeService.SaveAsync(dept, token).ConfigureAwait(true));
+            }
+            var d = await employeeService.GetDepartmentsAsync(token).ConfigureAwait(true);
+            var dcnt = d.Count();
+            employeeMock.EmployeeCollection()?.ForEach(async emp =>
+            {
+                await employeeService.SaveAsync(emp, token).ConfigureAwait(true);
+            });
+            var e = await employeeService.GetEmployeesAsync(token).ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            var mesg = ex.Message;
+        }
     }
-
-
 }

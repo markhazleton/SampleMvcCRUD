@@ -24,7 +24,7 @@ public class MvcEmployeeController : BaseController
     [HttpGet]
     public async Task<ActionResult> Index()
     {
-        var list = await client.GetAsync(cts.Token).ConfigureAwait(false);
+        var list = await client.GetEmployeesAsync(cts.Token).ConfigureAwait(false);
 
         return View(list);
     }
@@ -37,7 +37,7 @@ public class MvcEmployeeController : BaseController
     [HttpGet]
     public async Task<ActionResult> Details(int id)
     {
-        var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
+        var emp = await client.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
         return View(emp);
     }
 
@@ -46,7 +46,7 @@ public class MvcEmployeeController : BaseController
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public ActionResult Create() { return View(new EmployeeModel()); }
+    public ActionResult Create() { return View(new EmployeeDto()); }
 
     /// <summary>
     /// Save New Employee
@@ -55,7 +55,7 @@ public class MvcEmployeeController : BaseController
     /// <returns></returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<ActionResult> Create(EmployeeModel employee)
+    public async Task<ActionResult> Create(EmployeeDto employee)
     {
         EmployeeResponse reqResponse;
         if (employee != null)
@@ -73,7 +73,7 @@ public class MvcEmployeeController : BaseController
     [HttpGet]
     public async Task<ActionResult> Edit(int id)
     {
-        var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
+        var emp = await client.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
         return View(emp);
     }
 
@@ -85,7 +85,7 @@ public class MvcEmployeeController : BaseController
     /// <returns></returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<ActionResult> Edit(int id, EmployeeModel employee)
+    public async Task<ActionResult> Edit(int id, EmployeeDto employee)
     {
         EmployeeResponse reqResponse;
         if (employee != null)
@@ -104,7 +104,7 @@ public class MvcEmployeeController : BaseController
     [HttpGet]
     public async Task<ActionResult> Delete(int id)
     {
-        var emp = await client.FindByIdAsync(id, cts.Token).ConfigureAwait(false);
+        var emp = await client.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
         return View(emp);
     }
 
@@ -116,7 +116,7 @@ public class MvcEmployeeController : BaseController
     /// <returns></returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<ActionResult> Delete(int id, EmployeeModel employee)
+    public async Task<ActionResult> Delete(int id, EmployeeDto employee)
     {
         if (employee != null)
         {

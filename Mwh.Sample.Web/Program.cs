@@ -1,4 +1,5 @@
 using Azure.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 var vaultUri = Environment.GetEnvironmentVariable("VaultUri");
 if (vaultUri != null)
@@ -13,16 +14,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 // Initialize the In Memory Database
-SeedDatabase.ConfirmDatabaseCreation("Employee");
-builder.Services.AddDbContext<EmployeeContext>(opt =>
-    opt.UseInMemoryDatabase("Employee"));
+builder.Services.AddDbContext<EmployeeContext>(opt => opt.UseInMemoryDatabase("Employee"));
+builder.Services.AddScoped<IEmployeeService, EmployeeDatabaseService>();
+builder.Services.AddScoped<IEmployeeClient, EmployeeRestClient>();
+SeedDatabase.DatabaseInitialization();
 
 builder.Services.AddHttpClient();
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddScoped<IEmployeeDB, EmployeeDB>();
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-builder.Services.AddScoped<IEmployeeClient, EmployeeRestClient>();
 builder.Services.AddCustomSwagger();
 builder.Services.AddSession();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);

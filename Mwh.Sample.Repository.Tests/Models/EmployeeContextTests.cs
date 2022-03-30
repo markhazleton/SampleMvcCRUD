@@ -1,5 +1,6 @@
 ﻿
-namespace Mwh.Sample.Core.Data.Tests.Models;
+
+namespace Mwh.Sample.Repository.Tests.Models;
 [TestClass]
 public class EmployeeContextTests
 {

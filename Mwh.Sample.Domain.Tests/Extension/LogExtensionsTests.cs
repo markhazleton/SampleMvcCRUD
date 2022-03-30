@@ -8,7 +8,7 @@ public class LogExtensionsTests
     public void GetSerializeObjectString_StateUnderTest_ExpectedBehavior()
     {
         // Arrange
-        EmployeeModel objectToSerialize = default;
+        EmployeeDto objectToSerialize = default;
 
         // Act
         var result = LogExtensions.GetSerializeObjectString(
@@ -22,7 +22,7 @@ public class LogExtensionsTests
     public void GetSerializeObjectString_StateUnderTest_ExpectedBehaviorNull()
     {
         // Arrange
-        EmployeeModel objectToSerialize = null;
+        EmployeeDto objectToSerialize = null;
 
         // Act
         var result = LogExtensions.GetSerializeObjectString(
@@ -36,7 +36,7 @@ public class LogExtensionsTests
     public void GetSerializeObjectString_StateUnderTest_ExpectedBehavior1()
     {
         // Arrange
-        List<EmployeeModel> lstObjectToSerialize = new();
+        List<EmployeeDto> lstObjectToSerialize = new();
 
         // Act
         var result = LogExtensions.GetSerializeObjectString(
@@ -50,7 +50,7 @@ public class LogExtensionsTests
     public void IsSimpleType_StateUnderTest_ExpectedBehaviorFalse()
     {
         // Arrange
-        EmployeeModel type = new();
+        EmployeeDto type = new();
 
         // Act
         var result = LogExtensions.IsSimpleType(

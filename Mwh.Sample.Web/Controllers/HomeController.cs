@@ -1,10 +1,22 @@
 ﻿
+using Mwh.Sample.Repository.Repository;
+
 namespace Mwh.Sample.Web.Controllers;
 /// <summary>
 /// Home Controller
 /// </summary>
 public class HomeController : BaseController
 {
+    private readonly IEmployeeService employeeService;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="svc"></param>
+    public HomeController(IEmployeeService svc)
+    {
+        employeeService = svc;
+    }
     /// <summary>
     /// Employee Single Page Applications
     /// </summary>
@@ -25,9 +37,9 @@ public class HomeController : BaseController
     /// Main Home Page
     /// </summary>
     /// <returns></returns>
-    public IActionResult Index()
+    public async Task<ActionResult> Index()
     {
-        return View();
+       return View();
     }
 }
 
