@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace Mwh.Sample.Web.Extensions;
 
 /// <summary>

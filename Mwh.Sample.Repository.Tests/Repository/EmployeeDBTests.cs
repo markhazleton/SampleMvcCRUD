@@ -89,11 +89,11 @@ public class EmployeeDBTests
     public async Task Department_Update_Id0()
     {
         // Arrange
-        DepartmentDto? test = new DepartmentDto() 
-        { 
-            Id  =0,
-            Name ="Test",
-            Description ="Test Description"
+        DepartmentDto? test = new DepartmentDto()
+        {
+            Id = 0,
+            Name = "Test",
+            Description = "Test Description"
         };
         // Act
         var result = await employeeDB.UpdateAsync(test);

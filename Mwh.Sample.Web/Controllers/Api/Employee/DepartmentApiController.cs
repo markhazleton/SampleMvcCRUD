@@ -34,7 +34,7 @@ namespace Mwh.Sample.Web.Controllers.Api.Employee
         public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetAsync(int id)
         {
             CancellationTokenSource cts = new();
-            var dep = await _employeeService.FindDepartmentByIdAsync(id,cts.Token).ConfigureAwait(false);
+            var dep = await _employeeService.FindDepartmentByIdAsync(id, cts.Token).ConfigureAwait(false);
             return Ok(dep);
         }
     }

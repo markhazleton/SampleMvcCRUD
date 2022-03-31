@@ -20,9 +20,9 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     {
     }
 
-    public Task<int> AddMultipleEmployeesAsync(string[]? namelist)
+    public async Task<int> AddMultipleEmployeesAsync(string[]? namelist)
     {
-        throw new NotImplementedException();
+        return 0;
     }
 
     /// <summary>
@@ -31,10 +31,16 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     /// <param name="id">The identifier.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>EmployeeResponse.</returns>
-    public Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
+    public async Task<EmployeeResponse?> DeleteAsync(int id, CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
-        return ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", null, HttpMethod.Delete, token);
+        return await ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", requestBody: null, HttpMethod.Delete, token);
+    }
+
+    public async Task<DepartmentDto?> FindDepartmentByIdAsync(int id, CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+        return await ExecuteAsync<DepartmentDto>($"/api/department/{id}", null, HttpMethod.Get, token);
     }
 
     /// <summary>
@@ -43,25 +49,16 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     /// <param name="id">The identifier.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>EmployeeModel.</returns>
-    public Task<EmployeeDto> FindEmployeeByIdAsync(int id, CancellationToken token)
+    public async Task<EmployeeDto?> FindEmployeeByIdAsync(int id, CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
-        return ExecuteAsync<EmployeeDto>($"/api/employee/{id}", null, HttpMethod.Get, token);
+        return await ExecuteAsync<EmployeeDto>($"/api/employee/{id}", null, HttpMethod.Get, token);
     }
 
-    public Task<DepartmentDto> FindDepartmentByIdAsync(int id, CancellationToken token)
+    public async Task<IEnumerable<DepartmentDto>?> GetDepartmentsAsync(CancellationToken token)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<DepartmentDto>> GetDepartmentAsync(CancellationToken token)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(CancellationToken token)
-    {
-        throw new NotImplementedException();
+        token.ThrowIfCancellationRequested();
+        return await ExecuteAsync<IEnumerable<DepartmentDto>>($"/api/department", null, HttpMethod.Get, token);
     }
 
     /// <summary>
@@ -69,26 +66,14 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     /// </summary>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>IEnumerable&lt;EmployeeModel&gt;.</returns>
-    public Task<IEnumerable<EmployeeDto>> GetEmployeeAsync(CancellationToken token)
+    public async Task<IEnumerable<EmployeeDto>?> GetEmployeesAsync(CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
-        return ExecuteAsync<IEnumerable<EmployeeDto>>($"/api/employee", null, HttpMethod.Get, token);
+        return await ExecuteAsync<IEnumerable<EmployeeDto>>($"/api/employee", null, HttpMethod.Get, token);
     }
 
-    public Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(CancellationToken token)
-    {
-        throw new NotImplementedException();
-    }
 
-    public Task<EmployeeResponse> SaveAsync(EmployeeDto employee, CancellationToken token)
-    {
-        throw new NotImplementedException();
-    }
 
-    public Task<DepartmentResponse> SaveAsync(DepartmentDto dept, CancellationToken token)
-    {
-        throw new NotImplementedException();
-    }
 
     /// <summary>
     /// save as an asynchronous operation.
@@ -96,10 +81,16 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     /// <param name="employee">The employee.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>EmployeeResponse.</returns>
-    public Task<EmployeeResponse> SaveEmployeeAsync(EmployeeDto employee, CancellationToken token)
+    public async Task<EmployeeResponse?> SaveAsync(EmployeeDto? employee, CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
-        return ExecuteAsync<EmployeeResponse>($"/api/employee", employee, HttpMethod.Post, token);
+        return await ExecuteAsync<EmployeeResponse>($"/api/employee", employee, HttpMethod.Post, token);
+    }
+
+    public async Task<DepartmentResponse?> SaveAsync(DepartmentDto dept, CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+        return await ExecuteAsync<DepartmentResponse>($"/api/department", dept, HttpMethod.Post, token);
     }
 
     /// <summary>
@@ -109,16 +100,18 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     /// <param name="employee">The employee.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>EmployeeResponse.</returns>
-    public Task<EmployeeResponse> UpdateAsync(int id,
-        EmployeeDto employee,
+    public async Task<EmployeeResponse?> UpdateAsync(int id,
+        EmployeeDto? employee,
         CancellationToken token)
     {
+        if (employee is null)
+            return new EmployeeResponse("Employee can not be null");
         token.ThrowIfCancellationRequested();
         if (employee.id == id)
         {
-            return ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", employee, HttpMethod.Put, token);
+            return await ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", employee, HttpMethod.Put, token);
         }
-        return Task.Run(() =>
+        return await Task.Run(() =>
         {
             return new EmployeeResponse($"Mismatch in id({id}) && id({employee.id}).");
         });

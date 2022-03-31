@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mwh.Sample.Repository.Repository;
+﻿using Mwh.Sample.Repository.Repository;
 using System;
 using System.Threading.Tasks;
 

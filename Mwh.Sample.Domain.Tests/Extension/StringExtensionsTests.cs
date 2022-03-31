@@ -152,8 +152,8 @@ public class StringExtensionsTests
     [TestMethod()]
     public void IndexOfNthTestSourceNull()
     {
-        string myTest = null;
-        Assert.AreEqual(0, myTest.IndexOfNth("3", 3));
+        string? myTest = null;
+        Assert.AreEqual(0, myTest?.IndexOfNth("3", 3));
     }
 
     /// <summary>
@@ -164,7 +164,7 @@ public class StringExtensionsTests
     public void IndexOfNthTestValueNegativeNth()
     {
         string myTest = "333333";
-        var RunTest = myTest.IndexOfNth("3", -1);
+        _ = myTest.IndexOfNth("3", -1);
     }
 
     /// <summary>

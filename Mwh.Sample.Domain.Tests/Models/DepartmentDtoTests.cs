@@ -7,11 +7,11 @@
         public void DepartmentDto_ExpectedResults()
         {
             // Arrange
-            var departmentDto = new DepartmentDto() 
-            { 
+            var departmentDto = new DepartmentDto()
+            {
                 Id = 1,
                 Name = "Test",
-                Description ="Test",
+                Description = "Test",
             };
             departmentDto.Employees = new List<EmployeeDto>
             {
@@ -43,7 +43,7 @@
             Assert.IsNotNull(departmentDto);
             Assert.AreEqual(1, departmentDto.Id);
             Assert.AreEqual("Test Name", departmentDto.Name);
-            Assert.AreEqual("Test Description",departmentDto.Description);
+            Assert.AreEqual("Test Description", departmentDto.Description);
             Assert.IsNotNull(departmentDto.Employees);
             Assert.AreEqual(2, departmentDto.Employees.Count);
         }

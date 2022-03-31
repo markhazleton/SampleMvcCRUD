@@ -1,4 +1,4 @@
-﻿CancellationToken cancellationToken = new CancellationToken();  
+﻿CancellationToken cancellationToken = new CancellationToken();
 
 Console.WriteLine("Setup SQL Lite Database");
 

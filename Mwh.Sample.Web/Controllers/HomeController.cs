@@ -1,6 +1,4 @@
 ﻿
-using Mwh.Sample.Repository.Repository;
-
 namespace Mwh.Sample.Web.Controllers;
 /// <summary>
 /// Home Controller
@@ -37,9 +35,9 @@ public class HomeController : BaseController
     /// Main Home Page
     /// </summary>
     /// <returns></returns>
-    public async Task<ActionResult> Index()
+    public ActionResult Index()
     {
-       return View();
+        return View();
     }
 }
 

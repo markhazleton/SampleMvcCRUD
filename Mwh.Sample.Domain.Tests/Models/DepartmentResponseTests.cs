@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mwh.Sample.Domain.Models;
-
-namespace Mwh.Sample.Domain.Tests.Models
+﻿namespace Mwh.Sample.Domain.Tests.Models
 {
     [TestClass]
     public class DepartmentResponseTests
@@ -14,7 +11,7 @@ namespace Mwh.Sample.Domain.Tests.Models
             // Act
 
             // Assert
-            Assert.AreEqual(departmentResponse.Success,false);
+            Assert.AreEqual(departmentResponse.Success, false);
             Assert.AreEqual(departmentResponse.Message, "Empty Initialize");
             Assert.IsNull(departmentResponse.Resource);
         }
@@ -22,10 +19,10 @@ namespace Mwh.Sample.Domain.Tests.Models
         public void DepartmentResponse_GoodResponse()
         {
             // Arrange
-            var dept = new DepartmentDto() 
+            var dept = new DepartmentDto()
             {
                 Id = 1,
-                Name ="Test",
+                Name = "Test",
                 Description = "Test"
             };
             var departmentResponse = new DepartmentResponse(dept);

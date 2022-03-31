@@ -1,4 +1,6 @@
-﻿namespace Mwh.Sample.Repository.Tests.Models
+﻿using System;
+
+namespace Mwh.Sample.Repository.Tests.Models
 {
     [TestClass]
     public class DepartmentTests
@@ -7,11 +9,11 @@
         public void TestMethod1()
         {
             // Arrange
-            var department = new Department() 
-            { 
+            var department = new Department()
+            {
                 Name = "Department",
                 CreatedBy = "Test",
-                Description ="Test",
+                Description = "Test",
                 Id = 1,
                 LastUpdatedBy = "Test",
             };
@@ -21,7 +23,7 @@
 
             // Assert
             Assert.IsNotNull(department);
-            Assert.AreEqual(department.CreatedDate.Date, System.DateTime.Now.Date);
+            Assert.AreEqual(department.CreatedDate.Date, DateTime.Now.Date);
         }
     }
 }

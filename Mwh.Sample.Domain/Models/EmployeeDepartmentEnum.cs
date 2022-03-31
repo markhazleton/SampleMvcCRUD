@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Domain.Models;
+﻿
+namespace Mwh.Sample.Domain.Models;
 
 /// <summary>
 /// Enum EmployeeDepartment

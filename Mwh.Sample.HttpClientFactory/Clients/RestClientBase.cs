@@ -75,7 +75,7 @@ public abstract class RestClientBase : IDisposable, IRestClientBase
     /// <param name="urlSegment">The URL segment.</param>
     /// <param name="requestBody">The request body.</param>
     /// <returns>T.</returns>
-    protected async Task<T?> ExecuteAsync<T>(string urlSegment, object requestBody, HttpMethod httpMethod, CancellationToken token)
+    protected async Task<T?> ExecuteAsync<T>(string urlSegment, object? requestBody, HttpMethod httpMethod, CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
         HttpRequestMessage request = GetRequestMessage(urlSegment, httpMethod);

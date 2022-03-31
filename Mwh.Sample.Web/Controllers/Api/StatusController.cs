@@ -48,11 +48,6 @@ public class StatusController : BaseApiController
         return Ok(result);
     }
 
-
-
-
-
-
     /// <summary>
     /// Returns Current Application Status
     /// </summary>
@@ -69,11 +64,39 @@ public class StatusController : BaseApiController
     /// </summary>
     public class ApiExplorerModel
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public ApiExplorerModel()
+        {
+            GroupItems = new List<ApiDescriptionModel>();
+            GroupName = string.Empty;
+          
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         public List<ApiDescriptionModel> GroupItems { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string GroupName { get; set; }
     }
+    /// <summary>
+    /// 
+    /// </summary>
     public class ApiDescriptionModel
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public ApiDescriptionModel()
+        {
+            RelativePath = string.Empty;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         public string RelativePath { get; set; }
     }
 

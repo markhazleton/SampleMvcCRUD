@@ -83,7 +83,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<int> AddMultipleEmployeesAsync(string[]? namelist)
     {
-        if(namelist == null) return -1;
+        if (namelist == null) return -1;
 
         var list = new List<Employee>();
         foreach (var name in namelist)
@@ -134,7 +134,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
     }
 
     public async Task<DepartmentDto> FindDepartmentByIdAsync(int id, CancellationToken token)
-    {{return Create(await _context.Departments.Where(w => w.Id == id).Include(i=>i.Employees).FirstOrDefaultAsync(cancellationToken: token));}}
+    { { return Create(await _context.Departments.Where(w => w.Id == id).Include(i => i.Employees).FirstOrDefaultAsync(cancellationToken: token)); } }
 
     public async Task<EmployeeDto> FindEmployeeByIdAsync(int id, CancellationToken token)
     { return Create(await _context.Employees.FindAsync(new object[] { id }, cancellationToken: token).ConfigureAwait(false)); }
@@ -223,6 +223,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                     dbEmp.Name = item.Name;
                     dbEmp.State = item.State;
                     dbEmp.LastUpdatedDate = DateTime.Now;
+                    _context.Update(dbEmp);
                     await _context.SaveChangesAsync(cancellationToken)
                         .ConfigureAwait(true);
 

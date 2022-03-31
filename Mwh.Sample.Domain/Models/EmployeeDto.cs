@@ -58,7 +58,7 @@ public class EmployeeDto
                 return false;
             if (string.IsNullOrEmpty(Country))
                 return false;
-            if (Department==EmployeeDepartmentEnum.Unknown)
+            if (Department == EmployeeDepartmentEnum.Unknown)
                 return false;
             if ((Age < 1))
                 return false;

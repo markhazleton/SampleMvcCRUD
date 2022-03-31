@@ -122,9 +122,9 @@ public class EmployeeDB : IEmployeeDB
         return await EmployeeAsync(emp.id);
     }
 
-    public async Task< DepartmentDto> DepartmentAsync(int id)
+    public async Task<DepartmentDto> DepartmentAsync(int id)
     {
-        return Create(await _context.Departments.Where(w => w.Id == id).Include(i=>i.Employees).FirstOrDefaultAsync());
+        return Create(await _context.Departments.Where(w => w.Id == id).Include(i => i.Employees).FirstOrDefaultAsync());
     }
 
     public async Task<List<DepartmentDto>> DepartmentCollectionAsync()

@@ -55,14 +55,18 @@ public class MvcEmployeeController : BaseController
     /// <returns></returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<ActionResult> Create(EmployeeDto employee)
+    public async Task<ActionResult> Create(EmployeeDto? employee)
     {
-        EmployeeResponse reqResponse;
+        EmployeeResponse? reqResponse = null;
         if (employee != null)
         {
             reqResponse = await client.SaveAsync(employee, cts.Token).ConfigureAwait(false);
         }
-        return RedirectToAction("Index");
+        if (reqResponse?.Success == true)
+            return RedirectToAction("Index");
+
+        return RedirectToAction("Edit", new { employee?.id });
+
     }
 
     /// <summary>
@@ -85,15 +89,18 @@ public class MvcEmployeeController : BaseController
     /// <returns></returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<ActionResult> Edit(int id, EmployeeDto employee)
+    public async Task<ActionResult> Edit(int id, EmployeeDto? employee)
     {
-        EmployeeResponse reqResponse;
+        EmployeeResponse? reqResponse = null;
         if (employee != null)
         {
             if (employee.id == id)
                 reqResponse = await client.UpdateAsync(id, employee, cts.Token).ConfigureAwait(false);
         }
-        return RedirectToAction("Index");
+        if (reqResponse?.Success == true)
+            return RedirectToAction("Index");
+
+        return RedirectToAction("Edit", new { employee?.id });
     }
 
     /// <summary>
@@ -122,7 +129,7 @@ public class MvcEmployeeController : BaseController
         {
             if (employee.id == id)
             {
-                var result = await client.DeleteAsync(id, cts.Token).ConfigureAwait(false);
+                _ = await client.DeleteAsync(id, cts.Token).ConfigureAwait(false);
             }
         }
         return RedirectToAction("Index");

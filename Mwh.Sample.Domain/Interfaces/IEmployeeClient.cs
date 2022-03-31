@@ -3,7 +3,7 @@ namespace Mwh.Sample.Domain.Interfaces;
 /// <summary>
 ///
 /// </summary>
-public interface IEmployeeClient  
+public interface IEmployeeClient
 {
     /// <summary>
     /// 
@@ -17,7 +17,7 @@ public interface IEmployeeClient
     /// <param name="id">The identifier.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>Task&lt;EmployeeResponse&gt;.</returns>
-    Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token);
+    Task<EmployeeResponse?> DeleteAsync(int id, CancellationToken token);
 
     /// <summary>
     /// Finds the by identifier asynchronous.
@@ -25,27 +25,27 @@ public interface IEmployeeClient
     /// <param name="id">The identifier.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>Task&lt;EmployeeModel&gt;.</returns>
-    Task<EmployeeDto> FindEmployeeByIdAsync(int id, CancellationToken token);
+    Task<EmployeeDto?> FindEmployeeByIdAsync(int id, CancellationToken token);
     /// <summary>
     /// Find the Department by the id
     /// </summary>
     /// <param name="id"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    Task<DepartmentDto> FindDepartmentByIdAsync(int id, CancellationToken token);
+    Task<DepartmentDto?> FindDepartmentByIdAsync(int id, CancellationToken token);
 
     /// <summary>
     /// Lists the asynchronous.
     /// </summary>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>Task&lt;IEnumerable&lt;EmployeeModel&gt;&gt;.</returns>
-    Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(CancellationToken token);
+    Task<IEnumerable<EmployeeDto>?> GetEmployeesAsync(CancellationToken token);
     /// <summary>
     /// 
     /// </summary>
     /// <param name="token"></param>
     /// <returns></returns>
-    Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(CancellationToken token);
+    Task<IEnumerable<DepartmentDto>?> GetDepartmentsAsync(CancellationToken token);
 
     /// <summary>
     /// Saves the asynchronous.
@@ -53,14 +53,14 @@ public interface IEmployeeClient
     /// <param name="employee">The employee.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>Task&lt;EmployeeResponse&gt;.</returns>
-    Task<EmployeeResponse> SaveAsync(EmployeeDto employee, CancellationToken token);
+    Task<EmployeeResponse?> SaveAsync(EmployeeDto? employee, CancellationToken token);
     /// <summary>
     /// 
     /// </summary>
     /// <param name="dept"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    Task<DepartmentResponse> SaveAsync(DepartmentDto dept, CancellationToken token);
+    Task<DepartmentResponse?> SaveAsync(DepartmentDto dept, CancellationToken token);
     /// <summary>
     /// Updates the asynchronous.
     /// </summary>
@@ -68,5 +68,5 @@ public interface IEmployeeClient
     /// <param name="employee">The employee.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>Task&lt;EmployeeResponse&gt;.</returns>
-    Task<EmployeeResponse> UpdateAsync(int id, EmployeeDto employee, CancellationToken token);
+    Task<EmployeeResponse?> UpdateAsync(int id, EmployeeDto? employee, CancellationToken token);
 }
