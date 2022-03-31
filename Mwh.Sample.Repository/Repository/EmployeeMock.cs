@@ -51,7 +51,7 @@ public class EmployeeMock : IEmployeeDB
     /// </summary>
     /// <param name="ID">The identifier.</param>
     /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-    public bool Delete(int ID)
+    public async Task<bool> DeleteEmployeeAsync(int ID)
     {
         var myEmp = _emps.Where(w => w.id == ID).FirstOrDefault();
         if (myEmp == null)
@@ -60,11 +60,6 @@ public class EmployeeMock : IEmployeeDB
         {
             return true;
         }
-        return false;
-    }
-
-    public async Task<bool> DeleteEmployeeAsync(int ID)
-    {
         return false;
     }
 
@@ -151,14 +146,8 @@ public class EmployeeMock : IEmployeeDB
         }
     }
 
-    public async Task<DepartmentDto> UpdateAsync(DepartmentDto emp)
+    public async Task<DepartmentDto> UpdateAsync(DepartmentDto dept)
     {
-        return emp;
+        return dept;
     }
-
-    /// <summary>
-    /// Gets the instance.
-    /// </summary>
-    /// <value>The instance.</value>
-    public static EmployeeMock Instance { get; } = new EmployeeMock();
 }

@@ -1,4 +1,8 @@
 ﻿using Mwh.Sample.Repository.Repository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.Repository.Tests.Repository;
@@ -9,18 +13,116 @@ public class EmployeeDBTests
     private EmployeeDB employeeDB;
 
     [TestInitialize]
-    public void Initialize()
+    public async Task Initialize()
     {
         var builder = new DbContextOptionsBuilder();
         _ = builder.UseInMemoryDatabase("AddMultipleEmployees");
         employeeDB = new EmployeeDB(new EmployeeContext());
 
+        var employeeService = new EmployeeDatabaseService(new EmployeeContext());
+        var token = new CancellationToken();
+        var employeeMock = new EmployeeMock();
+        var deptResultList = new List<DepartmentResponse>();
+        foreach (var dept in employeeMock.DepartmentCollection())
+        {
+            deptResultList.Add(await employeeService.SaveAsync(dept, token).ConfigureAwait(true));
+        }
+        var d = await employeeService.GetDepartmentsAsync(token).ConfigureAwait(true);
+        var dcnt = d.Count();
+        employeeMock.EmployeeCollection()?.ForEach(async emp =>
+        {
+            await employeeService.SaveAsync(emp, token).ConfigureAwait(true);
+        });
+        var e = await employeeService.GetEmployeesAsync(token).ConfigureAwait(true);
+    }
+    [TestMethod]
+    public async Task Department_List_Expected()
+    {
+        // Arrange
 
+        // Act
+        var result = await employeeDB.DepartmentCollectionAsync();
 
+        // Assert
+        Assert.IsNotNull(result);
+    }
+    [TestMethod]
+    public async Task Department_iD1_Expected()
+    {
+        // Arrange
+        int DeptId = 1;
+        // Act
+        var result = await employeeDB.DepartmentAsync(DeptId);
 
+        // Assert
+        Assert.IsNotNull(result);
+    }
+    [TestMethod]
+    public async Task Department_iD1_Update()
+    {
+        // Arrange
+        int DeptId = 1;
+        // Act
+        var result = await employeeDB.DepartmentAsync(DeptId);
 
+        result.Description = "Test Description";
+        result.Name = "Test Name";
+        var result2 = await employeeDB.UpdateAsync(result);
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsNotNull(result2);
+        Assert.AreEqual(result2.Name, "Test Name");
+        Assert.AreEqual(result2.Description, "Test Description");
+    }
+    [TestMethod]
+    public async Task Department_Update_Null()
+    {
+        // Arrange
+        DepartmentDto? test = null;
+        // Act
+        var result = await employeeDB.UpdateAsync(test);
+        // Assert
+        Assert.IsNotNull(result);
     }
 
+    [TestMethod]
+    public async Task Department_Update_Id0()
+    {
+        // Arrange
+        DepartmentDto? test = new DepartmentDto() 
+        { 
+            Id  =0,
+            Name ="Test",
+            Description ="Test Description"
+        };
+        // Act
+        var result = await employeeDB.UpdateAsync(test);
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(result.Id, 0);
+        Assert.AreNotEqual(result.Name, test.Name);
+    }
+    [TestMethod]
+    public async Task Department_Update_MaxPlusOne()
+    {
+        // Arrange
+        DepartmentDto? test = new DepartmentDto()
+        {
+            Id = 0,
+            Name = "Test",
+            Description = "Test Description"
+        };
+
+        // Act
+        var depts = await employeeDB.DepartmentCollectionAsync();
+        test.Id = depts.OrderByDescending(d => d.Id).First().Id + 1;
+        var result = await employeeDB.UpdateAsync(test);
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(result.Id, test.Id);
+        Assert.AreEqual(result.Name, test.Name);
+        Assert.AreEqual(result.Description, test.Description);
+    }
 
     [TestMethod]
     public async Task Delete_StateUnderTest_ExpectedBehaviorNewEmployee()
@@ -142,11 +244,11 @@ public class EmployeeDBTests
     {
         // Arrange
         EmployeeDto emp = new EmployeeDto()
-        { 
-            Age =22,
-            Name ="Test",
+        {
+            Age = 22,
+            Name = "Test",
             State = "TX",
-            Country="USA",
+            Country = "USA",
             Department = EmployeeDepartmentEnum.IT
         };
 
@@ -155,7 +257,7 @@ public class EmployeeDBTests
 
         // Assert
         Assert.IsNotNull(result);
-        Assert.IsTrue(result.id>0);
+        Assert.IsTrue(result.id > 0);
     }
     /// <summary>
     /// 
@@ -171,7 +273,7 @@ public class EmployeeDBTests
             State = "TX",
             Country = "USA",
             Department = EmployeeDepartmentEnum.IT,
-            id=98
+            id = 98
         };
 
         // Act
@@ -179,7 +281,7 @@ public class EmployeeDBTests
 
         // Assert
         Assert.IsNotNull(result);
-        Assert.AreEqual(98,result.id);
+        Assert.AreEqual(98, result.id);
     }
 
     [TestMethod]

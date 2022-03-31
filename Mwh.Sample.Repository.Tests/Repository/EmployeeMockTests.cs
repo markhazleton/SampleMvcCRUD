@@ -36,17 +36,29 @@ namespace Mwh.Sample.Repository.Tests.Repository
             // Assert
             Assert.IsNotNull(result);
         }
+        [TestMethod]
+        public async Task Delete_StateUnderTest_Id1()
+        {
+            // Arrange
+            var employeeMock = new EmployeeMock();
+            int ID = 1;
+
+            // Act
+            var result = await employeeMock.DeleteEmployeeAsync(ID);
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
 
         [TestMethod]
-        public void Delete_StateUnderTest_ExpectedBehavior()
+        public async Task Delete_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
             var employeeMock = new EmployeeMock();
             int ID = 0;
 
             // Act
-            var result = employeeMock.Delete(
-                ID);
+            var result = await employeeMock.DeleteEmployeeAsync(ID);
 
             // Assert
             Assert.IsNotNull(result);
@@ -146,6 +158,89 @@ namespace Mwh.Sample.Repository.Tests.Repository
 
             // Assert
             Assert.IsNull(result);
+        }
+
+
+        [TestMethod]
+        public async Task Delete_StateUnderTest_ExpectedBehaviorNotFound()
+        {
+            // Arrange
+            var employeeMock = new EmployeeMock();
+            int ID = 0;
+
+            // Act
+            var result = await employeeMock.DeleteEmployeeAsync(ID);
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task Employee_StateUnderTest_ExpectedBehavior()
+        {
+            // Arrange
+            var employeeDB = new EmployeeMock();
+            int id = 0;
+
+            // Act
+            var result = await employeeDB.EmployeeAsync(id);
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task EmployeeCollection_ExpectedBehavior()
+        {
+            // Arrange
+            var employeeDB = new EmployeeMock();
+
+            // Act
+            var result = await employeeDB.EmployeeCollectionAsync();
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task Update_StateUnderTest_ExpectedBehaviorNewEmployee()
+        {
+            // Arrange
+            var employeeDB = new EmployeeMock();
+            var newEmp = new EmployeeDto()
+            {
+                Age = 33,
+                Name = "Test User",
+                State = "Texas",
+                Country = "USA",
+                Department = EmployeeDepartmentEnum.IT
+            };
+
+            // Act
+
+            // Get Current count of employees
+            var initResult = await employeeDB.EmployeeCollectionAsync();
+
+            // Add New Employee with Update
+            var addResult = await employeeDB.UpdateAsync(newEmp);
+
+            // Get updated count of employees
+            var updatedResult = await employeeDB.EmployeeCollectionAsync();
+            /// Update the Employee
+            addResult.Name = "Test User 2";
+            addResult.Age = 44;
+            addResult.State = "FL";
+            addResult.Department = EmployeeDepartmentEnum.Accounting;
+            var result = await employeeDB.UpdateAsync(addResult);
+            // Get result after update
+            var finalResult = await employeeDB.EmployeeAsync(result.id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(addResult.id, result.id);
+            Assert.AreEqual(finalResult.Age, 44);
+            Assert.AreEqual(finalResult.State, "FL");
+
         }
     }
 }

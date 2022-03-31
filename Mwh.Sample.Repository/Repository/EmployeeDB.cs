@@ -132,7 +132,7 @@ public class EmployeeDB : IEmployeeDB
         return Create(await _context.Departments.OrderBy(o => o.Name).ToListAsync());
     }
 
-    public async Task<DepartmentDto> UpdateAsync(DepartmentDto dept)
+    public async Task<DepartmentDto> UpdateAsync(DepartmentDto? dept)
     {
         if (dept == null) return new DepartmentDto();
 
