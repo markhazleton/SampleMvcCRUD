@@ -33,9 +33,9 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             Description = item.Description,
         };
     }
-    private static EmployeeDto Create(Employee? item)
+    private static EmployeeDto? Create(Employee? item)
     {
-        if (item == null) return new EmployeeDto();
+        if (item == null) return null;
 
         return new EmployeeDto()
         {
@@ -133,11 +133,17 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         GC.SuppressFinalize(this);
     }
 
-    public async Task<DepartmentDto> FindDepartmentByIdAsync(int id, CancellationToken token)
-    { { return Create(await _context.Departments.Where(w => w.Id == id).Include(i => i.Employees).FirstOrDefaultAsync(cancellationToken: token)); } }
+    public async Task<DepartmentDto> FindDepartmentByIdAsync(int Id, CancellationToken token)
+    { { return Create(await _context.Departments.Where(w => w.Id == Id).Include(i => i.Employees).FirstOrDefaultAsync(cancellationToken: token)); } }
 
-    public async Task<EmployeeDto> FindEmployeeByIdAsync(int id, CancellationToken token)
-    { return Create(await _context.Employees.FindAsync(new object[] { id }, cancellationToken: token).ConfigureAwait(false)); }
+    public async Task<EmployeeResponse> FindEmployeeByIdAsync(int Id, CancellationToken token)
+    {
+        var employee = Create(await _context.Employees.FindAsync(new object[] { Id }, cancellationToken: token).ConfigureAwait(false));
+        if (employee is null)
+            return new EmployeeResponse("Employee Not Found");
+
+        return new EmployeeResponse(employee); 
+    }
 
     public EmployeeDto[] Get()
     {

@@ -3,7 +3,7 @@
 }
 
 <div class="container">
-    <h2>JavaScript AJAX using MVC Api</h2>
+    <h2>JavaScript AJAX using Api</h2>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New Employee</button><br /><br />
     <table id="EmpSinglePage" class="table table-bordered table-hover">
         <thead class="thead-dark">
@@ -147,12 +147,12 @@
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function (result) {
-                    $('#id').val(result.id);
-                    $('#name').val(result.name);
-                    $('#age').val(result.age);
-                    $('#state').val(result.state);
-                    $('#country').val(result.country);
-                    $('#department').val(result.department);
+                    $('#id').val(result.resource.id);
+                    $('#name').val(result.resource.name);
+                    $('#age').val(result.resource.age);
+                    $('#state').val(result.resource.state);
+                    $('#country').val(result.resource.country);
+                    $('#department').val(result.resource.department);
 
                     $('#myModalLabel').html('Update Employee');
 

@@ -78,7 +78,7 @@ public class MvcEmployeeController : BaseController
     public async Task<ActionResult> Edit(int id)
     {
         var emp = await client.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
-        return View(emp);
+        return View(emp?.Resource??new EmployeeDto());
     }
 
     /// <summary>

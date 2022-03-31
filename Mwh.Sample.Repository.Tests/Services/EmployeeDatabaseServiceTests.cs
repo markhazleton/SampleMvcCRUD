@@ -99,7 +99,7 @@ public class EmployeeDatabaseServiceTests
 
         // Assert
         Assert.IsNotNull(result);
-        Assert.IsFalse(result.IsValid);
+        Assert.IsFalse(result.Success);
     }
 
     [TestMethod]
@@ -152,9 +152,9 @@ public class EmployeeDatabaseServiceTests
 
         var UpdateEmp = await employeeService.FindEmployeeByIdAsync(result.Resource.id, cancellationToken).ConfigureAwait(true);
 
-        UpdateEmp.Age = 50;
+        UpdateEmp.Resource.Age = 50;
 
-        var UpdateResult = await employeeService.SaveAsync(UpdateEmp, cancellationToken);
+        var UpdateResult = await employeeService.SaveAsync(UpdateEmp.Resource, cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -217,17 +217,26 @@ public class EmployeeDatabaseServiceTests
 
         // Act
         var result = await employeeService.SaveAsync(item, cancellationToken);
+        if (result.Success)
+            item = result.Resource ?? new EmployeeDto();
 
-        var UpdateEmp = await employeeService.FindEmployeeByIdAsync(result.Resource.id, cancellationToken).ConfigureAwait(true);
+        var FindResult = await employeeService.FindEmployeeByIdAsync(item.id, cancellationToken).ConfigureAwait(true);
 
-        UpdateEmp.Age = 50;
+        if (FindResult.Success)
+            item = FindResult.Resource ?? new EmployeeDto();
 
-        var UpdateResult = await employeeService.SaveAsync(UpdateEmp, cancellationToken);
+        item.Age = 50;
+
+        var UpdateResult = await employeeService.SaveAsync(item, cancellationToken);
+
+        if (UpdateResult.Success)
+            item = UpdateResult.Resource ?? new EmployeeDto();
+
 
         // Assert
         Assert.IsNotNull(result);
         Assert.IsTrue(result.Success);
-        Assert.IsNotNull(UpdateEmp);
+        Assert.IsNotNull(item);
         Assert.IsNotNull(UpdateResult);
         Assert.IsTrue(UpdateResult.Success);
         Assert.AreEqual(50, UpdateResult.Resource?.Age);

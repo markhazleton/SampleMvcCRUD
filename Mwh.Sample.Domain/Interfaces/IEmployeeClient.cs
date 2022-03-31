@@ -25,7 +25,7 @@ public interface IEmployeeClient
     /// <param name="id">The identifier.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>Task&lt;EmployeeModel&gt;.</returns>
-    Task<EmployeeDto?> FindEmployeeByIdAsync(int id, CancellationToken token);
+    Task<EmployeeResponse?> FindEmployeeByIdAsync(int id, CancellationToken token);
     /// <summary>
     /// Find the Department by the id
     /// </summary>

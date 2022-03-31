@@ -43,17 +43,17 @@ public abstract class BaseResponse<T>
     /// Gets the message.
     /// </summary>
     /// <value>The message.</value>
-    public string Message { get; private set; }
+    public string Message { get; set; }
 
     /// <summary>
     /// Gets the resource.
     /// </summary>
     /// <value>The resource.</value>
-    public T? Resource { get; private set; }
+    public T? Resource { get; set; }
 
     /// <summary>
     /// Gets a value indicating whether this <see cref="BaseResponse{T}"/> is success.
     /// </summary>
     /// <value><c>true</c> if success; otherwise, <c>false</c>.</value>
-    public bool Success { get; private set; }
+    public bool Success { get; set; }
 }

@@ -41,7 +41,9 @@ public class EmployeeController : BaseController
     public async Task<ActionResult> GetEmployeeEdit(int id = 0)
     {
         var employee = await client.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
-        return PartialView("_EmployeeEdit", employee);
+        return PartialView("_EmployeeEdit", employee?.Resource ?? new EmployeeDto());
+
+
     }
 
     /// <summary>

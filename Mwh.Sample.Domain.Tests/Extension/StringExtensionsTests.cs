@@ -153,7 +153,8 @@ public class StringExtensionsTests
     public void IndexOfNthTestSourceNull()
     {
         string? myTest = null;
-        Assert.AreEqual(0, myTest?.IndexOfNth("3", 3));
+        var result = myTest?.IndexOfNth("3", 3);
+        Assert.IsNull(result);
     }
 
     /// <summary>

@@ -44,14 +44,14 @@ public class EmployeeApiController : BaseApiController
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(EmployeeDto), 200)]
     [ProducesResponseType(typeof(ErrorResource), 400)]
-    public async Task<ActionResult<EmployeeDto>> FindByIdAsync(int id)
+    public async Task<ActionResult<EmployeeResponse>> FindByIdAsync(int id)
     {
         CancellationTokenSource cts = new();
         var result = await _employeeService.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
 
-        if (result.id != id)
+        if (!result.Success)
         {
-            return BadRequest(new ErrorResource("Employee Not Found"));
+            return BadRequest(result);
         }
         return Ok(result);
     }

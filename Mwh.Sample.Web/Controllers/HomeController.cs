@@ -5,16 +5,6 @@ namespace Mwh.Sample.Web.Controllers;
 /// </summary>
 public class HomeController : BaseController
 {
-    private readonly IEmployeeService employeeService;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="svc"></param>
-    public HomeController(IEmployeeService svc)
-    {
-        employeeService = svc;
-    }
     /// <summary>
     /// Employee Single Page Applications
     /// </summary>
