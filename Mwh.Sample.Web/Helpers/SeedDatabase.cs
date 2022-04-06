@@ -15,8 +15,8 @@ public static class SeedDatabase
     {
         try
         {
-            var context = new EmployeeContext();
-            var employeeService = new EmployeeDatabaseService(context);
+            using var context = new EmployeeContext();
+            using var employeeService = new EmployeeDatabaseService(context);
             var token = new CancellationToken();
             var employeeMock = new EmployeeMock();
             var deptResultList = new List<DepartmentResponse>();

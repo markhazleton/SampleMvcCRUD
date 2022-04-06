@@ -45,10 +45,8 @@ var departments = await employeeService.GetDepartmentsAsync(cancellationToken).C
 
 foreach (var dept in departments)
 {
-    Console.WriteLine($"{dept.Name} with {dept?.Employees?.Count} employees");
+    Console.WriteLine($"{dept.Name} with {dept?.Employees?.Length ?? 0} employees");
 }
-
-
 
 Console.WriteLine($"Employee Count:{employees?.Count()}");
 Console.WriteLine("Complete");

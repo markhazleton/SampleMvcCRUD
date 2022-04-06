@@ -56,11 +56,8 @@ public class EmployeeMock : IEmployeeDB
         var myEmp = _emps.Where(w => w.id == ID).FirstOrDefault();
         if (myEmp == null)
             return false;
-        if (_emps.Remove(myEmp))
-        {
-            return true;
-        }
-        return false;
+
+        return _emps.Remove(myEmp);
     }
 
     /// <summary>

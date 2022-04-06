@@ -1,9 +1,8 @@
-﻿
-namespace Mwh.Sample.Repository.Models;
+﻿namespace Mwh.Sample.Repository.Models;
 
 public class EmployeeContext : DbContext
 {
-    public EmployeeContext()
+    public EmployeeContext() : base()
     {
     }
 

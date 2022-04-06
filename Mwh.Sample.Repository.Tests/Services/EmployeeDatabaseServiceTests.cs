@@ -150,7 +150,7 @@ public class EmployeeDatabaseServiceTests
         // Act
         var result = await employeeService.SaveAsync(item, cancellationToken);
 
-        var UpdateEmp = await employeeService.FindEmployeeByIdAsync(result.Resource.id, cancellationToken).ConfigureAwait(true);
+        var UpdateEmp = await employeeService.FindEmployeeByIdAsync(result?.Resource?.id ?? 0, cancellationToken).ConfigureAwait(true);
 
         UpdateEmp.Resource.Age = 50;
 
@@ -360,7 +360,7 @@ public class EmployeeDatabaseServiceTests
     {
         // Arrange
         int id = 0;
-        EmployeeDto employee = null;
+        EmployeeDto? employee = null;
 
         // Act
         var result = await employeeService.UpdateAsync(

@@ -68,5 +68,5 @@ public interface IEmployeeService
     /// <param name="employee">The employee.</param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>Task&lt;EmployeeResponse&gt;.</returns>
-    Task<EmployeeResponse> UpdateAsync(int id, EmployeeDto employee, CancellationToken token);
+    Task<EmployeeResponse> UpdateAsync(int id, EmployeeDto? employee, CancellationToken token);
 }

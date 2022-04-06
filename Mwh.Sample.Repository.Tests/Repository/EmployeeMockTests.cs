@@ -129,6 +129,44 @@ namespace Mwh.Sample.Repository.Tests.Repository
             // Assert
             Assert.IsNotNull(result);
         }
+        [TestMethod]
+        public async Task UpdateAsync_StateUnderTest_NotFoundID()
+        {
+            // Arrange
+            var employeeMock = new EmployeeMock();
+            EmployeeDto emp = new EmployeeDto()
+            {
+                id = 9999,
+                Name = "Test",
+                Age = 99,
+                Country = "Test",
+                State = "Test",
+                Department = EmployeeDepartmentEnum.IT
+            };
+
+            // Act
+            var result = await employeeMock.UpdateAsync(emp);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.id, 0);
+            Assert.IsFalse(result.IsValid);
+        }
+        [TestMethod]
+        public async Task UpdateAsync_StateUnderTest_NotValid()
+        {
+            // Arrange
+            var employeeMock = new EmployeeMock();
+            EmployeeDto emp = new EmployeeDto();
+
+            // Act
+            var result = await employeeMock.UpdateAsync(emp);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.id, 0);
+            Assert.IsFalse(result.IsValid);
+        }
 
         [TestMethod]
         public async Task UpdateAsync_StateUnderTest_ExpectedBehavior()
@@ -138,11 +176,11 @@ namespace Mwh.Sample.Repository.Tests.Repository
             EmployeeDto emp = null;
 
             // Act
-            var result = await employeeMock.UpdateAsync(
-                emp);
+            var result = await employeeMock.UpdateAsync(emp);
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.AreEqual(result.id, 0);
+            Assert.IsFalse(result.IsValid);
         }
 
         [TestMethod]

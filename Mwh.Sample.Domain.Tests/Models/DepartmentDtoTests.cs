@@ -13,7 +13,7 @@
                 Name = "Test",
                 Description = "Test",
             };
-            departmentDto.Employees = new List<EmployeeDto>
+            departmentDto.Employees = new EmployeeDto[]
             {
                 new EmployeeDto()
                 {
@@ -45,7 +45,7 @@
             Assert.AreEqual("Test Name", departmentDto.Name);
             Assert.AreEqual("Test Description", departmentDto.Description);
             Assert.IsNotNull(departmentDto.Employees);
-            Assert.AreEqual(2, departmentDto.Employees.Count);
+            Assert.AreEqual(2, departmentDto.Employees.Length);
         }
     }
 }

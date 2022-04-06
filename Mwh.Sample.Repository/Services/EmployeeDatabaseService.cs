@@ -20,7 +20,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             Id = item.Id,
             Name = item.Name,
             Description = item.Description,
-            Employees = item?.Employees?.Select(s => Create(s)).ToArray()
+            Employees = item.Employees.Select(s => Create(s)).ToArray()
         };
     }
 
@@ -142,7 +142,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         if (employee is null)
             return new EmployeeResponse("Employee Not Found");
 
-        return new EmployeeResponse(employee); 
+        return new EmployeeResponse(employee);
     }
 
     public EmployeeDto[] Get()
@@ -151,7 +151,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
     }
 
     public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(CancellationToken token)
-    { return GetDepartmentDtos(await _context.Departments.Include(i => i.Employees).ToListAsync(cancellationToken: token).ConfigureAwait(false)); }
+    { return GetDepartmentDtos(await _context.Departments.ToListAsync(cancellationToken: token).ConfigureAwait(false)); }
 
     public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(CancellationToken token)
     { return GetEmployeeDtos(await _context.Employees.ToListAsync(cancellationToken: token).ConfigureAwait(false)); }
@@ -259,7 +259,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         return new EmployeeResponse(Create(newEmp ?? dbEmp));
     }
 
-    public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeDto employee, CancellationToken token)
+    public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeDto? employee, CancellationToken token)
     {
         if (employee == null)
             return new EmployeeResponse($"Can not update null employee");
