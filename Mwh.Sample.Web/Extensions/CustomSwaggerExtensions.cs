@@ -33,7 +33,7 @@ public static class CustomSwaggerExtensions
                            });
 
             var xmlFile = $"Mwh.Sample.Web.xml";
-            string xmlPath = String.Empty;
+            string xmlPath = string.Empty;
 
             if (File.Exists(Path.Combine(AppContext.BaseDirectory, "wwwroot")))
             {

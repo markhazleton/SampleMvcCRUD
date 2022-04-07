@@ -42,7 +42,7 @@ public class EmployeeDto
     /// </summary>
     /// <value>The employee identifier.</value>
     [JsonPropertyName("id")]
-    public int id { get; set; }
+    public int Id { get; set; }
 
     /// <summary>
     /// Returns true if ... is valid.

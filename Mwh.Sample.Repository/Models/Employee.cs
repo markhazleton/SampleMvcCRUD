@@ -13,6 +13,9 @@ public class Employee : BaseEntity
     /// </summary>
     /// <value>The country.</value>
     public string Country { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
     public virtual Department Department { get; set; }
 
     /// <summary>

@@ -39,7 +39,7 @@ public class EmployeeDB : IEmployeeDB
 
         return new EmployeeDto()
         {
-            id = entity.Id,
+            Id = entity.Id,
             State = entity.State,
             Age = entity.Age,
             Country = entity.Country,
@@ -74,7 +74,7 @@ public class EmployeeDB : IEmployeeDB
     {
         if (emp == null) return new EmployeeDto();
 
-        if (emp.id == 0)
+        if (emp.Id == 0)
         {
             var saveUser = new Employee()
             {
@@ -86,11 +86,11 @@ public class EmployeeDB : IEmployeeDB
             };
             await _context.Employees.AddAsync(saveUser);
             await _context.SaveChangesAsync();
-            emp.id = saveUser.Id;
+            emp.Id = saveUser.Id;
         }
         else
         {
-            var saveUser = await _context.Employees.Where(w => w.Id == emp.id).FirstOrDefaultAsync();
+            var saveUser = await _context.Employees.Where(w => w.Id == emp.Id).FirstOrDefaultAsync();
             if (saveUser != null)
             {
                 _context.Attach(saveUser);
@@ -106,7 +106,7 @@ public class EmployeeDB : IEmployeeDB
             {
                 saveUser = new Employee()
                 {
-                    Id = emp.id,
+                    Id = emp.Id,
                     Name = emp.Name,
                     State = emp.State,
                     Age = emp.Age,
@@ -115,11 +115,11 @@ public class EmployeeDB : IEmployeeDB
                 };
                 await _context.Employees.AddAsync(saveUser);
                 await _context.SaveChangesAsync();
-                emp.id = saveUser.Id;
+                emp.Id = saveUser.Id;
 
             }
         }
-        return await EmployeeAsync(emp.id);
+        return await EmployeeAsync(emp.Id);
     }
 
     public async Task<DepartmentDto> DepartmentAsync(int id)

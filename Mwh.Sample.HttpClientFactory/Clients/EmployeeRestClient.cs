@@ -20,7 +20,7 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     {
     }
 
-    public async Task<int> AddMultipleEmployeesAsync(string[]? namelist)
+    public async Task<int> AddMultipleEmployeesAsync(string?[]? namelist)
     {
         return 0;
     }
@@ -109,13 +109,13 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
         if (employee is null)
             return new EmployeeResponse("Employee can not be null");
         token.ThrowIfCancellationRequested();
-        if (employee.id == id)
+        if (employee.Id == id)
         {
             return await ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", employee, HttpMethod.Put, token);
         }
         return await Task.Run(() =>
         {
-            return new EmployeeResponse($"Mismatch in id({id}) && id({employee.id}).");
+            return new EmployeeResponse($"Mismatch in id({id}) && id({employee.Id}).");
         });
     }
 }

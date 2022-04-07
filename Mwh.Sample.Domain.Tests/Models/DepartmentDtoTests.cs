@@ -17,7 +17,7 @@
             {
                 new EmployeeDto()
                 {
-                    id = 1,
+                    Id = 1,
                     Name = "Test",
                     Age = 22,
                     State = "TX",
@@ -26,7 +26,7 @@
                 },
                 new EmployeeDto()
                 {
-                    id = 2,
+                    Id = 2,
                     Name = "Test Two",
                     Age = 33,
                     State = "TX",

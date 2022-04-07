@@ -30,7 +30,7 @@
 
             // Assert
             Assert.AreEqual(departmentResponse.Success, true);
-            Assert.AreEqual(departmentResponse.Message, String.Empty);
+            Assert.AreEqual(departmentResponse.Message, string.Empty);
             Assert.IsNotNull(departmentResponse.Resource);
         }
         [TestMethod]

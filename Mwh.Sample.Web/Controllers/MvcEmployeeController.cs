@@ -65,7 +65,7 @@ public class MvcEmployeeController : BaseController
         if (reqResponse?.Success == true)
             return RedirectToAction("Index");
 
-        return RedirectToAction("Edit", new { employee?.id });
+        return RedirectToAction("Edit", new { employee?.Id });
 
     }
 
@@ -94,13 +94,13 @@ public class MvcEmployeeController : BaseController
         EmployeeResponse? reqResponse = null;
         if (employee != null)
         {
-            if (employee.id == id)
+            if (employee.Id == id)
                 reqResponse = await client.UpdateAsync(id, employee, cts.Token).ConfigureAwait(false);
         }
         if (reqResponse?.Success == true)
             return RedirectToAction("Index");
 
-        return RedirectToAction("Edit", new { employee?.id });
+        return RedirectToAction("Edit", new { employee?.Id });
     }
 
     /// <summary>
@@ -127,7 +127,7 @@ public class MvcEmployeeController : BaseController
     {
         if (employee != null)
         {
-            if (employee.id == id)
+            if (employee.Id == id)
             {
                 _ = await client.DeleteAsync(id, cts.Token).ConfigureAwait(false);
             }

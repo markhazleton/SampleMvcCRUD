@@ -147,7 +147,7 @@ public class EmployeeDBTests
         // Get updated count of employees
         var updatedResult = await employeeDB.EmployeeCollectionAsync();
         /// Delete the Employee
-        var result = await employeeDB.DeleteEmployeeAsync(addResult.id);
+        var result = await employeeDB.DeleteEmployeeAsync(addResult.Id);
         // Get result after delete
         var finalResult = await employeeDB.EmployeeCollectionAsync();
 
@@ -226,11 +226,11 @@ public class EmployeeDBTests
         addResult.Department = EmployeeDepartmentEnum.Accounting;
         var result = await employeeDB.UpdateAsync(addResult);
         // Get result after update
-        var finalResult = await employeeDB.EmployeeAsync(result.id);
+        var finalResult = await employeeDB.EmployeeAsync(result.Id);
 
         // Assert
         Assert.IsNotNull(result);
-        Assert.AreEqual(addResult.id, result.id);
+        Assert.AreEqual(addResult.Id, result.Id);
         Assert.AreNotEqual(initResult.Count, updatedResult.Count);
         Assert.AreEqual(finalResult.Age, 44);
         Assert.AreEqual(finalResult.State, "FL");
@@ -257,7 +257,7 @@ public class EmployeeDBTests
 
         // Assert
         Assert.IsNotNull(result);
-        Assert.IsTrue(result.id > 0);
+        Assert.IsTrue(result.Id > 0);
     }
     /// <summary>
     /// 
@@ -273,7 +273,7 @@ public class EmployeeDBTests
             State = "TX",
             Country = "USA",
             Department = EmployeeDepartmentEnum.IT,
-            id = 98
+            Id = 98
         };
 
         // Act
@@ -281,7 +281,7 @@ public class EmployeeDBTests
 
         // Assert
         Assert.IsNotNull(result);
-        Assert.AreEqual(98, result.id);
+        Assert.AreEqual(98, result.Id);
     }
 
     [TestMethod]

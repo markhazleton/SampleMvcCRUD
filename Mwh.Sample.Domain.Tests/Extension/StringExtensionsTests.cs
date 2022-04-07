@@ -38,7 +38,7 @@ public class StringExtensionsTests
     [TestMethod()]
     public void GetDecimalFromStringTestNullString()
     {
-        string myTest = null;
+        string? myTest = null;
         decimal myDefault = 2.99M;
         var myValue = myTest.GetDecimalFromString(myDefault);
         Assert.AreEqual(myDefault, myValue);
@@ -75,7 +75,7 @@ public class StringExtensionsTests
     [TestMethod()]
     public void GetIntFromStringTestNullDefault()
     {
-        string myTest = null;
+        string? myTest = null;
         int? myDefault = null;
         var myValue = myTest.GetIntFromString(myDefault);
         Assert.AreEqual(myDefault, myValue);
@@ -87,7 +87,7 @@ public class StringExtensionsTests
     [TestMethod()]
     public void GetIntFromStringTestNullString()
     {
-        string myTest = null;
+        string? myTest = null;
         int? myDefault = 0;
         var myValue = myTest.GetIntFromString(myDefault);
         Assert.AreEqual(myDefault, myValue);
@@ -121,7 +121,7 @@ public class StringExtensionsTests
     [TestMethod()]
     public void GetNullIntFromStringTestNullString()
     {
-        string myTest = null;
+        string? myTest = null;
         var myValue = myTest.GetIntFromString(0);
         Assert.AreEqual(0, myValue);
     }
@@ -165,7 +165,8 @@ public class StringExtensionsTests
     public void IndexOfNthTestValueNegativeNth()
     {
         string myTest = "333333";
-        _ = myTest.IndexOfNth("3", -1);
+        var test = myTest.IndexOfNth("3", -1);
+        Assert.AreEqual(0, test);
     }
 
     /// <summary>
@@ -174,8 +175,9 @@ public class StringExtensionsTests
     [TestMethod()]
     public void IndexOfNthTestValueNull()
     {
+        string? search= default;
         string myTest = "333333";
-        Assert.AreEqual(0, myTest.IndexOfNth(null, 3));
+        Assert.AreEqual(0, myTest.IndexOfNth(search, 3));
     }
 
     /// <summary>
@@ -204,8 +206,8 @@ public class StringExtensionsTests
     [TestMethod()]
     public void LeftTestNullString()
     {
-        string myTest = null;
-        Assert.AreEqual(string.Empty, myTest.Left(2));
+        string? myTest = null;
+        Assert.AreEqual(null, myTest?.Left(2));
     }
 
     /// <summary>
@@ -224,8 +226,8 @@ public class StringExtensionsTests
     [TestMethod()]
     public void RightTestNullString()
     {
-        string myTest = null;
-        Assert.AreEqual(string.Empty, myTest.Right(2));
+        string? myTest = null;
+        Assert.AreEqual(null, myTest?.Right(2));
     }
 
     /// <summary>
@@ -254,7 +256,8 @@ public class StringExtensionsTests
     [TestMethod()]
     public void TrimIfNotNullTestWithNull()
     {
-        string myTest = null;
-        Assert.AreEqual(string.Empty, myTest.TrimIfNotNull());
+        string? myTest = null;
+        var myResult = myTest.TrimIfNotNull();
+        Assert.AreEqual(string.Empty, myResult);
     }
 }

@@ -51,7 +51,7 @@ public sealed class ApplicationStatus
     /// <summary>
     /// Region
     /// </summary>
-    public string Region { get; } = Environment.GetEnvironmentVariable("Region") ?? Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME") ?? String.Empty;
+    public string Region { get; } = Environment.GetEnvironmentVariable("Region") ?? Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME") ?? string.Empty;
     /// <summary>
     /// Status 
     /// </summary>

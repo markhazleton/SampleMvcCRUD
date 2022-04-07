@@ -11,7 +11,7 @@ public abstract class BaseResponse<T>
     /// Initializes a new instance of the <see cref="BaseResponse{T}"/> class.
     /// </summary>
     /// <param name="resource">The resource.</param>
-    protected BaseResponse(T resource)
+    protected BaseResponse(T? resource)
     {
         Success = true;
         Message = string.Empty;

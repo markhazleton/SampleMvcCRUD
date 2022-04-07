@@ -20,7 +20,7 @@ public class EmployeeModelTests
             State = "State",
             Country = "Country",
             Department = EmployeeDepartmentEnum.Marketing,
-            id = 0,
+            Id = 0,
             Name = "Name"
         };
 
@@ -48,8 +48,8 @@ public class EmployeeModelTests
             State = "State",
             Country = "Country",
             Department = EmployeeDepartmentEnum.Marketing,
-            id = 0,
-            Name = String.Empty
+            Id = 0,
+            Name = string.Empty
         };
 
         // Act
@@ -71,7 +71,7 @@ public class EmployeeModelTests
             State = string.Empty,
             Country = "Country",
             Department = EmployeeDepartmentEnum.Marketing,
-            id = 0,
+            Id = 0,
             Name = "Test"
         };
 
@@ -94,7 +94,7 @@ public class EmployeeModelTests
             State = "TX",
             Country = string.Empty,
             Department = EmployeeDepartmentEnum.Marketing,
-            id = 0,
+            Id = 0,
             Name = "Test"
         };
 
@@ -117,7 +117,7 @@ public class EmployeeModelTests
             State = "TX",
             Country = "USA",
             Department = EmployeeDepartmentEnum.Marketing,
-            id = 0,
+            Id = 0,
             Name = "Test"
         };
 
@@ -139,7 +139,7 @@ public class EmployeeModelTests
             Age = 20,
             State = "TX",
             Country = "USA",
-            id = 0,
+            Id = 0,
             Name = "Test"
         };
 

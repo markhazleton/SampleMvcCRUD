@@ -22,7 +22,7 @@ public class EmployeeDatabaseServiceTests
     public async Task AddMultiple_StateUnderTest_Null()
     {
         // Arrange
-        string[] namelist = null;
+        string?[]? namelist = null;
 
         // Act
         var result = await employeeService.AddMultipleEmployeesAsync(namelist);
@@ -62,7 +62,7 @@ public class EmployeeDatabaseServiceTests
 
         // Act
         var result = await employeeService.SaveAsync(employee, cancellationToken);
-        var id = result?.Resource?.id ?? 0;
+        var id = result?.Resource?.Id ?? 0;
         var afterResults = await employeeService.DeleteAsync(id, cancellationToken);
 
 
@@ -150,7 +150,7 @@ public class EmployeeDatabaseServiceTests
         // Act
         var result = await employeeService.SaveAsync(item, cancellationToken);
 
-        var UpdateEmp = await employeeService.FindEmployeeByIdAsync(result?.Resource?.id ?? 0, cancellationToken).ConfigureAwait(true);
+        var UpdateEmp = await employeeService.FindEmployeeByIdAsync(result?.Resource?.Id ?? 0, cancellationToken).ConfigureAwait(true);
 
         UpdateEmp.Resource.Age = 50;
 
@@ -220,7 +220,7 @@ public class EmployeeDatabaseServiceTests
         if (result.Success)
             item = result.Resource ?? new EmployeeDto();
 
-        var FindResult = await employeeService.FindEmployeeByIdAsync(item.id, cancellationToken).ConfigureAwait(true);
+        var FindResult = await employeeService.FindEmployeeByIdAsync(item.Id, cancellationToken).ConfigureAwait(true);
 
         if (FindResult.Success)
             item = FindResult.Resource ?? new EmployeeDto();
@@ -252,7 +252,7 @@ public class EmployeeDatabaseServiceTests
         int id = 0;
         EmployeeDto? employee = new EmployeeDto()
         {
-            id = 0,
+            Id = 0,
             Name = "Test",
             Age = 25,
             State = "TX",
@@ -283,7 +283,7 @@ public class EmployeeDatabaseServiceTests
         // Act
         EmployeeDto item = new()
         {
-            id = 1,
+            Id = 1,
             Name = "Test",
             Age = 25,
             State = "Texas",
@@ -314,7 +314,7 @@ public class EmployeeDatabaseServiceTests
         // Act
         EmployeeDto item = new()
         {
-            id = 999,
+            Id = 999,
             Name = "Test",
             Age = 25,
             State = "Texas",

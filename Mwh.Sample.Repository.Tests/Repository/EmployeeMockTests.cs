@@ -136,7 +136,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
             var employeeMock = new EmployeeMock();
             EmployeeDto emp = new EmployeeDto()
             {
-                id = 9999,
+                Id = 9999,
                 Name = "Test",
                 Age = 99,
                 Country = "Test",
@@ -149,7 +149,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.id, 0);
+            Assert.AreEqual(result.Id, 0);
             Assert.IsFalse(result.IsValid);
         }
         [TestMethod]
@@ -164,7 +164,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.id, 0);
+            Assert.AreEqual(result.Id, 0);
             Assert.IsFalse(result.IsValid);
         }
 
@@ -179,7 +179,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
             var result = await employeeMock.UpdateAsync(emp);
 
             // Assert
-            Assert.AreEqual(result.id, 0);
+            Assert.AreEqual(result.Id, 0);
             Assert.IsFalse(result.IsValid);
         }
 
@@ -270,11 +270,11 @@ namespace Mwh.Sample.Repository.Tests.Repository
             addResult.Department = EmployeeDepartmentEnum.Accounting;
             var result = await employeeDB.UpdateAsync(addResult);
             // Get result after update
-            var finalResult = await employeeDB.EmployeeAsync(result.id);
+            var finalResult = await employeeDB.EmployeeAsync(result.Id);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(addResult.id, result.id);
+            Assert.AreEqual(addResult.Id, result.Id);
             Assert.AreEqual(finalResult.Age, 44);
             Assert.AreEqual(finalResult.State, "FL");
 

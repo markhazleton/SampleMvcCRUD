@@ -10,7 +10,7 @@ public interface IEmployeeService
     /// </summary>
     /// <param name="namelist"></param>
     /// <returns></returns>
-    Task<int> AddMultipleEmployeesAsync(string[]? namelist);
+    Task<int> AddMultipleEmployeesAsync(string?[]? namelist);
     /// <summary>
     /// Deletes the asynchronous.
     /// </summary>

@@ -42,7 +42,7 @@ public class EmployeeMock : IEmployeeDB
 
         for (int i = 0; i < _emps.Count; i++)
         {
-            _emps[i].id = i + 1;
+            _emps[i].Id = i + 1;
         }
     }
 
@@ -53,7 +53,7 @@ public class EmployeeMock : IEmployeeDB
     /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     public async Task<bool> DeleteEmployeeAsync(int ID)
     {
-        var myEmp = _emps.Where(w => w.id == ID).FirstOrDefault();
+        var myEmp = _emps.Where(w => w.Id == ID).FirstOrDefault();
         if (myEmp == null)
             return false;
 
@@ -92,7 +92,7 @@ public class EmployeeMock : IEmployeeDB
     /// <exception cref="NotImplementedException"></exception>
     public async Task<EmployeeDto> EmployeeAsync(int id)
     {
-        return _emps?.Where(w => w.id == id).FirstOrDefault() ?? new EmployeeDto();
+        return _emps?.Where(w => w.Id == id).FirstOrDefault() ?? new EmployeeDto();
     }
 
     //Return list of all Employees
@@ -120,16 +120,16 @@ public class EmployeeMock : IEmployeeDB
         if (!emp.IsValid)
             return emp;
 
-        if (emp.id == 0)
+        if (emp.Id == 0)
         {
-            int nextID = _emps.OrderByDescending(o => o.id).Select(s => s.id).FirstOrDefault() + 1;
-            emp.id = nextID;
+            int nextID = _emps.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
+            emp.Id = nextID;
             _emps.Add(emp);
             return emp;
         }
         else
         {
-            var myEmp = _emps.Where(w => w.id == emp.id).FirstOrDefault();
+            var myEmp = _emps.Where(w => w.Id == emp.Id).FirstOrDefault();
 
             if (myEmp == null)
                 return new EmployeeDto();

@@ -20,7 +20,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             Id = item.Id,
             Name = item.Name,
             Description = item.Description,
-            Employees = item.Employees.Select(s => Create(s)).ToArray()
+            Employees = item?.Employees?.Select(s => Create(s)).ToArray() ?? null
         };
     }
 
@@ -44,7 +44,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             Country = item.Country,
             Age = item.Age,
             Department = (EmployeeDepartmentEnum)item.DepartmentId,
-            id = item.Id
+            Id = item.Id
         };
     }
 
@@ -57,7 +57,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             Country = item.Country,
             Age = item.Age,
             DepartmentId = (int)item.Department,
-            Id = item.id
+            Id = item.Id
         };
     }
     private static DepartmentDto[] GetDepartmentDtos(List<Department> list)
@@ -65,9 +65,9 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         return list.Select(s => Create(s)).ToArray();
     }
 
-    private static EmployeeDto[] GetEmployeeDtos(List<Employee> list)
+    private static EmployeeDto?[]? GetEmployeeDtos(List<Employee>? list)
     {
-        return list.Select(s => Create(s)).ToArray();
+        return list?.Select(s => Create(s)).ToArray() ?? null;
     }
 
     protected virtual void Dispose(bool disposing)
@@ -81,14 +81,14 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         }
     }
 
-    public async Task<int> AddMultipleEmployeesAsync(string[]? namelist)
+    public async Task<int> AddMultipleEmployeesAsync(string?[]? namelist)
     {
         if (namelist == null) return -1;
 
         var list = new List<Employee>();
         foreach (var name in namelist)
         {
-            list.Add(new Employee() { Name = name, Age = 33, Country = "USA", DepartmentId = 1, State = "TX" });
+            list.Add(new Employee() { Name = name??"UNKNOWN", Age = 33, Country = "USA", DepartmentId = 1, State = "TX" });
         }
         _context.Employees.AddRange(list);
         var dbResult = await _context.SaveChangesAsync();
@@ -143,11 +143,6 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             return new EmployeeResponse("Employee Not Found");
 
         return new EmployeeResponse(employee);
-    }
-
-    public EmployeeDto[] Get()
-    {
-        return GetEmployeeDtos(_context.Employees.ToList());
     }
 
     public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(CancellationToken token)
@@ -207,10 +202,10 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         var dbEmp = new Employee();
         try
         {
-            if (item.id > 0)
+            if (item.Id > 0)
             {
                 dbEmp = await _context.Employees
-                    .Where(w => w.Id == item.id)
+                    .Where(w => w.Id == item.Id)
                     .FirstOrDefaultAsync(cancellationToken: cancellationToken)
                     .ConfigureAwait(true);
 
@@ -264,10 +259,10 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         if (employee == null)
             return new EmployeeResponse($"Can not update null employee");
 
-        if (employee.id != id)
-            return new EmployeeResponse($"Mismatch in id({id}) && id({employee.id}).");
+        if (employee.Id != id)
+            return new EmployeeResponse($"Mismatch in id({id}) && id({employee.Id}).");
 
-        if (employee.id == 0)
+        if (employee.Id == 0)
             return new EmployeeResponse($"Can not update employee with id({id})");
 
         if (employee.Department == EmployeeDepartmentEnum.Unknown)

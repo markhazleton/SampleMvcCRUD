@@ -10,7 +10,7 @@ public class EmployeeResponseTests
         // Arrange
         var employee = new EmployeeDto()
         {
-            id = 1,
+            Id = 1,
             Age = 20,
             Name = "Test Employee",
             State = "TX",

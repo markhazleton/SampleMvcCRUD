@@ -28,6 +28,6 @@ namespace Mwh.Sample.Domain.Models
         /// 
         /// </summary>
         public string Description { get; set; }
-        public virtual EmployeeDto[]? Employees { get; set; }
+        public virtual EmployeeDto?[]? Employees { get; set; }
     }
 }
