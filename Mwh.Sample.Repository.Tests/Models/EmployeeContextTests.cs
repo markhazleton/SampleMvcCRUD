@@ -1,6 +1,7 @@
 ﻿
 using Mwh.Sample.Repository.Repository;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.Repository.Tests.Models;
@@ -22,17 +23,24 @@ public class EmployeeContextTests
         var employeeMock = new EmployeeMock();
         var employeeList = new List<EmployeeResponse>();
         var departmentList = new List<DepartmentResponse>();
+        var svc = new EmployeeDatabaseService(context);
 
         employeeMock.DepartmentCollection()?.ForEach(async dept =>
-        {
-        });
+       {
+           departmentList.Add(await svc.SaveDepartmentAsync(dept));
+       });
+        var deptSuccess = departmentList.Where(w => w.Success).Count();
 
         employeeMock.EmployeeCollection()?.ForEach(async emp =>
         {
+            employeeList.Add(await svc.SaveEmployeeDbAsync(emp));
         });
-        context.Dispose();
+        var emptSuccess = employeeList.Where(w => w.Success).Count();
 
         // Assert
         Assert.IsNotNull(context);
+        Assert.AreEqual(emptSuccess, await context.Employees.CountAsync());
+        Assert.AreEqual(deptSuccess, await context.Departments.CountAsync());
+
     }
 }

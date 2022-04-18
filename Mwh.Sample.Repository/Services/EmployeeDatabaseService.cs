@@ -40,11 +40,11 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         return new EmployeeDto()
         {
             Name = item.Name,
-            State = item.State,
-            Country = item.Country,
-            Age = item.Age,
-            Department = (EmployeeDepartmentEnum)item.DepartmentId,
-            Id = item.Id
+            State = item?.State??String.Empty,
+            Country = item?.Country??string.Empty,
+            Age = item?.Age??0,
+            Department = (EmployeeDepartmentEnum)(item?.DepartmentId??1),
+            Id = item?.Id??0
         };
     }
 
@@ -65,9 +65,10 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         return list.Select(s => Create(s)).ToArray();
     }
 
-    private static EmployeeDto?[]? GetEmployeeDtos(List<Employee>? list)
+    private static EmployeeDto[] GetEmployeeDtos(List<Employee> list)
     {
-        return list?.Select(s => Create(s)).ToArray() ?? null;
+        var returnList = list?.Select(s => Create(s)).ToArray();
+        return returnList;
     }
 
     protected virtual void Dispose(bool disposing)
@@ -146,7 +147,9 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
     }
 
     public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(CancellationToken token)
-    { return GetDepartmentDtos(await _context.Departments.ToListAsync(cancellationToken: token).ConfigureAwait(false)); }
+    {
+        return GetDepartmentDtos(await _context.Departments.ToListAsync(cancellationToken: token).ConfigureAwait(false));
+    }
 
     public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(CancellationToken token)
     { return GetEmployeeDtos(await _context.Employees.ToListAsync(cancellationToken: token).ConfigureAwait(false)); }

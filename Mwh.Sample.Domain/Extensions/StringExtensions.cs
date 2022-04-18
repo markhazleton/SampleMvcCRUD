@@ -77,10 +77,14 @@ public static class StringExtensions
     /// <param name="str">The string.</param>
     /// <param name="length">The length.</param>
     /// <returns>System.String.</returns>
+    /// <exception cref="ArgumentException">Can return zero or less characters. Must start with 1</exception>
     public static string Left(this string? str, int length)
     {
         if (str == null)
             return string.Empty;
+
+        if (length <= 0) throw new ArgumentException("Can return zero or less characters. Must start with 1");
+
         if (str.Length <= length)
             return str;
         return str.Substring(0, Math.Min(length, str.Length));

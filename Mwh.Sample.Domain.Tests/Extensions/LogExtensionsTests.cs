@@ -1,5 +1,5 @@
 ﻿
-namespace Mwh.Sample.Domain.Tests.Extension;
+namespace Mwh.Sample.Domain.Tests.Extensions;
 
 [TestClass]
 public class LogExtensionsTests
