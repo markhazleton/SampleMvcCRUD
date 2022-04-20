@@ -3,7 +3,7 @@
 /// <summary>
 /// 
 /// </summary>
-public class MyHttpContext
+public static class MyHttpContext
 {
     private static IHttpContextAccessor? m_httpContextAccessor;
 

@@ -1,11 +1,40 @@
-﻿
-namespace Mwh.Sample.Web.Extensions;
+﻿using Mwh.Sample.SwaggerCore.Options;
+
+namespace Mwh.Sample.SwaggerCore.Extensions;
 
 /// <summary>
-/// Custom Swagger
+/// 
 /// </summary>
-public static class CustomSwaggerExtensions
+public static class ServiceExtensions
 {
+    /// <summary>
+    /// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddSwaggerServices(this IServiceCollection services)
+    {
+        return services.AddVersioning()
+            .AddCustomSwagger();
+    }
+
+    private static IServiceCollection AddVersioning(this IServiceCollection services)
+    {
+        services.AddApiVersioning(setup =>
+        {
+            setup.DefaultApiVersion = new ApiVersion(1, 0);
+            setup.AssumeDefaultVersionWhenUnspecified = true;
+            setup.ReportApiVersions = true;
+        });
+
+        services.AddVersionedApiExplorer(setup =>
+        {
+            setup.GroupNameFormat = "'v'VVV";
+            setup.SubstituteApiVersionInUrl = true;
+        });
+
+        return services;
+    }
     /// <summary>
     /// Custom Swagger for Services
     /// </summary>
@@ -47,20 +76,15 @@ public static class CustomSwaggerExtensions
         });
         return services;
     }
-
-    /// <summary>
-    /// Custom Swagger for App Builder
-    /// </summary>
-    /// <param name="app"></param>
-    /// <returns></returns>
-    public static IApplicationBuilder UseCustomSwagger(this IApplicationBuilder app)
+    private static IServiceCollection AddSwaggerVersioning(this IServiceCollection services)
     {
-        app.UseSwagger()
-            .UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
-                options.DocumentTitle = "API";
-            });
-        return app;
+        services.AddSwaggerGen(options =>
+        {
+            // for further customization
+            //options.OperationFilter<DefaultValuesFilter>();
+        });
+        services.ConfigureOptions<ConfigureSwaggerOptions>();
+
+        return services;
     }
 }
