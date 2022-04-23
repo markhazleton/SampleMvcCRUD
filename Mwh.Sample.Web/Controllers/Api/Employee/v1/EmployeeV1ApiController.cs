@@ -1,17 +1,17 @@
 ﻿
-namespace Mwh.Sample.Web.Controllers.Api.Employee;
+namespace Mwh.Sample.Web.Controllers.Api.Employee.v1;
 
 /// <summary>
 /// Employee Api Controller
 /// </summary>
 [Route("api/employee")]
-public class EmployeeApiController : BaseApiController
+public class EmployeeV1ApiController : BaseApiController
 {
     private readonly IEmployeeService _employeeService;
     /// <summary>
     /// EmployeeApiController
     /// </summary>
-    public EmployeeApiController(IEmployeeService employeeService) : base() { _employeeService = employeeService; }
+    public EmployeeV1ApiController(IEmployeeService employeeService) : base() { _employeeService = employeeService; }
 
     /// <summary>
     /// Deletes a given employee according to an identifier.

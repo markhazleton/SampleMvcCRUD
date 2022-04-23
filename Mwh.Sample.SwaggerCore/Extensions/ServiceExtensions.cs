@@ -3,7 +3,7 @@
 namespace Mwh.Sample.SwaggerCore.Extensions;
 
 /// <summary>
-/// 
+/// Extensions to Services to configure Swagger/Open API
 /// </summary>
 public static class ServiceExtensions
 {
@@ -14,8 +14,7 @@ public static class ServiceExtensions
     /// <returns></returns>
     public static IServiceCollection AddSwaggerServices(this IServiceCollection services)
     {
-        return services.AddVersioning()
-            .AddCustomSwagger();
+        return services.AddVersioning().AddCustomSwagger();
     }
 
     private static IServiceCollection AddVersioning(this IServiceCollection services)
