@@ -8,7 +8,7 @@ if (vaultUri != null)
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddSwaggerServices();
+builder.Services.AddSwaggerServices(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 
 // Initialize the In Memory Database

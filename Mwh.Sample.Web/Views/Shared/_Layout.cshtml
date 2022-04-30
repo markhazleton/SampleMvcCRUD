@@ -1,7 +1,4 @@
-﻿@using Mwh.Sample.Domain.Models;
-@using System.Reflection;
-
-@{
+﻿@{
     var currentYear = DateTime.Now.Year.ToString();
     var status = new ApplicationStatus(Assembly.GetExecutingAssembly());
 }
@@ -12,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Mwh.Sample.Core.WebApi - Mark Hazleton">
     <meta name="author" content="Mark Hazleton">
-    <title>@ViewData["Title"] - Employee CRUD</title>
+    <title>@ViewData["Title"] - Sample MVC CRUD</title>
 
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/lib/datatables.net-bs/dataTables.bootstrap5.min.css" />
@@ -24,7 +21,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="/">Employee Mvc CRUD</a>
+                <a class="navbar-brand" href="/">Sample Mvc CRUD</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

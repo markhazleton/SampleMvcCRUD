@@ -6,10 +6,12 @@ For deployments there is an [Azure DevOps project](https://dev.azure.com/markhaz
 The Net 6 Web application is hosted:
 - The .Net 6 version is hosted on IIS on a Amazon Virtual Machine [EmployeeMvcCrud.controlorigins.com](https://employeemvccrud.controlorigins.com/)
 - Microsoft Azure AppService .Net 6 verion [app-samplemvccrudweb](https://app-samplemvccrudweb.azurewebsites.net/) 
+- Docker Hub Image [markhazleton/mwhsampleweb](https://hub.docker.com/r/markhazleton/mwhsampleweb)
+
+Source code on GitHub [SampleMvcCRUD](https://github.com/markhazleton/SampleMvcCRUD)
 
 Older version Net 4.8: [Archive Branch](https://github.com/markhazleton/SampleMvcCRUD/tree/archive/NetFramework)
 
-Source code is maintained on GitHub [SampleMvcCRUD](https://github.com/markhazleton/SampleMvcCRUD)
 
 ## Customization
 

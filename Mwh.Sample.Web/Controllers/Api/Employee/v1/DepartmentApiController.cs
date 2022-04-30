@@ -5,13 +5,13 @@ namespace Mwh.Sample.Web.Controllers.Api.Employee.v1
     /// 
     /// </summary>
     [Route("api/department")]
-    public class DepartmentV1ApiController : BaseApiController
+    public class DepartmentApiController : BaseApiController
     {
         private readonly IEmployeeService _employeeService;
         /// <summary>
         /// EmployeeApiController
         /// </summary>
-        public DepartmentV1ApiController(IEmployeeService employeeService) : base() { _employeeService = employeeService; }
+        public DepartmentApiController(IEmployeeService employeeService) : base() { _employeeService = employeeService; }
 
         /// <summary>
         /// Returns collection of all employees

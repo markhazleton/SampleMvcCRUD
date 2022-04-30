@@ -12,9 +12,9 @@ public static class ServiceExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddSwaggerServices(this IServiceCollection services)
+    public static IServiceCollection AddSwaggerServices(this IServiceCollection services, IConfiguration configuration)
     {
-        return services.AddVersioning().AddCustomSwagger();
+        return services.AddVersioning().AddCustomSwagger(configuration);
     }
 
     private static IServiceCollection AddVersioning(this IServiceCollection services)
@@ -39,26 +39,24 @@ public static class ServiceExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
+    public static IServiceCollection AddCustomSwagger(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSwaggerGen(cfg =>
         {
-            cfg.SwaggerDoc("v1",
-                           new OpenApiInfo
-                           {
-                               Title = "Mwh.Sample.WebAPI",
-                               Version = "v1",
-                               Description =
-                "<a href='/'>Back To Home</a><p>Simple RESTful API built with ASP.NET 6.0 to show how to create RESTful services using a decoupled, maintainable architecture.</p> ",
-                               Contact =
-                new OpenApiContact
+            cfg.SwaggerDoc(configuration.GetValue<string>("SwaggerApiVersion"),
+                new OpenApiInfo
                 {
-                    Name = "Mark Hazleton",
-                    Url = new Uri("https://linkedin.com/in/markhazleton/"),
-                    Email = "mark.hazleton@controlorigins.com",
-                },
-                               License = new OpenApiLicense { Name = "MIT", },
-                           });
+                    Title = configuration.GetValue<string>("SwaggerApiTitle"),
+                    Version = configuration.GetValue<string>("SwaggerApiVersion"),
+                    Description = $"<a href='/'>Back To Home</a><p>{configuration.GetValue<string>("SwaggerApiDescription")}</p>" ,
+                    Contact = new OpenApiContact
+                    {
+                        Name = configuration.GetValue<string>("SwaggerUserProfile:Name"),
+                        Url = new Uri(configuration.GetValue<string>("SwaggerUserProfile:Url")),
+                        Email = configuration.GetValue<string>("SwaggerUserProfile:Email"),
+                    },
+                    License = new OpenApiLicense { Name = "MIT", },
+                });
 
             var xmlFile = $"Mwh.Sample.Web.xml";
             string xmlPath = string.Empty;
