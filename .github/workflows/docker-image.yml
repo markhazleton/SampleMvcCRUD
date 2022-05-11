@@ -2,13 +2,13 @@ name: docker-markhazletonsample
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths-ignore:
       - README.md
       - .vscode/**
       - .gitignore
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths-ignore:
       - README.md
       - .vscode/**
