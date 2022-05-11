@@ -1,5 +1,3 @@
-using Azure.Identity;
-
 var builder = WebApplication.CreateBuilder(args);
 var vaultUri = Environment.GetEnvironmentVariable("VaultUri");
 if (vaultUri != null)
@@ -10,45 +8,39 @@ if (vaultUri != null)
 
 // Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddSwaggerServices(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 
 // Initialize the In Memory Database
 builder.Services.AddDbContext<EmployeeContext>(opt => opt.UseInMemoryDatabase("Employee"));
 builder.Services.AddScoped<IEmployeeService, EmployeeDatabaseService>();
 builder.Services.AddScoped<IEmployeeClient, EmployeeRestClient>();
-SeedDatabase.DatabaseInitialization();
+
+SeedDatabase.DatabaseInitialization(new EmployeeContext());
 
 builder.Services.AddHttpClient();
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddCustomSwagger();
 builder.Services.AddSession();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
-
-app.UseCustomSwagger();
-
+app.UseMyHttpContext();
+app.UseSwaggerWithVersioning();
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 app.UseStaticFiles();
-
 app.UseMvc(routes =>
 {
     routes.MapRoute(
         name: "default",
         template: "{controller=Home}/{action=Index}/{id?}");
 });
-
 app.Run();

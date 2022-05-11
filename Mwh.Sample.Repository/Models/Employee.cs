@@ -12,7 +12,7 @@ public class Employee : BaseEntity
     /// Gets or sets the country.
     /// </summary>
     /// <value>The country.</value>
-    public string Country { get; set; }
+    public string? Country { get; set; }
     /// <summary>
     /// 
     /// </summary>
@@ -34,5 +34,5 @@ public class Employee : BaseEntity
     /// Gets or sets the state.
     /// </summary>
     /// <value>The state.</value>
-    public string State { get; set; }
+    public string? State { get; set; }
 }

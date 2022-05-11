@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Console", "Mwh.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Repository", "Mwh.Sample.Repository\Mwh.Sample.Repository.csproj", "{7907F9C2-B2AA-4DEC-A275-80C5E60CAE12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.Sample.Repository.Tests", "Mwh.Sample.Repository.Tests\Mwh.Sample.Repository.Tests.csproj", "{0F675326-5D07-4613-A4FA-C62DAA1270E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Repository.Tests", "Mwh.Sample.Repository.Tests\Mwh.Sample.Repository.Tests.csproj", "{0F675326-5D07-4613-A4FA-C62DAA1270E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.Sample.SwaggerCore", "Mwh.Sample.SwaggerCore\Mwh.Sample.SwaggerCore.csproj", "{38AFC02B-E297-4C7C-B5D0-06EF648FF5C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{0F675326-5D07-4613-A4FA-C62DAA1270E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F675326-5D07-4613-A4FA-C62DAA1270E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F675326-5D07-4613-A4FA-C62DAA1270E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38AFC02B-E297-4C7C-B5D0-06EF648FF5C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38AFC02B-E297-4C7C-B5D0-06EF648FF5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38AFC02B-E297-4C7C-B5D0-06EF648FF5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38AFC02B-E297-4C7C-B5D0-06EF648FF5C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

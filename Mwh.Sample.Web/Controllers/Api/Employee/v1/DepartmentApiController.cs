@@ -1,5 +1,5 @@
 ﻿
-namespace Mwh.Sample.Web.Controllers.Api.Employee
+namespace Mwh.Sample.Web.Controllers.Api.Employee.v1
 {
     /// <summary>
     /// 

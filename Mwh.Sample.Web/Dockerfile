@@ -11,6 +11,7 @@ COPY ["nuget.config", "."]
 COPY ["Mwh.Sample.Web/Mwh.Sample.Web.csproj", "Mwh.Sample.Web/"]
 COPY ["Mwh.Sample.Repository/Mwh.Sample.Repository.csproj", "Mwh.Sample.Repository/"]
 COPY ["Mwh.Sample.Domain/Mwh.Sample.Domain.csproj", "Mwh.Sample.Domain/"]
+COPY ["Mwh.Sample.SwaggerCore/Mwh.Sample.SwaggerCore.csproj", "Mwh.Sample.SwaggerCore/"]
 COPY ["Mwh.Sample.HttpClientFactory/Mwh.Sample.HttpClientFactory.csproj", "Mwh.Sample.HttpClientFactory/"]
 RUN dotnet restore "Mwh.Sample.Web/Mwh.Sample.Web.csproj"
 COPY . .

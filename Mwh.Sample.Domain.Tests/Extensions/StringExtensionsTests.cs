@@ -1,5 +1,5 @@
 
-namespace Mwh.Sample.Domain.Tests.Extension;
+namespace Mwh.Sample.Domain.Tests.Extensions;
 
 /// <summary>
 /// Defines test class StringExtensionsTests.
@@ -166,7 +166,6 @@ public class StringExtensionsTests
     {
         string myTest = "333333";
         var test = myTest.IndexOfNth("3", -1);
-        Assert.AreEqual(0, test);
     }
 
     /// <summary>
@@ -175,9 +174,28 @@ public class StringExtensionsTests
     [TestMethod()]
     public void IndexOfNthTestValueNull()
     {
-        string? search= default;
+        string? search = default;
         string myTest = "333333";
         Assert.AreEqual(0, myTest.IndexOfNth(search, 3));
+    }
+    /// <summary>
+    /// Defines the test method LeftTest.
+    /// </summary>
+    [TestMethod()]
+    public void LeftTest_ShortString()
+    {
+        string myTest = "01";
+        Assert.AreEqual("01", myTest.Left(5));
+    }
+    /// <summary>
+    /// Defines the test method LeftTest.
+    /// </summary>
+    [ExpectedException(typeof(ArgumentException))]
+    [TestMethod()]
+    public void LeftTest_NegativeLength()
+    {
+        string myTest = "01";
+        _ = myTest.Left(-1);
     }
 
     /// <summary>
@@ -196,8 +214,8 @@ public class StringExtensionsTests
     [TestMethod()]
     public void LeftTestNullShortString()
     {
-        string myTest = "01";
-        Assert.AreEqual("01", myTest.Left(8));
+        string? myTest = null;
+        Assert.AreEqual(string.Empty, myTest.Left(8));
     }
 
     /// <summary>
@@ -207,7 +225,7 @@ public class StringExtensionsTests
     public void LeftTestNullString()
     {
         string? myTest = null;
-        Assert.AreEqual(null, myTest?.Left(2));
+        Assert.AreEqual(string.Empty, myTest.Left(2));
     }
 
     /// <summary>
@@ -227,7 +245,7 @@ public class StringExtensionsTests
     public void RightTestNullString()
     {
         string? myTest = null;
-        Assert.AreEqual(null, myTest?.Right(2));
+        Assert.AreEqual(string.Empty, myTest.Right(2));
     }
 
     /// <summary>

@@ -53,11 +53,14 @@ public class EmployeeMock : IEmployeeDB
     /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     public async Task<bool> DeleteEmployeeAsync(int ID)
     {
-        var myEmp = _emps.Where(w => w.Id == ID).FirstOrDefault();
-        if (myEmp == null)
-            return false;
-
-        return _emps.Remove(myEmp);
+        bool bReturn = false;
+        await Task.Run(() =>
+        {
+            var myEmp = _emps.Where(w => w.Id == ID).FirstOrDefault();
+            if (myEmp != null)
+                bReturn = _emps.Remove(myEmp);
+        });
+        return bReturn;
     }
 
     /// <summary>
@@ -67,8 +70,12 @@ public class EmployeeMock : IEmployeeDB
     /// <returns></returns>
     public async Task<DepartmentDto> DepartmentAsync(int id)
     {
-        return _depts?.Where(w => w.Id == id).FirstOrDefault() ?? new DepartmentDto();
-
+        DepartmentDto? department = null;
+        await Task.Run(() =>
+        {
+            department = _depts?.Where(w => w.Id == id).FirstOrDefault() ?? new DepartmentDto();
+        });
+        return department ?? new DepartmentDto();
     }
 
 
@@ -82,7 +89,16 @@ public class EmployeeMock : IEmployeeDB
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<List<DepartmentDto>> DepartmentCollectionAsync() { return _depts; }
+    public async Task<List<DepartmentDto>> DepartmentCollectionAsync()
+    {
+
+        var list = new List<DepartmentDto>();
+        await Task.Run(() =>
+        {
+            list.AddRange(_depts);
+        });
+        return list;
+    }
 
     /// <summary>
     /// 
@@ -92,7 +108,12 @@ public class EmployeeMock : IEmployeeDB
     /// <exception cref="NotImplementedException"></exception>
     public async Task<EmployeeDto> EmployeeAsync(int id)
     {
-        return _emps?.Where(w => w.Id == id).FirstOrDefault() ?? new EmployeeDto();
+        var emp = new EmployeeDto();
+        await Task.Run(() =>
+        {
+            emp = _emps?.Where(w => w.Id == id).FirstOrDefault() ?? new EmployeeDto();
+        });
+        return emp;
     }
 
     //Return list of all Employees
@@ -104,7 +125,12 @@ public class EmployeeMock : IEmployeeDB
 
     public async Task<List<EmployeeDto>> EmployeeCollectionAsync()
     {
-        return _emps;
+        var list = new List<EmployeeDto>();
+        await Task.Run(() =>
+        {
+            list.AddRange(_emps);
+        });
+        return list;
     }
     //Method for Updating Employee record
     /// <summary>
@@ -122,24 +148,27 @@ public class EmployeeMock : IEmployeeDB
 
         if (emp.Id == 0)
         {
-            int nextID = _emps.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
-            emp.Id = nextID;
-            _emps.Add(emp);
+            await Task.Run(() =>
+            {
+                int nextID = _emps.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
+                emp.Id = nextID;
+                _emps.Add(emp);
+            });
             return emp;
         }
         else
         {
-            var myEmp = _emps.Where(w => w.Id == emp.Id).FirstOrDefault();
+            var updateEmp = _emps.Where(w => w.Id == emp.Id).FirstOrDefault();
 
-            if (myEmp == null)
+            if (updateEmp == null)
                 return new EmployeeDto();
 
-            myEmp.Name = emp.Name;
-            myEmp.Age = emp.Age;
-            myEmp.Department = emp.Department;
-            myEmp.Country = emp.Country;
-            myEmp.State = emp.State;
-            return myEmp;
+            updateEmp.Name = emp.Name;
+            updateEmp.Age = emp.Age;
+            updateEmp.Department = emp.Department;
+            updateEmp.Country = emp.Country;
+            updateEmp.State = emp.State;
+            return updateEmp;
         }
     }
 

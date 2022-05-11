@@ -17,23 +17,25 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.1" />
-		<PackageReference Include="Azure.Identity" Version="1.5.0" />
+		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
+		<PackageReference Include="Azure.Identity" Version="1.6.0" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.2.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.3" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.4" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Mwh.Sample.Domain\Mwh.Sample.Domain.csproj" />
 		<ProjectReference Include="..\Mwh.Sample.HttpClientFactory\Mwh.Sample.HttpClientFactory.csproj" />
 		<ProjectReference Include="..\Mwh.Sample.Repository\Mwh.Sample.Repository.csproj" />
+		<ProjectReference Include="..\Mwh.Sample.SwaggerCore\Mwh.Sample.SwaggerCore.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Controllers\Api\Employee\v2\" />
 	  <Folder Include="wwwroot\lib\" />
 	</ItemGroup>
 
