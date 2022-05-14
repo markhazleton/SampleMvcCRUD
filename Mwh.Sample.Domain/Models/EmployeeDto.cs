@@ -36,6 +36,11 @@ public class EmployeeDto
     /// <value>The department.</value>
     [JsonPropertyName("department")]
     public EmployeeDepartmentEnum Department { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonPropertyName("departmentName")]
+    public string? DepartmentName { get; set; }
 
     /// <summary>
     /// Gets or sets the employee identifier.

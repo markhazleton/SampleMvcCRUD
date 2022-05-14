@@ -11,12 +11,14 @@ public abstract class BaseController : Controller
     ///
     /// </summary>
     public readonly CancellationTokenSource cts;
+    private readonly IConfiguration Config;
 
     /// <summary>
     /// BaseController
     /// </summary>
-    protected BaseController()
+    protected BaseController(IConfiguration configuration)
     {
         cts = new CancellationTokenSource();
+        this.Config = configuration;
     }
 }

@@ -6,6 +6,14 @@ namespace Mwh.Sample.Web.Controllers;
 public class HomeController : BaseController
 {
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="configuration"></param>
+    public HomeController(IConfiguration configuration) : base(configuration)
+    {
+
+    }
+    /// <summary>
     /// Employee Single Page Applications
     /// </summary>
     /// <returns></returns>

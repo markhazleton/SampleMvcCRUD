@@ -44,6 +44,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             Country = item?.Country??string.Empty,
             Age = item?.Age??0,
             Department = (EmployeeDepartmentEnum)(item?.DepartmentId??1),
+            DepartmentName = ((EmployeeDepartmentEnum)(item?.DepartmentId ?? 0)).ToString()??string.Empty,
             Id = item?.Id??0
         };
     }
