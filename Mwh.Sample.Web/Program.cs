@@ -14,7 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 // Initialize the In Memory Database
 builder.Services.AddDbContext<EmployeeContext>(opt => opt.UseInMemoryDatabase("Employee"));
 builder.Services.AddScoped<IEmployeeService, EmployeeDatabaseService>();
-builder.Services.AddScoped<IEmployeeClient, EmployeeRestClient>();
+builder.Services.AddScoped<IEmployeeClient, EmployeeDatabaseClient>();
 
 SeedDatabase.DatabaseInitialization(new EmployeeContext());
 

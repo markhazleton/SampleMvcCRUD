@@ -1,6 +1,5 @@
 ﻿
 namespace Mwh.Sample.Repository.Services;
-
 public class EmployeeDatabaseService : IDisposable, IEmployeeService
 {
     private readonly EmployeeContext _context;
