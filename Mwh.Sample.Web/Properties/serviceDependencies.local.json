@@ -4,7 +4,7 @@
       "secretStore": "LocalSecretsFile",
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/MwhTexeconWebCore",
       "type": "appInsights.azure",
-      "connectionId": "APPINSIGHTS_CONNECTIONSTRING"
+      "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING"
     },
     "secrets1": {
       "secretStore": null,

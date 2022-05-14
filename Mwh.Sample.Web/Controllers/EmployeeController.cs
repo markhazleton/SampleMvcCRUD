@@ -15,7 +15,8 @@ public class EmployeeController : BaseController
     ///
     /// </summary>
     /// <param name="employeeClient"></param>
-    public EmployeeController(IEmployeeClient employeeClient) : base()
+    /// <param name="configuration"></param>
+    public EmployeeController(IEmployeeClient employeeClient, IConfiguration configuration) : base(configuration)
     {
         client = employeeClient;
     }

@@ -12,7 +12,8 @@ public class MvcEmployeeController : BaseController
     /// Mvc Employee Controller Constructor
     /// </summary>
     /// <param name="employeeClient"></param>
-    public MvcEmployeeController(IEmployeeClient employeeClient) : base()
+    /// <param name="configuration"></param>
+    public MvcEmployeeController(IEmployeeClient employeeClient, IConfiguration configuration) : base(configuration)
     {
         client = employeeClient;
     }
