@@ -101,7 +101,7 @@
 
         function AddEmployee(jsonEmpObj) {
             $.ajax({
-                url: '/api/employee/',
+                url: '/Employee/',
                 data: jsonEmpObj,
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
@@ -110,28 +110,36 @@
                     loadEmployeeList();
                     $('#myModal').modal('hide');
                 },
-                error: function (errormessage) { alert(errormessage.responseText); }
+                error: function (errormessage) { 
+                    alert(errormessage.responseText); 
+                    loadEmployeeList();
+                    $('#myModal').modal('hide');
+                }
             });
         }
 
         function UpdateEmployee(id, jsonEmpObj) {
             $.ajax({
-                url: '/api/employee/' + id,
+                url: '/Employee/' + id,
                 data: jsonEmpObj,
-                type: "PUT",
+                type: "POST",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
                     loadEmployeeList();
                     $('#myModal').modal('hide');
                 },
-                error: function (errormessage) { alert(errormessage.responseText); }
+                error: function (errormessage) { 
+                    alert(errormessage.responseText); 
+                    loadEmployeeList();
+                    $('#myModal').modal('hide');
+                },
             });
         }
 
         function DeleteEmployee(id) {
             $.ajax({
-                url: '/api/employee/' + id,
+                url: '/Employee/' + id,
                 type: 'delete',
                 dataType: 'html',
                 success: function (data) {

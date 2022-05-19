@@ -154,7 +154,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
     public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(CancellationToken token)
     { return GetEmployeeDtos(await _context.Employees.ToListAsync(cancellationToken: token).ConfigureAwait(false)); }
 
-    public async Task<EmployeeResponse> SaveAsync(EmployeeDto employee, CancellationToken token)
+    public async Task<EmployeeResponse> SaveAsync(EmployeeDto? employee, CancellationToken token)
     {
         if (employee == null) return new EmployeeResponse("Employee can not be null");
 
