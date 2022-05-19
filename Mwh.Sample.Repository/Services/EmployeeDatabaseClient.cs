@@ -45,7 +45,7 @@ namespace Mwh.Sample.Repository.Services
             return await service.GetEmployeesAsync(token).ConfigureAwait(false);
         }
 
-        public async Task<EmployeeResponse> SaveAsync(EmployeeDto employee, CancellationToken token)
+        public async Task<EmployeeResponse> SaveAsync(EmployeeDto? employee, CancellationToken token)
         {
             return await service.SaveAsync(employee, token).ConfigureAwait(false);
         }
