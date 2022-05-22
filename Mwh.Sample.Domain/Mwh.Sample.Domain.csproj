@@ -9,8 +9,19 @@
 		<Deterministic>false</Deterministic>
 		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
 		<AssemblyVersion>6.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
+		<ApplicationIcon>favicon.ico</ApplicationIcon>
+		<PackageIcon>favicon.ico</PackageIcon>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Compile Remove="Interfaces\IEmployeeRepository.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="favicon.ico" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="..\favicon.ico">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 </Project>

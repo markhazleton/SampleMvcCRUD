@@ -14,6 +14,8 @@
 		<ApplicationInsightsResourceId>/subscriptions/99d8f664-6f80-4f58-b376-6f8fa975cc8a/resourceGroups/MwhSample/providers/microsoft.insights/components/MwhTexeconWebCore</ApplicationInsightsResourceId>
 		<UserSecretsId>9c59fa67-51a0-40f7-a8f1-64f4dba7c281</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<ApplicationIcon>favicon.ico</ApplicationIcon>
+		<PackageIcon>favicon.ico</PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -21,6 +23,10 @@
 	  <Content Remove="Controllers\Api\Employee\v2\**" />
 	  <EmbeddedResource Remove="Controllers\Api\Employee\v2\**" />
 	  <None Remove="Controllers\Api\Employee\v2\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="favicon.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -43,6 +49,13 @@
 
 	<ItemGroup>
 	  <Folder Include="wwwroot\lib\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\favicon.ico">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 </Project>
