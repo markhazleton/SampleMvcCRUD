@@ -12,7 +12,9 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://hellioworldkeyvault.vault.azure.net/",
+        "AZURE_USERNAME": "MAH0190@BSWHealth.org"
       },
       "sqlDebugging": true,
       "applicationUrl": "https://localhost:7023;http://localhost:5023",
@@ -22,7 +24,9 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://hellioworldkeyvault.vault.azure.net/",
+        "AZURE_USERNAME": "MAH0190@BSWHealth.org"
       },
       "sqlDebugging": true,
       "nativeDebugging": false
@@ -32,7 +36,11 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
-      "useSSL": true
+      "useSSL": true,
+      "environmentVariables": {
+        "VaultUri": "https://hellioworldkeyvault.vault.azure.net/",
+        "AZURE_USERNAME": "MAH0190@BSWHealth.org"
+      }
     }
   }
 }

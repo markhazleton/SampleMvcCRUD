@@ -11,7 +11,7 @@
 		<Deterministic>false</Deterministic>
 		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
 		<AssemblyVersion>6.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
-		<ApplicationInsightsResourceId>/subscriptions/99d8f664-6f80-4f58-b376-6f8fa975cc8a/resourceGroups/MwhSample/providers/microsoft.insights/components/MwhTexeconWebCore</ApplicationInsightsResourceId>
+		<ApplicationInsightsResourceId>/subscriptions/1e3f18e4-ceb9-4033-8ce0-f17b8af6225f/resourceGroups/HelloWorld/providers/microsoft.insights/components/SampleMvcCRUDWeb</ApplicationInsightsResourceId>
 		<UserSecretsId>9c59fa67-51a0-40f7-a8f1-64f4dba7c281</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<ApplicationIcon>favicon.ico</ApplicationIcon>
