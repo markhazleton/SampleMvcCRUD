@@ -23,6 +23,9 @@
 	  </None>
 	</ItemGroup>
 	<ItemGroup>
+	  <PackageReference Include="Bogus" Version="34.0.2" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\Mwh.Sample.Domain\Mwh.Sample.Domain.csproj" />
 		<ProjectReference Include="..\Mwh.Sample.Repository\Mwh.Sample.Repository.csproj" />
 	</ItemGroup>

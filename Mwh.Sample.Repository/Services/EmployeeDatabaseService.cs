@@ -39,12 +39,12 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         return new EmployeeDto()
         {
             Name = item.Name,
-            State = item?.State??String.Empty,
-            Country = item?.Country??string.Empty,
-            Age = item?.Age??0,
-            Department = (EmployeeDepartmentEnum)(item?.DepartmentId??1),
-            DepartmentName = ((EmployeeDepartmentEnum)(item?.DepartmentId ?? 0)).ToString()??string.Empty,
-            Id = item?.Id??0
+            State = item?.State ?? String.Empty,
+            Country = item?.Country ?? string.Empty,
+            Age = item?.Age ?? 0,
+            Department = (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1),
+            DepartmentName = ((EmployeeDepartmentEnum)(item?.DepartmentId ?? 0)).ToString() ?? string.Empty,
+            Id = item?.Id ?? 0
         };
     }
 
@@ -89,7 +89,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         var list = new List<Employee>();
         foreach (var name in namelist)
         {
-            list.Add(new Employee() { Name = name??"UNKNOWN", Age = 33, Country = "USA", DepartmentId = 1, State = "TX" });
+            list.Add(new Employee() { Name = name ?? "UNKNOWN", Age = 33, Country = "USA", DepartmentId = 1, State = "TX" });
         }
         _context.Employees.AddRange(list);
         var dbResult = await _context.SaveChangesAsync();
@@ -148,7 +148,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(CancellationToken token)
     {
-        return GetDepartmentDtos(await _context.Departments.ToListAsync(cancellationToken: token).ConfigureAwait(false));
+        return GetDepartmentDtos(await _context.Departments.Include(e => e.Employees).ToListAsync(cancellationToken: token).ConfigureAwait(false));
     }
 
     public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(CancellationToken token)
@@ -197,15 +197,26 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         }
         return new DepartmentResponse(Create(dbDept));
     }
-    public async Task<EmployeeResponse> SaveEmployeeDbAsync(EmployeeDto item, CancellationToken cancellationToken = default)
+    public async Task<EmployeeResponse> SaveEmployeeDbAsync(EmployeeDto? newItem, CancellationToken cancellationToken = default)
     {
-        if (item == null)
+        if (newItem == null)
             return new EmployeeResponse("Employee can not be null");
+        if (newItem?.Department == null)
+            return new EmployeeResponse("Department can not be null");
+        if ((newItem?.Department ?? 0) == 0)
+            return new EmployeeResponse("Department can not be null or Zero");
+
+        EmployeeDto item = newItem ?? new EmployeeDto();
+
+        int deptId = (int)(item?.Department ?? 0);
+        var dbDept = await _context.Departments.Where(w => w.Id == deptId).FirstOrDefaultAsync(cancellationToken: cancellationToken);
+        if (dbDept == null)
+            return new EmployeeResponse("Department not found");
 
         var dbEmp = new Employee();
         try
         {
-            if (item.Id > 0)
+            if ((item?.Id ?? 0) > 0)
             {
                 dbEmp = await _context.Employees
                     .Where(w => w.Id == item.Id)
@@ -223,7 +234,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                 {
                     dbEmp.Age = item.Age;
                     dbEmp.Country = item.Country;
-                    dbEmp.DepartmentId = (int)item.Department;
+                    dbEmp.DepartmentId = dbDept.Id;
                     dbEmp.Name = item.Name;
                     dbEmp.State = item.State;
                     dbEmp.LastUpdatedDate = DateTime.Now;

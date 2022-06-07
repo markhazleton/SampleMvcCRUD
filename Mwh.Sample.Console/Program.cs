@@ -37,7 +37,8 @@ employeeMock.EmployeeCollection()?.ForEach(async emp =>
 {
     employeeList.Add(await employeeService.SaveAsync(emp, cancellationToken).ConfigureAwait(false));
 });
-Console.WriteLine($"Success List Count:{employeeList?.Where(w => w.Success == true).ToArray().Length}");
+
+Console.WriteLine($"\n\nSuccess List Count:{employeeList?.Where(w => w.Success == true).ToArray().Length}");
 
 employees = await employeeService.GetEmployeesAsync(cancellationToken).ConfigureAwait(false);
 
@@ -48,6 +49,6 @@ foreach (var dept in departments)
     Console.WriteLine($"{dept.Name} with {dept?.Employees?.Length ?? 0} employees");
 }
 
-Console.WriteLine($"Employee Count:{employees?.Count()}");
+Console.WriteLine($"\n\nEmployee Count:{employees?.Count()}");
 Console.WriteLine("Complete");
-
+Console.ReadKey();

@@ -12,7 +12,7 @@ public class EmployeeResponse : BaseResponse<EmployeeDto>
     /// </summary>
     /// <param name="employee">Saved employee.</param>
     /// <returns>Response.</returns>
-    public EmployeeResponse(EmployeeDto employee) : base(employee) { }
+    public EmployeeResponse(EmployeeDto? employee) : base(employee) { }
 
     /// <summary>
     /// Creates am error response.

@@ -1,4 +1,6 @@
 ﻿
+using Bogus;
+
 namespace Mwh.Sample.Repository.Repository;
 /// <summary>
 /// Employee Mock Repository
@@ -11,12 +13,16 @@ public class EmployeeMock : IEmployeeDB
     /// </summary>
     private List<EmployeeDto> _emps;
 
+
+
+
     /// <summary>
     /// Constructor
     /// </summary>
     public EmployeeMock()
     {
         _depts = new List<DepartmentDto>();
+
         foreach (var dept in Enum.GetValues(typeof(EmployeeDepartmentEnum)))
         {
             _depts.Add(new DepartmentDto()
@@ -28,17 +34,23 @@ public class EmployeeMock : IEmployeeDB
         }
         _emps = new List<EmployeeDto>()
             {
-            new EmployeeDto() { Name = "Ilsa Lund", Age = 25, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "TX" },
-            new EmployeeDto() { Name = "Major Strasser", Age = 35, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "TX" },
-            new EmployeeDto() { Name = "Rick Blaine", Age = 45, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "TX" },
-            new EmployeeDto() { Name = "Victor Laszlo", Age = 55, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "TX" },
-            new EmployeeDto() { Name = "Louis Renault", Age = 65, Country = "France", Department = EmployeeDepartmentEnum.IT, State = "TX" },
-            new EmployeeDto() { Name = "Sam Spade", Age = 55, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "TX" },
-            new EmployeeDto() { Name = "Jim",Age = 35,Department = EmployeeDepartmentEnum.IT,State = "Florida",Country = "USA"},
-            new EmployeeDto() { Name = "Bob",Age = 50,Department = EmployeeDepartmentEnum.HR,State = "Texas",Country = "USA"},
-            new EmployeeDto() { Name = "Sam",Age = 53,Department = EmployeeDepartmentEnum.Marketing,State = "Texas",Country = "USA"},
-            new EmployeeDto() { Name = "Frank",Age = 50,Department = EmployeeDepartmentEnum.Executive,State = "Texas",Country = "USA"},
+            new EmployeeDto() { Name = "Ilsa Lund", Age = 25, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "Hesse" },
+            new EmployeeDto() { Name = "Major Strasser", Age = 35, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "Hesse" },
+            new EmployeeDto() { Name = "Rick Blaine", Age = 45, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "New York" },
+            new EmployeeDto() { Name = "Victor Laszlo", Age = 55, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "Hesse" },
+            new EmployeeDto() { Name = "Louis Renault", Age = 65, Country = "France", Department = EmployeeDepartmentEnum.IT, State = "Brittany" },
+            new EmployeeDto() { Name = "Sam Spade", Age = 55, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "California" },
+            new EmployeeDto() { Name = "Jim Smith",Age = 35,Department = EmployeeDepartmentEnum.IT,State = "Florida",Country = "USA"},
+            new EmployeeDto() { Name = "Bob Roberts",Age = 50,Department = EmployeeDepartmentEnum.HR,State = "Texas",Country = "USA"},
+            new EmployeeDto() { Name = "Sam Malone",Age = 53,Department = EmployeeDepartmentEnum.Marketing,State = "Massachusetts",Country = "USA"},
+            new EmployeeDto() { Name = "Frank Sinatra",Age = 50,Department = EmployeeDepartmentEnum.Executive,State = "New York",Country = "USA"},
             };
+
+        GetEmployeeList(300).ForEach(e =>
+        {
+            var emp = Create(e);
+            if (emp is not null) _emps.Add(emp);
+        });
 
         for (int i = 0; i < _emps.Count; i++)
         {
@@ -176,4 +188,44 @@ public class EmployeeMock : IEmployeeDB
     {
         return dept;
     }
+
+    public static EmployeeDto? Create(Employee? item)
+    {
+        if (item == null) return null;
+
+        return new EmployeeDto()
+        {
+            Name = item.Name,
+            State = item?.State ?? String.Empty,
+            Country = item?.Country ?? string.Empty,
+            Age = item?.Age ?? 0,
+            Department = (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1),
+            DepartmentName = ((EmployeeDepartmentEnum)(item?.DepartmentId ?? 0)).ToString() ?? string.Empty,
+            Id = item?.Id ?? 0
+        };
+    }
+
+    public static List<Employee> GetEmployeeList(int generateCount)
+    {
+        var states = new string[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" };
+        var testUsers = new Faker<Employee>()
+           //Optional: Call for objects that have complex initialization
+           .CustomInstantiator(f => new Employee())
+           //Basic rules using built-in generators
+           .RuleFor(u => u.Name, (f, u) => f.Name.FullName())
+           .RuleFor(u => u.Age, f => f.Random.Number(18, 70))
+           .RuleFor(u => u.DepartmentId, f => f.Random.Number(1, 6))
+           .RuleFor(u => u.Country, "USA")
+           .RuleFor(u => u.State, f => f.Random.ListItem(states))
+           //After all rules are applied finish with the following action
+           .FinishWith((f, u) =>
+           {
+               Console.WriteLine($"Employee Created! Name={u.Name}");
+           });
+        var user = testUsers.Generate(generateCount);
+        return user;
+    }
+
+
+
 }

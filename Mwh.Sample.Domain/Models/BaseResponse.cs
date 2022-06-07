@@ -13,8 +13,8 @@ public abstract class BaseResponse<T>
     /// <param name="resource">The resource.</param>
     protected BaseResponse(T? resource)
     {
-        Success = true;
-        Message = string.Empty;
+        Success = resource != null;
+        Message = resource == null ? "Resource is null" : string.Empty;
         Resource = resource;
     }
 
