@@ -23,7 +23,7 @@
     },
     {
       "destination": "wwwroot/lib/datatables.net-bs/",
-      "library": "datatables.net-bs5@1.11.5",
+      "library": "datatables.net-bs5@1.12.1",
       "files": ["dataTables.bootstrap5.min.css","dataTables.bootstrap5.min.js"]
     },
     {
