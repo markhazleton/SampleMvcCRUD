@@ -1,4 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
+
 var vaultUri = Environment.GetEnvironmentVariable("VaultUri");
 if (vaultUri != null)
 {
@@ -26,11 +27,6 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
 
 var app = builder.Build();
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
 app.UseMyHttpContext();
 app.UseSwaggerWithVersioning();
 app.UseHttpsRedirection();
