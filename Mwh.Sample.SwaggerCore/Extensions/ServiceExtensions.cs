@@ -48,7 +48,7 @@ public static class ServiceExtensions
                 {
                     Title = configuration.GetValue<string>("SwaggerApiTitle"),
                     Version = configuration.GetValue<string>("SwaggerApiVersion"),
-                    Description = $"<a href='/'>Back To Home</a><p>{configuration.GetValue<string>("SwaggerApiDescription")}</p>" ,
+                    Description = $"<a href='/'>Back To Home</a><p>{configuration.GetValue<string>("SwaggerApiDescription")}</p>",
                     Contact = new OpenApiContact
                     {
                         Name = configuration.GetValue<string>("SwaggerUserProfile:Name"),

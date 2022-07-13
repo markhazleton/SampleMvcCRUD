@@ -27,7 +27,7 @@ namespace Mwh.Sample.Repository.Services
 
         public async Task<DepartmentDto> FindDepartmentByIdAsync(int id, CancellationToken token)
         {
-            return await FindDepartmentByIdAsync(id, token).ConfigureAwait(false);  
+            return await FindDepartmentByIdAsync(id, token).ConfigureAwait(false);
         }
 
         public async Task<EmployeeResponse> FindEmployeeByIdAsync(int id, CancellationToken token)

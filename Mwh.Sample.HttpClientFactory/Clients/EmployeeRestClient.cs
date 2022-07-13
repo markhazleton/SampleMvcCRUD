@@ -52,7 +52,7 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     public async Task<EmployeeResponse?> FindEmployeeByIdAsync(int id, CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
-        var result =  await ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", null, HttpMethod.Get, token);
+        var result = await ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", null, HttpMethod.Get, token);
 
         return result;
     }
