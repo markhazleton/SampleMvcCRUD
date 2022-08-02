@@ -46,7 +46,7 @@ public class EmployeeController : BaseController
         if (employee != null)
             employee.Id = id ?? 0;
 
-        var response = await client.DeleteAsync(id??0, cts.Token);
+        var response = await client.DeleteAsync(id ?? 0, cts.Token);
         return Redirect("/Employee");
     }
     /// <summary>
@@ -66,11 +66,15 @@ public class EmployeeController : BaseController
     /// <summary>
     /// GetEmployeeList
     /// </summary>
+    /// <param name="paging"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<ActionResult> GetEmployeeList()
+    public async Task<ActionResult> GetEmployeeList(PagingParameterModel? paging)
     {
-        var list = await client.GetEmployeesAsync(cts.Token).ConfigureAwait(false);
+        if (paging == null)
+            paging = new PagingParameterModel();
+
+        var list = await client.GetEmployeesAsync(paging, cts.Token).ConfigureAwait(false);
         return PartialView("_EmployeeList", list);
     }
     /// <summary>
@@ -83,9 +87,9 @@ public class EmployeeController : BaseController
     [HttpPut]
     [HttpPost]
     [Route("Employee/GetEmployeeEdit/{id}")]
-    public async Task<ActionResult> GetEmployeeEdit(int? id=null, EmployeeDto? employee=null, CancellationToken token = default)
+    public async Task<ActionResult> GetEmployeeEdit(int? id = null, EmployeeDto? employee = null, CancellationToken token = default)
     {
-        if(employee!=null)
+        if (employee != null)
             employee.Id = id ?? 0;
 
         var response = await client.SaveAsync(employee, token);

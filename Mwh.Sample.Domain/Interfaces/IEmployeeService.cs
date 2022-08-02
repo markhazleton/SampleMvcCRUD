@@ -39,7 +39,7 @@ public interface IEmployeeService
     /// </summary>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>Task&lt;IEnumerable&lt;EmployeeModel&gt;&gt;.</returns>
-    Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(CancellationToken token);
+    Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token);
     /// <summary>
     /// 
     /// </summary>

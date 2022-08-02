@@ -1,6 +1,5 @@
 ﻿
 namespace Mwh.Sample.Domain.Models;
-
 /// <summary>
 /// ApplicationStatus
 /// </summary>
