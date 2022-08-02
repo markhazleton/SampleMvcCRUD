@@ -38,9 +38,10 @@ public class EmployeeDatabaseServiceTests
         string[] namelist = new string[] { "TestMultiple1", "TestMultiple2", "TestMultiple3" };
 
         // Act
-        var initResults = await employeeService.GetEmployeesAsync(cancellationToken);
+        var paging = new PagingParameterModel();
+        var initResults = await employeeService.GetEmployeesAsync(paging, cancellationToken);
         var result = await employeeService.AddMultipleEmployeesAsync(namelist);
-        var afterResults = await employeeService.GetEmployeesAsync(cancellationToken);
+        var afterResults = await employeeService.GetEmployeesAsync(paging, cancellationToken);
         var test = afterResults.Where(w => w.Name == "TestMultiple3").FirstOrDefault();
 
         // Assert
@@ -108,7 +109,7 @@ public class EmployeeDatabaseServiceTests
         // Arrange
 
         // Act
-        var result = await employeeService.GetEmployeesAsync(cancellationToken);
+        var result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -120,7 +121,7 @@ public class EmployeeDatabaseServiceTests
         // Arrange
 
         // Act
-        var result = await employeeService.GetEmployeesAsync(cancellationToken);
+        var result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);

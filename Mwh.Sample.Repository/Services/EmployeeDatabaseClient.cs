@@ -27,7 +27,7 @@ namespace Mwh.Sample.Repository.Services
 
         public async Task<DepartmentDto> FindDepartmentByIdAsync(int id, CancellationToken token)
         {
-            return await FindDepartmentByIdAsync(id, token).ConfigureAwait(false);  
+            return await FindDepartmentByIdAsync(id, token).ConfigureAwait(false);
         }
 
         public async Task<EmployeeResponse> FindEmployeeByIdAsync(int id, CancellationToken token)
@@ -40,9 +40,9 @@ namespace Mwh.Sample.Repository.Services
             return await service.GetDepartmentsAsync(token).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(CancellationToken token)
+        public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
         {
-            return await service.GetEmployeesAsync(token).ConfigureAwait(false);
+            return await service.GetEmployeesAsync(paging, token).ConfigureAwait(false);
         }
 
         public async Task<EmployeeResponse> SaveAsync(EmployeeDto? employee, CancellationToken token)

@@ -29,7 +29,7 @@ public static class SeedDatabase
             {
                 await employeeService.SaveAsync(emp, token).ConfigureAwait(true);
             });
-            var e = await employeeService.GetEmployeesAsync(token).ConfigureAwait(true);
+            var e = await employeeService.GetEmployeesAsync(new PagingParameterModel(), token).ConfigureAwait(true);
         }
         catch (Exception ex)
         {

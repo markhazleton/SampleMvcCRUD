@@ -14,7 +14,7 @@ Console.WriteLine("Database is Setup");
 
 var employeeService = new EmployeeDatabaseService(context);
 
-var employees = await employeeService.GetEmployeesAsync(new CancellationToken()).ConfigureAwait(false);
+var employees = await employeeService.GetEmployeesAsync(new PagingParameterModel(), new CancellationToken()).ConfigureAwait(false);
 
 Console.WriteLine($"Service List Count:{employees?.Count()}");
 
@@ -40,7 +40,7 @@ employeeMock.EmployeeCollection()?.ForEach(async emp =>
 
 Console.WriteLine($"\n\nSuccess List Count:{employeeList?.Where(w => w.Success == true).ToArray().Length}");
 
-employees = await employeeService.GetEmployeesAsync(cancellationToken).ConfigureAwait(false);
+employees = await employeeService.GetEmployeesAsync(new PagingParameterModel(), cancellationToken).ConfigureAwait(false);
 
 var departments = await employeeService.GetDepartmentsAsync(cancellationToken).ConfigureAwait(false);
 
