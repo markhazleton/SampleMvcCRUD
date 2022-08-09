@@ -67,8 +67,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     private static EmployeeDto[] GetEmployeeDtos(List<Employee> list)
     {
-        var returnList = list?.Select(s => Create(s)).ToArray();
-        return returnList;
+        return list?.Select(s => Create(s)).ToArray();
     }
 
     protected virtual void Dispose(bool disposing)
@@ -91,10 +90,11 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         {
             list.Add(new Employee() { Name = name ?? "UNKNOWN", Age = 33, Country = "USA", DepartmentId = 1, State = "TX" });
         }
-        _context.Employees.AddRange(list);
-        var dbResult = await _context.SaveChangesAsync();
-        return dbResult;
 
+        await _context.Employees.AddRangeAsync(list).ConfigureAwait(true);
+        await _context.SaveChangesAsync().ConfigureAwait(true);
+
+        return _context.Employees.Count();
     }
 
     public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
