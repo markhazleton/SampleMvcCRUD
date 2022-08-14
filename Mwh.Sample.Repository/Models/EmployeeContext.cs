@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Repository.Models;
+﻿
+namespace Mwh.Sample.Repository.Models;
 
 public class EmployeeContext : DbContext
 {

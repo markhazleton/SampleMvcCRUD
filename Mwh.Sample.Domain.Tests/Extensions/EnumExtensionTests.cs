@@ -1,5 +1,6 @@
 
 namespace Mwh.Sample.Domain.Tests.Extensions;
+
 /// <summary>
 /// Enum TestEnum
 /// </summary>

@@ -38,14 +38,16 @@ public class EmployeeDatabaseServiceTests
         string[] namelist = new string[] { "TestMultiple1", "TestMultiple2", "TestMultiple3" };
 
         // Act
-        var initResults = await employeeService.GetEmployeesAsync(cancellationToken);
-        var result = await employeeService.AddMultipleEmployeesAsync(namelist);
-        var afterResults = await employeeService.GetEmployeesAsync(cancellationToken);
-        var test = afterResults.Where(w => w.Name == "TestMultiple3").FirstOrDefault();
+        var paging = new PagingParameterModel();
+        var initResults = (await employeeService.GetEmployeesAsync(paging, cancellationToken).ConfigureAwait(true)).Count();
+        var result = await employeeService.AddMultipleEmployeesAsync(namelist).ConfigureAwait(true);
+        var afterResults = (await employeeService.GetEmployeesAsync(paging, cancellationToken).ConfigureAwait(true)).Count();
+        var empList = await employeeService.GetEmployeesAsync(paging, cancellationToken).ConfigureAwait(true);
+        var emp1 = empList.Where(w => w.Name == namelist[0]).FirstOrDefault();
 
         // Assert
-        Assert.IsNotNull(test);
-        Assert.AreEqual(initResults.Count() + 3, afterResults.Count());
+        Assert.IsNotNull(emp1);
+        Assert.AreEqual(emp1.Name, namelist[0]);
     }
     [TestMethod]
     public async Task DeleteAsync_ExpectedBehavior()
@@ -108,7 +110,7 @@ public class EmployeeDatabaseServiceTests
         // Arrange
 
         // Act
-        var result = await employeeService.GetEmployeesAsync(cancellationToken);
+        var result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -120,7 +122,7 @@ public class EmployeeDatabaseServiceTests
         // Arrange
 
         // Act
-        var result = await employeeService.GetEmployeesAsync(cancellationToken);
+        var result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);

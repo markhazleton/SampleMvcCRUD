@@ -1,5 +1,4 @@
-﻿
-using Bogus;
+﻿using Bogus;
 
 namespace Mwh.Sample.Repository.Repository;
 /// <summary>
@@ -12,9 +11,6 @@ public class EmployeeMock : IEmployeeDB
     /// The list
     /// </summary>
     private List<EmployeeDto> _emps;
-
-
-
 
     /// <summary>
     /// Constructor
@@ -46,7 +42,7 @@ public class EmployeeMock : IEmployeeDB
             new EmployeeDto() { Name = "Frank Sinatra",Age = 50,Department = EmployeeDepartmentEnum.Executive,State = "New York",Country = "USA"},
             };
 
-        GetEmployeeList(300).ForEach(e =>
+        GetEmployeeList(290).ForEach(e =>
         {
             var emp = Create(e);
             if (emp is not null) _emps.Add(emp);
@@ -56,6 +52,24 @@ public class EmployeeMock : IEmployeeDB
         {
             _emps[i].Id = i + 1;
         }
+    }
+
+    public static EmployeeDto? Create(Employee? item)
+    {
+        if (item == null) return null;
+
+        EmployeeDepartmentEnum empDept = (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1);
+
+        return new EmployeeDto()
+        {
+            Name = item?.Name ?? string.Empty,
+            State = item?.State ?? string.Empty,
+            Country = item?.Country ?? string.Empty,
+            Age = item?.Age ?? 0,
+            Department = empDept,
+            DepartmentName = empDept.ToString(),
+            Id = item?.Id ?? 0
+        };
     }
 
     /// <summary>
@@ -144,6 +158,27 @@ public class EmployeeMock : IEmployeeDB
         });
         return list;
     }
+
+    public static List<Employee> GetEmployeeList(int generateCount)
+    {
+        var states = new string[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" };
+        var testUsers = new Faker<Employee>()
+           //Optional: Call for objects that have complex initialization
+           .CustomInstantiator(f => new Employee())
+           //Basic rules using built-in generators
+           .RuleFor(u => u.Name, (f, u) => f.Name.FullName())
+           .RuleFor(u => u.Age, f => f.Random.Number(18, 70))
+           .RuleFor(u => u.DepartmentId, f => f.Random.Number(1, 6))
+           .RuleFor(u => u.Country, "USA")
+           .RuleFor(u => u.State, f => f.Random.ListItem(states))
+           //After all rules are applied finish with the following action
+           .FinishWith((f, u) =>
+           {
+               Console.WriteLine($"Employee Created! Name={u.Name}");
+           });
+        var user = testUsers.Generate(generateCount);
+        return user;
+    }
     //Method for Updating Employee record
     /// <summary>
     /// Updates the specified emp.
@@ -187,43 +222,6 @@ public class EmployeeMock : IEmployeeDB
     public async Task<DepartmentDto> UpdateAsync(DepartmentDto dept)
     {
         return dept;
-    }
-
-    public static EmployeeDto? Create(Employee? item)
-    {
-        if (item == null) return null;
-
-        return new EmployeeDto()
-        {
-            Name = item.Name,
-            State = item?.State ?? String.Empty,
-            Country = item?.Country ?? string.Empty,
-            Age = item?.Age ?? 0,
-            Department = (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1),
-            DepartmentName = ((EmployeeDepartmentEnum)(item?.DepartmentId ?? 0)).ToString() ?? string.Empty,
-            Id = item?.Id ?? 0
-        };
-    }
-
-    public static List<Employee> GetEmployeeList(int generateCount)
-    {
-        var states = new string[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" };
-        var testUsers = new Faker<Employee>()
-           //Optional: Call for objects that have complex initialization
-           .CustomInstantiator(f => new Employee())
-           //Basic rules using built-in generators
-           .RuleFor(u => u.Name, (f, u) => f.Name.FullName())
-           .RuleFor(u => u.Age, f => f.Random.Number(18, 70))
-           .RuleFor(u => u.DepartmentId, f => f.Random.Number(1, 6))
-           .RuleFor(u => u.Country, "USA")
-           .RuleFor(u => u.State, f => f.Random.ListItem(states))
-           //After all rules are applied finish with the following action
-           .FinishWith((f, u) =>
-           {
-               Console.WriteLine($"Employee Created! Name={u.Name}");
-           });
-        var user = testUsers.Generate(generateCount);
-        return user;
     }
 
 

@@ -138,11 +138,15 @@ public class MvcEmployeeController : BaseController
     /// <summary>
     /// Default Page for MvcEmployeeController
     /// </summary>
+    /// <param name="paging"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<ActionResult> Index()
+    public async Task<ActionResult> Index(PagingParameterModel? paging)
     {
-        var list = await client.GetEmployeesAsync(cts.Token).ConfigureAwait(false);
+        if (paging == null)
+            paging = new PagingParameterModel();
+
+        var list = await client.GetEmployeesAsync(paging, cts.Token).ConfigureAwait(false);
 
         return View(list);
     }

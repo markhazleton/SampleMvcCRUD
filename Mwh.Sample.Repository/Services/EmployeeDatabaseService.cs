@@ -39,7 +39,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         return new EmployeeDto()
         {
             Name = item.Name,
-            State = item?.State ?? String.Empty,
+            State = item?.State ?? string.Empty,
             Country = item?.Country ?? string.Empty,
             Age = item?.Age ?? 0,
             Department = (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1),
@@ -67,8 +67,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     private static EmployeeDto[] GetEmployeeDtos(List<Employee> list)
     {
-        var returnList = list?.Select(s => Create(s)).ToArray();
-        return returnList;
+        return list?.Select(s => Create(s)).ToArray();
     }
 
     protected virtual void Dispose(bool disposing)
@@ -91,10 +90,11 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         {
             list.Add(new Employee() { Name = name ?? "UNKNOWN", Age = 33, Country = "USA", DepartmentId = 1, State = "TX" });
         }
-        _context.Employees.AddRange(list);
-        var dbResult = await _context.SaveChangesAsync();
-        return dbResult;
 
+        await _context.Employees.AddRangeAsync(list).ConfigureAwait(true);
+        await _context.SaveChangesAsync().ConfigureAwait(true);
+
+        return _context.Employees.Count();
     }
 
     public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
@@ -151,8 +151,14 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         return GetDepartmentDtos(await _context.Departments.Include(e => e.Employees).ToListAsync(cancellationToken: token).ConfigureAwait(false));
     }
 
-    public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(CancellationToken token)
-    { return GetEmployeeDtos(await _context.Employees.ToListAsync(cancellationToken: token).ConfigureAwait(false)); }
+    public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
+    {
+        var source = _context.Employees.OrderBy(o => o.Name).AsQueryable();
+        int TotalCount = source.Count();
+        var items = await source.Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync(token).ConfigureAwait(false);
+        var paginationMetadata = paging.GetMetaData(TotalCount);
+        return GetEmployeeDtos(items);
+    }
 
     public async Task<EmployeeResponse> SaveAsync(EmployeeDto? employee, CancellationToken token)
     {
@@ -210,10 +216,12 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
         int deptId = (int)(item?.Department ?? 0);
         var dbDept = await _context.Departments.Where(w => w.Id == deptId).FirstOrDefaultAsync(cancellationToken: cancellationToken);
+
         if (dbDept == null)
             return new EmployeeResponse("Department not found");
 
         var dbEmp = new Employee();
+
         try
         {
             if ((item?.Id ?? 0) > 0)
@@ -226,6 +234,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                 if (dbEmp == null)
                 {
                     dbEmp = Create(item);
+                    dbEmp.Department = dbDept;
                     await _context.Employees.AddAsync(dbEmp, cancellationToken);
                     await _context.SaveChangesAsync(cancellationToken)
                         .ConfigureAwait(true);
@@ -235,6 +244,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                     dbEmp.Age = item.Age;
                     dbEmp.Country = item.Country;
                     dbEmp.DepartmentId = dbDept.Id;
+                    dbEmp.Department = dbDept;
                     dbEmp.Name = item.Name;
                     dbEmp.State = item.State;
                     dbEmp.LastUpdatedDate = DateTime.Now;
@@ -250,6 +260,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             else
             {
                 dbEmp = Create(item);
+                dbEmp.Department = dbDept;
                 await _context.Employees.AddAsync(dbEmp, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken)
                     .ConfigureAwait(true);

@@ -62,10 +62,17 @@ public class EmployeeApiController : BaseApiController
     /// <returns></returns>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<EmployeeDto>), 200)]
-    public async Task<ActionResult<IEnumerable<EmployeeDto>>> ListAsync()
+    public async Task<ActionResult<IEnumerable<EmployeeDto>>> ListAsync([FromQuery] PagingParameterModel? paging = null)
     {
         CancellationTokenSource cts = new();
-        var employees = await _employeeService.GetEmployeesAsync(cts.Token).ConfigureAwait(false);
+
+        if (paging == null)
+        {
+            paging = new PagingParameterModel();
+        }
+
+
+        var employees = await _employeeService.GetEmployeesAsync(paging, cts.Token).ConfigureAwait(false);
         return Ok(employees);
     }
 

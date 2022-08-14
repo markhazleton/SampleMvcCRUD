@@ -52,7 +52,7 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     public async Task<EmployeeResponse?> FindEmployeeByIdAsync(int id, CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
-        var result =  await ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", null, HttpMethod.Get, token);
+        var result = await ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", null, HttpMethod.Get, token);
 
         return result;
     }
@@ -66,16 +66,14 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     /// <summary>
     /// list as an asynchronous operation.
     /// </summary>
+    /// <param name="paging"></param>
     /// <param name="token">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     /// <returns>IEnumerable&lt;EmployeeModel&gt;.</returns>
-    public async Task<IEnumerable<EmployeeDto>?> GetEmployeesAsync(CancellationToken token)
+    public async Task<IEnumerable<EmployeeDto>?> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
-        return await ExecuteAsync<IEnumerable<EmployeeDto>>($"/api/employee", null, HttpMethod.Get, token);
+        return await ExecuteAsync<IEnumerable<EmployeeDto>>($"/api/employee", paging, HttpMethod.Get, token);
     }
-
-
-
 
     /// <summary>
     /// save as an asynchronous operation.

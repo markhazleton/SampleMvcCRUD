@@ -2,6 +2,11 @@
 namespace Mwh.Sample.Repository.Models;
 public class Employee : BaseEntity
 {
+    public Employee()
+    {
+        Name = string.Empty;
+        Department = new Department();
+    }
     /// <summary>
     /// Gets or sets the age.
     /// </summary>
