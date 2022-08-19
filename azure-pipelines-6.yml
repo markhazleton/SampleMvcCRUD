@@ -50,17 +50,11 @@ steps:
 
 - task: VSTest@2
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
     testSelector: 'testAssemblies'
     testAssemblyVer2: |
       **\*.test*.dll
       !**\*TestAdapter.dll
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
-    codeCoverageEnabled: true
+    codeCoverageEnabled: false
 
-- task: CRAnalyzeTask@201
-  inputs:
-    solution: 'Mwh.Sample.Web.sln'
-    sendLogs: true
