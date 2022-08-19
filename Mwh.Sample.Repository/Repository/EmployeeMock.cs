@@ -6,6 +6,8 @@ namespace Mwh.Sample.Repository.Repository;
 /// </summary>
 public class EmployeeMock : IEmployeeDB
 {
+    private int GeneratedEmployeeCount = 0;
+
     private List<DepartmentDto> _depts;
     /// <summary>
     /// The list
@@ -42,7 +44,7 @@ public class EmployeeMock : IEmployeeDB
             new EmployeeDto() { Name = "Frank Sinatra",Age = 50,Department = EmployeeDepartmentEnum.Executive,State = "New York",Country = "USA"},
             };
 
-        GetEmployeeList(5290).ForEach(e =>
+        GetEmployeeList(GeneratedEmployeeCount).ForEach(e =>
         {
             var emp = Create(e);
             if (emp is not null) _emps.Add(emp);
