@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "_LayoutPivot";
+    ViewBag.Title = "Employee Pivot";
+}
+<div class="container">
+    <h2>Employee with PivotTables.js</h2>
+    <p>
+    </p>
+
+    <div id="content-employeelist">
+    </div>
+
+</div>
+
+@section scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            loadEmployeeList();
+        });
+
+        //Load Employee List
+        function loadEmployeeList() {
+            $.ajax({
+                url: '/EmployeePivot/GetEmployeeList',
+                type: 'get',
+                dataType: 'html',
+                success: function (data) {
+                    $("#content-employeelist").html(data);
+                    $("#content-employeelist").fadeIn();
+                },
+                error: function (errormessage) { alert(errormessage.responseText); }
+            })
+        };
+    </script>
+}

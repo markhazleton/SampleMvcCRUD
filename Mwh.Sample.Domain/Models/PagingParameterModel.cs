@@ -5,9 +5,13 @@ namespace Mwh.Sample.Domain.Models;
 /// </summary>
 public class PagingParameterModel
 {
-    private const int maxPageSize = 300;
-    private int _pageSize { get; set; } = 300;
-
+    private const int maxPageSize = 5000;
+    private int _pageSize { get; set; }
+    public PagingParameterModel()
+    {
+        _pageSize = 300;
+        PageNumber = 1;
+    }
     public object GetMetaData(long TotalCount)
     {
         return new
@@ -21,7 +25,7 @@ public class PagingParameterModel
         };
     }
 
-    public int PageNumber { get; set; } = 1;
+    public int PageNumber { get; set; }
     public int PageSize
     {
         get { return _pageSize; }

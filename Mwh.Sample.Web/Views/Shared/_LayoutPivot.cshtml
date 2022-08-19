@@ -14,9 +14,9 @@
     <title>@ViewData["Title"] - Sample MVC CRUD</title>
 
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/lib/datatables.net-bs/dataTables.bootstrap5.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.13.0/pivot.min.css" />
+    
     @RenderSection("HeadScripts", required: false)
 </head>
 <body id="page-top">
@@ -65,9 +65,11 @@
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="~/lib/jquery/jquery.js" asp-append-version="true"></script>
-    <script src="~/lib/datatables/jquery.dataTables.min.js" asp-append-version="true"></script>
-    <script src="~/lib/datatables.net-bs/dataTables.bootstrap5.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.13.0/pivot.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.6.0/tips_data.min.js"></script>
+    
     @RenderSection("Scripts", required: false)
 </body>
 </html>

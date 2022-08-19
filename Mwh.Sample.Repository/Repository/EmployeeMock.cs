@@ -30,11 +30,11 @@ public class EmployeeMock : IEmployeeDB
         }
         _emps = new List<EmployeeDto>()
             {
-            new EmployeeDto() { Name = "Ilsa Lund", Age = 25, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "Hesse" },
-            new EmployeeDto() { Name = "Major Strasser", Age = 35, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "Hesse" },
+            new EmployeeDto() { Name = "Ilsa Lund", Age = 25, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "Kansas" },
+            new EmployeeDto() { Name = "Major Strasser", Age = 35, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "Texas" },
             new EmployeeDto() { Name = "Rick Blaine", Age = 45, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "New York" },
-            new EmployeeDto() { Name = "Victor Laszlo", Age = 55, Country = "Germany", Department = EmployeeDepartmentEnum.IT, State = "Hesse" },
-            new EmployeeDto() { Name = "Louis Renault", Age = 65, Country = "France", Department = EmployeeDepartmentEnum.IT, State = "Brittany" },
+            new EmployeeDto() { Name = "Victor Laszlo", Age = 55, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "Colorado" },
+            new EmployeeDto() { Name = "Louis Renault", Age = 65, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "Idaho" },
             new EmployeeDto() { Name = "Sam Spade", Age = 55, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "California" },
             new EmployeeDto() { Name = "Jim Smith",Age = 35,Department = EmployeeDepartmentEnum.IT,State = "Florida",Country = "USA"},
             new EmployeeDto() { Name = "Bob Roberts",Age = 50,Department = EmployeeDepartmentEnum.HR,State = "Texas",Country = "USA"},
@@ -42,7 +42,7 @@ public class EmployeeMock : IEmployeeDB
             new EmployeeDto() { Name = "Frank Sinatra",Age = 50,Department = EmployeeDepartmentEnum.Executive,State = "New York",Country = "USA"},
             };
 
-        GetEmployeeList(290).ForEach(e =>
+        GetEmployeeList(5290).ForEach(e =>
         {
             var emp = Create(e);
             if (emp is not null) _emps.Add(emp);
