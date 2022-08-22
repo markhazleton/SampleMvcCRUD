@@ -173,7 +173,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         {
             // Arrange
             var employeeMock = new EmployeeMock();
-            EmployeeDto emp = null;
+            EmployeeDto? emp = null;
 
             // Act
             var result = await employeeMock.UpdateAsync(emp);
@@ -188,10 +188,10 @@ namespace Mwh.Sample.Repository.Tests.Repository
         {
             // Arrange
             var employeeMock = new EmployeeMock();
-            DepartmentDto emp = null;
+            DepartmentDto? dept = null;
 
             // Act
-            var result = await employeeMock.UpdateAsync(emp);
+            var result = await employeeMock.UpdateAsync(dept);
 
             // Assert
             Assert.IsNull(result);

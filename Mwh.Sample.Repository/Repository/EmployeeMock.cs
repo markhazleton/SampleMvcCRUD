@@ -6,7 +6,7 @@ namespace Mwh.Sample.Repository.Repository;
 /// </summary>
 public class EmployeeMock : IEmployeeDB
 {
-    private int GeneratedEmployeeCount = 0;
+    private int _generatedEmployeeCount = 0;
 
     private List<DepartmentDto> _depts;
     /// <summary>
@@ -17,8 +17,9 @@ public class EmployeeMock : IEmployeeDB
     /// <summary>
     /// Constructor
     /// </summary>
-    public EmployeeMock()
+    public EmployeeMock(int GeneratedEmployeeCount = 0)
     {
+        _generatedEmployeeCount = GeneratedEmployeeCount;
         _depts = new List<DepartmentDto>();
 
         foreach (var dept in Enum.GetValues(typeof(EmployeeDepartmentEnum)))
@@ -44,7 +45,7 @@ public class EmployeeMock : IEmployeeDB
             new EmployeeDto() { Name = "Frank Sinatra",Age = 50,Department = EmployeeDepartmentEnum.Executive,State = "New York",Country = "USA"},
             };
 
-        GetEmployeeList(GeneratedEmployeeCount).ForEach(e =>
+        GetEmployeeList(_generatedEmployeeCount).ForEach(e =>
         {
             var emp = Create(e);
             if (emp is not null) _emps.Add(emp);
@@ -187,7 +188,7 @@ public class EmployeeMock : IEmployeeDB
     /// </summary>
     /// <param name="emp">The emp.</param>
     /// <returns>EmployeeModel.</returns>
-    public async Task<EmployeeDto> UpdateAsync(EmployeeDto emp)
+    public async Task<EmployeeDto> UpdateAsync(EmployeeDto? emp)
     {
         if (emp == null)
             return new EmployeeDto();
@@ -221,9 +222,13 @@ public class EmployeeMock : IEmployeeDB
         }
     }
 
-    public async Task<DepartmentDto> UpdateAsync(DepartmentDto dept)
+    public async Task<DepartmentDto> UpdateAsync(DepartmentDto? dept)
     {
-        return dept;
+        await Task.Run(() =>
+        {
+            // TODO: Update Department
+        });
+        return dept ?? new DepartmentDto();
     }
 
 

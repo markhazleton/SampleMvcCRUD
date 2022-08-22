@@ -67,7 +67,9 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     private static EmployeeDto[] GetEmployeeDtos(List<Employee> list)
     {
-        return list?.Select(s => Create(s)).ToArray();
+        if (list == null) return Array.Empty<EmployeeDto>();
+
+        return list?.Select(s => Create(s) ?? new EmployeeDto()).ToArray() ?? Array.Empty<EmployeeDto>();
     }
 
     protected virtual void Dispose(bool disposing)

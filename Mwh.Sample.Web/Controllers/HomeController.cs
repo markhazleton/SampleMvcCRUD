@@ -14,14 +14,6 @@ public class HomeController : BaseController
 
     }
     /// <summary>
-    /// Employee Single Page Applications
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    [Route("/home/EmpSinglePage/")]
-    public ActionResult EmpSinglePage() { return View(); }
-
-    /// <summary>
     /// Error Page Display
     /// </summary>
     /// <returns></returns>

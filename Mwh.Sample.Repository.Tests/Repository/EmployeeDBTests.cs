@@ -288,7 +288,7 @@ public class EmployeeDBTests
     public async Task Update_NullEmployee()
     {
         // Arrange
-        EmployeeDto emp = null;
+        EmployeeDto? emp = null;
 
         // Act
         var result = await employeeDB.UpdateAsync(emp);

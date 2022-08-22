@@ -70,7 +70,7 @@ public class EmployeeDB : IEmployeeDB
         return Create(await _context.Employees.OrderBy(o => o.Name).ToListAsync());
     }
 
-    public async Task<EmployeeDto> UpdateAsync(EmployeeDto emp)
+    public async Task<EmployeeDto> UpdateAsync(EmployeeDto? emp)
     {
         if (emp == null) return new EmployeeDto();
 

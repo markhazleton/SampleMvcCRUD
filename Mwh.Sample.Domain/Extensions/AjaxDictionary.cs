@@ -26,12 +26,12 @@ public sealed class AjaxDictionary<TKey, TValue>
     /// </summary>
     /// <param name="key">The key.</param>
     /// <returns>TValue.</returns>
-    public TValue this[TKey key]
+    public TValue? this[TKey key]
     {
         get
         {
-            _Dictionary.TryGetValue(key, out TValue vOut);
-            return vOut;
+            _ = _Dictionary.TryGetValue(key, out TValue vOut);
+            return vOut ?? default;
         }
         set
         {

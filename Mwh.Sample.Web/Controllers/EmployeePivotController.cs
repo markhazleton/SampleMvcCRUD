@@ -32,7 +32,6 @@
         /// <summary>
         /// GetEmployeeList
         /// </summary>
-        /// <param name="paging"></param>
         /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> GetEmployeeList()

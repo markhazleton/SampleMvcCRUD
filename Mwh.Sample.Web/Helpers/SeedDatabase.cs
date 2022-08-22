@@ -17,7 +17,7 @@ public static class SeedDatabase
         {
             using var employeeService = new EmployeeDatabaseService(context);
             var token = new CancellationToken();
-            var employeeMock = new EmployeeMock();
+            var employeeMock = new EmployeeMock(290);
             var deptResultList = new List<DepartmentResponse>();
             foreach (var dept in employeeMock.DepartmentCollection())
             {
