@@ -39,8 +39,9 @@ steps:
   inputs:
     testSelector: 'testAssemblies'
     testAssemblyVer2: |
-      **\*.test*.dll
+      **\Mwh.*.Test*.dll
       !**\*TestAdapter.dll
+      !**\*testhost.dll
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
 - task: ArchiveFiles@2
