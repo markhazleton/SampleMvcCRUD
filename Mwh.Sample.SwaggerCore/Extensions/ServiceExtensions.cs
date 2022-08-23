@@ -43,22 +43,22 @@ public static class ServiceExtensions
     {
         services.AddSwaggerGen(cfg =>
         {
-            cfg.SwaggerDoc(configuration.GetValue<string>("SwaggerApiVersion"),
+            cfg.SwaggerDoc(configuration.GetValue<string>("Swagger:ApiVersion"),
                 new OpenApiInfo
                 {
-                    Title = configuration.GetValue<string>("SwaggerApiTitle"),
-                    Version = configuration.GetValue<string>("SwaggerApiVersion"),
-                    Description = $"<a href='/'>Back To Home</a><p>{configuration.GetValue<string>("SwaggerApiDescription")}</p>",
+                    Title = configuration.GetValue<string>("Swagger:ApiTitle"),
+                    Version = configuration.GetValue<string>("Swagger:ApiVersion"),
+                    Description = $"<a href='/'>Back To Home</a><p>{configuration.GetValue<string>("Swagger:ApiDescription")}</p>",
                     Contact = new OpenApiContact
                     {
-                        Name = configuration.GetValue<string>("SwaggerUserProfile:Name"),
-                        Url = new Uri(configuration.GetValue<string>("SwaggerUserProfile:Url")),
-                        Email = configuration.GetValue<string>("SwaggerUserProfile:Email"),
+                        Name = configuration.GetValue<string>("Swagger:UserProfile:Name"),
+                        Url = new Uri(configuration.GetValue<string>("Swagger:UserProfile:Url")),
+                        Email = configuration.GetValue<string>("Swagger:UserProfile:Email"),
                     },
                     License = new OpenApiLicense { Name = "MIT", },
                 });
 
-            var xmlFile = $"Mwh.Sample.Web.xml";
+            var xmlFile = configuration.GetValue<string>("Swagger:XmlFile");
             string xmlPath = string.Empty;
 
             if (File.Exists(Path.Combine(AppContext.BaseDirectory, "wwwroot")))

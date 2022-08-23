@@ -3,21 +3,26 @@ namespace Mwh.Sample.SwaggerCore.Extensions;
 
 public static class AppBuilderExtensions
 {
-    public static IApplicationBuilder UseSwaggerWithVersioning(this IApplicationBuilder app)
+    /// <summary>
+    /// UseSwaggerWithVersioning
+    /// </summary>
+    /// <param name="app"></param>
+    /// <returns></returns>
+    public static IApplicationBuilder UseSwaggerWithVersioning(this IApplicationBuilder app, IConfiguration configuration)
     {
         IServiceProvider services = app.ApplicationServices;
         var provider = services.GetRequiredService<IApiVersionDescriptionProvider>();
-
         app.UseSwagger();
-
         app.UseSwaggerUI(options =>
         {
+            options.RoutePrefix = "swagger";
             foreach (var description in provider.ApiVersionDescriptions)
             {
                 options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
             }
+            options.InjectStylesheet("/swagger/custom.css");
+            options.DocumentTitle = configuration.GetValue<string>("Swagger:ApiTitle");
         });
-
         return app;
     }
 
@@ -33,6 +38,7 @@ public static class AppBuilderExtensions
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
                 options.DocumentTitle = "API";
+                options.InjectStylesheet("/swagger/custom.css");
             });
         return app;
     }

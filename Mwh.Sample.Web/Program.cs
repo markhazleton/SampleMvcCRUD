@@ -27,7 +27,7 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 app.UseMyHttpContext();
-app.UseSwaggerWithVersioning();
+app.UseSwaggerWithVersioning(builder.Configuration);
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
