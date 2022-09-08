@@ -39,7 +39,7 @@ steps:
   inputs:
     testSelector: 'testAssemblies'
     testAssemblyVer2: |
-      **\Mwh.*.Test*.dll
+      **\Mwh.*.Test.dll
       !**\*TestAdapter.dll
       !**\*testhost.dll
       !**\obj\**

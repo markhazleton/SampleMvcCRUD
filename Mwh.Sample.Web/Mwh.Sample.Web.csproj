@@ -32,7 +32,7 @@
 	<ItemGroup>
 		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
 		<PackageReference Include="Azure.Identity" Version="1.6.1" />
-		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.2.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.8" />
@@ -60,16 +60,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Update="wwwroot\swagger\custom.css">
+	  <Content Update="wwwroot\swagger_custom\custom.css">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
-	  <Content Update="wwwroot\swagger\favicon-16x16.png">
+	  <Content Update="wwwroot\swagger_custom\favicon-16x16.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
-	  <Content Update="wwwroot\swagger\favicon-32x32.png">
+	  <Content Update="wwwroot\swagger_custom\favicon-32x32.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
-	  <Content Update="wwwroot\swagger\favicon.ico">
+	  <Content Update="wwwroot\swagger_custom\favicon.ico">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>

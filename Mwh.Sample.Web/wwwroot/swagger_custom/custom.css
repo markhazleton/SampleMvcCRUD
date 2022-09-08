@@ -1,0 +1,57 @@
+html {
+    background-color: InfoBackground;
+}
+
+#swagger-ui {
+    background-color: InfoBackground;
+}
+
+.swagger-ui .scheme-container {
+    background-color: tan;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+select {
+    border: 2px solid tan;
+    box-shadow: none;
+    flex: 2;
+    outline: none;
+    width: 100%;
+}
+
+select {
+    border: 2px solid tan !important;
+}
+
+.swagger-ui .btn.authorize {
+    background-color: tan;
+    border-color: tan;
+    color: #f5fbfc;
+}
+
+    .swagger-ui .btn.authorize svg {
+        fill: #f5fbfc;
+    }
+
+div#swagger-ui div.topbar {
+    background-color: tan;
+    padding: 10px 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+div#swagger-ui div.topbar a.link img {
+    display:
+    none;
+}
+
+div.swagger-ui div.topbar a.link {
+    display: block;
+    -moz-box-sizing:border-box;
+    box-sizing: border-box;
+    background-color:white;
+    background: url('./favicon-32x32.png') no-repeat;
+    height: auto;
+}

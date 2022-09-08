@@ -20,7 +20,7 @@ public static class AppBuilderExtensions
             {
                 options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
             }
-            options.InjectStylesheet("/swagger/custom.css");
+            options.InjectStylesheet("/swagger_custom/custom.css");
             options.DocumentTitle = configuration.GetValue<string>("Swagger:ApiTitle");
         });
         return app;

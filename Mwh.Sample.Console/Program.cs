@@ -1,4 +1,4 @@
-﻿CancellationToken cancellationToken = new CancellationToken();
+﻿CancellationToken ct = new CancellationToken();
 
 Console.WriteLine("Setup SQL Lite Database");
 
@@ -35,20 +35,19 @@ Console.WriteLine($"Success List Count:{departmentList?.Where(w => w.Success == 
 Console.WriteLine("Add sample Employees to new database");
 employeeMock.EmployeeCollection()?.ForEach(async emp =>
 {
-    employeeList.Add(await employeeService.SaveAsync(emp, cancellationToken).ConfigureAwait(false));
+    employeeList.Add(await employeeService.SaveAsync(emp, ct).ConfigureAwait(false));
 });
 
 Console.WriteLine($"\n\nSuccess List Count:{employeeList?.Where(w => w.Success == true).ToArray().Length}");
 
-employees = await employeeService.GetEmployeesAsync(new PagingParameterModel(), cancellationToken).ConfigureAwait(false);
+employees = await employeeService.GetEmployeesAsync(new PagingParameterModel(), ct).ConfigureAwait(false);
 
-var departments = await employeeService.GetDepartmentsAsync(cancellationToken).ConfigureAwait(false);
+var departments = await employeeService.GetDepartmentsAsync(ct).ConfigureAwait(false);
 
 foreach (var dept in departments)
 {
     Console.WriteLine($"{dept.Name} with {dept?.Employees?.Length ?? 0} employees");
 }
-
 Console.WriteLine($"\n\nEmployee Count:{employees?.Count()}");
 Console.WriteLine("Complete");
 Console.ReadKey();

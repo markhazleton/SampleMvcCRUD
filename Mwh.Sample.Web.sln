@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{2E18C8B3-20AB-42BB-97B6-00B1AEA5CEB9}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		azure-pipelines-6.yml = azure-pipelines-6.yml
 		azure-pipelines.yml = azure-pipelines.yml
 		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
 		CONTRIBUTING.md = CONTRIBUTING.md
@@ -29,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Repository", "Mw
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Repository.Tests", "Mwh.Sample.Repository.Tests\Mwh.Sample.Repository.Tests.csproj", "{0F675326-5D07-4613-A4FA-C62DAA1270E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.Sample.SwaggerCore", "Mwh.Sample.SwaggerCore\Mwh.Sample.SwaggerCore.csproj", "{38AFC02B-E297-4C7C-B5D0-06EF648FF5C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.SwaggerCore", "Mwh.Sample.SwaggerCore\Mwh.Sample.SwaggerCore.csproj", "{38AFC02B-E297-4C7C-B5D0-06EF648FF5C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
