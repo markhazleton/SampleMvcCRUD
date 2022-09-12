@@ -222,13 +222,18 @@ public class EmployeeMock : IEmployeeDB
         }
     }
 
-    public async Task<DepartmentDto> UpdateAsync(DepartmentDto? dept)
+    /// <summary>
+    /// Update Department 
+    /// </summary>
+    /// <param name="dept"></param>
+    /// <returns></returns>
+    public async Task<DepartmentDto?> UpdateAsync(DepartmentDto? dept)
     {
         await Task.Run(() =>
         {
             // TODO: Update Department
         });
-        return dept ?? new DepartmentDto();
+        return dept;
     }
 
 

@@ -47,11 +47,11 @@ div#swagger-ui div.topbar a.link img {
     none;
 }
 
-div.swagger-ui div.topbar a.link {
+div#swagger-ui div.topbar a.link {
     display: block;
     -moz-box-sizing:border-box;
     box-sizing: border-box;
-    background-color:white;
-    background: url('./favicon-32x32.png') no-repeat;
+    background-color: white;
+    background: url('/swagger_custom/favicon-32x32.png') no-repeat;
     height: auto;
 }

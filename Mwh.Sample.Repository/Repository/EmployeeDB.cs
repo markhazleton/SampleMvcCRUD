@@ -35,29 +35,29 @@ public class EmployeeDB : IEmployeeDB
 
     private static EmployeeDto Create(Employee? entity)
     {
-        if (entity == null) return new EmployeeDto();
+        if (entity is null) return new EmployeeDto();
 
         return new EmployeeDto()
         {
             Id = entity.Id,
-            State = entity.State,
-            Age = entity.Age,
-            Country = entity.Country,
-            Department = (EmployeeDepartmentEnum)entity.DepartmentId,
-            Name = entity.Name
+            State = entity?.State ?? "TX",
+            Age = entity?.Age ?? 0,
+            Country = entity?.Country ?? "USA",
+            Department = entity is null ? EmployeeDepartmentEnum.IT : (EmployeeDepartmentEnum)entity.DepartmentId,
+            Name = entity?.Name ?? "DEFAULT"
         };
     }
 
     public async Task<bool> DeleteEmployeeAsync(int ID)
     {
         var delEmployee = await _context.Employees.Where(w => w.Id == ID).FirstOrDefaultAsync();
-        if (delEmployee != null)
+        if (delEmployee is null)
         {
-            _context.Employees.Remove(delEmployee);
-            await _context.SaveChangesAsync();
-            return true;
+            return false;
         }
-        return false;
+        _context.Employees.Remove(delEmployee);
+        await _context.SaveChangesAsync();
+        return true;
     }
 
     public async Task<EmployeeDto> EmployeeAsync(int id)
@@ -132,9 +132,9 @@ public class EmployeeDB : IEmployeeDB
         return Create(await _context.Departments.OrderBy(o => o.Name).ToListAsync());
     }
 
-    public async Task<DepartmentDto> UpdateAsync(DepartmentDto? dept)
+    public async Task<DepartmentDto?> UpdateAsync(DepartmentDto? dept)
     {
-        if (dept == null) return new DepartmentDto();
+        if (dept == null) return null;
 
         if (dept.Id == 0)
         {

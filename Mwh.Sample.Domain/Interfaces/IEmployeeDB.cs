@@ -47,5 +47,5 @@ public interface IEmployeeDB
     /// </summary>
     /// <param name="department"></param>
     /// <returns></returns>
-    Task<DepartmentDto> UpdateAsync(DepartmentDto department);
+    Task<DepartmentDto?> UpdateAsync(DepartmentDto? department);
 }

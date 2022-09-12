@@ -82,7 +82,7 @@ public class EmployeeDBTests
         // Act
         var result = await employeeDB.UpdateAsync(test);
         // Assert
-        Assert.IsNotNull(result);
+        Assert.IsNull(result);
     }
 
     [TestMethod]
