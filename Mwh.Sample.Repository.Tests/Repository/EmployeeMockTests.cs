@@ -18,7 +18,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
             var result = await employeeMock.DepartmentAsync(id);
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
@@ -29,11 +29,10 @@ namespace Mwh.Sample.Repository.Tests.Repository
             int id = 0;
 
             // Act
-            var result = await employeeMock.EmployeeAsync(
-                id);
+            var result = await employeeMock.EmployeeAsync(id);
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNull(result);
         }
         [TestMethod]
         public async Task Delete_StateUnderTest_Id1()
@@ -223,7 +222,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
             var result = await employeeDB.EmployeeAsync(id);
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNull(result);
         }
 
         [TestMethod]

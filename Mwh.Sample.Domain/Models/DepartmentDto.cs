@@ -10,10 +10,14 @@ namespace Mwh.Sample.Domain.Models
         /// <summary>
         /// 
         /// </summary>
-        public DepartmentDto()
+        public DepartmentDto(int id, string name, string? description = null)
         {
-            Name = string.Empty;
-            Description = string.Empty;
+            ValidateName(name, nameof(name));
+            if (id <= 0)
+                throw BuildInvalidIdException(id, nameof(id));
+            Id = id;
+            Name = name;
+            Description = description ?? string.Empty;
         }
         /// <summary>
         /// 
@@ -29,5 +33,20 @@ namespace Mwh.Sample.Domain.Models
         /// </summary>
         public string Description { get; set; }
         public virtual EmployeeDto?[]? Employees { get; set; }
+
+        public void ValidateName(string name, string paramName)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Department name cannot be null or whitespace", paramName);
+        }
+
+        private ArgumentException BuildInvalidIdException(int value, string paramName) =>
+            new ArgumentException($"Department ID must be >0. Actual value was: {value}", paramName);
+
+        public override string ToString() => $"Department Id={Id}, Name={Name}";
+
+
+
+
     }
 }

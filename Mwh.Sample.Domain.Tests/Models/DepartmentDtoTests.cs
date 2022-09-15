@@ -7,13 +7,12 @@
         public void DepartmentDto_ExpectedResults()
         {
             // Arrange
-            var departmentDto = new DepartmentDto()
+            var departmentDto = new DepartmentDto(
+                1,
+                "Test",
+                "Test")
             {
-                Id = 1,
-                Name = "Test",
-                Description = "Test",
-            };
-            departmentDto.Employees = new EmployeeDto[]
+                Employees = new EmployeeDto[]
             {
                 new EmployeeDto()
                 {
@@ -33,11 +32,12 @@
                     Country = "USA",
                     Department = EmployeeDepartmentEnum.IT
                 }
-            };
+            },
 
-            // Act
-            departmentDto.Name = "Test Name";
-            departmentDto.Description = "Test Description";
+                // Act
+                Name = "Test Name",
+                Description = "Test Description"
+            };
 
             // Assert
             Assert.IsNotNull(departmentDto);

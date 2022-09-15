@@ -17,18 +17,21 @@ public class EmployeeDB : IEmployeeDB
     }
     private static List<DepartmentDto> Create(List<Department> list)
     {
-        if (list == null) return new List<DepartmentDto>();
-        return list.Select(item => Create(item)).OrderBy(x => x.Name).ToList();
-    }
-    private static DepartmentDto Create(Department? item)
-    {
-        if (item == null) return new DepartmentDto();
+        List<DepartmentDto> returnList = new();
 
-        return new DepartmentDto()
+        if (list == null) return returnList;
+
+        returnList.AddRange(list.Where(w => !string.IsNullOrEmpty(w?.Name)).Select(item => Create(item)).OrderBy(x => x?.Name).ToList());
+
+        return returnList ?? new List<DepartmentDto>();
+    }
+    private static DepartmentDto Create(Department item)
+    {
+        if (item == null)
+            throw new ArgumentException("Department can not be null");
+
+        return new DepartmentDto(item.Id, item.Name, item.Description)
         {
-            Id = item.Id,
-            Name = item.Name,
-            Description = item.Description,
             Employees = item?.Employees?.Select(s => Create(s)).ToArray()
         };
     }
@@ -50,13 +53,22 @@ public class EmployeeDB : IEmployeeDB
 
     public async Task<bool> DeleteEmployeeAsync(int ID)
     {
-        var delEmployee = await _context.Employees.Where(w => w.Id == ID).FirstOrDefaultAsync();
+        var delEmployee = await _context.Employees.FindAsync(ID);
         if (delEmployee is null)
         {
             return false;
         }
-        _context.Employees.Remove(delEmployee);
-        await _context.SaveChangesAsync();
+        try
+        {
+            _context.Employees.Remove(delEmployee);
+            await _context.SaveChangesAsync();
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
         return true;
     }
 
@@ -70,9 +82,9 @@ public class EmployeeDB : IEmployeeDB
         return Create(await _context.Employees.OrderBy(o => o.Name).ToListAsync());
     }
 
-    public async Task<EmployeeDto> UpdateAsync(EmployeeDto? emp)
+    public async Task<EmployeeDto?> UpdateAsync(EmployeeDto? emp)
     {
-        if (emp == null) return new EmployeeDto();
+        if (emp == null) return null;
 
         if (emp.Id == 0)
         {
@@ -90,7 +102,8 @@ public class EmployeeDB : IEmployeeDB
         }
         else
         {
-            var saveUser = await _context.Employees.Where(w => w.Id == emp.Id).FirstOrDefaultAsync();
+            var saveUser = await _context.Employees.FindAsync(emp.Id);
+
             if (saveUser != null)
             {
                 _context.Attach(saveUser);
@@ -129,38 +142,44 @@ public class EmployeeDB : IEmployeeDB
 
     public async Task<List<DepartmentDto>> DepartmentCollectionAsync()
     {
-        return Create(await _context.Departments.OrderBy(o => o.Name).ToListAsync());
+        try
+        {
+            var dbDeptList = await _context.Departments.OrderBy(o => o.Name).ToListAsync();
+            return Create(dbDeptList);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
     }
 
     public async Task<DepartmentDto?> UpdateAsync(DepartmentDto? dept)
     {
         if (dept == null) return null;
 
-        if (dept.Id == 0)
+        if (dept?.Id == 0)
         {
-            return new DepartmentDto();
+            return null;
+        }
+        var saveDept = await _context.Departments.FindAsync(dept?.Id);
+        if (saveDept != null)
+        {
+            _context.Departments.Attach(saveDept);
+            saveDept.Name = string.IsNullOrEmpty(dept?.Name) ? saveDept.Name : dept.Name;
+            saveDept.Description = string.IsNullOrEmpty(dept?.Description) ? saveDept.Description : dept.Description;
+            await _context.SaveChangesAsync();
         }
         else
         {
-            var saveUser = await _context.Departments.Where(w => w.Id == dept.Id).FirstOrDefaultAsync();
-            if (saveUser != null)
+            var newDept = new Department()
             {
-                _context.Attach(saveUser);
-                saveUser.Name = dept.Name;
-                saveUser.Description = dept.Description;
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                var newDept = new Department()
-                {
-                    Name = dept.Name,
-                    Id = dept.Id,
-                    Description = dept.Description,
-                };
-                await _context.Departments.AddAsync(newDept);
-                await _context.SaveChangesAsync();
-            }
+                Id = dept.Id,
+                Name = string.IsNullOrEmpty(dept?.Name) ? "MISSING NAME" : dept.Name,
+                Description = string.IsNullOrEmpty(dept?.Description) ? "MISSING DESCRIPTION" : dept.Description,
+            };
+            await _context.Departments.AddAsync(newDept);
+            await _context.SaveChangesAsync();
         }
         return await DepartmentAsync(dept.Id);
     }

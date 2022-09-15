@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mwh.Sample.Repository.Tests.Repository;
@@ -12,28 +11,34 @@ public class EmployeeDBTests
 {
     private EmployeeDB employeeDB;
 
+
     [TestInitialize]
     public async Task Initialize()
     {
-        var builder = new DbContextOptionsBuilder();
-        _ = builder.UseInMemoryDatabase("AddMultipleEmployees");
-        employeeDB = new EmployeeDB(new EmployeeContext());
+        try
+        {
+            var builder = new DbContextOptionsBuilder();
+            _ = builder.EnableSensitiveDataLogging(true);
+            _ = builder.UseInMemoryDatabase("EmployeeDBTests");
+            employeeDB = new EmployeeDB(new EmployeeContext(builder.Options));
+            var employeeMock = new EmployeeMock();
+            var deptResultList = new List<DepartmentDto>();
+            foreach (var dept in employeeMock.DepartmentCollection())
+            {
+                deptResultList.Add(await employeeDB.UpdateAsync(dept).ConfigureAwait(true));
+            }
+            employeeMock.EmployeeCollection()?.ForEach(async emp =>
+            {
+                await employeeDB.UpdateAsync(emp).ConfigureAwait(true);
+            });
 
-        var employeeService = new EmployeeDatabaseService(new EmployeeContext());
-        var token = new CancellationToken();
-        var employeeMock = new EmployeeMock();
-        var deptResultList = new List<DepartmentResponse>();
-        foreach (var dept in employeeMock.DepartmentCollection())
-        {
-            deptResultList.Add(await employeeService.SaveAsync(dept, token).ConfigureAwait(true));
         }
-        var d = await employeeService.GetDepartmentsAsync(token).ConfigureAwait(true);
-        var dcnt = d.Count();
-        employeeMock.EmployeeCollection()?.ForEach(async emp =>
+        catch (Exception ex)
         {
-            await employeeService.SaveAsync(emp, token).ConfigureAwait(true);
-        });
-        var e = await employeeService.GetEmployeesAsync(new PagingParameterModel(), token).ConfigureAwait(true);
+            Console.Write(ex.Message);
+            throw;
+        }
+
     }
     [TestMethod]
     public async Task Department_List_Expected()
@@ -86,36 +91,27 @@ public class EmployeeDBTests
     }
 
     [TestMethod]
-    public async Task Department_Update_Id0()
+    public async Task Department_Update_Id1()
     {
         // Arrange
-        DepartmentDto? test = new DepartmentDto()
-        {
-            Id = 0,
-            Name = "Test",
-            Description = "Test Description"
-        };
+        DepartmentDto test = new DepartmentDto(1, "Test", "Test Description");
+
         // Act
         var result = await employeeDB.UpdateAsync(test);
         // Assert
         Assert.IsNotNull(result);
-        Assert.AreEqual(result.Id, 0);
-        Assert.AreNotEqual(result.Name, test.Name);
+        Assert.AreEqual(result.Id, 1);
+        Assert.AreEqual(result.Name, test.Name);
     }
     [TestMethod]
     public async Task Department_Update_MaxPlusOne()
     {
         // Arrange
-        DepartmentDto? test = new DepartmentDto()
-        {
-            Id = 0,
-            Name = "Test",
-            Description = "Test Description"
-        };
+        DepartmentDto? test = new DepartmentDto(1, "Test", "Test Description");
 
         // Act
         var depts = await employeeDB.DepartmentCollectionAsync();
-        test.Id = depts.OrderByDescending(d => d.Id).First().Id + 1;
+        test.Id = depts.OrderByDescending(d => d.Id).First().Id;
         var result = await employeeDB.UpdateAsync(test);
         // Assert
         Assert.IsNotNull(result);
@@ -168,7 +164,7 @@ public class EmployeeDBTests
         var result = await employeeDB.DeleteEmployeeAsync(ID);
 
         // Assert
-        Assert.IsNotNull(result);
+        Assert.IsFalse(result);
     }
 
     [TestMethod]
@@ -294,6 +290,6 @@ public class EmployeeDBTests
         var result = await employeeDB.UpdateAsync(emp);
 
         // Assert
-        Assert.IsNotNull(result);
+        Assert.IsNull(result);
     }
 }

@@ -17,7 +17,7 @@ public interface IEmployeeDB
     /// </summary>
     /// <param name="id">The identifier.</param>
     /// <returns>EmployeeModel.</returns>
-    Task<EmployeeDto> EmployeeAsync(int id);
+    Task<EmployeeDto?> EmployeeAsync(int id);
     /// <summary>
     /// 
     /// </summary>

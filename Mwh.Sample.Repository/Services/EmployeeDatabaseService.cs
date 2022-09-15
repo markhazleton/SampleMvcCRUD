@@ -10,15 +10,14 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         _context = context;
     }
 
-    private static DepartmentDto Create(Department? item)
+    private static DepartmentDto? Create(Department? item)
     {
-        if (item == null) return new DepartmentDto();
+        if (item == null) return null;
 
-        return new DepartmentDto()
+        return new DepartmentDto(item.Id,
+            item.Name,
+            item.Description)
         {
-            Id = item.Id,
-            Name = item.Name,
-            Description = item.Description,
             Employees = item?.Employees?.Select(s => Create(s)).ToArray() ?? null
         };
     }

@@ -24,12 +24,10 @@ public class EmployeeMock : IEmployeeDB
 
         foreach (var dept in Enum.GetValues(typeof(EmployeeDepartmentEnum)))
         {
-            _depts.Add(new DepartmentDto()
+            if ((int)dept > 0)
             {
-                Id = (int)dept,
-                Name = dept?.ToString() ?? "UNKNOWN",
-                Description = dept?.ToString() ?? "UNKNOWN",
-            });
+                _depts.Add(new DepartmentDto((int)dept, dept?.ToString() ?? "UNKNOWN", dept?.ToString() ?? "UNKNOWN"));
+            }
         }
         _emps = new List<EmployeeDto>()
             {
@@ -97,14 +95,14 @@ public class EmployeeMock : IEmployeeDB
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public async Task<DepartmentDto> DepartmentAsync(int id)
+    public async Task<DepartmentDto?> DepartmentAsync(int id)
     {
         DepartmentDto? department = null;
         await Task.Run(() =>
         {
-            department = _depts?.Where(w => w.Id == id).FirstOrDefault() ?? new DepartmentDto();
+            department = _depts?.Where(w => w.Id == id).FirstOrDefault();
         });
-        return department ?? new DepartmentDto();
+        return department;
     }
 
 
@@ -135,12 +133,12 @@ public class EmployeeMock : IEmployeeDB
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public async Task<EmployeeDto> EmployeeAsync(int id)
+    public async Task<EmployeeDto?> EmployeeAsync(int id)
     {
-        var emp = new EmployeeDto();
+        EmployeeDto? emp = null;
         await Task.Run(() =>
         {
-            emp = _emps?.Where(w => w.Id == id).FirstOrDefault() ?? new EmployeeDto();
+            emp = _emps?.Where(w => w.Id == id).FirstOrDefault() ?? null;
         });
         return emp;
     }

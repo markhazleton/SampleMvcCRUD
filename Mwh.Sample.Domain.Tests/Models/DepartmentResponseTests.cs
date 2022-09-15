@@ -19,12 +19,7 @@
         public void DepartmentResponse_GoodResponse()
         {
             // Arrange
-            var dept = new DepartmentDto()
-            {
-                Id = 1,
-                Name = "Test",
-                Description = "Test"
-            };
+            var dept = new DepartmentDto(1, "Test", "Test");
             var departmentResponse = new DepartmentResponse(dept);
             // Act
 
