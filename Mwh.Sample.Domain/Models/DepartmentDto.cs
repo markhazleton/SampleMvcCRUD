@@ -13,35 +13,49 @@ namespace Mwh.Sample.Domain.Models
         public DepartmentDto(int id, string name, string? description = null)
         {
             ValidateName(name, nameof(name));
-            if (id <= 0)
-                throw BuildInvalidIdException(id, nameof(id));
+            ValidateId(id, nameof(id));
+
             Id = id;
-            Name = name;
-            Description = description ?? string.Empty;
+            _name = name;
+            Description = description;
         }
         /// <summary>
         /// 
         /// </summary>
         [Key]
-        public int Id { get; set; }
+        public int Id { get; }
         /// <summary>
         /// 
         /// </summary>
-        public string Name { get; set; }
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                ValidateName(value, nameof(Name));
+                _name = value;
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public virtual EmployeeDto?[]? Employees { get; set; }
 
-        public void ValidateName(string name, string paramName)
+        public static void ValidateName(string name, string paramName)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Department name cannot be null or whitespace", paramName);
         }
+        public static void ValidateId(int Id, string paramName)
+        {
+            if (Id <= 0)
+                throw new ArgumentException("Department Id must be greater than zero", paramName);
+        }
 
-        private ArgumentException BuildInvalidIdException(int value, string paramName) =>
-            new ArgumentException($"Department ID must be >0. Actual value was: {value}", paramName);
+        private static ArgumentException BuildInvalidIdException(int value, string paramName) =>
+            new($"Department ID must be >0. Actual value was: {value}", paramName);
 
         public override string ToString() => $"Department Id={Id}, Name={Name}";
 

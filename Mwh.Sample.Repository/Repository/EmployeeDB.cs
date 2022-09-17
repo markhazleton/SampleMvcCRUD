@@ -162,25 +162,32 @@ public class EmployeeDB : IEmployeeDB
         {
             return null;
         }
-        var saveDept = await _context.Departments.FindAsync(dept?.Id);
+
+        DepartmentDto updateDept = new(
+            dept.Id,
+            dept.Name,
+            dept.Description
+            );
+
+        var saveDept = await _context.Departments.FindAsync(updateDept.Id);
         if (saveDept != null)
         {
             _context.Departments.Attach(saveDept);
-            saveDept.Name = string.IsNullOrEmpty(dept?.Name) ? saveDept.Name : dept.Name;
-            saveDept.Description = string.IsNullOrEmpty(dept?.Description) ? saveDept.Description : dept.Description;
+            saveDept.Name = string.IsNullOrEmpty(updateDept.Name) ? saveDept.Name : updateDept.Name;
+            saveDept.Description = string.IsNullOrEmpty(updateDept.Description) ? saveDept.Description : updateDept.Description;
             await _context.SaveChangesAsync();
         }
         else
         {
             var newDept = new Department()
             {
-                Id = dept.Id,
-                Name = string.IsNullOrEmpty(dept?.Name) ? "MISSING NAME" : dept.Name,
-                Description = string.IsNullOrEmpty(dept?.Description) ? "MISSING DESCRIPTION" : dept.Description,
+                Id = updateDept.Id,
+                Name = string.IsNullOrEmpty(updateDept.Name) ? "MISSING NAME" : updateDept.Name,
+                Description = string.IsNullOrEmpty(updateDept.Description) ? "MISSING DESCRIPTION" : updateDept.Description,
             };
             await _context.Departments.AddAsync(newDept);
             await _context.SaveChangesAsync();
         }
-        return await DepartmentAsync(dept.Id);
+        return await DepartmentAsync(updateDept.Id);
     }
 }

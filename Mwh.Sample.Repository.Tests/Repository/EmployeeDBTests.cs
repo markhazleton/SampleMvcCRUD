@@ -1,6 +1,5 @@
 ﻿using Mwh.Sample.Repository.Repository;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,29 +8,29 @@ namespace Mwh.Sample.Repository.Tests.Repository;
 [TestClass]
 public class EmployeeDBTests
 {
-    private EmployeeDB employeeDB;
-
+    private readonly EmployeeDB employeeDB;
+    public EmployeeDBTests()
+    {
+        var builder = new DbContextOptionsBuilder();
+        _ = builder.EnableSensitiveDataLogging(true);
+        _ = builder.UseInMemoryDatabase("EmployeeDBTests");
+        employeeDB = new EmployeeDB(new EmployeeContext(builder.Options));
+    }
 
     [TestInitialize]
     public async Task Initialize()
     {
         try
         {
-            var builder = new DbContextOptionsBuilder();
-            _ = builder.EnableSensitiveDataLogging(true);
-            _ = builder.UseInMemoryDatabase("EmployeeDBTests");
-            employeeDB = new EmployeeDB(new EmployeeContext(builder.Options));
             var employeeMock = new EmployeeMock();
-            var deptResultList = new List<DepartmentDto>();
             foreach (var dept in employeeMock.DepartmentCollection())
             {
-                deptResultList.Add(await employeeDB.UpdateAsync(dept).ConfigureAwait(true));
+                await employeeDB.UpdateAsync(dept).ConfigureAwait(true);
             }
             employeeMock.EmployeeCollection()?.ForEach(async emp =>
             {
                 await employeeDB.UpdateAsync(emp).ConfigureAwait(true);
             });
-
         }
         catch (Exception ex)
         {
@@ -107,11 +106,10 @@ public class EmployeeDBTests
     public async Task Department_Update_MaxPlusOne()
     {
         // Arrange
-        DepartmentDto? test = new DepartmentDto(1, "Test", "Test Description");
+        var depts = await employeeDB.DepartmentCollectionAsync();
+        DepartmentDto? test = new(depts.OrderByDescending(d => d.Id).First().Id, "Test", "Test Description");
 
         // Act
-        var depts = await employeeDB.DepartmentCollectionAsync();
-        test.Id = depts.OrderByDescending(d => d.Id).First().Id;
         var result = await employeeDB.UpdateAsync(test);
         // Assert
         Assert.IsNotNull(result);
