@@ -6,13 +6,9 @@ namespace Mwh.Sample.Repository.Repository;
 /// </summary>
 public class EmployeeMock : IEmployeeDB
 {
-    private int _generatedEmployeeCount = 0;
-
-    private List<DepartmentDto> _depts;
-    /// <summary>
-    /// The list
-    /// </summary>
-    private List<EmployeeDto> _emps;
+    private readonly List<DepartmentDto> _depts;
+    private readonly List<EmployeeDto> _emps;
+    private readonly int _generatedEmployeeCount = 0;
 
     /// <summary>
     /// Constructor
@@ -163,7 +159,7 @@ public class EmployeeMock : IEmployeeDB
     public static List<Employee> GetEmployeeList(int generateCount)
     {
         var states = new string[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" };
-        var testUsers = new Faker<Employee>()
+        var fakeEmployees = new Faker<Employee>()
            //Optional: Call for objects that have complex initialization
            .CustomInstantiator(f => new Employee())
            //Basic rules using built-in generators
@@ -173,12 +169,8 @@ public class EmployeeMock : IEmployeeDB
            .RuleFor(u => u.Country, "USA")
            .RuleFor(u => u.State, f => f.Random.ListItem(states))
            //After all rules are applied finish with the following action
-           .FinishWith((f, u) =>
-           {
-               Console.WriteLine($"Employee Created! Name={u.Name}");
-           });
-        var user = testUsers.Generate(generateCount);
-        return user;
+           .FinishWith((f, u) => { });
+        return fakeEmployees.Generate(generateCount);
     }
     //Method for Updating Employee record
     /// <summary>
