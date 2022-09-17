@@ -23,7 +23,7 @@ public class MvcEmployeeController : BaseController
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public ActionResult Create() { return View(new EmployeeDto()); }
+    public ActionResult Create() { return View(); }
 
     /// <summary>
     /// Save New Employee
@@ -59,7 +59,7 @@ public class MvcEmployeeController : BaseController
         if (emp?.Success == false)
             return RedirectToAction("Index");
 
-        return View(emp?.Resource ?? new EmployeeDto());
+        return View(emp?.Resource);
     }
 
     /// <summary>
@@ -94,7 +94,7 @@ public class MvcEmployeeController : BaseController
         if (emp?.Success == false)
             return RedirectToAction("Index");
 
-        return View(emp?.Resource ?? new EmployeeDto());
+        return View(emp?.Resource);
     }
 
     /// <summary>
@@ -110,7 +110,7 @@ public class MvcEmployeeController : BaseController
         if (emp?.Success == false)
             return RedirectToAction("Index");
 
-        return View(emp?.Resource ?? new EmployeeDto());
+        return View(emp?.Resource);
     }
 
     /// <summary>

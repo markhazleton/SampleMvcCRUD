@@ -5,15 +5,27 @@ namespace Mwh.Sample.Domain.Models;
 /// </summary>
 public class EmployeeDto
 {
-    /// <summary>
-    /// Constructor
-    /// </summary>
     public EmployeeDto()
     {
-        Department = EmployeeDepartmentEnum.Unknown;
-        Country = string.Empty;
-        State = string.Empty;
-        Name = string.Empty;
+
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <param name="Name"></param>
+    /// <param name="dept"></param>
+    public EmployeeDto(int id, string name, int age, string state, string country, EmployeeDepartmentEnum dept)
+    {
+        Id = id;
+        Name = name;
+        Age = age;
+        State = state;
+        Country = country;
+        Department = dept;
+        if (!IsValid())
+            throw new ArgumentException("New Employee is not valid", nameof(name));
+
     }
 
     /// <summary>
@@ -53,22 +65,19 @@ public class EmployeeDto
     /// Returns true if ... is valid.
     /// </summary>
     /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
-    public bool IsValid
+    public bool IsValid()
     {
-        get
-        {
-            if (string.IsNullOrEmpty(Name))
-                return false;
-            if (string.IsNullOrEmpty(State))
-                return false;
-            if (string.IsNullOrEmpty(Country))
-                return false;
-            if (Department == EmployeeDepartmentEnum.Unknown)
-                return false;
-            if ((Age < 1))
-                return false;
-            return true;
-        }
+        if (string.IsNullOrEmpty(Name))
+            return false;
+        if (string.IsNullOrEmpty(State))
+            return false;
+        if (string.IsNullOrEmpty(Country))
+            return false;
+        if (Department == EmployeeDepartmentEnum.Unknown)
+            return false;
+        if ((Age < 1))
+            return false;
+        return true;
     }
 
     /// <summary>

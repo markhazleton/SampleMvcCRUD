@@ -21,7 +21,6 @@ public class EmployeeMock : IEmployeeDB
     {
         _generatedEmployeeCount = GeneratedEmployeeCount;
         _depts = new List<DepartmentDto>();
-
         foreach (var dept in Enum.GetValues(typeof(EmployeeDepartmentEnum)))
         {
             if ((int)dept > 0)
@@ -29,48 +28,49 @@ public class EmployeeMock : IEmployeeDB
                 _depts.Add(new DepartmentDto((int)dept, dept?.ToString() ?? "UNKNOWN", dept?.ToString() ?? "UNKNOWN"));
             }
         }
-        _emps = new List<EmployeeDto>()
+        var FixedEmployees = new List<Employee>()
             {
-            new EmployeeDto() { Name = "Ilsa Lund", Age = 25, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "Kansas" },
-            new EmployeeDto() { Name = "Major Strasser", Age = 35, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "Texas" },
-            new EmployeeDto() { Name = "Rick Blaine", Age = 45, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "New York" },
-            new EmployeeDto() { Name = "Victor Laszlo", Age = 55, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "Colorado" },
-            new EmployeeDto() { Name = "Louis Renault", Age = 65, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "Idaho" },
-            new EmployeeDto() { Name = "Sam Spade", Age = 55, Country = "USA", Department = EmployeeDepartmentEnum.IT, State = "California" },
-            new EmployeeDto() { Name = "Jim Smith",Age = 35,Department = EmployeeDepartmentEnum.IT,State = "Florida",Country = "USA"},
-            new EmployeeDto() { Name = "Bob Roberts",Age = 50,Department = EmployeeDepartmentEnum.HR,State = "Texas",Country = "USA"},
-            new EmployeeDto() { Name = "Sam Malone",Age = 53,Department = EmployeeDepartmentEnum.Marketing,State = "Massachusetts",Country = "USA"},
-            new EmployeeDto() { Name = "Frank Sinatra",Age = 50,Department = EmployeeDepartmentEnum.Executive,State = "New York",Country = "USA"},
+            new Employee() { Name = "Ilsa Lund", Age = 25, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Kansas" },
+            new Employee() { Name = "Major Strasser", Age = 35, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Texas" },
+            new Employee() { Name = "Rick Blaine", Age = 45, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "New York" },
+            new Employee() { Name = "Victor Laszlo", Age = 55, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Colorado" },
+            new Employee() { Name = "Louis Renault", Age = 65, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Idaho" },
+            new Employee() { Name = "Sam Spade", Age = 55, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "California" },
+            new Employee() { Name = "Jim Smith",Age = 35,DepartmentId = (int)EmployeeDepartmentEnum.IT,State = "Florida",Country = "USA"},
+            new Employee() { Name = "Bob Roberts",Age = 50,DepartmentId = (int)EmployeeDepartmentEnum.HR,State = "Texas",Country = "USA"},
+            new Employee() { Name = "Sam Malone",Age = 53,DepartmentId = (int)EmployeeDepartmentEnum.Marketing,State = "Massachusetts",Country = "USA"},
+            new Employee() { Name = "Frank Sinatra",Age = 50,DepartmentId = (int)EmployeeDepartmentEnum.Executive,State = "New York",Country = "USA"},
             };
+        FixedEmployees.AddRange(GetEmployeeList(_generatedEmployeeCount));
 
-        GetEmployeeList(_generatedEmployeeCount).ForEach(e =>
+        _emps = new List<EmployeeDto>();
+        for (int i = 1; i < FixedEmployees.Count; i++)
         {
-            var emp = Create(e);
-            if (emp is not null) _emps.Add(emp);
-        });
-
-        for (int i = 0; i < _emps.Count; i++)
-        {
-            _emps[i].Id = i + 1;
+            try
+            {
+                var emp = Create(FixedEmployees[i], i);
+                if (emp is not null) _emps.Add(emp);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 
-    public static EmployeeDto? Create(Employee? item)
+    private static EmployeeDto? Create(Employee? item, int id)
     {
         if (item == null) return null;
 
         EmployeeDepartmentEnum empDept = (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1);
-
-        return new EmployeeDto()
-        {
-            Name = item?.Name ?? string.Empty,
-            State = item?.State ?? string.Empty,
-            Country = item?.Country ?? string.Empty,
-            Age = item?.Age ?? 0,
-            Department = empDept,
-            DepartmentName = empDept.ToString(),
-            Id = item?.Id ?? 0
-        };
+        return new EmployeeDto(
+            id,
+            item?.Name ?? string.Empty,
+            item?.Age ?? 99,
+            item?.State ?? string.Empty,
+            item?.Country ?? string.Empty,
+            empDept
+        );
     }
 
     /// <summary>
@@ -186,12 +186,12 @@ public class EmployeeMock : IEmployeeDB
     /// </summary>
     /// <param name="emp">The emp.</param>
     /// <returns>EmployeeModel.</returns>
-    public async Task<EmployeeDto> UpdateAsync(EmployeeDto? emp)
+    public async Task<EmployeeDto?> UpdateAsync(EmployeeDto? emp)
     {
         if (emp == null)
-            return new EmployeeDto();
+            return null;
 
-        if (!emp.IsValid)
+        if (!emp.IsValid())
             return emp;
 
         if (emp.Id == 0)
@@ -206,17 +206,20 @@ public class EmployeeMock : IEmployeeDB
         }
         else
         {
-            var updateEmp = _emps.Where(w => w.Id == emp.Id).FirstOrDefault();
-
+            var updateEmp = _emps.Find(o => o.Id == emp.Id);
             if (updateEmp == null)
-                return new EmployeeDto();
-
-            updateEmp.Name = emp.Name;
-            updateEmp.Age = emp.Age;
-            updateEmp.Department = emp.Department;
-            updateEmp.Country = emp.Country;
-            updateEmp.State = emp.State;
-            return updateEmp;
+            {
+                _emps.Add(emp);
+            }
+            else
+            {
+                updateEmp.Name = emp.Name;
+                updateEmp.Age = emp.Age;
+                updateEmp.Department = emp.Department;
+                updateEmp.Country = emp.Country;
+                updateEmp.State = emp.State;
+            }
+            return emp;
         }
     }
 

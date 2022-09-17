@@ -10,43 +10,35 @@ public class EnumerableExtensionsTest
         // Arrange
         var myList = new List<EmployeeDto>
         {
-            new EmployeeDto()
-            {
-                Age = 10,
-                Id = 1,
-                Name = "Test Ten",
-                State = "Texas",
-                Country = "USA",
-                Department = EmployeeDepartmentEnum.IT,
-                DepartmentName = "IT"
-            },
-            new EmployeeDto()
-            {
-                Age = 20,
-                Id = 2,
-                Name = "Test Twenty",
-                State = "Texas",
-                Country = "USA",
-                Department = EmployeeDepartmentEnum.Executive,
-                DepartmentName = "Executive"
-            },
-            new EmployeeDto()
-            {
-                Age = 30,
-                Id = 3,
-                Name = "Test Thirty",
-                State = "Texas",
-                Country = "USA",
-                Department = EmployeeDepartmentEnum.HR,
-                DepartmentName = "HR"
-            }
+            new EmployeeDto(
+                1,
+                "Test Ten",
+                10,
+                "Texas",
+                "USA",
+                EmployeeDepartmentEnum.IT
+            ),
+            new EmployeeDto(
+                2,
+                "Test Twenty",
+                20,
+                "Texas",
+                "USA",
+                EmployeeDepartmentEnum.Executive),
+            new EmployeeDto(
+                3,
+                "Test Thirty",
+                30,
+                "Texas",
+                "USA",
+                EmployeeDepartmentEnum.HR)
         };
 
         // Act
         var emp = myList.WithMinium(emp => emp.Age);
 
         // Assert
-        Assert.AreEqual(emp.Age, 10);
+        Assert.AreEqual(emp?.Age, 10);
 
     }
     [TestMethod]

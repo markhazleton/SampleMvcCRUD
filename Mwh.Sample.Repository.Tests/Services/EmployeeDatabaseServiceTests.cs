@@ -1,5 +1,7 @@
 ﻿
 using Mwh.Sample.Domain.Interfaces;
+using Mwh.Sample.Repository.Repository;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,8 +14,19 @@ namespace Mwh.Sample.Repository.Tests.Services;
 [TestClass]
 public class EmployeeDatabaseServiceTests
 {
-    private CancellationToken cancellationToken;
-    private IEmployeeService employeeService;
+    private readonly CancellationToken ct;
+    private readonly IEmployeeService employeeService;
+
+    public EmployeeDatabaseServiceTests()
+    {
+        var builder = new DbContextOptionsBuilder();
+        _ = builder.EnableSensitiveDataLogging(true);
+        _ = builder.UseInMemoryDatabase("EmployeeDBTests");
+        var context = new EmployeeContext(builder.Options);
+        employeeService = new EmployeeDatabaseService(context);
+        ct = default;
+    }
+
 
     /// <summary>
     /// 
@@ -39,10 +52,10 @@ public class EmployeeDatabaseServiceTests
 
         // Act
         var paging = new PagingParameterModel();
-        var initResults = (await employeeService.GetEmployeesAsync(paging, cancellationToken).ConfigureAwait(true)).Count();
+        var initResults = (await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true)).Count();
         var result = await employeeService.AddMultipleEmployeesAsync(namelist).ConfigureAwait(true);
-        var afterResults = (await employeeService.GetEmployeesAsync(paging, cancellationToken).ConfigureAwait(true)).Count();
-        var empList = await employeeService.GetEmployeesAsync(paging, cancellationToken).ConfigureAwait(true);
+        var afterResults = (await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true)).Count();
+        var empList = await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true);
         var emp1 = empList.Where(w => w.Name == namelist[0]).FirstOrDefault();
 
         // Assert
@@ -53,19 +66,19 @@ public class EmployeeDatabaseServiceTests
     public async Task DeleteAsync_ExpectedBehavior()
     {
         // Arrange
-        var employee = new EmployeeDto()
-        {
-            Name = "TestDelete",
-            Age = 20,
-            State = "TX",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT,
-        };
+        var employee = new EmployeeDto(
+            99,
+            "TestDelete",
+            20,
+            "TX",
+            "USA",
+            EmployeeDepartmentEnum.IT
+        );
 
         // Act
-        var result = await employeeService.SaveAsync(employee, cancellationToken);
+        var result = await employeeService.SaveAsync(employee, ct);
         var id = result?.Resource?.Id ?? 0;
-        var afterResults = await employeeService.DeleteAsync(id, cancellationToken);
+        var afterResults = await employeeService.DeleteAsync(id, ct);
 
 
         // Assert
@@ -84,7 +97,7 @@ public class EmployeeDatabaseServiceTests
         // Act
         var result = await employeeService.DeleteAsync(
             id,
-            cancellationToken);
+            ct);
 
         // Assert
         Assert.AreEqual(result.Success, false);
@@ -97,7 +110,7 @@ public class EmployeeDatabaseServiceTests
         int id = 0;
 
         // Act
-        var result = await employeeService.FindEmployeeByIdAsync(id, cancellationToken);
+        var result = await employeeService.FindEmployeeByIdAsync(id, ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -110,7 +123,7 @@ public class EmployeeDatabaseServiceTests
         // Arrange
 
         // Act
-        var result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), cancellationToken);
+        var result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -122,41 +135,54 @@ public class EmployeeDatabaseServiceTests
         // Arrange
 
         // Act
-        var result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), cancellationToken);
+        var result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), ct);
 
         // Assert
         Assert.IsNotNull(result);
     }
 
     [TestInitialize]
-    public void Initialize()
+    public async Task Initialize()
     {
-        var context = new EmployeeContext();
-        employeeService = new EmployeeDatabaseService(context);
-        cancellationToken = default;
+        try
+        {
+            var employeeMock = new EmployeeMock();
+            foreach (var dept in employeeMock.DepartmentCollection())
+            {
+                await employeeService.SaveAsync(dept, ct).ConfigureAwait(true);
+            }
+            employeeMock.EmployeeCollection()?.ForEach(async emp =>
+            {
+                await employeeService.UpdateAsync(emp.Id, emp, ct).ConfigureAwait(true);
+            });
+        }
+        catch (Exception ex)
+        {
+            Console.Write(ex.Message);
+            throw;
+        }
     }
 
     [TestMethod]
     public async Task Save_StateUnderTest_ValidNew()
     {
         // Arrange
-        EmployeeDto item = new()
-        {
-            Name = "Test",
-            Age = 25,
-            State = "Texas",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT,
-        };
+        EmployeeDto item = new(
+            999,
+            "Test",
+            25,
+            "Texas",
+            "USA",
+            EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = await employeeService.SaveAsync(item, cancellationToken);
+        var result = await employeeService.SaveAsync(item, ct);
 
-        var UpdateEmp = await employeeService.FindEmployeeByIdAsync(result?.Resource?.Id ?? 0, cancellationToken).ConfigureAwait(true);
+        var UpdateEmp = await employeeService.FindEmployeeByIdAsync(result?.Resource?.Id ?? 0, ct).ConfigureAwait(true);
 
         UpdateEmp.Resource.Age = 50;
 
-        var UpdateResult = await employeeService.SaveAsync(UpdateEmp.Resource, cancellationToken);
+        var UpdateResult = await employeeService.SaveAsync(UpdateEmp.Resource, ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -174,7 +200,7 @@ public class EmployeeDatabaseServiceTests
         EmployeeDto? item = null;
 
         // Act
-        var result = await employeeService.SaveAsync(item, cancellationToken);
+        var result = await employeeService.SaveAsync(item, ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -188,14 +214,13 @@ public class EmployeeDatabaseServiceTests
     {
         // Arrange
         CancellationToken cancellationToken = default;
-        EmployeeDto item = new()
-        {
-            Name = "Test",
-            Age = 25,
-            State = "Texas",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT,
-        };
+        EmployeeDto item = new(
+            999,
+            "Test",
+            25,
+            "Texas",
+            "USA",
+            EmployeeDepartmentEnum.IT);
 
         // Act
         var result = await employeeService.SaveAsync(item, cancellationToken);
@@ -208,31 +233,30 @@ public class EmployeeDatabaseServiceTests
     public async Task SaveAsync_StateUnderTest_ValidNew()
     {
         // Arrange
-        EmployeeDto item = new()
-        {
-            Name = "Test",
-            Age = 25,
-            State = "Texas",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT,
-        };
+        EmployeeDto item = new(
+            999,
+            "Test",
+            25,
+            "Texas",
+            "USA",
+            EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = await employeeService.SaveAsync(item, cancellationToken);
+        var result = await employeeService.SaveAsync(item, ct);
         if (result.Success)
-            item = result.Resource ?? new EmployeeDto();
+            item = result.Resource;
 
-        var FindResult = await employeeService.FindEmployeeByIdAsync(item.Id, cancellationToken).ConfigureAwait(true);
+        var FindResult = await employeeService.FindEmployeeByIdAsync(item.Id, ct).ConfigureAwait(true);
 
         if (FindResult.Success)
-            item = FindResult.Resource ?? new EmployeeDto();
+            item = FindResult.Resource;
 
         item.Age = 50;
 
-        var UpdateResult = await employeeService.SaveAsync(item, cancellationToken);
+        var UpdateResult = await employeeService.SaveAsync(item, ct);
 
         if (UpdateResult.Success)
-            item = UpdateResult.Resource ?? new EmployeeDto();
+            item = UpdateResult.Resource;
 
 
         // Assert
@@ -252,26 +276,21 @@ public class EmployeeDatabaseServiceTests
     {
         // Arrange
         int id = 0;
-        EmployeeDto? employee = new EmployeeDto()
-        {
-            Id = 0,
-            Name = "Test",
-            Age = 25,
-            State = "TX",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT
-        };
+        EmployeeDto item = new(
+            999,
+            "Test",
+            25,
+            "Texas",
+            "USA",
+            EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = await employeeService.UpdateAsync(
-            id,
-            employee,
-            cancellationToken);
+        var result = await employeeService.UpdateAsync(id, item, ct);
 
         // Assert
         Assert.IsNotNull(result);
         Assert.IsFalse(result.Success);
-        Assert.AreEqual("Can not update employee with id(0)", result.Message);
+        Assert.AreEqual("Mismatch in id(0) && id(999).", result.Message);
     }
     /// <summary>
     /// 
@@ -283,21 +302,18 @@ public class EmployeeDatabaseServiceTests
         // Arrange
         int id = 999;
         // Act
-        EmployeeDto item = new()
-        {
-            Id = 1,
-            Name = "Test",
-            Age = 25,
-            State = "Texas",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT,
-        };
-
+        EmployeeDto item = new(
+            1,
+            "Test",
+            25,
+            "Texas",
+            "USA",
+            EmployeeDepartmentEnum.IT);
 
         var result = await employeeService.UpdateAsync(
             id,
             item,
-            cancellationToken);
+            ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -314,21 +330,19 @@ public class EmployeeDatabaseServiceTests
         // Arrange
         int id = 999;
         // Act
-        EmployeeDto item = new()
-        {
-            Id = 999,
-            Name = "Test",
-            Age = 25,
-            State = "Texas",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT,
-        };
+        EmployeeDto item = new(
+            999,
+            "Test",
+            25,
+            "Texas",
+            "USA",
+            EmployeeDepartmentEnum.IT);
 
 
         var result = await employeeService.UpdateAsync(
             id,
             item,
-            cancellationToken);
+            ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -350,7 +364,7 @@ public class EmployeeDatabaseServiceTests
         var result = await employeeService.UpdateAsync(
             id,
             employee,
-            cancellationToken);
+            ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -368,7 +382,7 @@ public class EmployeeDatabaseServiceTests
         var result = await employeeService.UpdateAsync(
             id,
             employee,
-            cancellationToken);
+            ct);
 
         // Assert
         Assert.IsNotNull(result);

@@ -14,24 +14,19 @@
             {
                 Employees = new EmployeeDto[]
             {
-                new EmployeeDto()
-                {
-                    Id = 1,
-                    Name = "Test",
-                    Age = 22,
-                    State = "TX",
-                    Country = "USA",
-                    Department = EmployeeDepartmentEnum.IT
-                },
-                new EmployeeDto()
-                {
-                    Id = 2,
-                    Name = "Test Two",
-                    Age = 33,
-                    State = "TX",
-                    Country = "USA",
-                    Department = EmployeeDepartmentEnum.IT
-                }
+                new EmployeeDto(1,
+                    "Test",
+                    22,
+                    "TX",
+                    "USA",
+                    EmployeeDepartmentEnum.IT),
+                new EmployeeDto(
+                    2,
+                    "Test Two",
+                    33,
+                    "TX",
+                    "USA",
+                    EmployeeDepartmentEnum.IT)
             },
 
                 // Act

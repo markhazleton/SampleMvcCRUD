@@ -9,7 +9,6 @@ public class EmployeeDB : IEmployeeDB
     {
         _context = context;
     }
-
     private static List<EmployeeDto> Create(List<Employee> list)
     {
         if (list == null) return new List<EmployeeDto>();
@@ -36,19 +35,16 @@ public class EmployeeDB : IEmployeeDB
         };
     }
 
-    private static EmployeeDto Create(Employee? entity)
+    private static EmployeeDto Create(Employee entity)
     {
-        if (entity is null) return new EmployeeDto();
-
-        return new EmployeeDto()
-        {
-            Id = entity.Id,
-            State = entity?.State ?? "TX",
-            Age = entity?.Age ?? 0,
-            Country = entity?.Country ?? "USA",
-            Department = entity is null ? EmployeeDepartmentEnum.IT : (EmployeeDepartmentEnum)entity.DepartmentId,
-            Name = entity?.Name ?? "DEFAULT"
-        };
+        return new EmployeeDto(
+            entity.Id,
+            entity.Name ?? "DEFAULT",
+            entity.Age,
+            entity.State ?? "TX",
+            entity.Country ?? "USA",
+            (EmployeeDepartmentEnum)entity.DepartmentId
+        );
     }
 
     public async Task<bool> DeleteEmployeeAsync(int ID)
@@ -72,9 +68,10 @@ public class EmployeeDB : IEmployeeDB
         return true;
     }
 
-    public async Task<EmployeeDto> EmployeeAsync(int id)
+    public async Task<EmployeeDto?> EmployeeAsync(int id)
     {
-        return Create(await _context.Employees.Where(w => w.Id == id).FirstOrDefaultAsync());
+        var empEntity = await _context.Employees.Where(w => w.Id == id).FirstOrDefaultAsync();
+        return empEntity is null ? null : Create(empEntity);
     }
 
     public async Task<List<EmployeeDto>> EmployeeCollectionAsync()

@@ -6,7 +6,9 @@ namespace Mwh.Sample.Domain.Models;
 /// </summary>
 public class EmployeeResponse : BaseResponse<EmployeeDto>
 {
-    public EmployeeResponse() { }
+    public EmployeeResponse() : base() { }
+
+    public EmployeeResponse(bool IsSuccess = false) : base(IsSuccess) { }
     /// <summary>
     /// Creates a success response.
     /// </summary>

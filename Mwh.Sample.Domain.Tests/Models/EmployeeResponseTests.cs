@@ -8,15 +8,13 @@ public class EmployeeResponseTests
     public void EmployeeResponse_Expected()
     {
         // Arrange
-        var employee = new EmployeeDto()
-        {
-            Id = 1,
-            Age = 20,
-            Name = "Test Employee",
-            State = "TX",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT
-        };
+        var employee = new EmployeeDto(
+            1,
+            "Test Employee",
+            20,
+            "TX",
+            "USA",
+            EmployeeDepartmentEnum.IT);
         var employeeResponse = new EmployeeResponse(employee);
 
         // Act

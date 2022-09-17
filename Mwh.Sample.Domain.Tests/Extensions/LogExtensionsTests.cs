@@ -50,7 +50,7 @@ public class LogExtensionsTests
     public void IsSimpleType_StateUnderTest_ExpectedBehaviorFalse()
     {
         // Arrange
-        EmployeeDto type = new();
+        EmployeeDto type = new(99, "Test", 33, "Test", "Test", EmployeeDepartmentEnum.IT);
 
         // Act
         var result = LogExtensions.IsSimpleType(

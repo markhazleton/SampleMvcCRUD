@@ -133,38 +133,34 @@ namespace Mwh.Sample.Repository.Tests.Repository
         {
             // Arrange
             var employeeMock = new EmployeeMock();
-            EmployeeDto emp = new EmployeeDto()
-            {
-                Id = 9999,
-                Name = "Test",
-                Age = 99,
-                Country = "Test",
-                State = "Test",
-                Department = EmployeeDepartmentEnum.IT
-            };
+            EmployeeDto emp = new(
+                9999,
+                "Test",
+                99,
+                "Test",
+                "Test",
+                EmployeeDepartmentEnum.IT);
 
             // Act
             var result = await employeeMock.UpdateAsync(emp);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.Id, 0);
-            Assert.IsFalse(result.IsValid);
+            Assert.AreEqual(result.Id, 9999);
+            Assert.IsTrue(result.IsValid());
         }
         [TestMethod]
         public async Task UpdateAsync_StateUnderTest_NotValid()
         {
             // Arrange
             var employeeMock = new EmployeeMock();
-            EmployeeDto emp = new EmployeeDto();
+            EmployeeDto? emp = null;
 
             // Act
             var result = await employeeMock.UpdateAsync(emp);
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(result.Id, 0);
-            Assert.IsFalse(result.IsValid);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
@@ -178,8 +174,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
             var result = await employeeMock.UpdateAsync(emp);
 
             // Assert
-            Assert.AreEqual(result.Id, 0);
-            Assert.IsFalse(result.IsValid);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
@@ -243,14 +238,14 @@ namespace Mwh.Sample.Repository.Tests.Repository
         {
             // Arrange
             var employeeDB = new EmployeeMock();
-            var newEmp = new EmployeeDto()
-            {
-                Age = 33,
-                Name = "Test User",
-                State = "Texas",
-                Country = "USA",
-                Department = EmployeeDepartmentEnum.IT
-            };
+            EmployeeDto newEmp = new(
+                9999,
+                "Test",
+                99,
+                "Test",
+                "Test",
+                EmployeeDepartmentEnum.IT);
+
 
             // Act
 
@@ -274,8 +269,8 @@ namespace Mwh.Sample.Repository.Tests.Repository
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(addResult.Id, result.Id);
-            Assert.AreEqual(finalResult.Age, 44);
-            Assert.AreEqual(finalResult.State, "FL");
+            Assert.AreEqual(finalResult?.Age, 44);
+            Assert.AreEqual(finalResult?.State, "FL");
 
         }
     }

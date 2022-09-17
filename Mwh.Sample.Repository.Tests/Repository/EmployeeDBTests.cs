@@ -122,14 +122,13 @@ public class EmployeeDBTests
     public async Task Delete_StateUnderTest_ExpectedBehaviorNewEmployee()
     {
         // Arrange
-        var newEmp = new EmployeeDto()
-        {
-            Age = 33,
-            Name = "Test User",
-            State = "Texas",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT
-        };
+        var newEmp = new EmployeeDto(
+            99,
+            "Test User",
+            33,
+            "Texas",
+            "USA",
+            EmployeeDepartmentEnum.IT);
 
         // Act
 
@@ -175,7 +174,7 @@ public class EmployeeDBTests
         var result = await employeeDB.EmployeeAsync(id);
 
         // Assert
-        Assert.IsNotNull(result);
+        Assert.IsNull(result);
     }
 
     [TestMethod]
@@ -194,14 +193,13 @@ public class EmployeeDBTests
     public async Task Update_StateUnderTest_ExpectedBehaviorNewEmployee()
     {
         // Arrange
-        var newEmp = new EmployeeDto()
-        {
-            Age = 33,
-            Name = "Test User",
-            State = "Texas",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT
-        };
+        var newEmp = new EmployeeDto(
+            99,
+            "Test User",
+            33,
+            "Texas",
+            "USA",
+            EmployeeDepartmentEnum.IT);
 
         // Act
 
@@ -225,7 +223,7 @@ public class EmployeeDBTests
         // Assert
         Assert.IsNotNull(result);
         Assert.AreEqual(addResult.Id, result.Id);
-        Assert.AreNotEqual(initResult.Count, updatedResult.Count);
+        Assert.AreEqual(initResult.Count, updatedResult.Count);
         Assert.AreEqual(finalResult.Age, 44);
         Assert.AreEqual(finalResult.State, "FL");
 
@@ -237,14 +235,13 @@ public class EmployeeDBTests
     public async Task Update_NewEmployee()
     {
         // Arrange
-        EmployeeDto emp = new EmployeeDto()
-        {
-            Age = 22,
-            Name = "Test",
-            State = "TX",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT
-        };
+        var emp = new EmployeeDto(
+            99,
+            "Test User",
+            33,
+            "Texas",
+            "USA",
+            EmployeeDepartmentEnum.IT);
 
         // Act
         var result = await employeeDB.UpdateAsync(emp);
@@ -260,15 +257,14 @@ public class EmployeeDBTests
     public async Task Update_NewEmployeeWithId98()
     {
         // Arrange
-        EmployeeDto emp = new EmployeeDto()
-        {
-            Age = 22,
-            Name = "Test",
-            State = "TX",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.IT,
-            Id = 98
-        };
+        var emp = new EmployeeDto(
+            98,
+            "Test User",
+            33,
+            "Texas",
+            "USA",
+            EmployeeDepartmentEnum.IT);
+
 
         // Act
         var result = await employeeDB.UpdateAsync(emp);

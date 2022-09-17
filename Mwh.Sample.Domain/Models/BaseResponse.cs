@@ -17,6 +17,12 @@ public abstract class BaseResponse<T>
         Message = resource == null ? "Resource is null" : string.Empty;
         Resource = resource;
     }
+    protected BaseResponse(bool IsSucces)
+    {
+        Success = IsSucces;
+        Message = String.Empty;
+        Resource = default;
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseResponse{T}"/> class.

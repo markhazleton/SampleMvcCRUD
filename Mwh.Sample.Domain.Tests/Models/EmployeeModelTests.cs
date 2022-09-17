@@ -2,152 +2,122 @@
 namespace Mwh.Sample.Domain.Tests.Models;
 
 /// <summary>
-/// Defines test class EmployeeModelTests.
+/// Defines test class EmployeeDtoTests.
 /// </summary>
 [TestClass]
-public class EmployeeModelTests
+public class EmployeeDtoTests
 {
     /// <summary>
-    /// Defines the test method EmployeeModel_Validate.
+    /// Defines the test method emp_Validate.
     /// </summary>
     [TestMethod]
-    public void EmployeeModel_Validate()
+    public void emp_Validate()
     {
         // Arrange
-        var employeeModel = new EmployeeDto()
-        {
-            Age = 20,
-            State = "State",
-            Country = "Country",
-            Department = EmployeeDepartmentEnum.Marketing,
-            Id = 0,
-            Name = "Name"
-        };
+        var emp = GetValidEmployee();
 
         // Act
 
         // Assert
-        Assert.IsNotNull(employeeModel);
-        Assert.IsTrue(employeeModel.IsValid);
-        Assert.AreEqual(employeeModel.Name, "Name");
-        Assert.AreEqual(employeeModel.State, "State");
-        Assert.AreEqual(employeeModel.Country, "Country");
-        Assert.AreEqual(employeeModel.Department, EmployeeDepartmentEnum.Marketing);
-        Assert.AreEqual(employeeModel.Age, 20);
+        Assert.IsNotNull(emp);
+        Assert.IsTrue(emp.IsValid());
+        Assert.AreEqual(emp.Name, "Name");
+        Assert.AreEqual(emp.State, "State");
+        Assert.AreEqual(emp.Country, "Country");
+        Assert.AreEqual(emp.Department, EmployeeDepartmentEnum.Marketing);
+        Assert.AreEqual(emp.Age, 20);
     }
     /// <summary>
-    /// Defines the test method EmployeeModel_Validate.
+    /// Defines the test method emp_Validate.
     /// </summary>
     [TestMethod]
-    public void EmployeeModel_IsValidFalse_Name()
+    public void emp_IsValidFalse_Name()
     {
         // Arrange
-        var employeeModel = new EmployeeDto()
-        {
-            Age = 20,
-            State = "State",
-            Country = "Country",
-            Department = EmployeeDepartmentEnum.Marketing,
-            Id = 0,
-            Name = string.Empty
-        };
+        var emp = GetValidEmployee();
 
         // Act
+        emp.Name = String.Empty;
 
         // Assert
-        Assert.IsNotNull(employeeModel);
-        Assert.IsFalse(employeeModel.IsValid);
+        Assert.IsNotNull(emp);
+        Assert.IsFalse(emp.IsValid());
     }
     /// <summary>
-    /// Defines the test method EmployeeModel_Validate.
+    /// Defines the test method emp_Validate.
     /// </summary>
     [TestMethod]
-    public void EmployeeModel_IsValidFalse_State()
+    public void emp_IsValidFalse_State()
     {
         // Arrange
-        var employeeModel = new EmployeeDto()
-        {
-            Age = 20,
-            State = string.Empty,
-            Country = "Country",
-            Department = EmployeeDepartmentEnum.Marketing,
-            Id = 0,
-            Name = "Test"
-        };
+        var emp = GetValidEmployee();
 
         // Act
+        emp.State = String.Empty; ;
 
         // Assert
-        Assert.IsNotNull(employeeModel);
-        Assert.IsFalse(employeeModel.IsValid);
+        Assert.IsNotNull(emp);
+        Assert.IsFalse(emp.IsValid());
     }
     /// <summary>
-    /// Defines the test method EmployeeModel_Validate.
+    /// Defines the test method emp_Validate.
     /// </summary>
     [TestMethod]
-    public void EmployeeModel_IsValidFalse_Country()
+    public void emp_IsValidFalse_Country()
     {
         // Arrange
-        var employeeModel = new EmployeeDto()
-        {
-            Age = 20,
-            State = "TX",
-            Country = string.Empty,
-            Department = EmployeeDepartmentEnum.Marketing,
-            Id = 0,
-            Name = "Test"
-        };
+        var emp = GetValidEmployee();
 
         // Act
+        emp.Country = String.Empty;
 
         // Assert
-        Assert.IsNotNull(employeeModel);
-        Assert.IsFalse(employeeModel.IsValid);
+        Assert.IsNotNull(emp);
+        Assert.IsFalse(emp.IsValid());
     }
     /// <summary>
-    /// Defines the test method EmployeeModel_Validate.
+    /// Defines the test method emp_Validate.
     /// </summary>
     [TestMethod]
-    public void EmployeeModel_IsValidFalse_Age()
+    public void emp_IsValidFalse_Age()
     {
         // Arrange
-        var employeeModel = new EmployeeDto()
-        {
-            Age = 0,
-            State = "TX",
-            Country = "USA",
-            Department = EmployeeDepartmentEnum.Marketing,
-            Id = 0,
-            Name = "Test"
-        };
+        var emp = GetValidEmployee();
 
         // Act
+        emp.Age = 0;
 
         // Assert
-        Assert.IsNotNull(employeeModel);
-        Assert.IsFalse(employeeModel.IsValid);
+        Assert.IsNotNull(emp);
+        Assert.IsFalse(emp.IsValid());
     }
     /// <summary>
-    /// Defines the test method EmployeeModel_Validate.
+    /// Defines the test method emp_Validate.
     /// </summary>
     [TestMethod]
-    public void EmployeeModel_IsValidFalse_Department()
+    public void emp_IsValidFalse_Department()
     {
         // Arrange
-        var employeeModel = new EmployeeDto()
-        {
-            Age = 20,
-            State = "TX",
-            Country = "USA",
-            Id = 0,
-            Name = "Test"
-        };
+        var emp = GetValidEmployee();
 
         // Act
+        emp.Department = EmployeeDepartmentEnum.Unknown;
+
 
         // Assert
-        Assert.IsNotNull(employeeModel);
-        Assert.IsFalse(employeeModel.IsValid);
+        Assert.IsNotNull(emp);
+        Assert.IsFalse(emp.IsValid());
+
+    }
+    public static EmployeeDto GetValidEmployee()
+    {
+        return new EmployeeDto(
+                    999,
+                    "Name",
+                    20,
+                    "State",
+                    "Country",
+                    EmployeeDepartmentEnum.Marketing);
     }
 
 }

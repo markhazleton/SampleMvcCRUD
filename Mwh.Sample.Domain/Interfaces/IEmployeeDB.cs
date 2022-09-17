@@ -41,7 +41,7 @@ public interface IEmployeeDB
     /// </summary>
     /// <param name="employee">The emp.</param>
     /// <returns>EmployeeModel.</returns>
-    Task<EmployeeDto> UpdateAsync(EmployeeDto employee);
+    Task<EmployeeDto?> UpdateAsync(EmployeeDto employee);
     /// <summary>
     /// 
     /// </summary>
