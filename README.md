@@ -1,7 +1,11 @@
 # SampleMvcCRUD
 An Asp.Net MVC Application to demonstrate multiple ways of implementing a simple maintenance (CRUD) user interface
 
-For deployments there is an [Azure DevOps project](https://dev.azure.com/markhazleton/SampleMvcCRUD) with Continuous Integration/Continuous Deployment (CI/CD) pipelines to Azure App Services
+For deployments there are 2 approaches:
+
+1)  *current* [GitHub Actions](https://github.com/markhazleton/SampleMvcCRUD/actions) with Continuous Integration/Continuous Deployment (CI/CD) Docker Hub and Azure App Services 
+2)  [Azure DevOps project](https://dev.azure.com/markhazleton/SampleMvcCRUD) with Continuous Integration/Continuous Deployment (CI/CD) pipelines to Azure App Services 
+
 
 The Net 6 Web application is hosted:
 - The .Net 6 version is hosted on IIS on a Amazon Virtual Machine [EmployeeMvcCrud.controlorigins.com](https://employeemvccrud.controlorigins.com/)
