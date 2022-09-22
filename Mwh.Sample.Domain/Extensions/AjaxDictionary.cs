@@ -33,7 +33,7 @@ public sealed class AjaxDictionary<TKey, TValue>
         get
         {
             _ = _Dictionary.TryGetValue(key, out TValue? vOut);
-            return vOut ?? default;
+            return vOut;
         }
         set
         {
@@ -63,13 +63,43 @@ public sealed class AjaxDictionary<TKey, TValue>
         }
     }
 
+    public override string ToString()
+    {
+        string separator = ", ";
+
+        if (this._Dictionary is null || this._Dictionary.Count == 0)
+            return string.Empty;
+
+        if (this._Dictionary.Count == 1)
+            return $"{this._Dictionary.First().Key}:{this._Dictionary.First().Value}";
+
+        StringBuilder sb = new();
+        int counter = 0;
+        foreach (var item in this._Dictionary)
+        {
+            if (counter == 0)
+            {
+                sb.Append($"{item.Key}:{item.Value}");
+            }
+            else
+            {
+                sb.Append($"{separator}{item.Key}:{item.Value}");
+            }
+            counter++;
+        }
+        return sb.ToString();
+    }
+
+
     /// <summary>
     /// Adds the specified key.
     /// </summary>
     /// <param name="key">The key.</param>
     /// <param name="value">The value.</param>
-    public void Add(TKey key, TValue value)
+    public void Add(TKey key, TValue? value)
     {
+        if (value is null) return;
+
         if (_Dictionary.ContainsKey(key))
             _Dictionary[key] = value;
         else

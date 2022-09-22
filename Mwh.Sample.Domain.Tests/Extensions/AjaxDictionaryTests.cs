@@ -14,7 +14,20 @@ public class AjaxDictionaryTests
     {
         var myTest = new AjaxDictionary<int, string>();
         myTest.Add(1, "test");
+
+        Assert.AreEqual("1:test", myTest.ToString());
         Assert.AreEqual(1, myTest.GetList().Count);
+    }
+    /// <summary>
+    /// Defines the test method AddTest.
+    /// </summary>
+    [TestMethod()]
+    public void AddTest_Null()
+    {
+        string? nullString = null;
+        var myTest = new AjaxDictionary<int, string>();
+        myTest.Add(1, nullString);
+        Assert.AreEqual(string.Empty, myTest.ToString());
     }
 
     /// <summary>
@@ -36,6 +49,10 @@ public class AjaxDictionaryTests
         myTest.Add(1, "test1");
         myTest[2] = "test2";
 
+
+        var onestring = myTest.ToString();
+
+        Assert.AreEqual("1:test1, 2:test2, 3:test3, 4:test4", onestring);
         Assert.AreEqual("test1", myTest[1]);
         Assert.AreEqual("test2", myTest[2]);
         Assert.AreEqual("test3", myTest[3]);
@@ -50,6 +67,7 @@ public class AjaxDictionaryTests
     {
         var myTest = new AjaxDictionary<int, string>();
         Assert.AreNotEqual(null, myTest);
+        Assert.AreEqual(myTest.ToString(), String.Empty);
     }
 
     /// <summary>
