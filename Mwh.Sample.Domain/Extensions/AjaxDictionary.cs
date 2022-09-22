@@ -6,6 +6,8 @@ namespace Mwh.Sample.Domain.Extensions;
 /// <typeparam name="TKey">The type of the t key.</typeparam>
 /// <typeparam name="TValue">The type of the t value.</typeparam>
 public sealed class AjaxDictionary<TKey, TValue>
+    where TKey : notnull
+    where TValue : notnull
 {
     /// <summary>
     /// The dictionary
@@ -30,18 +32,20 @@ public sealed class AjaxDictionary<TKey, TValue>
     {
         get
         {
-            _ = _Dictionary.TryGetValue(key, out TValue vOut);
+            _ = _Dictionary.TryGetValue(key, out TValue? vOut);
             return vOut ?? default;
         }
         set
         {
-            _Dictionary.TryGetValue(key, out TValue vOut);
+            _Dictionary.TryGetValue(key, out TValue? vOut);
             if (vOut == null)
             {
+                if (value is null) throw new ArgumentException("Value Cannot be null");
                 _Dictionary.Add(key, value);
             }
             else
             {
+                if (value is null) throw new ArgumentException("Value Cannot be null");
                 _Dictionary[key] = value;
             }
         }
@@ -96,7 +100,7 @@ public sealed class AjaxDictionary<TKey, TValue>
         {
             if (key != null)
             {
-                info.AddValue(key.ToString(), _Dictionary[key]);
+                info.AddValue(key.ToString()!, _Dictionary[key]);
             }
         }
     }
