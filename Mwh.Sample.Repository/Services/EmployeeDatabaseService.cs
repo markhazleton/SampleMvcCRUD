@@ -86,10 +86,18 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
     {
         if (namelist == null) return -1;
 
+        Random rand = new();
         var list = new List<Employee>();
         foreach (var name in namelist)
         {
-            list.Add(new Employee() { Name = name ?? "UNKNOWN", Age = 33, Country = "USA", DepartmentId = 1, State = "TX" });
+            list.Add(new Employee()
+            {
+                Name = name ?? "UNKNOWN",
+                Age = rand.Next(1, 100),
+                Country = "USA",
+                DepartmentId = rand.Next(1, (Enum.GetNames(typeof(EmployeeDepartmentEnum)).Length - 1)),
+                State = "TX"
+            });
         }
 
         await _context.Employees.AddRangeAsync(list).ConfigureAwait(true);

@@ -21,7 +21,7 @@ public class EmployeeDatabaseServiceTests
     {
         var builder = new DbContextOptionsBuilder();
         _ = builder.EnableSensitiveDataLogging(true);
-        _ = builder.UseInMemoryDatabase("EmployeeDBTests");
+        _ = builder.UseInMemoryDatabase("EmployeeDatabaseServiceTests");
         var context = new EmployeeContext(builder.Options);
         employeeService = new EmployeeDatabaseService(context);
         ct = default;

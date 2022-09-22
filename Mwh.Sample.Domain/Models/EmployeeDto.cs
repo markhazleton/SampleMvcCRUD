@@ -1,10 +1,10 @@
 ﻿
 namespace Mwh.Sample.Domain.Models;
-/// <summary>
-/// Employee Model
-/// </summary>
 public class EmployeeDto
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public EmployeeDto()
     {
 
@@ -29,6 +29,25 @@ public class EmployeeDto
     }
 
     /// <summary>
+    /// Returns true if ... is valid.
+    /// </summary>
+    /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
+    public bool IsValid()
+    {
+        if (string.IsNullOrEmpty(Name))
+            return false;
+        if (string.IsNullOrEmpty(State))
+            return false;
+        if (string.IsNullOrEmpty(Country))
+            return false;
+        if (Department == EmployeeDepartmentEnum.Unknown)
+            return false;
+        if ((Age < 1))
+            return false;
+        return true;
+    }
+
+    /// <summary>
     /// Gets or sets the age.
     /// </summary>
     /// <value>The age.</value>
@@ -40,7 +59,7 @@ public class EmployeeDto
     /// </summary>
     /// <value>The country.</value>
     [JsonPropertyName("country")]
-    public string Country { get; set; }
+    public string? Country { get; set; }
 
     /// <summary>
     /// Gets or sets the department.
@@ -62,31 +81,12 @@ public class EmployeeDto
     public int Id { get; set; }
 
     /// <summary>
-    /// Returns true if ... is valid.
-    /// </summary>
-    /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
-    public bool IsValid()
-    {
-        if (string.IsNullOrEmpty(Name))
-            return false;
-        if (string.IsNullOrEmpty(State))
-            return false;
-        if (string.IsNullOrEmpty(Country))
-            return false;
-        if (Department == EmployeeDepartmentEnum.Unknown)
-            return false;
-        if ((Age < 1))
-            return false;
-        return true;
-    }
-
-    /// <summary>
     /// Gets or sets the name.
     /// </summary>
     /// <value>The name.</value>
     [Required]
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// Gets or sets the state.
@@ -94,5 +94,5 @@ public class EmployeeDto
     /// <value>The state.</value>
     [Required]
     [JsonPropertyName("state")]
-    public string State { get; set; }
+    public string? State { get; set; }
 }
