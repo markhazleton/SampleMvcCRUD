@@ -5,7 +5,7 @@ For deployments there is an [Azure DevOps project](https://dev.azure.com/markhaz
 
 The Net 6 Web application is hosted:
 - The .Net 6 version is hosted on IIS on a Amazon Virtual Machine [EmployeeMvcCrud.controlorigins.com](https://employeemvccrud.controlorigins.com/)
-- Microsoft Azure AppService .Net 6 verion [app-samplemvccrudweb](https://app-samplemvccrudweb.azurewebsites.net/) 
+- Microsoft Azure AppService .Net 6 Linux verion [mwhsampleweb](https://mwhsampleweb.azurewebsites.net/) 
 - Docker Hub Image [markhazleton/mwhsampleweb](https://hub.docker.com/r/markhazleton/mwhsampleweb)
 
 Source code on GitHub [SampleMvcCRUD](https://github.com/markhazleton/SampleMvcCRUD)
@@ -15,7 +15,7 @@ Older version Net 4.8: [Archive Branch](https://github.com/markhazleton/SampleMv
 
 ## Customization
 
-SampleMvcCrud is open source and you’re welcome to modify and contribute.
+SampleMvcCrud is open source and you’re welcome to contribute.
 
 
 ## Contributing
@@ -24,6 +24,7 @@ You can contribute in several ways.
 - **Issues:** Provide a detailed report of any bugs you encounter and open an issue on [GitHub](https://github.com/markhazleton/SampleMvcCrud/issues).
 - **Documentation:** If you'd like to fix a typo or beef up the docs, you can fork the project, make your changes, and submit a pull request.
 - **Code:** Make a fix and submit it as a pull request. 
+- **Platform:**  Right now this has a MVC Web soltution, would love a React/Vue or Mobile version, but my skills are not there yet. 
 
 ## Author
 
