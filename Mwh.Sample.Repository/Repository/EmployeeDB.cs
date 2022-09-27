@@ -9,6 +9,7 @@ public class EmployeeDB : IEmployeeDB
     {
         _context = context;
     }
+
     private static List<EmployeeDto> Create(List<Employee> list)
     {
         if (list == null) return new List<EmployeeDto>();
@@ -66,6 +67,25 @@ public class EmployeeDB : IEmployeeDB
             throw;
         }
         return true;
+    }
+
+    public async Task<DepartmentDto> DepartmentAsync(int id)
+    {
+        return Create(await _context.Departments.Where(w => w.Id == id).Include(i => i.Employees).FirstOrDefaultAsync());
+    }
+
+    public async Task<List<DepartmentDto>> DepartmentCollectionAsync()
+    {
+        try
+        {
+            var dbDeptList = await _context.Departments.OrderBy(o => o.Name).ToListAsync();
+            return Create(dbDeptList);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
     }
 
     public async Task<EmployeeDto?> EmployeeAsync(int id)
@@ -130,25 +150,6 @@ public class EmployeeDB : IEmployeeDB
             }
         }
         return await EmployeeAsync(emp.Id);
-    }
-
-    public async Task<DepartmentDto> DepartmentAsync(int id)
-    {
-        return Create(await _context.Departments.Where(w => w.Id == id).Include(i => i.Employees).FirstOrDefaultAsync());
-    }
-
-    public async Task<List<DepartmentDto>> DepartmentCollectionAsync()
-    {
-        try
-        {
-            var dbDeptList = await _context.Departments.OrderBy(o => o.Name).ToListAsync();
-            return Create(dbDeptList);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            throw;
-        }
     }
 
     public async Task<DepartmentDto?> UpdateAsync(DepartmentDto? dept)

@@ -95,4 +95,11 @@ public class EmployeeDto
     [Required]
     [JsonPropertyName("state")]
     public string? State { get; set; }
+
+
+    /// <summary>
+    /// Employee Manager
+    /// </summary>
+    [JsonPropertyName("manager_id")]
+    public int? ManagerId { get; set; }
 }
