@@ -21,7 +21,9 @@ public class EmployeeMock : IEmployeeDB
         {
             if ((int)dept > 0)
             {
-                _depts.Add(new DepartmentDto((int)dept, dept?.ToString() ?? "UNKNOWN", dept?.ToString() ?? "UNKNOWN"));
+                var doesExists = _depts.Where(w => w.Id == (int)dept).Any();
+                if (!doesExists)
+                    _depts.Add(new DepartmentDto((int)dept, dept?.ToString() ?? "UNKNOWN", dept?.ToString() ?? "UNKNOWN"));
             }
         }
         var FixedEmployees = new List<Employee>()

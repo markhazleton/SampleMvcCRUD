@@ -60,14 +60,12 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
     private static DepartmentDto[] GetDepartmentDtos(List<Department> list)
     {
         if (list is null) return Array.Empty<DepartmentDto>();
-
         return list?.Select(s => Create(s)).OfType<DepartmentDto>().ToArray() ?? Array.Empty<DepartmentDto>();
     }
 
     private static EmployeeDto[] GetEmployeeDtos(List<Employee> list)
     {
         if (list is null) return Array.Empty<EmployeeDto>();
-
         return list?.Select(s => Create(s)).OfType<EmployeeDto>().ToArray() ?? Array.Empty<EmployeeDto>();
     }
 
@@ -152,9 +150,12 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         return new EmployeeResponse(employee);
     }
 
-    public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(CancellationToken token)
+    public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(bool IncludeEmployees, CancellationToken token)
     {
-        return GetDepartmentDtos(await _context.Departments.Include(e => e.Employees).ToListAsync(cancellationToken: token).ConfigureAwait(false));
+        if (IncludeEmployees)
+            return GetDepartmentDtos(await _context.Departments.Where(w => !string.IsNullOrEmpty(w.Name)).Include(e => e.Employees).ToListAsync(cancellationToken: token).ConfigureAwait(false));
+
+        return GetDepartmentDtos(await _context.Departments.Where(w => !string.IsNullOrEmpty(w.Name)).ToListAsync(cancellationToken: token).ConfigureAwait(false));
     }
 
     public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
@@ -181,7 +182,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<DepartmentResponse> SaveDepartmentAsync(DepartmentDto? item, CancellationToken cancellationToken = default)
     {
-        if (item == null)
+        if (item is null)
             return new DepartmentResponse("Department can not be null");
 
         Department? dbDept;

@@ -55,7 +55,7 @@ catch (Exception ex)
 
 
 employees = await employeeService.GetEmployeesAsync(new PagingParameterModel(), ct).ConfigureAwait(false);
-var departments = await employeeService.GetDepartmentsAsync(ct).ConfigureAwait(false);
+var departments = await employeeService.GetDepartmentsAsync(true, ct).ConfigureAwait(false);
 foreach (var dept in departments)
 {
     Console.WriteLine($"{dept.Name} with {dept?.Employees?.Length ?? 0} employees");

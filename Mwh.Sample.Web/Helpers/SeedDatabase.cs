@@ -23,7 +23,7 @@ public static class SeedDatabase
             {
                 deptResultList.Add(await employeeService.SaveAsync(dept, token).ConfigureAwait(true));
             }
-            var d = await employeeService.GetDepartmentsAsync(token).ConfigureAwait(true);
+            var d = await employeeService.GetDepartmentsAsync(true, token).ConfigureAwait(true);
             var dcnt = d.Count();
             employeeMock.EmployeeCollection()?.ForEach(async emp =>
             {

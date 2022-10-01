@@ -5,7 +5,7 @@ namespace Mwh.Sample.Domain.Models
     /// <summary>
     /// 
     /// </summary>
-    public class DepartmentDto
+    public record class DepartmentDto
     {
         /// <summary>
         /// 
