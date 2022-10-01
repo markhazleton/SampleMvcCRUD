@@ -1,4 +1,6 @@
-﻿namespace Mwh.Sample.Domain.Tests.Models
+﻿using System.Text.Json;
+
+namespace Mwh.Sample.Domain.Tests.Models
 {
     [TestClass]
     public class DepartmentDtoTests
@@ -41,6 +43,46 @@
             Assert.AreEqual("Test Description", departmentDto.Description);
             Assert.IsNotNull(departmentDto.Employees);
             Assert.AreEqual(2, departmentDto.Employees.Length);
+        }
+
+        [TestMethod]
+        public void DepartmentDto_Equality()
+        {
+            // Arrange
+            var dept1 = new DepartmentDto(
+                1,
+                "Test",
+                "Test");
+
+            var dept1_copy = new DepartmentDto(
+                1,
+                "Test",
+                "Test");
+
+            var areEqual = (dept1 == dept1_copy);
+
+            // Assert
+            Assert.IsTrue(areEqual);
+        }
+        [TestMethod]
+        public void DepartmentDto_Serialize()
+        {
+            // Arrange
+            var dept1 = new DepartmentDto(
+                1,
+                "Test",
+                "Test");
+
+            var deptString = JsonSerializer.Serialize(dept1);
+
+            var dept1_copy = JsonSerializer.Deserialize<DepartmentDto>(deptString);
+
+            var areEqual = (dept1 == dept1_copy);
+
+            // Assert
+            Assert.IsTrue(areEqual);
+            Assert.IsNotNull(deptString);
+
         }
     }
 }
