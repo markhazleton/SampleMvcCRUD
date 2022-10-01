@@ -45,7 +45,7 @@ public interface IEmployeeService
     /// </summary>
     /// <param name="token"></param>
     /// <returns></returns>
-    Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(CancellationToken token);
+    Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(bool includeEmployees, CancellationToken token);
 
     /// <summary>
     /// Saves the asynchronous.

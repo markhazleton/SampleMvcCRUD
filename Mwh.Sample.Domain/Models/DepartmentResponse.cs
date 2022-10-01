@@ -9,7 +9,7 @@ namespace Mwh.Sample.Domain.Models
         /// </summary>
         /// <param name="employee">Saved employee.</param>
         /// <returns>Response.</returns>
-        public DepartmentResponse(DepartmentDto employee) : base(employee) { }
+        public DepartmentResponse(DepartmentDto? employee) : base(employee) { }
 
         /// <summary>
         /// Creates am error response.

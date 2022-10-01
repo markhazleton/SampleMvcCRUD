@@ -40,4 +40,8 @@ public class Employee : BaseEntity
     /// </summary>
     /// <value>The state.</value>
     public string? State { get; set; }
+    /// <summary>
+    /// Employee Manager Id
+    /// </summary>
+    public int? ManagerId { get; set; }
 }

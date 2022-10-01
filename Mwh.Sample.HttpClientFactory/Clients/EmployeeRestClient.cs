@@ -57,10 +57,10 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
         return result;
     }
 
-    public async Task<IEnumerable<DepartmentDto>?> GetDepartmentsAsync(CancellationToken token)
+    public async Task<IEnumerable<DepartmentDto>?> GetDepartmentsAsync(bool IncludeEmployees, CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
-        return await ExecuteAsync<IEnumerable<DepartmentDto>>($"/api/department", null, HttpMethod.Get, token);
+        return await ExecuteAsync<IEnumerable<DepartmentDto>>($"/api/department?IncludeEmployees={IncludeEmployees}", null, HttpMethod.Get, token);
     }
 
     /// <summary>

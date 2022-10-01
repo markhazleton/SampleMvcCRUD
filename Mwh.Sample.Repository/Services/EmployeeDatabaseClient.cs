@@ -35,9 +35,9 @@ namespace Mwh.Sample.Repository.Services
             return await service.FindEmployeeByIdAsync(id, token).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(CancellationToken token)
+        public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(bool IncludeEmployees, CancellationToken token)
         {
-            return await service.GetDepartmentsAsync(token).ConfigureAwait(false);
+            return await service.GetDepartmentsAsync(IncludeEmployees, token).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
