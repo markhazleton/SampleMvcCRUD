@@ -6,20 +6,18 @@
       "type": "mssql",
       "connectionId": ""
     },
-    "secrets2": {
+    "secrets1": {
       "type": "secrets",
       "connectionId": "VaultUri",
       "dynamicId": null
     },
     "appInsights1": {
       "type": "appInsights",
-      "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-      "dynamicId": null
+      "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING"
     },
-    "secrets1": {
+    "secrets2": {
       "type": "secrets",
-      "connectionId": "VaultUri",
-      "dynamicId": null
+      "connectionId": "VaultUri"
     }
   }
 }
