@@ -12,6 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		azure-pipelines.yml = azure-pipelines.yml
 		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
 		CONTRIBUTING.md = CONTRIBUTING.md
+		.github\workflows\docker-image.yml = .github\workflows\docker-image.yml
+		.github\workflows\master_markhazletonsampleweb.yml = .github\workflows\master_markhazletonsampleweb.yml
+		.github\workflows\MwhSampleWeb.yml = .github\workflows\MwhSampleWeb.yml
 		README.md = README.md
 		SECURITY.md = SECURITY.md
 	EndProjectSection
