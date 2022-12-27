@@ -17,7 +17,7 @@ env:
   AZURE_WEBAPP_NAME: MwhSampleWeb
   AZURE_WEBAPP_PACKAGE_PATH: Mwh.Sample.Web/publish
   CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 6.0.x
+  DOTNET_CORE_VERSION: 7.0.x
   WORKING_DIRECTORY: Mwh.Sample.Web
 jobs:
   build:
