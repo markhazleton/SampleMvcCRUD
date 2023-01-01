@@ -33,13 +33,11 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     /// <returns>EmployeeResponse.</returns>
     public async Task<EmployeeResponse?> DeleteAsync(int id, CancellationToken token)
     {
-        token.ThrowIfCancellationRequested();
         return await ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", requestBody: null, HttpMethod.Delete, token);
     }
 
     public async Task<DepartmentDto?> FindDepartmentByIdAsync(int id, CancellationToken token)
     {
-        token.ThrowIfCancellationRequested();
         return await ExecuteAsync<DepartmentDto>($"/api/department/{id}", null, HttpMethod.Get, token);
     }
 
@@ -51,7 +49,6 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     /// <returns>EmployeeModel.</returns>
     public async Task<EmployeeResponse?> FindEmployeeByIdAsync(int id, CancellationToken token)
     {
-        token.ThrowIfCancellationRequested();
         var result = await ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", null, HttpMethod.Get, token);
 
         return result;
@@ -59,7 +56,6 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
 
     public async Task<IEnumerable<DepartmentDto>?> GetDepartmentsAsync(bool IncludeEmployees, CancellationToken token)
     {
-        token.ThrowIfCancellationRequested();
         return await ExecuteAsync<IEnumerable<DepartmentDto>>($"/api/department?IncludeEmployees={IncludeEmployees}", null, HttpMethod.Get, token);
     }
 
@@ -71,7 +67,6 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     /// <returns>IEnumerable&lt;EmployeeModel&gt;.</returns>
     public async Task<IEnumerable<EmployeeDto>?> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
     {
-        token.ThrowIfCancellationRequested();
         return await ExecuteAsync<IEnumerable<EmployeeDto>>($"/api/employee", paging, HttpMethod.Get, token);
     }
 
@@ -83,13 +78,11 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     /// <returns>EmployeeResponse.</returns>
     public async Task<EmployeeResponse?> SaveAsync(EmployeeDto? employee, CancellationToken token)
     {
-        token.ThrowIfCancellationRequested();
         return await ExecuteAsync<EmployeeResponse>($"/api/employee", employee, HttpMethod.Post, token);
     }
 
     public async Task<DepartmentResponse?> SaveAsync(DepartmentDto dept, CancellationToken token)
     {
-        token.ThrowIfCancellationRequested();
         return await ExecuteAsync<DepartmentResponse>($"/api/department", dept, HttpMethod.Post, token);
     }
 

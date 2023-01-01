@@ -82,13 +82,13 @@ public abstract class RestClientBase : IDisposable, IRestClientBase
 
         if (requestBody != null) request.Content = JsonContent.Create(requestBody);
 
-        using var response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token).ConfigureAwait(false);
+        using var response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token);
         if (response.IsSuccessStatusCode)
         {
             // perhaps check some headers before deserializing
             try
             {
-                return await response.Content.ReadFromJsonAsync<T>(cancellationToken: token).ConfigureAwait(false);
+                return await response.Content.ReadFromJsonAsync<T>(cancellationToken: token);
             }
             catch (NotSupportedException) // When content type is not valid
             {

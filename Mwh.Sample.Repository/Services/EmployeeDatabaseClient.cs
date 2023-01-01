@@ -17,7 +17,7 @@ namespace Mwh.Sample.Repository.Services
 
         public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
         {
-            return await service.DeleteAsync(id, token).ConfigureAwait(false);
+            return await service.DeleteAsync(id, token);
         }
 
         public void Dispose()
@@ -27,37 +27,37 @@ namespace Mwh.Sample.Repository.Services
 
         public async Task<DepartmentDto> FindDepartmentByIdAsync(int id, CancellationToken token)
         {
-            return await FindDepartmentByIdAsync(id, token).ConfigureAwait(false);
+            return await FindDepartmentByIdAsync(id, token);
         }
 
         public async Task<EmployeeResponse> FindEmployeeByIdAsync(int id, CancellationToken token)
         {
-            return await service.FindEmployeeByIdAsync(id, token).ConfigureAwait(false);
+            return await service.FindEmployeeByIdAsync(id, token);
         }
 
         public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(bool IncludeEmployees, CancellationToken token)
         {
-            return await service.GetDepartmentsAsync(IncludeEmployees, token).ConfigureAwait(false);
+            return await service.GetDepartmentsAsync(IncludeEmployees, token);
         }
 
         public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
         {
-            return await service.GetEmployeesAsync(paging, token).ConfigureAwait(false);
+            return await service.GetEmployeesAsync(paging, token);
         }
 
         public async Task<EmployeeResponse> SaveAsync(EmployeeDto? employee, CancellationToken token)
         {
-            return await service.SaveAsync(employee, token).ConfigureAwait(false);
+            return await service.SaveAsync(employee, token);
         }
 
         public async Task<DepartmentResponse> SaveAsync(DepartmentDto dept, CancellationToken token)
         {
-            return await service.SaveAsync(dept, token).ConfigureAwait(false);
+            return await service.SaveAsync(dept, token);
         }
 
         public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeDto? employee, CancellationToken token)
         {
-            return await service.UpdateAsync(id, employee, token).ConfigureAwait(false);
+            return await service.UpdateAsync(id, employee, token);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Mwh.Sample.Web.Controllers.Api.Employee.v1
         public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetAsync(bool IncludeEmployees = false)
         {
             CancellationTokenSource cts = new();
-            var employees = await _employeeService.GetDepartmentsAsync(IncludeEmployees, cts.Token).ConfigureAwait(false);
+            var employees = await _employeeService.GetDepartmentsAsync(IncludeEmployees, cts.Token);
             return Ok(employees);
         }
         /// <summary>
@@ -35,7 +35,7 @@ namespace Mwh.Sample.Web.Controllers.Api.Employee.v1
         public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetAsync(int id)
         {
             CancellationTokenSource cts = new();
-            var dep = await _employeeService.FindDepartmentByIdAsync(id, cts.Token).ConfigureAwait(false);
+            var dep = await _employeeService.FindDepartmentByIdAsync(id, cts.Token);
             return Ok(dep);
         }
     }
