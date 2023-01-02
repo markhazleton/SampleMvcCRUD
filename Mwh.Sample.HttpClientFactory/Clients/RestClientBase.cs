@@ -15,6 +15,7 @@ public abstract class RestClientBase : IDisposable, IRestClientBase
     /// Lazy Client used to instantiate when needed rather than during constructor
     /// </summary>
     private IHttpClientFactory _clientFactory;
+    private readonly object _clientLock = new();
 
     /// <summary>
     /// ClientBase constructor used to set Application Name and Base Url for requests
@@ -53,9 +54,12 @@ public abstract class RestClientBase : IDisposable, IRestClientBase
     /// <exception cref="ObjectDisposedException">RestClient has been disposed</exception>
     protected HttpClient Client()
     {
-        if (_clientFactory == null)
-            throw new ObjectDisposedException("Client Factory has been disposed");
-        return _clientFactory.CreateClient();
+        lock (_clientLock)
+        {
+            if (_clientFactory == null)
+                throw new ObjectDisposedException("Client Factory has been disposed");
+            return _clientFactory.CreateClient();
+        }
     }
 
     /// <summary>
