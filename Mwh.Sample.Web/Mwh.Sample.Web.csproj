@@ -10,7 +10,7 @@
 	<PropertyGroup>
 		<Deterministic>false</Deterministic>
 		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
-		<AssemblyVersion>6.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
+		<AssemblyVersion>7.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
 		<ApplicationInsightsResourceId>/subscriptions/1e3f18e4-ceb9-4033-8ce0-f17b8af6225f/resourceGroups/MwhSampleLinux/providers/microsoft.insights/components/MwhSampleWeb</ApplicationInsightsResourceId>
 		<UserSecretsId>9c59fa67-51a0-40f7-a8f1-64f4dba7c281</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
