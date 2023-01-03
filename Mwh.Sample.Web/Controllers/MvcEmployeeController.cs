@@ -37,7 +37,7 @@ public class MvcEmployeeController : BaseController
         EmployeeResponse? reqResponse = null;
         if (employee != null)
         {
-            reqResponse = await client.SaveAsync(employee, cts.Token).ConfigureAwait(false);
+            reqResponse = await client.SaveAsync(employee, cts.Token);
         }
         if (reqResponse?.Success == false)
             return RedirectToAction("Index");
@@ -54,7 +54,7 @@ public class MvcEmployeeController : BaseController
     [HttpGet]
     public async Task<ActionResult> Delete(int id)
     {
-        var emp = await client.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
+        var emp = await client.FindEmployeeByIdAsync(id, cts.Token);
 
         if (emp?.Success == false)
             return RedirectToAction("Index");
@@ -76,7 +76,7 @@ public class MvcEmployeeController : BaseController
         {
             if (employee.Id == id)
             {
-                _ = await client.DeleteAsync(id, cts.Token).ConfigureAwait(false);
+                _ = await client.DeleteAsync(id, cts.Token);
             }
         }
         return RedirectToAction("Index");
@@ -90,7 +90,7 @@ public class MvcEmployeeController : BaseController
     [HttpGet]
     public async Task<ActionResult> Details(int id)
     {
-        var emp = await client.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
+        var emp = await client.FindEmployeeByIdAsync(id, cts.Token);
         if (emp?.Success == false)
             return RedirectToAction("Index");
 
@@ -105,7 +105,7 @@ public class MvcEmployeeController : BaseController
     [HttpGet]
     public async Task<ActionResult> Edit(int id)
     {
-        var emp = await client.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
+        var emp = await client.FindEmployeeByIdAsync(id, cts.Token);
 
         if (emp?.Success == false)
             return RedirectToAction("Index");
@@ -127,7 +127,7 @@ public class MvcEmployeeController : BaseController
         if (employee != null)
         {
             if (employee.Id == id)
-                reqResponse = await client.UpdateAsync(id, employee, cts.Token).ConfigureAwait(false);
+                reqResponse = await client.UpdateAsync(id, employee, cts.Token);
         }
         if (reqResponse?.Success == true)
             return RedirectToAction("Index");
@@ -146,7 +146,7 @@ public class MvcEmployeeController : BaseController
         if (paging == null)
             paging = new PagingParameterModel();
 
-        var list = await client.GetEmployeesAsync(paging, cts.Token).ConfigureAwait(false);
+        var list = await client.GetEmployeesAsync(paging, cts.Token);
 
         return View(list);
     }

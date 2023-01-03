@@ -143,7 +143,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<EmployeeResponse> FindEmployeeByIdAsync(int Id, CancellationToken token)
     {
-        var employee = Create(await _context.Employees.FindAsync(new object[] { Id }, cancellationToken: token).ConfigureAwait(false));
+        var employee = Create(await _context.Employees.FindAsync(new object[] { Id }, cancellationToken: token));
         if (employee is null)
             return new EmployeeResponse("Employee Not Found");
 
@@ -153,16 +153,16 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
     public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(bool IncludeEmployees, CancellationToken token)
     {
         if (IncludeEmployees)
-            return GetDepartmentDtos(await _context.Departments.Where(w => !string.IsNullOrEmpty(w.Name)).Include(e => e.Employees).ToListAsync(cancellationToken: token).ConfigureAwait(false));
+            return GetDepartmentDtos(await _context.Departments.Where(w => !string.IsNullOrEmpty(w.Name)).Include(e => e.Employees).ToListAsync(cancellationToken: token));
 
-        return GetDepartmentDtos(await _context.Departments.Where(w => !string.IsNullOrEmpty(w.Name)).ToListAsync(cancellationToken: token).ConfigureAwait(false));
+        return GetDepartmentDtos(await _context.Departments.Where(w => !string.IsNullOrEmpty(w.Name)).ToListAsync(cancellationToken: token));
     }
 
     public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
     {
         var source = _context.Employees.OrderBy(o => o.Name).AsQueryable();
         int TotalCount = source.Count();
-        var items = await source.Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync(token).ConfigureAwait(false);
+        var items = await source.Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync(token);
         var paginationMetadata = paging.GetMetaData(TotalCount);
         return GetEmployeeDtos(items);
     }
@@ -297,6 +297,6 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             return new EmployeeResponse($"Can not update employee with unknown department");
 
 
-        return await SaveAsync(employee, token).ConfigureAwait(false);
+        return await SaveAsync(employee, token);
     }
 }

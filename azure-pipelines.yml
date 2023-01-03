@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- master
+- main
 
 pool:
   vmImage: 'windows-latest'
@@ -14,14 +14,14 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Debug'
   buildPlatform: 'Any CPU'
-  dotNetVersion: '6.0.x'
+  dotNetVersion: '7.0.x'
   buildConfiguration: 'Release'
 steps:
 - task: UseDotNet@2
-  displayName: 'Use .NET Core sdk 6.0.100'
+  displayName: 'Use .NET Core sdk 7.0.100'
   inputs:
     packageType: 'sdk'
-    version: '6.0.100' 
+    version: '7.0.100' 
     performMultiLevelLookup: true
     includePreviewVersions: true
 
@@ -36,7 +36,7 @@ steps:
     version: $(dotNetVersion)
     includePreviewVersions: true
 - script: dotnet build Mwh.SampleMvcCRUD.sln --configuration $(buildConfiguration)
-  displayName: 'Build .NET 6 Application'
+  displayName: 'Build .NET 7 Application'
 
 - task: VSTest@2
   inputs:

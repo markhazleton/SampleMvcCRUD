@@ -30,7 +30,7 @@ public class EmployeeController : BaseController
     [Route("Employee/GetEmployeeDelete/{id}")]
     public async Task<ActionResult> GetEmployeeDelete(int id = 0)
     {
-        var employee = await client.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
+        var employee = await client.FindEmployeeByIdAsync(id, cts.Token);
         return PartialView("_EmployeeDelete", employee.Resource);
     }
     /// <summary>
@@ -57,7 +57,7 @@ public class EmployeeController : BaseController
     [HttpGet]
     public async Task<ActionResult> GetEmployeeEdit(int id = 0)
     {
-        var employee = await client.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
+        var employee = await client.FindEmployeeByIdAsync(id, cts.Token);
 
         return PartialView("_EmployeeEdit", employee?.Resource);
 
@@ -75,7 +75,7 @@ public class EmployeeController : BaseController
         if (paging == null)
             paging = new PagingParameterModel();
 
-        var list = await client.GetEmployeesAsync(paging, cts.Token).ConfigureAwait(false);
+        var list = await client.GetEmployeesAsync(paging, cts.Token);
         return PartialView("_EmployeeList", list);
     }
     /// <summary>

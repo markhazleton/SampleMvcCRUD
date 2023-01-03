@@ -43,7 +43,7 @@
                 PageNumber = 1
             };
 
-            var list = await client.GetEmployeesAsync(paging, cts.Token).ConfigureAwait(false);
+            var list = await client.GetEmployeesAsync(paging, cts.Token);
             return PartialView("_EmployeeList", list);
         }
 

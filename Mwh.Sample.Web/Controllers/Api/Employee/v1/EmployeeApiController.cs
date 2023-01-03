@@ -27,7 +27,7 @@ public class EmployeeApiController : BaseApiController
     public async Task<ActionResult<EmployeeResponse>> DeleteAsync(int id)
     {
         CancellationTokenSource cts = new();
-        var result = await _employeeService.DeleteAsync(id, cts.Token).ConfigureAwait(false);
+        var result = await _employeeService.DeleteAsync(id, cts.Token);
 
         if (!result.Success)
         {
@@ -47,7 +47,7 @@ public class EmployeeApiController : BaseApiController
     public async Task<ActionResult<EmployeeResponse>> FindByIdAsync(int id)
     {
         CancellationTokenSource cts = new();
-        var result = await _employeeService.FindEmployeeByIdAsync(id, cts.Token).ConfigureAwait(false);
+        var result = await _employeeService.FindEmployeeByIdAsync(id, cts.Token);
 
         if (!result.Success)
         {
@@ -72,7 +72,7 @@ public class EmployeeApiController : BaseApiController
         }
 
 
-        var employees = await _employeeService.GetEmployeesAsync(paging, cts.Token).ConfigureAwait(false);
+        var employees = await _employeeService.GetEmployeesAsync(paging, cts.Token);
         return Ok(employees);
     }
 
@@ -89,7 +89,7 @@ public class EmployeeApiController : BaseApiController
         if (employee == null) return BadRequest("Employee was null");
 
         CancellationTokenSource cts = new();
-        var result = await _employeeService.SaveAsync(employee, cts.Token).ConfigureAwait(false);
+        var result = await _employeeService.SaveAsync(employee, cts.Token);
 
         if (!result.Success)
         {
@@ -110,7 +110,7 @@ public class EmployeeApiController : BaseApiController
     public async Task<ActionResult<EmployeeResponse>> PutAsync(int id, [FromBody] EmployeeDto employee)
     {
         CancellationTokenSource cts = new();
-        var result = await _employeeService.UpdateAsync(id, employee, cts.Token).ConfigureAwait(false);
+        var result = await _employeeService.UpdateAsync(id, employee, cts.Token);
         if (!result.Success)
         {
             return BadRequest(new ErrorResource(result.Message));
