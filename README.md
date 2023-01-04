@@ -8,8 +8,10 @@ For deployments there are 2 approaches:
 
 The Net 6 Web application is hosted:
 - Amazon Virtual Machine - Windows 2012 IIS - Net 6 [markhazletonsamplecrud.controlorigins.com](https://markhazletonsamplecrud.controlorigins.com/)
-- Microsoft Azure AppService .Net 7 Linux verion [mwhsampleweb](https://mwhsampleweb.azurewebsites.net/) 
+- Microsoft Azure AppService .Net 7 Linux Deployed via GitHub Actions [mwhsampleweb.azurewebsites.net](https://mwhsampleweb.azurewebsites.net/) 
+- Microsoft Azure AppService .Net 7 Linux Image from docker hub [samplemvccrud.azurewebsites.net](https://samplemvccrud.azurewebsites.net/) 
 - Docker Hub Image [markhazleton/mwhsampleweb](https://hub.docker.com/r/markhazleton/mwhsampleweb)
+
 
 ## Customization
 
