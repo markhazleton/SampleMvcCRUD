@@ -7,8 +7,8 @@ For deployments there are 2 approaches:
 2)  [Azure DevOps project](https://dev.azure.com/markhazleton/SampleMvcCRUD) with Continuous Integration/Continuous Deployment (CI/CD) pipelines to Azure App Services 
 
 The Net 6 Web application is hosted:
-- Amazon Virtual Machine - Windows 2012 IIS [EmployeeMvcCrud.controlorigins.com](https://employeemvccrud.controlorigins.com/)
-- Microsoft Azure AppService .Net 6 Linux verion [mwhsampleweb](https://mwhsampleweb.azurewebsites.net/) 
+- Amazon Virtual Machine - Windows 2012 IIS - Net 6 [markhazletonsamplecrud.controlorigins.com](https://markhazletonsamplecrud.controlorigins.com/)
+- Microsoft Azure AppService .Net 7 Linux verion [mwhsampleweb](https://mwhsampleweb.azurewebsites.net/) 
 - Docker Hub Image [markhazleton/mwhsampleweb](https://hub.docker.com/r/markhazleton/mwhsampleweb)
 
 ## Customization
