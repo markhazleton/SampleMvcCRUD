@@ -1,4 +1,5 @@
-﻿namespace Mwh.Sample.Domain.Extensions;
+﻿
+namespace Mwh.Sample.Domain.Extensions;
 /// <summary>
 /// 
 /// </summary>
