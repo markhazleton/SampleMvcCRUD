@@ -5,7 +5,7 @@ namespace Mwh.Sample.Domain.Extensions;
 /// </summary>
 /// <typeparam name="TKey">The type of the t key.</typeparam>
 /// <typeparam name="TValue">The type of the t value.</typeparam>
-public sealed class AjaxDictionary<TKey, TValue>
+public sealed class PropertyBag<TKey, TValue>
     where TKey : notnull
     where TValue : notnull
 {
@@ -15,12 +15,12 @@ public sealed class AjaxDictionary<TKey, TValue>
     private readonly Dictionary<TKey, TValue> _Dictionary;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AjaxDictionary{TKey, TValue}"/> class.
+    /// Initializes a new instance of the <see cref="PropertyBag{TKey, TValue}"/> class.
     /// </summary>
-    public AjaxDictionary() { _Dictionary = new Dictionary<TKey, TValue>(); }
+    public PropertyBag() { _Dictionary = new Dictionary<TKey, TValue>(); }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AjaxDictionary{TKey, TValue}"/> class.
+    /// Initializes a new instance of the <see cref="PropertyBag{TKey, TValue}"/> class.
     /// </summary>
 
     /// <summary>
