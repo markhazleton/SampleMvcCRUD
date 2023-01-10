@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -14,8 +13,6 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <Content Include="favicon.ico" />
-	</ItemGroup>
-	<ItemGroup>
 	  <None Include="..\favicon.ico">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
@@ -26,7 +23,6 @@
 		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
 		<PackageReference Include="System.Text.Json" Version="7.0.1" />
 	</ItemGroup>
-
 	<ItemGroup>
 		<ProjectReference Include="..\Mwh.Sample.Domain\Mwh.Sample.Domain.csproj" />
 	</ItemGroup>

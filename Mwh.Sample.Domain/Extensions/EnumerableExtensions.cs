@@ -8,14 +8,14 @@ namespace Mwh.Sample.Domain.Extensions
             where T : class
             where TKey : IComparable<TKey>
         {
-            if (sequence == null) return default;
+            if (!sequence?.Any() ?? default) return default;
 
-            if (!sequence.Any()) return default;
-
-            return sequence
-            .Select(obj => Tuple.Create(obj, keySelector(obj)))
-            .Aggregate((Tuple<T, TKey>)null,
-                (best, cur) => best == null || cur.Item2.CompareTo(best.Item2) < 0 ? cur : best).Item1;
+            return sequence?
+                .Select(obj => Tuple.Create(obj, keySelector(obj)))
+                .Aggregate((Tuple<T, TKey>)null,
+                (best, cur) => best == null || cur.Item2.CompareTo(best.Item2) < 0 ? cur : best).Item1
+                ?? default;
         }
+
     }
 }

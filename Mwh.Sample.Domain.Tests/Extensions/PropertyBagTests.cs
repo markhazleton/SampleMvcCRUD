@@ -1,10 +1,10 @@
-
 namespace Mwh.Sample.Domain.Tests.Extensions;
+
 /// <summary>
-/// Defines test class AjaxDictionaryTests.
+/// Defines test class PropertyBagTests.
 /// </summary>
 [TestClass()]
-public class AjaxDictionaryTests
+public class PropertyBagTests
 {
     /// <summary>
     /// Defines the test method AddTest.
@@ -12,9 +12,8 @@ public class AjaxDictionaryTests
     [TestMethod()]
     public void AddTest()
     {
-        var myTest = new AjaxDictionary<int, string>();
+        var myTest = new PropertyBag<int, string>();
         myTest.Add(1, "test");
-
         Assert.AreEqual("1:test", myTest.ToString());
         Assert.AreEqual(1, myTest.GetList().Count);
     }
@@ -25,7 +24,7 @@ public class AjaxDictionaryTests
     public void AddTest_Null()
     {
         string? nullString = null;
-        var myTest = new AjaxDictionary<int, string>();
+        var myTest = new PropertyBag<int, string>();
         myTest.Add(1, nullString);
         Assert.AreEqual(string.Empty, myTest.ToString());
     }
@@ -36,7 +35,7 @@ public class AjaxDictionaryTests
     [TestMethod()]
     public void AddTest_Duplicate()
     {
-        var myTest = new AjaxDictionary<int, string>();
+        var myTest = new PropertyBag<int, string>();
         myTest.Add(1, "test");
         myTest[2] = "test";
         myTest.Add(3, "initial");
@@ -65,7 +64,7 @@ public class AjaxDictionaryTests
     [TestMethod()]
     public void AjaxDictionaryTest()
     {
-        var myTest = new AjaxDictionary<int, string>();
+        var myTest = new PropertyBag<int, string>();
         Assert.AreNotEqual(null, myTest);
         Assert.AreEqual(myTest.ToString(), String.Empty);
     }
@@ -76,7 +75,7 @@ public class AjaxDictionaryTests
     [TestMethod()]
     public void AjaxDictionaryTest1()
     {
-        var myTest = new AjaxDictionary<int, string>();
+        var myTest = new PropertyBag<int, string>();
         Assert.AreNotEqual(null, myTest);
     }
 
@@ -86,7 +85,7 @@ public class AjaxDictionaryTests
     [TestMethod()]
     public void GetListTest()
     {
-        var myTest = new AjaxDictionary<int, string>();
+        var myTest = new PropertyBag<int, string>();
         myTest.Add(1, "one");
         myTest.Add(2, "two");
         var myResult = myTest.GetList().FirstOrDefault();
