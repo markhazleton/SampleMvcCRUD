@@ -6,12 +6,6 @@
       "type": "secrets.user",
       "connectionId": null
     },
-    "appInsights1": {
-      "secretStore": "LocalSecretsFile",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/MwhSampleWeb",
-      "type": "appInsights.azure",
-      "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING"
-    },
     "secrets2": {
       "secretStore": null,
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/HellioWorldKeyVault",
@@ -21,6 +15,12 @@
     "apis1": {
       "ignored": "True",
       "type": "apis"
+    },
+    "appInsights1": {
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/MwhSampleWeb",
+      "type": "appInsights.azure",
+      "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING"
     }
   }
 }

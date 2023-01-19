@@ -32,6 +32,7 @@ builder.Services.AddSession();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 app.UseMyHttpContext();
@@ -40,6 +41,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.UseStaticFiles();
+app.MapHealthChecks("/health");
 app.UseMvc(routes =>
 {
     routes.MapRoute(
