@@ -1,6 +1,5 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: CI/CD Azure Web App - MwhSampleWeb
 
 on:
@@ -25,8 +24,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    steps:
     steps:
     - uses: actions/checkout@v2
 
@@ -52,6 +49,5 @@ jobs:
     - name: Publish Artifacts
       uses: actions/upload-artifact@v1.0.0
       with:
-                
         name: webapp
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
