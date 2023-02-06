@@ -67,8 +67,9 @@ public class EmployeeMock : IEmployeeDB
             item?.Age ?? 99,
             item?.State ?? string.Empty,
             item?.Country ?? string.Empty,
-            empDept
-        );
+            empDept,
+            item?.ProfilePicture ?? "default.jpg"
+            );
     }
 
     /// <summary>
@@ -212,6 +213,7 @@ public class EmployeeMock : IEmployeeDB
                 updateEmp.Department = emp.Department;
                 updateEmp.Country = emp.Country;
                 updateEmp.State = emp.State;
+                updateEmp.ProfilePicture = emp.ProfilePicture;
             }
             return emp;
         }

@@ -9,7 +9,7 @@
         "jquery.js",
         "jquery.min.map"
       ],
-      "library": "jquery@3.6.1"
+      "library": "jquery@3.6.3"
     },
     {
       "destination": "wwwroot/lib/jquery-validation-unobtrusive/",
@@ -23,12 +23,12 @@
     },
     {
       "destination": "wwwroot/lib/datatables.net-bs/",
-      "library": "datatables.net-bs5@1.12.1",
+      "library": "datatables.net-bs5@1.13.2",
       "files": [ "dataTables.bootstrap5.min.css", "dataTables.bootstrap5.min.js" ]
     },
     {
       "destination": "wwwroot/lib/bootstrap/",
-      "library": "bootstrap@5.2.2",
+      "library": "bootstrap@5.2.3",
       "provider": "unpkg",
       "files": [ "dist/js/bootstrap.min.js", "dist/css/bootstrap.min.css", "dist/js/bootstrap.bundle.min.js" ]
     }

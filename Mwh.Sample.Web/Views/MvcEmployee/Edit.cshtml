@@ -8,7 +8,7 @@
 
     <h2>Edit</h2>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "MvcEmployee", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.Id)
@@ -17,7 +17,7 @@
             <h4>Employee</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            
+
             <div class="form-group mb-3">
                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -25,7 +25,7 @@
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
-            
+
             <div class="form-group mb-3">
                 @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -33,7 +33,7 @@
                     @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
                 </div>
             </div>
-            
+
             <div class="form-group mb-3">
                 @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -41,7 +41,7 @@
                     @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
                 </div>
             </div>
-            
+
             <div class="form-group mb-3">
                 @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -49,7 +49,7 @@
                     @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
                 </div>
             </div>
-            
+
             <div class="form-group mb-3">
                 @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -57,6 +57,23 @@
                     @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="form-group mb-3">
+                <img src="~/images/@Model.ProfilePicture"
+                 class="rounded-circle"
+                 height="40" width="40"
+                 asp-append-version="true" />
+                <span asp-validation-for="ProfileImage" class="text-danger"></span>
+
+                <div class="input-group custom-file-button">
+                    <label class="input-group-text" asp-for="ProfileImage">Update Profile Picture</label>
+
+                    <input asp-for="ProfileImage" class="custom-file-input" id="ProfileImage" type="file" class="form-control">
+                </div>
+
+            </div>
+
+
+
 
             <div class="form-group mb-3">
                 <div class="col-md-offset-2 col-md-10">
@@ -71,3 +88,35 @@
         @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-info" })
     </div>
 </div>
+
+
+@section HeadScripts{
+
+<style type="text/css">
+.custom-file-button input[type=file] {
+  margin-left: -2px !important;
+}
+.custom-file-button input[type=file]::-webkit-file-upload-button {
+  display: none;
+}
+.custom-file-button input[type=file]::file-selector-button {
+  display: none;
+}
+.custom-file-button:hover label {
+  background-color: #dde0e3;
+  cursor: pointer;
+}
+</style>
+
+
+}
+
+@section scripts{
+    <script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

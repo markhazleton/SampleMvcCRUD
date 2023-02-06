@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Http;
+
 namespace Mwh.Sample.Domain.Models;
 public class EmployeeDto : IComparable<EmployeeDto>
 {
@@ -9,13 +11,25 @@ public class EmployeeDto : IComparable<EmployeeDto>
     {
 
     }
+
     /// <summary>
-    /// 
+    /// Load the Employee Dto
     /// </summary>
-    /// <param name="Id"></param>
-    /// <param name="Name"></param>
+    /// <param name="id"></param>
+    /// <param name="name"></param>
+    /// <param name="age"></param>
+    /// <param name="state"></param>
+    /// <param name="country"></param>
     /// <param name="dept"></param>
-    public EmployeeDto(int id, string name, int age, string state, string country, EmployeeDepartmentEnum dept)
+    /// <param name="profilePicture"></param>
+    /// <exception cref="ArgumentException"></exception>
+    public EmployeeDto(int id,
+        string name,
+        int age,
+        string state,
+        string country,
+        EmployeeDepartmentEnum dept,
+        string? profilePicture = null)
     {
         Id = id;
         Name = name;
@@ -23,6 +37,7 @@ public class EmployeeDto : IComparable<EmployeeDto>
         State = state;
         Country = country;
         Department = dept;
+        ProfilePicture = profilePicture;
         if (!IsValid())
             throw new ArgumentException("New Employee is not valid", nameof(name));
 
@@ -215,4 +230,10 @@ public class EmployeeDto : IComparable<EmployeeDto>
     [Required]
     [JsonPropertyName("state")]
     public string? State { get; set; }
+
+    [Required(ErrorMessage = "Please choose profile image")]
+    [JsonPropertyName("profile_picture")]
+    public string? ProfilePicture { get; set; }
+    public IFormFile? ProfileImage { get; set; }
+
 }

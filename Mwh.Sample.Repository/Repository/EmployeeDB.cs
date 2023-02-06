@@ -44,7 +44,8 @@ public class EmployeeDB : IEmployeeDB
             entity.Age,
             entity.State ?? "TX",
             entity.Country ?? "USA",
-            (EmployeeDepartmentEnum)entity.DepartmentId
+            (EmployeeDepartmentEnum)entity.DepartmentId,
+            entity.ProfilePicture ?? "default.jpg"
         );
     }
 
@@ -111,7 +112,8 @@ public class EmployeeDB : IEmployeeDB
                 State = emp.State,
                 Age = emp.Age,
                 Country = emp.Country,
-                DepartmentId = (int)emp.Department
+                DepartmentId = (int)emp.Department,
+                ProfilePicture = emp.ProfilePicture ?? "default.jpg"
             };
             await _context.Employees.AddAsync(saveUser);
             await _context.SaveChangesAsync();
@@ -129,6 +131,7 @@ public class EmployeeDB : IEmployeeDB
                 saveUser.Age = emp.Age;
                 saveUser.Country = emp.Country;
                 saveUser.DepartmentId = (int)emp.Department;
+                saveUser.ProfilePicture = emp.ProfilePicture ?? "default.jpg";
                 saveUser.LastUpdatedDate = DateTime.Now;
                 await _context.SaveChangesAsync();
             }
@@ -141,7 +144,8 @@ public class EmployeeDB : IEmployeeDB
                     State = emp.State,
                     Age = emp.Age,
                     Country = emp.Country,
-                    DepartmentId = (int)emp.Department
+                    DepartmentId = (int)emp.Department,
+                    ProfilePicture = emp.ProfilePicture ?? "default.jpg"
                 };
                 await _context.Employees.AddAsync(saveUser);
                 await _context.SaveChangesAsync();

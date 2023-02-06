@@ -23,4 +23,7 @@
 	    <PackagePath>\</PackagePath>
 	  </None>
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.2.0" />
+	</ItemGroup>
 </Project>

@@ -6,6 +6,7 @@ public class Employee : BaseEntity
     {
         Name = string.Empty;
         Department = new Department();
+        ProfilePicture = "default.jpg";
     }
     /// <summary>
     /// Gets or sets the age.
@@ -44,4 +45,9 @@ public class Employee : BaseEntity
     /// Employee Manager Id
     /// </summary>
     public int? ManagerId { get; set; }
+    /// <summary>
+    /// Profile Picture
+    /// </summary>
+    public string? ProfilePicture { get; set; }
+
 }

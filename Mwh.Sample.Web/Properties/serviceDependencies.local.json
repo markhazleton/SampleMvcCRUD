@@ -12,15 +12,15 @@
       "type": "secrets.keyVault",
       "connectionId": "VaultUri"
     },
-    "apis1": {
-      "ignored": "True",
-      "type": "apis"
-    },
     "appInsights1": {
       "secretStore": "LocalSecretsFile",
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/MwhSampleWeb",
       "type": "appInsights.azure",
       "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING"
+    },
+    "apis1": {
+      "ignored": "True",
+      "type": "apis"
     }
   }
 }

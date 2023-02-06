@@ -41,7 +41,8 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             item?.Age ?? 0,
             item?.State ?? string.Empty,
             item?.Country ?? string.Empty,
-            (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1)
+            (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1),
+            item?.ProfilePicture ?? "default.jpg"
         );
     }
 
@@ -54,6 +55,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             Country = item.Country,
             Age = item.Age,
             DepartmentId = (int)item.Department,
+            ProfilePicture = item.ProfilePicture ?? "default.jpg",
             Id = item.Id
         };
     }
@@ -224,7 +226,8 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                 newItem.Age,
                 newItem.State,
                 newItem.Country,
-                newItem.Department);
+                newItem.Department,
+                newItem.ProfilePicture);
 
             int deptId = (int)(item.Department);
             var dbDept = await _context.Departments.FindAsync(new object?[] { deptId }, cancellationToken: ct);
@@ -255,6 +258,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                     dbEmp.Name = item.Name;
                     dbEmp.State = item.State;
                     dbEmp.LastUpdatedDate = DateTime.Now;
+                    dbEmp.ProfilePicture = item.ProfilePicture ?? "default.jpg";
                     _context.Update(dbEmp);
                     await _context.SaveChangesAsync(ct)
                         .ConfigureAwait(true);
