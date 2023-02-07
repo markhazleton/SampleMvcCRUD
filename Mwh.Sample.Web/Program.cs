@@ -1,3 +1,5 @@
+using Westwind.AspNetCore.Markdown;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var vaultUri = Environment.GetEnvironmentVariable("VaultUri");
@@ -28,8 +30,10 @@ SeedDatabase.DatabaseInitialization(new EmployeeContext());
 
 builder.Services.AddHttpClient();
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddMarkdown();
 builder.Services.AddSession();
-builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
+builder.Services.AddMvc(options => options.EnableEndpointRouting = false)
+    .AddApplicationPart(typeof(MarkdownPageProcessorMiddleware).Assembly);
 builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 builder.Services.AddHealthChecks();
@@ -40,6 +44,7 @@ app.UseSwaggerWithVersioning(builder.Configuration);
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseMarkdown();
 app.UseStaticFiles();
 app.MapHealthChecks("/health");
 app.UseMvc(routes =>

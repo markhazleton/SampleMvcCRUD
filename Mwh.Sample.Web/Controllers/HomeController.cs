@@ -1,4 +1,5 @@
-﻿
+﻿using Westwind.AspNetCore.Markdown;
+
 namespace Mwh.Sample.Web.Controllers;
 /// <summary>
 /// Home Controller
@@ -27,7 +28,8 @@ public class HomeController : BaseController
     /// <returns></returns>
     public ActionResult Index()
     {
-        return View();
+        var myContent = Markdown.ParseHtmlStringFromFile("~/README.md");
+        return View(myContent);
     }
 }
 

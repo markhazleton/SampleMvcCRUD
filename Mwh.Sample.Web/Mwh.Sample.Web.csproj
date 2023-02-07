@@ -14,32 +14,21 @@
 		<ApplicationInsightsResourceId>/subscriptions/1e3f18e4-ceb9-4033-8ce0-f17b8af6225f/resourceGroups/MwhSampleLinux/providers/microsoft.insights/components/MwhSampleWeb</ApplicationInsightsResourceId>
 		<UserSecretsId>9c59fa67-51a0-40f7-a8f1-64f4dba7c281</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<ApplicationIcon>favicon.ico</ApplicationIcon>
-		<PackageIcon>favicon.ico</PackageIcon>
+		<ApplicationIcon>..\favicon.ico</ApplicationIcon>
+		<PackageIcon>..\favicon.ico</PackageIcon>
 	</PropertyGroup>
-
-	<ItemGroup>
-	  <Compile Remove="Controllers\Api\Employee\v2\**" />
-	  <Content Remove="Controllers\Api\Employee\v2\**" />
-	  <EmbeddedResource Remove="Controllers\Api\Employee\v2\**" />
-	  <None Remove="Controllers\Api\Employee\v2\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="favicon.ico" />
-	</ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
-		<PackageReference Include="Azure.Identity" Version="1.8.0" />
+		<PackageReference Include="Azure.Identity" Version="1.8.1" />
 		<PackageReference Include="Microsoft.ApplicationInsights" Version="2.21.0" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.2.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
 		<PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.10.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -49,36 +38,34 @@
 		<ProjectReference Include="..\Mwh.Sample.SwaggerCore\Mwh.Sample.SwaggerCore.csproj" />
 	</ItemGroup>
 
+	
 	<ItemGroup>
-	  <Folder Include="wwwroot\lib\" />
-	  <Folder Include="wwwroot\images\" />
+		<None Include="..\favicon.ico" Link="wwwroot\favicon.ico">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<Folder Include="wwwroot\lib\" />
+		<Folder Include="wwwroot\images\" />
+		<Content Include="..\favicon.ico">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\favicon.ico">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	  <None Include="D:\GitHub\markhazleton\SampleMvcCRUD\Mwh.Sample.Web\.editorconfig" />
+		<Content Update="wwwroot\swagger_custom\custom.css">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="wwwroot\swagger_custom\favicon-16x16.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="wwwroot\swagger_custom\favicon-32x32.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="wwwroot\swagger_custom\favicon.ico">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Content Update="wwwroot\swagger_custom\custom.css">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="wwwroot\swagger_custom\favicon-16x16.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="wwwroot\swagger_custom\favicon-32x32.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="wwwroot\swagger_custom\favicon.ico">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EditorConfigFiles Remove="D:\GitHub\markhazleton\SampleMvcCRUD\Mwh.Sample.Web\.editorconfig" />
-	</ItemGroup>
 
 </Project>
