@@ -1,10 +1,11 @@
 # SampleMvcCRUD
 An Asp.Net MVC Application to demonstrate multiple ways of implementing a simple maintenance (CRUD) user interface
 
-For deployments there are 2 approaches:
+For deployments there are multiple approaches:
 
 1)  *current* [GitHub Actions](https://github.com/markhazleton/SampleMvcCRUD/actions) with Continuous Integration/Continuous Deployment (CI/CD) to Docker Hub and Azure App Services 
 2)  [Azure DevOps project](https://dev.azure.com/markhazleton/SampleMvcCRUD) with Continuous Integration/Continuous Deployment (CI/CD) pipelines to Azure App Services 
+3)  GitHub actions to push Docker Image to Docker Hub, then have Azure App Service configured to pull latest version from Docker Hub. 
 
 Web application is hosted:
 - Amazon Web Services (AWS)  Virtual Machine - Windows 2012 IIS - Net 6 [markhazletonsamplecrud.controlorigins.com](https://markhazletonsamplecrud.controlorigins.com/)
@@ -33,7 +34,7 @@ Mark Hazleton
 To the many teachers and developers that post sample code under open source license.
 
 ## Copyright and License
-Copyright 2018-2022 Mark Hazleton
+Copyright 2018-2023 Mark Hazleton
 Code released under the MIT License.
 
 
