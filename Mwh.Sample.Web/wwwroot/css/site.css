@@ -26,6 +26,10 @@ a {
 
 /* Sticky footer styles
 -------------------------------------------------- */
+
+
+
+
 html {
     font-size: 14px;
 }
@@ -66,11 +70,18 @@ body {
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+@media (max-width: 767px) {
+    footer {
+        font-size: 12px;
+        padding: 10px;
+    }
 }
 /* ******************************************************************** */
 /* ***************  ControlOrgins Base Classes *********************** */

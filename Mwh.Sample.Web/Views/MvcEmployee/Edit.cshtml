@@ -72,12 +72,12 @@
 
             </div>
 
-
-
-
             <div class="form-group mb-3">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Details", "Details", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-sm btn-warning" })
+
                 </div>
             </div>
 
