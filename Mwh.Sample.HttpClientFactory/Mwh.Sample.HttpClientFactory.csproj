@@ -21,7 +21,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-		<PackageReference Include="System.Text.Json" Version="7.0.1" />
+		<PackageReference Include="System.Text.Json" Version="7.0.2" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Mwh.Sample.Domain\Mwh.Sample.Domain.csproj" />
