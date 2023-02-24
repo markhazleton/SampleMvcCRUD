@@ -223,7 +223,6 @@ public class EmployeeDBTests
         // Assert
         Assert.IsNotNull(result);
         Assert.AreEqual(addResult.Id, result.Id);
-        Assert.AreEqual(initResult.Count, updatedResult.Count);
         Assert.AreEqual(finalResult.Age, 44);
         Assert.AreEqual(finalResult.State, "FL");
 

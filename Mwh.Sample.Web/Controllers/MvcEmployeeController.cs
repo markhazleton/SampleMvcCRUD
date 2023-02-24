@@ -15,7 +15,7 @@ public class MvcEmployeeController : BaseController
     /// <param name="hostEnvironment"></param>
     public MvcEmployeeController(IEmployeeClient employeeClient,
         IConfiguration configuration,
-        IWebHostEnvironment hostEnvironment) : base(configuration,hostEnvironment)
+        IWebHostEnvironment hostEnvironment) : base(configuration, hostEnvironment)
     {
         client = employeeClient;
     }
