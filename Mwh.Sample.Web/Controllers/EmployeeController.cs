@@ -12,11 +12,12 @@ public class EmployeeController : BaseController
     private readonly IEmployeeClient client;
 
     /// <summary>
-    ///
+    /// 
     /// </summary>
     /// <param name="employeeClient"></param>
     /// <param name="configuration"></param>
-    public EmployeeController(IEmployeeClient employeeClient, IConfiguration configuration) : base(configuration)
+    /// <param name="hostEnvironment"></param>
+    public EmployeeController(IEmployeeClient employeeClient, IConfiguration configuration, IWebHostEnvironment hostEnvironment) : base(configuration, hostEnvironment)
     {
         client = employeeClient;
     }

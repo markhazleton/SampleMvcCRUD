@@ -10,12 +10,15 @@
         /// </summary>
         private readonly IEmployeeClient client;
 
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="employeeClient"></param>
         /// <param name="configuration"></param>
-        public EmployeePivotController(IEmployeeClient employeeClient, IConfiguration configuration) : base(configuration)
+        /// <param name="hostEnvironment"></param>
+        public EmployeePivotController(IEmployeeClient employeeClient, IConfiguration configuration,
+        IWebHostEnvironment hostEnvironment) : base(configuration, hostEnvironment)
         {
             client = employeeClient;
         }

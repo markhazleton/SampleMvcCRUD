@@ -6,10 +6,11 @@
     public class EmployeeSinglePageController : BaseController
     {
         /// <summary>
-        /// Constructor for Controller
+        /// 
         /// </summary>
         /// <param name="configuration"></param>
-        public EmployeeSinglePageController(IConfiguration configuration) : base(configuration)
+        /// <param name="hostEnvironment"></param>
+        public EmployeeSinglePageController(IConfiguration configuration, IWebHostEnvironment hostEnvironment) : base(configuration, hostEnvironment)
         {
         }
 

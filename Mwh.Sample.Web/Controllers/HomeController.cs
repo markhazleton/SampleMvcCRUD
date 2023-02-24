@@ -10,7 +10,8 @@ public class HomeController : BaseController
     /// 
     /// </summary>
     /// <param name="configuration"></param>
-    public HomeController(IConfiguration configuration) : base(configuration)
+    /// <param name="hostEnvironment"></param>
+    public HomeController(IConfiguration configuration, IWebHostEnvironment hostEnvironment) : base(configuration, hostEnvironment)
     {
 
     }

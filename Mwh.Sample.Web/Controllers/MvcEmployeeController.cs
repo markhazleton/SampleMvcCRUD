@@ -1,5 +1,4 @@
-﻿
-namespace Mwh.Sample.Web.Controllers;
+﻿namespace Mwh.Sample.Web.Controllers;
 
 /// <summary>
 /// MvcEmployeeController
@@ -7,7 +6,6 @@ namespace Mwh.Sample.Web.Controllers;
 public class MvcEmployeeController : BaseController
 {
     private readonly IEmployeeClient client;
-    private readonly IWebHostEnvironment webHostEnvironment;
 
     /// <summary>
     /// Mvc Employee Controller Constructor
@@ -17,9 +15,8 @@ public class MvcEmployeeController : BaseController
     /// <param name="hostEnvironment"></param>
     public MvcEmployeeController(IEmployeeClient employeeClient,
         IConfiguration configuration,
-        IWebHostEnvironment hostEnvironment) : base(configuration)
+        IWebHostEnvironment hostEnvironment) : base(configuration,hostEnvironment)
     {
-        webHostEnvironment = hostEnvironment;
         client = employeeClient;
     }
 
@@ -131,8 +128,7 @@ public class MvcEmployeeController : BaseController
         if (employee is null)
             return RedirectToAction("Edit", new { employee?.Id });
 
-        var uniqueFileName = UploadedFile(employee);
-        employee.ProfilePicture = uniqueFileName;
+        employee.ProfilePicture = UploadedFile(employee.ProfileImage);
 
         EmployeeResponse? reqResponse = null;
         if (employee != null)
@@ -161,26 +157,5 @@ public class MvcEmployeeController : BaseController
 
         return View(list);
     }
-
-    private string? UploadedFile(EmployeeDto? model)
-    {
-        if (model is null) return null;
-
-        string? uniqueFileName = null;
-
-        if (model.ProfileImage != null)
-        {
-            string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
-            uniqueFileName = $"{Guid.NewGuid()}_{model.ProfileImage.FileName}";
-            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                model.ProfileImage.CopyTo(fileStream);
-            }
-        }
-        return uniqueFileName;
-    }
-
-
 }
 

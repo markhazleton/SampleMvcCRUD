@@ -1,4 +1,8 @@
 ﻿
+using Mwh.Sample.Domain.Extensions;
+using System.Drawing;
+using System.Drawing.Imaging;
+
 namespace Mwh.Sample.Web.Controllers;
 
 /// <summary>
@@ -7,6 +11,8 @@ namespace Mwh.Sample.Web.Controllers;
 [ApiExplorerSettings(IgnoreApi = true)]
 public abstract class BaseController : Controller
 {
+    private readonly IWebHostEnvironment webHostEnvironment;
+
     /// <summary>
     ///
     /// </summary>
@@ -16,9 +22,27 @@ public abstract class BaseController : Controller
     /// <summary>
     /// BaseController
     /// </summary>
-    protected BaseController(IConfiguration configuration)
+    protected BaseController(IConfiguration configuration,
+        IWebHostEnvironment hostEnvironment)
     {
         cts = new CancellationTokenSource();
         this.Config = configuration;
+        webHostEnvironment = hostEnvironment;
     }
+    /// <summary>
+    /// Update File and return File Name
+    /// </summary>
+    /// <param name="ProfileImage"></param>
+    /// <returns></returns>
+    protected string? UploadedFile(IFormFile? ProfileImage)
+    {
+        if (ProfileImage is null) return null;
+
+        string filePath = Path.Combine(Path.Combine(webHostEnvironment.WebRootPath, "images"), $"{Guid.NewGuid()}_{$"{Path.GetFileNameWithoutExtension(ProfileImage.FileName)}.png"}");
+        using Bitmap bmpPostedImage = new(ProfileImage.OpenReadStream());
+        using Image objImage = bmpPostedImage.ScaleImage(81);
+        objImage.Save(filePath, ImageFormat.Png);
+        return Path.GetFileName(filePath);
+    }
+
 }
