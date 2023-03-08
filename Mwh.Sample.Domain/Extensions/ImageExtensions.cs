@@ -4,7 +4,7 @@ namespace Mwh.Sample.Domain.Extensions
 {
     public static class ImageExtensions
     {
-        public static System.Drawing.Image Resize(this System.Drawing.Image image, int maxWidth = 0, int maxHeight = 0)
+        public static Image Resize(this Image image, int maxWidth = 0, int maxHeight = 0)
         {
             if (maxWidth == 0)
                 maxWidth = image.Width;
@@ -22,7 +22,7 @@ namespace Mwh.Sample.Domain.Extensions
             Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
             return newImage;
         }
-        public static System.Drawing.Image ScaleImage(this System.Drawing.Image image, int maxHeight)
+        public static Image ScaleImage(this Image image, int maxHeight)
         {
             var ratio = (double)maxHeight / image.Height;
 

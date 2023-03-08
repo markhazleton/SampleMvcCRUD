@@ -11,9 +11,9 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
 {
     public class CreateModel : PageModel
     {
-        private readonly Mwh.Sample.Repository.Models.EmployeeContext _context;
+        private readonly EmployeeContext _context;
 
-        public CreateModel(Mwh.Sample.Repository.Models.EmployeeContext context)
+        public CreateModel(EmployeeContext context)
         {
             _context = context;
         }

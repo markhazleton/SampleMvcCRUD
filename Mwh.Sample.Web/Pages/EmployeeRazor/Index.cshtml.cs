@@ -11,9 +11,9 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
 {
     public class IndexModel : PageModel
     {
-        private readonly Mwh.Sample.Repository.Models.EmployeeContext _context;
+        private readonly EmployeeContext _context;
 
-        public IndexModel(Mwh.Sample.Repository.Models.EmployeeContext context)
+        public IndexModel(EmployeeContext context)
         {
             _context = context;
         }

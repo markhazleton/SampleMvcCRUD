@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Mwh.Sample.Repository.Models;
 
 namespace Mwh.Sample.Web.Pages.EmployeeRazor
 {
     public class EditModel : PageModel
     {
-        private readonly Mwh.Sample.Repository.Models.EmployeeContext _context;
+        private readonly EmployeeContext _context;
 
-        public EditModel(Mwh.Sample.Repository.Models.EmployeeContext context)
+        public EditModel(EmployeeContext context)
         {
             _context = context;
         }
@@ -35,7 +28,7 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
                 return NotFound();
             }
             Employee = employee;
-           ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "CreatedBy");
+           ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name");
             return Page();
         }
 

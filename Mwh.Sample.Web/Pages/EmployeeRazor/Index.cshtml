@@ -14,6 +14,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Name)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Employee[0].Age)
             </th>
             <th>
@@ -23,28 +26,7 @@
                 @Html.DisplayNameFor(model => model.Employee[0].Department)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Name)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Employee[0].State)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].ManagerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].ProfilePicture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].LastUpdatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].LastUpdatedDate)
             </th>
             <th></th>
         </tr>
@@ -53,37 +35,20 @@
 @foreach (var item in Model.Employee) {
         <tr>
             <td>
+                <img src="~/images/@item.ProfilePicture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Age)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Country)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Department.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Department.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ManagerId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProfilePicture)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdatedDate)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
