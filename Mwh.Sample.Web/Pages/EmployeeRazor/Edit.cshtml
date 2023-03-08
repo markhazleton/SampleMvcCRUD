@@ -1,0 +1,85 @@
+﻿@page
+@model Mwh.Sample.Web.Pages.EmployeeRazor.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Employee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Employee.Age" class="control-label"></label>
+                <input asp-for="Employee.Age" class="form-control" />
+                <span asp-validation-for="Employee.Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.Country" class="control-label"></label>
+                <input asp-for="Employee.Country" class="form-control" />
+                <span asp-validation-for="Employee.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.DepartmentId" class="control-label"></label>
+                <select asp-for="Employee.DepartmentId" class="form-control" asp-items="ViewBag.DepartmentId"></select>
+                <span asp-validation-for="Employee.DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.Name" class="control-label"></label>
+                <input asp-for="Employee.Name" class="form-control" />
+                <span asp-validation-for="Employee.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.State" class="control-label"></label>
+                <input asp-for="Employee.State" class="form-control" />
+                <span asp-validation-for="Employee.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.ManagerId" class="control-label"></label>
+                <input asp-for="Employee.ManagerId" class="form-control" />
+                <span asp-validation-for="Employee.ManagerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.ProfilePicture" class="control-label"></label>
+                <input asp-for="Employee.ProfilePicture" class="form-control" />
+                <span asp-validation-for="Employee.ProfilePicture" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Employee.Id" />
+            <div class="form-group">
+                <label asp-for="Employee.CreatedBy" class="control-label"></label>
+                <input asp-for="Employee.CreatedBy" class="form-control" />
+                <span asp-validation-for="Employee.CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.CreatedDate" class="control-label"></label>
+                <input asp-for="Employee.CreatedDate" class="form-control" />
+                <span asp-validation-for="Employee.CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.LastUpdatedBy" class="control-label"></label>
+                <input asp-for="Employee.LastUpdatedBy" class="form-control" />
+                <span asp-validation-for="Employee.LastUpdatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.LastUpdatedDate" class="control-label"></label>
+                <input asp-for="Employee.LastUpdatedDate" class="form-control" />
+                <span asp-validation-for="Employee.LastUpdatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

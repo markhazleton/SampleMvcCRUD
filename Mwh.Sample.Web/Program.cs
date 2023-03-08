@@ -32,6 +32,7 @@ builder.Services.AddHttpClient();
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddMarkdown();
 builder.Services.AddSession();
+builder.Services.AddRazorPages();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false)
     .AddApplicationPart(typeof(MarkdownPageProcessorMiddleware).Assembly);
 builder.Services.AddControllersWithViews();
