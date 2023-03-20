@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace Mwh.Sample.Domain.Models;
 public class EmployeeDto : IComparable<EmployeeDto>
@@ -222,6 +221,11 @@ public class EmployeeDto : IComparable<EmployeeDto>
     [Required]
     [JsonPropertyName("name")]
     public string? Name { get; set; }
+    public IFormFile? ProfileImage { get; set; }
+
+    [Required(ErrorMessage = "Please choose profile image")]
+    [JsonPropertyName("profile_picture")]
+    public string? ProfilePicture { get; set; }
 
     /// <summary>
     /// Gets or sets the state.
@@ -230,10 +234,5 @@ public class EmployeeDto : IComparable<EmployeeDto>
     [Required]
     [JsonPropertyName("state")]
     public string? State { get; set; }
-
-    [Required(ErrorMessage = "Please choose profile image")]
-    [JsonPropertyName("profile_picture")]
-    public string? ProfilePicture { get; set; }
-    public IFormFile? ProfileImage { get; set; }
 
 }

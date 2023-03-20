@@ -4,58 +4,53 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Age)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Department)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].State)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Employee) {
-        <tr>
-            <td>
-                <img src="~/images/@item.ProfilePicture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container">
+    <h2>Employee Razor Index</h2>
+    <p>
+        <a class="btn btn-primary" asp-page="Create">Create New Employee</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee[0].Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee[0].State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee[0].Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee[0].Department)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Employee)
+            {
+                <tr>
+                    <td>
+                        <img src="~/images/@item.ProfilePicture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                        <a asp-page="./Edit" asp-route-id="@item.Id">@item.Name</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Department.Name)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
