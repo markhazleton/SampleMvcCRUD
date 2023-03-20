@@ -33,6 +33,7 @@ builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddMarkdown();
 builder.Services.AddSession();
 builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false)
     .AddApplicationPart(typeof(MarkdownPageProcessorMiddleware).Assembly);
 builder.Services.AddControllersWithViews();
@@ -43,10 +44,11 @@ var app = builder.Build();
 app.UseMyHttpContext();
 app.UseSwaggerWithVersioning(builder.Configuration);
 app.UseHttpsRedirection();
-app.UseAuthorization();
 app.MapControllers();
 app.UseMarkdown();
 app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthorization();
 app.MapHealthChecks("/health");
 app.UseMvc(routes =>
 {
@@ -54,4 +56,11 @@ app.UseMvc(routes =>
         name: "default",
         template: "{controller=Home}/{action=Index}/{id?}");
 });
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+    endpoints.MapBlazorHub();
+}); 
+
 app.Run();
