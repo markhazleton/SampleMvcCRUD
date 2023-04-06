@@ -6,12 +6,17 @@
 }
 <div class="container">
 
-    <h2>Razor Page Edit</h2>
+    <h2>Razor Page Edit Employee</h2>
     <hr />
     <div class="row">
         <div class="col-md-4">
             <form method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Employee.Name" class="control-label"></label>
+                    <input asp-for="Employee.Name" class="form-control" />
+                    <span asp-validation-for="Employee.Name" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="Employee.Age" class="control-label"></label>
                     <input asp-for="Employee.Age" class="form-control" />
@@ -28,24 +33,9 @@
                     <span asp-validation-for="Employee.DepartmentId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Employee.Name" class="control-label"></label>
-                    <input asp-for="Employee.Name" class="form-control" />
-                    <span asp-validation-for="Employee.Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
                     <label asp-for="Employee.State" class="control-label"></label>
                     <input asp-for="Employee.State" class="form-control" />
                     <span asp-validation-for="Employee.State" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Employee.ManagerId" class="control-label"></label>
-                    <input asp-for="Employee.ManagerId" class="form-control" />
-                    <span asp-validation-for="Employee.ManagerId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Employee.ProfilePicture" class="control-label"></label>
-                    <input asp-for="Employee.ProfilePicture" class="form-control" />
-                    <span asp-validation-for="Employee.ProfilePicture" class="text-danger"></span>
                 </div>
                 <input type="hidden" asp-for="Employee.Id" />
                 <div class="form-group">

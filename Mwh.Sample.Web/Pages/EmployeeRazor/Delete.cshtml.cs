@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Mwh.Sample.Repository.Models;
 
 namespace Mwh.Sample.Web.Pages.EmployeeRazor
 {
@@ -19,7 +14,7 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
         }
 
         [BindProperty]
-      public Employee Employee { get; set; } = default!;
+        public Employee Employee { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -34,7 +29,7 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Employee = employee;
             }

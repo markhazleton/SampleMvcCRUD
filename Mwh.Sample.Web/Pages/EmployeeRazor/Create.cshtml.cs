@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Mwh.Sample.Repository.Models;
+using System;
+using System.Linq;
 
 namespace Mwh.Sample.Web.Pages.EmployeeRazor
 {
@@ -20,18 +16,18 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
 
         public IActionResult OnGet()
         {
-        ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "CreatedBy");
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "CreatedBy");
             return Page();
         }
 
         [BindProperty]
         public Employee Employee { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Employees == null || Employee == null)
+            if (!ModelState.IsValid || _context.Employees == null || Employee == null)
             {
                 return Page();
             }

@@ -128,7 +128,7 @@ public class MvcEmployeeController : BaseController
         if (employee is null)
             return RedirectToAction("Edit", new { employee?.Id });
 
-        employee.ProfilePicture = UploadedFile(employee.ProfileImage);
+        employee.ProfilePicture = UploadedFile(employee.ProfileImage, EmployeeId: employee?.Id.ToString());
 
         EmployeeResponse? reqResponse = null;
         if (employee != null)

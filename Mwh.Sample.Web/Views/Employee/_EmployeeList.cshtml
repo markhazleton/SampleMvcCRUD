@@ -18,7 +18,11 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        <a href="#" class="" onclick="return loadEmployeeEdit('@item.Id')">
+                            <img src="~/images/@item.ProfilePicture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </a>
+
                     </td>
                     <td>
                         @item.Age

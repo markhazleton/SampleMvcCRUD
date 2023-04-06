@@ -34,15 +34,21 @@ public abstract class BaseController : Controller
     /// </summary>
     /// <param name="ProfileImage"></param>
     /// <returns></returns>
-    protected string? UploadedFile(IFormFile? ProfileImage)
+    /// <param name="EmployeeId"></param>
+    protected string? UploadedFile(IFormFile? ProfileImage, string EmployeeId)
     {
         if (ProfileImage is null) return null;
-
-        string filePath = Path.Combine(Path.Combine(webHostEnvironment.WebRootPath, "images"), $"{Guid.NewGuid()}_{$"{Path.GetFileNameWithoutExtension(ProfileImage.FileName)}.png"}");
+        string folderPath = Path.Combine(webHostEnvironment.WebRootPath, "images", EmployeeId);
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+        string filePath = Path.Combine(folderPath, $"{Guid.NewGuid()}_{$"{Path.GetFileNameWithoutExtension(ProfileImage.FileName)}.png"}");
         using Bitmap bmpPostedImage = new(ProfileImage.OpenReadStream());
         using Image objImage = bmpPostedImage.ScaleImage(81);
         objImage.Save(filePath, ImageFormat.Png);
-        return Path.GetFileName(filePath);
+        return $"{EmployeeId}/{Path.GetFileName(filePath)}";
     }
+
 
 }
