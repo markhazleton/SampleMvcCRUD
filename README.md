@@ -1,6 +1,15 @@
 # SampleMvcCRUD
 An Asp.Net MVC Application to demonstrate multiple ways of implementing a simple maintenance (CRUD) user interface
 
+[![.NET](https://github.com/markhazleton/samplemvccrud/actions/workflows/main_mwhsampleweb.yml/badge.svg)]([main_mwhsampleweb.yml](https://github.com/markhazleton/SampleMvcCRUD/blob/main/.github/workflows/main_mwhsampleweb.yml))
+
+[![.NET](https://github.com/markhazleton/samplemvccrud/actions/workflows/docker-image.yml/badge.svg)]([docker-image.yml](https://github.com/markhazleton/SampleMvcCRUD/blob/main/.github/workflows/docker-image.yml))
+
+
+
+https://github.com/markhazleton/SampleMvcCRUD/blob/main/.github/workflows/docker-image.yml
+
+
 For deployments there are multiple approaches:
 
 1)  *current* [GitHub Action](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/main_mwhsampleweb.yml) with Continuous Integration/Continuous Deployment (CI/CD) to Docker Hub and Azure App Services 
