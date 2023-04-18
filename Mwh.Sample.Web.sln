@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{2E18C8B3-20AB-42BB-97B6-00B1AEA5CEB9}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		API-Example.http = API-Example.http
 		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
 		CONTRIBUTING.md = CONTRIBUTING.md
 		README.md = README.md
