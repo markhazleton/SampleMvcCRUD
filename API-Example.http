@@ -1,0 +1,15 @@
+@base=https://localhost:7023
+
+GET {{base}}/status/explorer
+###
+GET {{base}}/status
+###
+GET {{base}}/api/department
+###
+# Get a department by id, includes all employees
+GET {{base}}/api/department/1
+###
+GET {{base}}/api/employee?PageNumber=10&PageSize=2
+###
+GET {{base}}/api/employee/1
+###
