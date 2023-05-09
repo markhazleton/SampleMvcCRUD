@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Http;
 
 namespace Mwh.Sample.Domain.Models;
-public class EmployeeDto : IComparable<EmployeeDto>
+public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
 {
     /// <summary>
-    /// 
+    /// Employee DTO
     /// </summary>
     public EmployeeDto()
     {
