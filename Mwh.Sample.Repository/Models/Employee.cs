@@ -1,6 +1,6 @@
 ﻿
 namespace Mwh.Sample.Repository.Models;
-public class Employee : BaseEntity
+public class Employee : BaseEntity, IEmployee
 {
     public Employee()
     {
