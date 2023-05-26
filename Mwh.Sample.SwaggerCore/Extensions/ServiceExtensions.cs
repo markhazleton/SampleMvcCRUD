@@ -52,13 +52,13 @@ public static class ServiceExtensions
                     Contact = new OpenApiContact
                     {
                         Name = configuration.GetValue<string>("Swagger:UserProfile:Name"),
-                        Url = new Uri(configuration.GetValue<string>("Swagger:UserProfile:Url")),
+                        Url = new Uri(configuration.GetValue<string>("Swagger:UserProfile:Url") ?? ""),
                         Email = configuration.GetValue<string>("Swagger:UserProfile:Email"),
                     },
                     License = new OpenApiLicense { Name = "MIT", },
                 });
 
-            var xmlFile = configuration.GetValue<string>("Swagger:XmlFile");
+            var xmlFile = configuration.GetValue<string>("Swagger:XmlFile")??string.Empty;
             string xmlPath = string.Empty;
 
             if (File.Exists(Path.Combine(AppContext.BaseDirectory, "wwwroot")))

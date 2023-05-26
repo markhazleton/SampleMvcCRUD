@@ -37,7 +37,7 @@ public class MvcEmployeeController : BaseController
     public async Task<ActionResult> Create(EmployeeDto? employee)
     {
         EmployeeResponse? reqResponse = null;
-        if (employee != null)
+        if (employee is not null)
         {
             reqResponse = await client.SaveAsync(employee, cts.Token);
         }

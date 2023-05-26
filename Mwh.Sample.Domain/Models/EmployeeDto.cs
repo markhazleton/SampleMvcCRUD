@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace Mwh.Sample.Domain.Models;
 public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
@@ -50,19 +49,19 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
 
     public static bool operator <(EmployeeDto left, EmployeeDto right)
     {
-        return ReferenceEquals(left, null) ? !ReferenceEquals(right, null) : left.CompareTo(right) < 0;
+        return left is null ? right is not null : left.CompareTo(right) < 0;
     }
 
     public static bool operator <=(EmployeeDto left, EmployeeDto right)
     {
-        return ReferenceEquals(left, null) || left.CompareTo(right) <= 0;
+        return left is null || left.CompareTo(right) <= 0;
     }
 
     public static bool operator ==(EmployeeDto left, EmployeeDto right)
     {
-        if (ReferenceEquals(left, null))
+        if (left is null)
         {
-            return ReferenceEquals(right, null);
+            return right is null;
         }
 
         return left.Equals(right);
@@ -70,12 +69,12 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
 
     public static bool operator >(EmployeeDto left, EmployeeDto right)
     {
-        return !ReferenceEquals(left, null) && left.CompareTo(right) > 0;
+        return left is not null && left.CompareTo(right) > 0;
     }
 
     public static bool operator >=(EmployeeDto left, EmployeeDto right)
     {
-        return ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.CompareTo(right) >= 0;
+        return ReferenceEquals(left, null) ? right is null : left.CompareTo(right) >= 0;
     }
 
     public int CompareTo(EmployeeDto? other)
@@ -92,8 +91,8 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
 
             if (value1 == null && value2 == null)
             {
-                // Both objects are null, so they are equal
-                return 0;
+                // Both properties are null, so they are equal
+                continue;
             }
             else if (value1 == null || value2 == null)
             {
@@ -113,13 +112,16 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
         return 0;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
-        var other = obj as EmployeeDto;
-        if (other == null) return false;
+        if (ReferenceEquals(this, obj))
+            return true;
 
-        // Get a list of all public properties of the Person class
-        var properties = this.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        if (obj is not EmployeeDto other)
+            return false;
+
+        // Get a list of all public properties of the EmployeeDto class
+        var properties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
         // Compare the values of the public properties
         foreach (var property in properties)
@@ -127,25 +129,19 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
             var value1 = property.GetValue(this);
             var value2 = property.GetValue(other);
 
-            // If either value is null, use the ReferenceEquals method to compare them
-            if (value1 == null || value2 == null)
-            {
-                if (!Object.ReferenceEquals(value1, value2))
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                // If both values are not null, use the Equals method to compare them
-                if (!value1.Equals(value2))
-                {
-                    return false;
-                }
-            }
+            if (!AreEqual(value1, value2))
+                return false;
         }
-        // If all public property values are equal, return true
+
         return true;
+    }
+
+    private static bool AreEqual(object? value1, object? value2)
+    {
+        if (ReferenceEquals(value1, value2))
+            return true;
+
+        return value1?.Equals(value2) ?? false;
     }
 
     public override int GetHashCode()

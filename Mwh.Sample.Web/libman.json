@@ -9,7 +9,7 @@
         "jquery.js",
         "jquery.min.map"
       ],
-      "library": "jquery@3.6.4"
+      "library": "jquery@3.7.0"
     },
     {
       "destination": "wwwroot/lib/jquery-validation-unobtrusive/",

@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Http;
+
 namespace Mwh.Sample.HttpClientFactory.Clients;
 
 /// <summary>

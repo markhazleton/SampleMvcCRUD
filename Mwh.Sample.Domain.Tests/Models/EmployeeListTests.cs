@@ -14,6 +14,7 @@ public class EmployeeListTests
         var result = employeeList.AddItem(item);
 
         // Assert
+        Assert.AreEqual(employeeList.List.Count, 0);
         Assert.AreEqual(result.EnumerateItems().Count(), 0);
     }
 
@@ -35,6 +36,7 @@ public class EmployeeListTests
         var result = employeeList.AddItem(item);
 
         // Assert
+        Assert.AreEqual(employeeList.List.Count, 1);
         Assert.AreEqual(result.EnumerateItems().Count(), 1);
     }
 
@@ -49,5 +51,6 @@ public class EmployeeListTests
 
         // Assert
         Assert.AreEqual(result.Count(), 0);
+        Assert.AreEqual(employeeList.List.Count, 0);
     }
 }

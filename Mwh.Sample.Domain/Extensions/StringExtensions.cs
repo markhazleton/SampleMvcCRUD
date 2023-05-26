@@ -25,9 +25,7 @@ public static class StringExtensions
     /// <returns>System.Nullable&lt;System.Int32&gt;.</returns>
     public static int? GetIntFromString(this string? str, int? defaultValue)
     {
-        if (str == null) return defaultValue;
-        bool parsed = int.TryParse(str, out int returnInt);
-        return parsed ? returnInt : defaultValue;
+        return int.TryParse(str, out int returnInt) ? returnInt : defaultValue;
     }
 
     /// <summary>
@@ -38,9 +36,7 @@ public static class StringExtensions
     /// <returns>System.Int32.</returns>
     public static int GetIntFromString(this string? str, int defaultValue)
     {
-        bool parsed = int.TryParse(str, out int returnInt);
-        if (parsed) return returnInt;
-        return parsed ? returnInt : defaultValue;
+        return int.TryParse(str, out int returnInt) ? returnInt : defaultValue;
     }
 
     /// <summary>
@@ -53,9 +49,11 @@ public static class StringExtensions
     /// <exception cref="ArgumentException">Can not find the zeroth index of substring in string. Must start with 1</exception>
     public static int IndexOfNth(this string? str, string? value, int nth = 1)
     {
-        if (str == null) return 0;
+        if (str == null) 
+            return 0;
 
-        if (value == null) return 0;
+        if (value == null) 
+            return 0;
 
         if (nth <= 0) throw new ArgumentException("Can not find the zeroth index of substring in string. Must start with 1");
 

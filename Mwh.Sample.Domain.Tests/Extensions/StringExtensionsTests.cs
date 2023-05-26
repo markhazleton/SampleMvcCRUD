@@ -150,15 +150,26 @@ public class StringExtensionsTests
     /// Defines the test method IndexOfNthTestSourceNull.
     /// </summary>
     [TestMethod()]
-    public void IndexOfNthTestSourceNull()
+    public void IndexOfNthTestSourceNotFound()
     {
-        string? myTest = null;
-        var result = myTest?.IndexOfNth("3", 3);
-        Assert.IsNull(result);
+        string myTest = "123456";
+        var result = myTest.IndexOfNth("7", 3);
+        Assert.AreEqual(result, -1);
     }
 
     /// <summary>
-    /// Defines the test method IndexOfNthTestValueNegativeNth.
+    /// Defines the test method IndexOfNthTestSourceNull.
+    /// </summary>
+    [TestMethod()]
+    public void IndexOfNthTestSourceNull()
+    {
+        string? myTest = null;
+        var result = myTest.IndexOfNth("3", 3);
+        Assert.AreEqual(result,0);
+    }
+
+    /// <summary>
+    /// Defines the test method IndexOfNthTestValueNegativeNth. Throws exception
     /// </summary>
     [TestMethod()]
     [ExpectedException(typeof(ArgumentException))]
