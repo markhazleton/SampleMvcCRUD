@@ -165,7 +165,7 @@ public class StringExtensionsTests
     {
         string? myTest = null;
         var result = myTest.IndexOfNth("3", 3);
-        Assert.AreEqual(result,0);
+        Assert.AreEqual(result, 0);
     }
 
     /// <summary>

@@ -49,10 +49,10 @@ public static class StringExtensions
     /// <exception cref="ArgumentException">Can not find the zeroth index of substring in string. Must start with 1</exception>
     public static int IndexOfNth(this string? str, string? value, int nth = 1)
     {
-        if (str == null) 
+        if (str == null)
             return 0;
 
-        if (value == null) 
+        if (value == null)
             return 0;
 
         if (nth <= 0) throw new ArgumentException("Can not find the zeroth index of substring in string. Must start with 1");

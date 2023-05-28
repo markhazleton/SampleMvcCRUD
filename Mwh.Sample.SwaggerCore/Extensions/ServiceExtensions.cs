@@ -1,6 +1,4 @@
-﻿using Mwh.Sample.SwaggerCore.Options;
-
-namespace Mwh.Sample.SwaggerCore.Extensions;
+﻿namespace Mwh.Sample.SwaggerCore.Extensions;
 
 /// <summary>
 /// Extensions to Services to configure Swagger/Open API
@@ -58,7 +56,7 @@ public static class ServiceExtensions
                     License = new OpenApiLicense { Name = "MIT", },
                 });
 
-            var xmlFile = configuration.GetValue<string>("Swagger:XmlFile")??string.Empty;
+            var xmlFile = configuration.GetValue<string>("Swagger:XmlFile") ?? string.Empty;
             string xmlPath = string.Empty;
 
             if (File.Exists(Path.Combine(AppContext.BaseDirectory, "wwwroot")))
@@ -71,17 +69,6 @@ public static class ServiceExtensions
             }
             cfg.IncludeXmlComments(xmlPath);
         });
-        return services;
-    }
-    private static IServiceCollection AddSwaggerVersioning(this IServiceCollection services)
-    {
-        services.AddSwaggerGen(options =>
-        {
-            // for further customization
-            //options.OperationFilter<DefaultValuesFilter>();
-        });
-        services.ConfigureOptions<ConfigureSwaggerOptions>();
-
         return services;
     }
 }

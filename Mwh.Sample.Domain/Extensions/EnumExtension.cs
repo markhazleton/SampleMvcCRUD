@@ -17,12 +17,13 @@ public static class EnumExtension
         if (e == null)
             return string.Empty;
 
-        var fieldInfo = e.GetType()?.GetField(e.ToString());
+        var fieldInfo = e.GetType().GetField(e.ToString());
 
-        if (fieldInfo?.GetCustomAttributes(typeof(DisplayAttribute), false) is not DisplayAttribute[] descriptionAttributes)
-            return string.Empty;
+        if (fieldInfo?.GetCustomAttributes(typeof(DisplayAttribute), false) is not DisplayAttribute[] descriptionAttributes
+            || descriptionAttributes.Length == 0)
+            return e.ToString();
 
-        return (descriptionAttributes.Length > 0) ? descriptionAttributes[0].Description : e.ToString();
+        return descriptionAttributes[0].Description;
     }
 
     /// <summary>
@@ -35,12 +36,13 @@ public static class EnumExtension
         if (e == null)
             return string.Empty;
 
-        var fieldInfo = e.GetType()?.GetField(e.ToString());
+        var fieldInfo = e.GetType().GetField(e.ToString());
 
-        if (fieldInfo?.GetCustomAttributes(typeof(DisplayAttribute), false) is not DisplayAttribute[] descriptionAttributes)
-            return string.Empty;
+        if (fieldInfo?.GetCustomAttributes(typeof(DisplayAttribute), false) is not DisplayAttribute[] descriptionAttributes 
+            || descriptionAttributes.Length == 0)
+            return e.ToString();
 
-        return (descriptionAttributes.Length > 0) ? descriptionAttributes[0].Name : e.ToString();
+        return descriptionAttributes[0].Name;
     }
 
     /// <summary>
@@ -75,4 +77,25 @@ public static class EnumExtension
         /// </summary>
         public static readonly HashSet<T> DefinedValues = new((T[])Enum.GetValues(typeof(T)));
     }
+
+    public static IEnumerable<T> GetAllValues<T>() where T : Enum
+    {
+        return Enum.GetValues(typeof(T)).Cast<T>();
+    }
+    public static TEnum ParseCaseInsensitive<TEnum>(string value) where TEnum : Enum
+    {
+        return (TEnum)Enum.Parse(typeof(TEnum), value, ignoreCase: true);
+    }
+    public static string[] GetNames<T>() where T : Enum
+    {
+        return Enum.GetNames(typeof(T));
+    }
+    public static Type GetUnderlyingType<T>() where T : Enum
+    {
+        return Enum.GetUnderlyingType(typeof(T));
+    }
+
+
+
+
 }

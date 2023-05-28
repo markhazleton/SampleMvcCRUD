@@ -111,17 +111,15 @@ public static class LogExtensions
     /// <returns>String</returns>
     private static string GetTextObjectString(this object record)
     {
-        StringBuilder recordLog = new();
-        Dictionary<string, object> recordDictionary = GetDictionaryWithPropertiesForOneRecord(record);
-        if (recordDictionary is null) return string.Empty;
-
         int propertyCounter = 0;
+        StringBuilder recordLog = new();
+        var recordDictionary = GetDictionaryWithPropertiesForOneRecord(record);
         try
         {
             foreach (var keyValuePair in recordDictionary)
             {
                 propertyCounter += 1;
-                object thePropertyValue = recordDictionary[keyValuePair.Key];
+                var thePropertyValue = recordDictionary[keyValuePair.Key];
                 if (thePropertyValue != null)
                 {
                     recordLog.Append($"{keyValuePair.Key}:{keyValuePair.Value}|");

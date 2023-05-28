@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace Mwh.Sample.Domain.Tests.Extensions;
 
 /// <summary>
@@ -97,4 +99,36 @@ public class PropertyBagTests
     /// </summary>
     [TestMethod()]
     public void GetObjectDataTest() { }
+
+    [TestMethod]
+    public void GetObjectData_WithNonEmptyPropertyBag_SerializesDictionaryToSerializationInfo()
+    {
+        // Arrange
+        var propertyBag = new PropertyBag<string, int>();
+        propertyBag.Add("Key1", 1);
+        propertyBag.Add("Key2", 2);
+        var serializationInfo = new SerializationInfo(typeof(PropertyBag<string, int>), new FormatterConverter());
+
+        // Act
+        propertyBag.GetObjectData(serializationInfo);
+
+        // Assert
+        Assert.AreEqual(2, serializationInfo.MemberCount);
+        Assert.AreEqual(1, serializationInfo.GetValue("Key1", typeof(int)));
+        Assert.AreEqual(2, serializationInfo.GetValue("Key2", typeof(int)));
+    }
+
+    [TestMethod]
+    public void GetObjectData_WithEmptyPropertyBag_DoesNotAddValuesToSerializationInfo()
+    {
+        // Arrange
+        var propertyBag = new PropertyBag<string, int>();
+        var serializationInfo = new SerializationInfo(typeof(PropertyBag<string, int>), new FormatterConverter());
+
+        // Act
+        propertyBag.GetObjectData(serializationInfo);
+
+        // Assert
+        Assert.AreEqual(0, serializationInfo.MemberCount);
+    }
 }
