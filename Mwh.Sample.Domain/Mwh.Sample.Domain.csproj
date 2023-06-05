@@ -24,7 +24,9 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
 	</ItemGroup>
 </Project>

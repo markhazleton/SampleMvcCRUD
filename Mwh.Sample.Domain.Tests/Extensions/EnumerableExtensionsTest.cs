@@ -25,7 +25,7 @@ public class EnumerableExtensionsTest
         var resultMax = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.Maximum);
         var resultFirst = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.First);
         var resultLast = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.Last);
-        var resultMean = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.Mean);   
+        var resultMean = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.Mean);
 
         Assert.AreEqual(expectedOutput.CompareTo(resultMin), 0);
         Assert.AreEqual(resultMax?.Name, "Charlie");
@@ -49,7 +49,7 @@ public class EnumerableExtensionsTest
             new EmployeeDto { Name = "Charlie", Age = 35 }
         };
         var expectedOutput = new EmployeeDto { Name = "Alice", Age = 30 };
-        var result = input.SelectElementByOption(emp => emp.Name??string.Empty);
+        var result = input.SelectElementByOption(emp => emp.Name ?? string.Empty);
         Assert.AreEqual(expectedOutput.CompareTo(result), 0);
     }
 

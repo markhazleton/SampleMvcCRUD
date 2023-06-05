@@ -50,7 +50,7 @@ public static class ServiceExtensions
                     Contact = new OpenApiContact
                     {
                         Name = configuration.GetValue<string>("Swagger:UserProfile:Name"),
-                        Url = new Uri(configuration.GetValue<string>("Swagger:UserProfile:Url") ?? ""),
+                        Url = new Uri(configuration.GetValue<string>("Swagger:UserProfile:Url") ?? string.Empty),
                         Email = configuration.GetValue<string>("Swagger:UserProfile:Email"),
                     },
                     License = new OpenApiLicense { Name = "MIT", },

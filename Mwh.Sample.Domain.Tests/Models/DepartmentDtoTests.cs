@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Text.Json;
 namespace Mwh.Sample.Domain.Tests.Models;
 
@@ -18,7 +17,7 @@ public class DepartmentDtoTests
         var mytest = department.ToString();
 
         // Assert
-        Assert.AreEqual("Department Id=2, Name=IT",mytest);
+        Assert.AreEqual("Department Id=2, Name=IT", mytest);
         Assert.AreEqual((int)dept, department.Id);
         Assert.AreEqual(dept.GetDisplayName(), department.Name);
         Assert.AreEqual(dept.GetDescription(), department.Description);

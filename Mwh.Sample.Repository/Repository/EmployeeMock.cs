@@ -6,8 +6,8 @@ namespace Mwh.Sample.Repository.Repository;
 /// </summary>
 public class EmployeeMock : IEmployeeDB
 {
-    private readonly List<DepartmentDto> _depts;
-    private readonly List<EmployeeDto> _emps;
+    private readonly List<DepartmentDto> _departmentList = new();
+    private readonly List<EmployeeDto> _employeeList = new();
     private readonly int _generatedEmployeeCount = 0;
 
     /// <summary>
@@ -16,16 +16,13 @@ public class EmployeeMock : IEmployeeDB
     public EmployeeMock(int GeneratedEmployeeCount = 0)
     {
         _generatedEmployeeCount = GeneratedEmployeeCount;
-        _depts = new List<DepartmentDto>();
-        foreach (EmployeeDepartmentEnum dept in Enum.GetValues(typeof(EmployeeDepartmentEnum)))
-        {
-            if ((int)dept > 0)
-            {
-                var doesExists = _depts.Where(w => w.Id == (int)dept).Any();
-                if (!doesExists)
-                    _depts.Add(new DepartmentDto(dept));
-            }
-        }
+        _departmentList.AddRange(GetDepartmentList());
+        _employeeList.AddRange(GetFullEmployeeList(_generatedEmployeeCount));
+    }
+
+    private static List<EmployeeDto> GetFullEmployeeList(int generateCount)
+    {
+        var list = new List<EmployeeDto>();
         var FixedEmployees = new List<Employee>()
             {
             new Employee() { Name = "Ilsa Lund", Age = 25, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Kansas" },
@@ -39,21 +36,35 @@ public class EmployeeMock : IEmployeeDB
             new Employee() { Name = "Sam Malone",Age = 53,DepartmentId = (int)EmployeeDepartmentEnum.Marketing,State = "Massachusetts",Country = "USA"},
             new Employee() { Name = "Frank Sinatra",Age = 50,DepartmentId = (int)EmployeeDepartmentEnum.Executive,State = "New York",Country = "USA"},
             };
-        FixedEmployees.AddRange(GetEmployeeList(_generatedEmployeeCount));
-
-        _emps = new List<EmployeeDto>();
+        FixedEmployees.AddRange(GetFakerEmployeeList(generateCount));
         for (int i = 1; i < FixedEmployees.Count; i++)
         {
             try
             {
                 var emp = Create(FixedEmployees[i], i);
-                if (emp is not null) _emps.Add(emp);
+                if (emp is not null) list.Add(emp);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
+        return list;
+    }
+
+    private static List<DepartmentDto> GetDepartmentList()
+    {
+        var list = new List<DepartmentDto>();
+        foreach (EmployeeDepartmentEnum dept in Enum.GetValues(typeof(EmployeeDepartmentEnum)))
+        {
+            if ((int)dept > 0)
+            {
+                var doesExists = list.Where(w => w.Id == (int)dept).Any();
+                if (!doesExists)
+                    list.Add(new DepartmentDto(dept));
+            }
+        }
+        return list;
     }
 
     private static EmployeeDto? Create(Employee? item, int id)
@@ -82,9 +93,9 @@ public class EmployeeMock : IEmployeeDB
         bool bReturn = false;
         await Task.Run(() =>
         {
-            var myEmp = _emps.Where(w => w.Id == ID).FirstOrDefault();
+            var myEmp = _employeeList.Where(w => w.Id == ID).FirstOrDefault();
             if (myEmp != null)
-                bReturn = _emps.Remove(myEmp);
+                bReturn = _employeeList.Remove(myEmp);
         });
         return bReturn;
     }
@@ -99,7 +110,7 @@ public class EmployeeMock : IEmployeeDB
         DepartmentDto? department = null;
         await Task.Run(() =>
         {
-            department = _depts?.Where(w => w.Id == id).FirstOrDefault();
+            department = _departmentList?.Where(w => w.Id == id).FirstOrDefault();
         });
         return department;
     }
@@ -109,7 +120,7 @@ public class EmployeeMock : IEmployeeDB
     /// 
     /// </summary>
     /// <returns></returns>
-    public List<DepartmentDto> DepartmentCollection() { return _depts; }
+    public List<DepartmentDto> DepartmentCollection() { return _departmentList; }
 
     /// <summary>
     /// 
@@ -121,7 +132,7 @@ public class EmployeeMock : IEmployeeDB
         var list = new List<DepartmentDto>();
         await Task.Run(() =>
         {
-            list.AddRange(_depts);
+            list.AddRange(_departmentList);
         });
         return list;
     }
@@ -137,7 +148,7 @@ public class EmployeeMock : IEmployeeDB
         EmployeeDto? emp = null;
         await Task.Run(() =>
         {
-            emp = _emps?.Where(w => w.Id == id).FirstOrDefault() ?? null;
+            emp = _employeeList?.Where(w => w.Id == id).FirstOrDefault() ?? null;
         });
         return emp;
     }
@@ -147,19 +158,19 @@ public class EmployeeMock : IEmployeeDB
     /// Employees the collection.
     /// </summary>
     /// <returns>List&lt;EmployeeModel&gt;.</returns>
-    public List<EmployeeDto> EmployeeCollection() { return _emps; }
+    public List<EmployeeDto> EmployeeCollection() { return _employeeList; }
 
     public async Task<List<EmployeeDto>> EmployeeCollectionAsync()
     {
         var list = new List<EmployeeDto>();
         await Task.Run(() =>
         {
-            list.AddRange(_emps);
+            list.AddRange(_employeeList);
         });
         return list;
     }
 
-    public static List<Employee> GetEmployeeList(int generateCount)
+    public static List<Employee> GetFakerEmployeeList(int generateCount)
     {
         var states = new string[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" };
         var fakeEmployees = new Faker<Employee>()
@@ -193,18 +204,18 @@ public class EmployeeMock : IEmployeeDB
         {
             await Task.Run(() =>
             {
-                int nextID = _emps.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
+                int nextID = _employeeList.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
                 emp.Id = nextID;
-                _emps.Add(emp);
+                _employeeList.Add(emp);
             });
             return emp;
         }
         else
         {
-            var updateEmp = _emps.Find(o => o.Id == emp.Id);
+            var updateEmp = _employeeList.Find(o => o.Id == emp.Id);
             if (updateEmp == null)
             {
-                _emps.Add(emp);
+                _employeeList.Add(emp);
             }
             else
             {
@@ -232,7 +243,4 @@ public class EmployeeMock : IEmployeeDB
         });
         return dept;
     }
-
-
-
 }

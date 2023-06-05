@@ -1,5 +1,5 @@
 ﻿
-namespace Mwh.Sample.Domain.Extensions; 
+namespace Mwh.Sample.Domain.Extensions;
 
 public static class EnumerableExtensions
 {

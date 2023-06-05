@@ -175,10 +175,10 @@ public class EmployeeDB : IEmployeeDB
         }
 
         DepartmentDto updateDept = new()
-        { 
-            Id = dept.Id, 
-            Name = dept.Name, 
-            Description = dept.Description 
+        {
+            Id = dept.Id,
+            Name = dept.Name,
+            Description = dept.Description
         };
 
         var saveDept = await _context.Departments.FindAsync(updateDept.Id);

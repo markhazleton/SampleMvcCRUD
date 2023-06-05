@@ -38,7 +38,7 @@ public static class EnumExtension
 
         var fieldInfo = e.GetType().GetField(e.ToString());
 
-        if (fieldInfo?.GetCustomAttributes(typeof(DisplayAttribute), false) is not DisplayAttribute[] descriptionAttributes 
+        if (fieldInfo?.GetCustomAttributes(typeof(DisplayAttribute), false) is not DisplayAttribute[] descriptionAttributes
             || descriptionAttributes.Length == 0)
             return e.ToString();
 

@@ -1,7 +1,4 @@
-﻿using Moq;
-using Mwh.Sample.Domain.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Mwh.Sample.Domain.Interfaces;
 
 namespace Mwh.Sample.Repository.Tests.Services;
 

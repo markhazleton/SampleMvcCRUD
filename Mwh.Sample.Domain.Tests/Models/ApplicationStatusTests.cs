@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.IO;
+﻿using System.IO;
 
 namespace Mwh.Sample.Domain.Tests.Models;
 
