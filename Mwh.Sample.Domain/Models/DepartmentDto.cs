@@ -1,5 +1,4 @@
-﻿
-namespace Mwh.Sample.Domain.Models;
+﻿namespace Mwh.Sample.Domain.Models;
 
 
 /// <summary>
@@ -7,74 +6,29 @@ namespace Mwh.Sample.Domain.Models;
 /// </summary>
 public record class DepartmentDto
 {
-    /// <summary>
-    /// The name of the department.
-    /// </summary>
     private string _name;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DepartmentDto"/> class.
-    /// </summary>
-    /// <param name="id">The ID of the department.</param>
-    /// <param name="name">The name of the department.</param>
-    /// <param name="description">The description of the department (optional).</param>
-    public DepartmentDto(int id, string name, string? description = null)
+    public DepartmentDto()
     {
-        ValidateName(name, nameof(name));
-        ValidateId(id, nameof(id));
-
-        Id = id;
-        _name = name;
-        Description = description;
+        Id = 0;
+        _name = EmployeeDepartmentEnum.Unknown.ToString();
+        Description = EmployeeDepartmentEnum.Unknown.GetDescription();
     }
 
-    /// <summary>
-    /// Returns a string representation of the department.
-    /// </summary>
-    /// <returns>A string representing the department.</returns>
-    public override string ToString() => $"Department Id={Id}, Name={Name}";
-
-    /// <summary>
-    /// Validates the ID of the department.
-    /// </summary>
-    /// <param name="id">The ID to validate.</param>
-    /// <param name="paramName">The name of the parameter.</param>
-    public static void ValidateId(int id, string paramName)
+    public DepartmentDto(EmployeeDepartmentEnum enumValue)
     {
-        if (id <= 0)
-            throw new ArgumentException("Department Id must be greater than zero", paramName);
+        Id = (int)enumValue;
+        _name = enumValue.ToString();
+        Description = enumValue.GetDescription();
     }
 
-    /// <summary>
-    /// Validates the name of the department.
-    /// </summary>
-    /// <param name="name">The name to validate.</param>
-    /// <param name="paramName">The name of the parameter.</param>
-    public static void ValidateName(string name, string paramName)
-    {
-        if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException("Department name cannot be null or whitespace", paramName);
-    }
+    public string Description { get; set; }
 
-    /// <summary>
-    /// Gets or sets the description of the department.
-    /// </summary>
-    public string? Description { get; set; }
+    public EmployeeDto[] Employees { get; set; }
 
-    /// <summary>
-    /// Gets or sets the employees associated with the department.
-    /// </summary>
-    public virtual EmployeeDto?[]? Employees { get; set; }
-
-    /// <summary>
-    /// Gets the ID of the department.
-    /// </summary>
     [Key]
-    public int Id { get; }
+    public int Id { get; set; }
 
-    /// <summary>
-    /// Gets or sets the name of the department.
-    /// </summary>
     public string Name
     {
         get => _name;
@@ -83,5 +37,22 @@ public record class DepartmentDto
             ValidateName(value, nameof(Name));
             _name = value;
         }
+    }
+
+    public override string ToString()
+    {
+        return $"Department Id={Id}, Name={Name}";
+    }
+
+    public static void ValidateId(int id, string paramName)
+    {
+        if (id <= 0)
+            throw new ArgumentException("Department Id must be greater than zero", paramName);
+    }
+
+    public static void ValidateName(string name, string paramName)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Department name cannot be null or whitespace", paramName);
     }
 }

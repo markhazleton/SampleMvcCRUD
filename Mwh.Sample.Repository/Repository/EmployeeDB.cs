@@ -1,4 +1,6 @@
 ﻿
+using Mwh.Sample.Domain.Extensions;
+
 namespace Mwh.Sample.Repository.Repository;
 
 public class EmployeeDB : IEmployeeDB
@@ -30,10 +32,17 @@ public class EmployeeDB : IEmployeeDB
         if (item == null)
             throw new ArgumentException("Department can not be null");
 
-        return new DepartmentDto(item.Id, item.Name, item.Description)
+        var enumDept = (EmployeeDepartmentEnum)item.Id;
+
+        var dept = new DepartmentDto
         {
+            Id = item.Id,
+            Name = enumDept.GetDisplayName(),
+            Description = enumDept.GetDescription(),
             Employees = item?.Employees?.Select(s => Create(s)).ToArray()
         };
+
+        return dept;
     }
 
     private static EmployeeDto Create(Employee entity)
@@ -165,11 +174,12 @@ public class EmployeeDB : IEmployeeDB
             return null;
         }
 
-        DepartmentDto updateDept = new(
-            dept.Id,
-            dept.Name,
-            dept.Description
-            );
+        DepartmentDto updateDept = new()
+        { 
+            Id = dept.Id, 
+            Name = dept.Name, 
+            Description = dept.Description 
+        };
 
         var saveDept = await _context.Departments.FindAsync(updateDept.Id);
         if (saveDept != null)

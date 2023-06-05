@@ -17,13 +17,13 @@ public class EmployeeMock : IEmployeeDB
     {
         _generatedEmployeeCount = GeneratedEmployeeCount;
         _depts = new List<DepartmentDto>();
-        foreach (var dept in Enum.GetValues(typeof(EmployeeDepartmentEnum)))
+        foreach (EmployeeDepartmentEnum dept in Enum.GetValues(typeof(EmployeeDepartmentEnum)))
         {
             if ((int)dept > 0)
             {
                 var doesExists = _depts.Where(w => w.Id == (int)dept).Any();
                 if (!doesExists)
-                    _depts.Add(new DepartmentDto((int)dept, dept?.ToString() ?? "UNKNOWN", dept?.ToString() ?? "UNKNOWN"));
+                    _depts.Add(new DepartmentDto(dept));
             }
         }
         var FixedEmployees = new List<Employee>()

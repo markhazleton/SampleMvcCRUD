@@ -10,51 +10,25 @@ public class DepartmentDtoTests
     public void DepartmentDto_ConstructWithValidValues_Success()
     {
         // Arrange
-        int id = 1;
-        string name = "Department Name";
-        string description = "Department Description";
+        var dept = EmployeeDepartmentEnum.IT;
 
         // Act
-        var department = new DepartmentDto(id, name, description);
+        var department = new DepartmentDto(dept);
 
         var mytest = department.ToString();
 
         // Assert
-        Assert.AreEqual("Department Id=1, Name=Department Name", mytest);
-        Assert.AreEqual(id, department.Id);
-        Assert.AreEqual(name, department.Name);
-        Assert.AreEqual(description, department.Description);
-    }
-
-    [TestMethod]
-    public void DepartmentDto_ConstructWithInvalidName_ThrowsArgumentException()
-    {
-        // Arrange
-        int id = 1;
-        string name = "   ";
-
-        // Act and Assert
-        Assert.ThrowsException<ArgumentException>(() => new DepartmentDto(id, name));
-    }
-
-    [TestMethod]
-    public void DepartmentDto_ConstructWithInvalidId_ThrowsArgumentException()
-    {
-        // Arrange
-        int id = 0;
-        string name = "Department Name";
-
-        // Act and Assert
-        Assert.ThrowsException<ArgumentException>(() => new DepartmentDto(id, name));
+        Assert.AreEqual("Department Id=2, Name=IT",mytest);
+        Assert.AreEqual((int)dept, department.Id);
+        Assert.AreEqual(dept.GetDisplayName(), department.Name);
+        Assert.AreEqual(dept.GetDescription(), department.Description);
     }
 
     [TestMethod]
     public void DepartmentDto_SetValidName_Success()
     {
         // Arrange
-        int id = 1;
-        string name = "Department Name";
-        DepartmentDto department = new DepartmentDto(id, name);
+        DepartmentDto department = new(EmployeeDepartmentEnum.IT);
 
         // Act
         string newName = "New Department Name";
@@ -68,9 +42,7 @@ public class DepartmentDtoTests
     public void DepartmentDto_SetInvalidName_ThrowsArgumentException()
     {
         // Arrange
-        int id = 1;
-        string name = "Department Name";
-        DepartmentDto department = new DepartmentDto(id, name);
+        DepartmentDto department = new DepartmentDto(EmployeeDepartmentEnum.IT);
 
         // Act and Assert
         Assert.ThrowsException<ArgumentException>(() => department.Name = "   ");
@@ -80,10 +52,7 @@ public class DepartmentDtoTests
     public void DepartmentDto_ExpectedResults()
     {
         // Arrange
-        var departmentDto = new DepartmentDto(
-            1,
-            "Test",
-            "Test")
+        var departmentDto = new DepartmentDto(EmployeeDepartmentEnum.IT)
         {
             Employees = new EmployeeDto[]
         {
@@ -109,7 +78,7 @@ public class DepartmentDtoTests
 
         // Assert
         Assert.IsNotNull(departmentDto);
-        Assert.AreEqual(1, departmentDto.Id);
+        Assert.AreEqual(2, departmentDto.Id);
         Assert.AreEqual("Test Name", departmentDto.Name);
         Assert.AreEqual("Test Description", departmentDto.Description);
         Assert.IsNotNull(departmentDto.Employees);
@@ -120,15 +89,9 @@ public class DepartmentDtoTests
     public void DepartmentDto_Equality()
     {
         // Arrange
-        var dept1 = new DepartmentDto(
-            1,
-            "Test",
-            "Test");
+        var dept1 = new DepartmentDto(EmployeeDepartmentEnum.IT);
 
-        var dept1_copy = new DepartmentDto(
-            1,
-            "Test",
-            "Test");
+        var dept1_copy = new DepartmentDto(EmployeeDepartmentEnum.IT);
 
         var areEqual = (dept1 == dept1_copy);
 
@@ -139,10 +102,7 @@ public class DepartmentDtoTests
     public void DepartmentDto_Serialize()
     {
         // Arrange
-        var dept1 = new DepartmentDto(
-            1,
-            "Test",
-            "Test");
+        var dept1 = new DepartmentDto(EmployeeDepartmentEnum.IT);
 
         var deptString = JsonSerializer.Serialize(dept1);
 

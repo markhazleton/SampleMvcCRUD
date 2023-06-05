@@ -75,8 +75,8 @@ public class EmployeeDBTests
         // Assert
         Assert.IsNotNull(result);
         Assert.IsNotNull(result2);
-        Assert.AreEqual(result2.Name, "Test Name");
-        Assert.AreEqual(result2.Description, "Test Description");
+        Assert.AreEqual(result2.Name, "HR");
+        Assert.AreEqual(result2.Description, "HR");
     }
     [TestMethod]
     public async Task Department_Update_Null()
@@ -93,7 +93,12 @@ public class EmployeeDBTests
     public async Task Department_Update_Id1()
     {
         // Arrange
-        DepartmentDto test = new DepartmentDto(1, "Test", "Test Description");
+        DepartmentDto test = new()
+        {
+            Id = 1,
+            Name = "HR",
+            Description = "HR"
+        };
 
         // Act
         var result = await employeeDB.UpdateAsync(test);
@@ -107,7 +112,9 @@ public class EmployeeDBTests
     {
         // Arrange
         var depts = await employeeDB.DepartmentCollectionAsync();
-        DepartmentDto? test = new(depts.OrderByDescending(d => d.Id).First().Id, "Test", "Test Description");
+        var dept = depts.OrderByDescending(d => d.Id).First();
+
+        DepartmentDto? test = new((EmployeeDepartmentEnum)dept.Id);
 
         // Act
         var result = await employeeDB.UpdateAsync(test);

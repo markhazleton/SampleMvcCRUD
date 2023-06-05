@@ -12,13 +12,13 @@ namespace Mwh.Sample.Repository.Tests.Repository
         {
             // Arrange
             var employeeMock = new EmployeeMock();
-            int id = 0;
+            int id = 1;
 
             // Act
             var result = await employeeMock.DepartmentAsync(id);
 
             // Assert
-            Assert.IsNull(result);
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]

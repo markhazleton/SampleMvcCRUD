@@ -183,7 +183,7 @@ public class EmployeeDtoTests
         EmployeeDepartmentEnum department = EmployeeDepartmentEnum.IT;
 
         // Act and Assert
-        Assert.ThrowsException<ArgumentException>(() => new EmployeeDto(id, name, age, state, country, department));
+        Assert.ThrowsException<EmployeeDtoValidationException>(() => new EmployeeDto(id, name, age, state, country, department));
     }
 
 

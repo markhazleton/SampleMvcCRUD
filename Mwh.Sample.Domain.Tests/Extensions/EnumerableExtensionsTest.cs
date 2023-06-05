@@ -99,8 +99,8 @@ public class EnumerableExtensionsTest
         {
             new EmployeeDto(
                 1,
-                "Test Ten",
-                10,
+                "Test Eighteen",
+                18,
                 "Texas",
                 "USA",
                 EmployeeDepartmentEnum.IT
@@ -125,7 +125,7 @@ public class EnumerableExtensionsTest
         var emp = myList.SelectElementByOption(emp => emp.Age);
 
         // Assert
-        Assert.AreEqual(emp?.Age, 10);
+        Assert.AreEqual(emp?.Age, 18);
 
     }
     [TestMethod]

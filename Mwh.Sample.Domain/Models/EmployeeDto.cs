@@ -1,6 +1,31 @@
 ﻿using Microsoft.AspNetCore.Http;
 
 namespace Mwh.Sample.Domain.Models;
+
+
+public sealed class EmployeeDtoValidationException : Exception
+{
+    public EmployeeDtoValidationException()
+        : base("Employee validation failed.")
+    {
+    }
+
+    public void AddError(string key, string message)
+    {
+        Data.Add(key, message);
+    }
+
+    public void ThrowIfErrors()
+    {
+        if (Data.Count > 0)
+        {
+            throw this;
+        }
+    }
+}
+
+
+
 public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
 {
     /// <summary>
@@ -37,9 +62,8 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
         Country = country;
         Department = dept;
         ProfilePicture = profilePicture;
-        if (!IsValid())
-            throw new ArgumentException("New Employee is not valid", nameof(name));
 
+        EnsureValidDetails();
     }
 
     public static bool operator !=(EmployeeDto left, EmployeeDto right)
@@ -152,6 +176,29 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
         return serialized.GetHashCode();
     }
 
+
+    private void EnsureValidDetails()
+    {
+        var exception = new EmployeeDtoValidationException();
+        if (string.IsNullOrWhiteSpace(Name))
+        {
+            exception.AddError(nameof(Name), "Name is required.");
+        }
+        if (Age < 18)
+        {
+            exception.AddError(nameof(Age), "Employee must be at least 18 years old.");
+        }
+        if (string.IsNullOrEmpty(State))
+            exception.AddError(nameof(State), "State is required.");
+        if (string.IsNullOrEmpty(Country))
+            exception.AddError(nameof(Country), "Country is required.");
+        if (Department == EmployeeDepartmentEnum.Unknown)
+            exception.AddError(nameof(Department), "Department is required.");
+        exception.ThrowIfErrors();
+    }
+
+
+
     /// <summary>
     /// Returns true if ... is valid.
     /// </summary>
@@ -166,7 +213,7 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
             return false;
         if (Department == EmployeeDepartmentEnum.Unknown)
             return false;
-        if ((Age < 1))
+        if ((Age < 18))
             return false;
         return true;
     }

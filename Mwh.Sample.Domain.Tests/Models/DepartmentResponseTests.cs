@@ -19,7 +19,7 @@
         public void DepartmentResponse_GoodResponse()
         {
             // Arrange
-            var dept = new DepartmentDto(1, "Test", "Test");
+            var dept = new DepartmentDto(EmployeeDepartmentEnum.IT);
             var departmentResponse = new DepartmentResponse(dept);
             // Act
 

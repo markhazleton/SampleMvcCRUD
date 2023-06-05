@@ -1,5 +1,4 @@
-﻿
-namespace Mwh.Sample.Repository.Services;
+﻿namespace Mwh.Sample.Repository.Services;
 public class EmployeeDatabaseService : IDisposable, IEmployeeService
 {
     private readonly EmployeeContext _context;
@@ -14,10 +13,11 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
     {
         if (item == null) return null;
 
-        return new DepartmentDto(item.Id,
-            item.Name,
-            item.Description)
+        return new DepartmentDto()
         {
+            Id = item.Id,
+            Name = item.Name,
+            Description = item.Description,
             Employees = item?.Employees?.Select(s => Create(s)).ToArray() ?? null
         };
     }
@@ -93,7 +93,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             list.Add(new Employee()
             {
                 Name = name ?? "UNKNOWN",
-                Age = rand.Next(1, 100),
+                Age = rand.Next(18, 100),
                 Country = "USA",
                 DepartmentId = rand.Next(1, (Enum.GetNames(typeof(EmployeeDepartmentEnum)).Length - 1)),
                 State = "TX"
