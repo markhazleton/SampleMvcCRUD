@@ -3,28 +3,6 @@
 namespace Mwh.Sample.Domain.Models;
 
 
-public sealed class EmployeeDtoValidationException : Exception
-{
-    public EmployeeDtoValidationException()
-        : base("Employee validation failed.")
-    {
-    }
-
-    public void AddError(string key, string message)
-    {
-        Data.Add(key, message);
-    }
-
-    public void ThrowIfErrors()
-    {
-        if (Data.Count > 0)
-        {
-            throw this;
-        }
-    }
-}
-
-
 
 public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
 {
@@ -274,6 +252,9 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
     [JsonPropertyName("state")]
     public string? State { get; set; }
 
+    /// <summary>
+    /// Profile Picture
+    /// </summary>
     [Required(ErrorMessage = "Please choose profile image")]
     [JsonPropertyName("profile_picture")]
     public string? ProfilePicture { get; set; }

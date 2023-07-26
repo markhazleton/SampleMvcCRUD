@@ -22,15 +22,15 @@
 		<PackageReference Include="Azure.Identity" Version="1.9.0" />
 		<PackageReference Include="Microsoft.ApplicationInsights" Version="2.21.0" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.8" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.8">
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
-		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.7" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.8" />
 		<PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.11.0" />
@@ -45,15 +45,18 @@
 		<None Include="..\favicon.ico" Link="wwwroot\favicon.ico">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<Folder Include="wwwroot\lib\" />
 		<Folder Include="wwwroot\images\" />
 		<Content Include="..\favicon.ico">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 	</ItemGroup>
 	<ItemGroup>
+		<Content Update="wwwroot\README.md">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Update="wwwroot\swagger_custom\custom.css">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
