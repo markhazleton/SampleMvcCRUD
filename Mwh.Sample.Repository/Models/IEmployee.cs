@@ -9,4 +9,5 @@ public interface IEmployee
     string Name { get; set; }
     string? ProfilePicture { get; set; }
     string? State { get; set; }
+    Gender Gender { get; set; }
 }

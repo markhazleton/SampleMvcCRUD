@@ -49,5 +49,8 @@ public class Employee : BaseEntity, IEmployee
     /// Profile Picture
     /// </summary>
     public string? ProfilePicture { get; set; }
-
+    /// <summary>
+    /// Employee Gender
+    /// </summary>
+    public Gender Gender { get; set; }
 }

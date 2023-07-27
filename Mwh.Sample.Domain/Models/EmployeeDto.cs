@@ -31,7 +31,8 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
         string state,
         string country,
         EmployeeDepartmentEnum dept,
-        string? profilePicture = null)
+        string? profilePicture = null,
+        GenderEnum? gender = null)
     {
         Id = id;
         Name = name;
@@ -40,6 +41,7 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
         Country = country;
         Department = dept;
         ProfilePicture = profilePicture;
+        Gender = gender ?? GenderEnum.Other;
 
         EnsureValidDetails();
     }
@@ -221,6 +223,13 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
     /// </summary>
     [JsonPropertyName("departmentName")]
     public string? DepartmentName { get; set; }
+
+
+    /// <summary>
+    /// Employee Gender
+    /// </summary>
+    [JsonPropertyName("gender")]
+    public GenderEnum Gender { get; set; }
 
     /// <summary>
     /// Gets or sets the employee identifier.

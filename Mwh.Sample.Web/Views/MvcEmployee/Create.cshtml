@@ -25,6 +25,13 @@
                 </div>
             </div>
             <div class="form-group mb-3">
+                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="form-select" asp-for="Gender" asp-items="Html.GetEnumSelectList(typeof (Mwh.Sample.Domain.Models.GenderEnum))"></select>
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group mb-3">
                 @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })

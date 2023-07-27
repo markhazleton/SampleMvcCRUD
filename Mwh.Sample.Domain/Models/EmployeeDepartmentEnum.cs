@@ -1,6 +1,12 @@
 ﻿
 namespace Mwh.Sample.Domain.Models;
 
+public enum GenderEnum
+{
+    Male,
+    Female ,
+    Other
+}
 /// <summary>
 /// Enum EmployeeDepartment
 /// </summary>

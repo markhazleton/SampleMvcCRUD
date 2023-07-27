@@ -17,4 +17,5 @@ public interface IEmployeeDto
     IFormFile? ProfileImage { get; set; }
     string? ProfilePicture { get; set; }
     string? State { get; set; }
+    GenderEnum Gender { get; set; }
 }

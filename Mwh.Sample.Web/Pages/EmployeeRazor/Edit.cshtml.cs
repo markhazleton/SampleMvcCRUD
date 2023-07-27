@@ -6,6 +6,7 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
     public class EditModel : PageModel
     {
         private readonly EmployeeContext _context;
+        public SelectList Genders { get; private set; }
 
         public EditModel(EmployeeContext context)
         {
@@ -22,6 +23,9 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
                 return NotFound();
             }
 
+            // Populate the Genders SelectList with the values from the Gender enum
+            Genders = new SelectList(Enum.GetValues(typeof(GenderEnum)));
+
             var employee = await _context.Employees.FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {
@@ -32,7 +36,7 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // To protect from over-posting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {

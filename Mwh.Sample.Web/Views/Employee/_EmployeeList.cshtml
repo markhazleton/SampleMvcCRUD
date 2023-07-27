@@ -4,6 +4,7 @@
     <thead class="thead-dark">
         <tr>
             <th>Name</th>
+            <th>Gender</th>
             <th>Age</th>
             <th>State</th>
             <th>Country</th>
@@ -23,6 +24,9 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </a>
 
+                    </td>
+                    <td>
+                        @item.Gender
                     </td>
                     <td>
                         @item.Age

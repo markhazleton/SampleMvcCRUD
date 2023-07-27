@@ -9,6 +9,7 @@
         <thead class="thead-dark">
             <tr>
                 <th>Name</th>
+                <th>Gender</th>
                 <th>Age</th>
                 <th>State</th>
                 <th>Country</th>
@@ -32,6 +33,10 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" placeholder="name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Gender</label>
+                        <input type="text" class="form-control" id="gender" placeholder="gender" />
                     </div>
                     <div class="form-group">
                         <label for="age">Age</label>
@@ -83,6 +88,7 @@
                     $.each(result, function (key, item) {
                         html += '<tr>';
                         html += '<td>' + item.name + '</td>';
+                        html += '<td>' + item.gender + '</td>';
                         html += '<td>' + item.age + '</td>';
                         html += '<td>' + item.state + '</td>';
                         html += '<td>' + item.country + '</td>';
@@ -149,6 +155,7 @@
                 success: function (result) {
                     $('#id').val(result.resource.id);
                     $('#name').val(result.resource.name);
+                    $('#gender').val(result.resource.gender);
                     $('#age').val(result.resource.age);
                     $('#state').val(result.resource.state);
                     $('#country').val(result.resource.country);
@@ -197,6 +204,7 @@
                     $('#myModal').modal('hide');
                     $('#id').val("0");
                     $('#name').val("");
+                    $('#gender').val("");
                     $('#age').val("");
                     $('#state').val("");
                     $('#country').val("");
@@ -232,6 +240,7 @@
             $('#myModalLabel').html('Add Employee');
             $('#id').val("0");
             $('#name').val("");
+            $('#gender').val("");
             $('#age').val("");
             $('#state').val("");
             $('#country').val("");

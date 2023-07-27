@@ -42,7 +42,9 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             item?.State ?? string.Empty,
             item?.Country ?? string.Empty,
             (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1),
-            item?.ProfilePicture ?? "default.jpg"
+            item?.ProfilePicture ?? "default.jpg",
+            (GenderEnum)item?.Gender
+
         );
     }
 
@@ -56,6 +58,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             Age = item.Age,
             DepartmentId = (int)item.Department,
             ProfilePicture = item.ProfilePicture ?? "default.jpg",
+            Gender = (Gender)item.Gender,
             Id = item.Id
         };
     }
@@ -96,6 +99,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                 Age = rand.Next(18, 100),
                 Country = "USA",
                 DepartmentId = rand.Next(1, (Enum.GetNames(typeof(EmployeeDepartmentEnum)).Length - 1)),
+                Gender = (Gender)rand.Next(1, (Enum.GetNames(typeof(Gender)).Length - 1)),
                 State = "TX"
             });
         }
@@ -227,7 +231,8 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                 newItem.State,
                 newItem.Country,
                 newItem.Department,
-                newItem.ProfilePicture);
+                newItem.ProfilePicture,
+                newItem.Gender);
 
             int deptId = (int)(item.Department);
             var dbDept = await _context.Departments.FindAsync(new object?[] { deptId }, cancellationToken: ct);
@@ -255,10 +260,11 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                     dbEmp.Country = item.Country;
                     dbEmp.DepartmentId = dbDept.Id;
                     dbEmp.Department = dbDept;
-                    dbEmp.Name = item.Name;
+                    dbEmp.Name = item.Name ?? string.Empty;
                     dbEmp.State = item.State;
                     dbEmp.LastUpdatedDate = DateTime.Now;
                     dbEmp.ProfilePicture = item.ProfilePicture ?? "default.jpg";
+                    dbEmp.Gender = (Gender)item.Gender;
                     _context.Update(dbEmp);
                     await _context.SaveChangesAsync(ct)
                         .ConfigureAwait(true);

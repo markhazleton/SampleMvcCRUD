@@ -25,16 +25,16 @@ public class EmployeeMock : IEmployeeDB
         var list = new List<EmployeeDto>();
         var FixedEmployees = new List<Employee>()
             {
-            new Employee() { Name = "Ilsa Lund", Age = 25, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Kansas" },
-            new Employee() { Name = "Major Strasser", Age = 35, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Texas" },
-            new Employee() { Name = "Rick Blaine", Age = 45, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "New York" },
-            new Employee() { Name = "Victor Laszlo", Age = 55, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Colorado" },
-            new Employee() { Name = "Louis Renault", Age = 65, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Idaho" },
-            new Employee() { Name = "Sam Spade", Age = 55, Country = "USA", DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "California" },
-            new Employee() { Name = "Jim Smith",Age = 35,DepartmentId = (int)EmployeeDepartmentEnum.IT,State = "Florida",Country = "USA"},
-            new Employee() { Name = "Bob Roberts",Age = 50,DepartmentId = (int)EmployeeDepartmentEnum.HR,State = "Texas",Country = "USA"},
-            new Employee() { Name = "Sam Malone",Age = 53,DepartmentId = (int)EmployeeDepartmentEnum.Marketing,State = "Massachusetts",Country = "USA"},
-            new Employee() { Name = "Frank Sinatra",Age = 50,DepartmentId = (int)EmployeeDepartmentEnum.Executive,State = "New York",Country = "USA"},
+            new Employee() { Name = "Ilsa Lund", Age = 25, Country = "USA", Gender=Gender.Female, DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Kansas" },
+            new Employee() { Name = "Major Strasser", Age = 35, Country = "USA",Gender=Gender.Male, DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Texas" },
+            new Employee() { Name = "Rick Blaine", Age = 45, Country = "USA",Gender=Gender.Male, DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "New York" },
+            new Employee() { Name = "Victor Laszlo", Age = 55, Country = "USA",Gender=Gender.Male, DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Colorado" },
+            new Employee() { Name = "Louis Renault", Age = 65, Country = "USA",Gender=Gender.Male, DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Idaho" },
+            new Employee() { Name = "Sam Spade", Age = 55, Country = "USA",Gender=Gender.Male, DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "California" },
+            new Employee() { Name = "Jim Smith",Age = 35,Gender=Gender.Male,DepartmentId = (int)EmployeeDepartmentEnum.IT,State = "Florida",Country = "USA"},
+            new Employee() { Name = "Bob Roberts",Age = 50,Gender=Gender.Male,DepartmentId = (int)EmployeeDepartmentEnum.HR,State = "Texas",Country = "USA"},
+            new Employee() { Name = "Sam Malone",Age = 53,Gender=Gender.Male,DepartmentId = (int)EmployeeDepartmentEnum.Marketing,State = "Massachusetts",Country = "USA"},
+            new Employee() { Name = "Frank Sinatra",Age = 50,Gender=Gender.Male,DepartmentId = (int)EmployeeDepartmentEnum.Executive,State = "New York",Country = "USA"},
             };
         FixedEmployees.AddRange(GetFakerEmployeeList(generateCount));
         for (int i = 1; i < FixedEmployees.Count; i++)
@@ -72,6 +72,7 @@ public class EmployeeMock : IEmployeeDB
         if (item == null) return null;
 
         EmployeeDepartmentEnum empDept = (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1);
+        GenderEnum gender = (GenderEnum)(item?.Gender ?? 0);
         return new EmployeeDto(
             id,
             item?.Name ?? string.Empty,
@@ -79,7 +80,8 @@ public class EmployeeMock : IEmployeeDB
             item?.State ?? string.Empty,
             item?.Country ?? string.Empty,
             empDept,
-            item?.ProfilePicture ?? "default.jpg"
+            item?.ProfilePicture ?? "default.jpg",
+            gender
             );
     }
 
@@ -173,11 +175,15 @@ public class EmployeeMock : IEmployeeDB
     public static List<Employee> GetFakerEmployeeList(int generateCount)
     {
         var states = new string[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" };
+
+
+
         var fakeEmployees = new Faker<Employee>()
            //Optional: Call for objects that have complex initialization
            .CustomInstantiator(f => new Employee())
            //Basic rules using built-in generators
-           .RuleFor(u => u.Name, (f, u) => f.Name.FullName())
+           .RuleFor(u => u.Gender, f => f.PickRandom<Gender>())
+           .RuleFor(u => u.Name, (f, u) => f.Name.FullName((Bogus.DataSets.Name.Gender)u.Gender))
            .RuleFor(u => u.Age, f => f.Random.Number(18, 70))
            .RuleFor(u => u.DepartmentId, f => f.Random.Number(1, 6))
            .RuleFor(u => u.Country, "USA")

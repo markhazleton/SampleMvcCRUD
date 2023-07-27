@@ -18,6 +18,9 @@
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th>
+                     @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Age)
                 </th>
                 <th>
@@ -42,6 +45,9 @@
                          asp-append-version="true" />
                             @Html.ActionLink(item.Name, "Edit", new { id = item.Id }, htmlAttributes: new { @class = "" })
 
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gender)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Age)
