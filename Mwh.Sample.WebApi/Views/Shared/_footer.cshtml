@@ -1,0 +1,24 @@
+﻿@using System.Web.Optimization
+@{
+    string Version = String.Format("{0}.{1} ({2})",
+        ViewContext.Controller.GetType().Assembly.GetName().Version.Major,
+        ViewContext.Controller.GetType().Assembly.GetName().Version.Minor,
+        ViewContext.Controller.GetType().Assembly.GetName().Version.Build);
+}
+
+<footer class="py-5 bg-dark">
+    <div class="container d-flex justify-content-between align-items-center">
+        <p class="m-0 text-white">
+            <span></span>
+        </p>
+        <p class="m-0 text-center text-white">
+            Copyright &copy; 2019-2023
+            <a href="https://linkedin.com/in/markhazleton" target="_blank">Mark Hazleton LinkedIn</a> -
+            <a href="https://github.com/markhazleton" target="_blank">GitHub</a>
+        </p>
+        <p class="m-0 text-white">
+            <span>@Version</span> 
+        </p>
+    </div>
+</footer>
+
