@@ -74,7 +74,9 @@
         </div>
     </footer>
 
-    @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/bootstrap.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

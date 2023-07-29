@@ -20,14 +20,20 @@ namespace Mwh.Sample.WebApi
             if (bundles == null) return;
             //Scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery")
-                .Include("~/Scripts/jquery-3.7.0.js",
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/jquery.unobtrusive-ajax.js"));
+                .Include(
+                    "~/Scripts/jquery-3.7.0.js",
+                    // "~/Scripts/bootstrap.js",
+                    "~/Scripts/jquery.unobtrusive-ajax.js"
+                    ));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
+//            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 
             //CSS
-            bundles.Add(new StyleBundle("~/bundles/style").Include("~/Content/bootstrap.css", "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/bundles/style")
+                .Include(
+                    "~/Content/bootstrap.css", 
+                    "~/Content/site.css"
+                    ));
             }
         }
     }
