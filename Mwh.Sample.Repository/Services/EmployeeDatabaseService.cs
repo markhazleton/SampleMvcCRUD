@@ -234,7 +234,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                 newItem.ProfilePicture,
                 newItem.Gender);
 
-            int deptId = (int)(item.Department);
+            int deptId = (int)item.Department;
             var dbDept = await _context.Departments.FindAsync(new object?[] { deptId }, cancellationToken: ct);
 
             if (dbDept == null)

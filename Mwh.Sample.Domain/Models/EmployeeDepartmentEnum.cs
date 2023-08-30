@@ -4,7 +4,7 @@ namespace Mwh.Sample.Domain.Models;
 public enum GenderEnum
 {
     Male,
-    Female ,
+    Female,
     Other
 }
 /// <summary>
