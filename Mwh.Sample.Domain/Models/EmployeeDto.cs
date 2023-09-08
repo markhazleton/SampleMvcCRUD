@@ -2,8 +2,6 @@
 
 namespace Mwh.Sample.Domain.Models;
 
-
-
 public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
 {
     /// <summary>
@@ -40,8 +38,10 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
         State = state;
         Country = country;
         Department = dept;
+        DepartmentName = dept.ToString();
         ProfilePicture = profilePicture;
         Gender = gender ?? GenderEnum.Other;
+        GenderName = Gender.ToString();
 
         EnsureValidDetails();
     }
@@ -230,6 +230,7 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
     /// </summary>
     [JsonPropertyName("gender")]
     public GenderEnum Gender { get; set; }
+    public string? GenderName { get; set; }
 
     /// <summary>
     /// Gets or sets the employee identifier.
@@ -237,7 +238,6 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
     /// <value>The employee identifier.</value>
     [JsonPropertyName("id")]
     public int Id { get; set; }
-
 
     /// <summary>
     /// Employee Manager

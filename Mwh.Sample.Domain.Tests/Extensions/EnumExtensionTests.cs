@@ -213,7 +213,7 @@ public class EnumExtensionTests
         var underlyingType = EnumExtension.GetUnderlyingType<TestEnum>();
 
         // Assert
-        Assert.AreEqual(typeof(Int32), underlyingType);
+        Assert.AreEqual(typeof(int), underlyingType);
 
     }
 

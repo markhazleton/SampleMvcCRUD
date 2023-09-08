@@ -28,35 +28,39 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         {
             Id = item.Id,
             Name = item.Name,
-            Description = item?.Description ?? String.Empty,
+            Description = item?.Description ?? string.Empty,
         };
     }
     private static EmployeeDto? Create(Employee? item)
     {
         if (item == null) return null;
 
-        return new EmployeeDto(
-            item?.Id ?? 0,
-            item?.Name ?? String.Empty,
-            item?.Age ?? 0,
-            item?.State ?? string.Empty,
-            item?.Country ?? string.Empty,
-            (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1),
-            item?.ProfilePicture ?? "default.jpg",
-            (GenderEnum)item?.Gender
+        var retEmployee = new EmployeeDto
+        {
+            Id = item.Id,
+            Name = item.Name,
+            Age = item.Age,
+            State = item.State,
+            Country = item.Country,
+            Department = (EmployeeDepartmentEnum)(item?.Department?.Id ?? 0),
+            ProfilePicture = item.ProfilePicture,
+            Gender = (GenderEnum)(item?.Gender ?? 0),
+            DepartmentName = item?.Department?.Name ?? string.Empty,
+            GenderName = ((GenderEnum)(item?.Gender ?? 0)).ToString()
+        };
 
-        );
+        return retEmployee;
     }
 
-    private static Employee Create(EmployeeDto item)
+    private static Employee Create(EmployeeDto item, Department dbDept)
     {
         return new Employee()
         {
+            DepartmentId = dbDept.Id,
             Name = item.Name,
             State = item.State,
             Country = item.Country,
             Age = item.Age,
-            DepartmentId = (int)item.Department,
             ProfilePicture = item.ProfilePicture ?? "default.jpg",
             Gender = (Gender)item.Gender,
             Id = item.Id
@@ -149,7 +153,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<EmployeeResponse> FindEmployeeByIdAsync(int Id, CancellationToken token)
     {
-        var employee = Create(await _context.Employees.FindAsync(new object[] { Id }, cancellationToken: token));
+        var employee = Create(await _context.Employees.Include(i=>i.Department).Where(w=>w.Id==Id).FirstOrDefaultAsync(cancellationToken: token));
         if (employee is null)
             return new EmployeeResponse("Employee Not Found");
 
@@ -166,7 +170,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
     {
-        var source = _context.Employees.OrderBy(o => o.Name).AsQueryable();
+        var source = _context.Employees.Include(i=>i.Department).OrderBy(o => o.Name).AsQueryable();
         int TotalCount = source.Count();
         var items = await source.Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync(token);
         var paginationMetadata = paging.GetMetaData(TotalCount);
@@ -235,24 +239,23 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                 newItem.Gender);
 
             int deptId = (int)item.Department;
-            var dbDept = await _context.Departments.FindAsync(new object?[] { deptId }, cancellationToken: ct);
+            var dbDept = _context.Departments.Find(deptId);
 
             if (dbDept == null)
                 return new EmployeeResponse("Department not found");
 
-            var dbEmp = new Employee();
+            Employee? dbEmp;
 
             if (item.Id > 0)
             {
-                dbEmp = await _context.Employees.FindAsync(new object?[] { item.Id }, cancellationToken: ct).ConfigureAwait(true);
+                dbEmp = await _context.Employees.Include(d=>d.Department).Where(w=>w.Id==item.Id).FirstOrDefaultAsync(cancellationToken: ct).ConfigureAwait(true);
 
                 if (dbEmp == null)
                 {
-                    dbEmp = Create(item);
-                    dbEmp.Department = dbDept;
-                    await _context.Employees.AddAsync(dbEmp, ct);
-                    await _context.SaveChangesAsync(ct)
-                        .ConfigureAwait(true);
+                    dbEmp = Create(item,dbDept);
+
+                    _context.Employees.Add(dbEmp);
+                    _context.SaveChanges();
                 }
                 else
                 {
@@ -266,25 +269,20 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                     dbEmp.ProfilePicture = item.ProfilePicture ?? "default.jpg";
                     dbEmp.Gender = (Gender)item.Gender;
                     _context.Update(dbEmp);
-                    await _context.SaveChangesAsync(ct)
-                        .ConfigureAwait(true);
-
-                    var list = await _context.Employees
-                        .ToListAsync(cancellationToken: ct)
-                        .ConfigureAwait(true);
+                    _context.SaveChanges();
                 }
             }
             else
             {
-                dbEmp = Create(item);
-                dbEmp.Department = dbDept;
-                await _context.Employees.AddAsync(dbEmp, ct);
-                await _context.SaveChangesAsync(ct)
-                    .ConfigureAwait(true);
+                dbEmp = Create(item, dbDept);
+                
+                var desalt = _context.Employees.Add(dbEmp);
+                _context.SaveChanges();
             }
-            var newEmp = await _context.Employees.FindAsync(new object?[] { dbEmp.Id }, cancellationToken: ct);
 
-            return new EmployeeResponse(Create(newEmp ?? dbEmp));
+            var newEmp = await _context.Employees.Where(w => w.Id == dbEmp.Id).Include(i => i.Department).FirstOrDefaultAsync(cancellationToken: ct);
+
+            return new EmployeeResponse(Create(newEmp));
         }
         catch (Exception ex)
         {
