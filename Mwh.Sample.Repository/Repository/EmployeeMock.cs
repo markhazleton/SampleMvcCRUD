@@ -72,6 +72,7 @@ public class EmployeeMock : IEmployeeDB
         if (item == null) return null;
         EmployeeDepartmentEnum empDept = (EmployeeDepartmentEnum)(item?.DepartmentId ?? 1);
 
+
         return new EmployeeDto(
             id,
             item?.Name ?? string.Empty,
@@ -80,8 +81,14 @@ public class EmployeeMock : IEmployeeDB
             item?.Country ?? string.Empty,
              empDept,
             item?.ProfilePicture ?? "default.jpg",
-            GenderEnum.Male
+            gender: GetGenderEnum(item?.Gender)
             );
+    }
+
+
+    private static GenderEnum GetGenderEnum(Gender? gender)
+    {
+        return gender.HasValue ? (GenderEnum)(int)gender.Value : GenderEnum.Other;
     }
 
     /// <summary>
@@ -174,9 +181,6 @@ public class EmployeeMock : IEmployeeDB
     public static List<Employee> GetFakerEmployeeList(int generateCount)
     {
         var states = new string[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" };
-
-
-
         var fakeEmployees = new Faker<Employee>()
            //Optional: Call for objects that have complex initialization
            .CustomInstantiator(f => new Employee())
@@ -189,6 +193,7 @@ public class EmployeeMock : IEmployeeDB
            .RuleFor(u => u.State, f => f.Random.ListItem(states))
            //After all rules are applied finish with the following action
            .FinishWith((f, u) => { });
+
         return fakeEmployees.Generate(generateCount);
     }
     //Method for Updating Employee record

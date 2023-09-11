@@ -264,7 +264,6 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
     /// <summary>
     /// Profile Picture
     /// </summary>
-    [Required(ErrorMessage = "Please choose profile image")]
     [JsonPropertyName("profile_picture")]
     public string? ProfilePicture { get; set; }
     public IFormFile? ProfileImage { get; set; }

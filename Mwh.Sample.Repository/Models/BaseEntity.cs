@@ -3,8 +3,7 @@ namespace Mwh.Sample.Repository.Models;
 public enum Gender
 {
     Male,
-    Female,
-    Other
+    Female
 }
 
 public abstract class BaseEntity
