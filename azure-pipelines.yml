@@ -20,11 +20,11 @@ steps:
     packageType: 'sdk'
     version: '8.x'
     includePreviewVersions: true
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+    performMultiLevelLookup: true
+- task: DotNetCoreCLI@2
   inputs:
-    restoreSolution: '$(solution)'
+    command: 'restore'
+    feedsToUse: 'select'
 
 - task: VSBuild@1
   inputs:
