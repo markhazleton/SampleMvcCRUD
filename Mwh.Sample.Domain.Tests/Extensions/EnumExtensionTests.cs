@@ -213,7 +213,7 @@ public class EnumExtensionTests
         var underlyingType = EnumExtension.GetUnderlyingType<TestEnum>();
 
         // Assert
-        Assert.AreEqual(typeof(Int32), underlyingType);
+        Assert.AreEqual(typeof(int), underlyingType);
 
     }
 
@@ -234,7 +234,7 @@ public class EnumExtensionTests
     public void IsDefined_WithUndefinedEnumValue_ReturnsFalse()
     {
         // Arrange
-        TestEnum enumValue = (TestEnum)42; // An undefined enum value
+        TestEnum enumValue = (TestEnum)44; // An undefined enum value
 
         // Act
         bool isDefined = enumValue.IsDefined();

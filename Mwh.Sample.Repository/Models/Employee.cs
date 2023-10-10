@@ -1,13 +1,21 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Mwh.Sample.Repository.Models;
 public class Employee : BaseEntity, IEmployee
 {
     public Employee()
     {
         Name = string.Empty;
-        Department = new Department();
         ProfilePicture = "default.jpg";
     }
+
+    public Employee(Department dbDept)
+    {
+        this.Department = dbDept;
+        ProfilePicture = "default.jpg";
+    }
+
     /// <summary>
     /// Gets or sets the age.
     /// </summary>
@@ -22,13 +30,14 @@ public class Employee : BaseEntity, IEmployee
     /// <summary>
     /// 
     /// </summary>
-    public virtual Department Department { get; set; }
+    [ForeignKey("DepartmentId")] 
+    public Department? Department { get; set; }
 
     /// <summary>
     /// Gets or sets the department.
     /// </summary>
     /// <value>The department.</value>
-    public int DepartmentId { get; set; }
+    public int? DepartmentId { get; set; }
 
     /// <summary>
     /// Gets or sets the name.

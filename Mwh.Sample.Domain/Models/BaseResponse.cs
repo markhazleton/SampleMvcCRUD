@@ -27,10 +27,10 @@ public abstract class BaseResponse<T>
         Message = resource is null ? "Resource is null" : string.Empty;
         Resource = resource;
     }
-    protected BaseResponse(bool IsSucces)
+    protected BaseResponse(bool IsSuccess)
     {
-        Success = IsSucces;
-        Message = String.Empty;
+        Success = IsSuccess;
+        Message = string.Empty;
         Resource = default;
     }
     /// <summary>

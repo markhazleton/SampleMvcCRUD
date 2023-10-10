@@ -74,6 +74,7 @@ public class EmployeeDatabaseServiceTests
             "USA",
             EmployeeDepartmentEnum.IT
         );
+        employee.Gender = GenderEnum.Male;
 
         // Act
         var result = await employeeService.SaveAsync(employee, ct);

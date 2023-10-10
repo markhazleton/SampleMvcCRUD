@@ -33,7 +33,7 @@ public class EmployeeDtoTests
         var emp = GetValidEmployee();
 
         // Act
-        emp.Country = String.Empty;
+        emp.Country = string.Empty;
 
         // Assert
         Assert.IsNotNull(emp);
@@ -67,7 +67,7 @@ public class EmployeeDtoTests
         var emp = GetValidEmployee();
 
         // Act
-        emp.Name = String.Empty;
+        emp.Name = string.Empty;
 
         // Assert
         Assert.IsNotNull(emp);
@@ -83,7 +83,7 @@ public class EmployeeDtoTests
         var emp = GetValidEmployee();
 
         // Act
-        emp.State = String.Empty; ;
+        emp.State = string.Empty; ;
 
         // Assert
         Assert.IsNotNull(emp);

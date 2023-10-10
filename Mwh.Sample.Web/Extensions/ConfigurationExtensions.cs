@@ -36,11 +36,11 @@ public static class ConfigurationExtensions
     {
         if (!string.IsNullOrEmpty(Value))
         {
-            return Value ?? String.Empty;
+            return Value ?? string.Empty;
         }
         if (string.IsNullOrEmpty(defaultValue))
         {
-            return String.Empty;
+            return string.Empty;
         }
         return defaultValue ?? string.Empty;
     }
