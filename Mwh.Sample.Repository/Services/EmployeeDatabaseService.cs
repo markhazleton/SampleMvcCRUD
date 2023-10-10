@@ -1,4 +1,6 @@
-﻿namespace Mwh.Sample.Repository.Services;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Mwh.Sample.Repository.Services;
 public class EmployeeDatabaseService : IDisposable, IEmployeeService
 {
     private readonly EmployeeContext _context;
@@ -153,7 +155,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<EmployeeResponse> FindEmployeeByIdAsync(int Id, CancellationToken token)
     {
-        var employee = Create(await _context.Employees.Include(i=>i.Department).Where(w=>w.Id==Id).FirstOrDefaultAsync(cancellationToken: token));
+        var employee = Create(await _context.Employees.Include(i=>i.Department).Where(w=>w.Id==Id).AsNoTracking().FirstOrDefaultAsync(cancellationToken: token));
         if (employee is null)
             return new EmployeeResponse("Employee Not Found");
 
@@ -279,8 +281,16 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                 var desalt = _context.Employees.Add(dbEmp);
                 _context.SaveChanges();
             }
+            var local = _context.Set<Employee>()
+                     .Local
+                     .FirstOrDefault(entry => entry.Id.Equals(item.Id));
 
-            var newEmp = await _context.Employees.Where(w => w.Id == dbEmp.Id).Include(i => i.Department).FirstOrDefaultAsync(cancellationToken: ct);
+            // check if local is not null 
+            if (local != null)
+            {
+                _context.Entry(local).State = EntityState.Detached;
+            }
+            var newEmp = await _context.Employees.Where(w => w.Id == dbEmp.Id).Include(i => i.Department).AsNoTracking().FirstOrDefaultAsync(cancellationToken: ct);
 
             return new EmployeeResponse(Create(newEmp));
         }

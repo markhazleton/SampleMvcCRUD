@@ -179,16 +179,14 @@ public class EmployeeDatabaseServiceTests
         // Act
         var result = await employeeService.SaveAsync(item, ct);
 
-        var UpdateEmp = await employeeService.FindEmployeeByIdAsync(result?.Resource?.Id ?? 0, ct).ConfigureAwait(true);
+        result.Resource.Age = 50;
 
-        UpdateEmp.Resource.Age = 50;
-
-        var UpdateResult = await employeeService.SaveAsync(UpdateEmp.Resource, ct);
+        var UpdateResult = await employeeService.SaveAsync(result.Resource, ct);
 
         // Assert
         Assert.IsNotNull(result);
         Assert.IsTrue(result.Success);
-        Assert.IsNotNull(UpdateEmp);
+        Assert.IsNotNull(result);
         Assert.IsNotNull(UpdateResult);
         Assert.IsTrue(UpdateResult.Success);
         Assert.AreEqual(50, UpdateResult.Resource?.Age);
