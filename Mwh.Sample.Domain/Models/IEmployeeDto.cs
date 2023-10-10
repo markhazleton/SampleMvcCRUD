@@ -10,7 +10,8 @@ public interface IEmployeeDto
     int Age { get; set; }
     string? Country { get; set; }
     EmployeeDepartmentEnum Department { get; set; }
-    string? DepartmentName { get; set; }
+    string DepartmentName { get;  }
+    string GenderName { get; }
     int Id { get; set; }
     int? ManagerId { get; set; }
     string? Name { get; set; }

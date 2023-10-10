@@ -68,7 +68,7 @@ public class PropertyBagTests
     {
         var myTest = new PropertyBag<int, string>();
         Assert.AreNotEqual(null, myTest);
-        Assert.AreEqual(myTest.ToString(), String.Empty);
+        Assert.AreEqual(myTest.ToString(), string.Empty);
     }
 
     /// <summary>

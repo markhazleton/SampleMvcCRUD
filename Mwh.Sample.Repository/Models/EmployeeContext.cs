@@ -22,19 +22,11 @@ public class EmployeeContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Employee>(entity =>
-        {
-            entity.ToTable("Employees");
-            entity.HasKey(e => e.Id);
-            entity.HasOne(d => d.Department)
-            .WithMany(m => m.Employees)
-            .HasForeignKey(f => f.DepartmentId);
-        });
-        modelBuilder.Entity<Department>(entity =>
-        {
-            entity.ToTable("Departments");
-            entity.HasKey(e => e.Id);
-        });
+        modelBuilder.Entity<Employee>()
+            .HasOne(e => e.Department)
+            .WithMany(d => d.Employees)
+            .HasForeignKey(e => e.DepartmentId)
+            .IsRequired();
     }
 
     public DbSet<Employee> Employees { get; set; }
