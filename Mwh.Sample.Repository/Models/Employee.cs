@@ -30,7 +30,7 @@ public class Employee : BaseEntity, IEmployee
     /// <summary>
     /// 
     /// </summary>
-    [ForeignKey("DepartmentId")] 
+    [ForeignKey("DepartmentId")]
     public Department? Department { get; set; }
 
     /// <summary>

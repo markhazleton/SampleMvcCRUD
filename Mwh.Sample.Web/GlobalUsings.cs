@@ -6,7 +6,6 @@ global using Mwh.Sample.Domain.Interfaces;
 global using Mwh.Sample.Domain.Models;
 global using Mwh.Sample.Repository.Models;
 global using Mwh.Sample.Repository.Services;
-global using Mwh.Sample.SwaggerCore.Extensions;
 global using Mwh.Sample.Web.Extensions;
 global using Mwh.Sample.Web.Helpers;
 global using Mwh.Sample.Web.Models;

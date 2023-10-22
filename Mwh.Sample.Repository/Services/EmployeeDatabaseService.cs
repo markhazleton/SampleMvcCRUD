@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Mwh.Sample.Repository.Services;
+﻿namespace Mwh.Sample.Repository.Services;
 public class EmployeeDatabaseService : IDisposable, IEmployeeService
 {
     private readonly EmployeeContext _context;
@@ -155,7 +153,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<EmployeeResponse> FindEmployeeByIdAsync(int Id, CancellationToken token)
     {
-        var employee = Create(await _context.Employees.Include(i=>i.Department).Where(w=>w.Id==Id).AsNoTracking().FirstOrDefaultAsync(cancellationToken: token));
+        var employee = Create(await _context.Employees.Include(i => i.Department).Where(w => w.Id == Id).AsNoTracking().FirstOrDefaultAsync(cancellationToken: token));
         if (employee is null)
             return new EmployeeResponse("Employee Not Found");
 
@@ -172,7 +170,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
     {
-        var source = _context.Employees.Include(i=>i.Department).OrderBy(o => o.Name).AsQueryable();
+        var source = _context.Employees.Include(i => i.Department).OrderBy(o => o.Name).AsQueryable();
         int TotalCount = source.Count();
         var items = await source.Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync(token);
         var paginationMetadata = paging.GetMetaData(TotalCount);
@@ -250,11 +248,11 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
             if (item.Id > 0)
             {
-                dbEmp = await _context.Employees.Include(d=>d.Department).Where(w=>w.Id==item.Id).FirstOrDefaultAsync(cancellationToken: ct).ConfigureAwait(true);
+                dbEmp = await _context.Employees.Include(d => d.Department).Where(w => w.Id == item.Id).FirstOrDefaultAsync(cancellationToken: ct).ConfigureAwait(true);
 
                 if (dbEmp == null)
                 {
-                    dbEmp = Create(item,dbDept);
+                    dbEmp = Create(item, dbDept);
 
                     _context.Employees.Add(dbEmp);
                     _context.SaveChanges();
@@ -277,7 +275,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             else
             {
                 dbEmp = Create(item, dbDept);
-                
+
                 var desalt = _context.Employees.Add(dbEmp);
                 _context.SaveChanges();
             }
