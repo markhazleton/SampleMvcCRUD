@@ -1,5 +1,3 @@
-using Azure.Core;
-using Microsoft.AspNetCore.Http;
 using Microsoft.OpenApi.Models;
 using Westwind.AspNetCore.Markdown;
 
