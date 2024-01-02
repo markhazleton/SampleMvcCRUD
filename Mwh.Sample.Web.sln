@@ -30,6 +30,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Repository.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Console", "Mwh.Sample.Console\Mwh.Sample.Console.csproj", "{4C736D18-1AE3-470A-A589-5BA8D644AF63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mwh.Sample.AspireHost.AppHost", "Mwh.Sample.AspireHost\Mwh.Sample.AspireHost.AppHost\Mwh.Sample.AspireHost.AppHost.csproj", "{595AE662-EAD0-4503-978F-CBF4E4A84735}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.AspireHost.ServiceDefaults", "Mwh.Sample.AspireHost\Mwh.Sample.AspireHost.ServiceDefaults\Mwh.Sample.AspireHost.ServiceDefaults.csproj", "{2EF9764A-2835-4837-9E8E-8C53E4D45B7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +68,14 @@ Global
 		{4C736D18-1AE3-470A-A589-5BA8D644AF63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C736D18-1AE3-470A-A589-5BA8D644AF63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C736D18-1AE3-470A-A589-5BA8D644AF63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{595AE662-EAD0-4503-978F-CBF4E4A84735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{595AE662-EAD0-4503-978F-CBF4E4A84735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{595AE662-EAD0-4503-978F-CBF4E4A84735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{595AE662-EAD0-4503-978F-CBF4E4A84735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EF9764A-2835-4837-9E8E-8C53E4D45B7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EF9764A-2835-4837-9E8E-8C53E4D45B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EF9764A-2835-4837-9E8E-8C53E4D45B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EF9764A-2835-4837-9E8E-8C53E4D45B7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
