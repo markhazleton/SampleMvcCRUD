@@ -2,7 +2,7 @@
 namespace Mwh.Sample.Domain.Models;
 /// <summary>
 /// ApplicationStatus
-/// </summary>
+/// </summary>+
 public sealed class ApplicationStatus
 {
     public ApplicationStatus(Assembly assembly, Dictionary<string, string>? tests = null, List<string>? messages = null, ServiceStatus status = ServiceStatus.Online)
@@ -42,7 +42,7 @@ public sealed class ApplicationStatus
     /// <summary>
     /// Features
     /// </summary>
-    public Dictionary<string, string> Features { get; } = new Dictionary<string, string>();
+    public Dictionary<string, string> Features { get; } = [];
     /// <summary>
     /// Messages
     /// </summary>
