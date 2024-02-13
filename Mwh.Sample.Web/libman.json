@@ -13,24 +13,24 @@
     },
     {
       "destination": "wwwroot/lib/jquery-validation-unobtrusive/",
-      "library": "jquery-validation-unobtrusive@4.0.0",
-      "files": [ "jquery.validate.unobtrusive.min.js" ]
+      "files": [ "jquery.validate.unobtrusive.min.js" ],
+      "library": "jquery-validation-unobtrusive@4.0.0"
     },
     {
       "destination": "wwwroot/lib/datatables",
-      "library": "datatables.net@2.1.1",
-      "files": [ "jquery.dataTables.min.js" ]
+      "files": [ "jquery.dataTables.min.js" ],
+      "library": "datatables.net@2.1.1"
     },
     {
       "destination": "wwwroot/lib/datatables.net-bs/",
-      "library": "datatables.net-bs5@1.13.8",
-      "files": [ "dataTables.bootstrap5.min.css", "dataTables.bootstrap5.min.js" ]
+      "files": [ "dataTables.bootstrap5.min.css", "dataTables.bootstrap5.min.js" ],
+      "library": "datatables.net-bs5@1.13.10"
     },
     {
       "destination": "wwwroot/lib/bootstrap/",
+      "files": [ "dist/js/bootstrap.min.js", "dist/css/bootstrap.min.css", "dist/js/bootstrap.bundle.min.js" ],
       "library": "bootstrap@5.3.2",
-      "provider": "unpkg",
-      "files": [ "dist/js/bootstrap.min.js", "dist/css/bootstrap.min.css", "dist/js/bootstrap.bundle.min.js" ]
+      "provider": "unpkg"
     }
   ]
 }
