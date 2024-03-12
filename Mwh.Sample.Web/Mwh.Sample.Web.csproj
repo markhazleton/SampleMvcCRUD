@@ -38,6 +38,7 @@
 		<PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.16.0" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\AspireAppHost.ServiceDefaults\AspireAppHost.ServiceDefaults.csproj" />
 		<ProjectReference Include="..\Mwh.Sample.Domain\Mwh.Sample.Domain.csproj" />
 		<ProjectReference Include="..\Mwh.Sample.HttpClientFactory\Mwh.Sample.HttpClientFactory.csproj" />
 		<ProjectReference Include="..\Mwh.Sample.Repository\Mwh.Sample.Repository.csproj" />
