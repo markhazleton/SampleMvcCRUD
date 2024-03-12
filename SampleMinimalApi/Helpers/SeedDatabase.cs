@@ -1,7 +1,10 @@
 ﻿
+using Mwh.Sample.Domain.Models;
+using Mwh.Sample.Repository.Models;
 using Mwh.Sample.Repository.Repository;
+using Mwh.Sample.Repository.Services;
 
-namespace Mwh.Sample.Web.Helpers;
+namespace SampleMinimalApi.Helpers;
 
 /// <summary>
 /// See Employee Database

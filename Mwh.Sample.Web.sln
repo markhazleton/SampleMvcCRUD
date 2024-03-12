@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireAppHost", "AspireAppH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireAppHost.ServiceDefaults", "AspireAppHost.ServiceDefaults\AspireAppHost.ServiceDefaults.csproj", "{1DCCCE15-D1AF-4607-89FA-F26763E51160}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMinimalApi", "SampleMinimalApi\SampleMinimalApi.csproj", "{4F0E790B-E789-4728-8245-50E448069749}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{1DCCCE15-D1AF-4607-89FA-F26763E51160}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DCCCE15-D1AF-4607-89FA-F26763E51160}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DCCCE15-D1AF-4607-89FA-F26763E51160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F0E790B-E789-4728-8245-50E448069749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F0E790B-E789-4728-8245-50E448069749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F0E790B-E789-4728-8245-50E448069749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F0E790B-E789-4728-8245-50E448069749}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

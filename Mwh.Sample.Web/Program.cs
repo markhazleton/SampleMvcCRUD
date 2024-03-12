@@ -39,7 +39,6 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<EmployeeContext>(opt => opt.UseInMemoryDatabase("Employee"));
 builder.Services.AddScoped<IEmployeeService, EmployeeDatabaseService>();
 builder.Services.AddScoped<IEmployeeClient, EmployeeDatabaseClient>();
-
 SeedDatabase.DatabaseInitialization(new EmployeeContext());
 
 builder.Services.AddHttpClient();
