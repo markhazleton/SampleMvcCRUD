@@ -43,6 +43,24 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 
+app.MapPost("/employees", async (IEmployeeService employeeService, EmployeeDto employee, CancellationToken token) =>
+{
+    var result = await employeeService.SaveAsync(employee, token);
+    if (result is null)
+    {
+        return Results.BadRequest("Employee not saved");
+    }
+    if (result.Resource is null)
+    {
+        return Results.BadRequest("Employee not saved");
+    }
+    if (result.Success == false)
+    {
+        return Results.BadRequest("Employee not saved");
+    }
+
+    return Results.Created($"/employees/{result.Resource.Id}", result);
+}).WithOpenApi();
 
 app.MapGet("/employees", async (IEmployeeService employeeService, CancellationToken token) =>
 {
@@ -69,3 +87,13 @@ app.MapGet("/departments", async (IEmployeeService employeeService, Cancellation
 
 app.Run();
 
+public static class EmployeeGroupEndpoints
+{
+    public static RouteGroupBuilder MapEmployeeApi(this RouteGroupBuilder group, IEmployeeService employeeService)
+    {
+        group.MapGet("/", employeeService.GetEmployeesAsync);
+        group.MapGet("/{id}", employeeService.FindDepartmentByIdAsync);
+        group.MapDelete("/{id}", employeeService.DeleteAsync);
+        return group;
+    }
+}

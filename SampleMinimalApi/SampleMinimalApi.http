@@ -1,6 +1,6 @@
 @SampleMinimalApi_HostAddress = http://localhost:5127
 
-GET {{SampleMinimalApi_HostAddress}}/weatherforecast/
+GET {{SampleMinimalApi_HostAddress}}/employees/
 Accept: application/json
 
 ###
