@@ -28,7 +28,7 @@ You can contribute in several ways.
 ## Author
 
 Mark Hazleton
-+ https://markhazleton.controlorigins.com 
++ https://markhazleton.com 
 
 ## Thanks
 To the many teachers and developers that post sample code under open source license.
