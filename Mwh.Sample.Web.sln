@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
 		CONTRIBUTING.md = CONTRIBUTING.md
 		README.md = README.md
+		Mwh.Sample.Web\wwwroot\README.md = Mwh.Sample.Web\wwwroot\README.md
 		SECURITY.md = SECURITY.md
 	EndProjectSection
 EndProject
@@ -30,11 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Repository.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mwh.Sample.Console", "Mwh.Sample.Console\Mwh.Sample.Console.csproj", "{4C736D18-1AE3-470A-A589-5BA8D644AF63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireAppHost", "AspireAppHost\AspireAppHost.csproj", "{DC5813E3-80F3-4BB7-889A-9AD2605D2C9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspireAppHost", "AspireAppHost\AspireAppHost.csproj", "{DC5813E3-80F3-4BB7-889A-9AD2605D2C9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireAppHost.ServiceDefaults", "AspireAppHost.ServiceDefaults\AspireAppHost.ServiceDefaults.csproj", "{1DCCCE15-D1AF-4607-89FA-F26763E51160}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspireAppHost.ServiceDefaults", "AspireAppHost.ServiceDefaults\AspireAppHost.ServiceDefaults.csproj", "{1DCCCE15-D1AF-4607-89FA-F26763E51160}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMinimalApi", "SampleMinimalApi\SampleMinimalApi.csproj", "{4F0E790B-E789-4728-8245-50E448069749}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleMinimalApi", "SampleMinimalApi\SampleMinimalApi.csproj", "{4F0E790B-E789-4728-8245-50E448069749}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

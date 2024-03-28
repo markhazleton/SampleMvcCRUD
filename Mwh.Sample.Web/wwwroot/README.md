@@ -1,6 +1,13 @@
 # SampleMvcCRUD
 An Asp.Net MVC Application to demonstrate multiple ways of implementing a simple maintenance (CRUD) user interface
 
+[![.NET](https://github.com/markhazleton/samplemvccrud/actions/workflows/main_mwhsampleweb.yml/badge.svg)]([main_mwhsampleweb.yml](https://github.com/markhazleton/SampleMvcCRUD/blob/main/.github/workflows/main_mwhsampleweb.yml))
+
+[![.NET](https://github.com/markhazleton/samplemvccrud/actions/workflows/docker-image.yml/badge.svg)]([docker-image.yml](https://github.com/markhazleton/SampleMvcCRUD/blob/main/.github/workflows/docker-image.yml))
+
+https://github.com/markhazleton/SampleMvcCRUD/blob/main/.github/workflows/docker-image.yml
+
+
 For deployments there are multiple approaches:
 
 1)  *current* [GitHub Action](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/main_mwhsampleweb.yml) with Continuous Integration/Continuous Deployment (CI/CD) to Docker Hub and Azure App Services 
@@ -8,9 +15,9 @@ For deployments there are multiple approaches:
 1)  [Azure DevOps project](https://dev.azure.com/markhazleton/SampleMvcCRUD) with Continuous Integration/Continuous Deployment (CI/CD) pipelines to Azure App Services 
 
 Web application is hosted:
-- Amazon Web Services (AWS)  Virtual Machine - Windows 2012 IIS - Net 6 [markhazletonsamplecrud.controlorigins.com](https://markhazletonsamplecrud.controlorigins.com/)
-- Microsoft Azure AppService .Net 7 Linux Deployed via GitHub Actions [mwhsampleweb.azurewebsites.net](https://mwhsampleweb.azurewebsites.net/) 
-- Microsoft Azure AppService .Net 7 Linux Image from docker hub [samplemvccrud.azurewebsites.net](https://samplemvccrud.azurewebsites.net/) 
+- Microsoft Azure Virtual Machine - Windows 2022 IIS - Net 8 [samplecrud.frogsfolly.com](https://samplecrud.frogsfolly.com/)
+- Microsoft Azure AppService .Net 8 Linux Deployed via GitHub Actions [mwhsampleweb.azurewebsites.net](https://mwhsampleweb.azurewebsites.net/) 
+- Microsoft Azure AppService .Net 8 Linux Image from docker hub [samplemvccrud.azurewebsites.net](https://samplemvccrud.azurewebsites.net/) 
 - Docker Hub Image [markhazleton/mwhsampleweb](https://hub.docker.com/r/markhazleton/mwhsampleweb)
 
 ## Customization
@@ -34,7 +41,7 @@ Mark Hazleton
 To the many teachers and developers that post sample code under open source license.
 
 ## Copyright and License
-Copyright 2018-2023 Mark Hazleton
+Copyright 2018-2024 Mark Hazleton
 Code released under the MIT License.
 
 

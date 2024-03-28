@@ -24,12 +24,12 @@
     {
       "destination": "wwwroot/lib/datatables.net-bs/",
       "files": [ "dataTables.bootstrap5.min.css", "dataTables.bootstrap5.min.js" ],
-      "library": "datatables.net-bs5@1.13.10"
+      "library": "datatables.net-bs5@2.0.3"
     },
     {
       "destination": "wwwroot/lib/bootstrap/",
       "files": [ "dist/js/bootstrap.min.js", "dist/css/bootstrap.min.css", "dist/js/bootstrap.bundle.min.js" ],
-      "library": "bootstrap@5.3.2",
+      "library": "bootstrap@5.3.3",
       "provider": "unpkg"
     }
   ]
