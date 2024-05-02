@@ -6,7 +6,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - SampleCRUD
 on:
   push:
     branches:
-      - main
+      - noaspire
   workflow_dispatch:
 
 jobs:
