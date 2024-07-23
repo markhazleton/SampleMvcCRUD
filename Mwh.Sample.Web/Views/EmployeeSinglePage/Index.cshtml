@@ -4,10 +4,10 @@
 
 <div class="container">
     <h2>JavaScript AJAX using Api</h2>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New Employee</button><br /><br />
     <table id="EmpSinglePage" class="table table-bordered table-hover">
         <thead class="thead-dark">
             <tr>
+                <th>Profile</th>
                 <th>Name</th>
                 <th>Gender</th>
                 <th>Age</th>
@@ -17,7 +17,6 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody class="tbody"></tbody>
         <tfoot></tfoot>
     </table>
 </div>
@@ -66,46 +65,58 @@
     </div>
 </div>
 
-@section scripts {
 
+@section scripts {
     <script type="text/javascript">
-        //Load Data in Table when documents is ready
-        $(document).ready(function () {
+            $(document).ready(function () {
             loadData();
         });
 
-
-
-        //Load Employee List
         const loadData = () => {
-            $.ajax({
+                $.ajax({
                 url: "/api/employee",
                 type: "GET",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
-                success: function (result) {
-                    var html = '';
-                    $.each(result, function (key, item) {
-                        html += '<tr>';
-                        html += '<td>' + item.name + '</td>';
-                        html += '<td>' + item.gender + '</td>';
-                        html += '<td>' + item.age + '</td>';
-                        html += '<td>' + item.state + '</td>';
-                        html += '<td>' + item.country + '</td>';
-                        html += '<td>' + item.departmentName + '</td>';
-                        html += '<td><a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + item.id + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + item.id + ')">Delete</a></td>';
-                        html += '</tr>';
-                    });
-                    $('.tbody').html(html);
+                    success: function (result) {
+                    // Initialize DataTables
+                    $('#EmpSinglePage').DataTable({
+                        data: result,
+                        destroy: true,
+                paging: false, // Disable paging
+                scrollY: '50vh', // Set the height for vertical scrolling
+                stateSave: true, // Enable state saving
+                colReorder: true, // Enable column reordering
+                        columns: [
+                    {
+                        data: 'profile_picture',
+                        render: function(data, type, row) {
+                            return '<img src="/images/' + data + '" class="rounded-circle" height="40" width="40" asp-append-version="true" />';
+                        }
+                    },
+                    { data: 'name' },
+                    { data: 'genderName' },
+                    { data: 'age' },
+                    { data: 'state' },
+                    { data: 'country' },
+                    { data: 'departmentName' },
+                    {
+                        data: 'id',
+                        render: function(data, type, row) {
+                            return '<a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + data + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + data + ')">Delete</a>';
+                        }
+                    }
+                ]
+            });
                 },
                 error: function (errormessage) {
-                    alert(errormessage.responseText);
+            alert(errormessage.responseText);
                 }
             });
         }
 
-        //Show Add Employee Dialog
-        const Add =()=> {
+                //Show Add Employee Dialog
+        const Add = () => {
             var res = validate();
             if (res == false) {
                 return false;
@@ -217,7 +228,7 @@
         }
 
         // Delete Employee by Employee ID
-        const Delete= (ID) =>  {
+        const Delete = (ID) => {
             var ans = confirm("Are you sure you want to delete this Record?");
             if (ans) {
                 $.ajax({
@@ -236,7 +247,7 @@
         }
 
         // Clear the Employee Form
-        const  clearTextBox = () => {
+        const clearTextBox = () => {
             $('#myModalLabel').html('Add Employee');
             $('#id').val("0");
             $('#name').val("");
@@ -254,7 +265,7 @@
             $('#department').css('border-color', 'lightgrey');
         }
         // JQuery Validate
-        const validate =()=> {
+        const validate = () => {
             var isValid = true;
             if ($('#name').val().trim() == "") {
                 $('#name').css('border-color', 'Red');
@@ -293,5 +304,9 @@
             }
             return isValid;
         }
+
     </script>
+    <!-- Include the DataTables ColReorder extension -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.5.4/css/colReorder.dataTables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
 }
