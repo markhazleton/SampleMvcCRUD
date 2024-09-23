@@ -13,7 +13,7 @@ on:
       - README.md
       - .vscode/**
       - .gitignore
-  workflow_dispatch:  
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,13 +21,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.0.0 # Specifying exact version for stability
 
       - name: Set up .NET 9 SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.x'
           include-prerelease: true
+
+      - name: Check .NET version
+        run: dotnet --info
 
       - name: Restore dependencies
         run: dotnet restore
@@ -49,14 +52,13 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # Required for requesting the JWT
+      id-token: write
       contents: read
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v4.1.7
+        uses: actions/download-artifact@v3
         with:
           name: .net-app
 
@@ -67,9 +69,13 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
+      - name: Verify Azure Login
+        run: az account show
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'SampleCRUD'
           package: ${{ runner.workspace }}/myapp
+
