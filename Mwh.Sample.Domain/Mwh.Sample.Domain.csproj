@@ -1,32 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-	</PropertyGroup>
-	<PropertyGroup>
-		<Deterministic>false</Deterministic>
-		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
-		<AssemblyVersion>8.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
-		<ApplicationIcon>favicon.ico</ApplicationIcon>
-		<PackageIcon>favicon.ico</PackageIcon>
-	</PropertyGroup>
-	<ItemGroup>
-		<Compile Remove="Interfaces\IEmployeeRepository.cs" />
-	</ItemGroup>
-	<ItemGroup>
-		<Content Include="favicon.ico" />
-	</ItemGroup>
-	<ItemGroup>
-		<None Include="..\favicon.ico">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
-	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="System.Drawing.Common" Version="8.0.8" />
-	</ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Deterministic>false</Deterministic>
+    <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
+    <AssemblyVersion>8.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <PackageIcon>favicon.ico</PackageIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Interfaces\IEmployeeRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\favicon.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="9.0.0-rc.1.24451.1" />
+  </ItemGroup>
 </Project>

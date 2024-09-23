@@ -1,5 +1,46 @@
 ﻿@model Microsoft.AspNetCore.Html.HtmlString
 @{
-    ViewData["Title"] = "Mwh.Sample.Web";
+    ViewBag.Title = "ASP.NET MVC CRUD Tutorial | Sample CRUD Application";
+    ViewBag.MetaDescription = "Learn how to implement CRUD operations in ASP.NET MVC with this comprehensive tutorial. Explore various deployment strategies to Azure using Docker and GitHub Actions.";
+    ViewBag.MetaKeywords = "ASP.NET MVC, CRUD tutorial, ASP.NET CRUD operations, MVC tutorial, Docker, GitHub Actions, Azure App Services, Azure Virtual Machines";
 }
-@Html.Raw(Model)
+
+<div class="container">
+    <h1>Welcome to the ASP.NET MVC CRUD Tutorial</h1>
+    <p>
+        This sample CRUD application demonstrates how to create, read, update, and delete records using ASP.NET MVC.
+        It covers various deployment strategies to Azure, including using Docker and GitHub Actions for continuous integration and deployment.
+        Whether you're a beginner looking to understand the basics of MVC or an experienced developer exploring advanced deployment methods, this tutorial offers a comprehensive guide.
+    </p>
+    <h2>Features of this Sample CRUD Application:</h2>
+    <ul>
+        <li>Comprehensive ASP.NET MVC CRUD implementation</li>
+        <li>Azure deployment strategies using Docker and GitHub Actions</li>
+        <li>Scalable architecture with support for Azure App Services and Virtual Machines</li>
+        <li>Open-source project with opportunities for contributions</li>
+    </ul>
+    <p>
+        Ready to get started? Explore the code and follow the steps to deploy your own ASP.NET MVC application to Azure.
+        Stay tuned for upcoming features like integration with React, Vue, and mobile applications.
+    </p>
+    <h2>Why Choose This Tutorial?</h2>
+    <p>
+        This project is designed to help developers at all levels understand the best practices for building and deploying ASP.NET MVC applications.
+        By following this guide, you will learn how to efficiently manage the lifecycle of an MVC application, from development to production, using modern DevOps practices.
+    </p>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Project Readme.MD</h3>
+        </div>
+        <div class="card-body">
+            @Html.Raw(Model)
+        </div>
+        <div class="card-footer">
+            <br/>
+        </div>
+    </div>
+</div>
+

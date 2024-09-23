@@ -1,128 +1,102 @@
 ﻿@model Mwh.Sample.Domain.Models.EmployeeDto
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = $"Edit Employee - {Model.Name} | ASP.NET MVC CRUD Tutorial";
+    ViewBag.MetaDescription = $"Edit details for employee {Model.Name}. Learn how the Employee Edit form fits into the MVC Controller form approach in ASP.NET MVC.";
+    ViewBag.MetaKeywords = "ASP.NET MVC, Employee Edit, CRUD tutorial, MVC Forms, employee management, form handling, model binding";
 }
 
-<div class="container">
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title text-center">Edit Employee - @Model.Name</h2>
+            <p class="text-muted text-center">Update the employee's information using the form below.</p>
+            @using (Html.BeginForm("Edit", "MvcEmployee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id)
 
-    <h2>MVC Edit</h2>
+                <div class="mb-3">
+                    <h4>Employee Information</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @using (Html.BeginForm("Edit", "MvcEmployee", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.Id)
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="form-horizontal">
-            <h4>Employee</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "form-label" })
+                        <select class="form-select" asp-for="Gender" asp-items="Html.GetEnumSelectList(typeof(Mwh.Sample.Domain.Models.GenderEnum))"></select>
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                    </div>
 
-            <div class="form-group mb-3">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "form-label" })
+                        <select class="form-select" asp-for="Department" asp-items="Html.GetEnumSelectList(typeof(Mwh.Sample.Domain.Models.EmployeeDepartmentEnum))"></select>
+                        @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <img src="~/images/@Model.ProfilePicture" class="rounded-circle mb-3" height="60" width="60" asp-append-version="true" alt="Profile Picture" />
+                        <label class="form-label" asp-for="ProfileImage">Update Profile Picture</label>
+                        <div class="input-group">
+                            <input asp-for="ProfileImage" class="form-control" id="ProfileImage" type="file">
+                        </div>
+                        <span asp-validation-for="ProfileImage" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        @Html.ActionLink("Details", "Details", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-info ms-2" })
+                        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning ms-2" })
+                    </div>
                 </div>
-            </div>
-
-            <div class="form-group mb-3">
-                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <select class="form-select" asp-for="Gender" asp-items="Html.GetEnumSelectList(typeof (Mwh.Sample.Domain.Models.GenderEnum))"></select>
-                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group mb-3">
-                @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group mb-3">
-                @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group mb-3">
-                @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group mb-3">
-                @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <select class="form-select" asp-for="Department" asp-items="Html.GetEnumSelectList(typeof (Mwh.Sample.Domain.Models.EmployeeDepartmentEnum))"></select>
-                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group mb-3">
-                <img src="~/images/@Model.ProfilePicture"
-                 class="rounded-circle"
-                 height="40" width="40"
-                 asp-append-version="true" />
-                <span asp-validation-for="ProfileImage" class="text-danger"></span>
-
-                <div class="input-group custom-file-button">
-                    <label class="input-group-text" asp-for="ProfileImage">Update Profile Picture</label>
-
-                    <input asp-for="ProfileImage" class="custom-file-input" id="ProfileImage" type="file" class="form-control">
-                </div>
-
-            </div>
-
-            <div class="form-group mb-3">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                    @Html.ActionLink("Details", "Details", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info" })
-                    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-sm btn-warning" })
-
-                </div>
-            </div>
-
+            }
         </div>
-    }
-
-    <div class=" mb-3">
-        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-info" })
     </div>
 </div>
 
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title">About the Employee Edit Form</h3>
+            <p class="card-text">
+                The Employee Edit form is an integral part of the MVC Controller form approach in ASP.NET MVC. It allows for efficient updating of employee information through model binding and form handling.
+                This approach ensures data integrity and provides a seamless user experience for managing employee data.
+            </p>
+            <p class="card-text">
+                Using Bootstrap 5 styles, this form is not only functional but also visually appealing, ensuring that the user interface is intuitive and easy to use. The Edit form fits into the larger MVC architecture,
+                maintaining a clean separation of concerns and allowing for maintainable and scalable code.
+            </p>
+        </div>
+    </div>
+</div>
 
-@section HeadScripts{
-
-<style type="text/css">
-.custom-file-button input[type=file] {
-  margin-left: -2px !important;
-}
-.custom-file-button input[type=file]::-webkit-file-upload-button {
-  display: none;
-}
-.custom-file-button input[type=file]::file-selector-button {
-  display: none;
-}
-.custom-file-button:hover label {
-  background-color: #dde0e3;
-  cursor: pointer;
-}
-</style>
-
-
-}
-
-@section scripts{
+@section scripts {
     <script type="text/javascript">
-        // Add the following code if you want the name of the file appear on select
-        $(".custom-file-input").on("change", function () {
+        // Display the selected file name on the input label
+        $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
