@@ -1,12 +1,4 @@
 {
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:6080",
-      "sslPort": 44307
-    }
-  },
   "profiles": {
     "Mwh.Sample.Web": {
       "commandName": "Project",
@@ -19,10 +11,11 @@
       "sqlDebugging": true,
       "applicationUrl": "https://localhost:7023;http://localhost:5023",
       "dotnetRunMessages": true,
-      "nativeDebugging": true
+      "nativeDebugging": false
     },
     "IIS Express": {
       "commandName": "IISExpress",
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "VaultUri": "https://hellioworldkeyvault.vault.azure.net/",
@@ -35,12 +28,20 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
-      "publishAllPorts": true,
-      "useSSL": true,
       "environmentVariables": {
         "VaultUri": "https://hellioworldkeyvault.vault.azure.net/",
         "AZURE_USERNAME": "MAH0190@BSWHealth.org"
-      }
+      },
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:6080",
+      "sslPort": 44307
     }
   }
 }

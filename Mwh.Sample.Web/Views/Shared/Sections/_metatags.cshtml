@@ -1,0 +1,67 @@
+﻿@using System.IO
+@using System.Text.Json
+@using System.Text.RegularExpressions
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
+@{
+    // Retrieve the necessary parts of the URL from the request
+    var request = ViewContext.HttpContext.Request;
+    var scheme = request.Scheme;
+    var host = request.Host;
+    var path = request.Path;
+    var queryString = request.QueryString;
+
+    // Construct the canonical URL based on the current path
+    var canonicalUrl = $"{scheme}://{host}{path}{queryString}";
+
+
+    // Safely retrieve route data values and handle potential nulls
+    var areaName = ViewContext.RouteData.Values["area"]?.ToString() ?? string.Empty;
+    var controllerName = ViewContext.RouteData.Values["controller"]?.ToString() ?? string.Empty;
+    var actionName = ViewContext.RouteData.Values["action"]?.ToString() ?? string.Empty;
+    var idName = ViewContext.RouteData.Values["id"]?.ToString() ?? string.Empty;
+    actionName = actionName == "Index" ? string.Empty : actionName;
+    controllerName = controllerName == "Home" ? string.Empty : controllerName;
+    // Construct the current path based on area, controller, and action
+    var currentPath = !string.IsNullOrEmpty(areaName)
+        ? $"/{areaName}/{controllerName}/{actionName}/{idName}"
+        : $"/{controllerName}/{actionName}/{idName}";
+
+    currentPath = Regex.Replace(currentPath, "/+", "/");
+
+    // Initialize meta tags with default values
+    var Title = ViewData["Title"] as string ?? "SampleMvcCRUD";
+    var Description = ViewData["Description"] as string ?? $"The SampleMvcCRUD {Title} page.";
+    var Keywords = ViewData["Keywords"] as string ?? "ASP.NET, Web Development";
+    // ViewData overrides for Title and Description
+    Title = ViewData["Title"] as string ?? Title;
+    Description = ViewData["Description"] as string ?? Description;
+    Keywords = ViewData["Keywords"] as string ?? "ASP.NET, Web Development";
+}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75XXTZ5TQJ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-75XXTZ5TQJ');
+</script>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@Title - SampleMvcCRUD</title>
+<meta name="description" content="@Description" />
+<meta name="keywords" content="@Keywords" />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Mark Hazleton" />
+<link rel="canonical" href="@canonicalUrl" />
+<meta property="og:title" content="@Title" />
+<meta property="og:description" content="@Description" />
+<meta property="og:image" content="https://webspark.markhazleton.com/image.png" />
+<meta property="og:url" content="@canonicalUrl" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="@Title" />
+<meta name="twitter:description" content="@Description" />
+<meta name="twitter:image" content="https://webspark.markhazleton.com/image.png" />

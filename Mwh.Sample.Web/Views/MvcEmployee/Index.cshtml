@@ -1,12 +1,13 @@
 ﻿@model IEnumerable<Mwh.Sample.Domain.Models.EmployeeDto>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Manage Employees with MVC Forms | ASP.NET MVC CRUD Tutorial";
+    ViewBag.MetaDescription = "Learn how to manage employees using MVC Forms in an ASP.NET MVC application. Explore best practices for CRUD operations and Microsoft support for MVC architecture.";
+    ViewBag.MetaKeywords = "ASP.NET MVC, MVC Forms, employee management, CRUD operations, ASP.NET tutorial, MVC best practices, Microsoft support";
 }
 
 <div class="container">
 
-    <h2>MVC Forms</h2>
+    <h2>Manage Employees with MVC Forms</h2>
 
     <p>
         @Html.ActionLink("Add New Employee", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
@@ -82,6 +83,45 @@
     </table>
 </div>
 
+<div class="container mt-4">
+    <h3>MVC Forms Approach in ASP.NET MVC</h3>
+    <p>
+        The MVC Forms approach allows developers to build applications with strong separation of concerns, making it easier to maintain and scale.
+        It supports robust form handling and validation mechanisms, enabling secure and efficient data entry and modification.
+    </p>
+    <h4>Best Practices for MVC Forms:</h4>
+    <ul>
+        <li>Utilize <code>[HttpGet]</code> and <code>[HttpPost]</code> attributes for appropriate routing and data handling.</li>
+        <li>Implement validation using Data Annotations or custom validation logic.</li>
+        <li>Use <code>@Html.AntiForgeryToken()</code> to prevent CSRF attacks.</li>
+    </ul>
+    <h4>Pros and Cons of MVC Forms Approach:</h4>
+    <ul>
+        <li><strong>Pros:</strong> Clear separation of concerns, easy to test, comprehensive model binding and validation support.</li>
+        <li><strong>Cons:</strong> Can become complex with large forms, requires knowledge of HTML helpers and model binding.</li>
+    </ul>
+    <p>
+        Microsoft continues to support the MVC architecture, providing ongoing updates and improvements. With .NET 8, ASP.NET MVC remains a reliable choice for building web applications with a clean, maintainable architecture.
+    </p>
+</div>
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title">CRUD Functionality in MVC</h3>
+            <p class="card-text">
+                In classic MVC architecture, CRUD operations are implemented using Controller actions and views for each activity: Create, Read, Update, and Delete.
+                The <strong>Create</strong> action uses a form to capture new employee data, which is saved to the database upon submission.
+                The <strong>Read</strong> action displays a list of employees retrieved from the database, as seen in the table above.
+                <strong>Update</strong> allows editing of an employee's details, while <strong>Delete</strong> provides a confirmation before removal.
+            </p>
+            <p class="card-text">
+                You can generate views for each CRUD operation directly from your Entity Framework entities using scaffolding tools.
+                This automates the process of creating views and wiring up the controller. However, it is best practice to use ViewModels rather than exposing your entities directly to the view,
+                ensuring better separation of concerns and security.
+            </p>
+        </div>
+    </div>
+</div>
 
 @section scripts {
     <script type="text/javascript">

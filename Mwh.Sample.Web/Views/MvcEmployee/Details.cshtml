@@ -1,38 +1,50 @@
 ﻿@model Mwh.Sample.Domain.Models.EmployeeDto
+
 @{
-    ViewBag.Title = "Employee Details";
+    ViewBag.Title = $"Employee Details - {Model.Name} | ASP.NET MVC CRUD Tutorial";
+    ViewBag.MetaDescription = $"View detailed information for employee {Model.Name}. Learn how the Employee Details form fits into the MVC Controller form approach in ASP.NET MVC.";
+    ViewBag.MetaKeywords = "ASP.NET MVC, Employee Details, CRUD tutorial, MVC Forms, employee management, form handling, model binding";
 }
-<div class="container">
-    <h2>Employee Details</h2>
-    <div>
-        <dl class="dl-horizontal">
-            <dt>@Html.DisplayNameFor(model => model.Name)</dt>
-            <dd>
-                <img src="~/images/@Model.ProfilePicture" 
-                class="rounded-circle" 
-                height="40" width="40" 
-                asp-append-version="true" />
-                @Html.DisplayFor(model => model.Name)
-             </dd>
 
-            <dt>@Html.DisplayNameFor(model => model.Gender)</dt>
-            <dd>@Html.DisplayFor(model => model.Gender)</dd>
-
-            <dt>@Html.DisplayNameFor(model => model.Age)</dt>
-            <dd>@Html.DisplayFor(model => model.Age)</dd>
-
-            <dt>@Html.DisplayNameFor(model => model.State)</dt>
-            <dd>@Html.DisplayFor(model => model.State)</dd>
-
-            <dt>@Html.DisplayNameFor(model => model.Country)</dt>
-            <dd>@Html.DisplayFor(model => model.Country)</dd>
-
-            <dt>@Html.DisplayNameFor(model => model.Department)</dt>
-            <dd>@Html.DisplayFor(model => model.Department)</dd>
-        </dl>
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title text-center">Employee Details for @Model.Name</h2>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <img src="~/images/@Model.ProfilePicture" class="rounded img-fluid" alt="@Model.Name's Profile Picture" />
+                </div>
+                <div class="col-md-6">
+                    <h4 class="text-muted">Employee Information</h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Name:</strong> @Model.Name</li>
+                        <li class="list-group-item"><strong>Gender:</strong> @Model.Gender</li>
+                        <li class="list-group-item"><strong>Age:</strong> @Model.Age</li>
+                        <li class="list-group-item"><strong>State:</strong> @Model.State</li>
+                        <li class="list-group-item"><strong>Country:</strong> @Model.Country</li>
+                        <li class="list-group-item"><strong>Department:</strong> @Model.Department.ToString()</li>
+                    </ul>
+                    <div class="mt-3">
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
-        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-info" })
-    </p>
+</div>
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title">About the Employee Details Form</h3>
+            <p class="card-text">
+                The Employee Details form is a crucial component in the MVC Controller form approach. It allows for viewing, editing, and deleting employee records efficiently, leveraging model binding and form handling capabilities provided by ASP.NET MVC.
+                This form showcases how data is retrieved from the model and displayed to the user, making it easy to manage employee information in a structured way.
+            </p>
+            <p class="card-text">
+                By using this structured approach, developers can ensure a clean separation of concerns, improve code maintainability, and provide a better user experience through streamlined data management operations.
+            </p>
+        </div>
+    </div>
 </div>

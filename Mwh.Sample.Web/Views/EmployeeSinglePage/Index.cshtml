@@ -1,7 +1,8 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ASP.NET MVC CRUD Single Page Application | JavaScript AJAX Tutorial";
+    ViewBag.MetaDescription = "Learn how to create a Single Page Application (SPA) using JavaScript AJAX with ASP.NET MVC. This tutorial demonstrates how to implement CRUD operations with seamless updates.";
+    ViewBag.MetaKeywords = "ASP.NET MVC, Single Page Application, SPA, JavaScript AJAX, CRUD tutorial, MVC AJAX CRUD, API integration, ASP.NET tutorial";
 }
-
 <div class="container">
     <h2>JavaScript AJAX using Api</h2>
     <table id="EmpSinglePage" class="table table-bordered table-hover">
@@ -66,56 +67,176 @@
 </div>
 
 
+<div class="container">
+    <h3>About This Page</h3>
+    <p>
+        This page is part of an ASP.NET MVC tutorial that showcases how to build dynamic and responsive web applications using AJAX and JavaScript.
+        It allows you to interact with the API to manage employee data efficiently, providing a seamless user experience without full page reloads.
+    </p>
+    <h4>Key Features:</h4>
+    <ul>
+        <li>
+            Dynamic data loading using AJAX:
+            <pre><code class="language-javascript">
+$.ajax({
+    url: "/api/employee",
+    type: "GET",
+    contentType: "application/json;charset=utf-8",
+    dataType: "json",
+    success: function (result) {
+        $('#EmpSinglePage').DataTable({
+            data: result,
+            columns: [
+                { data: 'profile_picture' },
+                { data: 'name' },
+                { data: 'genderName' },
+                { data: 'age' },
+                { data: 'state' },
+                { data: 'country' },
+                { data: 'departmentName' },
+                { data: 'id' }
+            ]
+        });
+    },
+    error: function (errormessage) {
+        alert(errormessage.responseText);
+    }
+});
+            </code></pre>
+        </li>
+        <li>
+            Adding a new employee with AJAX:
+            <pre><code class="language-javascript">
+const Add = () => {
+    var employee = {
+        id: +$('#id').val(),
+        name: $('#name').val(),
+        age: +$('#age').val(),
+        state: $('#state').val(),
+        country: $('#country').val(),
+        department: +$('#department').val()
+    };
+    $.ajax({
+        url: "/api/employee",
+        data: JSON.stringify(employee),
+        type: "POST",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function () {
+            loadData();
+            $('#myModal').modal('hide');
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
+};
+            </code></pre>
+        </li>
+        <li>
+            Updating an existing employee with AJAX:
+            <pre><code class="language-javascript">
+const Update = () => {
+    var employee = {
+        id: +$('#id').val(),
+        name: $('#name').val(),
+        age: +$('#age').val(),
+        state: $('#state').val(),
+        country: $('#country').val(),
+        department: +$('#department').val()
+    };
+    $.ajax({
+        url: "/api/employee/" + employee.id,
+        data: JSON.stringify(employee),
+        type: "PUT",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function () {
+            loadData();
+            $('#myModal').modal('hide');
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
+};
+            </code></pre>
+        </li>
+    </ul>
+    <p>
+        This example serves as a great starting point for building more complex SPAs with robust client-side interactions. By using AJAX for CRUD operations, we achieve a more responsive and interactive user experience.
+    </p>
+</div>
+<div class="container">
+    <h3>Pros and Cons of Using JavaScript AJAX in ASP.NET MVC</h3>
+    <h4>Pros:</h4>
+    <ul>
+        <li><strong>Improved User Experience:</strong> AJAX allows seamless data updates without refreshing the entire page, providing a more responsive and interactive user interface.</li>
+        <li><strong>Reduced Server Load:</strong> Only the necessary data is sent back and forth, reducing the load on the server and network bandwidth usage.</li>
+        <li><strong>Modular Code Structure:</strong> The separation of concerns between client-side and server-side code makes the application more maintainable and scalable.</li>
+        <li><strong>Dynamic Content Loading:</strong> Enables the ability to dynamically load and update specific parts of a webpage, such as tables or forms, based on user interactions.</li>
+    </ul>
+
+    <h4>Cons:</h4>
+    <ul>
+        <li><strong>Increased Complexity:</strong> The combination of client-side and server-side logic can become complex and harder to debug, especially with large-scale applications.</li>
+        <li><strong>SEO Limitations:</strong> Content loaded dynamically through AJAX is not easily indexed by search engines, which can impact the SEO performance of the website.</li>
+        <li><strong>JavaScript Dependency:</strong> The functionality heavily relies on JavaScript, which can be a limitation if users disable JavaScript in their browsers.</li>
+        <li><strong>Security Concerns:</strong> Improper implementation of AJAX can expose the application to security vulnerabilities like Cross-Site Scripting (XSS) or Cross-Site Request Forgery (CSRF).</li>
+    </ul>
+</div>
+
+
 @section scripts {
     <script type="text/javascript">
-            $(document).ready(function () {
+        $(document).ready(function() {
             loadData();
         });
 
         const loadData = () => {
-                $.ajax({
+            $.ajax({
                 url: "/api/employee",
                 type: "GET",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
-                    success: function (result) {
+                success: function(result) {
                     // Initialize DataTables
                     $('#EmpSinglePage').DataTable({
                         data: result,
                         destroy: true,
-                paging: false, // Disable paging
-                scrollY: '50vh', // Set the height for vertical scrolling
-                stateSave: true, // Enable state saving
-                colReorder: true, // Enable column reordering
+                        paging: false, // Disable paging
+                        scrollY: '50vh', // Set the height for vertical scrolling
+                        stateSave: true, // Enable state saving
+                        colReorder: true, // Enable column reordering
                         columns: [
-                    {
-                        data: 'profile_picture',
-                        render: function(data, type, row) {
-                            return '<img src="/images/' + data + '" class="rounded-circle" height="40" width="40" asp-append-version="true" />';
-                        }
-                    },
-                    { data: 'name' },
-                    { data: 'genderName' },
-                    { data: 'age' },
-                    { data: 'state' },
-                    { data: 'country' },
-                    { data: 'departmentName' },
-                    {
-                        data: 'id',
-                        render: function(data, type, row) {
-                            return '<a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + data + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + data + ')">Delete</a>';
-                        }
-                    }
-                ]
-            });
+                            {
+                                data: 'profile_picture',
+                                render: function(data, type, row) {
+                                    return '<img src="/images/' + data + '" class="rounded-circle" height="40" width="40" asp-append-version="true" />';
+                                }
+                            },
+                            { data: 'name' },
+                            { data: 'genderName' },
+                            { data: 'age' },
+                            { data: 'state' },
+                            { data: 'country' },
+                            { data: 'departmentName' },
+                            {
+                                data: 'id',
+                                render: function(data, type, row) {
+                                    return '<a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + data + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + data + ')">Delete</a>';
+                                }
+                            }
+                        ]
+                    });
                 },
-                error: function (errormessage) {
-            alert(errormessage.responseText);
+                error: function(errormessage) {
+                    alert(errormessage.responseText);
                 }
             });
         }
 
-                //Show Add Employee Dialog
+        //Show Add Employee Dialog
         const Add = () => {
             var res = validate();
             if (res == false) {
@@ -142,11 +263,11 @@
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
-                success: function (result) {
+                success: function(result) {
                     loadData();
                     $('#myModal').modal('hide');
                 },
-                error: function (errormessage) {
+                error: function(errormessage) {
                     alert(errormessage.responseText);
                 }
             });
@@ -163,7 +284,7 @@
                 typr: "GET",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
-                success: function (result) {
+                success: function(result) {
                     $('#id').val(result.resource.id);
                     $('#name').val(result.resource.name);
                     $('#gender').val(result.resource.gender);
@@ -178,7 +299,7 @@
                     $('#btnUpdate').show();
                     $('#btnAdd').hide();
                 },
-                error: function (errormessage) {
+                error: function(errormessage) {
                     alert(errormessage.responseText);
                 }
             });
@@ -209,7 +330,7 @@
                 type: "PUT",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
-                success: function (result) {
+                success: function(result) {
                     loadData();
                     $('#myModalLabel').html('Add Employee');
                     $('#myModal').modal('hide');
@@ -221,7 +342,7 @@
                     $('#country').val("");
                     $('#department').val("");
                 },
-                error: function (errormessage) {
+                error: function(errormessage) {
                     alert(errormessage.responseText);
                 }
             });
@@ -236,10 +357,10 @@
                     type: "DELETE",
                     contentType: "application/json;charset=UTF-8",
                     dataType: "json",
-                    success: function (result) {
+                    success: function(result) {
                         loadData();
                     },
-                    error: function (errormessage) {
+                    error: function(errormessage) {
                         alert(errormessage.responseText);
                     }
                 });
