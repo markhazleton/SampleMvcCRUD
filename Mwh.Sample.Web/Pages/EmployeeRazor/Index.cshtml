@@ -2,61 +2,74 @@
 @model Mwh.Sample.Web.Pages.EmployeeRazor.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Manage Employees with Razor Pages | ASP.NET Core CRUD Tutorial";
+    ViewData["Description"] = "Learn how to manage employees using Razor Pages in ASP.NET Core. Explore the benefits and best practices for building CRUD applications with Razor Pages.";
+    ViewData["Keywords"] = "ASP.NET Core, Razor Pages, CRUD operations, employee management, Razor Pages tutorial, MVC vs Razor Pages, ASP.NET Core tutorial";
 }
-<div class="container">
-    <h2>Employee Razor Index</h2>
-    <p>
-        <a class="btn btn-primary" asp-page="Create">Create New Employee</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Employee[0].Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Employee[0].Gender)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Employee[0].Age)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Employee[0].State)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Employee[0].Country)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Employee[0].Department)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Employee)
-            {
-                <tr>
-                    <td>
-                        <img src="~/images/@item.ProfilePicture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
-                        <a asp-page="./Edit" asp-route-id="@item.Id">@item.Name</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Age)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.State)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Country)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Department.Name)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title text-center">Employee Management with Razor Pages</h2>
+            <p class="text-muted text-center">Manage your employee records with tightly bound UI and backend code using Razor Pages in ASP.NET Core.</p>
+            <p class="text-center">
+                <a class="btn btn-primary" asp-page="Create">Create New Employee</a>
+            </p>
+            <table class="table table-bordered table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].Gender)</th>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].Age)</th>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].State)</th>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].Country)</th>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].Department.Name)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Employee)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/images/@item.ProfilePicture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                                <a asp-page="./Edit" asp-route-id="@item.Id">@item.Name</a>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Age)</td>
+                            <td>@Html.DisplayFor(modelItem => item.State)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Country)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Department.Name)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title">How Razor Pages Work</h3>
+            <p class="card-text">
+                Razor Pages provide a simpler, page-focused approach for building web applications in ASP.NET Core. Unlike MVC, where the controller is separate, Razor Pages combine the view and the code-behind logic in a single file.
+                This tightly bound UI and backend logic makes it easier to maintain and understand, especially for CRUD operations.
+            </p>
+            <h4 class="card-title">History of Razor Pages</h4>
+            <p class="card-text">
+                Introduced in ASP.NET Core 2.0, Razor Pages were designed to simplify the development process by reducing the number of files required for simple pages. They are an evolution of the Web Pages framework and provide an easy way to create page-centric applications.
+            </p>
+            <h4 class="card-title">Best Practices for Razor Pages</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Use ViewModels:</strong> Separate ViewModels from entities to avoid exposing database logic directly to the UI.</li>
+                <li class="list-group-item"><strong>Keep Code-Behind Clean:</strong> Maintain a clear separation of concerns by keeping business logic out of the code-behind.</li>
+                <li class="list-group-item"><strong>Leverage Tag Helpers:</strong> Utilize Tag Helpers for cleaner and more readable Razor markup.</li>
+            </ul>
+            <h4 class="card-title">Pros and Cons of Razor Pages</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Pros:</strong> Simplifies development, tightly binds UI and backend, easy to learn and use for simple scenarios.</li>
+                <li class="list-group-item"><strong>Cons:</strong> Limited for complex applications compared to MVC, less control over the routing and structure of the application.</li>
+            </ul>
+        </div>
+    </div>
 </div>

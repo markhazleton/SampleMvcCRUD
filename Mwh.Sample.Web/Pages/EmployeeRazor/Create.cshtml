@@ -2,82 +2,101 @@
 @model Mwh.Sample.Web.Pages.EmployeeRazor.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Employee | ASP.NET Core Razor Pages";
+    ViewData["Description"] = "Create a new employee record using Razor Pages in ASP.NET Core. Learn how to use model binding and validation to manage employee information efficiently.";
+    ViewData["Keywords"] = "ASP.NET Core, Razor Pages, Create Employee, CRUD operations, employee management, Razor Pages tutorial";
 }
 
-<h1>Create</h1>
-
-<h4>Employee</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Employee.Age" class="control-label"></label>
-                <input asp-for="Employee.Age" class="form-control" />
-                <span asp-validation-for="Employee.Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.Country" class="control-label"></label>
-                <input asp-for="Employee.Country" class="form-control" />
-                <span asp-validation-for="Employee.Country" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.DepartmentId" class="control-label"></label>
-                <select asp-for="Employee.DepartmentId" class ="form-control" asp-items="ViewBag.DepartmentId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.Name" class="control-label"></label>
-                <input asp-for="Employee.Name" class="form-control" />
-                <span asp-validation-for="Employee.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.State" class="control-label"></label>
-                <input asp-for="Employee.State" class="form-control" />
-                <span asp-validation-for="Employee.State" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.ManagerId" class="control-label"></label>
-                <input asp-for="Employee.ManagerId" class="form-control" />
-                <span asp-validation-for="Employee.ManagerId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.ProfilePicture" class="control-label"></label>
-                <input asp-for="Employee.ProfilePicture" class="form-control" />
-                <span asp-validation-for="Employee.ProfilePicture" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.CreatedBy" class="control-label"></label>
-                <input asp-for="Employee.CreatedBy" class="form-control" />
-                <span asp-validation-for="Employee.CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.CreatedDate" class="control-label"></label>
-                <input asp-for="Employee.CreatedDate" class="form-control" />
-                <span asp-validation-for="Employee.CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.LastUpdatedBy" class="control-label"></label>
-                <input asp-for="Employee.LastUpdatedBy" class="form-control" />
-                <span asp-validation-for="Employee.LastUpdatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.LastUpdatedDate" class="control-label"></label>
-                <input asp-for="Employee.LastUpdatedDate" class="form-control" />
-                <span asp-validation-for="Employee.LastUpdatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title text-center">Create New Employee</h2>
+            <p class="text-muted text-center">Fill in the form below to add a new employee to the system.</p>
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <div class="form-group mb-3">
+                    <label asp-for="Employee.Name" class="form-label"></label>
+                    <input asp-for="Employee.Name" class="form-control" />
+                    <span asp-validation-for="Employee.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Employee.Age" class="form-label"></label>
+                    <input asp-for="Employee.Age" class="form-control" />
+                    <span asp-validation-for="Employee.Age" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Employee.Country" class="form-label"></label>
+                    <input asp-for="Employee.Country" class="form-control" />
+                    <span asp-validation-for="Employee.Country" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Employee.DepartmentId" class="form-label"></label>
+                    <select asp-for="Employee.DepartmentId" class="form-select" asp-items="ViewBag.DepartmentId"></select>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Employee.State" class="form-label"></label>
+                    <input asp-for="Employee.State" class="form-control" />
+                    <span asp-validation-for="Employee.State" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Employee.ManagerId" class="form-label"></label>
+                    <input asp-for="Employee.ManagerId" class="form-control" />
+                    <span asp-validation-for="Employee.ManagerId" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Employee.ProfilePicture" class="form-label"></label>
+                    <input asp-for="Employee.ProfilePicture" class="form-control" />
+                    <span asp-validation-for="Employee.ProfilePicture" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Employee.CreatedBy" class="form-label"></label>
+                    <input asp-for="Employee.CreatedBy" class="form-control" />
+                    <span asp-validation-for="Employee.CreatedBy" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Employee.CreatedDate" class="form-label"></label>
+                    <input asp-for="Employee.CreatedDate" class="form-control" />
+                    <span asp-validation-for="Employee.CreatedDate" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Employee.LastUpdatedBy" class="form-label"></label>
+                    <input asp-for="Employee.LastUpdatedBy" class="form-control" />
+                    <span asp-validation-for="Employee.LastUpdatedBy" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Employee.LastUpdatedDate" class="form-label"></label>
+                    <input asp-for="Employee.LastUpdatedDate" class="form-control" />
+                    <span asp-validation-for="Employee.LastUpdatedDate" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-4 text-center">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-page="Index" class="btn btn-secondary ms-3">Back to List</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title">About the Create Employee Form</h3>
+            <p class="card-text">
+                The Create Employee form allows you to add new employee records using Razor Pages in ASP.NET Core. This form leverages model binding to map user input directly to the Employee model,
+                ensuring that data is captured accurately and securely. With built-in validation, this form helps maintain data integrity and provides a user-friendly interface for data entry.
+            </p>
+            <h4 class="card-title">Best Practices:</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Use Validation:</strong> Implement client-side and server-side validation to ensure data quality and user input correctness.</li>
+                <li class="list-group-item"><strong>Maintain Clean UI:</strong> Use Bootstrap styles and appropriate layout to make the form user-friendly and accessible.</li>
+                <li class="list-group-item"><strong>Separate Business Logic:</strong> Keep business logic out of the Razor Page code-behind to maintain a clean separation of concerns.</li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
