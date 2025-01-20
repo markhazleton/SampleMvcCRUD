@@ -17,7 +17,7 @@ For deployments there are multiple approaches:
 Web application is hosted:
 - Microsoft Azure Virtual Machine - Windows 2022 IIS - Net 8 [samplecrud.markhazleton.com](https://samplecrud.markhazleton.com/)
 - Microsoft Azure AppService .Net 8 Linux Deployed via GitHub Actions [mwhsampleweb.azurewebsites.net](https://mwhsampleweb.azurewebsites.net/) 
-- Microsoft Azure AppService .Net 8 Linux Image from docker hub [samplemvccrud.azurewebsites.net](https://samplemvccrud.azurewebsites.net/) 
+- Microsoft Azure AppService .Net 8 Linux Image from docker hub [samplecrud.azurewebsites.net](https://samplecrud.azurewebsites.net/) 
 - Docker Hub Image [markhazleton/mwhsampleweb](https://hub.docker.com/r/markhazleton/mwhsampleweb)
 
 ## Customization
