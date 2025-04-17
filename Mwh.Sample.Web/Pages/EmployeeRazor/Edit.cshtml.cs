@@ -3,19 +3,38 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Mwh.Sample.Web.Pages.EmployeeRazor
 {
+    /// <summary>
+    /// Model for editing an existing employee through Razor Pages
+    /// </summary>
     public class EditModel : PageModel
     {
         private readonly EmployeeContext _context;
+
+        /// <summary>
+        /// Gets the list of gender options for the dropdown
+        /// </summary>
         public SelectList Genders { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EditModel"/> class
+        /// </summary>
+        /// <param name="context">Database context for employee data</param>
         public EditModel(EmployeeContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Gets or sets the employee to be edited
+        /// </summary>
         [BindProperty]
         public Employee Employee { get; set; } = default!;
 
+        /// <summary>
+        /// Handles GET requests to display the edit page
+        /// </summary>
+        /// <param name="id">The ID of the employee to edit</param>
+        /// <returns>The edit page or a not found result</returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Employees == null)
@@ -26,7 +45,7 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
             // Populate the Genders SelectList with the values from the Gender enum
             Genders = new SelectList(Enum.GetValues(typeof(GenderEnum)));
 
-            var employee = await _context.Employees.FirstOrDefaultAsync(m => m.Id == id);
+            Employee? employee = await _context.Employees.FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {
                 return NotFound();
@@ -36,6 +55,10 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
             return Page();
         }
 
+        /// <summary>
+        /// Handles POST requests to process the employee update
+        /// </summary>
+        /// <returns>Redirects to the index page after update or returns the form with validation errors</returns>
         // To protect from over-posting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()

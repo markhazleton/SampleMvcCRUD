@@ -1,39 +1,47 @@
-﻿
-using Mwh.Sample.Repository.Repository;
+﻿using Mwh.Sample.Repository.Repository;
 
 namespace Mwh.Sample.Web.Helpers;
 
 /// <summary>
-/// See Employee Database
+/// Helper class for seeding the employee database with initial test data
 /// </summary>
 public static class SeedDatabase
 {
     /// <summary>
-    /// ConfirmDatabaseCreation
+    /// Initializes the database with sample departments and employees
     /// </summary>
+    /// <param name="context">The employee database context to seed</param>
     public static async void DatabaseInitialization(EmployeeContext context)
     {
         try
         {
-            using var employeeService = new EmployeeDatabaseService(context);
-            var token = new CancellationToken();
-            var employeeMock = new EmployeeMock(290);
-            var deptResultList = new List<DepartmentResponse>();
-            foreach (var dept in employeeMock.DepartmentCollection())
+            using EmployeeDatabaseService employeeService = new EmployeeDatabaseService(context);
+            CancellationToken token = new CancellationToken();
+            EmployeeMock employeeMock = new EmployeeMock(290);
+            List<DepartmentResponse> deptResultList = new List<DepartmentResponse>();
+
+            // First add all departments
+            foreach (DepartmentDto dept in employeeMock.DepartmentCollection())
             {
                 deptResultList.Add(await employeeService.SaveAsync(dept, token).ConfigureAwait(true));
             }
-            var d = await employeeService.GetDepartmentsAsync(true, token).ConfigureAwait(true);
-            var departmentCount = d.Count();
+
+            // Verify departments were added
+            IEnumerable<DepartmentDto> d = await employeeService.GetDepartmentsAsync(true, token).ConfigureAwait(true);
+            int departmentCount = d.Count();
+
+            // Then add all employees
             employeeMock.EmployeeCollection()?.ForEach(async emp =>
             {
                 await employeeService.SaveAsync(emp, token).ConfigureAwait(true);
             });
-            var e = await employeeService.GetEmployeesAsync(new PagingParameterModel(), token).ConfigureAwait(true);
+
+            // Verify employees were added
+            IEnumerable<EmployeeDto> e = await employeeService.GetEmployeesAsync(new PagingParameterModel(), token).ConfigureAwait(true);
         }
         catch (Exception ex)
         {
-            var exceptionMessage = ex.Message;
+            string exceptionMessage = ex.Message;
         }
     }
 }

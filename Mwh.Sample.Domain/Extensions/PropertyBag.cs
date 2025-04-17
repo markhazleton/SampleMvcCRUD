@@ -57,7 +57,7 @@ public sealed class PropertyBag<TKey, TValue>
     /// <param name="value">The value.</param>
     public void Add(Dictionary<TKey, TValue> value)
     {
-        foreach (var item in value.Keys)
+        foreach (TKey item in value.Keys)
         {
             Add(item, value[item]);
         }
@@ -75,7 +75,7 @@ public sealed class PropertyBag<TKey, TValue>
 
         StringBuilder sb = new();
         int counter = 0;
-        foreach (var item in this._Dictionary)
+        foreach (KeyValuePair<TKey, TValue> item in this._Dictionary)
         {
             if (counter == 0)
             {
@@ -113,7 +113,7 @@ public sealed class PropertyBag<TKey, TValue>
     public List<string> GetList()
     {
         List<string> list = new();
-        foreach (var item in _Dictionary)
+        foreach (KeyValuePair<TKey, TValue> item in _Dictionary)
         {
             list.Add($"{item.Key} - {item.Value}");
         }

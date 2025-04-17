@@ -7,11 +7,11 @@ public class EmployeeListTests
     public void AddItem_Null_ExpectedBehavior()
     {
         // Arrange
-        var employeeList = new EmployeeList();
+        EmployeeList employeeList = new EmployeeList();
         EmployeeDto? item = null;
 
         // Act
-        var result = employeeList.AddItem(item);
+        EmployeeList result = employeeList.AddItem(item);
 
         // Assert
         Assert.AreEqual(employeeList.List.Count, 0);
@@ -22,7 +22,7 @@ public class EmployeeListTests
     public void AddItem_Valid_ExpectedBehavior()
     {
         // Arrange
-        var employeeList = new EmployeeList();
+        EmployeeList employeeList = new EmployeeList();
         EmployeeDto? item = new(
             3,
             "Test",
@@ -33,7 +33,7 @@ public class EmployeeListTests
             );
 
         // Act
-        var result = employeeList.AddItem(item);
+        EmployeeList result = employeeList.AddItem(item);
 
         // Assert
         Assert.AreEqual(employeeList.List.Count, 1);
@@ -44,10 +44,10 @@ public class EmployeeListTests
     public void EnumerateItems_Initialization_ExpectedBehavior()
     {
         // Arrange
-        var employeeList = new EmployeeList();
+        EmployeeList employeeList = new EmployeeList();
 
         // Act
-        var result = employeeList.EnumerateItems();
+        IEnumerable<EmployeeDto> result = employeeList.EnumerateItems();
 
         // Assert
         Assert.AreEqual(result.Count(), 0);

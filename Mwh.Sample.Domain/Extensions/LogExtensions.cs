@@ -18,7 +18,7 @@ public static class LogExtensions
             using (StringWriter writer = new())
             {
                 XmlSerializer oXS = new(typeof(T));
-                var myXML = new XmlDocument();
+                XmlDocument myXML = new XmlDocument();
                 oXS.Serialize(writer, objectToSerialize);
                 myXML.LoadXml(writer.ToString());
                 return myXML.OuterXml.ToString();
@@ -43,7 +43,7 @@ public static class LogExtensions
             using (StringWriter writer = new())
             {
                 XmlSerializer oXS = new(typeof(List<T>));
-                var myXML = new XmlDocument();
+                XmlDocument myXML = new XmlDocument();
                 oXS.Serialize(writer, lstObjectToSerialize);
                 myXML.LoadXml(writer.ToString());
                 return myXML.OuterXml.ToString();
@@ -113,13 +113,13 @@ public static class LogExtensions
     {
         int propertyCounter = 0;
         StringBuilder recordLog = new();
-        var recordDictionary = GetDictionaryWithPropertiesForOneRecord(record);
+        Dictionary<string, object> recordDictionary = GetDictionaryWithPropertiesForOneRecord(record);
         try
         {
-            foreach (var keyValuePair in recordDictionary)
+            foreach (KeyValuePair<string, object> keyValuePair in recordDictionary)
             {
                 propertyCounter += 1;
-                var thePropertyValue = recordDictionary[keyValuePair.Key];
+                object thePropertyValue = recordDictionary[keyValuePair.Key];
                 if (thePropertyValue != null)
                 {
                     recordLog.Append($"{keyValuePair.Key}:{keyValuePair.Value}|");

@@ -56,7 +56,7 @@ public class MvcEmployeeController : BaseController
     [HttpGet]
     public async Task<ActionResult> Delete(int id)
     {
-        var emp = await client.FindEmployeeByIdAsync(id, cts.Token);
+        EmployeeResponse? emp = await client.FindEmployeeByIdAsync(id, cts.Token);
 
         if (emp?.Success == false)
             return RedirectToAction("Index");
@@ -92,7 +92,7 @@ public class MvcEmployeeController : BaseController
     [HttpGet]
     public async Task<ActionResult> Details(int id)
     {
-        var emp = await client.FindEmployeeByIdAsync(id, cts.Token);
+        EmployeeResponse? emp = await client.FindEmployeeByIdAsync(id, cts.Token);
         if (emp?.Success == false)
             return RedirectToAction("Index");
 
@@ -107,7 +107,7 @@ public class MvcEmployeeController : BaseController
     [HttpGet]
     public async Task<ActionResult> Edit(int id)
     {
-        var emp = await client.FindEmployeeByIdAsync(id, cts.Token);
+        EmployeeResponse? emp = await client.FindEmployeeByIdAsync(id, cts.Token);
 
         if (emp?.Success == false)
             return RedirectToAction("Index");
@@ -153,7 +153,7 @@ public class MvcEmployeeController : BaseController
         if (paging == null)
             paging = new PagingParameterModel();
 
-        var list = await client.GetEmployeesAsync(paging, cts.Token);
+        IEnumerable<EmployeeDto> list = await client.GetEmployeesAsync(paging, cts.Token);
 
         return View(list);
     }

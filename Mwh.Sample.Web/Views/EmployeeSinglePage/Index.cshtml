@@ -1,197 +1,319 @@
 ﻿@{
-    ViewBag.Title = "ASP.NET MVC CRUD Single Page Application | JavaScript AJAX Tutorial";
-    ViewBag.MetaDescription = "Learn how to create a Single Page Application (SPA) using JavaScript AJAX with ASP.NET MVC. This tutorial demonstrates how to implement CRUD operations with seamless updates.";
-    ViewBag.MetaKeywords = "ASP.NET MVC, Single Page Application, SPA, JavaScript AJAX, CRUD tutorial, MVC AJAX CRUD, API integration, ASP.NET tutorial";
+    ViewBag.Title = "Single Page Application (SPA) | Modern AJAX CRUD";
+    ViewBag.MetaDescription = "A modern Single Page Application (SPA) built with JavaScript/AJAX and Bootstrap 5 demonstrating seamless CRUD operations without page reloads.";
+    ViewBag.MetaKeywords = "SPA, Single Page Application, AJAX, JavaScript, Bootstrap 5, REST API, CRUD operations, ASP.NET Core";
 }
-<div class="container">
-    <h2>JavaScript AJAX using Api</h2>
-    <table id="EmpSinglePage" class="table table-bordered table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>Profile</th>
-                <th>Name</th>
-                <th>Gender</th>
-                <th>Age</th>
-                <th>State</th>
-                <th>Country</th>
-                <th>Department</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tfoot></tfoot>
-    </table>
-</div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Add Employee</h4>
-                <button type="button" style="float:right;" class="close" data-dismiss="modal">&times;</button>
+
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h2 mb-0">
+                        <i class="bi bi-file-earmark-text text-primary me-2"></i>Single Page Application
+                    </h1>
+                    <p class="text-muted">Modern CRUD operations with AJAX and RESTful API</p>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="clearTextBox();" data-bs-toggle="modal" data-bs-target="#myModal">
+                    <i class="bi bi-plus-circle me-2"></i>Add Employee
+                </button>
             </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="name" />
-                    </div>
-                    <div class="form-group">
-                        <label for="genderName">Gender</label>
-                        <input type="text" class="form-control" id="genderName" placeholder="genderName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="age">Age</label>
-                        <input type="number" class="form-control" id="age" placeholder="age" />
-                    </div>
-                    <div class="form-group">
-                        <label for="state">State</label>
-                        <input type="text" class="form-control" id="state" placeholder="state" />
-                    </div>
-                    <div class="form-group">
-                        <label for="country">Country</label>
-                        <input type="text" class="form-control" id="country" placeholder="country" />
-                    </div>
-                    <div class="form-group">
-                        <label for="department">Department</label>
-                        <input type="number" class="form-control" id="department" placeholder="department" />
-                    </div>
-                    <input type="hidden" id="id" value="0" />
-                </form>
+            
+            <div class="card shadow-sm rounded-3 border-0">
+                <div class="card-body p-0">
+                    <table id="EmpSinglePage" class="table table-striped table-hover mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Profile</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>State</th>
+                                <th>Country</th>
+                                <th>Department</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be loaded here via AJAX -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Add</button>
-                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
-                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+    
+    <!-- Employee Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title" id="myModalLabel">Add Employee</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="employeeForm" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input type="text" class="form-control" id="name" placeholder="Enter employee name" required />
+                                <div class="invalid-feedback">Please enter a name</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="gender" class="form-label">Gender</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-gender-ambiguous"></i></span>
+                                <select class="form-select" id="gender" required>
+                                    <option value="" selected disabled>Select gender</option>
+                                    <option value="0">Male</option>
+                                    <option value="1">Female</option>
+                                    <option value="2">Non-Binary</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a gender</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="age" class="form-label">Age</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
+                                <input type="number" class="form-control" id="age" placeholder="Enter age" required />
+                                <div class="invalid-feedback">Please enter age</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="state" class="form-label">State</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                                    <input type="text" class="form-control" id="state" placeholder="Enter state" required />
+                                    <div class="invalid-feedback">Please enter state</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="country" class="form-label">Country</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                                    <input type="text" class="form-control" id="country" placeholder="Enter country" required />
+                                    <div class="invalid-feedback">Please enter country</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="department" class="form-label">Department</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-building"></i></span>
+                                <select class="form-select" id="department" required>
+                                    <option value="" selected disabled>Select department</option>
+                                    <!-- Department options will be loaded dynamically -->
+                                </select>
+                                <div class="invalid-feedback">Please select a department</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="id" value="0" />
+                    </form>
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">
+                        <i class="bi bi-plus-circle me-1"></i> Add
+                    </button>
+                    <button type="button" class="btn btn-success" id="btnUpdate" style="display:none;" onclick="Update();">
+                        <i class="bi bi-check-circle me-1"></i> Update
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-1"></i> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Documentation Section -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card shadow-sm rounded-3 border-0 mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="bi bi-info-circle me-2"></i>About Single Page Applications</h3>
+                </div>
+                <div class="card-body p-4">
+                    <p class="lead">
+                        This implementation demonstrates a modern Single Page Application (SPA) architecture built with JavaScript, AJAX, and RESTful APIs.
+                    </p>
+                    
+                    <div class="row g-4 mt-2">
+                        <div class="col-md-6">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h4 class="card-title"><i class="bi bi-stars text-warning me-2"></i>Key Benefits</h4>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Improved user experience with no page reloads</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Reduced server load with partial data transfers</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Clean separation between frontend and backend</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Enhanced interactivity for better user engagement</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h4 class="card-title"><i class="bi bi-exclamation-triangle text-warning me-2"></i>Considerations</h4>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>Increased complexity in JavaScript code</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>SEO challenges for content loaded via AJAX</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>Dependency on JavaScript being enabled</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>Requires careful security implementation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h4><i class="bi bi-code-slash me-2"></i>Technical Implementation</h4>
+                        <p>
+                            This SPA uses modern web development patterns to create a seamless user experience:
+                        </p>
+                        
+                        <div class="accordion" id="technicalAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        AJAX Data Loading
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#technicalAccordion">
+                                    <div class="accordion-body">
+                                        <p>The application loads data from the server without refreshing the page:</p>
+                                        <pre><code class="language-javascript bg-light d-block p-3 rounded">$.ajax({
+    url: "/api/employee",
+    type: "GET",
+    contentType: "application/json;charset=utf-8",
+    dataType: "json",
+    success: function(result) {
+        $('#EmpSinglePage').DataTable({
+            data: result,
+            // Configuration options...
+        });
+    },
+    error: function(errormessage) {
+        // Error handling...
+    }
+});</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Client-Side Form Validation
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#technicalAccordion">
+                                    <div class="accordion-body">
+                                        <p>Form validation happens on the client side for immediate feedback:</p>
+                                        <pre><code class="language-javascript bg-light d-block p-3 rounded">// Modern form validation using Bootstrap 5
+const validateForm = () => {
+    const form = document.getElementById('employeeForm');
+    if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+        form.classList.add('was-validated');
+        return false;
+    }
+    form.classList.add('was-validated');
+    return true;
+};</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        RESTful API Integration
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#technicalAccordion">
+                                    <div class="accordion-body">
+                                        <p>The SPA follows RESTful principles for API interactions:</p>
+                                        <ul>
+                                            <li><strong>GET</strong> - Retrieving all employees or a specific employee</li>
+                                            <li><strong>POST</strong> - Creating a new employee</li>
+                                            <li><strong>PUT</strong> - Updating an existing employee</li>
+                                            <li><strong>DELETE</strong> - Removing an employee</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-light">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-tools me-2"></i>Implementation by Mark Hazleton</span>
+                        <a href="https://github.com/markhazleton/SampleMvcCRUD" class="btn btn-outline-primary btn-sm" target="_blank">
+                            <i class="bi bi-github me-2"></i>View Source Code
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="container">
-    <h3>About This Page</h3>
-    <p>
-        This page is part of an ASP.NET MVC tutorial that showcases how to build dynamic and responsive web applications using AJAX and JavaScript.
-        It allows you to interact with the API to manage employee data efficiently, providing a seamless user experience without full page reloads.
-    </p>
-    <h4>Key Features:</h4>
-    <ul>
-        <li>
-            Dynamic data loading using AJAX:
-            <pre><code class="language-javascript">
-$.ajax({
-    url: "/api/employee",
-    type: "GET",
-    contentType: "application/json;charset=utf-8",
-    dataType: "json",
-    success: function (result) {
-        $('#EmpSinglePage').DataTable({
-            data: result,
-            columns: [
-                { data: 'profile_picture' },
-                { data: 'name' },
-                { data: 'genderName' },
-                { data: 'age' },
-                { data: 'state' },
-                { data: 'country' },
-                { data: 'departmentName' },
-                { data: 'id' }
-            ]
-        });
-    },
-    error: function (errormessage) {
-        alert(errormessage.responseText);
-    }
-});
-            </code></pre>
-        </li>
-        <li>
-            Adding a new employee with AJAX:
-            <pre><code class="language-javascript">
-const Add = () => {
-    var employee = {
-        id: +$('#id').val(),
-        name: $('#name').val(),
-        age: +$('#age').val(),
-        state: $('#state').val(),
-        country: $('#country').val(),
-        department: +$('#department').val()
-    };
-    $.ajax({
-        url: "/api/employee",
-        data: JSON.stringify(employee),
-        type: "POST",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function () {
-            loadData();
-            $('#myModal').modal('hide');
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
-    });
-};
-            </code></pre>
-        </li>
-        <li>
-            Updating an existing employee with AJAX:
-            <pre><code class="language-javascript">
-const Update = () => {
-    var employee = {
-        id: +$('#id').val(),
-        name: $('#name').val(),
-        age: +$('#age').val(),
-        state: $('#state').val(),
-        country: $('#country').val(),
-        department: +$('#department').val()
-    };
-    $.ajax({
-        url: "/api/employee/" + employee.id,
-        data: JSON.stringify(employee),
-        type: "PUT",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function () {
-            loadData();
-            $('#myModal').modal('hide');
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
-    });
-};
-            </code></pre>
-        </li>
-    </ul>
-    <p>
-        This example serves as a great starting point for building more complex SPAs with robust client-side interactions. By using AJAX for CRUD operations, we achieve a more responsive and interactive user experience.
-    </p>
-</div>
-<div class="container">
-    <h3>Pros and Cons of Using JavaScript AJAX in ASP.NET MVC</h3>
-    <h4>Pros:</h4>
-    <ul>
-        <li><strong>Improved User Experience:</strong> AJAX allows seamless data updates without refreshing the entire page, providing a more responsive and interactive user interface.</li>
-        <li><strong>Reduced Server Load:</strong> Only the necessary data is sent back and forth, reducing the load on the server and network bandwidth usage.</li>
-        <li><strong>Modular Code Structure:</strong> The separation of concerns between client-side and server-side code makes the application more maintainable and scalable.</li>
-        <li><strong>Dynamic Content Loading:</strong> Enables the ability to dynamically load and update specific parts of a webpage, such as tables or forms, based on user interactions.</li>
-    </ul>
-
-    <h4>Cons:</h4>
-    <ul>
-        <li><strong>Increased Complexity:</strong> The combination of client-side and server-side logic can become complex and harder to debug, especially with large-scale applications.</li>
-        <li><strong>SEO Limitations:</strong> Content loaded dynamically through AJAX is not easily indexed by search engines, which can impact the SEO performance of the website.</li>
-        <li><strong>JavaScript Dependency:</strong> The functionality heavily relies on JavaScript, which can be a limitation if users disable JavaScript in their browsers.</li>
-        <li><strong>Security Concerns:</strong> Improper implementation of AJAX can expose the application to security vulnerabilities like Cross-Site Scripting (XSS) or Cross-Site Request Forgery (CSRF).</li>
-    </ul>
-</div>
-
-
 @section scripts {
     <script type="text/javascript">
         $(document).ready(function() {
+            // Load departments before loading employee data
+            loadDepartments();
             loadData();
+            
+            // Initialize Bootstrap 5 validation
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+            
+            // Initialize modal events
+            $('#myModal').on('shown.bs.modal', function() {
+                // Focus on the name field when modal is shown
+                $('#name').trigger('focus');
+            });
         });
+
+        // Load departments from API
+        const loadDepartments = () => {
+            $.ajax({
+                url: "/api/department?IncludeEmployees=false",
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function(result) {
+                    // Clear current options except the default one
+                    $('#department').find('option:not(:first)').remove();
+                    
+                    // Add department options
+                    $.each(result, function(i, department) {
+                        $('#department').append($('<option></option>')
+                            .attr('value', department.id)
+                            .text(department.name));
+                    });
+                },
+                error: function(errormessage) {
+                    showToast('Error', 'Failed to load departments: ' + errormessage.responseText, 'danger');
+                }
+            });
+        }
 
         const loadData = () => {
             $.ajax({
@@ -200,94 +322,115 @@ const Update = () => {
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function(result) {
-                    // Initialize DataTables
+                    // Initialize DataTables with modern features
                     $('#EmpSinglePage').DataTable({
                         data: result,
                         destroy: true,
-                        paging: false, // Disable paging
-                        scrollY: '50vh', // Set the height for vertical scrolling
-                        stateSave: true, // Enable state saving
-                        colReorder: true, // Enable column reordering
+                        responsive: true,
+                        pageLength: 10,
+                        lengthMenu: [10, 25, 50, 100],
+                        stateSave: true,
+                        language: {
+                            search: "<i class='bi bi-search'></i> _INPUT_",
+                            searchPlaceholder: "Search employees...",
+                            lengthMenu: "<i class='bi bi-list-ul'></i> _MENU_ per page",
+                            info: "Showing _START_ to _END_ of _TOTAL_ employees",
+                            paginate: {
+                                first: "<i class='bi bi-chevron-double-left'></i>",
+                                last: "<i class='bi bi-chevron-double-right'></i>",
+                                next: "<i class='bi bi-chevron-right'></i>",
+                                previous: "<i class='bi bi-chevron-left'></i>"
+                            }
+                        },
+                        dom: '<"row mb-3"<"col-md-6"l><"col-md-6"f>><"row"<"col-md-12"tr>><"row"<"col-md-5"i><"col-md-7"p>>',
                         columns: [
                             {
                                 data: 'profile_picture',
                                 render: function(data, type, row) {
-                                    return '<img src="/images/' + data + '" class="rounded-circle" height="40" width="40" asp-append-version="true" />';
-                                }
+                                    return `<img src="/images/${data}" class="rounded-circle" height="40" width="40" alt="${row.name}" />`;
+                                },
+                                className: 'text-center align-middle'
                             },
-                            { data: 'name' },
-                            { data: 'genderName' },
-                            { data: 'age' },
-                            { data: 'state' },
-                            { data: 'country' },
-                            { data: 'departmentName' },
+                            { data: 'name', className: 'align-middle' },
+                            { data: 'genderName', className: 'align-middle' },
+                            { data: 'age', className: 'align-middle' },
+                            { data: 'state', className: 'align-middle' },
+                            { data: 'country', className: 'align-middle' },
+                            { data: 'departmentName', className: 'align-middle' },
                             {
                                 data: 'id',
                                 render: function(data, type, row) {
-                                    return '<a href="#" class="btn btn-primary" onclick="return getEmployeeByID(' + data + ')">Edit</a> <a href="#" class="btn btn-warning" onclick="Delete(' + data + ')">Delete</a>';
-                                }
+                                    return `
+                                    <div class="btn-group" role="group">
+                                        <button class="btn btn-sm btn-outline-primary" onclick="return getEmployeeByID(${data})">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" onclick="Delete(${data})">
+                                            <i class="bi bi-trash"></i> Delete
+                                        </button>
+                                    </div>`;
+                                },
+                                className: 'text-center align-middle',
+                                orderable: false
                             }
                         ]
                     });
                 },
                 error: function(errormessage) {
-                    alert(errormessage.responseText);
+                    showToast('Error loading data', errormessage.responseText, 'danger');
                 }
             });
         }
 
-        //Show Add Employee Dialog
+        // Show Add Employee Dialog
         const Add = () => {
-            var res = validate();
-            if (res == false) {
+            if (!validateForm()) {
                 return false;
             }
-            var empId = +$('#id').val();
-            var depId = +$('#department').val();
-            var ageId = +$('#age').val();
-
+            
             var employee = {
-                id: empId,
+                id: +$('#id').val(),
                 name: $('#name').val(),
-                age: ageId,
+                gender: +$('#gender').val(), // Convert to number
+                age: +$('#age').val(),
                 state: $('#state').val(),
                 country: $('#country').val(),
-                department: depId
+                department: +$('#department').val()
             };
-
-            var jsonEmpObj = JSON.stringify(employee)
 
             $.ajax({
                 url: "/api/employee",
-                data: jsonEmpObj,
+                data: JSON.stringify(employee),
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function(result) {
                     loadData();
                     $('#myModal').modal('hide');
+                    showToast('Success', 'Employee added successfully', 'success');
                 },
                 error: function(errormessage) {
-                    alert(errormessage.responseText);
+                    showToast('Error', errormessage.responseText, 'danger');
                 }
             });
         }
 
         // Get Employee based on Employee ID
         const getEmployeeByID = (EmpID) => {
-            $('#name').css('border-color', 'lightgrey');
-            $('#age').css('border-color', 'lightgrey');
-            $('#state').css('border-color', 'lightgrey');
-            $('#country').css('border-color', 'lightgrey');
             $.ajax({
                 url: "/api/employee/" + EmpID,
-                typr: "GET",
+                type: "GET",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 success: function(result) {
+                    console.log('Employee data received:', result.resource);
+                    
                     $('#id').val(result.resource.id);
                     $('#name').val(result.resource.name);
-                    $('#gender').val(result.resource.gender);
+                    
+                    // Set gender value based on numeric enum value (0=Male, 1=Female, 2=Other)
+                    $('#gender').val(result.resource.gender.toString());
+                    
                     $('#age').val(result.resource.age);
                     $('#state').val(result.resource.state);
                     $('#country').val(result.resource.country);
@@ -298,9 +441,12 @@ const Update = () => {
                     $('#myModal').modal('show');
                     $('#btnUpdate').show();
                     $('#btnAdd').hide();
+                    
+                    // Ensure Bootstrap validation styling is updated, but don't show errors yet
+                    $('#employeeForm').removeClass('was-validated');
                 },
                 error: function(errormessage) {
-                    alert(errormessage.responseText);
+                    showToast('Error', errormessage.responseText, 'danger');
                 }
             });
             return false;
@@ -308,50 +454,41 @@ const Update = () => {
 
         // Update existing Employee record
         const Update = () => {
-            var res = validate();
-            if (res == false) {
+            if (!validateForm()) {
                 return false;
             }
-            var empId = +$('#id').val();
-            var depId = +$('#department').val();
-            var ageId = +$('#age').val();
-
+            
             var employee = {
-                id: empId,
+                id: +$('#id').val(),
                 name: $('#name').val(),
-                age: ageId,
+                gender: +$('#gender').val(), // Convert to number
+                age: +$('#age').val(),
                 state: $('#state').val(),
                 country: $('#country').val(),
-                department: depId
+                department: +$('#department').val()
             };
+            
             $.ajax({
-                url: "/api/employee/" + empId,
+                url: "/api/employee/" + employee.id,
                 data: JSON.stringify(employee),
                 type: "PUT",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function(result) {
                     loadData();
-                    $('#myModalLabel').html('Add Employee');
+                    resetForm();
                     $('#myModal').modal('hide');
-                    $('#id').val("0");
-                    $('#name').val("");
-                    $('#gender').val("");
-                    $('#age').val("");
-                    $('#state').val("");
-                    $('#country').val("");
-                    $('#department').val("");
+                    showToast('Success', 'Employee updated successfully', 'success');
                 },
                 error: function(errormessage) {
-                    alert(errormessage.responseText);
+                    showToast('Error', errormessage.responseText, 'danger');
                 }
             });
         }
 
         // Delete Employee by Employee ID
         const Delete = (ID) => {
-            var ans = confirm("Are you sure you want to delete this Record?");
-            if (ans) {
+            if (confirm("Are you sure you want to delete this employee?")) {
                 $.ajax({
                     url: "/api/employee/" + ID,
                     type: "DELETE",
@@ -359,9 +496,10 @@ const Update = () => {
                     dataType: "json",
                     success: function(result) {
                         loadData();
+                        showToast('Success', 'Employee deleted successfully', 'success');
                     },
                     error: function(errormessage) {
-                        alert(errormessage.responseText);
+                        showToast('Error', errormessage.responseText, 'danger');
                     }
                 });
             }
@@ -369,6 +507,14 @@ const Update = () => {
 
         // Clear the Employee Form
         const clearTextBox = () => {
+            resetForm();
+            $('#btnUpdate').hide();
+            $('#btnAdd').show();
+            document.getElementById('employeeForm').classList.remove('was-validated');
+        }
+        
+        // Reset form fields
+        const resetForm = () => {
             $('#myModalLabel').html('Add Employee');
             $('#id').val("0");
             $('#name').val("");
@@ -377,57 +523,48 @@ const Update = () => {
             $('#state').val("");
             $('#country').val("");
             $('#department').val("");
-            $('#btnUpdate').hide();
-            $('#btnAdd').show();
-            $('#name').css('border-color', 'lightgrey');
-            $('#age').css('border-color', 'lightgrey');
-            $('#state').css('border-color', 'lightgrey');
-            $('#country').css('border-color', 'lightgrey');
-            $('#department').css('border-color', 'lightgrey');
         }
-        // JQuery Validate
-        const validate = () => {
-            var isValid = true;
-            if ($('#name').val().trim() == "") {
-                $('#name').css('border-color', 'Red');
-                isValid = false;
+        
+        // Validate form using Bootstrap 5 validation
+        const validateForm = () => {
+            const form = document.getElementById('employeeForm');
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+                form.classList.add('was-validated');
+                return false;
             }
-            else {
-                $('#name').css('border-color', 'lightgrey');
-            }
-            if ($('#age').val().trim() == "") {
-                $('#age').css('border-color', 'Red');
-                isValid = false;
-            }
-            else {
-                $('#age').css('border-color', 'lightgrey');
-            }
-            if ($('#state').val().trim() == "") {
-                $('#state').css('border-color', 'Red');
-                isValid = false;
-            }
-            else {
-                $('#state').css('border-color', 'lightgrey');
-            }
-            if ($('#country').val().trim() == "") {
-                $('#country').css('border-color', 'Red');
-                isValid = false;
-            }
-            else {
-                $('#country').css('border-color', 'lightgrey');
-            }
-            if ($('#department').val().trim() == "") {
-                $('#department').css('border-color', 'Red');
-                isValid = false;
-            }
-            else {
-                $('#department').css('border-color', 'lightgrey');
-            }
-            return isValid;
+            form.classList.add('was-validated');
+            return true;
         }
-
+        
+        // Show toast notification
+        const showToast = (title, message, type) => {
+            // Check if toast container exists, if not create it
+            if ($('#toastContainer').length === 0) {
+                $('body').append('<div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>');
+            }
+            
+            // Create a unique ID for this toast
+            const toastId = 'toast-' + new Date().getTime();
+            
+            // Create toast HTML
+            const toast = `
+            <div id="${toastId}" class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <strong>${title}:</strong> ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>`;
+            
+            // Add toast to container
+            $('#toastContainer').append(toast);
+            
+            // Initialize and show the toast
+            const toastElement = new bootstrap.Toast(document.getElementById(toastId), { delay: 5000 });
+            toastElement.show();
+        }
     </script>
-    <!-- Include the DataTables ColReorder extension -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.5.4/css/colReorder.dataTables.min.css" />
-    <script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
 }

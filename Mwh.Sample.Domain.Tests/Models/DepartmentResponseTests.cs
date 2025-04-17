@@ -7,7 +7,7 @@
         public void DepartmentResponse_Initialize()
         {
             // Arrange
-            var departmentResponse = new DepartmentResponse();
+            DepartmentResponse departmentResponse = new DepartmentResponse();
             // Act
 
             // Assert
@@ -19,8 +19,8 @@
         public void DepartmentResponse_GoodResponse()
         {
             // Arrange
-            var dept = new DepartmentDto(EmployeeDepartmentEnum.IT);
-            var departmentResponse = new DepartmentResponse(dept);
+            DepartmentDto dept = new DepartmentDto(EmployeeDepartmentEnum.IT);
+            DepartmentResponse departmentResponse = new DepartmentResponse(dept);
             // Act
 
             // Assert
@@ -32,7 +32,7 @@
         public void DepartmentResponse_BadResponse()
         {
             // Arrange
-            var departmentResponse = new DepartmentResponse("Test");
+            DepartmentResponse departmentResponse = new DepartmentResponse("Test");
             // Act
 
             // Assert

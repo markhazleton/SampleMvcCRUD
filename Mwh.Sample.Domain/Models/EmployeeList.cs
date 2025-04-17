@@ -19,7 +19,7 @@ public class EmployeeList
 
     public IEnumerable<EmployeeDto> EnumerateItems()
     {
-        foreach (var item in _list)
+        foreach (EmployeeDto item in _list)
             yield return item;
     }
 }

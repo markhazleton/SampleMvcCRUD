@@ -12,30 +12,30 @@ public class EmployeeContextTests
     public async Task EmployeeContext_ExpectedBehaviorAsync()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<EmployeeContext>()
+        DbContextOptions<EmployeeContext> options = new DbContextOptionsBuilder<EmployeeContext>()
             .UseInMemoryDatabase("EmployeeTest")
             .Options;
-        using var context = new EmployeeContext(options);
+        using EmployeeContext context = new EmployeeContext(options);
         // Act
         await context.Database.EnsureDeletedAsync();
         await context.Database.EnsureCreatedAsync();
 
-        var employeeMock = new EmployeeMock();
-        var employeeList = new List<EmployeeResponse>();
-        var departmentList = new List<DepartmentResponse>();
-        var svc = new EmployeeDatabaseService(context);
+        EmployeeMock employeeMock = new EmployeeMock();
+        List<EmployeeResponse> employeeList = new List<EmployeeResponse>();
+        List<DepartmentResponse> departmentList = new List<DepartmentResponse>();
+        EmployeeDatabaseService svc = new EmployeeDatabaseService(context);
 
         employeeMock.DepartmentCollection()?.ForEach(async dept =>
        {
            departmentList.Add(await svc.SaveDepartmentAsync(dept));
        });
-        var deptSuccess = departmentList.Where(w => w.Success).Count();
+        int deptSuccess = departmentList.Where(w => w.Success).Count();
 
         employeeMock.EmployeeCollection()?.ForEach(async emp =>
         {
             employeeList.Add(await svc.SaveEmployeeDbAsync(emp));
         });
-        var emptSuccess = employeeList.Where(w => w.Success).Count();
+        int emptSuccess = employeeList.Where(w => w.Success).Count();
 
         // Assert
         Assert.IsNotNull(context);

@@ -12,20 +12,20 @@ public class EnumerableExtensionsTest
     [TestMethod]
     public void EnumerableFindMinimum_HappyFlowInt()
     {
-        var input = new List<EmployeeDto>
+        List<EmployeeDto> input = new List<EmployeeDto>
         {
             new EmployeeDto { Name = "Alice", Age = 30 },
             new EmployeeDto { Name = "Bob", Age = 25 },
             new EmployeeDto { Name = "Charlie", Age = 35 },
             new EmployeeDto { Name = "Sandra", Age = 27 }
         };
-        var expectedOutput = new EmployeeDto { Name = "Bob", Age = 25 };
+        EmployeeDto expectedOutput = new EmployeeDto { Name = "Bob", Age = 25 };
 
-        var resultMin = input.SelectElementByOption(emp => emp.Age);
-        var resultMax = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.Maximum);
-        var resultFirst = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.First);
-        var resultLast = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.Last);
-        var resultMean = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.Mean);
+        EmployeeDto? resultMin = input.SelectElementByOption(emp => emp.Age);
+        EmployeeDto? resultMax = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.Maximum);
+        EmployeeDto? resultFirst = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.First);
+        EmployeeDto? resultLast = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.Last);
+        EmployeeDto? resultMean = input.SelectElementByOption(emp => emp.Age, EnumerableExtensions.MinMaxOption.Mean);
 
         Assert.AreEqual(expectedOutput.CompareTo(resultMin), 0);
         Assert.AreEqual(resultMax?.Name, "Charlie");
@@ -42,14 +42,14 @@ public class EnumerableExtensionsTest
     [TestMethod]
     public void EnumerableFindMinimum_HappyFlowString()
     {
-        var input = new List<EmployeeDto>
+        List<EmployeeDto> input = new List<EmployeeDto>
         {
             new EmployeeDto { Name = "Alice", Age = 30 },
             new EmployeeDto { Name = "Bob", Age = 25 },
             new EmployeeDto { Name = "Charlie", Age = 35 }
         };
-        var expectedOutput = new EmployeeDto { Name = "Alice", Age = 30 };
-        var result = input.SelectElementByOption(emp => emp.Name ?? string.Empty);
+        EmployeeDto expectedOutput = new EmployeeDto { Name = "Alice", Age = 30 };
+        EmployeeDto? result = input.SelectElementByOption(emp => emp.Name ?? string.Empty);
         Assert.AreEqual(expectedOutput.CompareTo(result), 0);
     }
 
@@ -59,12 +59,12 @@ public class EnumerableExtensionsTest
     [TestMethod]
     public void EnumerableFindMinimum_SingleElement()
     {
-        var input = new List<EmployeeDto>
+        List<EmployeeDto> input = new List<EmployeeDto>
         {
             new EmployeeDto { Name = "Bob", Age = 25 },
         };
-        var expectedOutput = new EmployeeDto { Name = "Bob", Age = 25 };
-        var result = input.SelectElementByOption(emp => emp.Age);
+        EmployeeDto expectedOutput = new EmployeeDto { Name = "Bob", Age = 25 };
+        EmployeeDto? result = input.SelectElementByOption(emp => emp.Age);
         Assert.AreEqual(expectedOutput.CompareTo(result), 0);
     }
 
@@ -74,8 +74,8 @@ public class EnumerableExtensionsTest
     [TestMethod]
     public void EnumerableFindMinimum_EmptyList()
     {
-        var input = new List<EmployeeDto> { };
-        var result = input.SelectElementByOption(emp => emp.Age);
+        List<EmployeeDto> input = new List<EmployeeDto> { };
+        EmployeeDto? result = input.SelectElementByOption(emp => emp.Age);
         Assert.IsNull(result);
     }
 
@@ -86,7 +86,7 @@ public class EnumerableExtensionsTest
     public void EnumerableFindMinimum_NullList()
     {
         List<EmployeeDto>? input = null;
-        var result = input.SelectElementByOption(emp => emp.Age);
+        EmployeeDto? result = input.SelectElementByOption(emp => emp.Age);
         Assert.IsNull(result);
     }
 
@@ -95,7 +95,7 @@ public class EnumerableExtensionsTest
     public void EnumerableFindMinimum_Expected()
     {
         // Arrange
-        var myList = new List<EmployeeDto>
+        List<EmployeeDto> myList = new List<EmployeeDto>
         {
             new EmployeeDto(
                 1,
@@ -122,7 +122,7 @@ public class EnumerableExtensionsTest
         };
 
         // Act
-        var emp = myList.SelectElementByOption(emp => emp.Age);
+        EmployeeDto? emp = myList.SelectElementByOption(emp => emp.Age);
 
         // Assert
         Assert.AreEqual(emp?.Age, 18);
@@ -135,7 +135,7 @@ public class EnumerableExtensionsTest
         List<EmployeeDto> myList = new List<EmployeeDto>();
 
         // Act
-        var emp = myList.SelectElementByOption(emp => emp.Age);
+        EmployeeDto? emp = myList.SelectElementByOption(emp => emp.Age);
 
         // Assert
         Assert.AreEqual(emp, null);
@@ -149,7 +149,7 @@ public class EnumerableExtensionsTest
         List<EmployeeDto>? myList = null;
 
         // Act
-        var emp = myList.SelectElementByOption(emp => emp.Age);
+        EmployeeDto? emp = myList.SelectElementByOption(emp => emp.Age);
 
         // Assert
         Assert.AreEqual(emp, null);

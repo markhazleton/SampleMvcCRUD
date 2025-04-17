@@ -8,14 +8,14 @@ public class EmployeeResponseTests
     public void EmployeeResponse_Expected()
     {
         // Arrange
-        var employee = new EmployeeDto(
+        EmployeeDto employee = new EmployeeDto(
             1,
             "Test Employee",
             20,
             "TX",
             "USA",
             EmployeeDepartmentEnum.IT);
-        var employeeResponse = new EmployeeResponse(employee);
+        EmployeeResponse employeeResponse = new EmployeeResponse(employee);
 
         // Act
 
@@ -27,7 +27,7 @@ public class EmployeeResponseTests
     public void EmployeeResponse_EmptyConstructor()
     {
         // Arrange
-        var employeeResponse = new EmployeeResponse();
+        EmployeeResponse employeeResponse = new EmployeeResponse();
 
         // Act
 

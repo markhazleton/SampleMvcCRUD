@@ -11,7 +11,7 @@ public class LogExtensionsTests
     {
         try
         {
-            var xmlDoc = new XmlDocument();
+            XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xmlString);
             return true;
         }
@@ -25,7 +25,7 @@ public class LogExtensionsTests
     public void GetSerializeObjectString_SerializeListOfObjects_ReturnsValidXmlString()
     {
         // Arrange
-        var people = new List<Person>
+        List<Person> people = new List<Person>
         {
             new Person { Name = "John Doe", Age = 30 },
             new Person { Name = "Jane Smith", Age = 25 },
@@ -33,7 +33,7 @@ public class LogExtensionsTests
         };
 
         // Act
-        var result = people.GetSerializeObjectString();
+        string result = people.GetSerializeObjectString();
 
         // Assert
         Assert.IsTrue(IsValidXml(result));
@@ -42,10 +42,10 @@ public class LogExtensionsTests
     public void GetSerializeObjectString_SerializeSingleObject_ReturnsValidXmlString()
     {
         // Arrange
-        var person = new Person { Name = "John Doe", Age = 30 };
+        Person person = new Person { Name = "John Doe", Age = 30 };
 
         // Act
-        var result = person.GetSerializeObjectString();
+        string result = person.GetSerializeObjectString();
 
         // Assert
         Assert.IsTrue(IsValidXml(result));
@@ -57,7 +57,7 @@ public class LogExtensionsTests
         EmployeeDto objectToSerialize = default;
 
         // Act
-        var result = LogExtensions.GetSerializeObjectString(objectToSerialize);
+        string result = LogExtensions.GetSerializeObjectString(objectToSerialize);
 
         // Assert
         Assert.IsNotNull(result);
@@ -70,7 +70,7 @@ public class LogExtensionsTests
         List<EmployeeDto> lstObjectToSerialize = new();
 
         // Act
-        var result = LogExtensions.GetSerializeObjectString(lstObjectToSerialize);
+        string result = LogExtensions.GetSerializeObjectString(lstObjectToSerialize);
 
         // Assert
         Assert.IsNotNull(result);
@@ -83,7 +83,7 @@ public class LogExtensionsTests
         EmployeeDto objectToSerialize = null;
 
         // Act
-        var result = LogExtensions.GetSerializeObjectString(objectToSerialize);
+        string result = LogExtensions.GetSerializeObjectString(objectToSerialize);
 
         // Assert
         Assert.IsNotNull(result);
@@ -93,10 +93,10 @@ public class LogExtensionsTests
     public void IsSimpleType_ComplexType_ReturnsFalse()
     {
         // Arrange
-        var complexType = typeof(Person);
+        Type complexType = typeof(Person);
 
         // Act
-        var result = complexType.IsSimpleType();
+        bool result = complexType.IsSimpleType();
 
         // Assert
         Assert.IsFalse(result);
@@ -106,7 +106,7 @@ public class LogExtensionsTests
     public void IsSimpleType_KnownSimpleTypes_ReturnsTrue()
     {
         // Arrange
-        var simpleTypes = new Type[]
+        Type[] simpleTypes = new Type[]
         {
             typeof(int),
             typeof(string),
@@ -118,7 +118,7 @@ public class LogExtensionsTests
         };
 
         // Act & Assert
-        foreach (var type in simpleTypes)
+        foreach (Type type in simpleTypes)
         {
             Assert.IsTrue(type.IsSimpleType());
         }
@@ -131,7 +131,7 @@ public class LogExtensionsTests
         EmployeeDto type = new(99, "Test", 33, "Test", "Test", EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = LogExtensions.IsSimpleType(type.GetType());
+        bool result = LogExtensions.IsSimpleType(type.GetType());
 
         // Assert
         Assert.IsNotNull(result);
@@ -145,7 +145,7 @@ public class LogExtensionsTests
         string type = "test";
 
         // Act
-        var result = LogExtensions.IsSimpleType(type.GetType());
+        bool result = LogExtensions.IsSimpleType(type.GetType());
 
         // Assert
         Assert.IsNotNull(result);

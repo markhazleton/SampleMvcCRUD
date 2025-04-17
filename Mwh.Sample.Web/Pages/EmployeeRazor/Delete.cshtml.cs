@@ -4,18 +4,33 @@ using System.Linq;
 
 namespace Mwh.Sample.Web.Pages.EmployeeRazor
 {
+    /// <summary>
+    /// Model for deleting an employee through Razor Pages
+    /// </summary>
     public class DeleteModel : PageModel
     {
         private readonly EmployeeContext _context;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteModel"/> class
+        /// </summary>
+        /// <param name="context">Database context for employee data</param>
         public DeleteModel(EmployeeContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Gets or sets the employee to be deleted
+        /// </summary>
         [BindProperty]
         public Employee Employee { get; set; } = default!;
 
+        /// <summary>
+        /// Handles GET requests to display the delete confirmation page
+        /// </summary>
+        /// <param name="id">The ID of the employee to delete</param>
+        /// <returns>The delete confirmation page or a not found result</returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Employees == null)
@@ -23,7 +38,7 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FirstOrDefaultAsync(m => m.Id == id);
+            Employee? employee = await _context.Employees.FirstOrDefaultAsync(m => m.Id == id);
 
             if (employee == null)
             {
@@ -36,13 +51,18 @@ namespace Mwh.Sample.Web.Pages.EmployeeRazor
             return Page();
         }
 
+        /// <summary>
+        /// Handles POST requests to process the employee deletion
+        /// </summary>
+        /// <param name="id">The ID of the employee to delete</param>
+        /// <returns>Redirects to the index page after deletion</returns>
         public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (id == null || _context.Employees == null)
             {
                 return NotFound();
             }
-            var employee = await _context.Employees.FindAsync(id);
+            Employee? employee = await _context.Employees.FindAsync(id);
 
             if (employee != null)
             {

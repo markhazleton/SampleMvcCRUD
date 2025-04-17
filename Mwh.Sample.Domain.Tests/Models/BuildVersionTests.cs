@@ -8,10 +8,10 @@ public class BuildVersionTests
     public void ToString_ExpectedBehavior()
     {
         // Arrange
-        var buildVersion = new BuildVersion(Assembly.GetExecutingAssembly());
+        BuildVersion buildVersion = new BuildVersion(Assembly.GetExecutingAssembly());
 
         // Act
-        var result = buildVersion.ToString();
+        string result = buildVersion.ToString();
 
         // Assert
         Assert.IsNotNull(result);

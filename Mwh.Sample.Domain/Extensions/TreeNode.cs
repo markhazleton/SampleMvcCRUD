@@ -12,7 +12,7 @@ public class TreeNode<T> where T : notnull, IComparable<T>
     public TreeNode<T> AddChild(T newChild)
     {
         int index = _children.FindIndex(x => x.Value.CompareTo(newChild) > 0);
-        var result = new TreeNode<T>(newChild);
+        TreeNode<T> result = new TreeNode<T>(newChild);
         if (index < 0)
             _children.Add(result);
         else
@@ -23,18 +23,18 @@ public class TreeNode<T> where T : notnull, IComparable<T>
     {
         yield return (startDepth, Value);
         ++startDepth;
-        foreach (var child in _children)
+        foreach (TreeNode<T> child in _children)
         {
-            foreach (var child2 in child.EnumerateSelfAndDescendantsWithDepth(startDepth))
+            foreach ((int Depth, T Value) child2 in child.EnumerateSelfAndDescendantsWithDepth(startDepth))
                 yield return child2;
         }
     }
     public IEnumerable<T> EnumerateSelfAndDescendants()
     {
         yield return Value;
-        foreach (var child in _children)
+        foreach (TreeNode<T> child in _children)
         {
-            foreach (var child2 in child.EnumerateSelfAndDescendants())
+            foreach (T child2 in child.EnumerateSelfAndDescendants())
                 yield return child2;
         }
     }

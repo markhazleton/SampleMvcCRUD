@@ -14,7 +14,7 @@ public class EmployeeDtoTests
     public void emp_IsValidFalse_Age()
     {
         // Arrange
-        var emp = GetValidEmployee();
+        EmployeeDto emp = GetValidEmployee();
 
         // Act
         emp.Age = 0;
@@ -30,7 +30,7 @@ public class EmployeeDtoTests
     public void emp_IsValidFalse_Country()
     {
         // Arrange
-        var emp = GetValidEmployee();
+        EmployeeDto emp = GetValidEmployee();
 
         // Act
         emp.Country = string.Empty;
@@ -46,7 +46,7 @@ public class EmployeeDtoTests
     public void emp_IsValidFalse_Department()
     {
         // Arrange
-        var emp = GetValidEmployee();
+        EmployeeDto emp = GetValidEmployee();
 
         // Act
         emp.Department = EmployeeDepartmentEnum.Unknown;
@@ -64,7 +64,7 @@ public class EmployeeDtoTests
     public void emp_IsValidFalse_Name()
     {
         // Arrange
-        var emp = GetValidEmployee();
+        EmployeeDto emp = GetValidEmployee();
 
         // Act
         emp.Name = string.Empty;
@@ -80,7 +80,7 @@ public class EmployeeDtoTests
     public void emp_IsValidFalse_State()
     {
         // Arrange
-        var emp = GetValidEmployee();
+        EmployeeDto emp = GetValidEmployee();
 
         // Act
         emp.State = string.Empty; ;
@@ -96,7 +96,7 @@ public class EmployeeDtoTests
     public void emp_Validate()
     {
         // Arrange
-        var emp = GetValidEmployee();
+        EmployeeDto emp = GetValidEmployee();
 
         // Act
 
@@ -114,11 +114,11 @@ public class EmployeeDtoTests
     public void EmployeeDto_Equals_DifferentProperties_ReturnsFalse()
     {
         // Arrange
-        var employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
-        var employee2 = new EmployeeDto(2, "Jane Smith", 25, "New York", "USA", EmployeeDepartmentEnum.Marketing);
+        EmployeeDto employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee2 = new EmployeeDto(2, "Jane Smith", 25, "New York", "USA", EmployeeDepartmentEnum.Marketing);
 
         // Act
-        var areEqual = employee1.Equals(employee2);
+        bool areEqual = employee1.Equals(employee2);
 
         // Assert
         Assert.IsFalse(areEqual);
@@ -128,11 +128,11 @@ public class EmployeeDtoTests
     public void EmployeeDto_Equals_SameProperties_ReturnsTrue()
     {
         // Arrange
-        var employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
-        var employee2 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee2 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
 
         // Act
-        var areEqual = employee1.Equals(employee2);
+        bool areEqual = employee1.Equals(employee2);
 
         // Assert
         Assert.IsTrue(areEqual);
@@ -152,7 +152,7 @@ public class EmployeeDtoTests
         };
 
         // Act
-        var isValid = employee.IsValid();
+        bool isValid = employee.IsValid();
 
         // Assert
         Assert.IsFalse(isValid);
@@ -162,10 +162,10 @@ public class EmployeeDtoTests
     public void EmployeeDto_InvalidData_IsNotValid_new()
     {
         // Arrange
-        var employee = new EmployeeDto();
+        EmployeeDto employee = new EmployeeDto();
 
         // Act
-        var isValid = employee.IsValid();
+        bool isValid = employee.IsValid();
 
         // Assert
         Assert.IsFalse(isValid);
@@ -191,10 +191,10 @@ public class EmployeeDtoTests
     public void EmployeeDto_ValidData_IsValid()
     {
         // Arrange
-        var employee = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
 
         // Act
-        var isValid = employee.IsValid();
+        bool isValid = employee.IsValid();
 
         // Assert
         Assert.IsTrue(isValid);
@@ -215,12 +215,12 @@ public class EmployeeDtoTests
     public void GetHashCode_EqualProperties_ReturnsSameHashCode()
     {
         // Arrange
-        var employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
-        var employee2 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee2 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
 
         // Act
-        var hashCode1 = employee1.GetHashCode();
-        var hashCode2 = employee2.GetHashCode();
+        int hashCode1 = employee1.GetHashCode();
+        int hashCode2 = employee2.GetHashCode();
 
         // Assert
         Assert.AreEqual(hashCode1, hashCode2);
@@ -230,12 +230,12 @@ public class EmployeeDtoTests
     public void GetHashCode_DifferentProperties_ReturnsDifferentHashCode()
     {
         // Arrange
-        var employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
-        var employee2 = new EmployeeDto(2, "Jane Smith", 25, "New York", "USA", EmployeeDepartmentEnum.Accounting);
+        EmployeeDto employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee2 = new EmployeeDto(2, "Jane Smith", 25, "New York", "USA", EmployeeDepartmentEnum.Accounting);
 
         // Act
-        var hashCode1 = employee1.GetHashCode();
-        var hashCode2 = employee2.GetHashCode();
+        int hashCode1 = employee1.GetHashCode();
+        int hashCode2 = employee2.GetHashCode();
 
         // Assert
         Assert.AreNotEqual(hashCode1, hashCode2);
@@ -245,10 +245,10 @@ public class EmployeeDtoTests
     public void Equals_SameInstance_ReturnsTrue()
     {
         // Arrange
-        var employee = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = employee.Equals(employee);
+        bool result = employee.Equals(employee);
 
         // Assert
         Assert.IsTrue(result);
@@ -258,11 +258,11 @@ public class EmployeeDtoTests
     public void Equals_EqualProperties_ReturnsTrue()
     {
         // Arrange
-        var employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
-        var employee2 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee2 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = employee1.Equals(employee2);
+        bool result = employee1.Equals(employee2);
 
         // Assert
         Assert.IsTrue(result);
@@ -272,11 +272,11 @@ public class EmployeeDtoTests
     public void Equals_DifferentProperties_ReturnsFalse()
     {
         // Arrange
-        var employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
-        var employee2 = new EmployeeDto(2, "Jane Smith", 25, "New York", "USA", EmployeeDepartmentEnum.Accounting);
+        EmployeeDto employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee2 = new EmployeeDto(2, "Jane Smith", 25, "New York", "USA", EmployeeDepartmentEnum.Accounting);
 
         // Act
-        var result = employee1.Equals(employee2);
+        bool result = employee1.Equals(employee2);
 
         // Assert
         Assert.IsFalse(result);
@@ -286,15 +286,15 @@ public class EmployeeDtoTests
     public void Equals_NullProperties_ReturnsFalse()
     {
         // Arrange
-        var employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
-        var employee2 = new EmployeeDto(1, "Jane Smith", 30, "California", "USA", EmployeeDepartmentEnum.IT)
+        EmployeeDto employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee2 = new EmployeeDto(1, "Jane Smith", 30, "California", "USA", EmployeeDepartmentEnum.IT)
         {
             Name = null
         };
 
         // Act
-        var result = employee1.Equals(employee2);
-        var result2 = employee2.Equals(employee1);
+        bool result = employee1.Equals(employee2);
+        bool result2 = employee2.Equals(employee1);
 
         // Assert
         Assert.IsFalse(result);
@@ -305,10 +305,10 @@ public class EmployeeDtoTests
     public void Equals_NullObject_ReturnsFalse()
     {
         // Arrange
-        var employee = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = employee.Equals(null);
+        bool result = employee.Equals(null);
 
         // Assert
         Assert.IsFalse(result);
@@ -318,11 +318,11 @@ public class EmployeeDtoTests
     public void Equals_DifferentObjectType_ReturnsFalse()
     {
         // Arrange
-        var employee = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
-        var otherObject = new object();
+        EmployeeDto employee = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        object otherObject = new object();
 
         // Act
-        var result = employee.Equals(otherObject);
+        bool result = employee.Equals(otherObject);
 
         // Assert
         Assert.IsFalse(result);
@@ -336,7 +336,7 @@ public class EmployeeDtoTests
         EmployeeDto employee2 = null;
 
         // Act
-        var result = Equals(employee1, employee2);
+        bool result = Equals(employee1, employee2);
         // Assert
         Assert.IsTrue(result);
     }
@@ -347,7 +347,7 @@ public class EmployeeDtoTests
         EmployeeDto employee1 = null;
 
         // Act
-        var result = Equals(employee1, employee1);
+        bool result = Equals(employee1, employee1);
         // Assert
         Assert.IsTrue(result);
     }
@@ -355,11 +355,11 @@ public class EmployeeDtoTests
     public void Equals_OneInstancesNull_ReturnsFalse()
     {
         // Arrange
-        var employee = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
         EmployeeDto employee2 = null;
 
         // Act
-        var result = employee.Equals(employee2);
+        bool result = employee.Equals(employee2);
         // Assert
         Assert.IsFalse(result);
     }

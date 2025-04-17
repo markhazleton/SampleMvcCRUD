@@ -2,11 +2,11 @@
 
 Console.WriteLine("Setup SQL Lite Database");
 
-var options = new DbContextOptionsBuilder<EmployeeContext>()
+DbContextOptions<EmployeeContext> options = new DbContextOptionsBuilder<EmployeeContext>()
     .UseSqlite(@"Data Source=EmployeeConsole.db")
     .EnableSensitiveDataLogging(true)
     .Options;
-using var context = new EmployeeContext(options);
+using EmployeeContext context = new EmployeeContext(options);
 try
 {
     await context.Database.EnsureDeletedAsync();
@@ -19,23 +19,23 @@ catch (Exception ex)
     Console.WriteLine(ex.ToString());
 }
 
-var employeeService = new EmployeeDatabaseService(context);
+EmployeeDatabaseService employeeService = new EmployeeDatabaseService(context);
 
-var employees = await employeeService.GetEmployeesAsync(new PagingParameterModel(), new CancellationToken());
+IEnumerable<EmployeeDto> employees = await employeeService.GetEmployeesAsync(new PagingParameterModel(), new CancellationToken());
 
 Console.WriteLine($"Service List Count:{employees?.Count()}");
 
 Console.WriteLine("Create MOCK to get sample Employees");
-var employeeMock = new EmployeeMock(100);
-var employeeList = new List<EmployeeResponse>();
-var departmentList = new List<DepartmentResponse>();
+EmployeeMock employeeMock = new EmployeeMock(100);
+List<EmployeeResponse> employeeList = new List<EmployeeResponse>();
+List<DepartmentResponse> departmentList = new List<DepartmentResponse>();
 
 try
 {
     Console.WriteLine("Add sample Departments to new database");
     employeeMock.DepartmentCollection()?.ForEach(async dept =>
     {
-        var dep = await employeeService.SaveDepartmentAsync(dept);
+        DepartmentResponse dep = await employeeService.SaveDepartmentAsync(dept);
         departmentList.Add(dep);
     });
     Console.WriteLine($"Department Success Count:{departmentList?.Where(w => w.Success == true).ToArray().Length}");
@@ -55,8 +55,8 @@ catch (Exception ex)
 
 
 employees = await employeeService.GetEmployeesAsync(new PagingParameterModel(), ct);
-var departments = await employeeService.GetDepartmentsAsync(true, ct);
-foreach (var dept in departments)
+IEnumerable<DepartmentDto> departments = await employeeService.GetDepartmentsAsync(true, ct);
+foreach (DepartmentDto dept in departments)
 {
     Console.WriteLine($"{dept.Name} with {dept?.Employees?.Length ?? 0} employees");
 }

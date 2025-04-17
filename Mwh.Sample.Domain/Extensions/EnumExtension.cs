@@ -17,7 +17,7 @@ public static class EnumExtension
         if (e == null)
             return string.Empty;
 
-        var fieldInfo = e.GetType().GetField(e.ToString());
+        FieldInfo? fieldInfo = e.GetType().GetField(e.ToString());
 
         if (fieldInfo?.GetCustomAttributes(typeof(DisplayAttribute), false) is not DisplayAttribute[] descriptionAttributes
             || descriptionAttributes.Length == 0)
@@ -36,7 +36,7 @@ public static class EnumExtension
         if (e == null)
             return string.Empty;
 
-        var fieldInfo = e.GetType().GetField(e.ToString());
+        FieldInfo? fieldInfo = e.GetType().GetField(e.ToString());
 
         if (fieldInfo?.GetCustomAttributes(typeof(DisplayAttribute), false) is not DisplayAttribute[] descriptionAttributes
             || descriptionAttributes.Length == 0)
@@ -61,7 +61,7 @@ public static class EnumExtension
     /// <returns>Dictionary&lt;System.Int32, System.String&gt;.</returns>
     public static Dictionary<int, string> ToDictionary(this Enum enumValue)
     {
-        var enumType = enumValue.GetType();
+        Type enumType = enumValue.GetType();
         return Enum.GetValues(enumType).Cast<Enum>().ToDictionary(t => (int)(object)t, t => t.ToString());
     }
 

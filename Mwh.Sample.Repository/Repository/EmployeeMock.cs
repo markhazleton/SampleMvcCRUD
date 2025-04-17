@@ -22,8 +22,8 @@ public class EmployeeMock : IEmployeeDB
 
     private static List<EmployeeDto> GetFullEmployeeList(int generateCount)
     {
-        var list = new List<EmployeeDto>();
-        var FixedEmployees = new List<Employee>()
+        List<EmployeeDto> list = new List<EmployeeDto>();
+        List<Employee> FixedEmployees = new List<Employee>()
             {
             new Employee() { Name = "Ilsa Lund", Age = 25, Country = "USA", Gender=Gender.Female, DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Kansas" },
             new Employee() { Name = "Major Strasser", Age = 35, Country = "USA",Gender=Gender.Male, DepartmentId = (int)EmployeeDepartmentEnum.IT, State = "Texas" },
@@ -41,7 +41,7 @@ public class EmployeeMock : IEmployeeDB
         {
             try
             {
-                var emp = Create(FixedEmployees[i], i);
+                EmployeeDto? emp = Create(FixedEmployees[i], i);
                 if (emp is not null) list.Add(emp);
             }
             catch (Exception ex)
@@ -54,12 +54,12 @@ public class EmployeeMock : IEmployeeDB
 
     private static List<DepartmentDto> GetDepartmentList()
     {
-        var list = new List<DepartmentDto>();
+        List<DepartmentDto> list = new List<DepartmentDto>();
         foreach (EmployeeDepartmentEnum dept in Enum.GetValues(typeof(EmployeeDepartmentEnum)))
         {
             if ((int)dept > 0)
             {
-                var doesExists = list.Where(w => w.Id == (int)dept).Any();
+                bool doesExists = list.Where(w => w.Id == (int)dept).Any();
                 if (!doesExists)
                     list.Add(new DepartmentDto(dept));
             }
@@ -101,7 +101,7 @@ public class EmployeeMock : IEmployeeDB
         bool bReturn = false;
         await Task.Run(() =>
         {
-            var myEmp = _employeeList.Where(w => w.Id == ID).FirstOrDefault();
+            EmployeeDto? myEmp = _employeeList.Where(w => w.Id == ID).FirstOrDefault();
             if (myEmp != null)
                 bReturn = _employeeList.Remove(myEmp);
         });
@@ -137,7 +137,7 @@ public class EmployeeMock : IEmployeeDB
     public async Task<List<DepartmentDto>> DepartmentCollectionAsync()
     {
 
-        var list = new List<DepartmentDto>();
+        List<DepartmentDto> list = new List<DepartmentDto>();
         await Task.Run(() =>
         {
             list.AddRange(_departmentList);
@@ -170,7 +170,7 @@ public class EmployeeMock : IEmployeeDB
 
     public async Task<List<EmployeeDto>> EmployeeCollectionAsync()
     {
-        var list = new List<EmployeeDto>();
+        List<EmployeeDto> list = new List<EmployeeDto>();
         await Task.Run(() =>
         {
             list.AddRange(_employeeList);
@@ -180,8 +180,8 @@ public class EmployeeMock : IEmployeeDB
 
     public static List<Employee> GetFakerEmployeeList(int generateCount)
     {
-        var states = new string[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" };
-        var fakeEmployees = new Faker<Employee>()
+        string[] states = new string[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" };
+        Faker<Employee> fakeEmployees = new Faker<Employee>()
            //Optional: Call for objects that have complex initialization
            .CustomInstantiator(f => new Employee())
            //Basic rules using built-in generators
@@ -222,7 +222,7 @@ public class EmployeeMock : IEmployeeDB
         }
         else
         {
-            var updateEmp = _employeeList.Find(o => o.Id == emp.Id);
+            EmployeeDto? updateEmp = _employeeList.Find(o => o.Id == emp.Id);
             if (updateEmp == null)
             {
                 _employeeList.Add(emp);

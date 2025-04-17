@@ -16,7 +16,7 @@ public class StringExtensionsTests
         string myTest = "1.99";
         decimal myDefault = 2.99M;
 
-        var myValue = myTest.GetDecimalFromString(myDefault);
+        decimal myValue = myTest.GetDecimalFromString(myDefault);
         Assert.AreEqual((decimal)1.99, myValue);
     }
 
@@ -28,7 +28,7 @@ public class StringExtensionsTests
     {
         string myTest = "INVALID";
         decimal myDefault = 2.99M;
-        var myValue = myTest.GetDecimalFromString(myDefault);
+        decimal myValue = myTest.GetDecimalFromString(myDefault);
         Assert.AreEqual(myDefault, myValue);
     }
 
@@ -40,7 +40,7 @@ public class StringExtensionsTests
     {
         string? myTest = null;
         decimal myDefault = 2.99M;
-        var myValue = myTest.GetDecimalFromString(myDefault);
+        decimal myValue = myTest.GetDecimalFromString(myDefault);
         Assert.AreEqual(myDefault, myValue);
     }
 
@@ -53,7 +53,7 @@ public class StringExtensionsTests
         string myTest = "1";
         int? myDefault = 0;
 
-        var myValue = myTest.GetIntFromString(myDefault);
+        int? myValue = myTest.GetIntFromString(myDefault);
         Assert.AreEqual(1, myValue);
     }
 
@@ -65,7 +65,7 @@ public class StringExtensionsTests
     {
         string myTest = "INVALID";
         int? myDefault = 0;
-        var myValue = myTest.GetIntFromString(myDefault);
+        int? myValue = myTest.GetIntFromString(myDefault);
         Assert.AreEqual(myDefault, myValue);
     }
 
@@ -77,7 +77,7 @@ public class StringExtensionsTests
     {
         string? myTest = null;
         int? myDefault = null;
-        var myValue = myTest.GetIntFromString(myDefault);
+        int? myValue = myTest.GetIntFromString(myDefault);
         Assert.AreEqual(myDefault, myValue);
     }
 
@@ -89,7 +89,7 @@ public class StringExtensionsTests
     {
         string? myTest = null;
         int? myDefault = 0;
-        var myValue = myTest.GetIntFromString(myDefault);
+        int? myValue = myTest.GetIntFromString(myDefault);
         Assert.AreEqual(myDefault, myValue);
     }
 
@@ -100,7 +100,7 @@ public class StringExtensionsTests
     public void GetNullIntFromStringTest()
     {
         string myTest = "1";
-        var myValue = myTest.GetIntFromString(0);
+        int myValue = myTest.GetIntFromString(0);
         Assert.AreEqual(1, myValue);
     }
 
@@ -111,7 +111,7 @@ public class StringExtensionsTests
     public void GetNullIntFromStringTestInvalidString()
     {
         string myTest = "INVALID";
-        var myValue = myTest.GetIntFromString(0);
+        int myValue = myTest.GetIntFromString(0);
         Assert.AreEqual(0, myValue);
     }
 
@@ -122,7 +122,7 @@ public class StringExtensionsTests
     public void GetNullIntFromStringTestNullString()
     {
         string? myTest = null;
-        var myValue = myTest.GetIntFromString(0);
+        int myValue = myTest.GetIntFromString(0);
         Assert.AreEqual(0, myValue);
     }
 
@@ -153,7 +153,7 @@ public class StringExtensionsTests
     public void IndexOfNthTestSourceNotFound()
     {
         string myTest = "123456";
-        var result = myTest.IndexOfNth("7", 3);
+        int result = myTest.IndexOfNth("7", 3);
         Assert.AreEqual(result, -1);
     }
 
@@ -164,7 +164,7 @@ public class StringExtensionsTests
     public void IndexOfNthTestSourceNull()
     {
         string? myTest = null;
-        var result = myTest.IndexOfNth("3", 3);
+        int result = myTest.IndexOfNth("3", 3);
         Assert.AreEqual(result, 0);
     }
 
@@ -176,7 +176,7 @@ public class StringExtensionsTests
     public void IndexOfNthTestValueNegativeNth()
     {
         string myTest = "333333";
-        var test = myTest.IndexOfNth("3", -1);
+        int test = myTest.IndexOfNth("3", -1);
     }
 
     /// <summary>
@@ -286,7 +286,7 @@ public class StringExtensionsTests
     public void TrimIfNotNullTestWithNull()
     {
         string? myTest = null;
-        var myResult = myTest.TrimIfNotNull();
+        string myResult = myTest.TrimIfNotNull();
         Assert.AreEqual(string.Empty, myResult);
     }
 }

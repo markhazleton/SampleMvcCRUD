@@ -35,7 +35,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
     {
         if (item == null) return null;
 
-        var retEmployee = new EmployeeDto
+        EmployeeDto retEmployee = new EmployeeDto
         {
             Id = item.Id,
             Name = item.Name,
@@ -94,8 +94,8 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         if (namelist == null) return -1;
 
         Random rand = new();
-        var list = new List<Employee>();
-        foreach (var name in namelist)
+        List<Employee> list = new List<Employee>();
+        foreach (string? name in namelist)
         {
             list.Add(new Employee()
             {
@@ -116,11 +116,11 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken ct)
     {
-        var response = new EmployeeResponse("Init");
+        EmployeeResponse response = new EmployeeResponse("Init");
 
         if (id > 0)
         {
-            var dbEmp = await _context.Employees.FindAsync(id);
+            Employee? dbEmp = await _context.Employees.FindAsync(id);
 
             if (dbEmp == null)
             {
@@ -153,7 +153,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<EmployeeResponse> FindEmployeeByIdAsync(int Id, CancellationToken token)
     {
-        var employee = Create(await _context.Employees.Include(i => i.Department).Where(w => w.Id == Id).AsNoTracking().FirstOrDefaultAsync(cancellationToken: token));
+        EmployeeDto? employee = Create(await _context.Employees.Include(i => i.Department).Where(w => w.Id == Id).AsNoTracking().FirstOrDefaultAsync(cancellationToken: token));
         if (employee is null)
             return new EmployeeResponse("Employee Not Found");
 
@@ -170,10 +170,10 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
     {
-        var source = _context.Employees.Include(i => i.Department).OrderBy(o => o.Name).AsQueryable();
+        IQueryable<Employee> source = _context.Employees.Include(i => i.Department).OrderBy(o => o.Name).AsQueryable();
         int TotalCount = source.Count();
-        var items = await source.Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync(token);
-        var paginationMetadata = paging.GetMetaData(TotalCount);
+        List<Employee> items = await source.Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync(token);
+        object paginationMetadata = paging.GetMetaData(TotalCount);
         return GetEmployeeDtos(items);
     }
 
@@ -239,7 +239,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                 newItem.Gender);
 
             int deptId = (int)item.Department;
-            var dbDept = _context.Departments.Find(deptId);
+            Department? dbDept = _context.Departments.Find(deptId);
 
             if (dbDept == null)
                 return new EmployeeResponse("Department not found");
@@ -276,10 +276,10 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             {
                 dbEmp = Create(item, dbDept);
 
-                var desalt = _context.Employees.Add(dbEmp);
+                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<Employee> desalt = _context.Employees.Add(dbEmp);
                 _context.SaveChanges();
             }
-            var local = _context.Set<Employee>()
+            Employee? local = _context.Set<Employee>()
                      .Local
                      .FirstOrDefault(entry => entry.Id.Equals(item.Id));
 
@@ -288,7 +288,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             {
                 _context.Entry(local).State = EntityState.Detached;
             }
-            var newEmp = await _context.Employees.Where(w => w.Id == dbEmp.Id).Include(i => i.Department).AsNoTracking().FirstOrDefaultAsync(cancellationToken: ct);
+            Employee? newEmp = await _context.Employees.Where(w => w.Id == dbEmp.Id).Include(i => i.Department).AsNoTracking().FirstOrDefaultAsync(cancellationToken: ct);
 
             return new EmployeeResponse(Create(newEmp));
         }

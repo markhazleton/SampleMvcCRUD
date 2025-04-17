@@ -29,7 +29,7 @@ public class HomeController : BaseController
     /// <returns></returns>
     public ActionResult Index()
     {
-        var myContent = Markdown.ParseHtmlStringFromFile("~/README.md");
+        Microsoft.AspNetCore.Html.HtmlString myContent = Markdown.ParseHtmlStringFromFile("~/README.md");
         return View(myContent);
     }
 }

@@ -7,26 +7,26 @@ public class TreeNodeTests
     public void AddChild_ShouldAddChildNodeInSortedOrder()
     {
         // Arrange
-        var rootNode = new TreeNode<int>(5);
+        TreeNode<int> rootNode = new TreeNode<int>(5);
 
         // Act
-        var child1 = rootNode.AddChild(3);
+        TreeNode<int> child1 = rootNode.AddChild(3);
         child1.AddChild(30);
         child1.AddChild(31);
 
-        var child2 = rootNode.AddChild(7);
+        TreeNode<int> child2 = rootNode.AddChild(7);
         child2.AddChild(70);
         child2.AddChild(71);
         child2.AddChild(72);
 
 
-        var child3 = rootNode.AddChild(1);
+        TreeNode<int> child3 = rootNode.AddChild(1);
         child3.AddChild(10);
         child3.AddChild(11);
         child3.AddChild(12);
 
-        var test = rootNode.EnumerateSelfAndDescendants().ToList();
-        var test2 = rootNode.EnumerateSelfAndDescendantsWithDepth();
+        List<int> test = rootNode.EnumerateSelfAndDescendants().ToList();
+        IEnumerable<(int Depth, int Value)> test2 = rootNode.EnumerateSelfAndDescendantsWithDepth();
 
 
         // Assert
@@ -42,14 +42,14 @@ public class TreeNodeTests
     public void EnumerateSelfAndDescendants_ShouldReturnCorrectDepthAndValues()
     {
         // Arrange
-        var rootNode = new TreeNode<string>("A");
-        var child1 = rootNode.AddChild("B");
-        var child2 = rootNode.AddChild("C");
-        var child3 = child1.AddChild("D");
-        var child4 = child1.AddChild("E");
+        TreeNode<string> rootNode = new TreeNode<string>("A");
+        TreeNode<string> child1 = rootNode.AddChild("B");
+        TreeNode<string> child2 = rootNode.AddChild("C");
+        TreeNode<string> child3 = child1.AddChild("D");
+        TreeNode<string> child4 = child1.AddChild("E");
 
         // Act
-        var result = rootNode.EnumerateSelfAndDescendantsWithDepth().ToList();
+        List<(int Depth, string Value)> result = rootNode.EnumerateSelfAndDescendantsWithDepth().ToList();
 
         // Assert
         Assert.AreEqual(5, result.Count);

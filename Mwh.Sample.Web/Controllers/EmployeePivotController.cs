@@ -40,13 +40,13 @@
         public async Task<ActionResult> GetEmployeeList()
         {
 
-            var paging = new PagingParameterModel
+            PagingParameterModel paging = new PagingParameterModel
             {
                 PageSize = 3000,
                 PageNumber = 1
             };
 
-            var list = await client.GetEmployeesAsync(paging, cts.Token);
+            IEnumerable<EmployeeDto> list = await client.GetEmployeesAsync(paging, cts.Token);
             return PartialView("_EmployeeList", list);
         }
 

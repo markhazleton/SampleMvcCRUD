@@ -10,8 +10,8 @@ public class ApplicationStatusTests
     public void ApplicationStatus_BuildDate_ReturnsValidDateTime()
     {
         // Arrange
-        var assembly = Assembly.GetExecutingAssembly();
-        var applicationStatus = new ApplicationStatus(assembly);
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        ApplicationStatus applicationStatus = new ApplicationStatus(assembly);
 
 
         string executingDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -20,11 +20,11 @@ public class ApplicationStatusTests
         if (File.Exists(dllFilePath))
         {
             Assembly myFileAssembly = Assembly.LoadFrom(dllFilePath);
-            var myFileStatus = new ApplicationStatus(myFileAssembly);
+            ApplicationStatus myFileStatus = new ApplicationStatus(myFileAssembly);
         }
 
         // Act
-        var buildDate = applicationStatus.BuildDate;
+        DateTime buildDate = applicationStatus.BuildDate;
 
         // Assert
         Assert.IsTrue(buildDate != DateTime.MinValue);
@@ -34,11 +34,11 @@ public class ApplicationStatusTests
     public void ApplicationStatus_BuildVersion_ReturnsValidBuildVersion()
     {
         // Arrange
-        var assembly = Assembly.GetExecutingAssembly();
-        var applicationStatus = new ApplicationStatus(assembly);
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        ApplicationStatus applicationStatus = new ApplicationStatus(assembly);
 
         // Act
-        var buildVersion = applicationStatus.BuildVersion;
+        BuildVersion buildVersion = applicationStatus.BuildVersion;
 
         // Assert
         Assert.IsNotNull(buildVersion);
@@ -49,10 +49,10 @@ public class ApplicationStatusTests
     public void ApplicationStatus_Features_DefaultValueIsEmptyDictionary()
     {
         // Arrange
-        var applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
+        ApplicationStatus applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
 
         // Act
-        var features = applicationStatus.Features;
+        Dictionary<string, string> features = applicationStatus.Features;
 
         // Assert
         Assert.IsNotNull(features);
@@ -63,10 +63,10 @@ public class ApplicationStatusTests
     public void ApplicationStatus_Messages_DefaultValueIsEmptyList()
     {
         // Arrange
-        var applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
+        ApplicationStatus applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
 
         // Act
-        var messages = applicationStatus.Messages;
+        List<string> messages = applicationStatus.Messages;
 
         // Assert
         Assert.IsNotNull(messages);
@@ -77,10 +77,10 @@ public class ApplicationStatusTests
     public void ApplicationStatus_Region_DefaultValueIsNotEmptyString()
     {
         // Arrange
-        var applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
+        ApplicationStatus applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
 
         // Act
-        var region = applicationStatus.Region;
+        string region = applicationStatus.Region;
 
         // Assert
         Assert.IsTrue(string.IsNullOrEmpty(region));
@@ -90,10 +90,10 @@ public class ApplicationStatusTests
     public void ApplicationStatus_Status_DefaultValueIsOnline()
     {
         // Arrange
-        var applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
+        ApplicationStatus applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
 
         // Act
-        var status = applicationStatus.Status;
+        ServiceStatus status = applicationStatus.Status;
 
         // Assert
         Assert.AreEqual(ServiceStatus.Online, status);
@@ -103,10 +103,10 @@ public class ApplicationStatusTests
     public void ApplicationStatus_Tests_DefaultValueIsEmptyDictionary()
     {
         // Arrange
-        var applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
+        ApplicationStatus applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
 
         // Act
-        var tests = applicationStatus.Tests;
+        Dictionary<string, string> tests = applicationStatus.Tests;
 
         // Assert
         Assert.IsNotNull(tests);

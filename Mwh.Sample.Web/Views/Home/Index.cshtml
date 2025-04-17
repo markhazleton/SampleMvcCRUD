@@ -5,41 +5,112 @@
     ViewBag.MetaKeywords = "ASP.NET MVC, CRUD tutorial, ASP.NET CRUD operations, MVC tutorial, Docker, GitHub Actions, Azure App Services, Azure Virtual Machines";
 }
 
-<div class="container">
-    <h1>Welcome to the ASP.NET MVC CRUD Tutorial</h1>
-    <p>
-        This sample CRUD application demonstrates how to create, read, update, and delete records using ASP.NET MVC.
-        It covers various deployment strategies to Azure, including using Docker and GitHub Actions for continuous integration and deployment.
-        Whether you're a beginner looking to understand the basics of MVC or an experienced developer exploring advanced deployment methods, this tutorial offers a comprehensive guide.
-    </p>
-    <h2>Features of this Sample CRUD Application:</h2>
-    <ul>
-        <li>Comprehensive ASP.NET MVC CRUD implementation</li>
-        <li>Azure deployment strategies using Docker and GitHub Actions</li>
-        <li>Scalable architecture with support for Azure App Services and Virtual Machines</li>
-        <li>Open-source project with opportunities for contributions</li>
-    </ul>
-    <p>
-        Ready to get started? Explore the code and follow the steps to deploy your own ASP.NET MVC application to Azure.
-        Stay tuned for upcoming features like integration with React, Vue, and mobile applications.
-    </p>
-    <h2>Why Choose This Tutorial?</h2>
-    <p>
-        This project is designed to help developers at all levels understand the best practices for building and deploying ASP.NET MVC applications.
-        By following this guide, you will learn how to efficiently manage the lifecycle of an MVC application, from development to production, using modern DevOps practices.
-    </p>
-</div>
-
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h3>Project Readme.MD</h3>
-        </div>
-        <div class="card-body">
-            @Html.Raw(Model)
-        </div>
-        <div class="card-footer">
-            <br/>
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold">
+                    <i class="bi bi-code-slash text-primary me-2"></i>ASP.NET MVC CRUD Tutorial
+                </h1>
+                <p class="lead text-muted">A comprehensive guide to building and deploying ASP.NET MVC applications</p>
+            </div>
+            
+            <div class="card shadow-sm rounded-3 border-0 mb-5">
+                <div class="card-body p-4 p-lg-5">
+                    <p class="lead">
+                        This sample CRUD application demonstrates how to create, read, update, and delete records using ASP.NET MVC.
+                        It covers various deployment strategies to Azure, including using Docker and GitHub Actions for continuous integration and deployment.
+                    </p>
+                    
+                    <div class="row g-4 py-4">
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-database-fill-check fs-3 text-primary"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h5>Comprehensive CRUD Implementation</h5>
+                                    <p class="text-muted">Learn the fundamentals of create, read, update, and delete operations in ASP.NET MVC</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-cloud-check-fill fs-3 text-primary"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h5>Azure Deployment Strategies</h5>
+                                    <p class="text-muted">Deploy your application using Docker, GitHub Actions, and modern CI/CD pipelines</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-gear-wide-connected fs-3 text-primary"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h5>Scalable Architecture</h5>
+                                    <p class="text-muted">Build applications that scale with Azure App Services and Virtual Machines</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-github fs-3 text-primary"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h5>Open-Source Project</h5>
+                                    <p class="text-muted">Contribute to the project and collaborate with the community</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 bg-light rounded-3 border border-light">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-lightbulb-fill text-warning fs-4 me-2"></i>
+                            <h4 class="mb-0">Getting Started</h4>
+                        </div>
+                        <p>
+                            Ready to get started? Explore the code and follow the steps to deploy your own ASP.NET MVC application to Azure.
+                            Stay tuned for upcoming features like integration with React, Vue, and mobile applications.
+                        </p>
+                        <div class="d-flex flex-wrap gap-2 mt-3">
+                            <a href="/Employee" class="btn btn-primary">
+                                <i class="bi bi-person-vcard me-2"></i>Employee Demo
+                            </a>
+                            <a href="https://github.com/markhazleton/SampleMvcCRUD" class="btn btn-outline-dark" target="_blank">
+                                <i class="bi bi-github me-2"></i>View on GitHub
+                            </a>
+                            <a href="/swagger/" class="btn btn-outline-secondary">
+                                <i class="bi bi-file-earmark-code me-2"></i>API Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow border-0 rounded-3 mb-4">
+                <div class="card-header bg-gradient text-white bg-primary py-3">
+                    <h3 class="mb-0">
+                        <i class="bi bi-file-text me-2"></i>Project Documentation
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="readme-content">
+                        @Html.Raw(Model)
+                    </div>
+                </div>
+                <div class="card-footer bg-light py-3 text-center">
+                    <p class="mb-0 text-muted">
+                        <i class="bi bi-info-circle me-1"></i>
+                        This documentation is automatically generated from the project's README.md file
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

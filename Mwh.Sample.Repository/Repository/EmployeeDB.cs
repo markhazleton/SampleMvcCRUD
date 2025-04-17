@@ -32,9 +32,9 @@ public class EmployeeDB : IEmployeeDB
         if (item == null)
             throw new ArgumentException("Department can not be null");
 
-        var enumDept = (EmployeeDepartmentEnum)item.Id;
+        EmployeeDepartmentEnum enumDept = (EmployeeDepartmentEnum)item.Id;
 
-        var dept = new DepartmentDto
+        DepartmentDto dept = new DepartmentDto
         {
             Id = item.Id,
             Name = enumDept.GetDisplayName(),
@@ -61,7 +61,7 @@ public class EmployeeDB : IEmployeeDB
 
     public async Task<bool> DeleteEmployeeAsync(int ID)
     {
-        var delEmployee = await _context.Employees.FindAsync(ID);
+        Employee? delEmployee = await _context.Employees.FindAsync(ID);
         if (delEmployee is null)
         {
             return false;
@@ -89,7 +89,7 @@ public class EmployeeDB : IEmployeeDB
     {
         try
         {
-            var dbDeptList = await _context.Departments.OrderBy(o => o.Name).ToListAsync();
+            List<Department> dbDeptList = await _context.Departments.OrderBy(o => o.Name).ToListAsync();
             return Create(dbDeptList);
         }
         catch (Exception ex)
@@ -101,7 +101,7 @@ public class EmployeeDB : IEmployeeDB
 
     public async Task<EmployeeDto?> EmployeeAsync(int id)
     {
-        var empEntity = await _context.Employees.Where(w => w.Id == id).FirstOrDefaultAsync();
+        Employee? empEntity = await _context.Employees.Where(w => w.Id == id).FirstOrDefaultAsync();
         return empEntity is null ? null : Create(empEntity);
     }
 
@@ -116,7 +116,7 @@ public class EmployeeDB : IEmployeeDB
 
         if (emp.Id == 0)
         {
-            var saveUser = new Employee()
+            Employee saveUser = new Employee()
             {
                 Name = emp.Name,
                 State = emp.State,
@@ -132,7 +132,7 @@ public class EmployeeDB : IEmployeeDB
         }
         else
         {
-            var saveUser = await _context.Employees.FindAsync(emp.Id);
+            Employee? saveUser = await _context.Employees.FindAsync(emp.Id);
 
             if (saveUser != null)
             {
@@ -185,7 +185,7 @@ public class EmployeeDB : IEmployeeDB
             Description = dept.Description
         };
 
-        var saveDept = await _context.Departments.FindAsync(updateDept.Id);
+        Department? saveDept = await _context.Departments.FindAsync(updateDept.Id);
         if (saveDept != null)
         {
             _context.Departments.Attach(saveDept);
@@ -195,7 +195,7 @@ public class EmployeeDB : IEmployeeDB
         }
         else
         {
-            var newDept = new Department()
+            Department newDept = new Department()
             {
                 Id = updateDept.Id,
                 Name = string.IsNullOrEmpty(updateDept.Name) ? "MISSING NAME" : updateDept.Name,

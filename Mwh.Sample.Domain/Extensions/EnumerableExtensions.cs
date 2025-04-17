@@ -43,7 +43,7 @@ public static class EnumerableExtensions
                 double sum = 0;
                 int count = 0;
 
-                foreach (var element in sequence)
+                foreach (T element in sequence)
                 {
                     TKey key = keySelector(element);
                     if (key is IConvertible convertible)

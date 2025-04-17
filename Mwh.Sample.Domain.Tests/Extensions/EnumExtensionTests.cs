@@ -64,7 +64,7 @@ public class EnumExtensionTests
         TestEnum? myTest = null;
 
         // Act
-        var result = myTest.GetDescription();
+        string result = myTest.GetDescription();
 
         // Assert
         Assert.AreEqual(result, string.Empty);
@@ -76,10 +76,10 @@ public class EnumExtensionTests
     public void EnumGetDisplayName_ExpectedBehavior()
     {
         // Arrange
-        var myTest = TestEnum.First;
+        TestEnum myTest = TestEnum.First;
 
         // Act
-        var result = myTest.GetDisplayName();
+        string result = myTest.GetDisplayName();
 
         // Assert
         Assert.AreEqual(result, "1st");
@@ -94,7 +94,7 @@ public class EnumExtensionTests
         TestEnum? myTest = null;
 
         // Act
-        var result = myTest.GetDisplayName();
+        string result = myTest.GetDisplayName();
 
         // Assert
         Assert.AreEqual(result, string.Empty);
@@ -106,10 +106,10 @@ public class EnumExtensionTests
     public void EnumGetDescriptionMissingDisplayName()
     {
         // Arrange
-        var myTest = TestEnum.Second;
+        TestEnum myTest = TestEnum.Second;
 
         // Act
-        var result = myTest.GetDescription();
+        string result = myTest.GetDescription();
 
         // Assert
         Assert.AreEqual(result, "Second");
@@ -121,10 +121,10 @@ public class EnumExtensionTests
     public void EnumGetDisplayNameMissingDisplayName()
     {
         // Arrange
-        var myTest = TestEnum.Second;
+        TestEnum myTest = TestEnum.Second;
 
         // Act
-        var result = myTest.GetDisplayName();
+        string result = myTest.GetDisplayName();
 
         // Assert
         Assert.AreEqual(result, "Second");
@@ -136,10 +136,10 @@ public class EnumExtensionTests
     public void EnumToDescriptionString_ExpectedBehavior()
     {
         // Arrange
-        var myTest = TestEnum.First;
+        TestEnum myTest = TestEnum.First;
 
         // Act
-        var result = myTest.GetDescription();
+        string result = myTest.GetDescription();
 
         // Assert
         Assert.AreEqual(result, "The First One");
@@ -151,10 +151,10 @@ public class EnumExtensionTests
     public void EnumToDictionaryExpectedBehavior()
     {
         // Arrange
-        var myTest = TestEnum.First;
+        TestEnum myTest = TestEnum.First;
 
         // Act
-        var result = myTest.ToDictionary();
+        Dictionary<int, string> result = myTest.ToDictionary();
 
         // Assert
         Assert.AreEqual(result.Count, 3);
@@ -164,10 +164,10 @@ public class EnumExtensionTests
     public void GetAllValues_ReturnsAllEnumValues()
     {
         // Arrange
-        var myTest = TestEnum.First;
+        TestEnum myTest = TestEnum.First;
 
         // Act
-        var values = EnumExtension.GetAllValues<TestEnum>();
+        IEnumerable<TestEnum> values = EnumExtension.GetAllValues<TestEnum>();
 
         // Assert
         Assert.AreEqual(3, values.Count());
@@ -179,10 +179,10 @@ public class EnumExtensionTests
     public void ParseCaseInsensitive_ParsesEnumValueCaseInsensitive()
     {
         // Arrange
-        var myTest = TestEnum.First;
+        TestEnum myTest = TestEnum.First;
 
         // Act
-        var value = EnumExtension.ParseCaseInsensitive<TestEnum>("fIrSt");
+        TestEnum value = EnumExtension.ParseCaseInsensitive<TestEnum>("fIrSt");
 
         // Assert
         Assert.AreEqual(TestEnum.First, value);
@@ -192,10 +192,10 @@ public class EnumExtensionTests
     public void GetNames_ReturnsAllEnumNames()
     {
         // Arrange
-        var myTest = TestEnum.First;
+        TestEnum myTest = TestEnum.First;
 
         // Act
-        var names = EnumExtension.GetNames<TestEnum>();
+        string[] names = EnumExtension.GetNames<TestEnum>();
 
         // Assert
         Assert.AreEqual(3, names.Length);
@@ -207,10 +207,10 @@ public class EnumExtensionTests
     public void GetUnderlyingType_ReturnsEnumUnderlyingType()
     {
         // Arrange
-        var myTest = TestEnum.First;
+        TestEnum myTest = TestEnum.First;
 
         // Act
-        var underlyingType = EnumExtension.GetUnderlyingType<TestEnum>();
+        Type underlyingType = EnumExtension.GetUnderlyingType<TestEnum>();
 
         // Assert
         Assert.AreEqual(typeof(int), underlyingType);

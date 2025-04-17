@@ -16,9 +16,9 @@ public class EmployeeDatabaseClientTests
     {
         // Arrange
         string[] namelist = { "John", "Jane" };
-        var serviceMock = new Mock<IEmployeeService>();
+        Mock<IEmployeeService> serviceMock = new Mock<IEmployeeService>();
         serviceMock.Setup(s => s.AddMultipleEmployeesAsync(namelist)).ReturnsAsync(2);
-        var client = new EmployeeDatabaseClient(serviceMock.Object);
+        EmployeeDatabaseClient client = new EmployeeDatabaseClient(serviceMock.Object);
 
         // Act
         int result = await client.AddMultipleEmployeesAsync(namelist);
@@ -33,14 +33,14 @@ public class EmployeeDatabaseClientTests
     {
         // Arrange
         int id = 1;
-        var cancellationToken = new CancellationToken();
-        var response = new EmployeeResponse();
-        var serviceMock = new Mock<IEmployeeService>();
+        CancellationToken cancellationToken = new CancellationToken();
+        EmployeeResponse response = new EmployeeResponse();
+        Mock<IEmployeeService> serviceMock = new Mock<IEmployeeService>();
         serviceMock.Setup(s => s.DeleteAsync(id, cancellationToken)).ReturnsAsync(response);
-        var client = new EmployeeDatabaseClient(serviceMock.Object);
+        EmployeeDatabaseClient client = new EmployeeDatabaseClient(serviceMock.Object);
 
         // Act
-        var result = await client.DeleteAsync(id, cancellationToken);
+        EmployeeResponse result = await client.DeleteAsync(id, cancellationToken);
 
         // Assert
         Assert.AreEqual(response, result);
@@ -52,14 +52,14 @@ public class EmployeeDatabaseClientTests
     {
         // Arrange
         int departmentId = (int)EmployeeDepartmentEnum.IT;
-        var cancellationToken = new CancellationToken();
-        var departmentDto = new DepartmentDto(EmployeeDepartmentEnum.IT);
-        var serviceMock = new Mock<IEmployeeService>();
+        CancellationToken cancellationToken = new CancellationToken();
+        DepartmentDto departmentDto = new DepartmentDto(EmployeeDepartmentEnum.IT);
+        Mock<IEmployeeService> serviceMock = new Mock<IEmployeeService>();
         serviceMock.Setup(s => s.FindDepartmentByIdAsync(departmentId, cancellationToken)).ReturnsAsync(departmentDto);
-        var client = new EmployeeDatabaseClient(serviceMock.Object);
+        EmployeeDatabaseClient client = new EmployeeDatabaseClient(serviceMock.Object);
 
         // Act
-        var result = await client.FindDepartmentByIdAsync(departmentId, cancellationToken);
+        DepartmentDto result = await client.FindDepartmentByIdAsync(departmentId, cancellationToken);
 
         // Assert
         Assert.AreEqual(departmentDto, result);
@@ -71,15 +71,15 @@ public class EmployeeDatabaseClientTests
     {
         // Arrange
         int employeeId = 1;
-        var cancellationToken = new CancellationToken();
-        var employee = new EmployeeDto(employeeId, "Test", 20, "Texas", "USA", EmployeeDepartmentEnum.IT);
-        var employeeResponse = new EmployeeResponse(employee);
-        var serviceMock = new Mock<IEmployeeService>();
+        CancellationToken cancellationToken = new CancellationToken();
+        EmployeeDto employee = new EmployeeDto(employeeId, "Test", 20, "Texas", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeResponse employeeResponse = new EmployeeResponse(employee);
+        Mock<IEmployeeService> serviceMock = new Mock<IEmployeeService>();
         serviceMock.Setup(s => s.FindEmployeeByIdAsync(employeeId, cancellationToken)).ReturnsAsync(employeeResponse);
-        var client = new EmployeeDatabaseClient(serviceMock.Object);
+        EmployeeDatabaseClient client = new EmployeeDatabaseClient(serviceMock.Object);
 
         // Act
-        var result = await client.FindEmployeeByIdAsync(employeeId, cancellationToken);
+        EmployeeResponse result = await client.FindEmployeeByIdAsync(employeeId, cancellationToken);
 
         // Assert
         Assert.AreEqual(employeeResponse, result);
@@ -90,18 +90,18 @@ public class EmployeeDatabaseClientTests
     {
         // Arrange
         bool includeEmployees = true;
-        var cancellationToken = new CancellationToken();
-        var departmentDtos = new List<DepartmentDto>
+        CancellationToken cancellationToken = new CancellationToken();
+        List<DepartmentDto> departmentDtos = new List<DepartmentDto>
         {
             new DepartmentDto(EmployeeDepartmentEnum.IT),
             new DepartmentDto(EmployeeDepartmentEnum.HR)
         };
-        var serviceMock = new Mock<IEmployeeService>();
+        Mock<IEmployeeService> serviceMock = new Mock<IEmployeeService>();
         serviceMock.Setup(s => s.GetDepartmentsAsync(includeEmployees, cancellationToken)).ReturnsAsync(departmentDtos);
-        var client = new EmployeeDatabaseClient(serviceMock.Object);
+        EmployeeDatabaseClient client = new EmployeeDatabaseClient(serviceMock.Object);
 
         // Act
-        var result = await client.GetDepartmentsAsync(includeEmployees, cancellationToken);
+        IEnumerable<DepartmentDto> result = await client.GetDepartmentsAsync(includeEmployees, cancellationToken);
 
         // Assert
         Assert.AreEqual(departmentDtos, result);

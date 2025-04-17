@@ -14,7 +14,7 @@ public class PropertyBagTests
     [TestMethod()]
     public void AddTest()
     {
-        var myTest = new PropertyBag<int, string>();
+        PropertyBag<int, string> myTest = new PropertyBag<int, string>();
         myTest.Add(1, "test");
         Assert.AreEqual("1:test", myTest.ToString());
         Assert.AreEqual(1, myTest.GetList().Count);
@@ -26,7 +26,7 @@ public class PropertyBagTests
     public void AddTest_Null()
     {
         string? nullString = null;
-        var myTest = new PropertyBag<int, string>();
+        PropertyBag<int, string> myTest = new PropertyBag<int, string>();
         myTest.Add(1, nullString);
         Assert.AreEqual(string.Empty, myTest.ToString());
     }
@@ -37,12 +37,12 @@ public class PropertyBagTests
     [TestMethod()]
     public void AddTest_Duplicate()
     {
-        var myTest = new PropertyBag<int, string>();
+        PropertyBag<int, string> myTest = new PropertyBag<int, string>();
         myTest.Add(1, "test");
         myTest[2] = "test";
         myTest.Add(3, "initial");
 
-        var tempDic = new Dictionary<int, string>();
+        Dictionary<int, string> tempDic = new Dictionary<int, string>();
         tempDic.Add(3, "test3");
         tempDic.Add(4, "test4");
         myTest.Add(tempDic);
@@ -51,7 +51,7 @@ public class PropertyBagTests
         myTest[2] = "test2";
 
 
-        var onestring = myTest.ToString();
+        string onestring = myTest.ToString();
 
         Assert.AreEqual("1:test1, 2:test2, 3:test3, 4:test4", onestring);
         Assert.AreEqual("test1", myTest[1]);
@@ -66,7 +66,7 @@ public class PropertyBagTests
     [TestMethod()]
     public void AjaxDictionaryTest()
     {
-        var myTest = new PropertyBag<int, string>();
+        PropertyBag<int, string> myTest = new PropertyBag<int, string>();
         Assert.AreNotEqual(null, myTest);
         Assert.AreEqual(myTest.ToString(), string.Empty);
     }
@@ -77,7 +77,7 @@ public class PropertyBagTests
     [TestMethod()]
     public void AjaxDictionaryTest1()
     {
-        var myTest = new PropertyBag<int, string>();
+        PropertyBag<int, string> myTest = new PropertyBag<int, string>();
         Assert.AreNotEqual(null, myTest);
     }
 
@@ -87,10 +87,10 @@ public class PropertyBagTests
     [TestMethod()]
     public void GetListTest()
     {
-        var myTest = new PropertyBag<int, string>();
+        PropertyBag<int, string> myTest = new PropertyBag<int, string>();
         myTest.Add(1, "one");
         myTest.Add(2, "two");
-        var myResult = myTest.GetList().FirstOrDefault();
+        string? myResult = myTest.GetList().FirstOrDefault();
         Assert.AreEqual("1 - one", myResult);
     }
 
@@ -104,10 +104,10 @@ public class PropertyBagTests
     public void GetObjectData_WithNonEmptyPropertyBag_SerializesDictionaryToSerializationInfo()
     {
         // Arrange
-        var propertyBag = new PropertyBag<string, int>();
+        PropertyBag<string, int> propertyBag = new PropertyBag<string, int>();
         propertyBag.Add("Key1", 1);
         propertyBag.Add("Key2", 2);
-        var serializationInfo = new SerializationInfo(typeof(PropertyBag<string, int>), new FormatterConverter());
+        SerializationInfo serializationInfo = new SerializationInfo(typeof(PropertyBag<string, int>), new FormatterConverter());
 
         // Act
         propertyBag.GetObjectData(serializationInfo);
@@ -122,8 +122,8 @@ public class PropertyBagTests
     public void GetObjectData_WithEmptyPropertyBag_DoesNotAddValuesToSerializationInfo()
     {
         // Arrange
-        var propertyBag = new PropertyBag<string, int>();
-        var serializationInfo = new SerializationInfo(typeof(PropertyBag<string, int>), new FormatterConverter());
+        PropertyBag<string, int> propertyBag = new PropertyBag<string, int>();
+        SerializationInfo serializationInfo = new SerializationInfo(typeof(PropertyBag<string, int>), new FormatterConverter());
 
         // Act
         propertyBag.GetObjectData(serializationInfo);

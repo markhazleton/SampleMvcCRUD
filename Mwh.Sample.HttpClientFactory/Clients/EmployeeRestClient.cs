@@ -49,7 +49,7 @@ public class EmployeeRestClient : RestClientBase, IEmployeeClient
     /// <returns>EmployeeModel.</returns>
     public async Task<EmployeeResponse?> FindEmployeeByIdAsync(int id, CancellationToken token)
     {
-        var result = await ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", null, HttpMethod.Get, token);
+        EmployeeResponse? result = await ExecuteAsync<EmployeeResponse>($"/api/employee/{id}", null, HttpMethod.Get, token);
 
         return result;
     }

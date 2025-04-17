@@ -19,10 +19,10 @@ public class EmployeeDatabaseServiceTests
 
     public EmployeeDatabaseServiceTests()
     {
-        var builder = new DbContextOptionsBuilder();
+        DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
         _ = builder.EnableSensitiveDataLogging(true);
         _ = builder.UseInMemoryDatabase("EmployeeDatabaseServiceTests");
-        var context = new EmployeeContext(builder.Options);
+        EmployeeContext context = new EmployeeContext(builder.Options);
         employeeService = new EmployeeDatabaseService(context);
         ct = default;
     }
@@ -38,7 +38,7 @@ public class EmployeeDatabaseServiceTests
         string?[]? namelist = null;
 
         // Act
-        var result = await employeeService.AddMultipleEmployeesAsync(namelist);
+        int result = await employeeService.AddMultipleEmployeesAsync(namelist);
 
         // Assert
         Assert.AreEqual(-1, result);
@@ -51,12 +51,12 @@ public class EmployeeDatabaseServiceTests
         string[] namelist = new string[] { "TestMultiple1", "TestMultiple2", "TestMultiple3" };
 
         // Act
-        var paging = new PagingParameterModel();
-        var initResults = (await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true)).Count();
-        var result = await employeeService.AddMultipleEmployeesAsync(namelist).ConfigureAwait(true);
-        var afterResults = (await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true)).Count();
-        var empList = await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true);
-        var emp1 = empList.Where(w => w.Name == namelist[0]).FirstOrDefault();
+        PagingParameterModel paging = new PagingParameterModel();
+        int initResults = (await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true)).Count();
+        int result = await employeeService.AddMultipleEmployeesAsync(namelist).ConfigureAwait(true);
+        int afterResults = (await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true)).Count();
+        System.Collections.Generic.IEnumerable<EmployeeDto> empList = await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true);
+        EmployeeDto? emp1 = empList.Where(w => w.Name == namelist[0]).FirstOrDefault();
 
         // Assert
         Assert.IsNotNull(emp1);
@@ -66,7 +66,7 @@ public class EmployeeDatabaseServiceTests
     public async Task DeleteAsync_ExpectedBehavior()
     {
         // Arrange
-        var employee = new EmployeeDto(
+        EmployeeDto employee = new EmployeeDto(
             99,
             "TestDelete",
             20,
@@ -77,9 +77,9 @@ public class EmployeeDatabaseServiceTests
         employee.Gender = GenderEnum.Male;
 
         // Act
-        var result = await employeeService.SaveAsync(employee, ct);
-        var id = result?.Resource?.Id ?? 0;
-        var afterResults = await employeeService.DeleteAsync(id, ct);
+        EmployeeResponse? result = await employeeService.SaveAsync(employee, ct);
+        int id = result?.Resource?.Id ?? 0;
+        EmployeeResponse afterResults = await employeeService.DeleteAsync(id, ct);
 
 
         // Assert
@@ -96,7 +96,7 @@ public class EmployeeDatabaseServiceTests
         int id = 0;
 
         // Act
-        var result = await employeeService.DeleteAsync(
+        EmployeeResponse result = await employeeService.DeleteAsync(
             id,
             ct);
 
@@ -111,7 +111,7 @@ public class EmployeeDatabaseServiceTests
         int id = 0;
 
         // Act
-        var result = await employeeService.FindEmployeeByIdAsync(id, ct);
+        EmployeeResponse result = await employeeService.FindEmployeeByIdAsync(id, ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -124,7 +124,7 @@ public class EmployeeDatabaseServiceTests
         // Arrange
 
         // Act
-        var result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), ct);
+        System.Collections.Generic.IEnumerable<EmployeeDto> result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -136,7 +136,7 @@ public class EmployeeDatabaseServiceTests
         // Arrange
 
         // Act
-        var result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), ct);
+        System.Collections.Generic.IEnumerable<EmployeeDto> result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -147,8 +147,8 @@ public class EmployeeDatabaseServiceTests
     {
         try
         {
-            var employeeMock = new EmployeeMock();
-            foreach (var dept in employeeMock.DepartmentCollection())
+            EmployeeMock employeeMock = new EmployeeMock();
+            foreach (DepartmentDto dept in employeeMock.DepartmentCollection())
             {
                 await employeeService.SaveAsync(dept, ct).ConfigureAwait(true);
             }
@@ -177,11 +177,11 @@ public class EmployeeDatabaseServiceTests
             EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = await employeeService.SaveAsync(item, ct);
+        EmployeeResponse result = await employeeService.SaveAsync(item, ct);
 
         result.Resource.Age = 50;
 
-        var UpdateResult = await employeeService.SaveAsync(result.Resource, ct);
+        EmployeeResponse UpdateResult = await employeeService.SaveAsync(result.Resource, ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -199,7 +199,7 @@ public class EmployeeDatabaseServiceTests
         EmployeeDto? item = null;
 
         // Act
-        var result = await employeeService.SaveAsync(item, ct);
+        EmployeeResponse result = await employeeService.SaveAsync(item, ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -222,7 +222,7 @@ public class EmployeeDatabaseServiceTests
             EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = await employeeService.SaveAsync(item, cancellationToken);
+        EmployeeResponse result = await employeeService.SaveAsync(item, cancellationToken);
 
         // Assert
         Assert.IsNotNull(result);
@@ -241,18 +241,18 @@ public class EmployeeDatabaseServiceTests
             EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = await employeeService.SaveAsync(item, ct);
+        EmployeeResponse result = await employeeService.SaveAsync(item, ct);
         if (result.Success)
             item = result.Resource;
 
-        var FindResult = await employeeService.FindEmployeeByIdAsync(item.Id, ct).ConfigureAwait(true);
+        EmployeeResponse FindResult = await employeeService.FindEmployeeByIdAsync(item.Id, ct).ConfigureAwait(true);
 
         if (FindResult.Success)
             item = FindResult.Resource;
 
         item.Age = 50;
 
-        var UpdateResult = await employeeService.SaveAsync(item, ct);
+        EmployeeResponse UpdateResult = await employeeService.SaveAsync(item, ct);
 
         if (UpdateResult.Success)
             item = UpdateResult.Resource;
@@ -284,7 +284,7 @@ public class EmployeeDatabaseServiceTests
             EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = await employeeService.UpdateAsync(id, item, ct);
+        EmployeeResponse result = await employeeService.UpdateAsync(id, item, ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -309,7 +309,7 @@ public class EmployeeDatabaseServiceTests
             "USA",
             EmployeeDepartmentEnum.IT);
 
-        var result = await employeeService.UpdateAsync(
+        EmployeeResponse result = await employeeService.UpdateAsync(
             id,
             item,
             ct);
@@ -338,7 +338,7 @@ public class EmployeeDatabaseServiceTests
             EmployeeDepartmentEnum.IT);
 
 
-        var result = await employeeService.UpdateAsync(
+        EmployeeResponse result = await employeeService.UpdateAsync(
             id,
             item,
             ct);
@@ -360,7 +360,7 @@ public class EmployeeDatabaseServiceTests
         EmployeeDto? employee = null;
 
         // Act
-        var result = await employeeService.UpdateAsync(
+        EmployeeResponse result = await employeeService.UpdateAsync(
             id,
             employee,
             ct);
@@ -378,7 +378,7 @@ public class EmployeeDatabaseServiceTests
         EmployeeDto? employee = null;
 
         // Act
-        var result = await employeeService.UpdateAsync(
+        EmployeeResponse result = await employeeService.UpdateAsync(
             id,
             employee,
             ct);

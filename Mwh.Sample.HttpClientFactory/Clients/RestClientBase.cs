@@ -39,7 +39,7 @@ public abstract class RestClientBase : IDisposable, IRestClientBase
 
     private HttpRequestMessage GetRequestMessage(string urlSegment, HttpMethod method)
     {
-        var request = new HttpRequestMessage(method, new Uri($"{BaseAPIUrl}{urlSegment}"));
+        HttpRequestMessage request = new HttpRequestMessage(method, new Uri($"{BaseAPIUrl}{urlSegment}"));
         request.Headers.TryAddWithoutValidation("UserID", UserID.ToString());
         request.Headers.TryAddWithoutValidation("Application", AppName);
         request.Headers.TryAddWithoutValidation("MachineName", Environment.MachineName);
@@ -86,7 +86,7 @@ public abstract class RestClientBase : IDisposable, IRestClientBase
 
         if (requestBody != null) request.Content = JsonContent.Create(requestBody);
 
-        using var response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token);
+        using HttpResponseMessage response = await Client().SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token);
         if (response.IsSuccessStatusCode)
         {
             // perhaps check some headers before deserializing

@@ -9,7 +9,7 @@ namespace Mwh.Sample.Repository.Tests.Models
         public void TestMethod1()
         {
             // Arrange
-            var department = new Department()
+            Department department = new Department()
             {
                 Name = "Department",
                 CreatedBy = "Test",

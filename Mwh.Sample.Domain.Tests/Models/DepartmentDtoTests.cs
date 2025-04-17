@@ -9,12 +9,12 @@ public class DepartmentDtoTests
     public void DepartmentDto_ConstructWithValidValues_Success()
     {
         // Arrange
-        var dept = EmployeeDepartmentEnum.IT;
+        EmployeeDepartmentEnum dept = EmployeeDepartmentEnum.IT;
 
         // Act
-        var department = new DepartmentDto(dept);
+        DepartmentDto department = new DepartmentDto(dept);
 
-        var mytest = department.ToString();
+        string mytest = department.ToString();
 
         // Assert
         Assert.AreEqual("Department Id=2, Name=IT", mytest);
@@ -51,7 +51,7 @@ public class DepartmentDtoTests
     public void DepartmentDto_ExpectedResults()
     {
         // Arrange
-        var departmentDto = new DepartmentDto(EmployeeDepartmentEnum.IT)
+        DepartmentDto departmentDto = new DepartmentDto(EmployeeDepartmentEnum.IT)
         {
             Employees = new EmployeeDto[]
         {
@@ -88,11 +88,11 @@ public class DepartmentDtoTests
     public void DepartmentDto_Equality()
     {
         // Arrange
-        var dept1 = new DepartmentDto(EmployeeDepartmentEnum.IT);
+        DepartmentDto dept1 = new DepartmentDto(EmployeeDepartmentEnum.IT);
 
-        var dept1_copy = new DepartmentDto(EmployeeDepartmentEnum.IT);
+        DepartmentDto dept1_copy = new DepartmentDto(EmployeeDepartmentEnum.IT);
 
-        var areEqual = (dept1 == dept1_copy);
+        bool areEqual = (dept1 == dept1_copy);
 
         // Assert
         Assert.IsTrue(areEqual);
@@ -101,13 +101,13 @@ public class DepartmentDtoTests
     public void DepartmentDto_Serialize()
     {
         // Arrange
-        var dept1 = new DepartmentDto(EmployeeDepartmentEnum.IT);
+        DepartmentDto dept1 = new DepartmentDto(EmployeeDepartmentEnum.IT);
 
-        var deptString = JsonSerializer.Serialize(dept1);
+        string deptString = JsonSerializer.Serialize(dept1);
 
-        var dept1_copy = JsonSerializer.Deserialize<DepartmentDto>(deptString);
+        DepartmentDto? dept1_copy = JsonSerializer.Deserialize<DepartmentDto>(deptString);
 
-        var areEqual = (dept1 == dept1_copy);
+        bool areEqual = (dept1 == dept1_copy);
 
         // Assert
         Assert.IsTrue(areEqual);

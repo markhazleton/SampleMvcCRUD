@@ -37,7 +37,7 @@ public class StatusController : BaseApiController
     [ProducesResponseType(typeof(List<ApiExplorerModel>), 200)]
     public IActionResult ApiExplorer()
     {
-        var result = _apiExplorer.ApiDescriptionGroups.Items.Select(s => new ApiExplorerModel()
+        List<ApiExplorerModel> result = _apiExplorer.ApiDescriptionGroups.Items.Select(s => new ApiExplorerModel()
         {
             GroupName = s.GroupName ?? "unknown",
             GroupItems = s.Items.Select(s => new ApiDescriptionModel()

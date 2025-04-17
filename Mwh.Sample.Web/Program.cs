@@ -1,14 +1,14 @@
 using Microsoft.OpenApi.Models;
 using Westwind.AspNetCore.Markdown;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-var vaultUri = Environment.GetEnvironmentVariable("VaultUri");
+string? vaultUri = Environment.GetEnvironmentVariable("VaultUri");
 if (vaultUri != null)
 {
     try
     {
-        var keyVaultEndpoint = new Uri(vaultUri);
+        Uri keyVaultEndpoint = new Uri(vaultUri);
         builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
     }
     catch (Exception ex)
@@ -51,7 +51,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 builder.Services.AddHealthChecks();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 app.UseSwagger();
 

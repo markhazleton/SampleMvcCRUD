@@ -85,13 +85,13 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
     {
         if (other == null) return 1;
         // Get a list of all public properties of the Person class
-        var properties = this.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        PropertyInfo[] properties = this.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
         // Compare the values of the public properties
-        foreach (var property in properties)
+        foreach (PropertyInfo property in properties)
         {
-            var value1 = property.GetValue(this);
-            var value2 = property.GetValue(other);
+            object? value1 = property.GetValue(this);
+            object? value2 = property.GetValue(other);
 
             if (value1 == null && value2 == null)
             {
@@ -125,13 +125,13 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
             return false;
 
         // Get a list of all public properties of the EmployeeDto class
-        var properties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        PropertyInfo[] properties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
         // Compare the values of the public properties
-        foreach (var property in properties)
+        foreach (PropertyInfo property in properties)
         {
-            var value1 = property.GetValue(this);
-            var value2 = property.GetValue(other);
+            object? value1 = property.GetValue(this);
+            object? value2 = property.GetValue(other);
 
             if (!AreEqual(value1, value2))
                 return false;
@@ -151,7 +151,7 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
     public override int GetHashCode()
     {
         // Serialize the object to a string
-        var serialized = JsonSerializer.Serialize(this);
+        string serialized = JsonSerializer.Serialize(this);
         // Get the hash code of the serialized string
         return serialized.GetHashCode();
     }
@@ -159,7 +159,7 @@ public class EmployeeDto : IComparable<EmployeeDto>, IEmployeeDto
 
     private void EnsureValidDetails()
     {
-        var exception = new EmployeeDtoValidationException();
+        EmployeeDtoValidationException exception = new EmployeeDtoValidationException();
         if (string.IsNullOrWhiteSpace(Name))
         {
             exception.AddError(nameof(Name), "Name is required.");

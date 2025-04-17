@@ -8,7 +8,7 @@ public class EmployeeTests
     public void Employee_Test()
     {
         // Arrange
-        var employee = new Employee
+        Employee employee = new Employee
         {
             Age = 20,
             Country = "USA",

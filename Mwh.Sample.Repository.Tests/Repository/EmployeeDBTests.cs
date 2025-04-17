@@ -11,7 +11,7 @@ public class EmployeeDBTests
     private readonly EmployeeDB employeeDB;
     public EmployeeDBTests()
     {
-        var builder = new DbContextOptionsBuilder();
+        DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
         _ = builder.EnableSensitiveDataLogging(true);
         _ = builder.UseInMemoryDatabase("EmployeeDBTests");
         employeeDB = new EmployeeDB(new EmployeeContext(builder.Options));
@@ -22,8 +22,8 @@ public class EmployeeDBTests
     {
         try
         {
-            var employeeMock = new EmployeeMock();
-            foreach (var dept in employeeMock.DepartmentCollection())
+            EmployeeMock employeeMock = new EmployeeMock();
+            foreach (DepartmentDto dept in employeeMock.DepartmentCollection())
             {
                 await employeeDB.UpdateAsync(dept).ConfigureAwait(true);
             }
@@ -45,7 +45,7 @@ public class EmployeeDBTests
         // Arrange
 
         // Act
-        var result = await employeeDB.DepartmentCollectionAsync();
+        System.Collections.Generic.List<DepartmentDto> result = await employeeDB.DepartmentCollectionAsync();
 
         // Assert
         Assert.IsNotNull(result);
@@ -56,7 +56,7 @@ public class EmployeeDBTests
         // Arrange
         int DeptId = 1;
         // Act
-        var result = await employeeDB.DepartmentAsync(DeptId);
+        DepartmentDto result = await employeeDB.DepartmentAsync(DeptId);
 
         // Assert
         Assert.IsNotNull(result);
@@ -67,11 +67,11 @@ public class EmployeeDBTests
         // Arrange
         int DeptId = 1;
         // Act
-        var result = await employeeDB.DepartmentAsync(DeptId);
+        DepartmentDto result = await employeeDB.DepartmentAsync(DeptId);
 
         result.Description = "Test Description";
         result.Name = "Test Name";
-        var result2 = await employeeDB.UpdateAsync(result);
+        DepartmentDto? result2 = await employeeDB.UpdateAsync(result);
         // Assert
         Assert.IsNotNull(result);
         Assert.IsNotNull(result2);
@@ -84,7 +84,7 @@ public class EmployeeDBTests
         // Arrange
         DepartmentDto? test = null;
         // Act
-        var result = await employeeDB.UpdateAsync(test);
+        DepartmentDto? result = await employeeDB.UpdateAsync(test);
         // Assert
         Assert.IsNull(result);
     }
@@ -101,7 +101,7 @@ public class EmployeeDBTests
         };
 
         // Act
-        var result = await employeeDB.UpdateAsync(test);
+        DepartmentDto? result = await employeeDB.UpdateAsync(test);
         // Assert
         Assert.IsNotNull(result);
         Assert.AreEqual(result.Id, 1);
@@ -111,13 +111,13 @@ public class EmployeeDBTests
     public async Task Department_Update_MaxPlusOne()
     {
         // Arrange
-        var depts = await employeeDB.DepartmentCollectionAsync();
-        var dept = depts.OrderByDescending(d => d.Id).First();
+        System.Collections.Generic.List<DepartmentDto> depts = await employeeDB.DepartmentCollectionAsync();
+        DepartmentDto dept = depts.OrderByDescending(d => d.Id).First();
 
         DepartmentDto? test = new((EmployeeDepartmentEnum)dept.Id);
 
         // Act
-        var result = await employeeDB.UpdateAsync(test);
+        DepartmentDto? result = await employeeDB.UpdateAsync(test);
         // Assert
         Assert.IsNotNull(result);
         Assert.AreEqual(result.Id, test.Id);
@@ -129,7 +129,7 @@ public class EmployeeDBTests
     public async Task Delete_StateUnderTest_ExpectedBehaviorNewEmployee()
     {
         // Arrange
-        var newEmp = new EmployeeDto(
+        EmployeeDto newEmp = new EmployeeDto(
             99,
             "Test User",
             33,
@@ -140,16 +140,16 @@ public class EmployeeDBTests
         // Act
 
         // Get Current count of employees
-        var initResult = await employeeDB.EmployeeCollectionAsync();
+        System.Collections.Generic.List<EmployeeDto> initResult = await employeeDB.EmployeeCollectionAsync();
 
         // Add New Employee with Update
-        var addResult = await employeeDB.UpdateAsync(newEmp);
+        EmployeeDto? addResult = await employeeDB.UpdateAsync(newEmp);
         // Get updated count of employees
-        var updatedResult = await employeeDB.EmployeeCollectionAsync();
+        System.Collections.Generic.List<EmployeeDto> updatedResult = await employeeDB.EmployeeCollectionAsync();
         /// Delete the Employee
-        var result = await employeeDB.DeleteEmployeeAsync(addResult.Id);
+        bool result = await employeeDB.DeleteEmployeeAsync(addResult.Id);
         // Get result after delete
-        var finalResult = await employeeDB.EmployeeCollectionAsync();
+        System.Collections.Generic.List<EmployeeDto> finalResult = await employeeDB.EmployeeCollectionAsync();
 
         // Assert
         Assert.IsNotNull(result);
@@ -165,7 +165,7 @@ public class EmployeeDBTests
         int ID = 0;
 
         // Act
-        var result = await employeeDB.DeleteEmployeeAsync(ID);
+        bool result = await employeeDB.DeleteEmployeeAsync(ID);
 
         // Assert
         Assert.IsFalse(result);
@@ -178,7 +178,7 @@ public class EmployeeDBTests
         int id = 0;
 
         // Act
-        var result = await employeeDB.EmployeeAsync(id);
+        EmployeeDto? result = await employeeDB.EmployeeAsync(id);
 
         // Assert
         Assert.IsNull(result);
@@ -190,7 +190,7 @@ public class EmployeeDBTests
         // Arrange
 
         // Act
-        var result = await employeeDB.EmployeeCollectionAsync();
+        System.Collections.Generic.List<EmployeeDto> result = await employeeDB.EmployeeCollectionAsync();
 
         // Assert
         Assert.IsNotNull(result);
@@ -200,7 +200,7 @@ public class EmployeeDBTests
     public async Task Update_StateUnderTest_ExpectedBehaviorNewEmployee()
     {
         // Arrange
-        var newEmp = new EmployeeDto(
+        EmployeeDto newEmp = new EmployeeDto(
             99,
             "Test User",
             33,
@@ -211,21 +211,21 @@ public class EmployeeDBTests
         // Act
 
         // Get Current count of employees
-        var initResult = await employeeDB.EmployeeCollectionAsync();
+        System.Collections.Generic.List<EmployeeDto> initResult = await employeeDB.EmployeeCollectionAsync();
 
         // Add New Employee with Update
-        var addResult = await employeeDB.UpdateAsync(newEmp);
+        EmployeeDto? addResult = await employeeDB.UpdateAsync(newEmp);
 
         // Get updated count of employees
-        var updatedResult = await employeeDB.EmployeeCollectionAsync();
+        System.Collections.Generic.List<EmployeeDto> updatedResult = await employeeDB.EmployeeCollectionAsync();
         /// Update the Employee
         addResult.Name = "Test User 2";
         addResult.Age = 44;
         addResult.State = "FL";
         addResult.Department = EmployeeDepartmentEnum.Accounting;
-        var result = await employeeDB.UpdateAsync(addResult);
+        EmployeeDto? result = await employeeDB.UpdateAsync(addResult);
         // Get result after update
-        var finalResult = await employeeDB.EmployeeAsync(result.Id);
+        EmployeeDto? finalResult = await employeeDB.EmployeeAsync(result.Id);
 
         // Assert
         Assert.IsNotNull(result);
@@ -241,7 +241,7 @@ public class EmployeeDBTests
     public async Task Update_NewEmployee()
     {
         // Arrange
-        var emp = new EmployeeDto(
+        EmployeeDto emp = new EmployeeDto(
             99,
             "Test User",
             33,
@@ -250,7 +250,7 @@ public class EmployeeDBTests
             EmployeeDepartmentEnum.IT);
 
         // Act
-        var result = await employeeDB.UpdateAsync(emp);
+        EmployeeDto? result = await employeeDB.UpdateAsync(emp);
 
         // Assert
         Assert.IsNotNull(result);
@@ -263,7 +263,7 @@ public class EmployeeDBTests
     public async Task Update_NewEmployeeWithId98()
     {
         // Arrange
-        var emp = new EmployeeDto(
+        EmployeeDto emp = new EmployeeDto(
             98,
             "Test User",
             33,
@@ -273,7 +273,7 @@ public class EmployeeDBTests
 
 
         // Act
-        var result = await employeeDB.UpdateAsync(emp);
+        EmployeeDto? result = await employeeDB.UpdateAsync(emp);
 
         // Assert
         Assert.IsNotNull(result);
@@ -287,7 +287,7 @@ public class EmployeeDBTests
         EmployeeDto? emp = null;
 
         // Act
-        var result = await employeeDB.UpdateAsync(emp);
+        EmployeeDto? result = await employeeDB.UpdateAsync(emp);
 
         // Assert
         Assert.IsNull(result);
