@@ -1,47 +1,160 @@
 # SampleMvcCRUD
-An Asp.Net MVC Application to demonstrate multiple ways of implementing a simple maintenance (CRUD) user interface
 
-[![.NET](https://github.com/markhazleton/samplemvccrud/actions/workflows/main_mwhsampleweb.yml/badge.svg)]([main_mwhsampleweb.yml](https://github.com/markhazleton/SampleMvcCRUD/blob/main/.github/workflows/main_mwhsampleweb.yml))
+An ASP.NET Core MVC application demonstrating multiple approaches to implementing a modern, maintainable CRUD (Create, Read, Update, Delete) user interface. This repository is designed as a reference and educational resource for developers interested in best practices for web application architecture, theming, API design, and deployment.
 
-[![.NET](https://github.com/markhazleton/samplemvccrud/actions/workflows/docker-image.yml/badge.svg)]([docker-image.yml](https://github.com/markhazleton/SampleMvcCRUD/blob/main/.github/workflows/docker-image.yml))
+[![.NET](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/main_mwhsampleweb.yml/badge.svg)](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/main_mwhsampleweb.yml)
+[![Docker Image](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml/badge.svg)](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml)
 
-https://github.com/markhazleton/SampleMvcCRUD/blob/main/.github/workflows/docker-image.yml
+---
 
+## 🌐 Live Demo & Deployments
 
-For deployments there are multiple approaches:
+- **Windows IIS VM (.NET 9):** [samplecrud.markhazleton.com](https://samplecrud.markhazleton.com/)
+- **Azure App Service (.NET 9, Linux, GitHub Actions):** [mwhsampleweb.azurewebsites.net](https://mwhsampleweb.azurewebsites.net/)
+- **Azure App Service (Docker Image):** [samplecrud.azurewebsites.net](https://samplecrud.azurewebsites.net/)
+- **Docker Hub Image:** [markhazleton/mwhsampleweb](https://hub.docker.com/r/markhazleton/mwhsampleweb)
 
-1)  *current* [GitHub Action](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/main_mwhsampleweb.yml) with Continuous Integration/Continuous Deployment (CI/CD) to Docker Hub and Azure App Services 
-1)  *current* [GitHub Action](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml) to push Docker Image to Docker Hub, then have Azure App Service configured to pull latest version from Docker Hub. 
-1)  [Azure DevOps project](https://dev.azure.com/markhazleton/SampleMvcCRUD) with Continuous Integration/Continuous Deployment (CI/CD) pipelines to Azure App Services 
+---
 
-Web application is hosted:
-- Microsoft Azure Virtual Machine - Windows 2022 IIS - Net 8 [samplecrud.markhazleton.com](https://samplecrud.markhazleton.com/)
-- Microsoft Azure AppService .Net 8 Linux Deployed via GitHub Actions [mwhsampleweb.azurewebsites.net](https://mwhsampleweb.azurewebsites.net/) 
-- Microsoft Azure AppService .Net 8 Linux Image from docker hub [samplecrud.azurewebsites.net](https://samplecrud.azurewebsites.net/) 
-- Docker Hub Image [markhazleton/mwhsampleweb](https://hub.docker.com/r/markhazleton/mwhsampleweb)
+## 🚀 Project Goals
 
-## Customization
+- Demonstrate multiple ways to build CRUD UIs in ASP.NET Core MVC
+- Showcase best practices for architecture, testing, and deployment
+- Provide a reference for theming, API design, and modern web techniques
+- Enable easy customization and extension for your own projects
 
-SampleMvcCrud is open source and you’re encouraged to contribute.
+---
 
-## Contributing
+## 🏗️ Features & Architecture
 
-You can contribute in several ways.
-- **Issues:** Provide a detailed report of any bugs you encounter and open an issue on [GitHub](https://github.com/markhazleton/SampleMvcCrud/issues).
-- **Documentation:** If you'd like to fix a typo or beef up the docs, you can fork the project, make your changes, and submit a pull request.
-- **Code:** Make a fix and submit it as a pull request. 
-- **Platform:**  Right now this has a MVC Web solution, I would love a React/Vue or Mobile version, but my skills are not there yet. 
+- **Multiple CRUD Implementations:**
+  - Classic MVC Controllers & Views
+  - Razor Pages
+  - Single Page (JavaScript-driven) UI
+  - Pivot Table integration (PivotTable.js)
+- **API-First Design:**
+  - RESTful endpoints for Employees and Departments
+  - Swagger/OpenAPI documentation ([API Docs](/swagger/))
+- **Modern UI/UX:**
+  - Responsive Bootstrap 5 layout
+  - [WebSpark.Bootswatch](https://www.nuget.org/packages/WebSpark.Bootswatch/) theme switcher (light/dark, instant theme change)
+  - Bootstrap Icons
+  - DataTables integration for advanced tables
+- **Security & Configuration:**
+  - Azure Key Vault integration for secrets
+  - App Insights telemetry
+  - Health checks endpoint (`/health`)
+- **DevOps & CI/CD:**
+  - GitHub Actions for build, test, Docker, and Azure deployment
+  - Azure DevOps pipeline example
+  - Dockerfile for containerized builds
+- **Testing:**
+  - Unit tests for domain and repository layers
+- **Extensible Architecture:**
+  - Clean separation of Domain, Repository, and Web projects
+  - Dependency Injection throughout
+  - Example HttpClientFactory usage
 
-## Author
+---
 
-Mark Hazleton
-+ https://markhazleton.com 
+## 🖌️ Theme Switcher (WebSpark.Bootswatch)
 
-## Thanks
-To the many teachers and developers that post sample code under open source license.
+This app features a dynamic theme switcher using [WebSpark.Bootswatch](https://www.nuget.org/packages/WebSpark.Bootswatch/):
 
-## Copyright and License
-Copyright 2018-2024 Mark Hazleton
-Code released under the MIT License.
+- Instantly change the site's look with any [Bootswatch](https://bootswatch.com/) theme
+- Light/dark mode support
+- User preferences are saved in the browser
+- Implemented via `<bootswatch-theme-switcher />` tag helper and JavaScript
 
+---
 
+## 🏁 Getting Started
+
+### Prerequisites
+
+- [.NET 9 SDK](https://dotnet.microsoft.com/download)
+- (Optional) [Docker](https://www.docker.com/)
+
+### Run Locally
+
+```pwsh
+# Clone the repository
+git clone https://github.com/markhazleton/SampleMvcCRUD.git
+cd SampleMvcCRUD
+
+# Restore and run the web app
+dotnet restore
+cd Mwh.Sample.Web
+dotnet run
+```
+
+Visit [https://localhost:5001](https://localhost:5001) in your browser.
+
+### Run with Docker
+
+```pwsh
+docker build -t mwhsampleweb ./Mwh.Sample.Web
+docker run -p 8080:80 mwhsampleweb
+```
+
+---
+
+## 🧩 Project Structure
+
+- `Mwh.Sample.Web/` - Main ASP.NET Core MVC web app
+- `Mwh.Sample.Domain/` - Domain models and interfaces
+- `Mwh.Sample.Repository/` - Data access and repository pattern
+- `Mwh.Sample.HttpClientFactory/` - HttpClient usage examples
+- `SampleMinimalApi/` - Minimal API example
+- `Mwh.Sample.Domain.Tests/`, `Mwh.Sample.Repository.Tests/` - Unit tests
+
+---
+
+## 📚 Key Techniques Demonstrated
+
+- **MVC, Razor Pages, and SPA patterns in one solution**
+- **API-first development with Swagger/OpenAPI**
+- **Modern Bootstrap theming and instant theme switching**
+- **Azure Key Vault for secure configuration**
+- **Health checks and Application Insights**
+- **CI/CD with GitHub Actions and Azure DevOps**
+- **Docker containerization**
+- **Extensible, testable architecture**
+
+---
+
+## 📝 Customization & Contribution
+
+SampleMvcCRUD is open source and welcomes contributions!
+
+- **Issues:** [File an issue](https://github.com/markhazleton/SampleMvcCRUD/issues)
+- **Pull Requests:** Fork, branch, and submit your improvements
+- **Documentation:** Help improve this README or add more docs
+- **Feature Ideas:** React/Vue/Mobile UI contributions are welcome
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+---
+
+## 👤 About the Author
+
+**Mark Hazleton** is a solutions architect and lifelong learner with a passion for building technology that delivers real business value. With extensive experience in both on-premises and cloud-based solutions, Mark has worked with organizations of all sizes—from small business websites to large enterprise projects. He is dedicated to pragmatic, outcome-focused software development, and is an advocate for clear communication, agile practices, and continuous learning.
+
+- [GitHub Profile](https://github.com/markhazleton)
+- [LinkedIn](https://www.linkedin.com/in/markhazleton)
+- [Personal Website](https://markhazleton.com)
+
+*For all questions, contributions, and support, please use the [GitHub repository issues](https://github.com/markhazleton/SampleMvcCRUD/issues) and pull requests. Community participation is welcome and encouraged!*
+
+---
+
+## 🙏 Acknowledgements
+
+Thanks to the open source community, teachers, and developers who share their knowledge and code.
+
+---
+
+## ⚖️ License
+
+Copyright 2018-2025 Mark Hazleton  
+Code released under the MIT License. See [LICENSE](LICENSE).
