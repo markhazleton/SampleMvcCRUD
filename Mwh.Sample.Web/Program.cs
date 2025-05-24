@@ -1,4 +1,7 @@
 using Microsoft.OpenApi.Models;
+using WebSpark.Bootswatch;
+using WebSpark.HttpClientUtility;
+using WebSpark.HttpClientUtility.RequestResult;
 using Westwind.AspNetCore.Markdown;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -42,6 +45,11 @@ SeedDatabase.DatabaseInitialization(new EmployeeContext());
 
 builder.Services.AddHttpClient();
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<IHttpRequestResultService, HttpRequestResultService>();
+
+// Add Bootswatch theme switcher services (includes StyleCache)
+builder.Services.AddBootswatchThemeSwitcher();
+
 builder.Services.AddMarkdown();
 builder.Services.AddSession();
 builder.Services.AddRazorPages();
@@ -71,6 +79,10 @@ app.UseSwaggerUI(options =>
 
 app.UseMyHttpContext();
 app.UseHttpsRedirection();
+
+// Use all Bootswatch features (includes StyleCache and static files)
+app.UseBootswatchAll();
+
 app.UseAuthorization();
 
 app.MapHealthChecks("/health");

@@ -33,6 +33,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.2" />
     <PackageReference Include="System.Formats.Asn1" Version="9.0.5" />
     <PackageReference Include="System.Text.Json" Version="9.0.5" />
+    <PackageReference Include="WebSpark.Bootswatch" Version="1.10.3" />
+    <PackageReference Include="WebSpark.HttpClientUtility" Version="1.0.8" />
     <PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.23.0" />
   </ItemGroup>
   <ItemGroup>
