@@ -1,6 +1,5 @@
 using Microsoft.OpenApi.Models;
 using WebSpark.Bootswatch;
-using WebSpark.HttpClientUtility;
 using WebSpark.HttpClientUtility.RequestResult;
 using Westwind.AspNetCore.Markdown;
 
