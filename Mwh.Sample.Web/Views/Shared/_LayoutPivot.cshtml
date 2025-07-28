@@ -83,6 +83,7 @@
 
     <main role="main" class="flex-shrink-0">
         <div class="container-fluid py-5 mt-5">
+            @await Html.PartialAsync("_Breadcrumb")
             @RenderBody()
         </div>
     </main>

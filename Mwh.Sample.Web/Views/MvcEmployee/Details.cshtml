@@ -1,10 +1,18 @@
 ﻿@model Mwh.Sample.Domain.Models.EmployeeDto
+@using Mwh.Sample.Web.Helpers
 
 @{
     ViewBag.Title = $"Employee Details - {Model.Name} | ASP.NET MVC CRUD Tutorial";
     ViewBag.MetaDescription = $"View detailed information for employee {Model.Name}. Learn how the Employee Details form fits into the MVC Controller form approach in ASP.NET MVC.";
     ViewBag.MetaKeywords = "ASP.NET MVC, Employee Details, CRUD tutorial, MVC Forms, employee management, form handling, model binding";
+    
+    var baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}";
 }
+
+<!-- Employee-specific structured data -->
+<script type="application/ld+json">
+@Html.Raw(StructuredDataHelper.GenerateEmployeeSchema(Model, baseUrl))
+</script>
 
 <div class="container mt-4">
     <div class="card shadow-sm">
