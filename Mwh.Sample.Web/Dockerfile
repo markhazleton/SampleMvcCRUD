@@ -8,12 +8,17 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
+# Set shell options for better error handling
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # Install Node.js and npm
 RUN apt-get update && \
-    apt-get install -y curl && \
+    apt-get install -y --no-install-recommends curl && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
-    npm install -g npm@latest
+    apt-get install -y --no-install-recommends nodejs && \
+    npm install -g npm@latest && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy the NuGet configuration and project files
 COPY ["nuget.config", "."]
