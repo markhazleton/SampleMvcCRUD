@@ -5,36 +5,38 @@
 
 @if (breadcrumbs.Count > 1)
 {
-    <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb bg-light rounded p-3 shadow-sm">
-            @for (int i = 0; i < breadcrumbs.Count; i++)
-            {
-                var breadcrumb = breadcrumbs[i];
-                var isLast = i == breadcrumbs.Count - 1;
+    <nav aria-label="breadcrumb" class="breadcrumb-nav bg-dark border-top border-secondary py-2">
+        <div class="container">
+            <ol class="breadcrumb mb-0">
+                @for (int i = 0; i < breadcrumbs.Count; i++)
+                {
+                    var breadcrumb = breadcrumbs[i];
+                    var isLast = i == breadcrumbs.Count - 1;
 
-                <li class="breadcrumb-item @(isLast ? "active" : "")" @(isLast ? "aria-current=\"page\"" : "")>
-                    @if (isLast)
-                    {
-                        <span class="text-muted">
-                            <i class="bi bi-geo-alt-fill me-1"></i>@breadcrumb.Name
-                        </span>
-                    }
-                    else
-                    {
-                        <a href="@breadcrumb.Url" class="text-decoration-none">
-                            @if (i == 0)
-                            {
-                                <i class="bi bi-house-door-fill me-1"></i>
-                            }
-                            else
-                            {
-                                <i class="bi bi-chevron-right me-1"></i>
-                            }
-                            @breadcrumb.Name
-                        </a>
-                    }
-                </li>
-            }
-        </ol>
+                    <li class="breadcrumb-item @(isLast ? "active" : "")" @(isLast ? "aria-current=\"page\"" : "")>
+                        @if (isLast)
+                        {
+                            <span class="text-light">
+                                <i class="bi bi-geo-alt-fill me-1"></i>@breadcrumb.Name
+                            </span>
+                        }
+                        else
+                        {
+                            <a href="@breadcrumb.Url" class="text-decoration-none text-light">
+                                @if (i == 0)
+                                {
+                                    <i class="bi bi-house-door-fill me-1"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-chevron-right me-1"></i>
+                                }
+                                @breadcrumb.Name
+                            </a>
+                        }
+                    </li>
+                }
+            </ol>
+        </div>
     </nav>
 }

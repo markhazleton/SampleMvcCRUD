@@ -14,7 +14,7 @@ public static class BreadcrumbHelper
     public static List<(string Name, string Url)> GenerateBreadcrumbs(ViewContext viewContext)
     {
         var breadcrumbs = new List<(string Name, string Url)>();
-        
+
         // Always start with Home
         breadcrumbs.Add(("Home", "/"));
 
@@ -23,7 +23,35 @@ public static class BreadcrumbHelper
         var actionName = viewContext.RouteData.Values["action"]?.ToString();
         var idValue = viewContext.RouteData.Values["id"]?.ToString();
 
-        // Skip if we're already on the home page
+        // Handle Razor Pages first - check if this is a Razor Page request
+        var isRazorPage = viewContext.ActionDescriptor.DisplayName?.Contains("Pages") == true ||
+                         viewContext.HttpContext.Request.Path.Value?.Contains("/EmployeeRazor") == true ||
+                         viewContext.ActionDescriptor.GetType().Name.Contains("CompiledPageActionDescriptor");
+
+        if (isRazorPage)
+        {
+            breadcrumbs.Add(("Employee Razor Pages", "/EmployeeRazor"));
+
+            var path = viewContext.HttpContext.Request.Path.Value;
+            var pageName = path?.Split('/', StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+
+            // Handle the case where URL is just /EmployeeRazor (Index page)
+            if (string.IsNullOrEmpty(pageName) || pageName.Equals("EmployeeRazor", StringComparison.OrdinalIgnoreCase))
+            {
+                // This is the Index page, we already have the breadcrumbs we need
+                return breadcrumbs;
+            }
+
+            // Handle other pages (Create, Edit, Details, Delete, etc.)
+            if (!string.IsNullOrEmpty(pageName))
+            {
+                AddPageBreadcrumb(breadcrumbs, pageName, idValue);
+            }
+
+            return breadcrumbs;
+        }
+
+        // Skip if we're already on the home page (for regular MVC controllers)
         if (string.IsNullOrEmpty(controllerName) || controllerName.Equals("Home", StringComparison.OrdinalIgnoreCase))
         {
             if (string.IsNullOrEmpty(actionName) || actionName.Equals("Index", StringComparison.OrdinalIgnoreCase))
@@ -64,21 +92,6 @@ public static class BreadcrumbHelper
                     AddActionBreadcrumb(breadcrumbs, actionName, idValue, $"/{controllerName}");
                 }
                 break;
-        }
-
-        // Handle Razor Pages
-        if (viewContext.ActionDescriptor.DisplayName?.Contains("Pages") == true || 
-            viewContext.HttpContext.Request.Path.Value?.Contains("/EmployeeRazor") == true)
-        {
-            breadcrumbs.Clear();
-            breadcrumbs.Add(("Home", "/"));
-            breadcrumbs.Add(("Employee Razor Pages", "/EmployeeRazor"));
-            
-            var pageName = viewContext.HttpContext.Request.Path.Value?.Split('/').LastOrDefault();
-            if (!string.IsNullOrEmpty(pageName) && !pageName.Equals("EmployeeRazor", StringComparison.OrdinalIgnoreCase))
-            {
-                AddPageBreadcrumb(breadcrumbs, pageName, idValue);
-            }
         }
 
         return breadcrumbs;
@@ -170,7 +183,7 @@ public static class BreadcrumbHelper
         {
             "Create" => "Create",
             "Edit" => "Edit",
-            "Details" => "Details", 
+            "Details" => "Details",
             "Delete" => "Delete",
             _ => actionName
         };
@@ -186,7 +199,7 @@ public static class BreadcrumbHelper
             "Create" => "Create",
             "Edit" => "Edit",
             "Details" => "Details",
-            "Delete" => "Delete", 
+            "Delete" => "Delete",
             _ => pageName
         };
     }

@@ -11,6 +11,7 @@ Allow: /
 # Disallow admin and API documentation areas
 Disallow: /swagger/
 Disallow: /health
+Disallow  /MvcEmployee/
 
 # Allow API endpoints for public access
 Allow: /api/

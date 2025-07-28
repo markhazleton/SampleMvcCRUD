@@ -58,7 +58,7 @@ public static class StructuredDataHelper
                 type = "SearchAction",
                 target = new
                 {
-                    type = "EntryPoint", 
+                    type = "EntryPoint",
                     urlTemplate = $"{baseUrl}/search?q={{search_term_string}}"
                 },
                 queryInput = "required name=search_term_string"
