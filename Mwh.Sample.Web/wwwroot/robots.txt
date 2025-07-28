@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Allow common crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Disallow admin and API documentation areas
+Disallow: /swagger/
+Disallow: /health
+
+# Allow API endpoints for public access
+Allow: /api/
+
+# Sitemap location (will be dynamically generated)
+Sitemap: /sitemap.xml
