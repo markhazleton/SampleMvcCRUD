@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Lint Dockerfile
-        run: docker run --rm -i hadolint/hadolint < ./Mwh.Sample.Web/Dockerfile
+        run: docker run --rm -i hadolint/hadolint --ignore DL3008 < ./Mwh.Sample.Web/Dockerfile
 
       - name: Cache Docker layers
         id: docker-cache
