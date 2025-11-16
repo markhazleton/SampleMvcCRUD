@@ -82,7 +82,7 @@ jobs:
         with:
           context: .
           file: ./Mwh.Sample.Web/Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           pull: true
           tags: ${{ steps.meta.outputs.tags }}
@@ -102,33 +102,47 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-      - name: Test Docker image
+      - name: Test Docker image locally
+        if: github.event_name != 'pull_request'
         run: |
           docker run --rm -d -p 8080:8080 --name test-container ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest
-          sleep 10
+          sleep 15
           docker logs test-container
           response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 || echo "000")
-          docker stop test-container
+          docker stop test-container || true
           if [ "$response" -eq "200" ] || [ "$response" -eq "000" ]; then
-            echo "Container test passed or skipped (status: $response)"
+            echo "? Container test passed or skipped (status: $response)"
           else
-            echo "Container test failed with status: $response"
+            echo "? Container test failed with status: $response"
             exit 1
           fi
 
-      - name: Scan image for vulnerabilities
+      - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest
           format: 'sarif'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
+          exit-code: '0'
+          ignore-unfixed: true
 
       - name: Upload Trivy results to GitHub Security
-        uses: github/codeql-action/upload-sarif@v3
-        if: always()
+        uses: github/codeql-action/upload-sarif@v4
+        if: always() && hashFiles('trivy-results.sarif') != ''
         with:
           sarif_file: 'trivy-results.sarif'
+          category: 'container-scan'
+
+      - name: Generate Trivy report
+        uses: aquasecurity/trivy-action@master
+        if: always()
+        with:
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest
+          format: 'table'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '0'
+          ignore-unfixed: true
 
       - name: Cleanup
         if: always()

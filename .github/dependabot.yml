@@ -1,0 +1,150 @@
+# Dependabot configuration for automatic dependency updates
+# See: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "markhazleton"
+
+  # NuGet dependencies for main web project
+  - package-ecosystem: "nuget"
+    directory: "/Mwh.Sample.Web"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "America/New_York"
+    labels:
+      - "dependencies"
+      - "nuget"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    open-pull-requests-limit: 10
+    ignore:
+      # Ignore major version updates for Microsoft packages to avoid breaking changes
+      - dependency-name: "Microsoft.*"
+        update-types: ["version-update:semver-major"]
+
+  # NuGet dependencies for domain project
+  - package-ecosystem: "nuget"
+    directory: "/Mwh.Sample.Domain"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "America/New_York"
+    labels:
+      - "dependencies"
+      - "nuget"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  # NuGet dependencies for repository project
+  - package-ecosystem: "nuget"
+    directory: "/Mwh.Sample.Repository"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "America/New_York"
+    labels:
+      - "dependencies"
+      - "nuget"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  # NuGet dependencies for console project
+  - package-ecosystem: "nuget"
+    directory: "/Mwh.Sample.Console"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "America/New_York"
+    labels:
+      - "dependencies"
+      - "nuget"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  # NuGet dependencies for test projects
+  - package-ecosystem: "nuget"
+    directory: "/Mwh.Sample.Domain.Tests"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "America/New_York"
+    labels:
+      - "dependencies"
+      - "nuget"
+      - "tests"
+    commit-message:
+      prefix: "test"
+      include: "scope"
+
+  - package-ecosystem: "nuget"
+    directory: "/Mwh.Sample.Repository.Tests"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "America/New_York"
+    labels:
+      - "dependencies"
+      - "nuget"
+      - "tests"
+    commit-message:
+      prefix: "test"
+      include: "scope"
+
+  # npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/Mwh.Sample.Web"
+    schedule:
+      interval: "weekly"
+      day: "wednesday"
+      time: "09:00"
+      timezone: "America/New_York"
+    labels:
+      - "dependencies"
+      - "npm"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    open-pull-requests-limit: 10
+    versioning-strategy: increase
+
+  # Docker base image updates
+  - package-ecosystem: "docker"
+    directory: "/Mwh.Sample.Web"
+    schedule:
+      interval: "weekly"
+      day: "thursday"
+      time: "09:00"
+      timezone: "America/New_York"
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "docker"
+      include: "scope"
