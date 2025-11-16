@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nFix failing GitHub Actions workflows\n\n- Remove check for non-existent Mwh.Sample.HttpClientFactory directory in Docker workflow\n- Add libgdiplus installation step for System.Drawing GDI+ tests in Azure workflow\n- Fix Trivy SARIF upload to only run when scan succeeds\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
