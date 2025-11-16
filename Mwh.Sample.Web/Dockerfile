@@ -1,11 +1,14 @@
-# Use the .NET 9.0 ASP.NET runtime as the base image
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+# Pin the .NET 10 runtime/SDK (nightly until GA) so restore supports net10.0
+ARG DOTNET_VERSION=10.0
+
+# Use the .NET 10 ASP.NET runtime as the base image
+FROM mcr.microsoft.com/dotnet/nightly/aspnet:${DOTNET_VERSION} AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-# Use the .NET 9.0 SDK image for building the application
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+# Use the .NET 10 SDK image for building the application
+FROM mcr.microsoft.com/dotnet/nightly/sdk:${DOTNET_VERSION} AS build
 WORKDIR /src
 
 # Set shell options for better error handling
