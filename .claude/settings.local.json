@@ -5,7 +5,11 @@
       "Bash(gh run view:*)",
       "Bash(git add:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\nFix failing GitHub Actions workflows\n\n- Remove check for non-existent Mwh.Sample.HttpClientFactory directory in Docker workflow\n- Add libgdiplus installation step for System.Drawing GDI+ tests in Azure workflow\n- Fix Trivy SARIF upload to only run when scan succeeds\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nMigrate from System.Drawing to SkiaSharp for cross-platform image processing\n\n- Replace System.Drawing.Common with SkiaSharp (v3.116.0) for MIT-licensed, cross-platform image support\n- Update ImageExtensions to use SKBitmap and SKSamplingOptions APIs\n- Update BaseController image upload to use SkiaSharp encoding\n- Update ImageExtensionsTests to use SkiaSharp types\n- Remove libgdiplus dependency from Azure workflow (no longer needed)\n- All 192 tests now pass on both Windows and Linux without native library dependencies\n\nBenefits:\n- No more libgdiplus dependency issues on Linux\n- Pure cross-platform solution with native library bundles\n- MIT license (no commercial restrictions)\n- Modern API using SKSamplingOptions instead of deprecated SKFilterQuality\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
