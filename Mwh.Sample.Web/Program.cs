@@ -1,4 +1,5 @@
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using WebSpark.Bootswatch;
 using WebSpark.HttpClientUtility.RequestResult;
 using Westwind.AspNetCore.Markdown;
@@ -26,7 +27,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
-        Version = "v8",
+        Version = "v10",
         Title = "Sample CRUD API",
         Description = "A Sample CRUD for Employees",
         Contact = new OpenApiContact
@@ -42,8 +43,11 @@ builder.Services.AddScoped<IEmployeeService, EmployeeDatabaseService>();
 builder.Services.AddScoped<IEmployeeClient, EmployeeDatabaseClient>();
 SeedDatabase.DatabaseInitialization(new EmployeeContext());
 
+// HttpClient factory available for future external API integrations
 builder.Services.AddHttpClient();
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+// Add HttpRequestResultService required by Bootswatch
 builder.Services.AddScoped<IHttpRequestResultService, HttpRequestResultService>();
 
 // Add Bootswatch theme switcher services (includes StyleCache)
@@ -64,7 +68,7 @@ app.UseSwagger();
 
 app.UseSwaggerUI(options =>
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample CRUD API v8");
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample CRUD API v10");
 
     // Set the Swagger UI browser document title.
     options.DocumentTitle = "Sample CRUD API ";

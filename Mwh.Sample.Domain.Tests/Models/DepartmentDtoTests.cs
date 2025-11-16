@@ -44,7 +44,16 @@ public class DepartmentDtoTests
         DepartmentDto department = new DepartmentDto(EmployeeDepartmentEnum.IT);
 
         // Act and Assert
-        Assert.ThrowsException<ArgumentException>(() => department.Name = "   ");
+        bool exceptionThrown = false;
+        try
+        {
+            department.Name = "   ";
+        }
+        catch (ArgumentException)
+        {
+            exceptionThrown = true;
+        }
+        Assert.IsTrue(exceptionThrown, "Expected ArgumentException was not thrown");
     }
 
     [TestMethod]

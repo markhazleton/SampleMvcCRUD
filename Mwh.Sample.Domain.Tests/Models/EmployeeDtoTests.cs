@@ -1,4 +1,3 @@
-
 namespace Mwh.Sample.Domain.Tests.Models;
 
 /// <summary>
@@ -183,7 +182,16 @@ public class EmployeeDtoTests
         EmployeeDepartmentEnum department = EmployeeDepartmentEnum.IT;
 
         // Act and Assert
-        Assert.ThrowsException<EmployeeDtoValidationException>(() => new EmployeeDto(id, name, age, state, country, department));
+        bool exceptionThrown = false;
+        try
+        {
+            _ = new EmployeeDto(id, name, age, state, country, department);
+        }
+        catch (EmployeeDtoValidationException)
+        {
+            exceptionThrown = true;
+        }
+        Assert.IsTrue(exceptionThrown, "Expected EmployeeDtoValidationException was not thrown");
     }
 
 

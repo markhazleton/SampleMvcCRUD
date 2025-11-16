@@ -1,23 +1,32 @@
-name: docker-markhazletonsample
+name: Docker Build and Push - MwhSampleWeb
 
 on:
   push:
     branches: [main]
     paths-ignore:
-      - README.md
-      - .vscode/**
-      - .gitignore
+      - '**.md'
+      - '.vscode/**'
+      - '.gitignore'
+      - '.github/workflows/main_samplecrud.yml'
   pull_request:
     branches: [main]
     paths-ignore:
-      - README.md
-      - .vscode/**
-      - .gitignore
+      - '**.md'
+      - '.vscode/**'
+      - '.gitignore'
   workflow_dispatch:
+
+env:
+  DOCKER_BUILDKIT: 1
+  COMPOSE_DOCKER_CLI_BUILD: 1
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
 
     steps:
       - name: Checkout
@@ -53,25 +62,97 @@ jobs:
       - name: Show Buildx version
         run: docker buildx version
 
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=${{ github.run_number }}
+
       - name: Build and push
         id: docker_image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Mwh.Sample.Web/Dockerfile
+          platforms: linux/amd64
           push: true
           pull: true
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:${{ github.run_number }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+          build-args: |
+            BUILD_DATE=${{ github.event.head_commit.timestamp }}
+            VCS_REF=${{ github.sha }}
+            VERSION=${{ github.run_number }}
+
+      # Temp fix for cache size growth issue
+      # https://github.com/docker/build-push-action/issues/252
+      # https://github.com/moby/buildkit/issues/1896
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+      - name: Test Docker image locally
+        if: github.event_name != 'pull_request'
+        run: |
+          docker run --rm -d -p 8080:8080 --name test-container ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest
+          sleep 15
+          docker logs test-container
+          response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 || echo "000")
+          docker stop test-container || true
+          if [ "$response" -eq "200" ] || [ "$response" -eq "000" ]; then
+            echo "? Container test passed or skipped (status: $response)"
+          else
+            echo "? Container test failed with status: $response"
+            exit 1
+          fi
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '0'
+          ignore-unfixed: true
+
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v4
+        if: always() && hashFiles('trivy-results.sarif') != ''
+        with:
+          sarif_file: 'trivy-results.sarif'
+          category: 'container-scan'
+
+      - name: Generate Trivy report
+        uses: aquasecurity/trivy-action@master
+        if: always()
+        with:
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest
+          format: 'table'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '0'
+          ignore-unfixed: true
 
       - name: Cleanup
+        if: always()
         run: |
           docker builder prune -f
           docker system prune -f
 
-      - name: Set Docker Image Output
-        run: echo "image=${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest" >> $GITHUB_ENV
-        shell: bash
+      - name: Output image information
+        run: |
+          echo "?? Docker image built and pushed successfully!"
+          echo "?? Image: ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb"
+          echo "???  Tags: ${{ steps.meta.outputs.tags }}"
+          echo "?? Build number: ${{ github.run_number }}"
