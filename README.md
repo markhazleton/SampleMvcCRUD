@@ -6,6 +6,17 @@ A .NET 10 (ASP.NET Core) application demonstrating multiple approaches to implem
 [![Docker Image](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml/badge.svg)](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml)
 
 ---
+## Project History
+- **2019** – Launched the repository, delivered the first MVC CRUD walkthrough with AJAX partials, and set the contributor/code-of-conduct foundation.
+- **2020** – Experimented with React and Blazor front ends, standardized REST/SOAP client abstractions, and stood up Azure Pipelines plus App Service deployments.
+- **2021** – Completed the .NET 5→6 modernization, layered in Bootstrap 5 theming, hardened CI/CD (GitHub Actions + Azure Pipelines), and increased automated tests.
+- **2022-2023** – Adopted .NET 7 then .NET 8, added TreeView/PivotTable demos, refined guard clauses and validation, and expanded Docker/Azure Linux automation.
+- **2024-2025** – Introduced the minimal API sample, Aspire experiments, Bootswatch theme switching, extensive workflow tuning, and the .NET 9 then .NET 10 migrations.
+- **Tagging** – Milestones in the [CHANGELOG](CHANGELOG.md) include suggested tags (e.g., `net10-ga`, `ui-bootswatch-switcher`) you can apply in git for quick navigation.
+
+See the [CHANGELOG](CHANGELOG.md) for the full milestone timeline, and open `reports/git-spark-report.html` to explore commit velocity visualized by Mark Hazleton's `git-spark` npm package.
+
+---
 ## Live Deployments
 - Windows IIS VM (.NET 9): https://samplecrud.markhazleton.com/
 - Azure App Service (.NET 9, Linux, GitHub Actions): https://mwhsampleweb.azurewebsites.net/
