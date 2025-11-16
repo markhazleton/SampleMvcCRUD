@@ -1,160 +1,120 @@
 # SampleMvcCRUD
 
-An ASP.NET Core MVC application demonstrating multiple approaches to implementing a modern, maintainable CRUD (Create, Read, Update, Delete) user interface. This repository is designed as a reference and educational resource for developers interested in best practices for web application architecture, theming, API design, and deployment.
+A .NET 10 (ASP.NET Core) application demonstrating multiple approaches to implementing a modern, maintainable CRUD (Create, Read, Update, Delete) user interface for Employee and Department management. This repository is a reference and educational resource that showcases patterns (MVC, Razor Pages, SPA-style), tooling, theming, and deployment techniques.
 
-[![.NET](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/main_mwhsampleweb.yml/badge.svg)](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/main_mwhsampleweb.yml)
+[![.NET Build & Tests](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/main_mwhsampleweb.yml/badge.svg)](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/main_mwhsampleweb.yml)
 [![Docker Image](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml/badge.svg)](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml)
 
 ---
-
-## 🌐 Live Demo & Deployments
-
-- **Windows IIS VM (.NET 9):** [samplecrud.markhazleton.com](https://samplecrud.markhazleton.com/)
-- **Azure App Service (.NET 9, Linux, GitHub Actions):** [mwhsampleweb.azurewebsites.net](https://mwhsampleweb.azurewebsites.net/)
-- **Azure App Service (Docker Image):** [samplecrud.azurewebsites.net](https://samplecrud.azurewebsites.net/)
-- **Docker Hub Image:** [markhazleton/mwhsampleweb](https://hub.docker.com/r/markhazleton/mwhsampleweb)
+## Live Deployments
+- Windows IIS VM (.NET 9): https://samplecrud.markhazleton.com/
+- Azure App Service (.NET 9, Linux, GitHub Actions): https://mwhsampleweb.azurewebsites.net/
+- Azure App Service (Docker Image): https://samplecrud.azurewebsites.net/
+- Docker Hub Image: https://hub.docker.com/r/markhazleton/mwhsampleweb
 
 ---
-
-## 🚀 Project Goals
-
-- Demonstrate multiple ways to build CRUD UIs in ASP.NET Core MVC
-- Showcase best practices for architecture, testing, and deployment
-- Provide a reference for theming, API design, and modern web techniques
-- Enable easy customization and extension for your own projects
+## Goals
+- Demonstrate multiple CRUD UI strategies
+- Showcase clean architecture, DI, and unit testing
+- Provide examples of theming and UX enhancements
+- Show Azure deployment and containerization approaches
 
 ---
-
-## 🏗️ Features & Architecture
-
-- **Multiple CRUD Implementations:**
-  - Classic MVC Controllers & Views
-  - Razor Pages
-  - Single Page (JavaScript-driven) UI
-  - Pivot Table integration (PivotTable.js)
-- **API-First Design:**
-  - RESTful endpoints for Employees and Departments
-  - Swagger/OpenAPI documentation ([API Docs](/swagger/))
-- **Modern UI/UX:**
-  - Responsive Bootstrap 5 layout
-  - [WebSpark.Bootswatch](https://www.nuget.org/packages/WebSpark.Bootswatch/) theme switcher (light/dark, instant theme change)
-  - Bootstrap Icons
-  - DataTables integration for advanced tables
-- **Security & Configuration:**
-  - Azure Key Vault integration for secrets
-  - App Insights telemetry
-  - Health checks endpoint (`/health`)
-- **DevOps & CI/CD:**
-  - GitHub Actions for build, test, Docker, and Azure deployment
-  - Azure DevOps pipeline example
-  - Dockerfile for containerized builds
-- **Testing:**
-  - Unit tests for domain and repository layers
-- **Extensible Architecture:**
-  - Clean separation of Domain, Repository, and Web projects
-  - Dependency Injection throughout
-  - Example HttpClientFactory usage
+## Features & Architecture
+- UI Patterns:
+  - MVC Controllers & Views (traditional multi-view CRUD)
+  - Razor Pages (page-centric CRUD)
+  - Single Page style (AJAX + partial views + modals)
+  - Pivot Table reporting (PivotTable.js)
+- API Endpoints:
+  - REST endpoints for Employees & Departments (Swagger/OpenAPI enabled)
+- Theming & UX:
+  - Bootswatch theme switcher (light/dark, instant swap)
+  - Bootstrap 5 + Bootstrap Icons
+  - Modal-based CRUD forms via jQuery/AJAX
+- Data Layer:
+  - In-memory EF Core database (EmployeeContext)
+  - Repository/service pattern via `IEmployeeService` & `EmployeeDatabaseService`
+- Observability & Health:
+  - Application Insights telemetry
+  - Health checks at `/health`
+- Security & Secrets:
+  - Optional Azure Key Vault integration (via `VaultUri` environment variable)
+- DevOps & CI/CD:
+  - GitHub Actions: build, test, Docker, Azure App Service deploy
+  - Dockerfile for container builds
+- Testing:
+  - Domain & Repository unit test projects
 
 ---
-
-## 🖌️ Theme Switcher (WebSpark.Bootswatch)
-
-This app features a dynamic theme switcher using [WebSpark.Bootswatch](https://www.nuget.org/packages/WebSpark.Bootswatch/):
-
-- Instantly change the site's look with any [Bootswatch](https://bootswatch.com/) theme
-- Light/dark mode support
-- User preferences are saved in the browser
-- Implemented via `<bootswatch-theme-switcher />` tag helper and JavaScript
+## Technology Stack
+- .NET 10 / C#
+- ASP.NET Core MVC & Razor Pages
+- Entity Framework Core (InMemory & SqlServer packages referenced for future use)
+- Swashbuckle (Swagger/OpenAPI)
+- Bootswatch theming (WebSpark.Bootswatch & WebSpark.HttpClientUtility)
+- Markdown rendering (Westwind.AspNetCore.Markdown)
 
 ---
+## HttpClient Usage
+HttpClient is utilized via `WebSpark.HttpClientUtility` package which provides `IHttpRequestResultService` for making HTTP requests. This is actively used by `WebSpark.Bootswatch` to fetch Bootswatch theme data from CDN sources, enabling the dynamic theme switcher functionality. The base `AddHttpClient()` factory registration is also available for future external API integrations.
 
-## 🏁 Getting Started
-
+---
+## Getting Started
 ### Prerequisites
-
-- [.NET 9 SDK](https://dotnet.microsoft.com/download)
-- (Optional) [Docker](https://www.docker.com/)
+- .NET 10 SDK
+- (Optional) Docker
 
 ### Run Locally
-
 ```pwsh
-# Clone the repository
 git clone https://github.com/markhazleton/SampleMvcCRUD.git
 cd SampleMvcCRUD
-
-# Restore and run the web app
-dotnet restore
-cd Mwh.Sample.Web
-dotnet run
+ dotnet restore
+ cd Mwh.Sample.Web
+ dotnet run
 ```
-
-Visit [https://localhost:5001](https://localhost:5001) in your browser.
+Visit https://localhost:5001
 
 ### Run with Docker
-
 ```pwsh
 docker build -t mwhsampleweb ./Mwh.Sample.Web
 docker run -p 8080:80 mwhsampleweb
 ```
 
 ---
-
-## 🧩 Project Structure
-
-- `Mwh.Sample.Web/` - Main ASP.NET Core MVC web app
-- `Mwh.Sample.Domain/` - Domain models and interfaces
-- `Mwh.Sample.Repository/` - Data access and repository pattern
-- `Mwh.Sample.HttpClientFactory/` - HttpClient usage examples
-- `SampleMinimalApi/` - Minimal API example
-- `Mwh.Sample.Domain.Tests/`, `Mwh.Sample.Repository.Tests/` - Unit tests
-
----
-
-## 📚 Key Techniques Demonstrated
-
-- **MVC, Razor Pages, and SPA patterns in one solution**
-- **API-first development with Swagger/OpenAPI**
-- **Modern Bootstrap theming and instant theme switching**
-- **Azure Key Vault for secure configuration**
-- **Health checks and Application Insights**
-- **CI/CD with GitHub Actions and Azure DevOps**
-- **Docker containerization**
-- **Extensible, testable architecture**
+## Project Structure
+```
+Mwh.Sample.Web/              Web application (MVC + Razor Pages + SPA-style CRUD)
+Mwh.Sample.Domain/           Domain models (Employee/Department DTOs, responses)
+Mwh.Sample.Repository/       EF Core context, service implementations, mock generator
+Mwh.Sample.Domain.Tests/     Unit tests for domain logic
+Mwh.Sample.Repository.Tests/ Unit tests for repository/service layer
+Mwh.Sample.Console/          Console app seeding & demonstration (SQLite EF example)
+```
+(There is no HttpClientFactory sample project; previous reference removed.)
 
 ---
-
-## 📝 Customization & Contribution
-
-SampleMvcCRUD is open source and welcomes contributions!
-
-- **Issues:** [File an issue](https://github.com/markhazleton/SampleMvcCRUD/issues)
-- **Pull Requests:** Fork, branch, and submit your improvements
-- **Documentation:** Help improve this README or add more docs
-- **Feature Ideas:** React/Vue/Mobile UI contributions are welcome
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+## Data Model
+Employees belong to Departments. CRUD operations demonstrate validation, paging (`PagingParameterModel`), and simple relationships.
 
 ---
-
-## 👤 About the Author
-
-**Mark Hazleton** is a solutions architect and lifelong learner with a passion for building technology that delivers real business value. With extensive experience in both on-premises and cloud-based solutions, Mark has worked with organizations of all sizes—from small business websites to large enterprise projects. He is dedicated to pragmatic, outcome-focused software development, and is an advocate for clear communication, agile practices, and continuous learning.
-
-- [GitHub Profile](https://github.com/markhazleton)
-- [LinkedIn](https://www.linkedin.com/in/markhazleton)
-- [Personal Website](https://markhazleton.com)
-
-*For all questions, contributions, and support, please use the [GitHub repository issues](https://github.com/markhazleton/SampleMvcCRUD/issues) and pull requests. Community participation is welcome and encouraged!*
+## Swagger/OpenAPI
+Interactive API docs available at `/swagger` when running locally or deployed.
 
 ---
-
-## 🙏 Acknowledgements
-
-Thanks to the open source community, teachers, and developers who share their knowledge and code.
+## Theme Switching
+Implemented via Bootswatch services and `<bootswatch-theme-switcher />` integration.
 
 ---
+## Health & Status
+- `/health` returns liveness status
+- `/status` provides application metadata
 
-## ⚖️ License
+---
+## Contributing
+Contributions welcome. Submit issues or PRs.
 
-Copyright 2018-2025 Mark Hazleton  
-Code released under the MIT License. See [LICENSE](LICENSE).
+---
+## License
+MIT License © 2018-2025 Mark Hazleton
+See `LICENSE` for details.

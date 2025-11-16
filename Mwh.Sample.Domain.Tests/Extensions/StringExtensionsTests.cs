@@ -1,3 +1,4 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Mwh.Sample.Domain.Tests.Extensions;
 
@@ -172,11 +173,19 @@ public class StringExtensionsTests
     /// Defines the test method IndexOfNthTestValueNegativeNth. Throws exception
     /// </summary>
     [TestMethod()]
-    [ExpectedException(typeof(ArgumentException))]
     public void IndexOfNthTestValueNegativeNth()
     {
         string myTest = "333333";
-        int test = myTest.IndexOfNth("3", -1);
+        bool exceptionThrown = false;
+        try
+        {
+            myTest.IndexOfNth("3", -1);
+        }
+        catch (ArgumentException)
+        {
+            exceptionThrown = true;
+        }
+        Assert.IsTrue(exceptionThrown, "Expected ArgumentException was not thrown");
     }
 
     /// <summary>
@@ -198,17 +207,6 @@ public class StringExtensionsTests
         string myTest = "01";
         Assert.AreEqual("01", myTest.Left(5));
     }
-    /// <summary>
-    /// Defines the test method LeftTest.
-    /// </summary>
-    [ExpectedException(typeof(ArgumentException))]
-    [TestMethod()]
-    public void LeftTest_NegativeLength()
-    {
-        string myTest = "01";
-        _ = myTest.Left(-1);
-    }
-
     /// <summary>
     /// Defines the test method LeftTest.
     /// </summary>
@@ -237,6 +235,25 @@ public class StringExtensionsTests
     {
         string? myTest = null;
         Assert.AreEqual(string.Empty, myTest.Left(2));
+    }
+
+    /// <summary>
+    /// Defines the test method LeftTest.
+    /// </summary>
+    [TestMethod()]
+    public void LeftTest_NegativeLength()
+    {
+        string myTest = "01";
+        bool exceptionThrown = false;
+        try
+        {
+            _ = myTest.Left(-1);
+        }
+        catch (ArgumentException)
+        {
+            exceptionThrown = true;
+        }
+        Assert.IsTrue(exceptionThrown, "Expected ArgumentException was not thrown");
     }
 
     /// <summary>
