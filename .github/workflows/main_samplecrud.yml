@@ -7,7 +7,18 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - '**.md'
+      - '.vscode/**'
+      - '.gitignore'
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
+
+env:
+  DOTNET_VERSION: '10.0.x'
+  AZURE_WEBAPP_NAME: 'SampleCRUD'
 
 jobs:
   build:
@@ -21,13 +32,42 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0'
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Cache .NET packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Cache npm packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Restore dependencies
+        run: dotnet restore
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+
+      - name: Publish test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: '**/TestResults/*.trx'
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish Mwh.Sample.Web/Mwh.Sample.Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp --no-restore
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -62,7 +102,22 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'SampleCRUD'
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
           package: .
+
+      - name: Verify deployment
+        run: |
+          echo "Deployment successful!"
+          echo "Application URL: ${{ steps.deploy-to-webapp.outputs.webapp-url }}"
           
+      - name: Health check
+        run: |
+          sleep 30
+          response=$(curl -s -o /dev/null -w "%{http_code}" ${{ steps.deploy-to-webapp.outputs.webapp-url }})
+          if [ $response -eq 200 ]; then
+            echo "Health check passed with status code: $response"
+          else
+            echo "Health check failed with status code: $response"
+            exit 1
+          fi
