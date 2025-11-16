@@ -1,7 +1,6 @@
 ﻿
 using Mwh.Sample.Domain.Extensions;
-using System.Drawing;
-using System.Drawing.Imaging;
+using SkiaSharp;
 
 namespace Mwh.Sample.Web.Controllers;
 
@@ -44,9 +43,15 @@ public abstract class BaseController : Controller
             Directory.CreateDirectory(folderPath);
         }
         string filePath = Path.Combine(folderPath, $"{Guid.NewGuid()}_{$"{Path.GetFileNameWithoutExtension(ProfileImage.FileName)}.png"}");
-        using Bitmap bmpPostedImage = new(ProfileImage.OpenReadStream());
-        using Image objImage = bmpPostedImage.ScaleImage(81);
-        objImage.Save(filePath, ImageFormat.Png);
+
+        using var stream = ProfileImage.OpenReadStream();
+        using var original = SKBitmap.Decode(stream);
+        using var scaled = original.ScaleImage(81);
+        using var image = SKImage.FromBitmap(scaled);
+        using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+        using var fileStream = System.IO.File.OpenWrite(filePath);
+        data.SaveTo(fileStream);
+
         return $"{EmployeeId}/{Path.GetFileName(filePath)}";
     }
 

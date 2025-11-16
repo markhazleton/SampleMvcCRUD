@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using SkiaSharp;
 
 namespace Mwh.Sample.Domain.Tests.Extensions;
 
@@ -10,10 +10,10 @@ public class ImageExtensionsTests
     public void Resize_WhenMaxWidthAndMaxHeightAreZero_ReturnsOriginalImage()
     {
         // Arrange
-        Bitmap originalImage = new Bitmap(100, 200);
+        using var originalImage = new SKBitmap(100, 200);
 
         // Act
-        Image resizedImage = originalImage.Resize();
+        using var resizedImage = originalImage.Resize();
 
         // Assert
         Assert.AreEqual(originalImage.Width, resizedImage.Width);
@@ -24,11 +24,11 @@ public class ImageExtensionsTests
     public void Resize_WhenMaxWidthIsZero_ReturnsImageWithProportionalHeight()
     {
         // Arrange
-        Bitmap originalImage = new Bitmap(100, 200);
+        using var originalImage = new SKBitmap(100, 200);
         int maxHeight = 150;
 
         // Act
-        Image resizedImage = originalImage.Resize(maxHeight: maxHeight);
+        using var resizedImage = originalImage.Resize(maxHeight: maxHeight);
 
         // Assert
         Assert.AreEqual(maxHeight, resizedImage.Height);
@@ -39,11 +39,11 @@ public class ImageExtensionsTests
     public void Resize_WhenMaxHeightIsZero_ReturnsImageWithProportionalWidth()
     {
         // Arrange
-        Bitmap originalImage = new Bitmap(500, 500);
+        using var originalImage = new SKBitmap(500, 500);
         int maxWidth = 120;
 
         // Act
-        Image resizedImage = originalImage.Resize(maxWidth: maxWidth);
+        using var resizedImage = originalImage.Resize(maxWidth: maxWidth);
 
         // Assert
         Assert.AreEqual(maxWidth, resizedImage.Width);
@@ -54,11 +54,11 @@ public class ImageExtensionsTests
     public void ScaleImage_WhenMaxHeightIsGreaterThanOriginalHeight_ReturnsImageWithProportionalWidth()
     {
         // Arrange
-        Bitmap originalImage = new Bitmap(100, 200);
+        using var originalImage = new SKBitmap(100, 200);
         int maxHeight = 300;
 
         // Act
-        Image scaledImage = originalImage.ScaleImage(maxHeight);
+        using var scaledImage = originalImage.ScaleImage(maxHeight);
 
         // Assert
         Assert.AreEqual(maxHeight, scaledImage.Height);

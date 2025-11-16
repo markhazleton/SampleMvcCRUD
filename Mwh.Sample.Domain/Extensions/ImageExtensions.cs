@@ -1,10 +1,10 @@
-﻿using System.Drawing;
+﻿using SkiaSharp;
 
 namespace Mwh.Sample.Domain.Extensions
 {
     public static class ImageExtensions
     {
-        public static Image Resize(this Image image, int maxWidth = 0, int maxHeight = 0)
+        public static SKBitmap Resize(this SKBitmap image, int maxWidth = 0, int maxHeight = 0)
         {
             if (maxWidth == 0)
                 maxWidth = image.Width;
@@ -18,23 +18,19 @@ namespace Mwh.Sample.Domain.Extensions
             int newWidth = (int)(image.Width * ratio);
             int newHeight = (int)(image.Height * ratio);
 
-            Bitmap newImage = new Bitmap(newWidth, newHeight);
-            Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
-            return newImage;
+            var resizedImage = image.Resize(new SKImageInfo(newWidth, newHeight), SKSamplingOptions.Default);
+            return resizedImage ?? image;
         }
-        public static Image ScaleImage(this Image image, int maxHeight)
+
+        public static SKBitmap ScaleImage(this SKBitmap image, int maxHeight)
         {
             double ratio = (double)maxHeight / image.Height;
 
             int newWidth = (int)(image.Width * ratio);
             int newHeight = (int)(image.Height * ratio);
 
-            Bitmap newImage = new Bitmap(newWidth, newHeight);
-            using (Graphics g = Graphics.FromImage(newImage))
-            {
-                g.DrawImage(image, 0, 0, newWidth, newHeight);
-            }
-            return newImage;
+            var scaledImage = image.Resize(new SKImageInfo(newWidth, newHeight), SKSamplingOptions.Default);
+            return scaledImage ?? image;
         }
     }
 }
