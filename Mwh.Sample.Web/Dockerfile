@@ -20,12 +20,18 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy the NuGet configuration and project files
-COPY ["nuget.config", "."]
-COPY ["Mwh.Sample.Web/Mwh.Sample.Web.csproj", "Mwh.Sample.Web/"]
-COPY ["Mwh.Sample.Repository/Mwh.Sample.Repository.csproj", "Mwh.Sample.Repository/"]
-COPY ["Mwh.Sample.Domain/Mwh.Sample.Domain.csproj", "Mwh.Sample.Domain/"]
-COPY ["Mwh.Sample.HttpClientFactory/Mwh.Sample.HttpClientFactory.csproj", "Mwh.Sample.HttpClientFactory/"]
+# Copy solution and nuget configuration
+COPY ["Mwh.Sample.Web.sln", "./"]
+COPY ["nuget.config", "./"]
+
+# Copy all project files - ensuring proper directory structure
+COPY ["Mwh.Sample.Web/*.csproj", "Mwh.Sample.Web/"]
+COPY ["Mwh.Sample.Repository/*.csproj", "Mwh.Sample.Repository/"]
+COPY ["Mwh.Sample.Domain/*.csproj", "Mwh.Sample.Domain/"]
+COPY ["Mwh.Sample.HttpClientFactory/*.csproj", "Mwh.Sample.HttpClientFactory/"]
+COPY ["Mwh.Sample.Console/*.csproj", "Mwh.Sample.Console/"]
+COPY ["Mwh.Sample.Domain.Tests/*.csproj", "Mwh.Sample.Domain.Tests/"]
+COPY ["Mwh.Sample.Repository.Tests/*.csproj", "Mwh.Sample.Repository.Tests/"]
 
 # Restore dependencies
 RUN dotnet restore "Mwh.Sample.Web/Mwh.Sample.Web.csproj"
@@ -39,7 +45,7 @@ RUN dotnet build "Mwh.Sample.Web.csproj" -c Release -o /app/build
 
 # Publish the application to the publish directory
 FROM build AS publish
-RUN dotnet publish "Mwh.Sample.Web.csproj" -c Release -o /app/publish
+RUN dotnet publish "Mwh.Sample.Web.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # Use the base image to run the application
 FROM base AS final
