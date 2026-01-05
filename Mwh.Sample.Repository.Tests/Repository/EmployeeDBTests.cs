@@ -1,4 +1,4 @@
-﻿using Mwh.Sample.Repository.Repository;
+using Mwh.Sample.Repository.Repository;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ public class EmployeeDBTests
     private readonly EmployeeDB employeeDB;
     public EmployeeDBTests()
     {
-        DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
+        DbContextOptionsBuilder<EmployeeContext> builder = new DbContextOptionsBuilder<EmployeeContext>();
         _ = builder.EnableSensitiveDataLogging(true);
         _ = builder.UseInMemoryDatabase("EmployeeDBTests");
         employeeDB = new EmployeeDB(new EmployeeContext(builder.Options));

@@ -1,4 +1,4 @@
-﻿using Mwh.Sample.Repository.Repository;
+using Mwh.Sample.Repository.Repository;
 
 namespace Mwh.Sample.Web.Helpers;
 
@@ -15,7 +15,7 @@ public static class SeedDatabase
     {
         try
         {
-            using EmployeeDatabaseService employeeService = new EmployeeDatabaseService(context);
+            EmployeeDatabaseService employeeService = new EmployeeDatabaseService(context);
             CancellationToken token = new CancellationToken();
             EmployeeMock employeeMock = new EmployeeMock(290);
             List<DepartmentResponse> deptResultList = new List<DepartmentResponse>();

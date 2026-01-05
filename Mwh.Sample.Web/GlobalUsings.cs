@@ -11,3 +11,5 @@ global using Mwh.Sample.Web.Helpers;
 global using Mwh.Sample.Web.Models;
 global using System.Diagnostics;
 global using System.Reflection;
+global using System.Threading;
+global using System.Threading.Tasks;

@@ -1,4 +1,4 @@
-﻿using Bogus;
+using Bogus;
 
 namespace Mwh.Sample.Repository.Repository;
 /// <summary>
@@ -180,19 +180,17 @@ public class EmployeeMock : IEmployeeDB
 
     public static List<Employee> GetFakerEmployeeList(int generateCount)
     {
-        string[] states = new string[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" };
+        string[] states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+        
         Faker<Employee> fakeEmployees = new Faker<Employee>()
-           //Optional: Call for objects that have complex initialization
-           .CustomInstantiator(f => new Employee())
-           //Basic rules using built-in generators
-           .RuleFor(u => u.Gender, f => f.PickRandom<Gender>())
-           .RuleFor(u => u.Name, (f, u) => f.Name.FullName((Bogus.DataSets.Name.Gender)u.Gender))
-           .RuleFor(u => u.Age, f => f.Random.Number(18, 70))
-           .RuleFor(u => u.DepartmentId, f => f.Random.Number(1, 6))
-           .RuleFor(u => u.Country, "USA")
-           .RuleFor(u => u.State, f => f.Random.ListItem(states))
-           //After all rules are applied finish with the following action
-           .FinishWith((f, u) => { });
+            .CustomInstantiator(f => new Employee { Name = "Default" })
+            .RuleFor(u => u.Gender, f => f.PickRandom<Gender>())
+            .RuleFor(u => u.Name, (f, u) => f.Name.FullName((Bogus.DataSets.Name.Gender)u.Gender))
+            .RuleFor(u => u.Age, f => f.Random.Number(18, 70))
+            .RuleFor(u => u.DepartmentId, f => f.Random.Number(1, 6))
+            .RuleFor(u => u.Country, "USA")
+            .RuleFor(u => u.State, f => f.Random.ListItem(states))
+            .FinishWith((f, u) => { });
 
         return fakeEmployees.Generate(generateCount);
     }

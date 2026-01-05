@@ -1,4 +1,3 @@
-﻿
 using Mwh.Sample.Domain.Interfaces;
 using Mwh.Sample.Repository.Repository;
 using System;
@@ -19,7 +18,7 @@ public class EmployeeDatabaseServiceTests
 
     public EmployeeDatabaseServiceTests()
     {
-        DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
+        DbContextOptionsBuilder<EmployeeContext> builder = new DbContextOptionsBuilder<EmployeeContext>();
         _ = builder.EnableSensitiveDataLogging(true);
         _ = builder.UseInMemoryDatabase("EmployeeDatabaseServiceTests");
         EmployeeContext context = new EmployeeContext(builder.Options);

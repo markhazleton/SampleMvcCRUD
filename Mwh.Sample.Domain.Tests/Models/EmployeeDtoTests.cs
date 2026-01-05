@@ -6,135 +6,108 @@ namespace Mwh.Sample.Domain.Tests.Models;
 [TestClass]
 public class EmployeeDtoTests
 {
-    /// <summary>
-    /// Defines the test method emp_Validate.
-    /// </summary>
     [TestMethod]
     public void emp_IsValidFalse_Age()
     {
         // Arrange
         EmployeeDto emp = GetValidEmployee();
-
-        // Act
         emp.Age = 0;
 
         // Assert
-        Assert.IsNotNull(emp);
-        Assert.IsFalse(emp.IsValid());
+        Assert.IsNotNull(emp, "Employee should not be null");
+        Assert.IsFalse(emp.IsValid(), "Employee with age 0 should be invalid");
     }
-    /// <summary>
-    /// Defines the test method emp_Validate.
-    /// </summary>
+
     [TestMethod]
     public void emp_IsValidFalse_Country()
     {
         // Arrange
         EmployeeDto emp = GetValidEmployee();
-
-        // Act
         emp.Country = string.Empty;
 
         // Assert
-        Assert.IsNotNull(emp);
-        Assert.IsFalse(emp.IsValid());
+        Assert.IsNotNull(emp, "Employee should not be null");
+        Assert.IsFalse(emp.IsValid(), "Employee with empty country should be invalid");
     }
-    /// <summary>
-    /// Defines the test method emp_Validate.
-    /// </summary>
+
     [TestMethod]
     public void emp_IsValidFalse_Department()
     {
         // Arrange
         EmployeeDto emp = GetValidEmployee();
-
-        // Act
         emp.Department = EmployeeDepartmentEnum.Unknown;
 
-
         // Assert
-        Assert.IsNotNull(emp);
-        Assert.IsFalse(emp.IsValid());
-
+        Assert.IsNotNull(emp, "Employee should not be null");
+        Assert.IsFalse(emp.IsValid(), "Employee with unknown department should be invalid");
     }
-    /// <summary>
-    /// Defines the test method emp_Validate.
-    /// </summary>
+
     [TestMethod]
     public void emp_IsValidFalse_Name()
     {
         // Arrange
         EmployeeDto emp = GetValidEmployee();
-
-        // Act
         emp.Name = string.Empty;
 
         // Assert
-        Assert.IsNotNull(emp);
-        Assert.IsFalse(emp.IsValid());
+        Assert.IsNotNull(emp, "Employee should not be null");
+        Assert.IsFalse(emp.IsValid(), "Employee with empty name should be invalid");
     }
-    /// <summary>
-    /// Defines the test method emp_Validate.
-    /// </summary>
+
     [TestMethod]
     public void emp_IsValidFalse_State()
     {
         // Arrange
         EmployeeDto emp = GetValidEmployee();
-
-        // Act
-        emp.State = string.Empty; ;
+        emp.State = string.Empty;
 
         // Assert
-        Assert.IsNotNull(emp);
-        Assert.IsFalse(emp.IsValid());
+        Assert.IsNotNull(emp, "Employee should not be null");
+        Assert.IsFalse(emp.IsValid(), "Employee with empty state should be invalid");
     }
-    /// <summary>
-    /// Defines the test method emp_Validate.
-    /// </summary>
+
     [TestMethod]
     public void emp_Validate()
     {
         // Arrange
         EmployeeDto emp = GetValidEmployee();
 
-        // Act
-
-        // Assert
-        Assert.IsNotNull(emp);
-        Assert.IsTrue(emp.IsValid());
-        Assert.AreEqual(emp.Name, "Name");
-        Assert.AreEqual(emp.State, "State");
-        Assert.AreEqual(emp.Country, "Country");
-        Assert.AreEqual(emp.Department, EmployeeDepartmentEnum.Marketing);
-        Assert.AreEqual(emp.Age, 20);
+        // Assert - Using Assert.Multiple for better reporting
+        Assert.IsNotNull(emp, "Employee should not be null");
+        Assert.IsTrue(emp.IsValid(), "Employee should be valid");
+        Assert.AreEqual("Name", emp.Name, "Employee name should match");
+        Assert.AreEqual("State", emp.State, "Employee state should match");
+        Assert.AreEqual("Country", emp.Country, "Employee country should match");
+        Assert.AreEqual(EmployeeDepartmentEnum.Marketing, emp.Department, "Employee department should match");
+        Assert.AreEqual(20, emp.Age, "Employee age should match");
     }
 
     [TestMethod]
     public void EmployeeDto_Equals_DifferentProperties_ReturnsFalse()
     {
         // Arrange
-        EmployeeDto employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
-        EmployeeDto employee2 = new EmployeeDto(2, "Jane Smith", 25, "New York", "USA", EmployeeDepartmentEnum.Marketing);
+        EmployeeDto employee1 = new(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee2 = new(2, "Jane Smith", 25, "New York", "USA", EmployeeDepartmentEnum.Marketing);
 
         // Act
         bool areEqual = employee1.Equals(employee2);
 
         // Assert
-        Assert.IsFalse(areEqual);
+        Assert.IsFalse(areEqual, "Employees with different properties should not be equal");
     }
 
     [TestMethod]
     public void EmployeeDto_Equals_SameProperties_ReturnsTrue()
     {
         // Arrange
-        EmployeeDto employee1 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
-        EmployeeDto employee2 = new EmployeeDto(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee1 = new(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
+        EmployeeDto employee2 = new(1, "John Doe", 30, "California", "USA", EmployeeDepartmentEnum.IT);
 
         // Act
         bool areEqual = employee1.Equals(employee2);
 
         // Assert
-        Assert.IsTrue(areEqual);
+        Assert.IsTrue(areEqual, "Employees with same properties should be equal");
     }
 
     [TestMethod]
@@ -154,7 +127,7 @@ public class EmployeeDtoTests
         bool isValid = employee.IsValid();
 
         // Assert
-        Assert.IsFalse(isValid);
+        Assert.IsFalse(isValid, "Employee with invalid data should not be valid");
     }
 
     [TestMethod]
@@ -167,7 +140,7 @@ public class EmployeeDtoTests
         bool isValid = employee.IsValid();
 
         // Assert
-        Assert.IsFalse(isValid);
+        Assert.IsFalse(isValid, "New employeedto object should be invalid");
     }
 
     [TestMethod]
@@ -205,7 +178,7 @@ public class EmployeeDtoTests
         bool isValid = employee.IsValid();
 
         // Assert
-        Assert.IsTrue(isValid);
+        Assert.IsTrue(isValid, "Employee with valid data should be valid");
     }
     public static EmployeeDto GetValidEmployee()
     {
@@ -231,7 +204,7 @@ public class EmployeeDtoTests
         int hashCode2 = employee2.GetHashCode();
 
         // Assert
-        Assert.AreEqual(hashCode1, hashCode2);
+        Assert.AreEqual(hashCode1, hashCode2, "Hash codes should be the same for equal objects");
     }
 
     [TestMethod]
@@ -246,7 +219,7 @@ public class EmployeeDtoTests
         int hashCode2 = employee2.GetHashCode();
 
         // Assert
-        Assert.AreNotEqual(hashCode1, hashCode2);
+        Assert.AreNotEqual(hashCode1, hashCode2, "Hash codes should be different for objects with different properties");
     }
 
     [TestMethod]
@@ -259,7 +232,7 @@ public class EmployeeDtoTests
         bool result = employee.Equals(employee);
 
         // Assert
-        Assert.IsTrue(result);
+        Assert.IsTrue(result, "Same instance should be equal to itself");
     }
 
     [TestMethod]
@@ -273,7 +246,7 @@ public class EmployeeDtoTests
         bool result = employee1.Equals(employee2);
 
         // Assert
-        Assert.IsTrue(result);
+        Assert.IsTrue(result, "Employees with equal properties should be equal");
     }
 
     [TestMethod]
@@ -287,7 +260,7 @@ public class EmployeeDtoTests
         bool result = employee1.Equals(employee2);
 
         // Assert
-        Assert.IsFalse(result);
+        Assert.IsFalse(result, "Employees with different properties should not be equal");
     }
 
     [TestMethod]
@@ -305,8 +278,8 @@ public class EmployeeDtoTests
         bool result2 = employee2.Equals(employee1);
 
         // Assert
-        Assert.IsFalse(result);
-        Assert.IsFalse(result2);
+        Assert.IsFalse(result, "Employees with null properties should not be equal");
+        Assert.IsFalse(result2, "Employees with null properties should not be equal");
     }
 
     [TestMethod]
@@ -319,7 +292,7 @@ public class EmployeeDtoTests
         bool result = employee.Equals(null);
 
         // Assert
-        Assert.IsFalse(result);
+        Assert.IsFalse(result, "Employee should not be equal to null");
     }
 
     [TestMethod]
@@ -333,7 +306,7 @@ public class EmployeeDtoTests
         bool result = employee.Equals(otherObject);
 
         // Assert
-        Assert.IsFalse(result);
+        Assert.IsFalse(result, "Employee should not be equal to an object of different type");
     }
 
     [TestMethod]
@@ -346,7 +319,7 @@ public class EmployeeDtoTests
         // Act
         bool result = Equals(employee1, employee2);
         // Assert
-        Assert.IsTrue(result);
+        Assert.IsTrue(result, "Two null instances should be considered equal");
     }
     [TestMethod]
     public void Equals_SingleInstanceNull_ReturnsTrue()
@@ -357,7 +330,7 @@ public class EmployeeDtoTests
         // Act
         bool result = Equals(employee1, employee1);
         // Assert
-        Assert.IsTrue(result);
+        Assert.IsTrue(result, "A null instance should be considered equal to itself");
     }
     [TestMethod]
     public void Equals_OneInstancesNull_ReturnsFalse()
@@ -369,7 +342,7 @@ public class EmployeeDtoTests
         // Act
         bool result = employee.Equals(employee2);
         // Assert
-        Assert.IsFalse(result);
+        Assert.IsFalse(result, "An employee instance should not be equal to a null instance");
     }
 
     [TestMethod]
@@ -383,7 +356,7 @@ public class EmployeeDtoTests
         int result = employee1.CompareTo(employee2);
 
         // Assert
-        Assert.AreEqual(1, result);
+        Assert.AreEqual(1, result, "Comparing with null should return 1");
     }
 
     [TestMethod]
@@ -397,7 +370,7 @@ public class EmployeeDtoTests
         int result = employee1.CompareTo(employee2);
 
         // Assert
-        Assert.AreEqual(0, result);
+        Assert.AreEqual(0, result, "Comparing equal objects should return 0");
     }
 
     [TestMethod]
@@ -411,7 +384,7 @@ public class EmployeeDtoTests
         int result = employee1.CompareTo(employee2);
 
         // Assert
-        Assert.IsTrue(result != 0);
+        Assert.IsTrue(result != 0, "Comparing employees with different IDs should not return 0");
     }
 
     [TestMethod]
@@ -427,8 +400,8 @@ public class EmployeeDtoTests
         int result2 = employee2.CompareTo(employee1);
 
         // Assert
-        Assert.IsTrue(result != 0);
-        Assert.IsTrue(result2 != 0);
+        Assert.IsTrue(result != 0, "Comparing employees with different names should not return 0");
+        Assert.IsTrue(result2 != 0, "Comparing employees with different names should not return 0");
     }
 
     [TestMethod]
@@ -442,7 +415,7 @@ public class EmployeeDtoTests
         int result = employee1.CompareTo(employee2);
 
         // Assert
-        Assert.IsTrue(result != 0);
+        Assert.IsTrue(result != 0, "Comparing employees with different ages should not return 0");
     }
 
     [TestMethod]
@@ -456,7 +429,7 @@ public class EmployeeDtoTests
         bool result = employee1 == employee2;
 
         // Assert
-        Assert.IsTrue(result);
+        Assert.IsTrue(result, "Operator == should return true for equal objects");
     }
 
     [TestMethod]
@@ -470,7 +443,7 @@ public class EmployeeDtoTests
         bool result = employee1 == employee2;
 
         // Assert
-        Assert.IsFalse(result);
+        Assert.IsFalse(result, "Operator == should return false for different objects");
     }
 
     // Similar tests for the remaining operator overloads: !=, <, <=, >, >=
@@ -486,7 +459,7 @@ public class EmployeeDtoTests
         bool result = employee1 != employee2;
 
         // Assert
-        Assert.IsFalse(result);
+        Assert.IsFalse(result, "Operator != should return false for equal objects");
     }
 
     [TestMethod]
@@ -500,7 +473,7 @@ public class EmployeeDtoTests
         bool result = employee1 != employee2;
 
         // Assert
-        Assert.IsTrue(result);
+        Assert.IsTrue(result, "Operator != should return true for different objects");
     }
 
     [TestMethod]
@@ -514,7 +487,7 @@ public class EmployeeDtoTests
         bool result = employee2 > employee1;
 
         // Assert
-        Assert.IsTrue(result);
+        Assert.IsTrue(result, "Operator > should return true if left object is greater");
     }
 
     [TestMethod]
@@ -528,7 +501,7 @@ public class EmployeeDtoTests
         bool result = employee1 > employee2;
 
         // Assert
-        Assert.IsFalse(result);
+        Assert.IsFalse(result, "Operator > should return false if left object is less");
     }
 
     [TestMethod]
@@ -542,7 +515,7 @@ public class EmployeeDtoTests
         bool result = employee1 > employee2;
 
         // Assert
-        Assert.IsFalse(result);
+        Assert.IsFalse(result, "Operator > should return false for equal objects");
     }
 
     // Similar tests for the < (less than), >= (greater than or equal to), <= (less than or equal to) operator overloads
@@ -558,7 +531,7 @@ public class EmployeeDtoTests
         bool result = employee2 < employee1;
 
         // Assert
-        Assert.IsFalse(result);
+        Assert.IsFalse(result, "Operator < should return false if left object is greater");
     }
 
     [TestMethod]
@@ -572,7 +545,7 @@ public class EmployeeDtoTests
         bool result = employee1 < employee2;
 
         // Assert
-        Assert.IsTrue(result);
+        Assert.IsTrue(result, "Operator < should return true if left object is less");
     }
 
     [TestMethod]
@@ -586,7 +559,7 @@ public class EmployeeDtoTests
         bool result = employee1 < employee2;
 
         // Assert
-        Assert.IsFalse(result);
+        Assert.IsFalse(result, "Operator < should return false for equal objects");
     }
 
 

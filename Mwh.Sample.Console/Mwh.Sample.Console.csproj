@@ -4,26 +4,47 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
+  
   <PropertyGroup>
     <Deterministic>false</Deterministic>
     <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
-    <AssemblyVersion>9.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
+    <AssemblyVersion>10.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
     <PackageIcon>favicon.ico</PackageIcon>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <!-- Code Analysis and Quality Settings -->
+  <PropertyGroup>
+    <AnalysisLevel>latest-all</AnalysisLevel>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- Performance and Trimming Settings -->
+  <PropertyGroup>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <IsTrimmable>true</IsTrimmable>
+    <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Include="favicon.ico" />
   </ItemGroup>
+  
   <ItemGroup>
     <None Include="..\favicon.ico">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Bogus" Version="35.6.5" />
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Mwh.Sample.Domain\Mwh.Sample.Domain.csproj" />
     <ProjectReference Include="..\Mwh.Sample.Repository\Mwh.Sample.Repository.csproj" />

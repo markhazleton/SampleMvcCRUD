@@ -6,23 +6,28 @@ using Westwind.AspNetCore.Markdown;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// Configure Azure Key Vault if available
 string? vaultUri = Environment.GetEnvironmentVariable("VaultUri");
-if (vaultUri != null)
+if (!string.IsNullOrEmpty(vaultUri))
 {
     try
     {
-        Uri keyVaultEndpoint = new Uri(vaultUri);
+        Uri keyVaultEndpoint = new(vaultUri);
         builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
     }
     catch (Exception ex)
     {
-        Console.WriteLine(ex.Message);
+        builder.Logging.AddConsole().Services.BuildServiceProvider()
+            .GetRequiredService<ILogger<Program>>()
+            .LogError(ex, "Failed to configure Azure Key Vault");
     }
 }
 
-// Add services to the container.
+// Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+// Configure Swagger/OpenAPI
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -37,76 +42,97 @@ builder.Services.AddSwaggerGen(options =>
         },
     });
 });
-// Initialize the In Memory Database
-builder.Services.AddDbContext<EmployeeContext>(opt => opt.UseInMemoryDatabase("Employee"));
+
+// Database and data access services
+builder.Services.AddDbContext<EmployeeContext>(opt => 
+    opt.UseInMemoryDatabase("Employee"));
 builder.Services.AddScoped<IEmployeeService, EmployeeDatabaseService>();
 builder.Services.AddScoped<IEmployeeClient, EmployeeDatabaseClient>();
-SeedDatabase.DatabaseInitialization(new EmployeeContext());
 
-// HttpClient factory available for future external API integrations
+// Seed database during startup
+using (var context = new EmployeeContext())
+{
+    SeedDatabase.DatabaseInitialization(context);
+}
+
+// HTTP and infrastructure services
 builder.Services.AddHttpClient();
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-// Add HttpRequestResultService required by Bootswatch
+// Application-specific services
 builder.Services.AddScoped<IHttpRequestResultService, HttpRequestResultService>();
-
-// Add Bootswatch theme switcher services (includes StyleCache)
 builder.Services.AddBootswatchThemeSwitcher();
-
 builder.Services.AddMarkdown();
+
+// Session and MVC configuration
 builder.Services.AddSession();
 builder.Services.AddRazorPages();
-builder.Services.AddMvc(options => options.EnableEndpointRouting = false)
-    .AddApplicationPart(typeof(MarkdownPageProcessorMiddleware).Assembly);
 builder.Services.AddControllersWithViews();
-builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
+
+// Monitoring and diagnostics
+builder.Services.AddApplicationInsightsTelemetry(
+    builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 builder.Services.AddHealthChecks();
+
+// Problem details for standardized error responses
+builder.Services.AddProblemDetails();
 
 WebApplication app = builder.Build();
 
-app.UseSwagger();
+// Configure middleware pipeline
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
 
+// Swagger configuration
+app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample CRUD API v10");
-
-    // Set the Swagger UI browser document title.
-    options.DocumentTitle = "Sample CRUD API ";
-
-    // Use a custom CSS stylesheet.
+    options.DocumentTitle = "Sample CRUD API";
     options.InjectStylesheet("/swagger_custom/custom.css");
-
-    // Set the Swagger UI to render at the application's root.
     options.RoutePrefix = "swagger";
 });
 
+// Request pipeline
 app.UseMyHttpContext();
 app.UseHttpsRedirection();
-
-// Use all Bootswatch features (includes StyleCache and static files)
+app.UseStaticFiles();
 app.UseBootswatchAll();
 
+app.UseRouting();
 app.UseAuthorization();
+app.UseSession();
 
+// Health check endpoint
 app.MapHealthChecks("/health");
 
+// Map controllers and pages
 app.MapControllers();
-app.UseMarkdown();
-app.UseStaticFiles();
+app.MapRazorPages();
 
-app.UseMvc(routes =>
-{
-    routes.MapRoute(
-        name: "default",
-        template: "{controller=Home}/{action=Index}/{id?}");
-    routes.MapRoute(
-        name: "home",
-        template: "home/index",
-        defaults: new { controller = "Home", action = "Index" });
-    routes.MapRoute(
-        name: "index",
-        template: "index.html",
-        defaults: new { controller = "Home", action = "Index" });
-});
+// Map MVC routes using modern endpoint routing
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "home",
+    pattern: "home/index",
+    defaults: new { controller = "Home", action = "Index" });
+
+app.MapControllerRoute(
+    name: "index",
+    pattern: "index.html",
+    defaults: new { controller = "Home", action = "Index" });
+
+// Markdown middleware
+app.UseMarkdown();
 
 app.Run();

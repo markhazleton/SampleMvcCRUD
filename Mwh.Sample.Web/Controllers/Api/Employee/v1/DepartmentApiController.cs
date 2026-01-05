@@ -1,42 +1,58 @@
-﻿
-namespace Mwh.Sample.Web.Controllers.Api.Employee.v1
+﻿namespace Mwh.Sample.Web.Controllers.Api.Employee.v1
 {
     /// <summary>
-    /// 
+    /// Department API Controller
     /// </summary>
     [Route("api/department")]
+    [ApiController]
     public class DepartmentApiController : BaseApiController
     {
         private readonly IEmployeeService _employeeService;
-        /// <summary>
-        /// EmployeeApiController
-        /// </summary>
-        public DepartmentApiController(IEmployeeService employeeService) : base() { _employeeService = employeeService; }
 
         /// <summary>
-        /// Returns collection of all employees
+        /// DepartmentApiController
         /// </summary>
-        /// <returns></returns>
-        /// <param name="IncludeEmployees"></param>
-        [HttpGet("")]
-        [ProducesResponseType(typeof(IEnumerable<DepartmentDto>), 200)]
-        public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetAsync(bool IncludeEmployees = false)
+        public DepartmentApiController(IEmployeeService employeeService) : base()
         {
-            CancellationTokenSource cts = new();
-            IEnumerable<DepartmentDto> employees = await _employeeService.GetDepartmentsAsync(IncludeEmployees, cts.Token);
-            return Ok(employees);
+            _employeeService = employeeService;
         }
+
         /// <summary>
-        /// Returns collection of all employees
+        /// Returns collection of all departments
         /// </summary>
-        /// <returns></returns>
-        [HttpGet("{id}")]
+        /// <param name="includeEmployees">Whether to include employees in the response</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Collection of departments</returns>
+        [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<DepartmentDto>), 200)]
-        public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetAsync(int id)
+        public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetAsync(
+            bool includeEmployees = false,
+            CancellationToken cancellationToken = default)
         {
-            CancellationTokenSource cts = new();
-            DepartmentDto dep = await _employeeService.FindDepartmentByIdAsync(id, cts.Token);
-            return Ok(dep);
+            IEnumerable<DepartmentDto> departments = await _employeeService.GetDepartmentsAsync(includeEmployees, cancellationToken);
+
+            return Ok(departments);
+        }
+
+        /// <summary>
+        /// Returns a single department by identifier
+        /// </summary>
+        /// <param name="id">Department identifier</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Department details</returns>
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(DepartmentDto), 200)]
+        [ProducesResponseType(typeof(ErrorResource), 404)]
+        public async Task<ActionResult<DepartmentDto>> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            DepartmentDto department = await _employeeService.FindDepartmentByIdAsync(id, cancellationToken);
+
+            if (department is null)
+            {
+                return NotFound(new ErrorResource("Department not found"));
+            }
+
+            return Ok(department);
         }
     }
 }

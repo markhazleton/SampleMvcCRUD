@@ -1,21 +1,22 @@
-﻿
-namespace Mwh.Sample.Repository.Models;
+﻿namespace Mwh.Sample.Repository.Models;
 
 /// <summary>
-/// 
+/// Department entity
 /// </summary>
 public class Department : BaseEntity, IDepartment
 {
     /// <summary>
-    /// 
+    /// Gets or sets the department name.
     /// </summary>
-    public string Description { get; set; }
+    public required string Name { get; set; }
+
     /// <summary>
-    /// 
+    /// Gets or sets the department description.
     /// </summary>
-    public ICollection<Employee>? Employees { get; set; }
+    public string Description { get; set; } = string.Empty;
+
     /// <summary>
-    /// 
+    /// Gets or sets the collection of employees in this department.
     /// </summary>
-    public string Name { get; set; }
+    public ICollection<Employee> Employees { get; set; } = [];
 }

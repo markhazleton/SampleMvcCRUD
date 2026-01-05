@@ -1,5 +1,4 @@
-﻿
-namespace Mwh.Sample.Repository.Models;
+﻿namespace Mwh.Sample.Repository.Models;
 
 public class EmployeeContext : DbContext
 {
@@ -7,7 +6,7 @@ public class EmployeeContext : DbContext
     {
     }
 
-    public EmployeeContext(DbContextOptions options) : base(options)
+    public EmployeeContext(DbContextOptions<EmployeeContext> options) : base(options)
     {
         ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
     }
@@ -22,13 +21,45 @@ public class EmployeeContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Employee>()
-            .HasOne(e => e.Department)
-            .WithMany(d => d.Employees)
-            .HasForeignKey(e => e.DepartmentId)
-            .IsRequired();
+        modelBuilder.Entity<Employee>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            
+            entity.HasOne(e => e.Department)
+                .WithMany(d => d.Employees)
+                .HasForeignKey(e => e.DepartmentId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            entity.Property(e => e.State)
+                .HasMaxLength(2);
+
+            entity.Property(e => e.Country)
+                .HasMaxLength(100);
+
+            entity.HasIndex(e => e.Name);
+        });
+
+        modelBuilder.Entity<Department>(entity =>
+        {
+            entity.HasKey(d => d.Id);
+
+            entity.Property(d => d.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            entity.Property(d => d.Description)
+                .HasMaxLength(500);
+
+            entity.HasIndex(d => d.Name)
+                .IsUnique();
+        });
     }
 
-    public DbSet<Employee> Employees { get; set; }
-    public DbSet<Department> Departments { get; set; }
+    public DbSet<Employee> Employees => Set<Employee>();
+    public DbSet<Department> Departments => Set<Department>();
 }

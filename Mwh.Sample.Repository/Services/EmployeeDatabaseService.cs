@@ -1,8 +1,8 @@
-﻿namespace Mwh.Sample.Repository.Services;
-public class EmployeeDatabaseService : IDisposable, IEmployeeService
+namespace Mwh.Sample.Repository.Services;
+
+public class EmployeeDatabaseService : IEmployeeService
 {
     private readonly EmployeeContext _context;
-
 
     public EmployeeDatabaseService(EmployeeContext context)
     {
@@ -11,183 +11,178 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     private static DepartmentDto? Create(Department? item)
     {
-        if (item == null) return null;
+        if (item is null) return null;
 
-        return new DepartmentDto()
+        return new DepartmentDto
         {
             Id = item.Id,
             Name = item.Name,
             Description = item.Description,
-            Employees = item?.Employees?.Select(s => Create(s)).ToArray() ?? null
+            Employees = item.Employees?.Select(Create).OfType<EmployeeDto>().ToArray()
         };
     }
 
-    private static Department Create(DepartmentDto item)
+    private static Department Create(DepartmentDto item) => new()
     {
-        return new Department()
-        {
-            Id = item.Id,
-            Name = item.Name,
-            Description = item?.Description ?? string.Empty,
-        };
-    }
+        Id = item.Id,
+        Name = item.Name,
+        Description = item.Description ?? string.Empty,
+    };
+
     private static EmployeeDto? Create(Employee? item)
     {
-        if (item == null) return null;
+        if (item is null) return null;
 
-        EmployeeDto retEmployee = new EmployeeDto
+        return new EmployeeDto
         {
             Id = item.Id,
             Name = item.Name,
             Age = item.Age,
             State = item.State,
             Country = item.Country,
-            Department = (EmployeeDepartmentEnum)(item?.Department?.Id ?? 0),
+            Department = (EmployeeDepartmentEnum)(item.Department?.Id ?? 0),
             ProfilePicture = item.ProfilePicture,
-            Gender = (GenderEnum)(item?.Gender ?? 0),
-            DepartmentName = item?.Department?.Name ?? string.Empty,
-            GenderName = ((GenderEnum)(item?.Gender ?? 0)).ToString()
-        };
-
-        return retEmployee;
-    }
-
-    private static Employee Create(EmployeeDto item, Department dbDept)
-    {
-        return new Employee()
-        {
-            DepartmentId = dbDept.Id,
-            Name = item.Name,
-            State = item.State,
-            Country = item.Country,
-            Age = item.Age,
-            ProfilePicture = item.ProfilePicture ?? "default.jpg",
-            Gender = (Gender)item.Gender,
-            Id = item.Id
+            Gender = (GenderEnum)item.Gender,
+            DepartmentName = item.Department?.Name ?? string.Empty,
+            GenderName = ((GenderEnum)item.Gender).ToString()
         };
     }
-    private static DepartmentDto[] GetDepartmentDtos(List<Department> list)
-    {
-        if (list is null) return Array.Empty<DepartmentDto>();
-        return list?.Select(s => Create(s)).OfType<DepartmentDto>().ToArray() ?? Array.Empty<DepartmentDto>();
-    }
 
-    private static EmployeeDto[] GetEmployeeDtos(List<Employee> list)
+    private static Employee Create(EmployeeDto item, Department dbDept) => new()
     {
-        if (list is null) return Array.Empty<EmployeeDto>();
-        return list?.Select(s => Create(s)).OfType<EmployeeDto>().ToArray() ?? Array.Empty<EmployeeDto>();
-    }
+        DepartmentId = dbDept.Id,
+        Name = item.Name,
+        State = item.State,
+        Country = item.Country,
+        Age = item.Age,
+        ProfilePicture = item.ProfilePicture ?? "default.jpg",
+        Gender = (Gender)item.Gender,
+        Id = item.Id
+    };
 
-    protected virtual void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            if (_context != null)
-            {
-                ((IDisposable)_context).Dispose();
-            }
-        }
-    }
+    private static EmployeeDto[] GetEmployeeDtos(List<Employee>? list) =>
+        list?.Select(Create).OfType<EmployeeDto>().ToArray() ?? [];
+
+    private static DepartmentDto[] GetDepartmentDtos(List<Department>? list) =>
+        list?.Select(Create).OfType<DepartmentDto>().ToArray() ?? [];
 
     public async Task<int> AddMultipleEmployeesAsync(string?[]? namelist)
     {
-        if (namelist == null) return -1;
+        if (namelist is null) return -1;
 
         Random rand = new();
-        List<Employee> list = new List<Employee>();
-        foreach (string? name in namelist)
-        {
-            list.Add(new Employee()
+        
+        var employees = namelist
+            .Select(name => new Employee
             {
                 Name = name ?? "UNKNOWN",
                 Age = rand.Next(18, 100),
                 Country = "USA",
-                DepartmentId = rand.Next(1, (Enum.GetNames(typeof(EmployeeDepartmentEnum)).Length - 1)),
-                Gender = (Gender)rand.Next(1, (Enum.GetNames(typeof(Gender)).Length - 1)),
+                DepartmentId = rand.Next(1, Enum.GetNames<EmployeeDepartmentEnum>().Length - 1),
+                Gender = (Gender)rand.Next(1, Enum.GetNames<Gender>().Length - 1),
                 State = "TX"
-            });
-        }
+            })
+            .ToList();
 
-        await _context.Employees.AddRangeAsync(list).ConfigureAwait(true);
-        await _context.SaveChangesAsync().ConfigureAwait(true);
+        await _context.Employees.AddRangeAsync(employees).ConfigureAwait(false);
+        await _context.SaveChangesAsync().ConfigureAwait(false);
 
-        return _context.Employees.Count();
+        return await _context.Employees.CountAsync().ConfigureAwait(false);
     }
 
     public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken ct)
     {
-        EmployeeResponse response = new EmployeeResponse("Init");
-
-        if (id > 0)
-        {
-            Employee? dbEmp = await _context.Employees.FindAsync(id);
-
-            if (dbEmp == null)
-            {
-                response = new EmployeeResponse("Employee Not Found");
-            }
-            else
-            {
-                _context.Employees.Remove(dbEmp);
-                await _context.SaveChangesAsync(ct)
-                    .ConfigureAwait(true);
-
-                return new EmployeeResponse(true);
-            }
-        }
-        else
-        {
+        if (id <= 0)
             return new EmployeeResponse("Invalid Employee Id for delete");
-        }
-        return response;
-    }
 
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
+        Employee? dbEmp = await _context.Employees.FindAsync([id], ct);
+
+        if (dbEmp is null)
+            return new EmployeeResponse("Employee Not Found");
+
+        _context.Employees.Remove(dbEmp);
+        await _context.SaveChangesAsync(ct).ConfigureAwait(false);
+
+        return new EmployeeResponse(true);
     }
 
     public async Task<DepartmentDto> FindDepartmentByIdAsync(int Id, CancellationToken token)
-    { { return Create(await _context.Departments.Where(w => w.Id == Id).Include(i => i.Employees).FirstOrDefaultAsync(cancellationToken: token)); } }
+    {
+        var department = await _context.Departments
+            .Where(w => w.Id == Id)
+            .Include(i => i.Employees)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(token)
+            .ConfigureAwait(false);
+            
+        return Create(department);
+    }
 
     public async Task<EmployeeResponse> FindEmployeeByIdAsync(int Id, CancellationToken token)
     {
-        EmployeeDto? employee = Create(await _context.Employees.Include(i => i.Department).Where(w => w.Id == Id).AsNoTracking().FirstOrDefaultAsync(cancellationToken: token));
-        if (employee is null)
-            return new EmployeeResponse("Employee Not Found");
+        EmployeeDto? employee = Create(
+            await _context.Employees
+                .Include(i => i.Department)
+                .Where(w => w.Id == Id)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(token)
+                .ConfigureAwait(false));
 
-        return new EmployeeResponse(employee);
+        return employee is null 
+            ? new EmployeeResponse("Employee Not Found") 
+            : new EmployeeResponse(employee);
     }
 
     public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(bool IncludeEmployees, CancellationToken token)
     {
-        if (IncludeEmployees)
-            return GetDepartmentDtos(await _context.Departments.Where(w => !string.IsNullOrEmpty(w.Name)).Include(e => e.Employees).ToListAsync(cancellationToken: token));
+        var query = _context.Departments
+            .Where(w => !string.IsNullOrEmpty(w.Name));
 
-        return GetDepartmentDtos(await _context.Departments.Where(w => !string.IsNullOrEmpty(w.Name)).ToListAsync(cancellationToken: token));
+        if (IncludeEmployees)
+            query = query.Include(e => e.Employees);
+
+        var departments = await query
+            .AsNoTracking()
+            .ToListAsync(token)
+            .ConfigureAwait(false);
+
+        return GetDepartmentDtos(departments);
     }
 
     public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
     {
-        IQueryable<Employee> source = _context.Employees.Include(i => i.Department).OrderBy(o => o.Name).AsQueryable();
-        int TotalCount = source.Count();
-        List<Employee> items = await source.Skip((paging.PageNumber - 1) * paging.PageSize).Take(paging.PageSize).ToListAsync(token);
-        object paginationMetadata = paging.GetMetaData(TotalCount);
+        IQueryable<Employee> source = _context.Employees
+            .Include(i => i.Department)
+            .OrderBy(o => o.Name)
+            .AsNoTracking();
+
+        int totalCount = await source.CountAsync(token).ConfigureAwait(false);
+        
+        List<Employee> items = await source
+            .Skip((paging.PageNumber - 1) * paging.PageSize)
+            .Take(paging.PageSize)
+            .ToListAsync(token)
+            .ConfigureAwait(false);
+
+        object paginationMetadata = paging.GetMetaData(totalCount);
+        
         return GetEmployeeDtos(items);
     }
 
     public async Task<EmployeeResponse> SaveAsync(EmployeeDto? employee, CancellationToken token)
     {
-        if (employee == null) return new EmployeeResponse("Employee can not be null");
-        return await SaveEmployeeDbAsync(employee, token).ConfigureAwait(true);
+        if (employee is null) 
+            return new EmployeeResponse("Employee can not be null");
+            
+        return await SaveEmployeeDbAsync(employee, token).ConfigureAwait(false);
     }
 
     public async Task<DepartmentResponse> SaveAsync(DepartmentDto dept, CancellationToken token)
     {
-        if (dept == null) return new DepartmentResponse("Department can not be null");
+        if (dept is null) 
+            return new DepartmentResponse("Department can not be null");
 
-        return await SaveDepartmentAsync(dept, token).ConfigureAwait(true);
+        return await SaveDepartmentAsync(dept, token).ConfigureAwait(false);
     }
 
     public async Task<DepartmentResponse> SaveDepartmentAsync(DepartmentDto? item, CancellationToken cancellationToken = default)
@@ -195,40 +190,38 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
         if (item is null)
             return new DepartmentResponse("Department can not be null");
 
-        Department? dbDept;
-        if (item.Id > 0)
+        if (item.Id <= 0)
+            return new DepartmentResponse("Zero ID not allowed");
+
+        Department? dbDept = await _context.Departments
+            .FindAsync([item.Id], cancellationToken)
+            .ConfigureAwait(false);
+
+        if (dbDept is null)
         {
-            dbDept = await _context.Departments.FindAsync(item.Id);
-            if (dbDept == null)
-            {
-                dbDept = Create(item);
-                _context.Departments.Add(dbDept);
-                await _context.SaveChangesAsync(cancellationToken);
-            }
-            else
-            {
-                dbDept.Id = item.Id;
-                dbDept.Name = item.Name;
-                dbDept.Description = item.Description;
-                await _context.SaveChangesAsync(cancellationToken);
-            }
+            dbDept = Create(item);
+            _context.Departments.Add(dbDept);
         }
         else
         {
-            return new DepartmentResponse("Zero ID not allowed");
+            dbDept.Id = item.Id;
+            dbDept.Name = item.Name;
+            dbDept.Description = item.Description;
         }
+
+        await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        
         return new DepartmentResponse(Create(dbDept));
     }
+
     public async Task<EmployeeResponse> SaveEmployeeDbAsync(EmployeeDto? newItem, CancellationToken ct = default)
     {
-        EmployeeDto item;
         if (newItem is null)
-        {
             return new EmployeeResponse("Employee can not be null");
-        }
+
         try
         {
-            item = new EmployeeDto(
+            EmployeeDto item = new(
                 newItem.Id,
                 newItem.Name,
                 newItem.Age,
@@ -239,23 +232,27 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                 newItem.Gender);
 
             int deptId = (int)item.Department;
-            Department? dbDept = _context.Departments.Find(deptId);
+            Department? dbDept = await _context.Departments
+                .FindAsync([deptId], ct)
+                .ConfigureAwait(false);
 
-            if (dbDept == null)
+            if (dbDept is null)
                 return new EmployeeResponse("Department not found");
 
             Employee? dbEmp;
 
             if (item.Id > 0)
             {
-                dbEmp = await _context.Employees.Include(d => d.Department).Where(w => w.Id == item.Id).FirstOrDefaultAsync(cancellationToken: ct).ConfigureAwait(true);
+                dbEmp = await _context.Employees
+                    .Include(d => d.Department)
+                    .Where(w => w.Id == item.Id)
+                    .FirstOrDefaultAsync(ct)
+                    .ConfigureAwait(false);
 
-                if (dbEmp == null)
+                if (dbEmp is null)
                 {
                     dbEmp = Create(item, dbDept);
-
                     _context.Employees.Add(dbEmp);
-                    _context.SaveChanges();
                 }
                 else
                 {
@@ -265,30 +262,36 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
                     dbEmp.Department = dbDept;
                     dbEmp.Name = item.Name ?? string.Empty;
                     dbEmp.State = item.State;
-                    dbEmp.LastUpdatedDate = DateTime.Now;
+                    dbEmp.LastUpdatedDate = DateTime.UtcNow;
                     dbEmp.ProfilePicture = item.ProfilePicture ?? "default.jpg";
                     dbEmp.Gender = (Gender)item.Gender;
                     _context.Update(dbEmp);
-                    _context.SaveChanges();
                 }
+                
+                await _context.SaveChangesAsync(ct).ConfigureAwait(false);
             }
             else
             {
                 dbEmp = Create(item, dbDept);
-
-                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<Employee> desalt = _context.Employees.Add(dbEmp);
-                _context.SaveChanges();
+                _context.Employees.Add(dbEmp);
+                await _context.SaveChangesAsync(ct).ConfigureAwait(false);
             }
-            Employee? local = _context.Set<Employee>()
-                     .Local
-                     .FirstOrDefault(entry => entry.Id.Equals(item.Id));
 
-            // check if local is not null 
-            if (local != null)
+            Employee? local = _context.Set<Employee>()
+                .Local
+                .FirstOrDefault(entry => entry.Id.Equals(item.Id));
+
+            if (local is not null)
             {
                 _context.Entry(local).State = EntityState.Detached;
             }
-            Employee? newEmp = await _context.Employees.Where(w => w.Id == dbEmp.Id).Include(i => i.Department).AsNoTracking().FirstOrDefaultAsync(cancellationToken: ct);
+
+            Employee? newEmp = await _context.Employees
+                .Where(w => w.Id == dbEmp.Id)
+                .Include(i => i.Department)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(ct)
+                .ConfigureAwait(false);
 
             return new EmployeeResponse(Create(newEmp));
         }
@@ -300,8 +303,8 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
 
     public async Task<EmployeeResponse> UpdateAsync(int id, EmployeeDto? employee, CancellationToken token)
     {
-        if (employee == null)
-            return new EmployeeResponse($"Can not update null employee");
+        if (employee is null)
+            return new EmployeeResponse("Can not update null employee");
 
         if (employee.Id != id)
             return new EmployeeResponse($"Mismatch in id({id}) && id({employee.Id}).");
@@ -310,8 +313,7 @@ public class EmployeeDatabaseService : IDisposable, IEmployeeService
             return new EmployeeResponse($"Can not update employee with id({id})");
 
         if (employee.Department == EmployeeDepartmentEnum.Unknown)
-            return new EmployeeResponse($"Can not update employee with unknown department");
-
+            return new EmployeeResponse("Can not update employee with unknown department");
 
         return await SaveAsync(employee, token);
     }

@@ -3,7 +3,9 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
+  
   <PropertyGroup>
     <Deterministic>false</Deterministic>
     <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
@@ -11,26 +13,44 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <PackageIcon>favicon.ico</PackageIcon>
   </PropertyGroup>
+
+  <!-- Code Analysis and Quality Settings -->
+  <PropertyGroup>
+    <AnalysisLevel>latest-all</AnalysisLevel>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <!-- Performance and Trimming Settings -->
+  <PropertyGroup>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <IsTrimmable>true</IsTrimmable>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Repository\EmployeeRepository.cs" />
     <Compile Remove="Services\EmployeeService.cs" />
     <Compile Remove="Services\EmployeeServiceContext.cs" />
   </ItemGroup>
+  
   <ItemGroup>
     <Content Include="favicon.ico" />
   </ItemGroup>
+  
   <ItemGroup>
     <None Include="..\favicon.ico">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Bogus" Version="35.6.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.1" />
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Mwh.Sample.Domain\Mwh.Sample.Domain.csproj" />
   </ItemGroup>

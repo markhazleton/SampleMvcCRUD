@@ -1,5 +1,5 @@
-﻿
-namespace Mwh.Sample.Domain.Extensions;
+﻿namespace Mwh.Sample.Domain.Extensions;
+
 /// <summary>
 /// LogExtensions Static Class
 /// </summary>
@@ -15,14 +15,12 @@ public static class LogExtensions
     {
         try
         {
-            using (StringWriter writer = new())
-            {
-                XmlSerializer oXS = new(typeof(T));
-                XmlDocument myXML = new XmlDocument();
-                oXS.Serialize(writer, objectToSerialize);
-                myXML.LoadXml(writer.ToString());
-                return myXML.OuterXml.ToString();
-            }
+            using StringWriter writer = new();
+            XmlSerializer oXS = new(typeof(T));
+            XmlDocument myXML = new();
+            oXS.Serialize(writer, objectToSerialize);
+            myXML.LoadXml(writer.ToString());
+            return myXML.OuterXml;
         }
         catch
         {
@@ -40,14 +38,12 @@ public static class LogExtensions
     {
         try
         {
-            using (StringWriter writer = new())
-            {
-                XmlSerializer oXS = new(typeof(List<T>));
-                XmlDocument myXML = new XmlDocument();
-                oXS.Serialize(writer, lstObjectToSerialize);
-                myXML.LoadXml(writer.ToString());
-                return myXML.OuterXml.ToString();
-            }
+            using StringWriter writer = new();
+            XmlSerializer oXS = new(typeof(List<T>));
+            XmlDocument myXML = new();
+            oXS.Serialize(writer, lstObjectToSerialize);
+            myXML.LoadXml(writer.ToString());
+            return myXML.OuterXml;
         }
         catch
         {
@@ -62,19 +58,20 @@ public static class LogExtensions
     /// <returns><c>true</c> if [is simple type] [the specified type]; otherwise, <c>false</c>.</returns>
     public static bool IsSimpleType(this Type type)
     {
-        return
-            type.IsValueType ||
-            type.IsPrimitive ||
-            new Type[]
-            {
-                    typeof(string),
-                    typeof(decimal),
-                    typeof(DateTime),
-                    typeof(DateTimeOffset),
-                    typeof(TimeSpan),
-                    typeof(Guid)
-            }.Contains(type) ||
-            Convert.GetTypeCode(type) != TypeCode.Object;
+        Type[] simpleTypes =
+        [
+            typeof(string),
+            typeof(decimal),
+            typeof(DateTime),
+            typeof(DateTimeOffset),
+            typeof(TimeSpan),
+            typeof(Guid)
+        ];
+
+        return type.IsValueType ||
+               type.IsPrimitive ||
+               simpleTypes.Contains(type) ||
+               Convert.GetTypeCode(type) != TypeCode.Object;
     }
 
     /// <summary>
@@ -82,25 +79,27 @@ public static class LogExtensions
     /// </summary>
     /// <param name="record">record as object</param>
     /// <returns>Dictionary object</returns>
-    private static Dictionary<string, object> GetDictionaryWithPropertiesForOneRecord(object record)
+    private static Dictionary<string, object> GetDictionaryWithPropertiesForOneRecord(object? record)
     {
-        if (record == null)
-            return new Dictionary<string, object>();
+        if (record is null)
+            return [];
 
         Type type = record.GetType();
         PropertyInfo[] properties = type.GetProperties();
-        Dictionary<string, object> dictionary = new();
+        Dictionary<string, object> dictionary = [];
+
         foreach (PropertyInfo propertyInfo in properties)
         {
-            if (propertyInfo != null)
+            if (propertyInfo is not null && IsSimpleType(propertyInfo.PropertyType))
             {
-                if (IsSimpleType(propertyInfo.PropertyType))
+                object? value = propertyInfo.GetValue(record, []);
+                if (value is not null)
                 {
-                    object value = propertyInfo.GetValue(record, new object[] { });
                     dictionary.Add(propertyInfo.Name, value);
                 }
             }
         }
+
         return dictionary;
     }
 
@@ -109,34 +108,29 @@ public static class LogExtensions
     /// </summary>
     /// <param name="record">record as object</param>
     /// <returns>String</returns>
-    private static string GetTextObjectString(this object record)
+    private static string GetTextObjectString(this object? record)
     {
-        int propertyCounter = 0;
+        if (record is null)
+            return string.Empty;
+
         StringBuilder recordLog = new();
         Dictionary<string, object> recordDictionary = GetDictionaryWithPropertiesForOneRecord(record);
+
         try
         {
-            foreach (KeyValuePair<string, object> keyValuePair in recordDictionary)
+            foreach (KeyValuePair<string, object> kvp in recordDictionary)
             {
-                propertyCounter += 1;
-                object thePropertyValue = recordDictionary[keyValuePair.Key];
-                if (thePropertyValue != null)
-                {
-                    recordLog.Append($"{keyValuePair.Key}:{keyValuePair.Value}|");
-                }
-                else
-                {
-                    recordLog.Append($"{keyValuePair.Key}:{"[NULL]"}| ");
-                }
+                object? value = kvp.Value;
+                recordLog.Append(value is not null 
+                    ? $"{kvp.Key}:{value}|" 
+                    : $"{kvp.Key}:[NULL]|");
             }
         }
         catch (Exception ex)
         {
             recordLog.AppendLine(ex.Message);
         }
-        finally
-        {
-        }
+
         return recordLog.ToString();
     }
 }
