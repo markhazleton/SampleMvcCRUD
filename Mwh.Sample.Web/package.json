@@ -8,7 +8,7 @@
   "private": true,
   "dependencies": {
     "datatables.net": "2.2.2",
-    "datatables.net-bs5": "2.2.2",
+    "datatables.net-bs5": "2.3.6",
     "jquery": "3.7.1",
     "jquery-validation": "1.21.0",
     "jquery-validation-unobtrusive": "4.0.0"
