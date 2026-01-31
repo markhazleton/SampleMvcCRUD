@@ -58,6 +58,7 @@ public static class LogExtensions
     /// <returns><c>true</c> if [is simple type] [the specified type]; otherwise, <c>false</c>.</returns>
     public static bool IsSimpleType(this Type type)
     {
+        ArgumentNullException.ThrowIfNull(type);
         Type[] simpleTypes =
         [
             typeof(string),

@@ -118,6 +118,7 @@ public static class ConfigurationExtensions
     /// <returns>The integer value from configuration or default</returns>
     public static int GetInt(this IConfiguration _config, string configKey, string? defaultValue = null)
     {
+        ArgumentNullException.ThrowIfNull(_config);
         return GetInt(_config.GetSection(configKey).Value, defaultValue);
     }
 
@@ -130,6 +131,7 @@ public static class ConfigurationExtensions
     /// <returns>An array of integers from configuration or default</returns>
     public static int[] GetIntList(this IConfiguration _config, string configKey, string? defaultValue = null)
     {
+        ArgumentNullException.ThrowIfNull(_config);
         return GetIntList(_config.GetSection(configKey).Value, defaultValue);
     }
 
@@ -142,6 +144,7 @@ public static class ConfigurationExtensions
     /// <returns>The string value from configuration or default</returns>
     public static string GetString(this IConfiguration _config, string configKey, string? defaultValue = null)
     {
+        ArgumentNullException.ThrowIfNull(_config);
         return GetString(_config.GetSection(configKey).Value, defaultValue);
     }
 
@@ -154,6 +157,7 @@ public static class ConfigurationExtensions
     /// <returns>An array of strings from configuration or default</returns>
     public static string[] GetStringList(this IConfiguration _config, string configKey, string? defaultValue = null)
     {
+        ArgumentNullException.ThrowIfNull(_config);
         return GetStringList(_config.GetSection(configKey).Value, defaultValue);
     }
 }

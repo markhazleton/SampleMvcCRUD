@@ -6,10 +6,15 @@ namespace Mwh.Sample.Domain.Extensions
     {
         public static SKBitmap Resize(this SKBitmap image, int maxWidth = 0, int maxHeight = 0)
         {
+            ArgumentNullException.ThrowIfNull(image);
             if (maxWidth == 0)
+            {
                 maxWidth = image.Width;
+            }
             if (maxHeight == 0)
+            {
                 maxHeight = image.Height;
+            }
 
             double ratioX = (double)maxWidth / image.Width;
             double ratioY = (double)maxHeight / image.Height;
@@ -24,6 +29,7 @@ namespace Mwh.Sample.Domain.Extensions
 
         public static SKBitmap ScaleImage(this SKBitmap image, int maxHeight)
         {
+            ArgumentNullException.ThrowIfNull(image);
             double ratio = (double)maxHeight / image.Height;
 
             int newWidth = (int)(image.Width * ratio);

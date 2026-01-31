@@ -73,6 +73,7 @@ public static class StructuredDataHelper
     /// </summary>
     public static string GenerateEmployeeSchema(EmployeeDto employee, string baseUrl)
     {
+        ArgumentNullException.ThrowIfNull(employee);
         var person = new
         {
             context = "https://schema.org",

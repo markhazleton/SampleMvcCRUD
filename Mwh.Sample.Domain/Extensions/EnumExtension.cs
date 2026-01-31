@@ -1,5 +1,4 @@
-﻿
-namespace Mwh.Sample.Domain.Extensions;
+﻿namespace Mwh.Sample.Domain.Extensions;
 
 /// <summary>
 /// ENUM Extension Methods
@@ -61,6 +60,7 @@ public static class EnumExtension
     /// <returns>Dictionary&lt;System.Int32, System.String&gt;.</returns>
     public static Dictionary<int, string> ToDictionary(this Enum enumValue)
     {
+        ArgumentNullException.ThrowIfNull(enumValue);
         Type enumType = enumValue.GetType();
         return Enum.GetValues(enumType).Cast<Enum>().ToDictionary(t => (int)(object)t, t => t.ToString());
     }

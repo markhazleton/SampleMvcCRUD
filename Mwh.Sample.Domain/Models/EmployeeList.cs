@@ -1,5 +1,4 @@
-﻿
-namespace Mwh.Sample.Domain.Models;
+﻿namespace Mwh.Sample.Domain.Models;
 
 /// <summary>
 /// Employee List
@@ -10,7 +9,10 @@ public class EmployeeList
 
     public EmployeeList AddItem(EmployeeDto? item)
     {
-        if (item == null) return this;
+        if (item == null)
+        {
+            return this;
+        }
         _list.Add(item);
         return this;
     }

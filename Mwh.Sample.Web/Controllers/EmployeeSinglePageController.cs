@@ -31,6 +31,7 @@
         /// Renders the Single Page Application view
         /// </summary>
         /// <returns>The SPA view that will be populated with data via AJAX</returns>
+        [HttpGet]
         public IActionResult Index()
         {
             _logger.LogInformation("SPA Employee page accessed at {Time}", DateTime.UtcNow);

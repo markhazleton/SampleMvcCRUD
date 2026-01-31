@@ -19,6 +19,7 @@ public class HomeController : BaseController
     /// Error Page Display
     /// </summary>
     /// <returns></returns>
+    [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     { return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }); }
@@ -27,6 +28,7 @@ public class HomeController : BaseController
     /// Main Home Page
     /// </summary>
     /// <returns></returns>
+    [HttpGet]
     public ActionResult Index()
     {
         Microsoft.AspNetCore.Html.HtmlString myContent = Markdown.ParseHtmlStringFromFile("~/README.md");

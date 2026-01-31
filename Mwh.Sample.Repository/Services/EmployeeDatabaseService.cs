@@ -151,6 +151,7 @@ public class EmployeeDatabaseService : IEmployeeService
 
     public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(PagingParameterModel paging, CancellationToken token)
     {
+        ArgumentNullException.ThrowIfNull(paging);
         IQueryable<Employee> source = _context.Employees
             .Include(i => i.Department)
             .OrderBy(o => o.Name)

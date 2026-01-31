@@ -17,9 +17,8 @@ if (!string.IsNullOrEmpty(vaultUri))
     }
     catch (Exception ex)
     {
-        builder.Logging.AddConsole().Services.BuildServiceProvider()
-            .GetRequiredService<ILogger<Program>>()
-            .LogError(ex, "Failed to configure Azure Key Vault");
+        // Log Key Vault configuration error - using Console as fallback
+        Console.WriteLine($"Failed to configure Azure Key Vault: {ex.Message}");
     }
 }
 
@@ -70,8 +69,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 
 // Monitoring and diagnostics
-builder.Services.AddApplicationInsightsTelemetry(
-    builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
+builder.Services.AddApplicationInsightsTelemetry(options =>
+{
+    options.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+});
 builder.Services.AddHealthChecks();
 
 // Problem details for standardized error responses

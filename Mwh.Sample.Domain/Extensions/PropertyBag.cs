@@ -1,5 +1,4 @@
-﻿
-namespace Mwh.Sample.Domain.Extensions;
+﻿namespace Mwh.Sample.Domain.Extensions;
 /// <summary>
 /// Special Dictionary for Use with Restful / AJAX Calls
 /// </summary>
@@ -57,6 +56,7 @@ public sealed class PropertyBag<TKey, TValue>
     /// <param name="value">The value.</param>
     public void Add(Dictionary<TKey, TValue> value)
     {
+        ArgumentNullException.ThrowIfNull(value);
         foreach (TKey item in value.Keys)
         {
             Add(item, value[item]);
@@ -98,12 +98,12 @@ public sealed class PropertyBag<TKey, TValue>
     /// <param name="value">The value.</param>
     public void Add(TKey key, TValue? value)
     {
-        if (value is null) return;
+        if (value is null)
+        {
+            return;
+        }
 
-        if (_Dictionary.ContainsKey(key))
-            _Dictionary[key] = value;
-        else
-            _Dictionary.Add(key, value);
+        _Dictionary[key] = value;
     }
 
     /// <summary>
@@ -126,6 +126,7 @@ public sealed class PropertyBag<TKey, TValue>
     /// <param name="info">The information.</param>
     public void GetObjectData(SerializationInfo info)
     {
+        ArgumentNullException.ThrowIfNull(info);
         foreach (TKey key in _Dictionary.Keys)
         {
             if (key != null)

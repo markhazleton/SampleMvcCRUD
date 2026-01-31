@@ -1,5 +1,4 @@
-﻿
-namespace Mwh.Sample.Web.Controllers;
+﻿namespace Mwh.Sample.Web.Controllers;
 
 /// <summary>
 /// EmployeeController
@@ -41,6 +40,7 @@ public class EmployeeController : BaseController
     /// <param name="employee"></param>
     /// <returns></returns>[HttpPost]
     [HttpPost]
+    [ValidateAntiForgeryToken]
     [Route("Employee/GetEmployeeDelete/{id}")]
     public async Task<ActionResult> GetEmployeeDelete(int? id = null, EmployeeDto? employee = null)
     {
@@ -88,6 +88,7 @@ public class EmployeeController : BaseController
     /// <returns></returns>
     [HttpPut]
     [HttpPost]
+    [ValidateAntiForgeryToken]
     [Route("Employee/GetEmployeeEdit/{id}")]
     public async Task<ActionResult> GetEmployeeEdit(int? id = null, EmployeeDto? employee = null, CancellationToken token = default)
     {

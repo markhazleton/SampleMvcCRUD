@@ -12,6 +12,7 @@ public static class HttpContextExtensions
     /// <returns>The application builder instance for method chaining</returns>
     public static IApplicationBuilder UseMyHttpContext(this IApplicationBuilder app)
     {
+        ArgumentNullException.ThrowIfNull(app);
         MyHttpContext.Configure(app.ApplicationServices.GetRequiredService<IHttpContextAccessor>());
         return app;
     }
