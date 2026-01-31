@@ -273,5 +273,76 @@ namespace Mwh.Sample.Repository.Tests.Repository
             Assert.AreEqual(finalResult?.State, "FL");
 
         }
+
+        [TestMethod]
+        public void EmployeeMock_Constructor_WithGeneratedEmployees()
+        {
+            // Arrange & Act
+            EmployeeMock mock = new EmployeeMock(20);
+
+            // Assert
+            System.Collections.Generic.List<EmployeeDto> employees = mock.EmployeeCollection();
+            Assert.IsNotNull(employees);
+            Assert.IsTrue(employees.Count >= 20);
+        }
+
+        [TestMethod]
+        public async Task EmployeeMock_UpdateAsync_NewEmployee_ShouldAdd()
+        {
+            // Arrange
+            EmployeeMock mock = new EmployeeMock();
+            int initialCount = mock.EmployeeCollection().Count;
+
+            EmployeeDto newEmp = new EmployeeDto(
+                0,
+                "New Mock Employee",
+                40,
+                "Arizona",
+                "USA",
+                EmployeeDepartmentEnum.IT);
+
+            // Act
+            EmployeeDto? result = await mock.UpdateAsync(newEmp);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Id > 0);
+            Assert.AreEqual(initialCount + 1, mock.EmployeeCollection().Count);
+        }
+
+        [TestMethod]
+        public async Task EmployeeMock_UpdateAsync_NullDepartment_ShouldReturnNull()
+        {
+            // Arrange
+            EmployeeMock mock = new EmployeeMock();
+            DepartmentDto? nullDept = null;
+
+            // Act
+            DepartmentDto? result = await mock.UpdateAsync(nullDept);
+
+            // Assert
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public async Task EmployeeMock_DepartmentAsync_InvalidId_ShouldThrowOrReturnNull()
+        {
+            // Arrange
+            EmployeeMock mock = new EmployeeMock();
+            int invalidId = 9999;
+
+            // Act  & Assert - EmployeeMock throws exception for invalid department IDs
+            try
+            {
+                DepartmentDto? result = await mock.DepartmentAsync(invalidId);
+                // Some implementations may return null
+                Assert.IsNull(result);
+            }
+            catch (ArgumentException)
+            {
+                // Expected behavior for invalid ID
+                Assert.IsTrue(true);
+            }
+        }
     }
 }

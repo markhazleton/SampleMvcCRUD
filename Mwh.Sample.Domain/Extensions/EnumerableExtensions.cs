@@ -16,6 +16,8 @@ public static class EnumerableExtensions
         where T : class
         where TKey : IComparable<TKey>
     {
+        ArgumentNullException.ThrowIfNull(keySelector);
+
         if (sequence == null || !sequence.Any())
             return default;
 

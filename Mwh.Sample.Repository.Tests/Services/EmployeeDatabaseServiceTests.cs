@@ -11,18 +11,16 @@ namespace Mwh.Sample.Repository.Tests.Services;
 /// 
 /// </summary>
 [TestClass]
-public class EmployeeDatabaseServiceTests
+public class EmployeeDatabaseServiceTests : IDisposable
 {
     private readonly CancellationToken ct;
-    private readonly IEmployeeService employeeService;
+    private IEmployeeService? employeeService;
+    private EmployeeContext? context;
+    private readonly string databaseName;
 
     public EmployeeDatabaseServiceTests()
     {
-        DbContextOptionsBuilder<EmployeeContext> builder = new DbContextOptionsBuilder<EmployeeContext>();
-        _ = builder.EnableSensitiveDataLogging(true);
-        _ = builder.UseInMemoryDatabase("EmployeeDatabaseServiceTests");
-        EmployeeContext context = new EmployeeContext(builder.Options);
-        employeeService = new EmployeeDatabaseService(context);
+        databaseName = $"EmployeeDatabaseServiceTests_{Guid.NewGuid()}";
         ct = default;
     }
 
@@ -37,7 +35,7 @@ public class EmployeeDatabaseServiceTests
         string?[]? namelist = null;
 
         // Act
-        int result = await employeeService.AddMultipleEmployeesAsync(namelist);
+        int result = await employeeService!.AddMultipleEmployeesAsync(namelist);
 
         // Assert
         Assert.AreEqual(-1, result);
@@ -51,7 +49,7 @@ public class EmployeeDatabaseServiceTests
 
         // Act
         PagingParameterModel paging = new PagingParameterModel();
-        int initResults = (await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true)).Count();
+        int initResults = (await employeeService!.GetEmployeesAsync(paging, ct).ConfigureAwait(true)).Count();
         int result = await employeeService.AddMultipleEmployeesAsync(namelist).ConfigureAwait(true);
         int afterResults = (await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true)).Count();
         System.Collections.Generic.IEnumerable<EmployeeDto> empList = await employeeService.GetEmployeesAsync(paging, ct).ConfigureAwait(true);
@@ -76,7 +74,7 @@ public class EmployeeDatabaseServiceTests
         employee.Gender = GenderEnum.Male;
 
         // Act
-        EmployeeResponse? result = await employeeService.SaveAsync(employee, ct);
+        EmployeeResponse? result = await employeeService!.SaveAsync(employee, ct);
         int id = result?.Resource?.Id ?? 0;
         EmployeeResponse afterResults = await employeeService.DeleteAsync(id, ct);
 
@@ -95,7 +93,7 @@ public class EmployeeDatabaseServiceTests
         int id = 0;
 
         // Act
-        EmployeeResponse result = await employeeService.DeleteAsync(
+        EmployeeResponse result = await employeeService!.DeleteAsync(
             id,
             ct);
 
@@ -110,7 +108,7 @@ public class EmployeeDatabaseServiceTests
         int id = 0;
 
         // Act
-        EmployeeResponse result = await employeeService.FindEmployeeByIdAsync(id, ct);
+        EmployeeResponse result = await employeeService!.FindEmployeeByIdAsync(id, ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -123,7 +121,7 @@ public class EmployeeDatabaseServiceTests
         // Arrange
 
         // Act
-        System.Collections.Generic.IEnumerable<EmployeeDto> result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), ct);
+        System.Collections.Generic.IEnumerable<EmployeeDto> result = await employeeService!.GetEmployeesAsync(new PagingParameterModel(), ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -135,7 +133,7 @@ public class EmployeeDatabaseServiceTests
         // Arrange
 
         // Act
-        System.Collections.Generic.IEnumerable<EmployeeDto> result = await employeeService.GetEmployeesAsync(new PagingParameterModel(), ct);
+        System.Collections.Generic.IEnumerable<EmployeeDto> result = await employeeService!.GetEmployeesAsync(new PagingParameterModel(), ct);
 
         // Assert
         Assert.IsNotNull(result);
@@ -146,21 +144,39 @@ public class EmployeeDatabaseServiceTests
     {
         try
         {
+            DbContextOptionsBuilder<EmployeeContext> builder = new DbContextOptionsBuilder<EmployeeContext>();
+            _ = builder.EnableSensitiveDataLogging(true);
+            _ = builder.UseInMemoryDatabase(databaseName);
+            context = new EmployeeContext(builder.Options);
+            employeeService = new EmployeeDatabaseService(context);
+
             EmployeeMock employeeMock = new EmployeeMock();
             foreach (DepartmentDto dept in employeeMock.DepartmentCollection())
             {
                 await employeeService.SaveAsync(dept, ct).ConfigureAwait(true);
             }
-            employeeMock.EmployeeCollection()?.ForEach(async emp =>
+            foreach (EmployeeDto emp in employeeMock.EmployeeCollection())
             {
                 await employeeService.UpdateAsync(emp.Id, emp, ct).ConfigureAwait(true);
-            });
+            }
         }
         catch (Exception ex)
         {
             Console.Write(ex.Message);
             throw;
         }
+    }
+
+    [TestCleanup]
+    public void Cleanup()
+    {
+        context?.Dispose();
+    }
+
+    public void Dispose()
+    {
+        context?.Dispose();
+        GC.SuppressFinalize(this);
     }
 
     [TestMethod]
@@ -377,7 +393,7 @@ public class EmployeeDatabaseServiceTests
         EmployeeDto? employee = null;
 
         // Act
-        EmployeeResponse result = await employeeService.UpdateAsync(
+        EmployeeResponse result = await employeeService!.UpdateAsync(
             id,
             employee,
             ct);
@@ -385,5 +401,183 @@ public class EmployeeDatabaseServiceTests
         // Assert
         Assert.IsNotNull(result);
         Assert.IsFalse(result.Success);
+    }
+
+    [TestMethod]
+    public async Task GetDepartmentsAsync_WithoutEmployees_ShouldReturnDepartments()
+    {
+        // Arrange
+        bool includeEmployees = false;
+
+        // Act
+        System.Collections.Generic.IEnumerable<DepartmentDto> result = await employeeService!.GetDepartmentsAsync(includeEmployees, ct);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result.Any());
+    }
+
+    [TestMethod]
+    public async Task GetDepartmentsAsync_WithEmployees_ShouldReturnDepartmentsWithEmployees()
+    {
+        // Arrange
+        bool includeEmployees = true;
+
+        // Act
+        System.Collections.Generic.IEnumerable<DepartmentDto> result = await employeeService!.GetDepartmentsAsync(includeEmployees, ct);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result.Any());
+    }
+
+    [TestMethod]
+    public async Task FindDepartmentByIdAsync_WithValidId_ShouldReturnDepartment()
+    {
+        // Arrange
+        int deptId = (int)EmployeeDepartmentEnum.IT;
+
+        // Act
+        DepartmentDto? result = await employeeService!.FindDepartmentByIdAsync(deptId, ct);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(deptId, result.Id);
+    }
+
+    [TestMethod]
+    public async Task FindDepartmentByIdAsync_WithInvalidId_ShouldReturnNull()
+    {
+        // Arrange
+        int deptId = 9999;
+
+        // Act
+        DepartmentDto? result = await employeeService!.FindDepartmentByIdAsync(deptId, ct);
+
+        // Assert
+        Assert.IsNull(result);
+    }
+
+    [TestMethod]
+    public async Task SaveDepartmentAsync_WithNullDepartment_ShouldReturnError()
+    {
+        // Arrange
+        DepartmentDto? dept = null;
+
+        // Act
+        DepartmentResponse result = await employeeService!.SaveAsync(dept!, ct);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsFalse(result.Success);
+        Assert.AreEqual("Department can not be null", result.Message);
+    }
+
+    [TestMethod]
+    public async Task SaveDepartmentAsync_WithZeroId_ShouldReturnError()
+    {
+        // Arrange
+        DepartmentDto dept = new DepartmentDto
+        {
+            Id = 0,
+            Name = "Test",
+            Description = "Test"
+        };
+
+        // Act
+        DepartmentResponse result = await employeeService!.SaveAsync(dept, ct);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsFalse(result.Success);
+        Assert.AreEqual("Zero ID not allowed", result.Message);
+    }
+
+    [TestMethod]
+    public async Task SaveDepartmentAsync_WithValidDepartment_ShouldSaveDepartment()
+    {
+        // Arrange
+        DepartmentDto dept = new DepartmentDto(EmployeeDepartmentEnum.Accounting);
+
+        // Act
+        DepartmentResponse result = await employeeService!.SaveAsync(dept, ct);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result.Success);
+        Assert.IsNotNull(result.Resource);
+    }
+
+    [TestMethod]
+    public async Task SaveEmployeeDbAsync_WithInvalidDepartment_ShouldReturnError()
+    {
+        // Arrange
+        EmployeeDto employee = new EmployeeDto(
+            0,
+            "Test User",
+            25,
+            "TX",
+            "USA",
+            (EmployeeDepartmentEnum)9999);
+
+        // Act
+        EmployeeResponse result = await employeeService!.SaveAsync(employee, ct);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsFalse(result.Success);
+        Assert.AreEqual("Department not found", result.Message);
+    }
+
+    [TestMethod]
+    public async Task GetEmployeesAsync_WithNullPaging_ShouldThrowException()
+    {
+        // Arrange
+        PagingParameterModel? paging = null;
+
+        // Act & Assert
+        try
+        {
+            await employeeService!.GetEmployeesAsync(paging!, ct);
+            Assert.Fail("Expected ArgumentNullException was not thrown");
+        }
+        catch (ArgumentNullException)
+        {
+            // Expected exception
+            Assert.IsTrue(true);
+        }
+    }
+
+    [TestMethod]
+    public async Task GetEmployeesAsync_WithPaging_ShouldReturnPagedResults()
+    {
+        // Arrange
+        PagingParameterModel paging = new PagingParameterModel
+        {
+            PageNumber = 1,
+            PageSize = 5
+        };
+
+        // Act
+        System.Collections.Generic.IEnumerable<EmployeeDto> result = await employeeService!.GetEmployeesAsync(paging, ct);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result.Count() <= 5);
+    }
+
+    [TestMethod]
+    public async Task SaveAsync_WithNullDepartmentDto_ShouldReturnError()
+    {
+        // Arrange
+        DepartmentDto? dept = null;
+
+        // Act
+        DepartmentResponse result = await employeeService!.SaveAsync(dept!, ct);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsFalse(result.Success);
+        Assert.AreEqual("Department can not be null", result.Message);
     }
 }

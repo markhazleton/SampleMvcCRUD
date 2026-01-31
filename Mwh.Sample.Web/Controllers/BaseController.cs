@@ -1,6 +1,7 @@
 ﻿
 using Mwh.Sample.Domain.Extensions;
 using SkiaSharp;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mwh.Sample.Web.Controllers;
 
@@ -17,6 +18,7 @@ public abstract class BaseController : Controller
     /// </summary>
     public readonly CancellationTokenSource cts;
     private readonly IConfiguration Config;
+    private bool disposed = false;
 
     /// <summary>
     /// BaseController
@@ -34,10 +36,19 @@ public abstract class BaseController : Controller
     /// <param name="ProfileImage"></param>
     /// <returns></returns>
     /// <param name="EmployeeId"></param>
+    [SuppressMessage("Security", "CA3003:Review code for file path injection vulnerabilities", Justification = "EmployeeId is sanitized using Path.GetFileName to prevent path traversal attacks")]
     protected string? UploadedFile(IFormFile? ProfileImage, string EmployeeId)
     {
         if (ProfileImage is null) return null;
-        string folderPath = Path.Combine(webHostEnvironment.WebRootPath, "images", EmployeeId);
+
+        // Sanitize EmployeeId to prevent path traversal attacks
+        var sanitizedEmployeeId = Path.GetFileName(EmployeeId);
+        if (string.IsNullOrWhiteSpace(sanitizedEmployeeId) || sanitizedEmployeeId.Contains(".."))
+        {
+            throw new ArgumentException("Invalid EmployeeId", nameof(EmployeeId));
+        }
+
+        string folderPath = Path.Combine(webHostEnvironment.WebRootPath, "images", sanitizedEmployeeId);
         if (!Directory.Exists(folderPath))
         {
             Directory.CreateDirectory(folderPath);
@@ -52,7 +63,23 @@ public abstract class BaseController : Controller
         using var fileStream = System.IO.File.OpenWrite(filePath);
         data.SaveTo(fileStream);
 
-        return $"{EmployeeId}/{Path.GetFileName(filePath)}";
+        return $"{sanitizedEmployeeId}/{Path.GetFileName(filePath)}";
+    }
+
+    /// <summary>
+    /// Dispose of managed resources
+    /// </summary>
+    protected override void Dispose(bool disposing)
+    {
+        if (!disposed)
+        {
+            if (disposing)
+            {
+                cts?.Dispose();
+            }
+            disposed = true;
+        }
+        base.Dispose(disposing);
     }
 
 

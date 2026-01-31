@@ -25,16 +25,16 @@ public class EmployeeContextTests
         List<DepartmentResponse> departmentList = new List<DepartmentResponse>();
         EmployeeDatabaseService svc = new EmployeeDatabaseService(context);
 
-        employeeMock.DepartmentCollection()?.ForEach(async dept =>
-       {
-           departmentList.Add(await svc.SaveDepartmentAsync(dept));
-       });
+        foreach (DepartmentDto dept in employeeMock.DepartmentCollection())
+        {
+            departmentList.Add(await svc.SaveDepartmentAsync(dept));
+        }
         int deptSuccess = departmentList.Where(w => w.Success).Count();
 
-        employeeMock.EmployeeCollection()?.ForEach(async emp =>
+        foreach (EmployeeDto emp in employeeMock.EmployeeCollection())
         {
             employeeList.Add(await svc.SaveEmployeeDbAsync(emp));
-        });
+        }
         int emptSuccess = employeeList.Where(w => w.Success).Count();
 
         // Assert

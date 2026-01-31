@@ -13,6 +13,8 @@ public class EmployeeContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        ArgumentNullException.ThrowIfNull(optionsBuilder);
+
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseInMemoryDatabase("Employee");
@@ -21,6 +23,8 @@ public class EmployeeContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        ArgumentNullException.ThrowIfNull(modelBuilder);
+
         modelBuilder.Entity<Employee>(entity =>
         {
             entity.HasKey(e => e.Id);

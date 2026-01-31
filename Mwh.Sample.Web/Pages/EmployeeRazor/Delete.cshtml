@@ -26,8 +26,8 @@
                 <dt class="col-sm-3 text-muted">@Html.DisplayNameFor(model => model.Employee.Country)</dt>
                 <dd class="col-sm-9">@Html.DisplayFor(model => model.Employee.Country)</dd>
 
-                <dt class="col-sm-3 text-muted">@Html.DisplayNameFor(model => model.Employee.Department.Name)</dt>
-                <dd class="col-sm-9">@Html.DisplayFor(model => model.Employee.Department.Name)</dd>
+                <dt class="col-sm-3 text-muted">@Html.DisplayNameFor(model => model.Employee.Department!.Name)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Employee.Department!.Name)</dd>
 
                 <dt class="col-sm-3 text-muted">@Html.DisplayNameFor(model => model.Employee.State)</dt>
                 <dd class="col-sm-9">@Html.DisplayFor(model => model.Employee.State)</dd>

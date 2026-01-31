@@ -13,6 +13,8 @@ public static class BreadcrumbHelper
     /// </summary>
     public static List<(string Name, string Url)> GenerateBreadcrumbs(ViewContext viewContext)
     {
+        ArgumentNullException.ThrowIfNull(viewContext);
+
         var breadcrumbs = new List<(string Name, string Url)>();
 
         // Always start with Home
