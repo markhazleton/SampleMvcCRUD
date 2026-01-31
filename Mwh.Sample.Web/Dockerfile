@@ -1,11 +1,20 @@
 # Pin the .NET 10 runtime/SDK (nightly until GA) so restore supports net10.0
 ARG DOTNET_VERSION=10.0
 
-# Use the .NET 10 ASP.NET runtime as the base image
-FROM mcr.microsoft.com/dotnet/nightly/aspnet:${DOTNET_VERSION} AS base
+# Use the .NET 10 ASP.NET runtime as the base image (Alpine for security)
+FROM mcr.microsoft.com/dotnet/nightly/aspnet:${DOTNET_VERSION}-alpine AS base
+
+# Update Alpine packages to get latest security patches
+RUN apk update && apk upgrade --no-cache && \
+    # Install ICU for globalization support
+    apk add --no-cache icu-libs icu-data-full && \
+    # Remove unnecessary packages and clean up
+    rm -rf /var/cache/apk/*
+
+# Create non-root user for security
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
 
 # Use the .NET 10 SDK image for building the application
 FROM mcr.microsoft.com/dotnet/nightly/sdk:${DOTNET_VERSION} AS build
@@ -14,8 +23,9 @@ WORKDIR /src
 # Set shell options for better error handling
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Install Node.js and npm
+# Update OS packages to latest security patches
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends curl && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y --no-install-recommends nodejs && \
@@ -52,5 +62,19 @@ RUN dotnet publish "Mwh.Sample.Web.csproj" -c Release -o /app/publish /p:UseAppH
 # Use the base image to run the application
 FROM base AS final
 WORKDIR /app
+
+# Copy published application
 COPY --from=publish /app/publish .
+
+# Set ownership to non-root user
+RUN chown -R appuser:appgroup /app
+
+# Switch to non-root user for security
+USER appuser
+
+# Configure ASP.NET Core for container environment
+ENV ASPNETCORE_URLS=http://+:8080
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
 ENTRYPOINT ["dotnet", "Mwh.Sample.Web.dll"]
