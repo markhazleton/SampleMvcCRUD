@@ -83,14 +83,7 @@ jobs:
       uses: github/codeql-action/analyze@v4
       with:
         category: "/language:${{matrix.language}}"
-        output: sarif-results
         upload: true
-
-    - name: Upload SARIF results
-      uses: github/codeql-action/upload-sarif@v4
-      if: always()
-      with:
-        sarif_file: sarif-results/${{ matrix.language }}.sarif
 
     - name: Generate analysis summary
       if: always()
