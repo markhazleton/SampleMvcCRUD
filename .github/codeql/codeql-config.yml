@@ -1,0 +1,61 @@
+# CodeQL Configuration for SampleMvcCRUD
+# Configures C# code scanning for security and quality
+
+name: "Sample MVC CRUD CodeQL Config"
+
+# Disable default queries and use custom selection
+disable-default-queries: false
+
+# Query suites to run
+queries:
+  - name: security-extended
+    uses: security-extended
+  - name: security-and-quality
+    uses: security-and-quality
+
+# Paths to analyze
+paths:
+  - Mwh.Sample.Console
+  - Mwh.Sample.Domain
+  - Mwh.Sample.Repository
+  - Mwh.Sample.Web
+  - SampleMinimalApi
+
+# Paths to exclude from analysis
+paths-ignore:
+  - '**/obj/**'
+  - '**/bin/**'
+  - '**/TestResults/**'
+  - '**/wwwroot/lib/**'
+  - '**/node_modules/**'
+  - '**/*.min.js'
+  - '**/*.min.css'
+  - '**/*.Designer.cs'
+  - '**/Migrations/**'
+  - 'Mwh.Sample.Domain.Tests'
+  - 'Mwh.Sample.Repository.Tests'
+
+# Query filters - adjust severity thresholds
+query-filters:
+  - include:
+      kind:
+        - problem
+        - path-problem
+      precision:
+        - high
+        - very-high
+        - medium
+  - exclude:
+      tags:
+        - experimental
+
+# Severity configuration
+severity:
+  error: 
+    - security
+    - correctness
+  warning:
+    - maintainability
+    - reliability
+  note:
+    - readability
