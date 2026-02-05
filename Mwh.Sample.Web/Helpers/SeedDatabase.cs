@@ -39,9 +39,15 @@ public static class SeedDatabase
             // Verify employees were added
             IEnumerable<EmployeeDto> e = await employeeService.GetEmployeesAsync(new PagingParameterModel(), token).ConfigureAwait(true);
         }
-        catch (Exception ex)
+        catch (InvalidOperationException ex)
         {
-            string exceptionMessage = ex.Message;
+            // Database operation failed - log and continue (this is seed data)
+            Console.WriteLine($"Database seed error: {ex.Message}");
+        }
+        catch (DbUpdateException ex)
+        {
+            // Database update failed - log and continue (this is seed data)
+            Console.WriteLine($"Database update error during seed: {ex.Message}");
         }
     }
 }

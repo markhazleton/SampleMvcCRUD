@@ -15,9 +15,19 @@ if (!string.IsNullOrEmpty(vaultUri))
         Uri keyVaultEndpoint = new(vaultUri);
         builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
     }
-    catch (Exception ex)
+    catch (UriFormatException ex)
     {
-        // Log Key Vault configuration error - using Console as fallback
+        // Log Key Vault URI format error
+        Console.WriteLine($"Invalid Key Vault URI format: {ex.Message}");
+    }
+    catch (Azure.Identity.AuthenticationFailedException ex)
+    {
+        // Log authentication failure
+        Console.WriteLine($"Failed to authenticate with Azure Key Vault: {ex.Message}");
+    }
+    catch (Azure.RequestFailedException ex)
+    {
+        // Log Key Vault request error
         Console.WriteLine($"Failed to configure Azure Key Vault: {ex.Message}");
     }
 }

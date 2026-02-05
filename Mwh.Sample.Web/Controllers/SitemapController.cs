@@ -44,9 +44,14 @@ public class SitemapController : Controller
             var sitemap = GenerateSitemap();
             return Content(sitemap, "application/xml", Encoding.UTF8);
         }
-        catch (Exception ex)
+        catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Error generating sitemap");
+            _logger.LogError(ex, "Error generating sitemap: invalid operation");
+            return StatusCode(500, "Error generating sitemap");
+        }
+        catch (System.Xml.XmlException ex)
+        {
+            _logger.LogError(ex, "Error generating sitemap: XML error");
             return StatusCode(500, "Error generating sitemap");
         }
     }
@@ -133,7 +138,7 @@ public class SitemapController : Controller
                     });
                 }
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
             {
                 _logger.LogWarning(ex, "Could not generate URL for {Controller}/{Action}",
                     actionDescriptor.RouteValues["controller"],

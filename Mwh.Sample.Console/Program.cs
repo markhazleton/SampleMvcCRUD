@@ -13,7 +13,12 @@ try
     await context.Database.EnsureCreatedAsync();
     Console.WriteLine("Database is Setup");
 }
-catch (Exception ex)
+catch (Microsoft.Data.Sqlite.SqliteException ex)
+{
+    Console.WriteLine("SQLite Database Initialization error");
+    Console.WriteLine(ex.ToString());
+}
+catch (InvalidOperationException ex)
 {
     Console.WriteLine("Database Initialization error");
     Console.WriteLine(ex.ToString());
@@ -47,7 +52,12 @@ try
     });
     Console.WriteLine($"Employee Success Count:{employeeList?.Where(w => w.Success == true).ToArray().Length}");
 }
-catch (Exception ex)
+catch (DbUpdateException ex)
+{
+    Console.WriteLine("Database Update error");
+    Console.WriteLine(ex.ToString());
+}
+catch (InvalidOperationException ex)
 {
     Console.WriteLine("Database Load error");
     Console.WriteLine(ex.ToString());

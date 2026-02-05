@@ -44,9 +44,13 @@ public class EmployeeMock : IEmployeeDB
                 EmployeeDto? emp = Create(FixedEmployees[i], i);
                 if (emp is not null) list.Add(emp);
             }
-            catch (Exception ex)
+            catch (InvalidCastException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Invalid cast when creating employee: {ex.Message}");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Invalid argument when creating employee: {ex.Message}");
             }
         }
         return list;

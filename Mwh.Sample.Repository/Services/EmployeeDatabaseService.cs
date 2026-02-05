@@ -296,9 +296,13 @@ public class EmployeeDatabaseService : IEmployeeService
 
             return new EmployeeResponse(Create(newEmp));
         }
-        catch (Exception ex)
+        catch (DbUpdateException ex)
         {
-            return new EmployeeResponse($"Exception:{ex.Message}");
+            return new EmployeeResponse($"Database update failed: {ex.Message}");
+        }
+        catch (InvalidOperationException ex)
+        {
+            return new EmployeeResponse($"Invalid operation: {ex.Message}");
         }
     }
 
