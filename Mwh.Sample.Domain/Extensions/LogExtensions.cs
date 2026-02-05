@@ -22,8 +22,14 @@ public static class LogExtensions
             myXML.LoadXml(writer.ToString());
             return myXML.OuterXml;
         }
-        catch
+        catch (InvalidOperationException)
         {
+            // Serialization failed, fall back to text representation
+            return objectToSerialize.GetTextObjectString();
+        }
+        catch (System.Xml.XmlException)
+        {
+            // XML parsing failed, fall back to text representation
             return objectToSerialize.GetTextObjectString();
         }
     }
@@ -45,8 +51,14 @@ public static class LogExtensions
             myXML.LoadXml(writer.ToString());
             return myXML.OuterXml;
         }
-        catch
+        catch (InvalidOperationException)
         {
+            // Serialization failed, fall back to text representation
+            return lstObjectToSerialize.GetTextObjectString();
+        }
+        catch (System.Xml.XmlException)
+        {
+            // XML parsing failed, fall back to text representation
             return lstObjectToSerialize.GetTextObjectString();
         }
     }
@@ -127,8 +139,14 @@ public static class LogExtensions
                     : $"{kvp.Key}:[NULL]|");
             }
         }
-        catch (Exception ex)
+        catch (InvalidOperationException ex)
         {
+            // Collection was modified during iteration
+            recordLog.AppendLine(ex.Message);
+        }
+        catch (ArgumentException ex)
+        {
+            // Invalid argument in string formatting
             recordLog.AppendLine(ex.Message);
         }
 

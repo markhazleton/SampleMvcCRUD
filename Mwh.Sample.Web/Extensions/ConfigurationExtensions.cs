@@ -104,7 +104,14 @@ public static class ConfigurationExtensions
             {
                 returnVals.Add((T)Convert.ChangeType(item, typeof(T)));
             }
-            catch { AllConverted = false; }
+            catch (InvalidCastException) 
+            { 
+                AllConverted = false; 
+            }
+            catch (FormatException) 
+            { 
+                AllConverted = false; 
+            }
         }
         return returnVals;
     }

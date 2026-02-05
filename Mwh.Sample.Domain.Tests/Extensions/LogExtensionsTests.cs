@@ -15,7 +15,7 @@ public class LogExtensionsTests
             xmlDoc.LoadXml(xmlString);
             return true;
         }
-        catch (Exception)
+        catch (System.Xml.XmlException)
         {
             return false;
         }
