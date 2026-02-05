@@ -343,3 +343,72 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# ==============================================================================
+# Project-Specific Ignores (SampleMvcCRUD)
+# ==============================================================================
+
+# Test Coverage Reports (modern .NET test tools)
+coverage.cobertura.xml
+coverage.opencover.xml
+coverage.json
+TestResults/
+**/TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# AI-Assisted Development - Working Sessions (per Constitution Principle XI)
+# Session folders are temporary working directories that should not be committed
+.documentation/copilot/session-*/
+.documentation/copilot/drafts/*-draft.md
+.documentation/copilot/archive/*-temp.md
+
+# HTTP REST Client (VS Code, JetBrains)
+*.http.user
+.rest-client/
+http-client.private.env.json
+
+# Docker local artifacts
+docker-compose.override.yml
+.dockerignore.local
+
+# Local development databases
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Local environment overrides
+.env.local
+.env.*.local
+appsettings.Local.json
+appsettings.*.Local.json
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows thumbnail cache
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# VS Code specific
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+*.sln.DotSettings.user
+
+# Application Insights
+ApplicationInsights.config
