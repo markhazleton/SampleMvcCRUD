@@ -50,12 +50,12 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends nodejs && \
     npm install -g npm@latest && \
     # CRITICAL: Update OpenSSL and system libraries to fix CVEs
-    apt-get install -y --only-upgrade \
+    # Use || true to continue even if some packages aren't available
+    (apt-get install -y --only-upgrade \
         openssl \
         libssl3 \
-        libcrypto3-udeb \
         libc6 \
-        libc-bin && \
+        libc-bin || true) && \
     # Clean up aggressively
     apt-get autoremove -y && \
     apt-get clean && \
