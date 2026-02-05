@@ -24,6 +24,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 Act as a skeptical technical expert identifying risks, architectural flaws, implementation hazards, and failure scenarios that will prevent successful delivery. This command assumes `/speckit.tasks` has completed and focuses on **what will go wrong** rather than consistency checking.
 
 **Key Distinction from `/speckit.analyze`:**
+
 - `/speckit.analyze` = Consistency & completeness checking (are artifacts aligned?)
 - `/speckit.critic` = Adversarial risk analysis (what will fail in production?)
 
@@ -33,18 +34,18 @@ Act as a skeptical technical expert identifying risks, architectural flaws, impl
 
 **Critical Mindset**: Assume the team has **limited experience** with the proposed stack, **optimistic estimates**, and **incomplete understanding** of edge cases. Your job is to identify where the plan will fail in production.
 
-**Constitution Authority**: The project constitution (`.specify/memory/constitution.md`) is **non-negotiable**. Constitution violations are automatically SHOWSTOPPER severity.
+**Constitution Authority**: The project constitution (`/.documentation.documentation/memory/constitution.md`) is **non-negotiable**. Constitution violations are automatically SHOWSTOPPER severity.
 
 ## Execution Steps
 
 ### 1. Initialize Analysis Context
 
-Run `.specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:
+Run `.documentation/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:
 
 - SPEC = FEATURE_DIR/spec.md
 - PLAN = FEATURE_DIR/plan.md
 - TASKS = FEATURE_DIR/tasks.md
-- CONSTITUTION = .specify/memory/constitution.md
+- CONSTITUTION = /.documentation.documentation/memory/constitution.md
 
 Abort with an error message if any required file is missing (instruct the user to run the appropriate prerequisite command).
 
@@ -67,6 +68,7 @@ This informs which framework-specific risks to prioritize.
 Extract failure-prone elements from each artifact:
 
 **From spec.md:**
+
 - Performance/scale requirements (look for unrealistic targets)
 - Security requirements (look for vague or incomplete coverage)
 - Third-party integrations (look for vendor lock-in, API limits)
@@ -74,6 +76,7 @@ Extract failure-prone elements from each artifact:
 - Data consistency requirements (look for distributed system naivety)
 
 **From plan.md:**
+
 - Technology stack (look for bleeding-edge/unproven choices)
 - Architecture patterns (look for over-engineering or under-engineering)
 - Data models (look for normalization issues, missing indexes, scale bottlenecks)
@@ -81,6 +84,7 @@ Extract failure-prone elements from each artifact:
 - Testing strategy (look for inadequate coverage of failure modes)
 
 **From tasks.md:**
+
 - Task sequencing (look for missing dependencies, circular deps)
 - Effort estimates (look for optimistic scheduling)
 - Parallelization assumptions (look for hidden bottlenecks)
@@ -93,6 +97,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 #### A. Architectural Risks
 
 **ASYNC/CONCURRENCY RISKS** (Python async, Node.js, Go goroutines, etc.):
+
 - Blocking I/O in async contexts (wrong driver, sync calls in async functions)
 - Connection pool exhaustion
 - Missing timeout configuration
@@ -100,6 +105,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 - Improper resource cleanup
 
 **SCALE NAIVETY:**
+
 - N+1 query patterns in ORM usage
 - Missing pagination on list endpoints (or offset pagination at scale)
 - No caching strategy for hot paths
@@ -108,6 +114,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 - Large file operations without streaming
 
 **DISTRIBUTED SYSTEM BLINDNESS:**
+
 - Missing handling of network partitions
 - No strategy for eventual consistency
 - Assuming atomic cross-service operations
@@ -116,6 +123,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 - Missing distributed tracing
 
 **DEPENDENCY RISKS:**
+
 - Expensive operations without caching
 - Circular dependencies
 - Missing proper dependency injection for testability
@@ -124,6 +132,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 #### B. Security & Compliance Risks
 
 **AUTHENTICATION/AUTHORIZATION:**
+
 - Missing or incomplete auth middleware
 - No API key/token validation on protected endpoints
 - Overly permissive CORS configuration
@@ -131,6 +140,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 - Secrets hardcoded or in environment without vault
 
 **INPUT VALIDATION:**
+
 - Unvalidated path parameters
 - Missing input sanitization
 - No request size limits
@@ -138,6 +148,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 - XSS vulnerabilities
 
 **REGULATORY BLINDNESS:**
+
 - No mention of GDPR/data residency if handling user data
 - Missing data retention policies
 - No backup/restore procedures
@@ -147,6 +158,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 #### C. Operational Hazards
 
 **OBSERVABILITY GAPS:**
+
 - No structured logging strategy
 - Missing metrics/monitoring configuration
 - No alerting thresholds defined
@@ -155,6 +167,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 - No distributed tracing
 
 **DEPLOYMENT RISKS:**
+
 - Zero-downtime deployment not addressed
 - Missing database migration strategy
 - No rollback procedure
@@ -163,6 +176,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 - No graceful shutdown handling
 
 **TESTING GAPS:**
+
 - Missing integration test strategy
 - No database fixtures for tests
 - Missing API contract testing
@@ -172,18 +186,21 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 #### D. Implementation Traps
 
 **OPTIMISTIC ESTIMATES:**
+
 - Integration tasks without buffer for API issues
 - No time for debugging race conditions
 - Missing tasks for performance optimization
 - Inadequate testing time allocation
 
 **MISSING DEPENDENCIES:**
+
 - Tasks referencing undefined data models
 - Parallel tasks with hidden shared resources
 - No infrastructure provisioning tasks
 - Missing CI/CD pipeline setup
 
 **TECHNICAL DEBT SEEDS:**
+
 - "Quick and dirty" approaches without refactor tasks
 - Hardcoded values without configuration management
 - Missing documentation tasks
@@ -192,6 +209,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 #### E. Business Continuity Risks
 
 **DATA LOSS SCENARIOS:**
+
 - No backup strategy
 - Missing validation before destructive operations
 - Inadequate testing of restore procedures
@@ -199,6 +217,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 - Missing soft delete strategy
 
 **AVAILABILITY RISKS:**
+
 - Single point of failure in architecture
 - No rate limiting strategy
 - Missing DDoS mitigation considerations
@@ -210,6 +229,7 @@ Analyze across these critical dimensions, applying stack-specific knowledge:
 Based on detected stack, apply relevant checklist:
 
 **Python + FastAPI/Django:**
+
 - [ ] Blocking I/O in async endpoints
 - [ ] Missing async database driver (psycopg2 vs asyncpg)
 - [ ] No Pydantic validation constraints
@@ -219,6 +239,7 @@ Based on detected stack, apply relevant checklist:
 - [ ] Missing mypy type checking in CI
 
 **Node.js + Express/Next.js:**
+
 - [ ] Unhandled promise rejections
 - [ ] Missing async error middleware
 - [ ] No connection pool management
@@ -227,6 +248,7 @@ Based on detected stack, apply relevant checklist:
 - [ ] No proper process management (PM2, cluster)
 
 **Go + Gin/Fiber:**
+
 - [ ] Goroutine leaks
 - [ ] Missing context cancellation
 - [ ] No connection pooling configuration
@@ -234,6 +256,7 @@ Based on detected stack, apply relevant checklist:
 - [ ] Missing structured logging
 
 **Java + Spring Boot:**
+
 - [ ] Missing @Transactional boundaries
 - [ ] N+1 queries in JPA/Hibernate
 - [ ] No connection pool tuning (HikariCP)
@@ -241,6 +264,7 @@ Based on detected stack, apply relevant checklist:
 - [ ] Improper exception handling
 
 **General Web:**
+
 - [ ] Missing CORS configuration
 - [ ] No HTTPS enforcement
 - [ ] Missing security headers
@@ -250,15 +274,19 @@ Based on detected stack, apply relevant checklist:
 ### 6. Severity Classification
 
 **SHOWSTOPPER**: Will cause production outage, data loss, or security breach
+
 - Examples: No authentication, blocking I/O causing event loop starvation, missing connection pooling, SQL injection vectors, constitution violations
 
 **CRITICAL**: Will cause major user-facing issues or costly rework
+
 - Examples: Missing pagination, no error handling strategy, missing health checks, inadequate monitoring, no migration strategy
 
 **HIGH**: Will cause technical debt or operational burden
+
 - Examples: Missing structured logging, hardcoded configs, no rollback plan, missing type checking, no pre-commit hooks
 
 **MEDIUM**: Will slow development or cause minor issues
+
 - Examples: Suboptimal query patterns, missing edge case handling, inconsistent code style
 
 ### 7. Produce Risk Assessment Report
@@ -342,18 +370,20 @@ End report with:
 
 **GO/NO-GO RECOMMENDATION:**
 
-```
+```text
 [ ] STOP - Showstoppers present, cannot proceed to implementation
 [ ] CONDITIONAL - Fix critical risks first, then reassess
 [ ] PROCEED WITH CAUTION - Document acknowledged risks, add mitigation tasks
 ```
 
 **Required Actions Before Implementation:**
+
 1. [Specific fix for showstopper #1]
 2. [Specific fix for showstopper #2]
 ...
 
 **Recommended Risk Mitigations:**
+
 - Add tasks for: [specific missing tasks]
 - Revise plan to address: [architectural concerns]
 - Clarify spec requirements for: [ambiguous areas]
@@ -370,6 +400,7 @@ End report with:
 ### Focus Areas
 
 **Prioritize finding:**
+
 1. Security vulnerabilities (no auth, input validation, misconfiguration)
 2. Async/concurrency bugs (blocking I/O, race conditions, deadlocks)
 3. Scale bottlenecks (N+1 queries, missing pagination, no caching)
@@ -379,6 +410,7 @@ End report with:
 7. Constitution violations (always SHOWSTOPPER)
 
 **Ignore:**
+
 - Code style preferences (if linter configured)
 - Minor inconsistencies in documentation format
 - Theoretical edge cases with <1% probability

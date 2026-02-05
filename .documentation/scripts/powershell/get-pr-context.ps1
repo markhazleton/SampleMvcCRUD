@@ -151,11 +151,11 @@ try {
 $filesChanged = $prData.files | ForEach-Object { $_.path }
 
 # Check for constitution
-$constitutionPath = Join-Path $repoRoot.Path "memory\constitution.md"
+$constitutionPath = Join-Path $repoRoot.Path ".documentation\memory\constitution.md"
 $constitutionExists = Test-Path $constitutionPath
 
 # Prepare review directory
-$reviewDir = Join-Path $repoRoot.Path "specs\pr-review"
+$reviewDir = Join-Path $repoRoot.Path ".documentation\specs\pr-review"
 
 # Build output
 if ($Json) {

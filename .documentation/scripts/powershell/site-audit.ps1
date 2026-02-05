@@ -425,10 +425,10 @@ function Get-PatternDetection {
 function Get-ConstitutionInfo {
     param([string]$RepoRoot)
     
-    $constitutionPath = Join-Path $RepoRoot 'memory/constitution.md'
+    $constitutionPath = Join-Path $RepoRoot '.documentation/memory/constitution.md'
     $info = @{
         exists = $false
-        path = 'memory/constitution.md'
+        path = '.documentation/memory/constitution.md'
         principles = @()
         version = $null
     }
@@ -462,7 +462,7 @@ $result = @{
     scope = $Scope
     repo_root = $repoRoot
     constitution = $constitutionInfo
-    audit_dir = 'docs/copilot/audit'
+    audit_dir = '.documentation/copilot/audit'
 }
 
 # Get file categories (always needed for context)

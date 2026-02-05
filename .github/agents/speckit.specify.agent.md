@@ -47,17 +47,17 @@ Given that feature description, do this:
    b. Find the highest feature number across all sources for the short-name:
       - Remote branches: `git ls-remote --heads origin | grep -E 'refs/heads/[0-9]+-<short-name>$'`
       - Local branches: `git branch | grep -E '^[* ]*[0-9]+-<short-name>$'`
-      - Specs directories: Check for directories matching `specs/[0-9]+-<short-name>`
+      - Specs directories: Check for directories matching `.documentation/specs/[0-9]+-<short-name>`
 
    c. Determine the next available number:
       - Extract all numbers from all three sources
       - Find the highest number N
       - Use N+1 for the new branch number
 
-   d. Run the script `.specify/scripts/powershell/create-new-feature.ps1 -Json "$ARGUMENTS"` with the calculated number and short-name:
+   d. Run the script `.documentation/scripts/powershell/create-new-feature.ps1 -Json "$ARGUMENTS"` with the calculated number and short-name:
       - Pass `--number N+1` and `--short-name "your-short-name"` along with the feature description
-      - Bash example: `.specify/scripts/powershell/create-new-feature.ps1 -Json "$ARGUMENTS" --json --number 5 --short-name "user-auth" "Add user authentication"`
-      - PowerShell example: `.specify/scripts/powershell/create-new-feature.ps1 -Json "$ARGUMENTS" -Json -Number 5 -ShortName "user-auth" "Add user authentication"`
+      - Bash example: `.documentation/scripts/powershell/create-new-feature.ps1 -Json "$ARGUMENTS" --json --number 5 --short-name "user-auth" "Add user authentication"`
+      - PowerShell example: `.documentation/scripts/powershell/create-new-feature.ps1 -Json "$ARGUMENTS" -Json -Number 5 -ShortName "user-auth" "Add user authentication"`
 
    **IMPORTANT**:
    - Check all three sources (remote branches, local branches, specs directories) to find the highest number
@@ -68,7 +68,7 @@ Given that feature description, do this:
    - The JSON output will contain BRANCH_NAME and SPEC_FILE paths
    - For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot")
 
-3. Load `.specify/templates/spec-template.md` to understand required sections.
+3. Load `.documentation/templates/spec-template.md` to understand required sections.
 
 4. Follow this execution flow:
 

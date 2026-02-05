@@ -4,7 +4,7 @@ description: Perform comprehensive codebase audit against project constitution/s
 handoffs:
   - label: View Audit History
     agent: speckit.site-audit
-    prompt: Show me previous audit reports in docs/copilot/audit/
+    prompt: Show me previous audit reports in .documentation/copilot/audit/
 ---
 
 ## User Input
@@ -23,7 +23,7 @@ This command performs a comprehensive codebase audit against the project constit
 
 ## Prerequisites
 
-- Project constitution at `.specify/memory/constitution.md` (REQUIRED)
+- Project constitution at `/.documentation.documentation/memory/constitution.md` (REQUIRED)
 - PowerShell 7+ (for script execution)
 - pip-audit (optional, for Python security scanning)
 
@@ -46,7 +46,7 @@ If no scope specified, default to `--scope=full`.
 
 ### 1. Initialize Audit Context
 
-Run `.specify/scripts/powershell/site-audit.ps1 $ARGUMENTS -Json` to gather codebase data and parse JSON output for:
+Run `.documentation/scripts/powershell/site-audit.ps1 $ARGUMENTS -Json` to gather codebase data and parse JSON output for:
 - `REPO_ROOT`: Repository root path
 - `CONSTITUTION_PATH`: Path to constitution file
 - `FILES`: Categorized file listings
@@ -62,7 +62,7 @@ For single quotes in args like "I'm auditing", use escape syntax: e.g 'I'\''m au
 
 ### 2. Load Constitution
 
-Read and parse `.specify/memory/constitution.md`:
+Read and parse `/.documentation.documentation/memory/constitution.md`:
 - Extract all core principles with their names
 - Identify MUST requirements (non-negotiable/mandatory)
 - Identify SHOULD requirements (recommended)
@@ -228,10 +228,10 @@ Apply consistent severity across all findings:
 
 ### 10. Generate Audit Report
 
-Create comprehensive report at `/docs/copilot/audit/YYYY-MM-DD_results.md`:
+Create comprehensive report at `/.documentation/copilot/audit/YYYY-MM-DD_results.md`:
 
 #### Ensure Directory Exists
-- Check if `/docs/copilot/audit/` exists
+- Check if `/.documentation/copilot/audit/` exists
 - Create directory structure if missing
 
 #### Report Structure
@@ -470,7 +470,7 @@ Display concise summary:
 ```
 ✅ Site Audit Complete!
 
-📄 Report saved: /docs/copilot/audit/YYYY-MM-DD_results.md
+📄 Report saved: /.documentation/copilot/audit/YYYY-MM-DD_results.md
 📅 Audit date: {DATETIME}
 🎯 Scope: {SCOPE}
 
@@ -487,7 +487,7 @@ Overall Health: {HEALTHY/NEEDS ATTENTION/CRITICAL}
 ⚠️ Critical issues require immediate attention:
 - {ID}: {Brief description}
 
-View full report: /docs/copilot/audit/YYYY-MM-DD_results.md
+View full report: /.documentation/copilot/audit/YYYY-MM-DD_results.md
 ```
 
 ## Guidelines
@@ -543,13 +543,13 @@ Overall Health: HEALTHY
 
 Keep up the great work! 🎉
 
-Report saved: /docs/copilot/audit/YYYY-MM-DD_results.md
+Report saved: /.documentation/copilot/audit/YYYY-MM-DD_results.md
 ```
 
 ### Historical Comparison
 
 When previous audits exist:
-- Load most recent audit from `/docs/copilot/audit/`
+- Load most recent audit from `/.documentation/copilot/audit/`
 - Compare issue counts by severity
 - Show improvement/regression trends
 - Highlight newly introduced vs. fixed issues
