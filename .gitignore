@@ -40,6 +40,10 @@ Generated\ Files/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+# Build output files
+build_*.txt
+build_*.log
+
 # NUNIT
 *.VisualState.xml
 TestResult.xml

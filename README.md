@@ -47,8 +47,6 @@ See the [CHANGELOG](CHANGELOG.md) for the full milestone timeline, and open `rep
 - Observability & Health:
   - Application Insights telemetry
   - Health checks at `/health`
-- Security & Secrets:
-  - Optional Azure Key Vault integration (via `VaultUri` environment variable)
 - DevOps & CI/CD:
   - GitHub Actions: build, test, Docker image push
   - Dockerfile for container builds

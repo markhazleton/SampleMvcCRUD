@@ -6,32 +6,6 @@ using Westwind.AspNetCore.Markdown;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Configure Azure Key Vault if available
-string? vaultUri = Environment.GetEnvironmentVariable("VaultUri");
-if (!string.IsNullOrEmpty(vaultUri))
-{
-    try
-    {
-        Uri keyVaultEndpoint = new(vaultUri);
-        builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
-    }
-    catch (UriFormatException ex)
-    {
-        // Log Key Vault URI format error
-        Console.WriteLine($"Invalid Key Vault URI format: {ex.Message}");
-    }
-    catch (Azure.Identity.AuthenticationFailedException ex)
-    {
-        // Log authentication failure
-        Console.WriteLine($"Failed to authenticate with Azure Key Vault: {ex.Message}");
-    }
-    catch (Azure.RequestFailedException ex)
-    {
-        // Log Key Vault request error
-        Console.WriteLine($"Failed to configure Azure Key Vault: {ex.Message}");
-    }
-}
-
 // Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

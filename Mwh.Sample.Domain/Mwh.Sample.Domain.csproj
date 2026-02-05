@@ -28,10 +28,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Interfaces\IEmployeeRepository.cs" />
-  </ItemGroup>
-  
-  <ItemGroup>
     <Content Include="favicon.ico" />
   </ItemGroup>
   

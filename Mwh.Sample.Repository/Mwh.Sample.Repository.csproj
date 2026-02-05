@@ -28,12 +28,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Repository\EmployeeRepository.cs" />
-    <Compile Remove="Services\EmployeeService.cs" />
-    <Compile Remove="Services\EmployeeServiceContext.cs" />
-  </ItemGroup>
-  
-  <ItemGroup>
     <Content Include="favicon.ico" />
   </ItemGroup>
   
