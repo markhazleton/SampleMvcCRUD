@@ -2,8 +2,8 @@
 
 A .NET 10 (ASP.NET Core) application demonstrating multiple approaches to implementing a modern, maintainable CRUD (Create, Read, Update, Delete) user interface for Employee and Department management. This repository is a reference and educational resource that showcases patterns (MVC, Razor Pages, SPA-style), tooling, theming, and deployment techniques.
 
-[![.NET Build & Tests](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/main_mwhsampleweb.yml/badge.svg)](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/main_mwhsampleweb.yml)
 [![Docker Image](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml/badge.svg)](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml)
+[![CodeQL](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/codeql-analysis.yml)
 
 ---
 ## Project History
@@ -19,8 +19,6 @@ See the [CHANGELOG](CHANGELOG.md) for the full milestone timeline, and open `rep
 ---
 ## Live Deployments
 - Windows IIS VM (.NET 9): https://samplecrud.markhazleton.com/
-- Azure App Service (.NET 9, Linux, GitHub Actions): https://mwhsampleweb.azurewebsites.net/
-- Azure App Service (Docker Image): https://samplecrud.azurewebsites.net/
 - Docker Hub Image: https://hub.docker.com/r/markhazleton/mwhsampleweb
 
 ---
@@ -52,7 +50,7 @@ See the [CHANGELOG](CHANGELOG.md) for the full milestone timeline, and open `rep
 - Security & Secrets:
   - Optional Azure Key Vault integration (via `VaultUri` environment variable)
 - DevOps & CI/CD:
-  - GitHub Actions: build, test, Docker, Azure App Service deploy
+  - GitHub Actions: build, test, Docker image push
   - Dockerfile for container builds
 - Testing:
   - Domain & Repository unit test projects

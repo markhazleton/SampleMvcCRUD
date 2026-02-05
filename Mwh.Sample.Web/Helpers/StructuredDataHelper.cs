@@ -18,7 +18,7 @@ public static class StructuredDataHelper
             context = "https://schema.org",
             type = "Organization",
             name = "Sample MVC CRUD",
-            description = "A comprehensive ASP.NET MVC CRUD tutorial application demonstrating best practices for web development and Azure deployment.",
+            description = "A comprehensive ASP.NET MVC CRUD tutorial application demonstrating best practices for web development and modern deployment strategies.",
             url = baseUrl,
             logo = new
             {
@@ -199,7 +199,7 @@ public static class StructuredDataHelper
             context = "https://schema.org",
             type = "SoftwareApplication",
             name = "Sample MVC CRUD Application",
-            description = "A demonstration ASP.NET MVC application showcasing CRUD operations, Azure deployment, and modern web development practices.",
+            description = "A demonstration ASP.NET MVC application showcasing CRUD operations, Docker containerization, and modern web development practices.",
             url = baseUrl,
             applicationCategory = "DeveloperApplication",
             operatingSystem = "Web Browser",
