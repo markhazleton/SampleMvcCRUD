@@ -45,8 +45,17 @@
     <tfoot></tfoot>
 </table>
 <script type="text/javascript">
-    $("#output").pivotUI($("#input"),
-    {
+    // Wait for DOM and libraries to be fully loaded
+    $(document).ready(function() {
+        // Ensure pivot library is loaded
+        if (typeof $.fn.pivotUI !== 'undefined') {
+            $("#output").pivotUI($("#input"), {
+                rows: ["Department"],
+                cols: ["Gender"],
+                aggregatorName: "Count"
+            });
+        } else {
+            console.error('PivotUI library not loaded');
+        }
     });
-
 </script>

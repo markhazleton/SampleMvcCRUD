@@ -15,7 +15,8 @@
     <link id="bootswatch-theme-stylesheet" rel="stylesheet" href="@themeUrl" />
     <link rel="stylesheet" href="/lib/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.13.0/pivot.min.css" />
+    <!-- PivotTable.js CSS via jsDelivr (matches JS version) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pivottable@@2.23.0/dist/pivot.min.css" />
 
     <style>
         /* Responsive navbar offset - account for main nav + breadcrumb */
@@ -134,14 +135,15 @@
     </footer>
 
     <!-- JavaScript Bundle -->
-    <script src="~/lib/jquery/jquery.js" asp-append-version="true"></script>
+    <!-- jQuery 3.7.1 from CDN (stable, widely supported) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/_content/WebSpark.Bootswatch/js/bootswatch-theme-switcher.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.13.0/pivot.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.6.0/tips_data.min.js"></script>
+    <!-- PivotTable.js via jsDelivr with jQuery Migrate for compatibility -->
+    <script src="https://cdn.jsdelivr.net/npm/pivottable@@2.23.0/dist/pivot.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
