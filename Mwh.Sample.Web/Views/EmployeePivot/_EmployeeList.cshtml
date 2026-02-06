@@ -1,61 +1,97 @@
-﻿@model IEnumerable<Mwh.Sample.Domain.Models.EmployeeDto>
+﻿<!-- Loading indicator -->
+<div id="loading" class="text-center my-5">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading employee data...</span>
+    </div>
+    <p class="mt-2">Fetching employee data from server...</p>
+    <small class="text-muted">Loading <span id="record-count">...</span> records</small>
+</div>
 
+<!-- Pivot output container -->
+<div id="output" class="d-none"></div>
 
-<div id="output"></div>
-    
-<table class="table table-bordered table-hover hidden" id="input">
-    <thead class="thead-dark">
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>State</th>
-            <th>Country</th>
-            <th>Department</th>
-            <th>Gender</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model != null)
-        {
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @item.Age
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.State)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Country)
-                    </td>
-                    <td>
-                        @item.Department
-                    </td>
-                    <td>
-                        @item.Gender
-                    </td>
-                </tr>
-            }
-        }
-    </tbody>
-    <tfoot></tfoot>
-</table>
+<!-- Error message container -->
+<div id="error-message" class="alert alert-danger d-none" role="alert">
+    <h4 class="alert-heading"><i class="bi bi-exclamation-triangle"></i> Pivot Table Error</h4>
+    <p id="error-text"></p>
+    <button type="button" class="btn btn-sm btn-outline-danger" onclick="location.reload()">
+        <i class="bi bi-arrow-clockwise"></i> Retry
+    </button>
+</div>
+
+<!-- No longer needed: Hidden source data table removed for performance -->
+<!-- Data now loaded via AJAX from /EmployeePivot/GetEmployeeData -->
+
 <script type="text/javascript">
-    // Wait for DOM and libraries to be fully loaded
+    // Server-side JSON data loading for PivotTable.js
     $(document).ready(function() {
         // Ensure pivot library is loaded
-        if (typeof $.fn.pivotUI !== 'undefined') {
-            $("#output").pivotUI($("#input"), {
-                rows: ["Department"],
-                cols: ["Gender"],
-                aggregatorName: "Count"
-            });
-        } else {
-            console.error('PivotUI library not loaded');
+        if (typeof $.fn.pivotUI === 'undefined') {
+            showError('PivotUI library not loaded. Please refresh the page.');
+            return;
+        }
+
+        // Load employee data from server via AJAX
+        $.ajax({
+            url: '/EmployeePivot/GetEmployeeData',
+            method: 'GET',
+            dataType: 'json',
+            timeout: 30000, // 30 second timeout
+            success: function(data) {
+                try {
+                    // Update record count
+                    $('#record-count').text(data.length);
+
+                    // Initialize pivot table with JSON data
+                    $("#output").pivotUI(data, {
+                        rows: ["Department"],
+                        cols: ["Gender"],
+                        aggregatorName: "Count",
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.plotly_renderers
+                        ),
+                        rendererName: "Table",
+                        aggregators: {
+                            "Count": $.pivotUtilities.aggregators["Count"],
+                            "Count Unique Values": $.pivotUtilities.aggregators["Count Unique Values"],
+                            "List Unique Values": $.pivotUtilities.aggregators["List Unique Values"],
+                            "Average": $.pivotUtilities.aggregators["Average"],
+                            "Sum": $.pivotUtilities.aggregators["Sum"]
+                        },
+                        hiddenAttributes: ["Name"], // Hide name from drag-drop to reduce clutter
+                        onRefresh: function(config) {
+                            // Successfully rendered
+                            console.log('Pivot table refreshed with ' + data.length + ' records');
+                        }
+                    });
+
+                    // Hide loading, show output
+                    $("#loading").addClass('d-none');
+                    $("#output").removeClass('d-none');
+
+                } catch (error) {
+                    showError('Failed to initialize pivot table: ' + error.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                let errorMessage = 'Failed to load employee data from server.';
+                if (xhr.status === 500) {
+                    errorMessage += ' Server error: ' + (xhr.responseJSON?.error || error);
+                } else if (status === 'timeout') {
+                    errorMessage += ' Request timed out. Please try again.';
+                } else {
+                    errorMessage += ' ' + error;
+                }
+                showError(errorMessage);
+            }
+        });
+
+        function showError(message) {
+            console.error('Pivot table error:', message);
+            $("#loading").addClass('d-none');
+            $("#error-message").removeClass('d-none');
+            $("#error-text").text(message);
         }
     });
 </script>

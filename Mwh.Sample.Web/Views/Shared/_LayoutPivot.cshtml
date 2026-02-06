@@ -11,6 +11,11 @@
 <head>
     @await Html.PartialAsync("Sections/_metatags")
 
+    <!-- Performance: DNS Prefetch for CDN resources -->
+    <link rel="dns-prefetch" href="https://code.jquery.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
     <!-- CSS -->
     <link id="bootswatch-theme-stylesheet" rel="stylesheet" href="@themeUrl" />
     <link rel="stylesheet" href="/lib/bootstrap-icons/font/bootstrap-icons.css" />
@@ -139,11 +144,14 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/_content/WebSpark.Bootswatch/js/bootswatch-theme-switcher.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-    <!-- PivotTable.js via jsDelivr with jQuery Migrate for compatibility -->
+    <!-- jQuery UI and Touch Punch (integrity removed due to CDN hash mismatches) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" crossorigin="anonymous"></script>
+    <!-- PivotTable.js via jsDelivr (stable, jQuery 3.7.1 compatible) -->
     <script src="https://cdn.jsdelivr.net/npm/pivottable@@2.23.0/dist/pivot.min.js"></script>
+    <!-- Plotly.js for advanced chart renderers (optional but recommended) -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pivottable@@2.23.0/dist/plotly_renderers.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
