@@ -1,0 +1,154 @@
+@model EmployeeDto
+@{
+    var departments = ViewBag.Departments as IEnumerable<DepartmentDto>;
+    var isEdit = Model?.Id > 0;
+    var genderValue = Model?.Gender;
+    var deptValue = Model?.Department ?? EmployeeDepartmentEnum.Unknown;
+}
+
+<div class="modal-header bg-light">
+    <h5 class="modal-title">
+        @(isEdit ? "Update Employee" : "Add Employee")
+    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <form id="htmxEmployeeForm"
+          hx-post="/EmployeeHtmx/Save"
+          hx-swap="none"
+          class="needs-validation" novalidate>
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Id" value="@(Model?.Id ?? 0)" />
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input type="text" class="form-control" id="Name" name="Name"
+                       value="@Model?.Name" placeholder="Enter employee name" required />
+                <div class="invalid-feedback">Please enter a name</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="Gender" class="form-label">Gender</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-gender-ambiguous"></i></span>
+                <select class="form-select" id="Gender" name="Gender" required>
+                    @{
+                        var genderOptions = new[] {
+                            new { Value = "", Text = "Select gender", Selected = !isEdit, Disabled = true },
+                            new { Value = "0", Text = "Male", Selected = genderValue == GenderEnum.Male, Disabled = false },
+                            new { Value = "1", Text = "Female", Selected = genderValue == GenderEnum.Female, Disabled = false },
+                            new { Value = "2", Text = "Non-Binary", Selected = genderValue == GenderEnum.Other, Disabled = false }
+                        };
+                    }
+                    @foreach (var opt in genderOptions)
+                    {
+                        if (opt.Selected && opt.Disabled)
+                        {
+                            <option value="@opt.Value" disabled selected>@opt.Text</option>
+                        }
+                        else if (opt.Selected)
+                        {
+                            <option value="@opt.Value" selected>@opt.Text</option>
+                        }
+                        else if (opt.Disabled)
+                        {
+                            <option value="@opt.Value" disabled>@opt.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@opt.Value">@opt.Text</option>
+                        }
+                    }
+                </select>
+                <div class="invalid-feedback">Please select a gender</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="Age" class="form-label">Age</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
+                <input type="number" class="form-control" id="Age" name="Age"
+                       value="@Model?.Age" placeholder="Enter age" min="18" required />
+                <div class="invalid-feedback">Please enter age (minimum 18)</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="State" class="form-label">State</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                    <input type="text" class="form-control" id="State" name="State"
+                           value="@Model?.State" placeholder="Enter state" required />
+                    <div class="invalid-feedback">Please enter state</div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Country" class="form-label">Country</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                    <input type="text" class="form-control" id="Country" name="Country"
+                           value="@Model?.Country" placeholder="Enter country" required />
+                    <div class="invalid-feedback">Please enter country</div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="Department" class="form-label">Department</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-building"></i></span>
+                <select class="form-select" id="Department" name="Department" required>
+                    @if (deptValue == EmployeeDepartmentEnum.Unknown)
+                    {
+                        <option value="" disabled selected>Select department</option>
+                    }
+                    else
+                    {
+                        <option value="" disabled>Select department</option>
+                    }
+                    @if (departments != null)
+                    {
+                        @foreach (var dept in departments)
+                        {
+                            if ((int)deptValue == dept.Id)
+                            {
+                                <option value="@dept.Id" selected>@dept.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@dept.Id">@dept.Name</option>
+                            }
+                        }
+                    }
+                </select>
+                <div class="invalid-feedback">Please select a department</div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer bg-light">
+    <button type="submit" form="htmxEmployeeForm"
+            class="btn @(isEdit ? "btn-success" : "btn-primary")">
+        @if (isEdit)
+        {
+            <i class="bi bi-check-circle me-1"></i> @:Update
+        }
+        else
+        {
+            <i class="bi bi-plus-circle me-1"></i> @:Add
+        }
+    </button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        <i class="bi bi-x-circle me-1"></i> Close
+    </button>
+</div>
+
+<script>
+    // Bootstrap 5 form validation for htmx forms
+    document.getElementById('htmxEmployeeForm').addEventListener('htmx:configRequest', function (event) {
+        if (!this.checkValidity()) {
+            event.preventDefault();
+            this.classList.add('was-validated');
+        }
+    });
+</script>

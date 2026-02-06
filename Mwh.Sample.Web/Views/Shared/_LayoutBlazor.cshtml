@@ -1,4 +1,4 @@
-﻿@inject StyleCache StyleCache
+@inject StyleCache StyleCache
 @{
     var currentYear = DateTime.Now.Year.ToString();
     var status = new ApplicationStatus(Assembly.GetExecutingAssembly());
@@ -10,10 +10,11 @@
 
 <head>
     @await Html.PartialAsync("Sections/_metatags")
+
     <!-- CSS -->
     <link id="bootswatch-theme-stylesheet" rel="stylesheet" href="@themeUrl" />
     <link rel="stylesheet" href="/lib/bootstrap-icons/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="/lib/datatables.net-bs/css/dataTables.bootstrap5.min.css" />
+
     <style>
         /* Responsive navbar offset - account for main nav + breadcrumb */
         body.d-flex {
@@ -115,7 +116,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/EmployeeBlazor">
+                                    <a class="dropdown-item active" href="/EmployeeBlazor">
                                         <i class="bi bi-lightning"></i> <span class="ms-1">Blazor</span>
                                     </a>
                                 </li>
@@ -147,12 +148,13 @@
 
     <footer class="footer mt-auto py-3 bg-dark text-white">
         @await Html.PartialAsync("_Footer")
-    </footer> <!-- JavaScript Bundle -->
-    <script src="~/lib/jquery/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    </footer>
+
+    <!-- Bootstrap JS (needed for modals, dropdowns, theme switcher) -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/_content/WebSpark.Bootswatch/js/bootswatch-theme-switcher.js"></script>
-    <script src="~/lib/datatables/dataTables.min.js"></script>
-    <script src="~/lib/datatables.net-bs/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Blazor Server SignalR connection -->
+    <script src="_framework/blazor.server.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

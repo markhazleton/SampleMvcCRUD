@@ -1,0 +1,174 @@
+@model IEnumerable<EmployeeDto>
+@{
+    var currentPage = (int)(ViewBag.CurrentPage ?? 1);
+    var pageSize = (int)(ViewBag.PageSize ?? 10);
+    var totalPages = (int)(ViewBag.TotalPages ?? 1);
+    var totalItems = (int)(ViewBag.TotalItems ?? 0);
+    var allItemsCount = (int)(ViewBag.AllItemsCount ?? 0);
+    var search = ViewBag.Search as string;
+    var hasSearch = !string.IsNullOrWhiteSpace(search);
+
+    // Calculate visible page numbers (show max 5 pages)
+    var maxVisiblePages = 5;
+    var startPage = Math.Max(1, currentPage - maxVisiblePages / 2);
+    var endPage = Math.Min(totalPages, startPage + maxVisiblePages - 1);
+    startPage = Math.Max(1, endPage - maxVisiblePages + 1);
+}
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover mb-0">
+        <thead class="table-dark">
+            <tr>
+                <th>Profile</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Department</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var emp in Model)
+                {
+                    <tr>
+                        <td class="text-center align-middle">
+                            <img src="/images/@(emp.ProfilePicture ?? "default.jpg")"
+                                 class="rounded-circle" height="40" width="40"
+                                 alt="@emp.Name"
+                                 onerror="this.src='/images/default.jpg'" />
+                        </td>
+                        <td class="align-middle">@emp.Name</td>
+                        <td class="align-middle">@emp.GenderName</td>
+                        <td class="align-middle">@emp.Age</td>
+                        <td class="align-middle">@emp.State</td>
+                        <td class="align-middle">@emp.Country</td>
+                        <td class="align-middle">@emp.DepartmentName</td>
+                        <td class="text-center align-middle">
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-sm btn-outline-primary"
+                                        hx-get="/EmployeeHtmx/Edit/@emp.Id"
+                                        hx-target="#form-container"
+                                        hx-swap="innerHTML">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger"
+                                        hx-get="/EmployeeHtmx/DeleteConfirm/@emp.Id"
+                                        hx-target="#form-container"
+                                        hx-swap="innerHTML">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center text-muted py-4">
+                        @if (hasSearch)
+                        {
+                            <i class="bi bi-search me-2"></i>
+                            <span>No employees match your search for "@search".</span>
+                        }
+                        else
+                        {
+                            <i class="bi bi-inbox me-2"></i>
+                            <span>No employees found.</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="card-footer bg-light">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <span class="text-muted small">
+            @if (totalItems > 0)
+            {
+                var start = (currentPage - 1) * pageSize + 1;
+                var end = Math.Min(currentPage * pageSize, totalItems);
+                <text>Showing @start to @end of @totalItems employees</text>
+                if (hasSearch && totalItems != allItemsCount)
+                {
+                    <text> (filtered from @allItemsCount total)</text>
+                }
+            }
+            else
+            {
+                <text>No employees to display</text>
+            }
+        </span>
+
+        @if (totalPages > 1)
+        {
+            <nav aria-label="Employee pagination">
+                <ul class="pagination pagination-sm mb-0">
+                    <!-- First Page -->
+                    <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                        <button class="page-link" 
+                                hx-get="/EmployeeHtmx/Table?page=1&pageSize=@pageSize@(hasSearch ? "&search=" + Uri.EscapeDataString(search!) : "")"
+                                hx-target="#employee-table"
+                                hx-swap="innerHTML"
+                                @(currentPage == 1 ? "disabled" : "")>
+                            <i class="bi bi-chevron-double-left"></i>
+                        </button>
+                    </li>
+
+                    <!-- Previous Page -->
+                    <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                        <button class="page-link"
+                                hx-get="/EmployeeHtmx/Table?page=@(currentPage - 1)&pageSize=@pageSize@(hasSearch ? "&search=" + Uri.EscapeDataString(search!) : "")"
+                                hx-target="#employee-table"
+                                hx-swap="innerHTML"
+                                @(currentPage == 1 ? "disabled" : "")>
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                    </li>
+
+                    <!-- Page Numbers -->
+                    @for (var p = startPage; p <= endPage; p++)
+                    {
+                        var pageNum = p;
+                        <li class="page-item @(currentPage == pageNum ? "active" : "")">
+                            <button class="page-link"
+                                    hx-get="/EmployeeHtmx/Table?page=@pageNum&pageSize=@pageSize@(hasSearch ? "&search=" + Uri.EscapeDataString(search!) : "")"
+                                    hx-target="#employee-table"
+                                    hx-swap="innerHTML">
+                                @pageNum
+                            </button>
+                        </li>
+                    }
+
+                    <!-- Next Page -->
+                    <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                        <button class="page-link"
+                                hx-get="/EmployeeHtmx/Table?page=@(currentPage + 1)&pageSize=@pageSize@(hasSearch ? "&search=" + Uri.EscapeDataString(search!) : "")"
+                                hx-target="#employee-table"
+                                hx-swap="innerHTML"
+                                @(currentPage == totalPages ? "disabled" : "")>
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </li>
+
+                    <!-- Last Page -->
+                    <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                        <button class="page-link"
+                                hx-get="/EmployeeHtmx/Table?page=@totalPages&pageSize=@pageSize@(hasSearch ? "&search=" + Uri.EscapeDataString(search!) : "")"
+                                hx-target="#employee-table"
+                                hx-swap="innerHTML"
+                                @(currentPage == totalPages ? "disabled" : "")>
+                            <i class="bi bi-chevron-double-right"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        }
+    </div>
+</div>

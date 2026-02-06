@@ -52,6 +52,7 @@ builder.Services.AddMarkdown();
 builder.Services.AddSession();
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
+builder.Services.AddServerSideBlazor();
 
 // Monitoring and diagnostics
 builder.Services.AddApplicationInsightsTelemetry(options =>
@@ -106,6 +107,7 @@ app.MapHealthChecks("/health");
 // Map controllers and pages
 app.MapControllers();
 app.MapRazorPages();
+app.MapBlazorHub();
 
 // Map MVC routes using modern endpoint routing
 app.MapControllerRoute(

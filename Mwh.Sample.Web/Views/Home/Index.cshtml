@@ -1,120 +1,738 @@
-﻿@model Microsoft.AspNetCore.Html.HtmlString
-@{
-    ViewBag.Title = "ASP.NET MVC CRUD Tutorial | Sample CRUD Application";
-    ViewBag.MetaDescription = "Learn how to implement CRUD operations in ASP.NET MVC with this comprehensive tutorial. Explore various deployment strategies to Azure using Docker and GitHub Actions.";
-    ViewBag.MetaKeywords = "ASP.NET MVC, CRUD tutorial, ASP.NET CRUD operations, MVC tutorial, Docker, GitHub Actions, Azure App Services, Azure Virtual Machines";
+﻿@{
+    ViewBag.Title = "ASP.NET Core CRUD Tutorial | Modern UI Pattern Showcase";
+    ViewBag.MetaDescription = "A comprehensive guide to building CRUD applications with ASP.NET Core, showcasing multiple UI patterns including MVC, Razor Pages, React, Vue, htmx, and vanilla JavaScript SPA implementations.";
+    ViewBag.MetaKeywords = "ASP.NET Core, CRUD tutorial, MVC, Razor Pages, React, Vue, htmx, SPA, REST API, Docker, Azure deployment";
 }
 
 <div class="container py-5">
+    <!-- Hero Section -->
     <div class="row mb-5">
         <div class="col-lg-12">
             <div class="text-center mb-5">
                 <h1 class="display-4 fw-bold">
-                    <i class="bi bi-code-slash text-primary me-2"></i>ASP.NET MVC CRUD Tutorial
+                    <i class="bi bi-code-slash text-primary me-2"></i>ASP.NET Core CRUD Tutorial
                 </h1>
-                <p class="lead text-muted">A comprehensive guide to building and deploying ASP.NET MVC applications</p>
+                <p class="lead text-muted">A comprehensive guide to building modern CRUD applications with multiple UI patterns</p>
             </div>
-            
-            <div class="card shadow-sm rounded-3 border-0 mb-5">
+
+            <!-- Quick Start Card -->
+            <div class="card shadow-sm rounded-3 border-0 mb-5 bg-gradient">
                 <div class="card-body p-4 p-lg-5">
-                    <p class="lead">
-                        This sample CRUD application demonstrates how to create, read, update, and delete records using ASP.NET MVC.
-                        It covers various deployment strategies to Azure, including using Docker and GitHub Actions for continuous integration and deployment.
+                    <h2 class="h3 mb-4 text-center">
+                        <i class="bi bi-rocket-takeoff text-primary me-2"></i>What This Application Demonstrates
+                    </h2>
+                    <p class="lead text-center mb-4">
+                        This educational project showcases <strong>8 different UI patterns</strong> for implementing CRUD operations 
+                        in a single ASP.NET Core application, helping you understand the tradeoffs between traditional server-rendered 
+                        views and modern client-side frameworks.
                     </p>
-                    
-                    <div class="row g-4 py-4">
+
+                    <div class="row g-4">
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
-                                    <i class="bi bi-database-fill-check fs-3 text-primary"></i>
+                                    <i class="bi bi-layers-fill fs-3 text-primary"></i>
                                 </div>
                                 <div class="ms-3">
-                                    <h5>Comprehensive CRUD Implementation</h5>
-                                    <p class="text-muted">Learn the fundamentals of create, read, update, and delete operations in ASP.NET MVC</p>
+                                    <h5>Multiple UI Patterns</h5>
+                                    <p class="text-muted mb-0">Compare MVC, Razor Pages, React, Vue, htmx, and vanilla JavaScript implementations</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
-                                    <i class="bi bi-cloud-check-fill fs-3 text-primary"></i>
+                                    <i class="bi bi-file-code-fill fs-3 text-primary"></i>
                                 </div>
                                 <div class="ms-3">
-                                    <h5>Modern Deployment Strategies</h5>
-                                    <p class="text-muted">Deploy your application using Docker, GitHub Actions, and modern CI/CD pipelines</p>
+                                    <h5>Clean Architecture</h5>
+                                    <p class="text-muted mb-0">Repository pattern, dependency injection, DTOs, and separation of concerns</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
-                                    <i class="bi bi-gear-wide-connected fs-3 text-primary"></i>
+                                    <i class="bi bi-server fs-3 text-primary"></i>
                                 </div>
                                 <div class="ms-3">
-                                    <h5>Scalable Architecture</h5>
-                                    <p class="text-muted">Build applications that scale with cloud services and virtual machines</p>
+                                    <h5>RESTful API</h5>
+                                    <p class="text-muted mb-0">OpenAPI/Swagger documentation, versioned endpoints, standardized responses</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
-                                    <i class="bi bi-github fs-3 text-primary"></i>
+                                    <i class="bi bi-palette-fill fs-3 text-primary"></i>
                                 </div>
                                 <div class="ms-3">
-                                    <h5>Open-Source Project</h5>
-                                    <p class="text-muted">Contribute to the project and collaborate with the community</p>
+                                    <h5>Modern UX</h5>
+                                    <p class="text-muted mb-0">Dynamic theme switching, Bootstrap 5, responsive design, modal forms</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="p-4 bg-light rounded-3 border border-light">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-lightbulb-fill text-warning fs-4 me-2"></i>
-                            <h4 class="mb-0">Getting Started</h4>
-                        </div>
-                        <p>
-                            Ready to get started? Explore the code and learn how to deploy your own ASP.NET MVC application using modern DevOps practices.
-                            Compare multiple CRUD approaches side by side: MVC, Razor Pages, jQuery AJAX, vanilla JavaScript SPA, and React.
-                        </p>
-                        <div class="d-flex flex-wrap gap-2 mt-3">
-                            <a href="/Employee" class="btn btn-primary">
-                                <i class="bi bi-person-vcard me-2"></i>Employee Demo
-                            </a>
-                            <a href="/EmployeeReact" class="btn btn-outline-primary">
-                                <i class="bi bi-filetype-jsx me-2"></i>React Demo
-                            </a>
-                            <a href="https://github.com/markhazleton/SampleMvcCRUD" class="btn btn-outline-dark" target="_blank">
-                                <i class="bi bi-github me-2"></i>View on GitHub
-                            </a>
-                            <a href="/swagger/" class="btn btn-outline-secondary">
-                                <i class="bi bi-file-earmark-code me-2"></i>API Documentation
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="card shadow border-0 rounded-3 mb-4">
-                <div class="card-header bg-gradient text-white bg-primary py-3">
-                    <h3 class="mb-0">
-                        <i class="bi bi-file-text me-2"></i>Project Documentation
-                    </h3>
+        </div>
+    </div>
+
+    <!-- Implementation Approaches Section -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <div class="card shadow-sm border-0 rounded-3 mb-4">
+                <div class="card-header bg-primary text-white py-3">
+                    <h2 class="h3 mb-0">
+                        <i class="bi bi-grid-3x3-gap-fill me-2"></i>CRUD Implementation Approaches
+                    </h2>
                 </div>
                 <div class="card-body p-4">
-                    <div class="readme-content">
-                        @Html.Raw(Model)
+                    <p class="lead mb-4">
+                        Explore 8 different ways to implement Employee CRUD operations. Each approach has unique characteristics, 
+                        benefits, and tradeoffs. Use this comparison to choose the right pattern for your project.
+                    </p>
+
+                    <!-- Implementation Cards Grid -->
+                    <div class="row g-4">
+                        <!-- Traditional MVC -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="bi bi-diagram-3-fill fs-2 text-primary me-3"></i>
+                                        <h5 class="mb-0">Traditional MVC</h5>
+                                    </div>
+                                    <p class="text-muted small mb-3">
+                                        Classic pattern with separate views for Create, Edit, Details, and Delete operations. 
+                                        Full page reloads, server-side validation.
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="badge bg-success me-1">SEO-Friendly</span>
+                                        <span class="badge bg-info">Server-Rendered</span>
+                                    </div>
+                                    <a href="/MvcEmployee" class="btn btn-outline-primary btn-sm w-100">
+                                        <i class="bi bi-arrow-right-circle me-2"></i>View Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- jQuery AJAX MVC -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="bi bi-window-stack fs-2 text-success me-3"></i>
+                                        <h5 class="mb-0">jQuery AJAX + MVC</h5>
+                                    </div>
+                                    <p class="text-muted small mb-3">
+                                        Single index view with modal forms for all CRUD operations. Uses jQuery AJAX and 
+                                        partial views for dynamic updates without page reloads.
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="badge bg-success me-1">Dynamic</span>
+                                        <span class="badge bg-warning text-dark">Partial Views</span>
+                                    </div>
+                                    <a href="/Employee" class="btn btn-outline-success btn-sm w-100">
+                                        <i class="bi bi-arrow-right-circle me-2"></i>View Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Razor Pages -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="bi bi-file-earmark-code-fill fs-2 text-info me-3"></i>
+                                        <h5 class="mb-0">Razor Pages</h5>
+                                    </div>
+                                    <p class="text-muted small mb-3">
+                                        Page-focused approach with tightly bound UI and code-behind logic. Simpler than MVC 
+                                        for page-centric scenarios, excellent for CRUD.
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="badge bg-success me-1">Page-Focused</span>
+                                        <span class="badge bg-info">Code-Behind</span>
+                                    </div>
+                                    <a href="/EmployeeRazor" class="btn btn-outline-info btn-sm w-100">
+                                        <i class="bi bi-arrow-right-circle me-2"></i>View Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vanilla JS SPA -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="bi bi-file-earmark-text-fill fs-2 text-warning me-3"></i>
+                                        <h5 class="mb-0">Vanilla JavaScript SPA</h5>
+                                    </div>
+                                    <p class="text-muted small mb-3">
+                                        Single Page Application using vanilla JavaScript, fetch API, and Bootstrap modals. 
+                                        No frameworks, direct REST API consumption.
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="badge bg-warning text-dark me-1">No Framework</span>
+                                        <span class="badge bg-success">REST API</span>
+                                    </div>
+                                    <a href="/EmployeeSinglePage" class="btn btn-outline-warning btn-sm w-100">
+                                        <i class="bi bi-arrow-right-circle me-2"></i>View Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- React -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="bi bi-filetype-jsx fs-2 text-primary me-3"></i>
+                                        <h5 class="mb-0">React SPA</h5>
+                                    </div>
+                                    <p class="text-muted small mb-3">
+                                        Component-based SPA using React 18 with hooks, functional components, and state management. 
+                                        Modern UI patterns with reusable components.
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="badge bg-primary me-1">Components</span>
+                                        <span class="badge bg-success">Hooks</span>
+                                    </div>
+                                    <a href="/EmployeeReact" class="btn btn-outline-primary btn-sm w-100">
+                                        <i class="bi bi-arrow-right-circle me-2"></i>View Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vue -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="bi bi-filetype-vue fs-2 text-success me-3"></i>
+                                        <h5 class="mb-0">Vue SPA</h5>
+                                    </div>
+                                    <p class="text-muted small mb-3">
+                                        Reactive SPA using Vue 3 Composition API with declarative templates. 
+                                        Client-side sorting, filtering, and pagination.
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="badge bg-success me-1">Reactive</span>
+                                        <span class="badge bg-info">Composition API</span>
+                                    </div>
+                                    <a href="/EmployeeVue" class="btn btn-outline-success btn-sm w-100">
+                                        <i class="bi bi-arrow-right-circle me-2"></i>View Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- htmx -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="bi bi-arrow-repeat fs-2 text-info me-3"></i>
+                                        <h5 class="mb-0">htmx Hypermedia</h5>
+                                    </div>
+                                    <p class="text-muted small mb-3">
+                                        Server-driven UI with HTML-over-the-wire pattern. Minimal JavaScript, 
+                                        enhanced HTML attributes, progressive enhancement.
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="badge bg-info me-1">Server-Driven</span>
+                                        <span class="badge bg-success">Minimal JS</span>
+                                    </div>
+                                    <a href="/EmployeeHtmx" class="btn btn-outline-info btn-sm w-100">
+                                        <i class="bi bi-arrow-right-circle me-2"></i>View Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pivot Table -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="bi bi-table fs-2 text-secondary me-3"></i>
+                                        <h5 class="mb-0">Pivot Table Analysis</h5>
+                                    </div>
+                                    <p class="text-muted small mb-3">
+                                        Interactive data analysis using PivotTable.js. Drag-and-drop pivot tables 
+                                        for exploring employee data across multiple dimensions.
+                                    </p>
+                                    <div class="mb-3">
+                                        <span class="badge bg-secondary me-1">Analytics</span>
+                                        <span class="badge bg-warning text-dark">Read-Only</span>
+                                    </div>
+                                    <a href="/EmployeePivot" class="btn btn-outline-secondary btn-sm w-100">
+                                        <i class="bi bi-arrow-right-circle me-2"></i>View Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Table -->
+                    <div class="mt-5">
+                        <h3 class="h4 mb-3">
+                            <i class="bi bi-table me-2"></i>Quick Comparison
+                        </h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Approach</th>
+                                        <th>Page Reloads</th>
+                                        <th>JavaScript Required</th>
+                                        <th>SEO Friendly</th>
+                                        <th>Learning Curve</th>
+                                        <th>Best For</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Traditional MVC</strong></td>
+                                        <td><span class="badge bg-danger">Full</span></td>
+                                        <td><span class="badge bg-success">None</span></td>
+                                        <td><span class="badge bg-success">Excellent</span></td>
+                                        <td><span class="badge bg-success">Low</span></td>
+                                        <td>Traditional web apps, SEO-critical content</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>jQuery AJAX</strong></td>
+                                        <td><span class="badge bg-success">None</span></td>
+                                        <td><span class="badge bg-warning text-dark">Moderate</span></td>
+                                        <td><span class="badge bg-warning text-dark">Partial</span></td>
+                                        <td><span class="badge bg-warning text-dark">Medium</span></td>
+                                        <td>Modernizing legacy apps, gradual enhancement</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Razor Pages</strong></td>
+                                        <td><span class="badge bg-danger">Full</span></td>
+                                        <td><span class="badge bg-success">None</span></td>
+                                        <td><span class="badge bg-success">Excellent</span></td>
+                                        <td><span class="badge bg-success">Low</span></td>
+                                        <td>Page-focused apps, CRUD operations, forms</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Vanilla JS SPA</strong></td>
+                                        <td><span class="badge bg-success">None</span></td>
+                                        <td><span class="badge bg-warning text-dark">Moderate</span></td>
+                                        <td><span class="badge bg-danger">Poor</span></td>
+                                        <td><span class="badge bg-warning text-dark">Medium</span></td>
+                                        <td>Learning, prototypes, no build tools</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>React</strong></td>
+                                        <td><span class="badge bg-success">None</span></td>
+                                        <td><span class="badge bg-danger">Heavy</span></td>
+                                        <td><span class="badge bg-danger">Poor</span></td>
+                                        <td><span class="badge bg-danger">High</span></td>
+                                        <td>Complex UIs, component reuse, large teams</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Vue</strong></td>
+                                        <td><span class="badge bg-success">None</span></td>
+                                        <td><span class="badge bg-danger">Heavy</span></td>
+                                        <td><span class="badge bg-danger">Poor</span></td>
+                                        <td><span class="badge bg-warning text-dark">Medium</span></td>
+                                        <td>Progressive enhancement, reactive UIs</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>htmx</strong></td>
+                                        <td><span class="badge bg-success">None</span></td>
+                                        <td><span class="badge bg-success">Minimal</span></td>
+                                        <td><span class="badge bg-success">Good</span></td>
+                                        <td><span class="badge bg-success">Low</span></td>
+                                        <td>Server-rendered apps, minimal JS preference</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Pivot Table</strong></td>
+                                        <td><span class="badge bg-success">None</span></td>
+                                        <td><span class="badge bg-warning text-dark">Moderate</span></td>
+                                        <td><span class="badge bg-warning text-dark">Fair</span></td>
+                                        <td><span class="badge bg-success">Low</span></td>
+                                        <td>Data analysis, reporting, business intelligence</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <div class="card-footer bg-light py-3 text-center">
-                    <p class="mb-0 text-muted">
-                        <i class="bi bi-info-circle me-1"></i>
-                        This documentation is automatically generated from the project's README.md file
+            </div>
+        </div>
+    </div>
+
+    <!-- Technical Architecture Section -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <div class="card shadow-sm border-0 rounded-3 mb-4">
+                <div class="card-header bg-success text-white py-3">
+                    <h2 class="h3 mb-0">
+                        <i class="bi bi-gear-fill me-2"></i>Technical Architecture
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <h4 class="h5 mb-3"><i class="bi bi-layers me-2 text-success"></i>Clean Architecture</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Domain Layer:</strong> DTOs, responses, business models</li>
+                                <li class="list-group-item"><strong>Repository Layer:</strong> Data access, EF Core context, mock data generation</li>
+                                <li class="list-group-item"><strong>Web Layer:</strong> Controllers, views, pages, API endpoints</li>
+                                <li class="list-group-item"><strong>Test Projects:</strong> Unit tests for domain and repository layers</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="h5 mb-3"><i class="bi bi-server me-2 text-success"></i>Technology Stack</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>.NET 10 / C# 13:</strong> Latest framework and language features</li>
+                                <li class="list-group-item"><strong>Entity Framework Core:</strong> In-memory database for demos</li>
+                                <li class="list-group-item"><strong>Bootstrap 5:</strong> Responsive UI with dynamic theming</li>
+                                <li class="list-group-item"><strong>OpenAPI/Swagger:</strong> Interactive API documentation</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="h5 mb-3"><i class="bi bi-shield-check me-2 text-success"></i>Best Practices</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Dependency Injection:</strong> Interface-based services, scoped lifetimes</li>
+                                <li class="list-group-item"><strong>Repository Pattern:</strong> <code>IEmployeeService</code> abstraction</li>
+                                <li class="list-group-item"><strong>Async/Await:</strong> All I/O operations are asynchronous</li>
+                                <li class="list-group-item"><strong>DTOs:</strong> Never expose EF entities directly to UI</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="h5 mb-3"><i class="bi bi-braces me-2 text-success"></i>RESTful API</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Versioned Endpoints:</strong> <code>/api/v1/employee</code></li>
+                                <li class="list-group-item"><strong>Standard HTTP Methods:</strong> GET, POST, PUT, DELETE</li>
+                                <li class="list-group-item"><strong>ActionResult&lt;T&gt;:</strong> Proper status codes and responses</li>
+                                <li class="list-group-item"><strong>ProblemDetails:</strong> Standardized error responses</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features & Capabilities Section -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <div class="card shadow-sm border-0 rounded-3 mb-4">
+                <div class="card-header bg-info text-white py-3">
+                    <h2 class="h3 mb-0">
+                        <i class="bi bi-stars me-2"></i>Features & Capabilities
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="bi bi-palette-fill text-info me-2"></i>Dynamic Theming</h5>
+                                    <p class="card-text">
+                                        Switch between Bootswatch themes instantly. Supports light/dark modes, 
+                                        multiple color schemes, and persists theme preference.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="bi bi-heart-pulse-fill text-info me-2"></i>Health Monitoring</h5>
+                                    <p class="card-text">
+                                        Built-in health checks at <code>/health</code>. Monitor application status, 
+                                        database connectivity, and service availability.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="bi bi-file-earmark-code-fill text-info me-2"></i>API Documentation</h5>
+                                    <p class="card-text">
+                                        Interactive Swagger UI for testing API endpoints. Complete OpenAPI specification 
+                                        with request/response examples.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="bi bi-phone-fill text-info me-2"></i>Responsive Design</h5>
+                                    <p class="card-text">
+                                        Mobile-first responsive layouts. Works seamlessly across desktop, tablet, 
+                                        and mobile devices with Bootstrap 5.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="bi bi-database-fill-check text-info me-2"></i>Mock Data Generation</h5>
+                                    <p class="card-text">
+                                        Automatic generation of realistic test data. Pre-populated with employees, 
+                                        departments, and profile images.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="bi bi-graph-up text-info me-2"></i>Application Insights</h5>
+                                    <p class="card-text">
+                                        Integrated telemetry and monitoring. Track performance, errors, and usage 
+                                        patterns with Azure Application Insights.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DevOps & Deployment Section -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <div class="card shadow-sm border-0 rounded-3 mb-4">
+                <div class="card-header bg-dark text-white py-3">
+                    <h2 class="h3 mb-0">
+                        <i class="bi bi-cloud-upload-fill me-2"></i>DevOps & Deployment
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card border-primary h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title"><i class="bi bi-github text-dark me-2"></i>GitHub Actions CI/CD</h4>
+                                    <p class="card-text">Automated workflows for building, testing, and deploying the application:</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">
+                                            <a href="https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml" target="_blank" class="text-decoration-none">
+                                                <i class="bi bi-check-circle-fill text-success me-2"></i>Docker Image Build & Push
+                                            </a>
+                                        </li>
+                                        <li class="mb-2">
+                                            <a href="https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/codeql-analysis.yml" target="_blank" class="text-decoration-none">
+                                                <i class="bi bi-check-circle-fill text-success me-2"></i>CodeQL Security Scanning
+                                            </a>
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="bi bi-info-circle-fill text-info me-2"></i>Automated Test Execution
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-primary h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title"><i class="bi bi-box-seam text-dark me-2"></i>Container Deployment</h4>
+                                    <p class="card-text">Multi-stage Docker builds optimized for production:</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">
+                                            <i class="bi bi-check-circle-fill text-success me-2"></i>Alpine-based images for minimal size
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="bi bi-check-circle-fill text-success me-2"></i>Non-root user security
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="bi bi-check-circle-fill text-success me-2"></i>Trivy vulnerability scanning
+                                        </li>
+                                        <li class="mb-2">
+                                            <a href="https://hub.docker.com/r/markhazleton/mwhsampleweb" target="_blank" class="text-decoration-none">
+                                                <i class="bi bi-box text-primary me-2"></i>Docker Hub Repository
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Deployments -->
+                    <div class="alert alert-info d-flex align-items-center" role="alert">
+                        <i class="bi bi-cloud-check-fill fs-4 me-3"></i>
+                        <div>
+                            <h5 class="alert-heading mb-1">Live Deployment</h5>
+                            <p class="mb-0">
+                                See this application running in production: 
+                                <a href="https://samplecrud.markhazleton.com/" target="_blank" class="alert-link">
+                                    https://samplecrud.markhazleton.com/
+                                </a>
+                                <span class="ms-2 badge bg-info">Windows IIS VM</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Start Code -->
+                    <div class="mt-4">
+                        <h4 class="h5 mb-3"><i class="bi bi-terminal me-2"></i>Quick Start</h4>
+                        <div class="row g-3">
+                            <div class="col-lg-6">
+                                <div class="card bg-dark text-white">
+                                    <div class="card-header">
+                                        <i class="bi bi-code-slash me-2"></i>Run Locally with .NET
+                                    </div>
+                                    <div class="card-body">
+                                        <pre class="mb-0"><code>git clone https://github.com/markhazleton/SampleMvcCRUD.git
+cd SampleMvcCRUD
+dotnet restore
+cd Mwh.Sample.Web
+dotnet run
+# Visit https://localhost:5001</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card bg-dark text-white">
+                                    <div class="card-header">
+                                        <i class="bi bi-box-seam me-2"></i>Run with Docker
+                                    </div>
+                                    <div class="card-body">
+                                        <pre class="mb-0"><code>docker pull markhazleton/mwhsampleweb:latest
+docker run -p 8080:8080 markhazleton/mwhsampleweb
+# Visit http://localhost:8080
+
+# Or build from source
+docker build -t mwhsampleweb ./Mwh.Sample.Web</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Resources Section -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <div class="card shadow-sm border-0 rounded-3 mb-4">
+                <div class="card-header bg-warning text-dark py-3">
+                    <h2 class="h3 mb-0">
+                        <i class="bi bi-book-fill me-2"></i>Learning & Documentation
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <h4 class="h5 mb-3"><i class="bi bi-journal-code me-2 text-warning"></i>Educational Scope</h4>
+                            <p>This is an <strong>educational project</strong> designed for learning purposes:</p>
+                            <ul>
+                                <li><strong>No Authentication/Authorization:</strong> Intentionally omitted for simplicity</li>
+                                <li><strong>In-Memory Database:</strong> Data doesn't persist between restarts</li>
+                                <li><strong>Mock Data:</strong> Pre-populated with test employees and departments</li>
+                                <li><strong>Security Scanning:</strong> CodeQL and Trivy for demonstration only</li>
+                            </ul>
+                            <div class="alert alert-warning" role="alert">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                <strong>Not Production-Ready:</strong> This application demonstrates patterns and techniques. 
+                                Additional security, validation, and data persistence are required for production use.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="h5 mb-3"><i class="bi bi-link-45deg me-2 text-warning"></i>Resources & Links</h4>
+                            <div class="list-group">
+                                <a href="https://github.com/markhazleton/SampleMvcCRUD" target="_blank" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1"><i class="bi bi-github me-2"></i>GitHub Repository</h6>
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </div>
+                                    <p class="mb-1 small">Source code, issues, pull requests, and contributions</p>
+                                </a>
+                                <a href="/swagger/" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1"><i class="bi bi-file-earmark-code me-2"></i>API Documentation</h6>
+                                        <i class="bi bi-arrow-right-circle"></i>
+                                    </div>
+                                    <p class="mb-1 small">Interactive Swagger UI for testing REST API endpoints</p>
+                                </a>
+                                <a href="/health" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1"><i class="bi bi-heart-pulse me-2"></i>Health Check</h6>
+                                        <i class="bi bi-arrow-right-circle"></i>
+                                    </div>
+                                    <p class="mb-1 small">Application health status and diagnostics</p>
+                                </a>
+                                <a href="https://github.com/markhazleton/SampleMvcCRUD/blob/main/CHANGELOG.md" target="_blank" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1"><i class="bi bi-clock-history me-2"></i>Changelog</h6>
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </div>
+                                    <p class="mb-1 small">Project history, milestones, and version updates</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow border-0 rounded-3 bg-primary text-white text-center">
+                <div class="card-body p-5">
+                    <h2 class="h3 mb-3">
+                        <i class="bi bi-rocket-takeoff-fill me-2"></i>Ready to Explore?
+                    </h2>
+                    <p class="lead mb-4">
+                        Start with any CRUD implementation and compare approaches to find the best fit for your project.
                     </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="/Employee" class="btn btn-light btn-lg">
+                            <i class="bi bi-play-circle me-2"></i>Try jQuery AJAX Demo
+                        </a>
+                        <a href="/EmployeeReact" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-filetype-jsx me-2"></i>Try React Demo
+                        </a>
+                        <a href="/swagger/" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-file-earmark-code me-2"></i>Explore API
+                        </a>
+                        <a href="https://github.com/markhazleton/SampleMvcCRUD" target="_blank" class="btn btn-dark btn-lg">
+                            <i class="bi bi-github me-2"></i>View Source Code
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .hover-shadow {
+        transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    .hover-shadow:hover {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        transform: translateY(-2px);
+    }
+    pre code {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+    .card-header h2, .card-header h3 {
+        font-weight: 600;
+    }
+</style>
 
