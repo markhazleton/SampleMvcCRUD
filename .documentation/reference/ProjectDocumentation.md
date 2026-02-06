@@ -49,6 +49,25 @@ Namespace: `Mwh.Sample.Web.Controllers`
 - `GetEmployeeList()`: Returns `Task<ActionResult>`
   - /// GetEmployeeList     ///
 ---
+## Class: `EmployeeReactController`
+Namespace: `Mwh.Sample.Web.Controllers`
+
+/// React-based Employee CRUD Controller ///
+
+### Properties:
+
+
+### Methods:
+
+- `Index()`: Returns `IActionResult`
+  - /// Renders the React Employee CRUD view ///
+
+### Notes:
+- Uses a dedicated `_LayoutReact.cshtml` layout that loads React 18, ReactDOM, and Babel standalone via CDN
+- No jQuery dependency — uses native Fetch API for REST operations
+- Implements full CRUD with functional components and React hooks (useState, useEffect, useRef, useCallback)
+- Features: sortable table, search/filter, pagination, modal forms, delete confirmation, toast notifications
+---
 ## Class: `EmployeeSinglePageController`
 Namespace: `Mwh.Sample.Web.Controllers`
 

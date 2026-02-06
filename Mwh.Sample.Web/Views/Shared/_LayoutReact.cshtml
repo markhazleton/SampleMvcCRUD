@@ -12,16 +12,11 @@
     @await Html.PartialAsync("Sections/_metatags")
 
     <!-- Performance: DNS Prefetch for CDN resources -->
-    <link rel="dns-prefetch" href="https://code.jquery.com">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
 
     <!-- CSS -->
     <link id="bootswatch-theme-stylesheet" rel="stylesheet" href="@themeUrl" />
     <link rel="stylesheet" href="/lib/bootstrap-icons/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <!-- PivotTable.js CSS via jsDelivr (matches JS version) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pivottable@@2.23.0/dist/pivot.min.css" />
 
     <style>
         /* Responsive navbar offset - account for main nav + breadcrumb */
@@ -59,7 +54,6 @@
             color: rgba(255, 255, 255, 0.8) !important;
         }
     </style>
-
     @RenderSection("HeadScripts", required: false)
 </head>
 
@@ -110,14 +104,14 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/EmployeeReact">
+                                    <a class="dropdown-item active" href="/EmployeeReact">
                                         <i class="bi bi-filetype-jsx"></i> <span class="ms-1">React</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/EmployeePivot">
+                            <a class="nav-link" href="/EmployeePivot">
                                 <i class="bi bi-table"></i> <span class="ms-1">PivotTable.js</span>
                             </a>
                         </li>
@@ -144,19 +138,13 @@
         @await Html.PartialAsync("_Footer")
     </footer>
 
-    <!-- JavaScript Bundle -->
-    <!-- jQuery 3.7.1 from CDN (stable, widely supported) -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- React via CDN (no jQuery needed) -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@@babel/standalone/babel.min.js" crossorigin></script>
+    <!-- Bootstrap JS (needed for modals, dropdowns, theme switcher) -->
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/_content/WebSpark.Bootswatch/js/bootswatch-theme-switcher.js"></script>
-    <!-- jQuery UI and Touch Punch (integrity removed due to CDN hash mismatches) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" crossorigin="anonymous"></script>
-    <!-- PivotTable.js via jsDelivr (stable, jQuery 3.7.1 compatible) -->
-    <script src="https://cdn.jsdelivr.net/npm/pivottable@@2.23.0/dist/pivot.min.js"></script>
-    <!-- Plotly.js for advanced chart renderers (optional but recommended) -->
-    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pivottable@@2.23.0/dist/plotly_renderers.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

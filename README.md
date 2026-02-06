@@ -31,16 +31,18 @@ See the [CHANGELOG](CHANGELOG.md) for the full milestone timeline, and open `rep
 ---
 ## Features & Architecture
 - UI Patterns:
-  - MVC Controllers & Views (traditional multi-view CRUD)
-  - Razor Pages (page-centric CRUD)
-  - Single Page style (AJAX + partial views + modals)
-  - Pivot Table reporting (PivotTable.js)
+  - MVC Controllers & Views — traditional multi-view CRUD (`/MvcEmployee`)
+  - jQuery AJAX + Partial Views — modal-based CRUD without full page reloads (`/Employee`)
+  - Razor Pages — page-centric CRUD using the Razor Pages model (`/EmployeeRazor`)
+  - Single Page Application (SPA) — JavaScript/AJAX with DataTables and REST API (`/EmployeeSinglePage`)
+  - React SPA — component-based CRUD with React 18, hooks, and Fetch API (`/EmployeeReact`)
+  - Pivot Table reporting — data analysis with PivotTable.js (`/EmployeePivot`)
 - API Endpoints:
   - REST endpoints for Employees & Departments (Swagger/OpenAPI enabled)
 - Theming & UX:
   - Bootswatch theme switcher (light/dark, instant swap)
   - Bootstrap 5 + Bootstrap Icons
-  - Modal-based CRUD forms via jQuery/AJAX
+  - Modal-based CRUD forms
 - Data Layer:
   - In-memory EF Core database (EmployeeContext)
   - Repository/service pattern via `IEmployeeService` & `EmployeeDatabaseService`
@@ -57,6 +59,7 @@ See the [CHANGELOG](CHANGELOG.md) for the full milestone timeline, and open `rep
 ## Technology Stack
 - .NET 10 / C#
 - ASP.NET Core MVC & Razor Pages
+- React 18 (CDN + Babel standalone for in-browser JSX)
 - Entity Framework Core (InMemory & SqlServer packages referenced for future use)
 - Swashbuckle (Swagger/OpenAPI)
 - Bootswatch theming (WebSpark.Bootswatch & WebSpark.HttpClientUtility)

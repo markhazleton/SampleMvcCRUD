@@ -2,6 +2,9 @@
 
 This document captures notable milestones extracted from the git history of `SampleMvcCRUD`. For visual commit-density analytics generated with the Mark Hazleton `git-spark` npm package, open `reports/git-spark-report.html` in a browser.
 
+## 2026
+- **Feb 6** – Added a React 18 Employee CRUD implementation (`/EmployeeReact`) with functional components, hooks, and Fetch API. Introduced a dedicated `_LayoutReact.cshtml` layout loading React/Babel via CDN to isolate from jQuery-based pages. Features include sortable columns, search/filter, pagination, modal forms with Bootstrap 5 validation, delete confirmation dialog, and toast notifications.
+
 ## 2025
 - **Nov 16** *(Tag: net10-ga)* – Migrated the solution to .NET 10.0, refactored project structure, hardened Docker and GitHub Actions workflows, and replaced `System.Drawing` with SkiaSharp for cross-platform image processing.
 - **Sep 7** – Performed a dependency refresh across all projects to prepare for the upcoming .NET 10 upgrade window.
