@@ -421,7 +421,7 @@
     private EmployeeDto? deleteTarget;
     private string? toastMessage;
     private string toastType = "success";
-    private CancellationTokenSource cts = new();
+    private readonly CancellationTokenSource cts = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -439,7 +439,11 @@
             employees = (await empTask.ConfigureAwait(false)).ToList();
             departments = (await deptTask.ConfigureAwait(false)).ToList();
         }
-        catch (Exception ex)
+        catch (InvalidOperationException ex)
+        {
+            ShowToast(ex.Message, "danger");
+        }
+        catch (HttpRequestException ex)
         {
             ShowToast(ex.Message, "danger");
         }
@@ -530,7 +534,8 @@
                 showForm = true;
             }
         }
-        catch (Exception ex) { ShowToast(ex.Message, "danger"); }
+        catch (InvalidOperationException ex) { ShowToast(ex.Message, "danger"); }
+        catch (HttpRequestException ex) { ShowToast(ex.Message, "danger"); }
     }
 
     private async Task HandleSave()
@@ -551,7 +556,8 @@
             showForm = false;
             await LoadData().ConfigureAwait(false);
         }
-        catch (Exception ex) { ShowToast(ex.Message, "danger"); }
+        catch (InvalidOperationException ex) { ShowToast(ex.Message, "danger"); }
+        catch (HttpRequestException ex) { ShowToast(ex.Message, "danger"); }
         finally { saving = false; }
     }
 
@@ -569,7 +575,8 @@
             deleteTarget = null;
             await LoadData().ConfigureAwait(false);
         }
-        catch (Exception ex) { ShowToast(ex.Message, "danger"); }
+        catch (InvalidOperationException ex) { ShowToast(ex.Message, "danger"); }
+        catch (HttpRequestException ex) { ShowToast(ex.Message, "danger"); }
     }
 
     private void ShowToast(string message, string type)

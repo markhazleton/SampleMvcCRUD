@@ -81,7 +81,11 @@
 
                 return Json(pivotData);
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+            catch (HttpRequestException ex)
             {
                 return StatusCode(500, new { error = ex.Message });
             }

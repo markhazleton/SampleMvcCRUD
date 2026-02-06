@@ -57,13 +57,12 @@ public class EmployeeHtmxController : BaseController
         var filteredEmployees = allEmployees;
         if (!string.IsNullOrWhiteSpace(search))
         {
-            var searchLower = search.ToLower();
             filteredEmployees = allEmployees.Where(e =>
-                (e.Name?.Contains(searchLower, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                (e.GenderName?.Contains(searchLower, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                (e.State?.Contains(searchLower, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                (e.Country?.Contains(searchLower, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                (e.DepartmentName?.Contains(searchLower, StringComparison.OrdinalIgnoreCase) ?? false)
+                (e.Name?.Contains(search, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                (e.GenderName?.Contains(search, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                (e.State?.Contains(search, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                (e.Country?.Contains(search, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                (e.DepartmentName?.Contains(search, StringComparison.OrdinalIgnoreCase) ?? false)
             ).ToList();
         }
 
