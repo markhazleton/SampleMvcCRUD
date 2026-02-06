@@ -1,4 +1,4 @@
-﻿
+
 namespace Mwh.Sample.Repository.Tests.Models;
 
 [TestClass]
@@ -30,3 +30,5 @@ public class EmployeeTests
         Assert.IsNotNull(employee);
     }
 }
+
+

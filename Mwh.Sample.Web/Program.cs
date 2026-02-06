@@ -1,4 +1,5 @@
 using Microsoft.OpenApi;
+using Mwh.Sample.Web.Middleware;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using WebSpark.Bootswatch;
 using WebSpark.HttpClientUtility.RequestResult;
@@ -62,6 +63,9 @@ builder.Services.AddHealthChecks();
 // Problem details for standardized error responses
 builder.Services.AddProblemDetails();
 
+// Global exception handler (Constitution Principle III)
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
 WebApplication app = builder.Build();
 
 // Configure middleware pipeline
@@ -71,7 +75,8 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Error");
+    // Use global exception handler for standardized ProblemDetails responses
+    app.UseExceptionHandler();
     app.UseHsts();
 }
 

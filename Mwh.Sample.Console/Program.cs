@@ -1,6 +1,13 @@
-﻿CancellationToken ct = new CancellationToken();
+﻿using Microsoft.Extensions.Logging;
+
+CancellationToken ct = new CancellationToken();
 
 Console.WriteLine("Setup SQL Lite Database");
+
+// Setup logger factory for dependency injection
+using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+var serviceLogger = loggerFactory.CreateLogger<EmployeeDatabaseService>();
+var mockLogger = loggerFactory.CreateLogger<EmployeeMock>();
 
 DbContextOptions<EmployeeContext> options = new DbContextOptionsBuilder<EmployeeContext>()
     .UseSqlite(@"Data Source=EmployeeConsole.db")
@@ -24,14 +31,14 @@ catch (InvalidOperationException ex)
     Console.WriteLine(ex.ToString());
 }
 
-EmployeeDatabaseService employeeService = new EmployeeDatabaseService(context);
+EmployeeDatabaseService employeeService = new EmployeeDatabaseService(context, serviceLogger);
 
 IEnumerable<EmployeeDto> employees = await employeeService.GetEmployeesAsync(new PagingParameterModel(), new CancellationToken());
 
 Console.WriteLine($"Service List Count:{employees?.Count()}");
 
 Console.WriteLine("Create MOCK to get sample Employees");
-EmployeeMock employeeMock = new EmployeeMock(100);
+EmployeeMock employeeMock = new EmployeeMock(mockLogger, 100);
 List<EmployeeResponse> employeeList = new List<EmployeeResponse>();
 List<DepartmentResponse> departmentList = new List<DepartmentResponse>();
 

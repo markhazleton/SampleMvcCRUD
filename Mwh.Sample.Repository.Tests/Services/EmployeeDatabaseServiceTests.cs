@@ -148,9 +148,9 @@ public class EmployeeDatabaseServiceTests : IDisposable
             _ = builder.EnableSensitiveDataLogging(true);
             _ = builder.UseInMemoryDatabase(databaseName);
             context = new EmployeeContext(builder.Options);
-            employeeService = new EmployeeDatabaseService(context);
+            employeeService = new EmployeeDatabaseService(context, NullLogger<EmployeeDatabaseService>.Instance);
 
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             foreach (DepartmentDto dept in employeeMock.DepartmentCollection())
             {
                 await employeeService.SaveAsync(dept, ct).ConfigureAwait(true);
@@ -581,3 +581,5 @@ public class EmployeeDatabaseServiceTests : IDisposable
         Assert.AreEqual("Department can not be null", result.Message);
     }
 }
+
+

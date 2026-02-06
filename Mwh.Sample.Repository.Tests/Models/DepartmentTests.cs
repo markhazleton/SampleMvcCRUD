@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Mwh.Sample.Repository.Tests.Models
 {
@@ -27,3 +27,5 @@ namespace Mwh.Sample.Repository.Tests.Models
         }
     }
 }
+
+

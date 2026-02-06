@@ -1,0 +1,49 @@
+Summary
+  Generated on: 2/5/2026 - 4:54:55 PM
+  Coverage date: 2/5/2026 - 4:54:21 PM - 2/5/2026 - 4:54:22 PM
+  Parser: MultiReport (2x Cobertura)
+  Assemblies: 2
+  Classes: 25
+  Files: 25
+  Line coverage: 93.2%
+  Covered lines: 1185
+  Uncovered lines: 86
+  Coverable lines: 1271
+  Total lines: 2309
+  Branch coverage: 79.6% (333 of 418)
+  Covered branches: 333
+  Total branches: 418
+  Method coverage: 95.3% (185 of 194)
+  Full method coverage: 87.1% (169 of 194)
+  Covered methods: 185
+  Fully covered methods: 169
+  Total methods: 194
+
+Mwh.Sample.Domain                                           94.3%
+  Mwh.Sample.Domain.Extensions.EnumerableExtensions         94.2%
+  Mwh.Sample.Domain.Extensions.EnumExtension                 100%
+  Mwh.Sample.Domain.Extensions.ImageExtensions               100%
+  Mwh.Sample.Domain.Extensions.LogExtensions                83.1%
+  Mwh.Sample.Domain.Extensions.PropertyBag<T1, T2>           100%
+  Mwh.Sample.Domain.Extensions.StringExtensions              100%
+  Mwh.Sample.Domain.Extensions.TreeNode<T>                   100%
+  Mwh.Sample.Domain.Models.ApplicationStatus                96.7%
+  Mwh.Sample.Domain.Models.BaseResponse<T>                   100%
+  Mwh.Sample.Domain.Models.BuildVersion                      100%
+  Mwh.Sample.Domain.Models.DepartmentDto                      87%
+  Mwh.Sample.Domain.Models.DepartmentResponse                100%
+  Mwh.Sample.Domain.Models.EmployeeDto                      90.9%
+  Mwh.Sample.Domain.Models.EmployeeDtoValidationException    100%
+  Mwh.Sample.Domain.Models.EmployeeList                      100%
+  Mwh.Sample.Domain.Models.EmployeeResponse                  100%
+  Mwh.Sample.Domain.Models.PagingParameterModel              100%
+
+Mwh.Sample.Repository                                       92.2%
+  Mwh.Sample.Repository.Models.BaseEntity                    100%
+  Mwh.Sample.Repository.Models.Department                    100%
+  Mwh.Sample.Repository.Models.Employee                     88.8%
+  Mwh.Sample.Repository.Models.EmployeeContext                89%
+  Mwh.Sample.Repository.Repository.EmployeeDB               94.8%
+  Mwh.Sample.Repository.Repository.EmployeeMock             94.5%
+  Mwh.Sample.Repository.Services.EmployeeDatabaseClient     61.2%
+  Mwh.Sample.Repository.Services.EmployeeDatabaseService    93.2%

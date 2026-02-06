@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Mwh.Sample.Repository.Repository;
 
 namespace Mwh.Sample.Web.Helpers;
@@ -15,9 +16,13 @@ public static class SeedDatabase
     {
         try
         {
-            EmployeeDatabaseService employeeService = new EmployeeDatabaseService(context);
+            using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            var serviceLogger = loggerFactory.CreateLogger<EmployeeDatabaseService>();
+            var mockLogger = loggerFactory.CreateLogger<EmployeeMock>();
+            
+            EmployeeDatabaseService employeeService = new EmployeeDatabaseService(context, serviceLogger);
             CancellationToken token = new CancellationToken();
-            EmployeeMock employeeMock = new EmployeeMock(290);
+            EmployeeMock employeeMock = new EmployeeMock(mockLogger, 290);
             List<DepartmentResponse> deptResultList = new List<DepartmentResponse>();
 
             // First add all departments

@@ -3,13 +3,28 @@ using Mwh.Sample.Domain.Extensions;
 
 namespace Mwh.Sample.Repository.Repository;
 
+/// <summary>
+/// Direct database access repository for employee and department entities.
+/// </summary>
+/// <remarks>
+/// This class provides low-level Entity Framework Core operations on employee data.
+/// Prefer using <see cref="IEmployeeService"/> or <see cref="IEmployeeClient"/> 
+/// for most application scenarios as they provide DTO conversion and business logic.
+/// </remarks>
 public class EmployeeDB : IEmployeeDB
 {
-    private EmployeeContext _context;
+    private readonly EmployeeContext _context;
+    private readonly ILogger<EmployeeDB> _logger;
 
-    public EmployeeDB(EmployeeContext context)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EmployeeDB"/> class.
+    /// </summary>
+    /// <param name="context">The database context for employee data access.</param>
+    /// <param name="logger">Logger for structured logging and diagnostics.</param>
+    public EmployeeDB(EmployeeContext context, ILogger<EmployeeDB> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     private static List<EmployeeDto> Create(List<Employee> list)

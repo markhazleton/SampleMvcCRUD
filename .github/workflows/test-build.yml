@@ -1,0 +1,133 @@
+name: Test & Build
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '**.cs'
+      - '**.csproj'
+      - '.github/workflows/test-build.yml'
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test & Coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      
+      - name: Cache NuGet packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      
+      - name: Restore dependencies
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      
+      - name: Test with coverage
+        run: dotnet test --configuration Release --no-build --collect:"XPlat Code Coverage" --logger "console;verbosity=detailed"
+      
+      - name: Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+      
+      - name: Generate coverage report
+        run: reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coveragereport -reporttypes:"Html;TextSummary;Cobertura"
+      
+      - name: Check coverage threshold
+        id: coverage
+        run: |
+          COVERAGE=$(grep -oP 'Line coverage: \K[0-9.]+' coveragereport/Summary.txt || echo "0")
+          echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+          echo "### 📊 Test Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Coverage**: ${COVERAGE}%" >> $GITHUB_STEP_SUMMARY
+          echo "**Constitution Requirement**: 25% minimum" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if (( $(echo "$COVERAGE < 25.0" | bc -l) )); then
+            echo "❌ Coverage ${COVERAGE}% is below 25% constitution requirement (Principle V)" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+          
+          echo "✅ Coverage ${COVERAGE}% meets constitution requirement" >> $GITHUB_STEP_SUMMARY
+          
+          if (( $(echo "$COVERAGE >= 90.0" | bc -l) )); then
+            echo "🏆 **EXCELLENT** - Far exceeds goal!" >> $GITHUB_STEP_SUMMARY
+          elif (( $(echo "$COVERAGE >= 70.0" | bc -l) )); then
+            echo "✨ **GREAT** - Well above baseline!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "👍 **GOOD** - Meets baseline requirement" >> $GITHUB_STEP_SUMMARY
+          fi
+      
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: coveragereport
+          retention-days: 30
+      
+      - name: Comment PR with coverage
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            try {
+              const summary = fs.readFileSync('coveragereport/Summary.txt', 'utf8');
+              const coverageMatch = summary.match(/Line coverage: ([0-9.]+)%/);
+              const branchMatch = summary.match(/Branch coverage: ([0-9.]+)%/);
+              
+              const lineCoverage = coverageMatch ? coverageMatch[1] : 'N/A';
+              const branchCoverage = branchMatch ? branchMatch[1] : 'N/A';
+              
+              const emoji = parseFloat(lineCoverage) >= 90 ? '🏆' : parseFloat(lineCoverage) >= 70 ? '✨' : '✅';
+              
+              const body = `## ${emoji} Test Coverage Report\n\n` +
+                `✅ All tests passed!\n\n` +
+                `| Metric | Value | Status |\n` +
+                `|--------|-------|--------|\n` +
+                `| **Line Coverage** | ${lineCoverage}% | ${parseFloat(lineCoverage) >= 25 ? '✅ Pass' : '❌ Fail'} |\n` +
+                `| **Branch Coverage** | ${branchCoverage}% | Info |\n` +
+                `| **Constitution Requirement** | 25% minimum | Reference |\n\n` +
+                `View detailed report in workflow artifacts.`;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            } catch (error) {
+              console.log('Could not read coverage summary:', error.message);
+            }
+      
+      - name: Generate test summary
+        if: always()
+        run: |
+          echo "## 🧪 Test Execution Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Workflow**: Test & Build" >> $GITHUB_STEP_SUMMARY
+          echo "- **Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Constitution**: v1.0.0 (Principle VI.1)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "This workflow enforces the 25% test coverage baseline required by the project constitution." >> $GITHUB_STEP_SUMMARY

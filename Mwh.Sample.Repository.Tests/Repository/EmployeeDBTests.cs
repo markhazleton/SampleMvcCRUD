@@ -26,9 +26,9 @@ public class EmployeeDBTests : IDisposable
             _ = builder.EnableSensitiveDataLogging(true);
             _ = builder.UseInMemoryDatabase(databaseName);
             context = new EmployeeContext(builder.Options);
-            employeeDB = new EmployeeDB(context);
+            employeeDB = new EmployeeDB(context, NullLogger<EmployeeDB>.Instance);
 
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             foreach (DepartmentDto dept in employeeMock.DepartmentCollection())
             {
                 await employeeDB.UpdateAsync(dept).ConfigureAwait(true);
@@ -487,3 +487,5 @@ public class EmployeeDBTests : IDisposable
         Assert.AreEqual(existingDept.Id, result.Id);
     }
 }
+
+

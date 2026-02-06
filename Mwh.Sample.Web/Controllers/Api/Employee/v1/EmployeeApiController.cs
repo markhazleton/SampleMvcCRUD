@@ -1,8 +1,16 @@
 ﻿namespace Mwh.Sample.Web.Controllers.Api.Employee.v1;
 
 /// <summary>
-/// Employee Api Controller
+/// Employee management API endpoints for CRUD operations.
 /// </summary>
+/// <remarks>
+/// This controller provides RESTful endpoints for managing employee records using the repository pattern.
+/// All operations use Entity Framework Core with in-memory database for educational purposes.
+/// <para>
+/// <b>Educational Project:</b> This API does not implement authentication or authorization by design.
+/// Do not deploy to production without adding security features.
+/// </para>
+/// </remarks>
 [Route("api/employee")]
 [ApiController]
 public class EmployeeApiController : BaseApiController
@@ -10,22 +18,32 @@ public class EmployeeApiController : BaseApiController
     private readonly IEmployeeService _employeeService;
 
     /// <summary>
-    /// EmployeeApiController
+    /// Initializes a new instance of the <see cref="EmployeeApiController"/> class.
     /// </summary>
+    /// <param name="employeeService">The employee service for data operations.</param>
     public EmployeeApiController(IEmployeeService employeeService) : base()
     {
         _employeeService = employeeService;
     }
 
     /// <summary>
-    /// Deletes a given employee according to an identifier.
+    /// Deletes an employee by their unique identifier.
     /// </summary>
     /// <remarks>
-    /// Id must be a valid employee
+    /// Removes the employee record from the database. This operation cannot be undone.
+    /// <para><b>Example:</b> DELETE /api/employee/1</para>
     /// </remarks>
-    /// <param name="id">Employee identifier.</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Response for the request.</returns>
+    /// <param name="id">The unique identifier of the employee to delete.</param>
+    /// <param name="cancellationToken">Cancellation token for async operation.</param>
+    /// <returns>
+    /// An <see cref="ActionResult{EmployeeResponse}"/> containing:
+    /// <list type="bullet">
+    /// <item>200 OK with success response if deletion successful</item>
+    /// <item>400 Bad Request if employee not found or deletion fails</item>
+    /// </list>
+    /// </returns>
+    /// <response code="200">Employee successfully deleted.</response>
+    /// <response code="400">Employee not found or could not be deleted.</response>
     [HttpDelete("{id}", Name = "DeleteEmployee")]
     [ProducesResponseType(typeof(EmployeeDto), 200)]
     [ProducesResponseType(typeof(ErrorResource), 400)]
@@ -42,11 +60,23 @@ public class EmployeeApiController : BaseApiController
     }
 
     /// <summary>
-    /// Returns Single Employee according to an identifier.
+    /// Retrieves a single employee by their unique identifier.
     /// </summary>
-    /// <param name="id">Employee identifier</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Employee response</returns>
+    /// <remarks>
+    /// Returns the complete employee record including department information.
+    /// <para><b>Example:</b> GET /api/employee/1</para>
+    /// </remarks>
+    /// <param name="id">The unique identifier of the employee to retrieve.</param>
+    /// <param name="cancellationToken">Cancellation token for async operation.</param>
+    /// <returns>
+    /// An <see cref="ActionResult{EmployeeResponse}"/> containing:
+    /// <list type="bullet">
+    /// <item>200 OK with employee data if found</item>
+    /// <item>400 Bad Request if employee not found</item>
+    /// </list>
+    /// </returns>
+    /// <response code="200">Employee found and returned successfully.</response>
+    /// <response code="400">Employee with specified ID not found.</response>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(EmployeeDto), 200)]
     [ProducesResponseType(typeof(ErrorResource), 400)]

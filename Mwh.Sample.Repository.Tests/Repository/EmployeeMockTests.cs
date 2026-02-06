@@ -1,4 +1,4 @@
-﻿using Mwh.Sample.Repository.Repository;
+using Mwh.Sample.Repository.Repository;
 using System;
 using System.Threading.Tasks;
 
@@ -11,7 +11,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task DepartmentAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             int id = 1;
 
             // Act
@@ -25,7 +25,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task EmployeeAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             int id = 0;
 
             // Act
@@ -38,7 +38,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task Delete_StateUnderTest_Id1()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             int ID = 1;
 
             // Act
@@ -52,7 +52,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task Delete_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             int ID = 0;
 
             // Act
@@ -66,7 +66,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task DeleteAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             int ID = 0;
 
             // Act
@@ -81,7 +81,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public void DepartmentCollection_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
 
             // Act
             System.Collections.Generic.List<DepartmentDto> result = employeeMock.DepartmentCollection();
@@ -94,7 +94,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task DepartmentCollectionAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
 
             // Act
             System.Collections.Generic.List<DepartmentDto> result = await employeeMock.DepartmentCollectionAsync();
@@ -107,7 +107,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public void EmployeeCollection_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
 
             // Act
             System.Collections.Generic.List<EmployeeDto> result = employeeMock.EmployeeCollection();
@@ -120,7 +120,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task EmployeeCollectionAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
 
             // Act
             System.Collections.Generic.List<EmployeeDto> result = await employeeMock.EmployeeCollectionAsync();
@@ -132,7 +132,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task UpdateAsync_StateUnderTest_NotFoundID()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             EmployeeDto emp = new(
                 9999,
                 "Test",
@@ -153,7 +153,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task UpdateAsync_StateUnderTest_NotValid()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             EmployeeDto? emp = null;
 
             // Act
@@ -167,7 +167,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task UpdateAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             EmployeeDto? emp = null;
 
             // Act
@@ -181,7 +181,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task UpdateAsync_StateUnderTest_ExpectedBehavior1()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             DepartmentDto? dept = null;
 
             // Act
@@ -196,7 +196,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task Delete_StateUnderTest_ExpectedBehaviorNotFound()
         {
             // Arrange
-            EmployeeMock employeeMock = new EmployeeMock();
+            EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             int ID = 0;
 
             // Act
@@ -210,7 +210,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task Employee_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            EmployeeMock employeeDB = new EmployeeMock();
+            EmployeeMock employeeDB = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             int id = 0;
 
             // Act
@@ -224,7 +224,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task EmployeeCollection_ExpectedBehavior()
         {
             // Arrange
-            EmployeeMock employeeDB = new EmployeeMock();
+            EmployeeMock employeeDB = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
 
             // Act
             System.Collections.Generic.List<EmployeeDto> result = await employeeDB.EmployeeCollectionAsync();
@@ -237,7 +237,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task Update_StateUnderTest_ExpectedBehaviorNewEmployee()
         {
             // Arrange
-            EmployeeMock employeeDB = new EmployeeMock();
+            EmployeeMock employeeDB = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             EmployeeDto newEmp = new(
                 9999,
                 "Test",
@@ -278,7 +278,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public void EmployeeMock_Constructor_WithGeneratedEmployees()
         {
             // Arrange & Act
-            EmployeeMock mock = new EmployeeMock(20);
+            EmployeeMock mock = new EmployeeMock(NullLogger<EmployeeMock>.Instance, 20);
 
             // Assert
             System.Collections.Generic.List<EmployeeDto> employees = mock.EmployeeCollection();
@@ -290,7 +290,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task EmployeeMock_UpdateAsync_NewEmployee_ShouldAdd()
         {
             // Arrange
-            EmployeeMock mock = new EmployeeMock();
+            EmployeeMock mock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             int initialCount = mock.EmployeeCollection().Count;
 
             EmployeeDto newEmp = new EmployeeDto(
@@ -314,7 +314,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task EmployeeMock_UpdateAsync_NullDepartment_ShouldReturnNull()
         {
             // Arrange
-            EmployeeMock mock = new EmployeeMock();
+            EmployeeMock mock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             DepartmentDto? nullDept = null;
 
             // Act
@@ -328,7 +328,7 @@ namespace Mwh.Sample.Repository.Tests.Repository
         public async Task EmployeeMock_DepartmentAsync_InvalidId_ShouldThrowOrReturnNull()
         {
             // Arrange
-            EmployeeMock mock = new EmployeeMock();
+            EmployeeMock mock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
             int invalidId = 9999;
 
             // Act  & Assert - EmployeeMock throws exception for invalid department IDs
@@ -346,3 +346,5 @@ namespace Mwh.Sample.Repository.Tests.Repository
         }
     }
 }
+
+

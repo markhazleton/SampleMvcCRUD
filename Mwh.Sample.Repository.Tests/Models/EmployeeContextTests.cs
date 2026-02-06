@@ -1,4 +1,4 @@
-﻿
+
 using Mwh.Sample.Repository.Repository;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +20,10 @@ public class EmployeeContextTests
         await context.Database.EnsureDeletedAsync();
         await context.Database.EnsureCreatedAsync();
 
-        EmployeeMock employeeMock = new EmployeeMock();
+        EmployeeMock employeeMock = new EmployeeMock(NullLogger<EmployeeMock>.Instance);
         List<EmployeeResponse> employeeList = new List<EmployeeResponse>();
         List<DepartmentResponse> departmentList = new List<DepartmentResponse>();
-        EmployeeDatabaseService svc = new EmployeeDatabaseService(context);
+        EmployeeDatabaseService svc = new EmployeeDatabaseService(context, NullLogger<EmployeeDatabaseService>.Instance);
 
         foreach (DepartmentDto dept in employeeMock.DepartmentCollection())
         {
@@ -44,3 +44,5 @@ public class EmployeeContextTests
 
     }
 }
+
+

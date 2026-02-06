@@ -2,19 +2,30 @@ using Bogus;
 
 namespace Mwh.Sample.Repository.Repository;
 /// <summary>
-/// Employee Mock Repository
+/// Mock employee repository with generated test data using Bogus library.
 /// </summary>
+/// <remarks>
+/// This implementation generates fake employee data for testing and demonstration purposes.
+/// Uses the Bogus library to create realistic employee records with random data.
+/// <para>
+/// <b>Note:</b> Data is regenerated on each instantiation and is not persisted.
+/// </para>
+/// </remarks>
 public class EmployeeMock : IEmployeeDB
 {
     private readonly List<DepartmentDto> _departmentList = new();
     private readonly List<EmployeeDto> _employeeList = new();
     private readonly int _generatedEmployeeCount = 0;
+    private readonly ILogger<EmployeeMock> _logger;
 
     /// <summary>
-    /// Constructor
+    /// Initializes a new instance of the <see cref="EmployeeMock"/> class.
     /// </summary>
-    public EmployeeMock(int GeneratedEmployeeCount = 0)
+    /// <param name="logger">Logger for structured logging and diagnostics.</param>
+    /// <param name="GeneratedEmployeeCount">Number of additional random employees to generate beyond the fixed list.</param>
+    public EmployeeMock(ILogger<EmployeeMock> logger, int GeneratedEmployeeCount = 0)
     {
+        _logger = logger;
         _generatedEmployeeCount = GeneratedEmployeeCount;
         _departmentList.AddRange(GetDepartmentList());
         _employeeList.AddRange(GetFullEmployeeList(_generatedEmployeeCount));

@@ -1,4 +1,5 @@
 ﻿global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Logging;
 global using Mwh.Sample.Domain.Interfaces;
 global using Mwh.Sample.Domain.Models;
 global using Mwh.Sample.Repository.Models;

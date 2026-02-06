@@ -1,12 +1,27 @@
 ﻿namespace Mwh.Sample.Repository.Services;
 
+/// <summary>
+/// Client wrapper for employee service operations with logging.
+/// </summary>
+/// <remarks>
+/// This class provides a thin client layer over <see cref="IEmployeeService"/>
+/// that adds structured logging for all operations. Follows the repository pattern
+/// to abstract data access from consumers.
+/// </remarks>
 public class EmployeeDatabaseClient : IEmployeeClient
 {
     private readonly IEmployeeService service;
+    private readonly ILogger<EmployeeDatabaseClient> _logger;
 
-    public EmployeeDatabaseClient(IEmployeeService service)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EmployeeDatabaseClient"/> class.
+    /// </summary>
+    /// <param name="service">The underlying employee service for data operations.</param>
+    /// <param name="logger">Logger for structured logging and diagnostics.</param>
+    public EmployeeDatabaseClient(IEmployeeService service, ILogger<EmployeeDatabaseClient> logger)
     {
         this.service = service;
+        _logger = logger;
     }
 
     public async Task<int> AddMultipleEmployeesAsync(string[] namelist)
@@ -16,6 +31,7 @@ public class EmployeeDatabaseClient : IEmployeeClient
 
     public async Task<EmployeeResponse> DeleteAsync(int id, CancellationToken token)
     {
+        _logger.LogInformation("Client: Deleting employee with ID {EmployeeId}", id);
         return await service.DeleteAsync(id, token).ConfigureAwait(false);
     }
 
@@ -26,6 +42,7 @@ public class EmployeeDatabaseClient : IEmployeeClient
 
     public async Task<EmployeeResponse> FindEmployeeByIdAsync(int id, CancellationToken token)
     {
+        _logger.LogInformation("Client: Finding employee with ID {EmployeeId}", id);
         return await service.FindEmployeeByIdAsync(id, token).ConfigureAwait(false);
     }
 

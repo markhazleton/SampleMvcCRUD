@@ -1,12 +1,30 @@
 namespace Mwh.Sample.Repository.Services;
 
+/// <summary>
+/// Database-backed implementation of employee service using Entity Framework Core.
+/// </summary>
+/// <remarks>
+/// This service provides CRUD operations for employees and departments using an in-memory database.
+/// All operations use async/await patterns with ConfigureAwait(false) for library code compliance.
+/// <para>
+/// <b>Educational Note:</b> Uses InMemory database provider for demonstration purposes.
+/// In production, replace with SQL Server, PostgreSQL, or other persistent provider.
+/// </para>
+/// </remarks>
 public class EmployeeDatabaseService : IEmployeeService
 {
     private readonly EmployeeContext _context;
+    private readonly ILogger<EmployeeDatabaseService> _logger;
 
-    public EmployeeDatabaseService(EmployeeContext context)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EmployeeDatabaseService"/> class.
+    /// </summary>
+    /// <param name="context">The database context for employee data access.</param>
+    /// <param name="logger">Logger for structured logging and diagnostics.</param>
+    public EmployeeDatabaseService(EmployeeContext context, ILogger<EmployeeDatabaseService> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     private static DepartmentDto? Create(Department? item)
@@ -108,18 +126,27 @@ public class EmployeeDatabaseService : IEmployeeService
 
     public async Task<DepartmentDto> FindDepartmentByIdAsync(int Id, CancellationToken token)
     {
+        _logger.LogInformation("Finding department with ID {DepartmentId}", Id);
+        
         var department = await _context.Departments
             .Where(w => w.Id == Id)
             .Include(i => i.Employees)
             .AsNoTracking()
             .FirstOrDefaultAsync(token)
             .ConfigureAwait(false);
+        
+        if (department == null)
+        {
+            _logger.LogWarning("Department with ID {DepartmentId} not found", Id);
+        }
             
         return Create(department);
     }
 
     public async Task<EmployeeResponse> FindEmployeeByIdAsync(int Id, CancellationToken token)
     {
+        _logger.LogInformation("Finding employee with ID {EmployeeId}", Id);
+        
         EmployeeDto? employee = Create(
             await _context.Employees
                 .Include(i => i.Department)
@@ -128,9 +155,14 @@ public class EmployeeDatabaseService : IEmployeeService
                 .FirstOrDefaultAsync(token)
                 .ConfigureAwait(false));
 
-        return employee is null 
-            ? new EmployeeResponse("Employee Not Found") 
-            : new EmployeeResponse(employee);
+        if (employee is null)
+        {
+            _logger.LogWarning("Employee with ID {EmployeeId} not found", Id);
+            return new EmployeeResponse("Employee Not Found");
+        }
+        
+        _logger.LogDebug("Employee {EmployeeId} found: {EmployeeName}", Id, employee.Name);
+        return new EmployeeResponse(employee);
     }
 
     public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync(bool IncludeEmployees, CancellationToken token)
