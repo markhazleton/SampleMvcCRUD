@@ -99,7 +99,7 @@ jobs:
       - name: Test Docker image locally
         run: |
           docker run --rm -d --name test-container \
-            -p 8080:80 \
+            -p 8080:8080 \
             ${{ secrets.DOCKERHUB_USERNAME }}/uisamplespark:latest
           sleep 10
           curl -f http://localhost:8080 || echo "Health check failed"
