@@ -23,7 +23,7 @@ updates:
 
   # NuGet dependencies for main web project
   - package-ecosystem: "nuget"
-    directory: "/Mwh.Sample.Web"
+    directory: "/UISampleSpark.UI"
     schedule:
       interval: "weekly"
       day: "tuesday"
@@ -43,7 +43,7 @@ updates:
 
   # NuGet dependencies for domain project
   - package-ecosystem: "nuget"
-    directory: "/Mwh.Sample.Domain"
+    directory: "/UISampleSpark.Core"
     schedule:
       interval: "weekly"
       day: "tuesday"
@@ -58,7 +58,7 @@ updates:
 
   # NuGet dependencies for repository project
   - package-ecosystem: "nuget"
-    directory: "/Mwh.Sample.Repository"
+    directory: "/UISampleSpark.Data"
     schedule:
       interval: "weekly"
       day: "tuesday"
@@ -73,7 +73,7 @@ updates:
 
   # NuGet dependencies for console project
   - package-ecosystem: "nuget"
-    directory: "/Mwh.Sample.Console"
+    directory: "/UISampleSpark.CLI"
     schedule:
       interval: "weekly"
       day: "tuesday"
@@ -88,7 +88,7 @@ updates:
 
   # NuGet dependencies for test projects
   - package-ecosystem: "nuget"
-    directory: "/Mwh.Sample.Domain.Tests"
+    directory: "/UISampleSpark.Core.Tests"
     schedule:
       interval: "weekly"
       day: "tuesday"
@@ -103,7 +103,7 @@ updates:
       include: "scope"
 
   - package-ecosystem: "nuget"
-    directory: "/Mwh.Sample.Repository.Tests"
+    directory: "/UISampleSpark.Data.Tests"
     schedule:
       interval: "weekly"
       day: "tuesday"
@@ -119,7 +119,7 @@ updates:
 
   # npm dependencies
   - package-ecosystem: "npm"
-    directory: "/Mwh.Sample.Web"
+    directory: "/UISampleSpark.UI"
     schedule:
       interval: "weekly"
       day: "wednesday"
@@ -136,7 +136,7 @@ updates:
 
   # Docker base image updates
   - package-ecosystem: "docker"
-    directory: "/Mwh.Sample.Web"
+    directory: "/UISampleSpark.UI"
     schedule:
       interval: "weekly"
       day: "thursday"

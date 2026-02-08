@@ -1,0 +1,737 @@
+@{
+    Layout = "~/Views/Shared/_LayoutReact.cshtml";
+    ViewBag.Title = "React Employee CRUD | Modern Component-Based UI";
+    ViewBag.MetaDescription = "A React-based Single Page Application demonstrating component-driven CRUD operations with hooks and functional components.";
+    ViewBag.MetaKeywords = "React, JSX, Hooks, Components, REST API, CRUD operations, ASP.NET Core, SPA";
+}
+
+<div id="react-root"></div>
+
+@section Scripts {
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        // --- API Helper ---
+        const api = {
+            async getAll() {
+                const res = await fetch('/api/employee');
+                if (!res.ok) throw new Error('Failed to load employees');
+                return res.json();
+            },
+            async getById(id) {
+                const res = await fetch(`/api/employee/${id}`);
+                if (!res.ok) throw new Error('Failed to load employee');
+                return res.json();
+            },
+            async create(employee) {
+                const res = await fetch('/api/employee', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(employee)
+                });
+                if (!res.ok) {
+                    const text = await res.text();
+                    throw new Error(text || 'Failed to create employee');
+                }
+                return res.json();
+            },
+            async update(id, employee) {
+                const res = await fetch(`/api/employee/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(employee)
+                });
+                if (!res.ok) {
+                    const text = await res.text();
+                    throw new Error(text || 'Failed to update employee');
+                }
+                return res.json();
+            },
+            async remove(id) {
+                const res = await fetch(`/api/employee/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                if (!res.ok) {
+                    const text = await res.text();
+                    throw new Error(text || 'Failed to delete employee');
+                }
+                return res.json();
+            },
+            async getDepartments() {
+                const res = await fetch('/api/department?IncludeEmployees=false');
+                if (!res.ok) throw new Error('Failed to load departments');
+                return res.json();
+            }
+        };
+
+        // --- Toast Component ---
+        function Toast({ toasts, onDismiss }) {
+            return (
+                <div className="toast-container position-fixed bottom-0 end-0 p-3">
+                    {toasts.map(t => (
+                        <div key={t.id}
+                             className={`toast show align-items-center text-white bg-${t.type} border-0`}
+                             role="alert">
+                            <div className="d-flex">
+                                <div className="toast-body">
+                                    <strong>{t.title}:</strong> {t.message}
+                                </div>
+                                <button type="button"
+                                        className="btn-close btn-close-white me-2 m-auto"
+                                        onClick={() => onDismiss(t.id)}></button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        // --- Delete Confirmation Modal ---
+        function DeleteModal({ employee, onConfirm, onCancel }) {
+            if (!employee) return null;
+            return (
+                <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header bg-danger text-white">
+                                <h5 className="modal-title">
+                                    <i className="bi bi-exclamation-triangle me-2"></i>Confirm Delete
+                                </h5>
+                                <button type="button" className="btn-close btn-close-white" onClick={onCancel}></button>
+                            </div>
+                            <div className="modal-body">
+                                <p>Are you sure you want to delete <strong>{employee.name}</strong>?</p>
+                                <p className="text-muted mb-0">This action cannot be undone.</p>
+                            </div>
+                            <div className="modal-footer bg-light">
+                                <button type="button" className="btn btn-secondary" onClick={onCancel}>
+                                    <i className="bi bi-x-circle me-1"></i> Cancel
+                                </button>
+                                <button type="button" className="btn btn-danger" onClick={() => onConfirm(employee.id)}>
+                                    <i className="bi bi-trash me-1"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // --- Employee Form Modal ---
+        function EmployeeFormModal({ show, employee, departments, onSave, onClose }) {
+            const emptyForm = { id: 0, name: '', gender: '', age: '', state: '', country: '', department: '' };
+            const [form, setForm] = useState(emptyForm);
+            const [validated, setValidated] = useState(false);
+            const [saving, setSaving] = useState(false);
+            const nameRef = useRef(null);
+
+            const isEdit = employee && employee.id > 0;
+
+            useEffect(() => {
+                if (show) {
+                    if (employee) {
+                        setForm({
+                            id: employee.id,
+                            name: employee.name || '',
+                            gender: employee.gender != null ? employee.gender.toString() : '',
+                            age: employee.age || '',
+                            state: employee.state || '',
+                            country: employee.country || '',
+                            department: employee.department != null ? employee.department.toString() : ''
+                        });
+                    } else {
+                        setForm(emptyForm);
+                    }
+                    setValidated(false);
+                    setSaving(false);
+                    setTimeout(() => nameRef.current && nameRef.current.focus(), 200);
+                }
+            }, [show, employee]);
+
+            const handleChange = (e) => {
+                const { name, value } = e.target;
+                setForm(prev => ({ ...prev, [name]: value }));
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                const formEl = e.target;
+                if (!formEl.checkValidity()) {
+                    setValidated(true);
+                    return;
+                }
+                setSaving(true);
+                try {
+                    const payload = {
+                        id: parseInt(form.id) || 0,
+                        name: form.name,
+                        gender: parseInt(form.gender),
+                        age: parseInt(form.age),
+                        state: form.state,
+                        country: form.country,
+                        department: parseInt(form.department)
+                    };
+                    await onSave(payload, isEdit);
+                } catch {
+                    setSaving(false);
+                }
+            };
+
+            if (!show) return null;
+
+            return (
+                <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header bg-light">
+                                <h5 className="modal-title">
+                                    {isEdit ? 'Update Employee' : 'Add Employee'}
+                                </h5>
+                                <button type="button" className="btn-close" onClick={onClose}></button>
+                            </div>
+                            <div className="modal-body">
+                                <form id="reactEmployeeForm"
+                                      className={`needs-validation ${validated ? 'was-validated' : ''}`}
+                                      noValidate
+                                      onSubmit={handleSubmit}>
+                                    <div className="mb-3">
+                                        <label htmlFor="name" className="form-label">Name</label>
+                                        <div className="input-group">
+                                            <span className="input-group-text"><i className="bi bi-person"></i></span>
+                                            <input type="text" className="form-control" id="name" name="name"
+                                                   ref={nameRef}
+                                                   value={form.name} onChange={handleChange}
+                                                   placeholder="Enter employee name" required />
+                                            <div className="invalid-feedback">Please enter a name</div>
+                                        </div>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="gender" className="form-label">Gender</label>
+                                        <div className="input-group">
+                                            <span className="input-group-text"><i className="bi bi-gender-ambiguous"></i></span>
+                                            <select className="form-select" id="gender" name="gender"
+                                                    value={form.gender} onChange={handleChange} required>
+                                                <option value="" disabled>Select gender</option>
+                                                <option value="0">Male</option>
+                                                <option value="1">Female</option>
+                                                <option value="2">Non-Binary</option>
+                                            </select>
+                                            <div className="invalid-feedback">Please select a gender</div>
+                                        </div>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="age" className="form-label">Age</label>
+                                        <div className="input-group">
+                                            <span className="input-group-text"><i className="bi bi-calendar3"></i></span>
+                                            <input type="number" className="form-control" id="age" name="age"
+                                                   value={form.age} onChange={handleChange}
+                                                   placeholder="Enter age" min="18" required />
+                                            <div className="invalid-feedback">Please enter age (minimum 18)</div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6 mb-3">
+                                            <label htmlFor="state" className="form-label">State</label>
+                                            <div className="input-group">
+                                                <span className="input-group-text"><i className="bi bi-geo-alt"></i></span>
+                                                <input type="text" className="form-control" id="state" name="state"
+                                                       value={form.state} onChange={handleChange}
+                                                       placeholder="Enter state" required />
+                                                <div className="invalid-feedback">Please enter state</div>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6 mb-3">
+                                            <label htmlFor="country" className="form-label">Country</label>
+                                            <div className="input-group">
+                                                <span className="input-group-text"><i className="bi bi-globe"></i></span>
+                                                <input type="text" className="form-control" id="country" name="country"
+                                                       value={form.country} onChange={handleChange}
+                                                       placeholder="Enter country" required />
+                                                <div className="invalid-feedback">Please enter country</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="department" className="form-label">Department</label>
+                                        <div className="input-group">
+                                            <span className="input-group-text"><i className="bi bi-building"></i></span>
+                                            <select className="form-select" id="department" name="department"
+                                                    value={form.department} onChange={handleChange} required>
+                                                <option value="" disabled>Select department</option>
+                                                {departments.map(d => (
+                                                    <option key={d.id} value={d.id}>{d.name}</option>
+                                                ))}
+                                            </select>
+                                            <div className="invalid-feedback">Please select a department</div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div className="modal-footer bg-light">
+                                <button type="submit" form="reactEmployeeForm"
+                                        className={`btn ${isEdit ? 'btn-success' : 'btn-primary'}`}
+                                        disabled={saving}>
+                                    {saving ? (
+                                        <><span className="spinner-border spinner-border-sm me-1"></span> Saving...</>
+                                    ) : isEdit ? (
+                                        <><i className="bi bi-check-circle me-1"></i> Update</>
+                                    ) : (
+                                        <><i className="bi bi-plus-circle me-1"></i> Add</>
+                                    )}
+                                </button>
+                                <button type="button" className="btn btn-secondary" onClick={onClose}>
+                                    <i className="bi bi-x-circle me-1"></i> Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // --- Employee Table Component ---
+        function EmployeeTable({ employees, loading, sortConfig, onSort, onEdit, onDelete, searchTerm }) {
+            const getSortIcon = (column) => {
+                if (sortConfig.key !== column) return <i className="bi bi-chevron-expand text-muted ms-1"></i>;
+                return sortConfig.direction === 'asc'
+                    ? <i className="bi bi-chevron-up ms-1"></i>
+                    : <i className="bi bi-chevron-down ms-1"></i>;
+            };
+
+            const sortableHeader = (column, label) => (
+                <th role="button" onClick={() => onSort(column)} className="user-select-none">
+                    {label}{getSortIcon(column)}
+                </th>
+            );
+
+            if (loading) {
+                return (
+                    <div className="text-center py-5">
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                        <p className="text-muted mt-2">Loading employees...</p>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="table-responsive">
+                    <table className="table table-striped table-hover mb-0">
+                        <thead className="table-dark">
+                            <tr>
+                                <th>Profile</th>
+                                {sortableHeader('name', 'Name')}
+                                {sortableHeader('genderName', 'Gender')}
+                                {sortableHeader('age', 'Age')}
+                                {sortableHeader('state', 'State')}
+                                {sortableHeader('country', 'Country')}
+                                {sortableHeader('departmentName', 'Department')}
+                                <th className="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {employees.length === 0 ? (
+                                <tr>
+                                    <td colSpan="8" className="text-center text-muted py-4">
+                                        {searchTerm
+                                            ? <><i className="bi bi-search me-2"></i>No employees match your search.</>
+                                            : <><i className="bi bi-inbox me-2"></i>No employees found.</>}
+                                    </td>
+                                </tr>
+                            ) : employees.map(emp => (
+                                <tr key={emp.id}>
+                                    <td className="text-center align-middle">
+                                        <img src={`/images/${emp.profile_picture || 'default.jpg'}`}
+                                             className="rounded-circle" height="40" width="40"
+                                             alt={emp.name}
+                                             onError={(e) => { e.target.src = '/images/default.jpg'; }} />
+                                    </td>
+                                    <td className="align-middle">{emp.name}</td>
+                                    <td className="align-middle">{emp.genderName}</td>
+                                    <td className="align-middle">{emp.age}</td>
+                                    <td className="align-middle">{emp.state}</td>
+                                    <td className="align-middle">{emp.country}</td>
+                                    <td className="align-middle">{emp.departmentName}</td>
+                                    <td className="text-center align-middle">
+                                        <div className="btn-group" role="group">
+                                            <button className="btn btn-sm btn-outline-primary"
+                                                    onClick={() => onEdit(emp.id)}>
+                                                <i className="bi bi-pencil-square"></i> Edit
+                                            </button>
+                                            <button className="btn btn-sm btn-outline-danger"
+                                                    onClick={() => onDelete(emp)}>
+                                                <i className="bi bi-trash"></i> Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            );
+        }
+
+        // --- Pagination Component ---
+        function Pagination({ currentPage, totalPages, onPageChange }) {
+            if (totalPages <= 1) return null;
+
+            const pages = [];
+            const maxVisible = 5;
+            let start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+            let end = Math.min(totalPages, start + maxVisible - 1);
+            if (end - start + 1 < maxVisible) start = Math.max(1, end - maxVisible + 1);
+
+            for (let i = start; i <= end; i++) pages.push(i);
+
+            return (
+                <nav aria-label="Employee pagination">
+                    <ul className="pagination pagination-sm mb-0 justify-content-end">
+                        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                            <button className="page-link" onClick={() => onPageChange(1)}>
+                                <i className="bi bi-chevron-double-left"></i>
+                            </button>
+                        </li>
+                        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                            <button className="page-link" onClick={() => onPageChange(currentPage - 1)}>
+                                <i className="bi bi-chevron-left"></i>
+                            </button>
+                        </li>
+                        {pages.map(p => (
+                            <li key={p} className={`page-item ${p === currentPage ? 'active' : ''}`}>
+                                <button className="page-link" onClick={() => onPageChange(p)}>{p}</button>
+                            </li>
+                        ))}
+                        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+                            <button className="page-link" onClick={() => onPageChange(currentPage + 1)}>
+                                <i className="bi bi-chevron-right"></i>
+                            </button>
+                        </li>
+                        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+                            <button className="page-link" onClick={() => onPageChange(totalPages)}>
+                                <i className="bi bi-chevron-double-right"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            );
+        }
+
+        // --- Main App Component ---
+        function EmployeeApp() {
+            const [employees, setEmployees] = useState([]);
+            const [departments, setDepartments] = useState([]);
+            const [loading, setLoading] = useState(true);
+            const [toasts, setToasts] = useState([]);
+            const [showForm, setShowForm] = useState(false);
+            const [editEmployee, setEditEmployee] = useState(null);
+            const [deleteTarget, setDeleteTarget] = useState(null);
+            const [searchTerm, setSearchTerm] = useState('');
+            const [pageSize, setPageSize] = useState(10);
+            const [currentPage, setCurrentPage] = useState(1);
+            const [sortConfig, setSortConfig] = useState({ key: 'name', direction: 'asc' });
+
+            const addToast = useCallback((title, message, type) => {
+                const id = Date.now();
+                setToasts(prev => [...prev, { id, title, message, type }]);
+                setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), 5000);
+            }, []);
+
+            const dismissToast = useCallback((id) => {
+                setToasts(prev => prev.filter(t => t.id !== id));
+            }, []);
+
+            const loadEmployees = useCallback(async () => {
+                try {
+                    const data = await api.getAll();
+                    setEmployees(data);
+                } catch (err) {
+                    addToast('Error', err.message, 'danger');
+                }
+            }, [addToast]);
+
+            const loadDepartments = useCallback(async () => {
+                try {
+                    const data = await api.getDepartments();
+                    setDepartments(data);
+                } catch (err) {
+                    addToast('Error', err.message, 'danger');
+                }
+            }, [addToast]);
+
+            useEffect(() => {
+                const init = async () => {
+                    setLoading(true);
+                    await Promise.all([loadEmployees(), loadDepartments()]);
+                    setLoading(false);
+                };
+                init();
+            }, [loadEmployees, loadDepartments]);
+
+            // --- Sorting ---
+            const handleSort = (key) => {
+                setSortConfig(prev => ({
+                    key,
+                    direction: prev.key === key && prev.direction === 'asc' ? 'desc' : 'asc'
+                }));
+            };
+
+            // --- Filtering, sorting, and pagination ---
+            const filtered = employees.filter(emp => {
+                if (!searchTerm) return true;
+                const term = searchTerm.toLowerCase();
+                return (emp.name || '').toLowerCase().includes(term)
+                    || (emp.state || '').toLowerCase().includes(term)
+                    || (emp.country || '').toLowerCase().includes(term)
+                    || (emp.departmentName || '').toLowerCase().includes(term)
+                    || (emp.genderName || '').toLowerCase().includes(term);
+            });
+
+            const sorted = [...filtered].sort((a, b) => {
+                const aVal = a[sortConfig.key] ?? '';
+                const bVal = b[sortConfig.key] ?? '';
+                if (typeof aVal === 'number' && typeof bVal === 'number') {
+                    return sortConfig.direction === 'asc' ? aVal - bVal : bVal - aVal;
+                }
+                const cmp = String(aVal).localeCompare(String(bVal));
+                return sortConfig.direction === 'asc' ? cmp : -cmp;
+            });
+
+            const totalPages = Math.ceil(sorted.length / pageSize);
+            const paginated = sorted.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+            // Reset page when search/pageSize changes
+            useEffect(() => { setCurrentPage(1); }, [searchTerm, pageSize]);
+
+            // --- CRUD handlers ---
+            const handleEdit = async (id) => {
+                try {
+                    const result = await api.getById(id);
+                    setEditEmployee(result.resource);
+                    setShowForm(true);
+                } catch (err) {
+                    addToast('Error', err.message, 'danger');
+                }
+            };
+
+            const handleSave = async (payload, isEdit) => {
+                try {
+                    if (isEdit) {
+                        await api.update(payload.id, payload);
+                        addToast('Success', 'Employee updated successfully', 'success');
+                    } else {
+                        await api.create(payload);
+                        addToast('Success', 'Employee added successfully', 'success');
+                    }
+                    setShowForm(false);
+                    setEditEmployee(null);
+                    await loadEmployees();
+                } catch (err) {
+                    addToast('Error', err.message, 'danger');
+                    throw err;
+                }
+            };
+
+            const handleDelete = async (id) => {
+                try {
+                    await api.remove(id);
+                    addToast('Success', 'Employee deleted successfully', 'success');
+                    setDeleteTarget(null);
+                    await loadEmployees();
+                } catch (err) {
+                    addToast('Error', err.message, 'danger');
+                }
+            };
+
+            const handleAddNew = () => {
+                setEditEmployee(null);
+                setShowForm(true);
+            };
+
+            return (
+                <div className="container py-4">
+                    <div className="row mb-4">
+                        <div className="col-md-12">
+                            <div className="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <h1 className="h2 mb-0">
+                                        <i className="bi bi-filetype-jsx text-primary me-2"></i>React Employee CRUD
+                                    </h1>
+                                    <p className="text-muted">Component-based CRUD with React hooks and RESTful API</p>
+                                </div>
+                                <button type="button" className="btn btn-primary" onClick={handleAddNew}>
+                                    <i className="bi bi-plus-circle me-2"></i>Add Employee
+                                </button>
+                            </div>
+
+                            <div className="card shadow-sm rounded-3 border-0">
+                                <div className="card-body pb-0">
+                                    <div className="row mb-3">
+                                        <div className="col-md-6">
+                                            <div className="d-flex align-items-center">
+                                                <label className="me-2"><i className="bi bi-list-ul"></i></label>
+                                                <select className="form-select form-select-sm" style={{ width: 'auto' }}
+                                                        value={pageSize}
+                                                        onChange={e => setPageSize(Number(e.target.value))}>
+                                                    <option value={10}>10 per page</option>
+                                                    <option value={25}>25 per page</option>
+                                                    <option value={50}>50 per page</option>
+                                                    <option value={100}>100 per page</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="input-group input-group-sm">
+                                                <span className="input-group-text"><i className="bi bi-search"></i></span>
+                                                <input type="text" className="form-control"
+                                                       placeholder="Search employees..."
+                                                       value={searchTerm}
+                                                       onChange={e => setSearchTerm(e.target.value)} />
+                                                {searchTerm && (
+                                                    <button className="btn btn-outline-secondary"
+                                                            onClick={() => setSearchTerm('')}>
+                                                        <i className="bi bi-x"></i>
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="card-body p-0">
+                                    <EmployeeTable
+                                        employees={paginated}
+                                        loading={loading}
+                                        sortConfig={sortConfig}
+                                        onSort={handleSort}
+                                        onEdit={handleEdit}
+                                        onDelete={emp => setDeleteTarget(emp)}
+                                        searchTerm={searchTerm}
+                                    />
+                                </div>
+                                <div className="card-footer bg-light">
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <span className="text-muted small">
+                                            Showing {sorted.length === 0 ? 0 : (currentPage - 1) * pageSize + 1} to {Math.min(currentPage * pageSize, sorted.length)} of {sorted.length} employees
+                                            {searchTerm && <> (filtered from {employees.length} total)</>}
+                                        </span>
+                                        <Pagination
+                                            currentPage={currentPage}
+                                            totalPages={totalPages}
+                                            onPageChange={setCurrentPage}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Documentation Section */}
+                    <div className="row mt-5">
+                        <div className="col-md-12">
+                            <div className="card shadow-sm rounded-3 border-0 mb-4">
+                                <div className="card-header bg-primary text-white">
+                                    <h3 className="mb-0"><i className="bi bi-info-circle me-2"></i>About React Implementation</h3>
+                                </div>
+                                <div className="card-body p-4">
+                                    <p className="lead">
+                                        This implementation demonstrates a React-based SPA using functional components, hooks, and the Fetch API
+                                        to consume the same RESTful endpoints as the other CRUD implementations.
+                                    </p>
+
+                                    <div className="row g-4 mt-2">
+                                        <div className="col-md-6">
+                                            <div className="card h-100 bg-light border-0">
+                                                <div className="card-body">
+                                                    <h4 className="card-title"><i className="bi bi-stars text-warning me-2"></i>React Advantages</h4>
+                                                    <ul className="list-group list-group-flush">
+                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-check-circle-fill text-success me-2"></i>Component-based architecture for reusability</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-check-circle-fill text-success me-2"></i>Declarative UI with automatic DOM updates</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-check-circle-fill text-success me-2"></i>React Hooks for clean state management</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-check-circle-fill text-success me-2"></i>Virtual DOM for efficient rendering</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-6">
+                                            <div className="card h-100 bg-light border-0">
+                                                <div className="card-body">
+                                                    <h4 className="card-title"><i className="bi bi-exclamation-triangle text-warning me-2"></i>Considerations</h4>
+                                                    <ul className="list-group list-group-flush">
+                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-dash-circle text-danger me-2"></i>Larger initial bundle size than vanilla JS</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-dash-circle text-danger me-2"></i>Learning curve for React concepts</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-dash-circle text-danger me-2"></i>CDN + Babel adds runtime overhead (use build tools in production)</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-dash-circle text-danger me-2"></i>Requires JavaScript to be enabled in browser</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-4">
+                                        <h4><i className="bi bi-code-slash me-2"></i>Technical Details</h4>
+                                        <div className="row g-3 mt-1">
+                                            <div className="col-md-4">
+                                                <div className="card bg-light border-0 h-100">
+                                                    <div className="card-body">
+                                                        <h6 className="fw-bold"><i className="bi bi-box me-1"></i> React 18</h6>
+                                                        <p className="small text-muted mb-0">Loaded via CDN with Babel standalone for in-browser JSX transpilation. Isolated in a dedicated layout page.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-4">
+                                                <div className="card bg-light border-0 h-100">
+                                                    <div className="card-body">
+                                                        <h6 className="fw-bold"><i className="bi bi-arrow-repeat me-1"></i> Hooks</h6>
+                                                        <p className="small text-muted mb-0">useState, useEffect, useRef, and useCallback for state management and side effects.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-4">
+                                                <div className="card bg-light border-0 h-100">
+                                                    <div className="card-body">
+                                                        <h6 className="fw-bold"><i className="bi bi-cloud-arrow-up me-1"></i> Fetch API</h6>
+                                                        <p className="small text-muted mb-0">Native browser Fetch API for RESTful CRUD operations — no jQuery dependency.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="card-footer bg-light">
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <span><i className="bi bi-tools me-2"></i>Implementation by Mark Hazleton</span>
+                                        <a href="https://github.com/markhazleton/UISampleSpark" className="btn btn-outline-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                                            <i className="bi bi-github me-2"></i>View Source Code
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Modals */}
+                    <EmployeeFormModal
+                        show={showForm}
+                        employee={editEmployee}
+                        departments={departments}
+                        onSave={handleSave}
+                        onClose={() => { setShowForm(false); setEditEmployee(null); }}
+                    />
+                    <DeleteModal
+                        employee={deleteTarget}
+                        onConfirm={handleDelete}
+                        onCancel={() => setDeleteTarget(null)}
+                    />
+                    <Toast toasts={toasts} onDismiss={dismissToast} />
+                </div>
+            );
+        }
+
+        // --- Mount the React App ---
+        const root = ReactDOM.createRoot(document.getElementById('react-root'));
+        root.render(<EmployeeApp />);
+    </script>
+}

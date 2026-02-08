@@ -1,13 +1,13 @@
-# SampleMvcCRUD
+# UISampleSpark
 
-A .NET 10 (ASP.NET Core) application demonstrating multiple approaches to implementing a modern, maintainable CRUD (Create, Read, Update, Delete) user interface for Employee and Department management. This repository is a reference and educational resource that showcases patterns (MVC, Razor Pages, SPA-style), tooling, theming, and deployment techniques.
+A .NET 10 (ASP.NET Core) application exploring multiple front-end technologies for building modern web user interfaces. This repository is an educational reference that compares UI patterns — MVC, Razor Pages, React, Vue, htmx, Blazor, and vanilla JavaScript SPA — using a common Employee/Department domain, with theming, containerization, and deployment examples.
 
-[![Docker Image](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml/badge.svg)](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/docker-image.yml)
-[![CodeQL](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/markhazleton/SampleMvcCRUD/actions/workflows/codeql-analysis.yml)
+[![Docker Image](https://github.com/markhazleton/UISampleSpark/actions/workflows/docker-image.yml/badge.svg)](https://github.com/markhazleton/UISampleSpark/actions/workflows/docker-image.yml)
+[![CodeQL](https://github.com/markhazleton/UISampleSpark/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/markhazleton/UISampleSpark/actions/workflows/codeql-analysis.yml)
 
 ---
 ## Project History
-- **2019** – Launched the repository, delivered the first MVC CRUD walkthrough with AJAX partials, and set the contributor/code-of-conduct foundation.
+- **2019** – Launched the repository with the first MVC walkthrough using AJAX partials, and set the contributor/code-of-conduct foundation.
 - **2020** – Experimented with React and Blazor front ends, standardized REST/SOAP client abstractions, and stood up Azure Pipelines plus App Service deployments.
 - **2021** – Completed the .NET 5→6 modernization, layered in Bootstrap 5 theming, hardened CI/CD (GitHub Actions + Azure Pipelines), and increased automated tests.
 - **2022-2023** – Adopted .NET 7 then .NET 8, added TreeView/PivotTable demos, refined guard clauses and validation, and expanded Docker/Azure Linux automation.
@@ -19,11 +19,11 @@ See the [CHANGELOG](CHANGELOG.md) for the full milestone timeline, and open `rep
 ---
 ## Live Deployments
 - Windows IIS VM (.NET 9): https://samplecrud.markhazleton.com/
-- Docker Hub Image: https://hub.docker.com/r/markhazleton/mwhsampleweb
+- Docker Hub Image: https://hub.docker.com/r/markhazleton/uisamplespark
 
 ---
 ## Goals
-- Demonstrate multiple CRUD UI strategies
+- Compare multiple front-end UI technologies side-by-side
 - Showcase clean architecture, DI, and unit testing
 - Provide examples of theming and UX enhancements
 - Show Azure deployment and containerization approaches
@@ -31,18 +31,21 @@ See the [CHANGELOG](CHANGELOG.md) for the full milestone timeline, and open `rep
 ---
 ## Features & Architecture
 - UI Patterns:
-  - MVC Controllers & Views — traditional multi-view CRUD (`/MvcEmployee`)
-  - jQuery AJAX + Partial Views — modal-based CRUD without full page reloads (`/Employee`)
-  - Razor Pages — page-centric CRUD using the Razor Pages model (`/EmployeeRazor`)
+  - MVC Controllers & Views — traditional multi-view pattern (`/MvcEmployee`)
+  - jQuery AJAX + Partial Views — modal-based UI without full page reloads (`/Employee`)
+  - Razor Pages — page-centric model (`/EmployeeRazor`)
   - Single Page Application (SPA) — JavaScript/AJAX with DataTables and REST API (`/EmployeeSinglePage`)
-  - React SPA — component-based CRUD with React 18, hooks, and Fetch API (`/EmployeeReact`)
+  - React SPA — component-based UI with React 18, hooks, and Fetch API (`/EmployeeReact`)
+  - Vue SPA — reactive UI with Vue 3 Composition API (`/EmployeeVue`)
+  - htmx — server-driven hypermedia with HTML-over-the-wire (`/EmployeeHtmx`)
+  - Blazor Server — real-time C# components via SignalR (`/EmployeeBlazor`)
   - Pivot Table reporting — data analysis with PivotTable.js (`/EmployeePivot`)
 - API Endpoints:
   - REST endpoints for Employees & Departments (Swagger/OpenAPI enabled)
 - Theming & UX:
   - Bootswatch theme switcher (light/dark, instant swap)
   - Bootstrap 5 + Bootstrap Icons
-  - Modal-based CRUD forms
+  - Modal-based forms
 - Data Layer:
   - In-memory EF Core database (EmployeeContext)
   - Repository/service pattern via `IEmployeeService` & `EmployeeDatabaseService`
@@ -77,35 +80,35 @@ HttpClient is utilized via `WebSpark.HttpClientUtility` package which provides `
 
 ### Run Locally
 ```pwsh
-git clone https://github.com/markhazleton/SampleMvcCRUD.git
-cd SampleMvcCRUD
+git clone https://github.com/markhazleton/UISampleSpark.git
+cd UISampleSpark
  dotnet restore
- cd Mwh.Sample.Web
+ cd UISampleSpark.UI
  dotnet run
 ```
 Visit https://localhost:5001
 
 ### Run with Docker
 ```pwsh
-docker build -t mwhsampleweb ./Mwh.Sample.Web
-docker run -p 8080:80 mwhsampleweb
+docker build -t uisamplespark ./UISampleSpark.UI
+docker run -p 8080:80 uisamplespark
 ```
 
 ---
 ## Project Structure
 ```
-Mwh.Sample.Web/              Web application (MVC + Razor Pages + SPA-style CRUD)
-Mwh.Sample.Domain/           Domain models (Employee/Department DTOs, responses)
-Mwh.Sample.Repository/       EF Core context, service implementations, mock generator
-Mwh.Sample.Domain.Tests/     Unit tests for domain logic
-Mwh.Sample.Repository.Tests/ Unit tests for repository/service layer
-Mwh.Sample.Console/          Console app seeding & demonstration (SQLite EF example)
+UISampleSpark.UI/              Web application (MVC, Razor Pages, React, Vue, htmx, Blazor)
+UISampleSpark.Core/           Domain models (Employee/Department DTOs, responses)
+UISampleSpark.Data/       EF Core context, service implementations, mock generator
+UISampleSpark.Core.Tests/     Unit tests for domain logic
+UISampleSpark.Data.Tests/ Unit tests for repository/service layer
+UISampleSpark.CLI/          Console app seeding & demonstration (SQLite EF example)
 ```
 (There is no HttpClientFactory sample project; previous reference removed.)
 
 ---
 ## Data Model
-Employees belong to Departments. CRUD operations demonstrate validation, paging (`PagingParameterModel`), and simple relationships.
+Employees belong to Departments. Each UI pattern implements the same operations — create, read, update, delete — demonstrating validation, paging (`PagingParameterModel`), and simple relationships.
 
 ---
 ## Swagger/OpenAPI

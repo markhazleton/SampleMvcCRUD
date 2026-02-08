@@ -40,19 +40,19 @@ Added ArgumentNullException.ThrowIfNull() to 9 methods:
 
 ### 5. File Modifications
 - `.editorconfig` - Enhanced with comprehensive diagnostic configurations
-- `Mwh.Sample.Domain\Extensions\PropertyBag.cs` - Parameter validation + refactoring
-- `Mwh.Sample.Domain\Extensions\EnumExtension.cs` - Parameter validation
-- `Mwh.Sample.Domain\Extensions\LogExtensions.cs` - Parameter validation
-- `Mwh.Sample.Domain\Extensions\ImageExtensions.cs` - Parameter validation + null checks
-- `Mwh.Sample.Domain\Models\EmployeeList.cs` - Null safety improvements
-- `Mwh.Sample.Web\Controllers\EmployeeController.cs` - Security attributes
-- `Mwh.Sample.Web\Controllers\HomeController.cs` - HTTP method attributes
-- `Mwh.Sample.Web\Controllers\EmployeeSinglePageController.cs` - HTTP method attributes
-- `Mwh.Sample.Web\Extensions\HttpContextExtensions.cs` - Parameter validation
-- `Mwh.Sample.Web\Extensions\ConfigurationExtensions.cs` - Parameter validation
-- `Mwh.Sample.Web\Helpers\StructuredDataHelper.cs` - Parameter validation
-- `Mwh.Sample.Web\Program.cs` - Startup error handling + AI configuration
-- `Mwh.Sample.Repository\Services\EmployeeDatabaseService.cs` - Parameter validation
+- `UISampleSpark.Core\Extensions\PropertyBag.cs` - Parameter validation + refactoring
+- `UISampleSpark.Core\Extensions\EnumExtension.cs` - Parameter validation
+- `UISampleSpark.Core\Extensions\LogExtensions.cs` - Parameter validation
+- `UISampleSpark.Core\Extensions\ImageExtensions.cs` - Parameter validation + null checks
+- `UISampleSpark.Core\Models\EmployeeList.cs` - Null safety improvements
+- `UISampleSpark.UI\Controllers\EmployeeController.cs` - Security attributes
+- `UISampleSpark.UI\Controllers\HomeController.cs` - HTTP method attributes
+- `UISampleSpark.UI\Controllers\EmployeeSinglePageController.cs` - HTTP method attributes
+- `UISampleSpark.UI\Extensions\HttpContextExtensions.cs` - Parameter validation
+- `UISampleSpark.UI\Extensions\ConfigurationExtensions.cs` - Parameter validation
+- `UISampleSpark.UI\Helpers\StructuredDataHelper.cs` - Parameter validation
+- `UISampleSpark.UI\Program.cs` - Startup error handling + AI configuration
+- `UISampleSpark.Data\Services\EmployeeDatabaseService.cs` - Parameter validation
 
 ## Remaining Warnings (27)
 

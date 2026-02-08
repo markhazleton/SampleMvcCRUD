@@ -51,7 +51,7 @@ COMPATIBILITY NOTES:
 
 ═══════════════════════════════════════════════════════════════════════════════
 -->
-# SampleMvcCRUD Constitution
+# UISampleSpark Constitution
 
 **Mission**: Educational reference project demonstrating ASP.NET Core CRUD patterns and best practices.
 

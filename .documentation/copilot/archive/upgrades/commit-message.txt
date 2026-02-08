@@ -13,10 +13,10 @@ All 192 unit tests pass (137 Domain tests + 55 Repository tests).
 No breaking changes identified.
 
 Projects upgraded:
-- Mwh.Sample.Domain
-- Mwh.Sample.Repository
-- Mwh.Sample.HttpClientFactory
-- Mwh.Sample.Web (Blazor)
-- Mwh.Sample.Console
-- Mwh.Sample.Domain.Tests
-- Mwh.Sample.Repository.Tests
+- UISampleSpark.Core
+- UISampleSpark.Data
+- UISampleSpark.HttpClientFactory
+- UISampleSpark.UI (Blazor)
+- UISampleSpark.CLI
+- UISampleSpark.Core.Tests
+- UISampleSpark.Data.Tests

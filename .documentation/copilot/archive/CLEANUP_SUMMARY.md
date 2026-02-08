@@ -1,4 +1,4 @@
-# Cleanup Summary - SampleMvcCRUD
+# Cleanup Summary - UISampleSpark
 
 ## Date: February 5, 2026
 
@@ -18,36 +18,36 @@ These temporary build logs should never have been committed:
 
 ### Azure Key Vault Dependencies
 Removed all Azure Key Vault code and configuration (added in Nov 2021, never used):
-- ✅ `Mwh.Sample.Web\Models\KeyVaultOptions.cs`
-- ✅ `Mwh.Sample.Web\Models\KeyVaultUsage.cs`
+- ✅ `UISampleSpark.UI\Models\KeyVaultOptions.cs`
+- ✅ `UISampleSpark.UI\Models\KeyVaultUsage.cs`
 - ✅ NuGet Package: `Azure.Extensions.AspNetCore.Configuration.Secrets`
 - ✅ NuGet Package: `Azure.Identity`
 - ✅ Key Vault configuration code in `Program.cs`
 
 ### Azure App Service Deployment Files
 Removed entire ServiceDependencies folder (old Azure App Service configs):
-- ✅ `Mwh.Sample.Web\Properties\ServiceDependencies\` (entire folder with ARM templates)
-- ✅ `Mwh.Sample.Web\Properties\serviceDependencies.json`
-- ✅ `Mwh.Sample.Web\Properties\serviceDependencies.local.json`
-- ✅ `Mwh.Sample.Web\Properties\serviceDependencies.main_mwhsampleweb.json`
-- ✅ `Mwh.Sample.Web\Properties\serviceDependencies.MwhSampleWeb.json`
-- ✅ `Mwh.Sample.Web\Properties\serviceDependencies.SampleCRUD - Zip Deploy.json`
+- ✅ `UISampleSpark.UI\Properties\ServiceDependencies\` (entire folder with ARM templates)
+- ✅ `UISampleSpark.UI\Properties\serviceDependencies.json`
+- ✅ `UISampleSpark.UI\Properties\serviceDependencies.local.json`
+- ✅ `UISampleSpark.UI\Properties\serviceDependencies.main_uisamplespark.json`
+- ✅ `UISampleSpark.UI\Properties\serviceDependencies.UISampleSpark.json`
+- ✅ `UISampleSpark.UI\Properties\serviceDependencies.SampleCRUD - Zip Deploy.json`
 
 ### IIS Configuration
 Removed IIS-specific config (app uses Docker/Kestrel):
-- ✅ `Mwh.Sample.Web\web.config`
+- ✅ `UISampleSpark.UI\web.config`
 
 ---
 
 ## ✅ Project File Cleanup
 
-### Mwh.Sample.Repository.csproj
+### UISampleSpark.Data.csproj
 Removed `<Compile Remove>` entries for non-existent files:
 - ✅ `Repository\EmployeeRepository.cs`
 - ✅ `Services\EmployeeService.cs`
 - ✅ `Services\EmployeeServiceContext.cs`
 
-### Mwh.Sample.Domain.csproj
+### UISampleSpark.Core.csproj
 Removed `<Compile Remove>` entry for non-existent file:
 - ✅ `Interfaces\IEmployeeRepository.cs`
 

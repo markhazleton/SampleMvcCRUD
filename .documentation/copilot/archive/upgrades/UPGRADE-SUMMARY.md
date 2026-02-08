@@ -1,6 +1,6 @@
 # .NET 10 Upgrade Summary Report
 
-**Project**: SampleMvcCRUD  
+**Project**: UISampleSpark  
 **Date**: November 16, 2025  
 **Upgrade Type**: Framework Version Upgrade (.NET 9.0 ? .NET 10.0)  
 **Strategy**: Big Bang (Atomic Upgrade)  
@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-The SampleMvcCRUD solution has been successfully upgraded from .NET 9.0 to .NET 10.0 using a Big Bang migration strategy. All 7 projects in the solution were upgraded simultaneously in a single atomic operation, including all associated NuGet package updates. The upgrade completed with **zero compilation errors** and **all 192 unit tests passing**, demonstrating complete backward compatibility and successful migration.
+The UISampleSpark solution has been successfully upgraded from .NET 9.0 to .NET 10.0 using a Big Bang migration strategy. All 7 projects in the solution were upgraded simultaneously in a single atomic operation, including all associated NuGet package updates. The upgrade completed with **zero compilation errors** and **all 192 unit tests passing**, demonstrating complete backward compatibility and successful migration.
 
 ### Key Achievements
 
@@ -27,7 +27,7 @@ The SampleMvcCRUD solution has been successfully upgraded from .NET 9.0 to .NET 
 
 ### Repository Information
 
-- **Repository**: https://github.com/markhazleton/SampleMvcCRUD
+- **Repository**: https://github.com/markhazleton/UISampleSpark
 - **Source Branch**: `main`
 - **Upgrade Branch**: `upgrade-to-NET10`
 - **Commit Hash**: `5e476ac98dc91e7939ece2e5ef532577416966af`
@@ -50,7 +50,7 @@ The SampleMvcCRUD solution has been successfully upgraded from .NET 9.0 to .NET 
 
 All 7 projects were successfully upgraded from `net9.0` to `net10.0`:
 
-### 1. **Mwh.Sample.Domain** (ClassLibrary)
+### 1. **UISampleSpark.Core** (ClassLibrary)
 - **Type**: Foundation/Domain Layer
 - **Dependencies**: 0 project dependencies
 - **Dependants**: 5 projects
@@ -59,7 +59,7 @@ All 7 projects were successfully upgraded from `net9.0` to `net10.0`:
 - **Package Updates**: 1
   - System.Drawing.Common: 9.0.8 ? 10.0.0
 
-### 2. **Mwh.Sample.Repository** (ClassLibrary)
+### 2. **UISampleSpark.Data** (ClassLibrary)
 - **Type**: Data Access Layer
 - **Dependencies**: 1 (Domain)
 - **Dependants**: 3 projects
@@ -70,7 +70,7 @@ All 7 projects were successfully upgraded from `net9.0` to `net10.0`:
   - Microsoft.EntityFrameworkCore.InMemory: 9.0.8 ? 10.0.0
   - Microsoft.EntityFrameworkCore.Sqlite: 9.0.8 ? 10.0.0
 
-### 3. **Mwh.Sample.HttpClientFactory** (ClassLibrary)
+### 3. **UISampleSpark.HttpClientFactory** (ClassLibrary)
 - **Type**: Service Layer
 - **Dependencies**: 1 (Domain)
 - **Dependants**: 0
@@ -80,7 +80,7 @@ All 7 projects were successfully upgraded from `net9.0` to `net10.0`:
   - Microsoft.Extensions.Http: 9.0.8 ? 10.0.0
   - System.Text.Json: 9.0.8 ? 10.0.0
 
-### 4. **Mwh.Sample.Web** (Blazor Web Application)
+### 4. **UISampleSpark.UI** (Blazor Web Application)
 - **Type**: Main Application (ASP.NET Core / Blazor)
 - **Dependencies**: 2 (Repository, Domain)
 - **Dependants**: 0
@@ -95,7 +95,7 @@ All 7 projects were successfully upgraded from `net9.0` to `net10.0`:
   - System.Formats.Asn1: 9.0.8 ? 10.0.0
   - System.Text.Json: 9.0.8 ? 10.0.0
 
-### 5. **Mwh.Sample.Console** (Console Application)
+### 5. **UISampleSpark.CLI** (Console Application)
 - **Type**: Console Application
 - **Dependencies**: 2 (Repository, Domain)
 - **Dependants**: 0
@@ -103,7 +103,7 @@ All 7 projects were successfully upgraded from `net9.0` to `net10.0`:
 - **Files**: 3
 - **Package Updates**: 0 (Bogus 35.6.3 already compatible)
 
-### 6. **Mwh.Sample.Domain.Tests** (Test Project)
+### 6. **UISampleSpark.Core.Tests** (Test Project)
 - **Type**: Unit Test Project (MSTest)
 - **Dependencies**: 1 (Domain)
 - **Dependants**: 0
@@ -112,7 +112,7 @@ All 7 projects were successfully upgraded from `net9.0` to `net10.0`:
 - **Package Updates**: 0 (All test packages compatible)
 - **Test Results**: ? **137 tests passed, 0 failed, 0 skipped**
 
-### 7. **Mwh.Sample.Repository.Tests** (Test Project)
+### 7. **UISampleSpark.Data.Tests** (Test Project)
 - **Type**: Unit Test Project (MSTest)
 - **Dependencies**: 1 (Repository)
 - **Dependants**: 0
@@ -181,8 +181,8 @@ platform-specific code) that were present before the upgrade.
 
 | Test Project | Tests Passed | Tests Failed | Tests Skipped | Status |
 |-------------|--------------|--------------|---------------|--------|
-| Mwh.Sample.Domain.Tests | 137 | 0 | 0 | ? PASS |
-| Mwh.Sample.Repository.Tests | 55 | 0 | 0 | ? PASS |
+| UISampleSpark.Core.Tests | 137 | 0 | 0 | ? PASS |
+| UISampleSpark.Data.Tests | 55 | 0 | 0 | ? PASS |
 | **TOTAL** | **192** | **0** | **0** | ? **100% SUCCESS** |
 
 **Key Insights**:
@@ -203,13 +203,13 @@ platform-specific code) that were present before the upgrade.
 
 ### Modified Project Files (7 files)
 
-1. `Mwh.Sample.Console/Mwh.Sample.Console.csproj`
-2. `Mwh.Sample.Domain/Mwh.Sample.Domain.csproj`
-3. `Mwh.Sample.Domain.Tests/Mwh.Sample.Domain.Tests.csproj`
-4. `Mwh.Sample.HttpClientFactory/Mwh.Sample.HttpClientFactory.csproj`
-5. `Mwh.Sample.Repository/Mwh.Sample.Repository.csproj`
-6. `Mwh.Sample.Repository.Tests/Mwh.Sample.Repository.Tests.csproj`
-7. `Mwh.Sample.Web/Mwh.Sample.Web.csproj`
+1. `UISampleSpark.CLI/UISampleSpark.CLI.csproj`
+2. `UISampleSpark.Core/UISampleSpark.Core.csproj`
+3. `UISampleSpark.Core.Tests/UISampleSpark.Core.Tests.csproj`
+4. `UISampleSpark.HttpClientFactory/UISampleSpark.HttpClientFactory.csproj`
+5. `UISampleSpark.Data/UISampleSpark.Data.csproj`
+6. `UISampleSpark.Data.Tests/UISampleSpark.Data.Tests.csproj`
+7. `UISampleSpark.UI/UISampleSpark.UI.csproj`
 
 ### Created Documentation Files (5 files)
 
@@ -300,10 +300,10 @@ Comprehensive analysis of .NET 9.0 ? .NET 10.0 breaking changes:
 
 ### Testing Success Criteria ?
 
-- [x] Mwh.Sample.Domain.Tests: All 137 tests pass
-- [x] Mwh.Sample.Repository.Tests: All 55 tests pass
-- [x] Mwh.Sample.Web: Application verified buildable
-- [x] Mwh.Sample.Console: Application verified buildable
+- [x] UISampleSpark.Core.Tests: All 137 tests pass
+- [x] UISampleSpark.Data.Tests: All 55 tests pass
+- [x] UISampleSpark.UI: Application verified buildable
+- [x] UISampleSpark.CLI: Application verified buildable
 - [x] Performance within acceptable thresholds
 
 ### Big Bang Strategy Success Criteria ?
@@ -338,7 +338,7 @@ Comprehensive analysis of .NET 9.0 ? .NET 10.0 breaking changes:
 
 2. **RECOMMENDED**: Manual testing of Blazor application
    ```bash
-   dotnet run --project Mwh.Sample.Web\Mwh.Sample.Web.csproj
+   dotnet run --project UISampleSpark.UI\UISampleSpark.UI.csproj
    ```
    Verify:
    - Application starts without errors
@@ -350,7 +350,7 @@ Comprehensive analysis of .NET 9.0 ? .NET 10.0 breaking changes:
 
 3. **RECOMMENDED**: Create Pull Request
    - Merge `upgrade-to-NET10` ? `main`
-   - Use provided PR template (see plan.md §10.4)
+   - Use provided PR template (see plan.md ï¿½10.4)
    - Request code review
    - Run CI/CD pipeline validation
 
@@ -461,7 +461,7 @@ Comprehensive analysis of .NET 9.0 ? .NET 10.0 breaking changes:
 
 ### C. Repository Information
 
-- **GitHub Repository**: https://github.com/markhazleton/SampleMvcCRUD
+- **GitHub Repository**: https://github.com/markhazleton/UISampleSpark
 - **Upgrade Branch**: upgrade-to-NET10
 - **Main Branch**: main
 - **Commit Hash**: 5e476ac98dc91e7939ece2e5ef532577416966af
@@ -476,7 +476,7 @@ Comprehensive analysis of .NET 9.0 ? .NET 10.0 breaking changes:
 
 ## Summary
 
-The .NET 10 upgrade of the SampleMvcCRUD solution has been **completed successfully** with exceptional results:
+The .NET 10 upgrade of the UISampleSpark solution has been **completed successfully** with exceptional results:
 
 ? **100% Success Rate** - All projects upgraded, all tests passed  
 ? **Zero Issues** - No breaking changes, no compilation errors  

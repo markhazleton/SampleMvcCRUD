@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-The SampleMvcCRUD project recently underwent a significant transformation in project governance and development practices. What started as an educational ASP.NET Core reference project evolved into a comprehensive demonstration of:
+The UISampleSpark project recently underwent a significant transformation in project governance and development practices. What started as an educational ASP.NET Core reference project evolved into a comprehensive demonstration of:
 
 - **Constitutional project governance** with 11 core principles
 - **100% compliance achievement** from initial 82% baseline  
@@ -221,7 +221,7 @@ jobs:
 
 #### Fix #2: Global Exception Handler (172 lines)
 
-**File**: `Mwh.Sample.Web/Middleware/GlobalExceptionHandler.cs`
+**File**: `UISampleSpark.UI/Middleware/GlobalExceptionHandler.cs`
 
 **Implementation Highlights**:
 ```csharp
@@ -530,7 +530,7 @@ Four new CRUD implementations were added:
 
 #### 1. React (CDN-Based SPA)
 
-**File**: `Mwh.Sample.Web/Views/EmployeeReact/Index.cshtml` (737 lines)
+**File**: `UISampleSpark.UI/Views/EmployeeReact/Index.cshtml` (737 lines)
 
 **Approach**: React 18 + Hooks via unpkg CDN
 
@@ -652,7 +652,7 @@ public async Task<IActionResult> Save(EmployeeDto employee)
 
 #### 3. Vue (Reactive SPA)
 
-**File**: `Mwh.Sample.Web/Views/EmployeeVue/Index.cshtml` (616 lines)
+**File**: `UISampleSpark.UI/Views/EmployeeVue/Index.cshtml` (616 lines)
 
 **Approach**: Vue 3 Composition API via CDN
 
@@ -1021,7 +1021,7 @@ Future Enhancements
    ```markdown
    [![Constitution](https://img.shields.io/badge/Constitution-100%25-green.svg)](.documentation/memory/constitution.md)
    [![SpecKit Spark](https://img.shields.io/badge/SpecKit_Spark-16_agents-blue.svg)](.github/agents)
-   [![UI Paradigms](https://img.shields.io/badge/UI_Paradigms-7_implementations-orange.svg)](/Mwh.Sample.Web/Controllers)
+   [![UI Paradigms](https://img.shields.io/badge/UI_Paradigms-7_implementations-orange.svg)](/UISampleSpark.UI/Controllers)
    ```
 
 3. **Integration Testing**
@@ -1068,7 +1068,7 @@ This transformation was enabled by:
 
 ## Conclusion
 
-SampleMvcCRUD has evolved from a code reference project into a **comprehensive educational platform** demonstrating:
+UISampleSpark has evolved from a code reference project into a **comprehensive educational platform** demonstrating:
 
 1. **Constitutional project governance** (11 principles, 100% compliant)
 2. **AI-assisted development lifecycle** (16 SpecKit Spark agents)
@@ -1105,7 +1105,7 @@ The project now serves as:
 
 ---
 
-*This article documents the transformation of SampleMvcCRUD featuring SpecKit Spark (Mark Hazleton's fork) and constitutional governance implementation. For the most current project status, see [README.md](../../../README.md). For the constitution, see [constitution.md](../../memory/constitution.md). For SpecKit Spark agents, see [.github/agents](../../../.github/agents/).*
+*This article documents the transformation of UISampleSpark featuring SpecKit Spark (Mark Hazleton's fork) and constitutional governance implementation. For the most current project status, see [README.md](../../../README.md). For the constitution, see [constitution.md](../../memory/constitution.md). For SpecKit Spark agents, see [.github/agents](../../../.github/agents/).*
 
 **Last Updated**: February 6, 2026  
 **Article Version**: 1.0.1  
@@ -1137,7 +1137,7 @@ superficial examples.
 
 ---
 
-*This article documents the transformation of SampleMvcCRUD featuring SpecKit Spark (Mark Hazleton's fork) and constitutional governance implementation. For the most current project status, see [README.md](../../../README.md). For the constitution, see [constitution.md](../../memory/constitution.md). For SpecKit Spark agents, see [.github/agents](../../../.github/agents/).*
+*This article documents the transformation of UISampleSpark featuring SpecKit Spark (Mark Hazleton's fork) and constitutional governance implementation. For the most current project status, see [README.md](../../../README.md). For the constitution, see [constitution.md](../../memory/constitution.md). For SpecKit Spark agents, see [.github/agents](../../../.github/agents/).*
 
 **Last Updated**: February 6, 2026  
 **Article Version**: 1.0.1  

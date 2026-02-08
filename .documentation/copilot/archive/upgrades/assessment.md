@@ -7,13 +7,13 @@ This document provides a comprehensive overview of the projects and their depend
 - [Projects Relationship Graph](#projects-relationship-graph)
 - [Project Details](#project-details)
 
-  - [Mwh.Sample.Console\Mwh.Sample.Console.csproj](#mwhsampleconsolemwhsampleconsolecsproj)
-  - [Mwh.Sample.Domain.Tests\Mwh.Sample.Domain.Tests.csproj](#mwhsampledomaintestsmwhsampledomaintestscsproj)
-  - [Mwh.Sample.Domain\Mwh.Sample.Domain.csproj](#mwhsampledomainmwhsampledomaincsproj)
-  - [Mwh.Sample.HttpClientFactory\Mwh.Sample.HttpClientFactory.csproj](#mwhsamplehttpclientfactorymwhsamplehttpclientfactorycsproj)
-  - [Mwh.Sample.Repository.Tests\Mwh.Sample.Repository.Tests.csproj](#mwhsamplerepositorytestsmwhsamplerepositorytestscsproj)
-  - [Mwh.Sample.Repository\Mwh.Sample.Repository.csproj](#mwhsamplerepositorymwhsamplerepositorycsproj)
-  - [Mwh.Sample.Web\Mwh.Sample.Web.csproj](#mwhsamplewebmwhsamplewebcsproj)
+  - [UISampleSpark.CLI\UISampleSpark.CLI.csproj](#uisamplesparkclicsproj)
+  - [UISampleSpark.Core.Tests\UISampleSpark.Core.Tests.csproj](#uisamplesparkcoretestscsproj)
+  - [UISampleSpark.Core\UISampleSpark.Core.csproj](#uisamplesparkcorecsproj)
+  - [UISampleSpark.HttpClientFactory\UISampleSpark.HttpClientFactory.csproj](#uisamplesparkhttpclientfactorycsproj)
+  - [UISampleSpark.Data.Tests\UISampleSpark.Data.Tests.csproj](#uisamplesparkdatatestscsproj)
+  - [UISampleSpark.Data\UISampleSpark.Data.csproj](#uisamplesparkdatacsproj)
+  - [UISampleSpark.UI\UISampleSpark.UI.csproj](#uisamplesparkuisamplesparkcsproj)
 - [Aggregate NuGet packages details](#aggregate-nuget-packages-details)
 
 
@@ -25,13 +25,13 @@ Legend:
 
 ```mermaid
 flowchart LR
-    P1["<b>📦&nbsp;Mwh.Sample.Web.csproj</b><br/><small>net9.0</small>"]
-    P2["<b>📦&nbsp;Mwh.Sample.Domain.csproj</b><br/><small>net9.0</small>"]
-    P3["<b>📦&nbsp;Mwh.Sample.HttpClientFactory.csproj</b><br/><small>net9.0</small>"]
-    P4["<b>📦&nbsp;Mwh.Sample.Repository.csproj</b><br/><small>net9.0</small>"]
-    P5["<b>📦&nbsp;Mwh.Sample.Domain.Tests.csproj</b><br/><small>net9.0</small>"]
-    P6["<b>📦&nbsp;Mwh.Sample.Repository.Tests.csproj</b><br/><small>net9.0</small>"]
-    P7["<b>📦&nbsp;Mwh.Sample.Console.csproj</b><br/><small>net9.0</small>"]
+    P1["<b>📦&nbsp;UISampleSpark.UI.csproj</b><br/><small>net9.0</small>"]
+    P2["<b>📦&nbsp;UISampleSpark.Core.csproj</b><br/><small>net9.0</small>"]
+    P3["<b>📦&nbsp;UISampleSpark.HttpClientFactory.csproj</b><br/><small>net9.0</small>"]
+    P4["<b>📦&nbsp;UISampleSpark.Data.csproj</b><br/><small>net9.0</small>"]
+    P5["<b>📦&nbsp;UISampleSpark.Core.Tests.csproj</b><br/><small>net9.0</small>"]
+    P6["<b>📦&nbsp;UISampleSpark.Data.Tests.csproj</b><br/><small>net9.0</small>"]
+    P7["<b>📦&nbsp;UISampleSpark.CLI.csproj</b><br/><small>net9.0</small>"]
     P1 --> P4
     P1 --> P2
     P3 --> P2
@@ -40,20 +40,20 @@ flowchart LR
     P6 --> P4
     P7 --> P4
     P7 --> P2
-    click P1 "#mwhsamplewebmwhsamplewebcsproj"
-    click P2 "#mwhsampledomainmwhsampledomaincsproj"
-    click P3 "#mwhsamplehttpclientfactorymwhsamplehttpclientfactorycsproj"
-    click P4 "#mwhsamplerepositorymwhsamplerepositorycsproj"
-    click P5 "#mwhsampledomaintestsmwhsampledomaintestscsproj"
-    click P6 "#mwhsamplerepositorytestsmwhsamplerepositorytestscsproj"
-    click P7 "#mwhsampleconsolemwhsampleconsolecsproj"
+    click P1 "#uisamplesparkuisamplesparkcsproj"
+    click P2 "#uisamplesparkcorecsproj"
+    click P3 "#uisamplesparkhttpclientfactorycsproj"
+    click P4 "#uisamplesparkdatacsproj"
+    click P5 "#uisamplesparkcoretestscsproj"
+    click P6 "#uisamplesparkdatatestscsproj"
+    click P7 "#uisamplesparkclicsproj"
 
 ```
 
 ## Project Details
 
-<a id="mwhsampleconsolemwhsampleconsolecsproj"></a>
-### Mwh.Sample.Console\Mwh.Sample.Console.csproj
+<a id="uisamplesparkclicsproj"></a>
+### UISampleSpark.CLI\UISampleSpark.CLI.csproj
 
 #### Project Info
 
@@ -74,15 +74,15 @@ Legend:
 
 ```mermaid
 flowchart TB
-    subgraph current["Mwh.Sample.Console.csproj"]
-        MAIN["<b>📦&nbsp;Mwh.Sample.Console.csproj</b><br/><small>net9.0</small>"]
-        click MAIN "#mwhsampleconsolemwhsampleconsolecsproj"
+    subgraph current["UISampleSpark.CLI.csproj"]
+        MAIN["<b>📦&nbsp;UISampleSpark.CLI.csproj</b><br/><small>net9.0</small>"]
+        click MAIN "#uisamplesparkclicsproj"
     end
     subgraph downstream["Dependencies (2"]
-        P4["<b>📦&nbsp;Mwh.Sample.Repository.csproj</b><br/><small>net9.0</small>"]
-        P2["<b>📦&nbsp;Mwh.Sample.Domain.csproj</b><br/><small>net9.0</small>"]
-        click P4 "#mwhsamplerepositorymwhsamplerepositorycsproj"
-        click P2 "#mwhsampledomainmwhsampledomaincsproj"
+        P4["<b>📦&nbsp;UISampleSpark.Data.csproj</b><br/><small>net9.0</small>"]
+        P2["<b>📦&nbsp;UISampleSpark.Core.csproj</b><br/><small>net9.0</small>"]
+        click P4 "#uisamplesparkdatacsproj"
+        click P2 "#uisamplesparkcorecsproj"
     end
     MAIN --> P4
     MAIN --> P2
@@ -95,8 +95,8 @@ flowchart TB
 | :--- | :---: | :---: | :---: | :--- |
 | Bogus | Explicit | 35.6.3 |  | ✅Compatible |
 
-<a id="mwhsampledomaintestsmwhsampledomaintestscsproj"></a>
-### Mwh.Sample.Domain.Tests\Mwh.Sample.Domain.Tests.csproj
+<a id="uisamplesparkcoretestscsproj"></a>
+### UISampleSpark.Core.Tests\UISampleSpark.Core.Tests.csproj
 
 #### Project Info
 
@@ -117,13 +117,13 @@ Legend:
 
 ```mermaid
 flowchart TB
-    subgraph current["Mwh.Sample.Domain.Tests.csproj"]
-        MAIN["<b>📦&nbsp;Mwh.Sample.Domain.Tests.csproj</b><br/><small>net9.0</small>"]
-        click MAIN "#mwhsampledomaintestsmwhsampledomaintestscsproj"
+    subgraph current["UISampleSpark.Core.Tests.csproj"]
+        MAIN["<b>📦&nbsp;UISampleSpark.Core.Tests.csproj</b><br/><small>net9.0</small>"]
+        click MAIN "#uisamplesparkcoretestscsproj"
     end
     subgraph downstream["Dependencies (1"]
-        P2["<b>📦&nbsp;Mwh.Sample.Domain.csproj</b><br/><small>net9.0</small>"]
-        click P2 "#mwhsampledomainmwhsampledomaincsproj"
+        P2["<b>📦&nbsp;UISampleSpark.Core.csproj</b><br/><small>net9.0</small>"]
+        click P2 "#uisamplesparkcorecsproj"
     end
     MAIN --> P2
 
@@ -138,8 +138,8 @@ flowchart TB
 | MSTest.TestAdapter | Explicit | 3.10.4 |  | ✅Compatible |
 | MSTest.TestFramework | Explicit | 3.10.4 |  | ✅Compatible |
 
-<a id="mwhsampledomainmwhsampledomaincsproj"></a>
-### Mwh.Sample.Domain\Mwh.Sample.Domain.csproj
+<a id="uisamplesparkcorecsproj"></a>
+### UISampleSpark.Core\UISampleSpark.Core.csproj
 
 #### Project Info
 
@@ -161,20 +161,20 @@ Legend:
 ```mermaid
 flowchart TB
     subgraph upstream["Dependants (5)"]
-        P1["<b>📦&nbsp;Mwh.Sample.Web.csproj</b><br/><small>net9.0</small>"]
-        P3["<b>📦&nbsp;Mwh.Sample.HttpClientFactory.csproj</b><br/><small>net9.0</small>"]
-        P4["<b>📦&nbsp;Mwh.Sample.Repository.csproj</b><br/><small>net9.0</small>"]
-        P5["<b>📦&nbsp;Mwh.Sample.Domain.Tests.csproj</b><br/><small>net9.0</small>"]
-        P7["<b>📦&nbsp;Mwh.Sample.Console.csproj</b><br/><small>net9.0</small>"]
-        click P1 "#mwhsamplewebmwhsamplewebcsproj"
-        click P3 "#mwhsamplehttpclientfactorymwhsamplehttpclientfactorycsproj"
-        click P4 "#mwhsamplerepositorymwhsamplerepositorycsproj"
-        click P5 "#mwhsampledomaintestsmwhsampledomaintestscsproj"
-        click P7 "#mwhsampleconsolemwhsampleconsolecsproj"
+        P1["<b>📦&nbsp;UISampleSpark.UI.csproj</b><br/><small>net9.0</small>"]
+        P3["<b>📦&nbsp;UISampleSpark.HttpClientFactory.csproj</b><br/><small>net9.0</small>"]
+        P4["<b>📦&nbsp;UISampleSpark.Data.csproj</b><br/><small>net9.0</small>"]
+        P5["<b>📦&nbsp;UISampleSpark.Core.Tests.csproj</b><br/><small>net9.0</small>"]
+        P7["<b>📦&nbsp;UISampleSpark.CLI.csproj</b><br/><small>net9.0</small>"]
+        click P1 "#uisamplesparkuisamplesparkcsproj"
+        click P3 "#uisamplesparkhttpclientfactorycsproj"
+        click P4 "#uisamplesparkdatacsproj"
+        click P5 "#uisamplesparkcoretestscsproj"
+        click P7 "#uisamplesparkclicsproj"
     end
-    subgraph current["Mwh.Sample.Domain.csproj"]
-        MAIN["<b>📦&nbsp;Mwh.Sample.Domain.csproj</b><br/><small>net9.0</small>"]
-        click MAIN "#mwhsampledomainmwhsampledomaincsproj"
+    subgraph current["UISampleSpark.Core.csproj"]
+        MAIN["<b>📦&nbsp;UISampleSpark.Core.csproj</b><br/><small>net9.0</small>"]
+        click MAIN "#uisamplesparkcorecsproj"
     end
     P1 --> MAIN
     P3 --> MAIN
@@ -190,8 +190,8 @@ flowchart TB
 | :--- | :---: | :---: | :---: | :--- |
 | System.Drawing.Common | Explicit | 9.0.8 | 10.0.0 | NuGet package upgrade is recommended |
 
-<a id="mwhsamplehttpclientfactorymwhsamplehttpclientfactorycsproj"></a>
-### Mwh.Sample.HttpClientFactory\Mwh.Sample.HttpClientFactory.csproj
+<a id="uisamplesparkhttpclientfactorycsproj"></a>
+### UISampleSpark.HttpClientFactory\UISampleSpark.HttpClientFactory.csproj
 
 #### Project Info
 
@@ -212,13 +212,13 @@ Legend:
 
 ```mermaid
 flowchart TB
-    subgraph current["Mwh.Sample.HttpClientFactory.csproj"]
-        MAIN["<b>📦&nbsp;Mwh.Sample.HttpClientFactory.csproj</b><br/><small>net9.0</small>"]
-        click MAIN "#mwhsamplehttpclientfactorymwhsamplehttpclientfactorycsproj"
+    subgraph current["UISampleSpark.HttpClientFactory.csproj"]
+        MAIN["<b>📦&nbsp;UISampleSpark.HttpClientFactory.csproj</b><br/><small>net9.0</small>"]
+        click MAIN "#uisamplesparkhttpclientfactorycsproj"
     end
     subgraph downstream["Dependencies (1"]
-        P2["<b>📦&nbsp;Mwh.Sample.Domain.csproj</b><br/><small>net9.0</small>"]
-        click P2 "#mwhsampledomainmwhsampledomaincsproj"
+        P2["<b>📦&nbsp;UISampleSpark.Core.csproj</b><br/><small>net9.0</small>"]
+        click P2 "#uisamplesparkcorecsproj"
     end
     MAIN --> P2
 
@@ -231,8 +231,8 @@ flowchart TB
 | Microsoft.Extensions.Http | Explicit | 9.0.8 | 10.0.0 | NuGet package upgrade is recommended |
 | System.Text.Json | Explicit | 9.0.8 | 10.0.0 | NuGet package upgrade is recommended |
 
-<a id="mwhsamplerepositorytestsmwhsamplerepositorytestscsproj"></a>
-### Mwh.Sample.Repository.Tests\Mwh.Sample.Repository.Tests.csproj
+<a id="uisamplesparkdatatestscsproj"></a>
+### UISampleSpark.Data.Tests\UISampleSpark.Data.Tests.csproj
 
 #### Project Info
 
@@ -253,13 +253,13 @@ Legend:
 
 ```mermaid
 flowchart TB
-    subgraph current["Mwh.Sample.Repository.Tests.csproj"]
-        MAIN["<b>📦&nbsp;Mwh.Sample.Repository.Tests.csproj</b><br/><small>net9.0</small>"]
-        click MAIN "#mwhsamplerepositorytestsmwhsamplerepositorytestscsproj"
+    subgraph current["UISampleSpark.Data.Tests.csproj"]
+        MAIN["<b>📦&nbsp;UISampleSpark.Data.Tests.csproj</b><br/><small>net9.0</small>"]
+        click MAIN "#uisamplesparkdatatestscsproj"
     end
     subgraph downstream["Dependencies (1"]
-        P4["<b>📦&nbsp;Mwh.Sample.Repository.csproj</b><br/><small>net9.0</small>"]
-        click P4 "#mwhsamplerepositorymwhsamplerepositorycsproj"
+        P4["<b>📦&nbsp;UISampleSpark.Data.csproj</b><br/><small>net9.0</small>"]
+        click P4 "#uisamplesparkdatacsproj"
     end
     MAIN --> P4
 
@@ -275,8 +275,8 @@ flowchart TB
 | MSTest.TestAdapter | Explicit | 3.10.4 |  | ✅Compatible |
 | MSTest.TestFramework | Explicit | 3.10.4 |  | ✅Compatible |
 
-<a id="mwhsamplerepositorymwhsamplerepositorycsproj"></a>
-### Mwh.Sample.Repository\Mwh.Sample.Repository.csproj
+<a id="uisamplesparkdatacsproj"></a>
+### UISampleSpark.Data\UISampleSpark.Data.csproj
 
 #### Project Info
 
@@ -298,20 +298,20 @@ Legend:
 ```mermaid
 flowchart TB
     subgraph upstream["Dependants (3)"]
-        P1["<b>📦&nbsp;Mwh.Sample.Web.csproj</b><br/><small>net9.0</small>"]
-        P6["<b>📦&nbsp;Mwh.Sample.Repository.Tests.csproj</b><br/><small>net9.0</small>"]
-        P7["<b>📦&nbsp;Mwh.Sample.Console.csproj</b><br/><small>net9.0</small>"]
-        click P1 "#mwhsamplewebmwhsamplewebcsproj"
-        click P6 "#mwhsamplerepositorytestsmwhsamplerepositorytestscsproj"
-        click P7 "#mwhsampleconsolemwhsampleconsolecsproj"
+        P1["<b>📦&nbsp;UISampleSpark.UI.csproj</b><br/><small>net9.0</small>"]
+        P6["<b>📦&nbsp;UISampleSpark.Data.Tests.csproj</b><br/><small>net9.0</small>"]
+        P7["<b>📦&nbsp;UISampleSpark.CLI.csproj</b><br/><small>net9.0</small>"]
+        click P1 "#uisamplesparkuisamplesparkcsproj"
+        click P6 "#uisamplesparkdatatestscsproj"
+        click P7 "#uisamplesparkclicsproj"
     end
-    subgraph current["Mwh.Sample.Repository.csproj"]
-        MAIN["<b>📦&nbsp;Mwh.Sample.Repository.csproj</b><br/><small>net9.0</small>"]
-        click MAIN "#mwhsamplerepositorymwhsamplerepositorycsproj"
+    subgraph current["UISampleSpark.Data.csproj"]
+        MAIN["<b>📦&nbsp;UISampleSpark.Data.csproj</b><br/><small>net9.0</small>"]
+        click MAIN "#uisamplesparkdatacsproj"
     end
     subgraph downstream["Dependencies (1"]
-        P2["<b>📦&nbsp;Mwh.Sample.Domain.csproj</b><br/><small>net9.0</small>"]
-        click P2 "#mwhsampledomainmwhsampledomaincsproj"
+        P2["<b>📦&nbsp;UISampleSpark.Core.csproj</b><br/><small>net9.0</small>"]
+        click P2 "#uisamplesparkcorecsproj"
     end
     P1 --> MAIN
     P6 --> MAIN
@@ -329,8 +329,8 @@ flowchart TB
 | Microsoft.EntityFrameworkCore.InMemory | Explicit | 9.0.8 | 10.0.0 | NuGet package upgrade is recommended |
 | Microsoft.EntityFrameworkCore.Sqlite | Explicit | 9.0.8 | 10.0.0 | NuGet package upgrade is recommended |
 
-<a id="mwhsamplewebmwhsamplewebcsproj"></a>
-### Mwh.Sample.Web\Mwh.Sample.Web.csproj
+<a id="uisamplesparkuisamplesparkcsproj"></a>
+### UISampleSpark.UI\UISampleSpark.UI.csproj
 
 #### Project Info
 
@@ -351,15 +351,15 @@ Legend:
 
 ```mermaid
 flowchart TB
-    subgraph current["Mwh.Sample.Web.csproj"]
-        MAIN["<b>📦&nbsp;Mwh.Sample.Web.csproj</b><br/><small>net9.0</small>"]
-        click MAIN "#mwhsamplewebmwhsamplewebcsproj"
+    subgraph current["UISampleSpark.UI.csproj"]
+        MAIN["<b>📦&nbsp;UISampleSpark.UI.csproj</b><br/><small>net9.0</small>"]
+        click MAIN "#uisamplesparkuisamplesparkcsproj"
     end
     subgraph downstream["Dependencies (2"]
-        P4["<b>📦&nbsp;Mwh.Sample.Repository.csproj</b><br/><small>net9.0</small>"]
-        P2["<b>📦&nbsp;Mwh.Sample.Domain.csproj</b><br/><small>net9.0</small>"]
-        click P4 "#mwhsamplerepositorymwhsamplerepositorycsproj"
-        click P2 "#mwhsampledomainmwhsampledomaincsproj"
+        P4["<b>📦&nbsp;UISampleSpark.Data.csproj</b><br/><small>net9.0</small>"]
+        P2["<b>📦&nbsp;UISampleSpark.Core.csproj</b><br/><small>net9.0</small>"]
+        click P4 "#uisamplesparkdatacsproj"
+        click P2 "#uisamplesparkcorecsproj"
     end
     MAIN --> P4
     MAIN --> P2
@@ -390,28 +390,28 @@ flowchart TB
 
 | Package | Current Version | Suggested Version | Projects | Description |
 | :--- | :---: | :---: | :--- | :--- |
-| Azure.Extensions.AspNetCore.Configuration.Secrets | 1.4.0 |  | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | ✅Compatible |
-| Azure.Identity | 1.15.0 |  | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | ✅Compatible |
-| Bogus | 35.6.3 |  | [Mwh.Sample.Console.csproj](#mwhsampleconsolecsproj)<br/>[Mwh.Sample.Repository.csproj](#mwhsamplerepositorycsproj) | ✅Compatible |
-| coverlet.collector | 6.0.4 |  | [Mwh.Sample.Domain.Tests.csproj](#mwhsampledomaintestscsproj)<br/>[Mwh.Sample.Repository.Tests.csproj](#mwhsamplerepositorytestscsproj) | ✅Compatible |
-| Microsoft.ApplicationInsights | 2.23.0 |  | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | ✅Compatible |
-| Microsoft.ApplicationInsights.AspNetCore | 2.23.0 |  | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | ✅Compatible |
-| Microsoft.EntityFrameworkCore | 9.0.8 | 10.0.0 | [Mwh.Sample.Repository.csproj](#mwhsamplerepositorycsproj)<br/>[Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | NuGet package upgrade is recommended |
-| Microsoft.EntityFrameworkCore.InMemory | 9.0.8 | 10.0.0 | [Mwh.Sample.Repository.csproj](#mwhsamplerepositorycsproj)<br/>[Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | NuGet package upgrade is recommended |
-| Microsoft.EntityFrameworkCore.Sqlite | 9.0.8 | 10.0.0 | [Mwh.Sample.Repository.csproj](#mwhsamplerepositorycsproj) | NuGet package upgrade is recommended |
-| Microsoft.EntityFrameworkCore.SqlServer | 9.0.8 | 10.0.0 | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | NuGet package upgrade is recommended |
-| Microsoft.EntityFrameworkCore.Tools | 9.0.8 | 10.0.0 | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | NuGet package upgrade is recommended |
-| Microsoft.Extensions.Http | 9.0.8 | 10.0.0 | [Mwh.Sample.HttpClientFactory.csproj](#mwhsamplehttpclientfactorycsproj) | NuGet package upgrade is recommended |
-| Microsoft.NET.Test.Sdk | 17.14.1 |  | [Mwh.Sample.Domain.Tests.csproj](#mwhsampledomaintestscsproj)<br/>[Mwh.Sample.Repository.Tests.csproj](#mwhsamplerepositorytestscsproj) | ✅Compatible |
-| Microsoft.VisualStudio.Web.CodeGeneration.Design | 9.0.0 | 10.0.0-rc.1.25458.5 | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | NuGet package upgrade is recommended |
-| Moq | 4.20.72 |  | [Mwh.Sample.Repository.Tests.csproj](#mwhsamplerepositorytestscsproj) | ✅Compatible |
-| MSTest.TestAdapter | 3.10.4 |  | [Mwh.Sample.Domain.Tests.csproj](#mwhsampledomaintestscsproj)<br/>[Mwh.Sample.Repository.Tests.csproj](#mwhsamplerepositorytestscsproj) | ✅Compatible |
-| MSTest.TestFramework | 3.10.4 |  | [Mwh.Sample.Domain.Tests.csproj](#mwhsampledomaintestscsproj)<br/>[Mwh.Sample.Repository.Tests.csproj](#mwhsamplerepositorytestscsproj) | ✅Compatible |
-| Swashbuckle.AspNetCore | 9.0.4 |  | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | ✅Compatible |
-| System.Drawing.Common | 9.0.8 | 10.0.0 | [Mwh.Sample.Domain.csproj](#mwhsampledomaincsproj) | NuGet package upgrade is recommended |
-| System.Formats.Asn1 | 9.0.8 | 10.0.0 | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | NuGet package upgrade is recommended |
-| System.Text.Json | 9.0.8 | 10.0.0 | [Mwh.Sample.HttpClientFactory.csproj](#mwhsamplehttpclientfactorycsproj)<br/>[Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | NuGet package upgrade is recommended |
-| WebSpark.Bootswatch | 1.20.1 |  | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | ✅Compatible |
-| WebSpark.HttpClientUtility | 1.1.0 |  | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | ✅Compatible |
-| Westwind.AspNetCore.Markdown | 3.24.0 |  | [Mwh.Sample.Web.csproj](#mwhsamplewebcsproj) | ✅Compatible |
+| Azure.Extensions.AspNetCore.Configuration.Secrets | 1.4.0 |  | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | ✅Compatible |
+| Azure.Identity | 1.15.0 |  | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | ✅Compatible |
+| Bogus | 35.6.3 |  | [UISampleSpark.CLI.csproj](#uisamplesparkclicsproj)<br/>[UISampleSpark.Data.csproj](#uisamplesparkdatacsproj) | ✅Compatible |
+| coverlet.collector | 6.0.4 |  | [UISampleSpark.Core.Tests.csproj](#uisamplesparkcoretestscsproj)<br/>[UISampleSpark.Data.Tests.csproj](#uisamplesparkdatatestscsproj) | ✅Compatible |
+| Microsoft.ApplicationInsights | 2.23.0 |  | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | ✅Compatible |
+| Microsoft.ApplicationInsights.AspNetCore | 2.23.0 |  | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | ✅Compatible |
+| Microsoft.EntityFrameworkCore | 9.0.8 | 10.0.0 | [UISampleSpark.Data.csproj](#uisamplesparkdatacsproj)<br/>[UISampleSpark.UI.csproj](#uisamplesparkcsproj) | NuGet package upgrade is recommended |
+| Microsoft.EntityFrameworkCore.InMemory | 9.0.8 | 10.0.0 | [UISampleSpark.Data.csproj](#uisamplesparkdatacsproj)<br/>[UISampleSpark.UI.csproj](#uisamplesparkcsproj) | NuGet package upgrade is recommended |
+| Microsoft.EntityFrameworkCore.Sqlite | 9.0.8 | 10.0.0 | [UISampleSpark.Data.csproj](#uisamplesparkdatacsproj) | NuGet package upgrade is recommended |
+| Microsoft.EntityFrameworkCore.SqlServer | 9.0.8 | 10.0.0 | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | NuGet package upgrade is recommended |
+| Microsoft.EntityFrameworkCore.Tools | 9.0.8 | 10.0.0 | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | NuGet package upgrade is recommended |
+| Microsoft.Extensions.Http | 9.0.8 | 10.0.0 | [UISampleSpark.HttpClientFactory.csproj](#uisamplesparkhttpclientfactorycsproj) | NuGet package upgrade is recommended |
+| Microsoft.NET.Test.Sdk | 17.14.1 |  | [UISampleSpark.Core.Tests.csproj](#uisamplesparkcoretestscsproj)<br/>[UISampleSpark.Data.Tests.csproj](#uisamplesparkdatatestscsproj) | ✅Compatible |
+| Microsoft.VisualStudio.Web.CodeGeneration.Design | 9.0.0 | 10.0.0-rc.1.25458.5 | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | NuGet package upgrade is recommended |
+| Moq | 4.20.72 |  | [UISampleSpark.Data.Tests.csproj](#uisamplesparkdatatestscsproj) | ✅Compatible |
+| MSTest.TestAdapter | 3.10.4 |  | [UISampleSpark.Core.Tests.csproj](#uisamplesparkcoretestscsproj)<br/>[UISampleSpark.Data.Tests.csproj](#uisamplesparkdatatestscsproj) | ✅Compatible |
+| MSTest.TestFramework | 3.10.4 |  | [UISampleSpark.Core.Tests.csproj](#uisamplesparkcoretestscsproj)<br/>[UISampleSpark.Data.Tests.csproj](#uisamplesparkdatatestscsproj) | ✅Compatible |
+| Swashbuckle.AspNetCore | 9.0.4 |  | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | ✅Compatible |
+| System.Drawing.Common | 9.0.8 | 10.0.0 | [UISampleSpark.Core.csproj](#uisamplesparkcorecsproj) | NuGet package upgrade is recommended |
+| System.Formats.Asn1 | 9.0.8 | 10.0.0 | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | NuGet package upgrade is recommended |
+| System.Text.Json | 9.0.8 | 10.0.0 | [UISampleSpark.HttpClientFactory.csproj](#uisamplesparkhttpclientfactorycsproj)<br/>[UISampleSpark.UI.csproj](#uisamplesparkcsproj) | NuGet package upgrade is recommended |
+| WebSpark.Bootswatch | 1.20.1 |  | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | ✅Compatible |
+| WebSpark.HttpClientUtility | 1.1.0 |  | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | ✅Compatible |
+| Westwind.AspNetCore.Markdown | 3.24.0 |  | [UISampleSpark.UI.csproj](#uisamplesparkcsproj) | ✅Compatible |
 

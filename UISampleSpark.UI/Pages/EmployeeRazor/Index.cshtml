@@ -1,0 +1,103 @@
+@page
+@model UISampleSpark.UI.Pages.EmployeeRazor.IndexModel
+
+@{
+    ViewData["Title"] = "Manage Employees with Razor Pages | ASP.NET Core UI Patterns Tutorial";
+    ViewData["Description"] = "Learn how to manage employees using Razor Pages in ASP.NET Core. Explore the benefits and best practices for building CRUD applications with Razor Pages.";
+    ViewData["Keywords"] = "ASP.NET Core, Razor Pages, CRUD operations, employee management, Razor Pages tutorial, MVC vs Razor Pages, ASP.NET Core tutorial";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title text-center">Employee Management with Razor Pages</h2>
+            <p class="text-muted text-center">Manage your employee records with tightly bound UI and backend code using Razor Pages in ASP.NET Core.</p>
+            <p class="text-center">
+                <a class="btn btn-primary" asp-page="Create">Create New Employee</a>
+            </p>
+            <table id="EmployeeTable" class="table table-bordered table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].Gender)</th>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].Age)</th>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].State)</th>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].Country)</th>
+                        <th>@Html.DisplayNameFor(model => model.Employee[0].Department!.Name)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Employee)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/images/@item.ProfilePicture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                                <a asp-page="./Edit" asp-route-id="@item.Id">@item.Name</a>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Age)</td>
+                            <td>@Html.DisplayFor(modelItem => item.State)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Country)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Department!.Name)</td>
+                            <td>
+                                <a asp-page="./Edit" asp-route-id="@item.Id" title="Edit Employee">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
+                                    </svg>
+                                </a>
+                                <a asp-page="./Details" asp-route-id="@item.Id" title="View Details">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"></path>
+                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path>
+                                    </svg>
+                                </a>
+                                <a asp-page="./Delete" asp-route-id="@item.Id" title="Delete Employee">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
+                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title">How Razor Pages Work</h3>
+            <p class="card-text">
+                Razor Pages provide a simpler, page-focused approach for building web applications in ASP.NET Core. Unlike MVC, where the controller is separate, Razor Pages combine the view and the code-behind logic in a single file.
+                This tightly bound UI and backend logic makes it easier to maintain and understand, especially for CRUD operations.
+            </p>
+            <h4 class="card-title">History of Razor Pages</h4>
+            <p class="card-text">
+                Introduced in ASP.NET Core 2.0, Razor Pages were designed to simplify the development process by reducing the number of files required for simple pages. They are an evolution of the Web Pages framework and provide an easy way to create page-centric applications.
+            </p>
+            <h4 class="card-title">Best Practices for Razor Pages</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Use ViewModels:</strong> Separate ViewModels from entities to avoid exposing database logic directly to the UI.</li>
+                <li class="list-group-item"><strong>Keep Code-Behind Clean:</strong> Maintain a clear separation of concerns by keeping business logic out of the code-behind.</li>
+                <li class="list-group-item"><strong>Leverage Tag Helpers:</strong> Utilize Tag Helpers for cleaner and more readable Razor markup.</li>
+            </ul>
+            <h4 class="card-title">Pros and Cons of Razor Pages</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Pros:</strong> Simplifies development, tightly binds UI and backend, easy to learn and use for simple scenarios.</li>
+                <li class="list-group-item"><strong>Cons:</strong> Limited for complex applications compared to MVC, less control over the routing and structure of the application.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#EmployeeTable').DataTable();
+        });
+    </script>
+}

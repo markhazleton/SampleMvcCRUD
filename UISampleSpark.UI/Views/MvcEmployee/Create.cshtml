@@ -1,0 +1,84 @@
+@model UISampleSpark.Core.Models.EmployeeDto
+
+@{
+    ViewBag.Title = "Create New Employee | ASP.NET MVC CRUD Tutorial";
+    ViewBag.MetaDescription = "Create a new employee record using the MVC Controller form approach in ASP.NET MVC. Learn how to use model binding and validation for efficient data handling.";
+    ViewBag.MetaKeywords = "ASP.NET MVC, Create Employee, UI patterns tutorial, MVC Forms, employee management, form handling, model binding";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title text-center">Create New Employee</h2>
+            <p class="text-muted text-center">Fill in the form below to add a new employee to the system.</p>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-horizontal">
+                    <h4>Employee Information</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "form-label" })
+                        <select class="form-select" asp-for="Gender" asp-items="Html.GetEnumSelectList(typeof(UISampleSpark.Core.Models.GenderEnum))"></select>
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "form-label" })
+                        <select class="form-select" asp-for="Department" asp-items="Html.GetEnumSelectList(typeof(UISampleSpark.Core.Models.EmployeeDepartmentEnum))"></select>
+                        @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-secondary ms-2" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title">About the Employee Creation Form</h3>
+            <p class="card-text">
+                The Employee Creation form is a fundamental part of the MVC Controller form approach in ASP.NET MVC. It uses model binding to capture user inputs and validation to ensure data integrity.
+                This approach allows for efficient handling of user-submitted data and provides a robust framework for creating new records in the system.
+            </p>
+            <p class="card-text">
+                Using Bootstrap 5 styles, the form is designed to be user-friendly and visually appealing, ensuring that the process of adding new employees is intuitive and efficient.
+                This form demonstrates the power of MVC architecture in building maintainable and scalable web applications.
+            </p>
+        </div>
+    </div>
+</div>

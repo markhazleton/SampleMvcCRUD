@@ -7,11 +7,11 @@
 **Error:**
 ```
 ERROR: failed to build: failed to solve: failed to compute cache key: 
-failed to calculate checksum of ref: "/Mwh.Sample.HttpClientFactory/Mwh.Sample.HttpClientFactory.csproj": not found
+failed to calculate checksum of ref: "/UISampleSpark.HttpClientFactory/UISampleSpark.HttpClientFactory.csproj": not found
 ```
 
 **Root Cause:**
-The Docker build context is not properly including the `Mwh.Sample.HttpClientFactory` directory when building from GitHub Actions.
+The Docker build context is not properly including the `UISampleSpark.HttpClientFactory` directory when building from GitHub Actions.
 
 **Solutions:**
 
@@ -39,11 +39,11 @@ COPY ["*.sln", "./"]
 COPY ["nuget.config", "./"]
 
 # Copy all csproj files with proper directory structure
-COPY ["Mwh.Sample.Web/*.csproj", "Mwh.Sample.Web/"]
-COPY ["Mwh.Sample.Repository/*.csproj", "Mwh.Sample.Repository/"]
-COPY ["Mwh.Sample.Domain/*.csproj", "Mwh.Sample.Domain/"]
-COPY ["Mwh.Sample.HttpClientFactory/*.csproj", "Mwh.Sample.HttpClientFactory/"]
-COPY ["Mwh.Sample.Console/*.csproj", "Mwh.Sample.Console/"]
+COPY ["UISampleSpark.UI/*.csproj", "UISampleSpark.UI/"]
+COPY ["UISampleSpark.Data/*.csproj", "UISampleSpark.Data/"]
+COPY ["UISampleSpark.Core/*.csproj", "UISampleSpark.Core/"]
+COPY ["UISampleSpark.HttpClientFactory/*.csproj", "UISampleSpark.HttpClientFactory/"]
+COPY ["UISampleSpark.CLI/*.csproj", "UISampleSpark.CLI/"]
 ```
 
 ### 2. Dependabot Docker Updater Failures
@@ -79,7 +79,7 @@ This is a GitHub infrastructure issue where Dependabot cannot find the Docker up
 ### 3. Missing Dependabot Configuration for HttpClientFactory
 
 **Issue:**
-The `Mwh.Sample.HttpClientFactory` project is not included in the Dependabot configuration.
+The `UISampleSpark.HttpClientFactory` project is not included in the Dependabot configuration.
 
 **Fix:**
 Add the following to `.github/dependabot.yml`:
@@ -87,7 +87,7 @@ Add the following to `.github/dependabot.yml`:
 ```yaml
   # NuGet dependencies for HttpClientFactory project
   - package-ecosystem: "nuget"
-    directory: "/Mwh.Sample.HttpClientFactory"
+    directory: "/UISampleSpark.HttpClientFactory"
     schedule:
       interval: "weekly"
       day: "tuesday"
@@ -127,10 +127,10 @@ gh api repos/:owner/:repo/dependabot/alerts
 ### Test Docker Build Locally
 ```bash
 # Test the Docker build with the same context as GitHub Actions
-docker build -f Mwh.Sample.Web/Dockerfile -t mwhsampleweb:test .
+docker build -f UISampleSpark.UI/Dockerfile -t uisamplespark:test .
 
 # Check for context issues
-docker build -f Mwh.Sample.Web/Dockerfile --progress=plain -t mwhsampleweb:test . 2>&1 | grep "not found"
+docker build -f UISampleSpark.UI/Dockerfile --progress=plain -t uisamplespark:test . 2>&1 | grep "not found"
 ```
 
 ## Recommended Actions

@@ -1,6 +1,6 @@
 <!-- 
 ═══════════════════════════════════════════════════════════════════════════════
-GitHub Copilot Runtime Instructions for SampleMvcCRUD
+GitHub Copilot Runtime Instructions for UISampleSpark
 ═══════════════════════════════════════════════════════════════════════════════
 This file provides RUNTIME guidance for AI coding agents.
 For GOVERNANCE and PRINCIPLES, see: /.documentation/memory/constitution.md
@@ -182,8 +182,8 @@ Move from `copilot/` to permanent locations when:
 
 ### Test Structure
 ```
-Mwh.Sample.Domain.Tests/       ← Unit tests for domain logic
-Mwh.Sample.Repository.Tests/   ← Unit tests for repository layer
+UISampleSpark.Core.Tests/       ← Unit tests for domain logic
+UISampleSpark.Data.Tests/   ← Unit tests for repository layer
 ```
 
 ### Testing Standards

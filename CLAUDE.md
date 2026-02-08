@@ -4,11 +4,11 @@ All agents working in this repository MUST follow the project constitution at `/
 
 ## Project Overview
 
-Educational ASP.NET Core CRUD reference project. Not production-ready by design (no auth).
+Educational ASP.NET Core project exploring multiple front-end UI technologies (MVC, Razor Pages, React, Vue, htmx, Blazor). Not production-ready by design (no auth).
 
 - **Framework**: .NET 10 (`global.json` specifies SDK)
-- **Solution**: `SampleMvcCRUD.sln`
-- **Build/Test**: `dotnet build SampleMvcCRUD.sln` / `dotnet test SampleMvcCRUD.sln`
+- **Solution**: `UISampleSpark.sln`
+- **Build/Test**: `dotnet build UISampleSpark.sln` / `dotnet test UISampleSpark.sln`
 
 ## Mandatory Coding Rules
 

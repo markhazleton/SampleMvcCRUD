@@ -1,0 +1,86 @@
+@page
+@model UISampleSpark.UI.Pages.EmployeeRazor.EditModel
+
+@{
+    ViewData["Title"] = $"Edit Employee - {Model.Employee.Name} | ASP.NET Core Razor Pages";
+    ViewData["Description"] = $"Edit the details of employee {Model.Employee.Name} using Razor Pages in ASP.NET Core. Learn how to manage employee information with tightly bound UI and backend logic.";
+    ViewData["Keywords"] = "ASP.NET Core, Razor Pages, Edit Employee, CRUD operations, Razor Pages tutorial, employee management, MVC vs Razor Pages";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title text-center">Edit Employee - @Model.Employee.Name</h2>
+            <hr />
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Employee.Name" class="form-label"></label>
+                            <input asp-for="Employee.Name" class="form-control" />
+                            <span asp-validation-for="Employee.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Employee.Gender" class="form-label"></label>
+                            <select asp-for="Employee.Gender" asp-items="@Model.Genders" class="form-select">
+                                <option value="">Select Gender</option>
+                            </select>
+                            <span asp-validation-for="Employee.Gender" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Employee.Age" class="form-label"></label>
+                            <input asp-for="Employee.Age" class="form-control" />
+                            <span asp-validation-for="Employee.Age" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Employee.Country" class="form-label"></label>
+                            <input asp-for="Employee.Country" class="form-control" />
+                            <span asp-validation-for="Employee.Country" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Employee.DepartmentId" class="form-label"></label>
+                            <select asp-for="Employee.DepartmentId" class="form-select" asp-items="ViewBag.DepartmentId"></select>
+                            <span asp-validation-for="Employee.DepartmentId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Employee.State" class="form-label"></label>
+                            <input asp-for="Employee.State" class="form-control" />
+                            <span asp-validation-for="Employee.State" class="text-danger"></span>
+                        </div>
+                        <input type="hidden" asp-for="Employee.Id" />
+                        <div class="form-group mt-4">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                            <a class="btn btn-secondary ms-3" asp-page="./Index">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title">About Razor Pages Edit Form</h3>
+            <p class="card-text">
+                The Razor Pages Edit form in ASP.NET Core allows you to update existing employee records with a tightly integrated UI and backend logic.
+                Razor Pages provide a simplified model for binding form data directly to the page model, ensuring smooth data handling and validation.
+                This approach promotes maintainability and clarity by encapsulating all page-specific logic in one place.
+            </p>
+            <h4 class="card-title">Best Practices for Razor Pages</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Use ViewModels:</strong> Keep your ViewModels separate from entities to maintain clean separation of concerns.</li>
+                <li class="list-group-item"><strong>Leverage Tag Helpers:</strong> Use Tag Helpers for consistent and reusable UI elements.</li>
+                <li class="list-group-item"><strong>Keep Code-Behind Simple:</strong> Avoid putting complex business logic in the code-behind, use services for that instead.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

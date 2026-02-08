@@ -1,4 +1,4 @@
-name: Docker Build and Push - MwhSampleWeb
+name: Docker Build and Push - UISampleSpark
 
 on:
   push:
@@ -47,14 +47,14 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Lint Dockerfile
-        run: docker run --rm -i hadolint/hadolint hadolint --ignore DL3008 --ignore DL3018 --ignore DL3015 - < ./Mwh.Sample.Web/Dockerfile
+        run: docker run --rm -i hadolint/hadolint hadolint --ignore DL3008 --ignore DL3018 --ignore DL3015 - < ./UISampleSpark.UI/Dockerfile
 
       - name: Cache Docker layers
         id: docker-cache
         uses: actions/cache@v5
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}-${{ hashFiles('**/Dockerfile', '**/Mwh.Sample.Web/**/*') }}
+          key: ${{ runner.os }}-buildx-${{ github.sha }}-${{ hashFiles('**/Dockerfile', '**/UISampleSpark.UI/**/*') }}
           restore-keys: |
             ${{ runner.os }}-buildx-
 
@@ -68,7 +68,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/uisamplespark
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=sha,prefix={{branch}}-
@@ -80,12 +80,12 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Mwh.Sample.Web/Dockerfile
+          file: ./UISampleSpark.UI/Dockerfile
           push: true
           pull: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:${{ github.run_number }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/uisamplespark:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/uisamplespark:${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
@@ -100,7 +100,7 @@ jobs:
         run: |
           docker run --rm -d --name test-container \
             -p 8080:80 \
-            ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/uisamplespark:latest
           sleep 10
           curl -f http://localhost:8080 || echo "Health check failed"
           docker stop test-container
@@ -110,7 +110,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         continue-on-error: true
         with:
-          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/uisamplespark:latest
           format: 'sarif'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH,MEDIUM'
@@ -127,7 +127,7 @@ jobs:
       - name: Generate Trivy report
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/uisamplespark:latest
           format: 'table'
           output: 'trivy-report.txt'
           severity: 'CRITICAL,HIGH,MEDIUM,LOW'
@@ -153,6 +153,6 @@ jobs:
       - name: Output image information
         run: |
           echo "### Docker Image Information" >> $GITHUB_STEP_SUMMARY
-          echo "- **Image**: ${{ secrets.DOCKERHUB_USERNAME }}/mwhsampleweb:latest" >> $GITHUB_STEP_SUMMARY
+          echo "- **Image**: ${{ secrets.DOCKERHUB_USERNAME }}/uisamplespark:latest" >> $GITHUB_STEP_SUMMARY
           echo "- **Tag**: ${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Digest**: ${{ steps.docker_image.outputs.digest }}" >> $GITHUB_STEP_SUMMARY

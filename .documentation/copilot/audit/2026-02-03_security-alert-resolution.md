@@ -1,6 +1,6 @@
 # Security Alert Resolution Report
 **Date**: February 3, 2026  
-**Repository**: markhazleton/SampleMvcCRUD  
+**Repository**: markhazleton/UISampleSpark  
 **Alert Count**: 39 Open → 0 after rebuild
 
 ## Executive Summary
@@ -180,13 +180,13 @@ schedule:
 
 2. **Verify New Image Published**:
    ```bash
-   docker pull markhazleton/mwhsampleweb:latest
-   docker run --rm aquasecurity/trivy image markhazleton/mwhsampleweb:latest
+   docker pull markhazleton/uisamplespark:latest
+   docker run --rm aquasecurity/trivy image markhazleton/uisamplespark:latest
    ```
 
 3. **Check Code Scanning Alerts**:
    ```bash
-   gh api repos/markhazleton/SampleMvcCRUD/code-scanning/alerts?state=open
+   gh api repos/markhazleton/UISampleSpark/code-scanning/alerts?state=open
    ```
 
 ### Expected Results
@@ -244,11 +244,11 @@ schedule:
 **Check Open Alerts**:
 ```bash
 # Code scanning alerts
-gh api repos/markhazleton/SampleMvcCRUD/code-scanning/alerts?state=open \
+gh api repos/markhazleton/UISampleSpark/code-scanning/alerts?state=open \
   --jq '.[] | {number, cve: .rule.id, severity: .rule.severity}'
 
 # Dependabot alerts
-gh api repos/markhazleton/SampleMvcCRUD/dependabot/alerts?state=open
+gh api repos/markhazleton/UISampleSpark/dependabot/alerts?state=open
 
 # View in browser
 gh browse --security
@@ -350,10 +350,10 @@ gh run list --limit 5
 
 ## Contact & Resources
 
-- **Security Tab**: https://github.com/markhazleton/SampleMvcCRUD/security
-- **Code Scanning**: https://github.com/markhazleton/SampleMvcCRUD/security/code-scanning
-- **Actions**: https://github.com/markhazleton/SampleMvcCRUD/actions
-- **Docker Hub**: https://hub.docker.com/r/markhazleton/mwhsampleweb
+- **Security Tab**: https://github.com/markhazleton/UISampleSpark/security
+- **Code Scanning**: https://github.com/markhazleton/UISampleSpark/security/code-scanning
+- **Actions**: https://github.com/markhazleton/UISampleSpark/actions
+- **Docker Hub**: https://hub.docker.com/r/markhazleton/uisamplespark
 
 ## Summary
 

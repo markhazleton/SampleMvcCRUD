@@ -1,7 +1,7 @@
-# CodeQL Configuration for SampleMvcCRUD
+# CodeQL Configuration for UISampleSpark
 # Configures C# code scanning for security and quality
 
-name: "Sample MVC CRUD CodeQL Config"
+name: "UI Sample Spark CodeQL Config"
 
 # Disable default queries and use custom selection
 disable-default-queries: false
@@ -15,11 +15,11 @@ queries:
 
 # Paths to analyze
 paths:
-  - Mwh.Sample.Console
-  - Mwh.Sample.Domain
-  - Mwh.Sample.Repository
-  - Mwh.Sample.Web
-  - SampleMinimalApi
+  - UISampleSpark.CLI
+  - UISampleSpark.Core
+  - UISampleSpark.Data
+  - UISampleSpark.UI
+  - UISampleSpark.MinimalApi
 
 # Paths to exclude from analysis
 paths-ignore:
@@ -32,8 +32,8 @@ paths-ignore:
   - '**/*.min.css'
   - '**/*.Designer.cs'
   - '**/Migrations/**'
-  - 'Mwh.Sample.Domain.Tests'
-  - 'Mwh.Sample.Repository.Tests'
+  - 'UISampleSpark.Core.Tests'
+  - 'UISampleSpark.Data.Tests'
 
 # Query filters - adjust severity thresholds
 query-filters:

@@ -3,13 +3,13 @@
 ## 1. Executive Summary
 
 ### Scenario
-Upgrade the SampleMvcCRUD solution from .NET 9.0 to .NET 10.0, including all associated NuGet package updates.
+Upgrade the UISampleSpark solution from .NET 9.0 to .NET 10.0, including all associated NuGet package updates.
 
 ### Scope
 - **Total Projects**: 7 projects
 - **Current State**: All projects targeting net9.0
 - **Target State**: All projects targeting net10.0
-- **Main Application**: Blazor web application (Mwh.Sample.Web)
+- **Main Application**: Blazor web application (UISampleSpark.UI)
 - **Total Lines of Code**: ~11,180 LOC across all projects
 
 ### Selected Strategy
@@ -62,15 +62,15 @@ Execute a single, coordinated upgrade of all projects and packages simultaneousl
 While the Big Bang strategy upgrades all projects simultaneously, understanding the dependency order helps prioritize testing and troubleshooting:
 
 **Dependency Hierarchy**:
-1. **Foundation Layer**: Mwh.Sample.Domain (no dependencies, 5 dependants)
-2. **Data Layer**: Mwh.Sample.Repository (depends on Domain, 3 dependants)
-3. **Service Layer**: Mwh.Sample.HttpClientFactory (depends on Domain)
+1. **Foundation Layer**: UISampleSpark.Core (no dependencies, 5 dependants)
+2. **Data Layer**: UISampleSpark.Data (depends on Domain, 3 dependants)
+3. **Service Layer**: UISampleSpark.HttpClientFactory (depends on Domain)
 4. **Application Layer**: 
-   - Mwh.Sample.Web (depends on Repository, Domain)
-   - Mwh.Sample.Console (depends on Repository, Domain)
+   - UISampleSpark.UI (depends on Repository, Domain)
+   - UISampleSpark.CLI (depends on Repository, Domain)
 5. **Test Layer**: 
-   - Mwh.Sample.Domain.Tests (depends on Domain)
-   - Mwh.Sample.Repository.Tests (depends on Repository)
+   - UISampleSpark.Core.Tests (depends on Domain)
+   - UISampleSpark.Data.Tests (depends on Repository)
 
 **Critical Path**: Domain → Repository → Web/Console
 
@@ -99,19 +99,19 @@ While the Big Bang strategy upgrades all projects simultaneously, understanding 
 
 ```
 Level 0 (Foundation):
-  └─ Mwh.Sample.Domain (0 dependencies, 5 dependants)
+  └─ UISampleSpark.Core (0 dependencies, 5 dependants)
 
 Level 1 (Data Layer):
-  └─ Mwh.Sample.Repository (1 dependency: Domain)
-  └─ Mwh.Sample.HttpClientFactory (1 dependency: Domain)
+  └─ UISampleSpark.Data (1 dependency: Domain)
+  └─ UISampleSpark.HttpClientFactory (1 dependency: Domain)
 
 Level 2 (Application Layer):
-  └─ Mwh.Sample.Web (2 dependencies: Repository, Domain)
-  └─ Mwh.Sample.Console (2 dependencies: Repository, Domain)
+  └─ UISampleSpark.UI (2 dependencies: Repository, Domain)
+  └─ UISampleSpark.CLI (2 dependencies: Repository, Domain)
 
 Level 3 (Test Layer):
-  └─ Mwh.Sample.Domain.Tests (1 dependency: Domain)
-  └─ Mwh.Sample.Repository.Tests (1 dependency: Repository)
+  └─ UISampleSpark.Core.Tests (1 dependency: Domain)
+  └─ UISampleSpark.Data.Tests (1 dependency: Repository)
 ```
 
 ### 3.2 Project Groupings
@@ -122,10 +122,10 @@ Level 3 (Test Layer):
 
 **Phase 1: Atomic Upgrade**
 All projects upgraded simultaneously:
-- Foundation: Mwh.Sample.Domain
-- Data: Mwh.Sample.Repository, Mwh.Sample.HttpClientFactory
-- Applications: Mwh.Sample.Web, Mwh.Sample.Console
-- Tests: Mwh.Sample.Domain.Tests, Mwh.Sample.Repository.Tests
+- Foundation: UISampleSpark.Core
+- Data: UISampleSpark.Data, UISampleSpark.HttpClientFactory
+- Applications: UISampleSpark.UI, UISampleSpark.CLI
+- Tests: UISampleSpark.Core.Tests, UISampleSpark.Data.Tests
 
 **Phase 2: Test Validation**
 Execute all test projects to verify upgrade success.
@@ -134,7 +134,7 @@ Execute all test projects to verify upgrade success.
 
 ## 4. Project-by-Project Migration Plans
 
-### Project: Mwh.Sample.Domain
+### Project: UISampleSpark.Core
 
 **Current State**
 - Target Framework: net9.0
@@ -155,7 +155,7 @@ Execute all test projects to verify upgrade success.
    - None (foundation layer with no dependencies)
 
 2. **Framework Update**
-   - Update `Mwh.Sample.Domain.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
+   - Update `UISampleSpark.Core.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
 
 3. **Package Updates**
 
@@ -173,7 +173,7 @@ Execute all test projects to verify upgrade success.
    - Domain models should remain unchanged
 
 6. **Testing Strategy**
-   - Unit tests: Execute Mwh.Sample.Domain.Tests after upgrade
+   - Unit tests: Execute UISampleSpark.Core.Tests after upgrade
    - Verify all domain logic tests pass
    - Confirm no serialization or data type issues
 
@@ -186,12 +186,12 @@ Execute all test projects to verify upgrade success.
 
 ---
 
-### Project: Mwh.Sample.Repository
+### Project: UISampleSpark.Data
 
 **Current State**
 - Target Framework: net9.0
 - Project Type: ClassLibrary
-- Dependencies: 1 (Mwh.Sample.Domain)
+- Dependencies: 1 (UISampleSpark.Core)
 - Dependants: 3 (Web, Console, Repository.Tests)
 - Package Count: 4
 - LOC: 1,014
@@ -204,10 +204,10 @@ Execute all test projects to verify upgrade success.
 **Migration Steps**
 
 1. **Prerequisites**
-   - Mwh.Sample.Domain must be upgraded (happens simultaneously in Big Bang)
+   - UISampleSpark.Core must be upgraded (happens simultaneously in Big Bang)
 
 2. **Framework Update**
-   - Update `Mwh.Sample.Repository.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
+   - Update `UISampleSpark.Data.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
 
 3. **Package Updates**
 
@@ -232,7 +232,7 @@ Execute all test projects to verify upgrade success.
    - Verify migration compatibility if using EF migrations
 
 6. **Testing Strategy**
-   - Unit tests: Execute Mwh.Sample.Repository.Tests after upgrade
+   - Unit tests: Execute UISampleSpark.Data.Tests after upgrade
    - Verify all repository operations work correctly
    - Test in-memory database scenarios
    - Validate SQLite database operations
@@ -247,12 +247,12 @@ Execute all test projects to verify upgrade success.
 
 ---
 
-### Project: Mwh.Sample.HttpClientFactory
+### Project: UISampleSpark.HttpClientFactory
 
 **Current State**
 - Target Framework: net9.0
 - Project Type: ClassLibrary
-- Dependencies: 1 (Mwh.Sample.Domain)
+- Dependencies: 1 (UISampleSpark.Core)
 - Dependants: 0
 - Package Count: 2
 - LOC: 263
@@ -265,10 +265,10 @@ Execute all test projects to verify upgrade success.
 **Migration Steps**
 
 1. **Prerequisites**
-   - Mwh.Sample.Domain must be upgraded (happens simultaneously in Big Bang)
+   - UISampleSpark.Core must be upgraded (happens simultaneously in Big Bang)
 
 2. **Framework Update**
-   - Update `Mwh.Sample.HttpClientFactory.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
+   - Update `UISampleSpark.HttpClientFactory.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
 
 3. **Package Updates**
 
@@ -305,12 +305,12 @@ Execute all test projects to verify upgrade success.
 
 ---
 
-### Project: Mwh.Sample.Web
+### Project: UISampleSpark.UI
 
 **Current State**
 - Target Framework: net9.0
 - Project Type: AspNetCore (Blazor)
-- Dependencies: 2 (Mwh.Sample.Repository, Mwh.Sample.Domain)
+- Dependencies: 2 (UISampleSpark.Data, UISampleSpark.Core)
 - Dependants: 0
 - Package Count: 15
 - LOC: 4,883
@@ -323,10 +323,10 @@ Execute all test projects to verify upgrade success.
 **Migration Steps**
 
 1. **Prerequisites**
-   - Mwh.Sample.Repository and Mwh.Sample.Domain must be upgraded (happens simultaneously in Big Bang)
+   - UISampleSpark.Data and UISampleSpark.Core must be upgraded (happens simultaneously in Big Bang)
 
 2. **Framework Update**
-   - Update `Mwh.Sample.Web.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
+   - Update `UISampleSpark.UI.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
 
 3. **Package Updates**
 
@@ -357,7 +357,7 @@ Execute all test projects to verify upgrade success.
      - Improved component lifecycle
      - WebAssembly enhancements
      - SignalR improvements
-   - **EF Core**: Same considerations as Mwh.Sample.Repository
+   - **EF Core**: Same considerations as UISampleSpark.Data
    - **System.Text.Json**: Enhanced serialization capabilities
 
 5. **Code Modifications**
@@ -396,12 +396,12 @@ Execute all test projects to verify upgrade success.
 
 ---
 
-### Project: Mwh.Sample.Console
+### Project: UISampleSpark.CLI
 
 **Current State**
 - Target Framework: net9.0
 - Project Type: DotNetCoreApp
-- Dependencies: 2 (Mwh.Sample.Repository, Mwh.Sample.Domain)
+- Dependencies: 2 (UISampleSpark.Data, UISampleSpark.Core)
 - Dependants: 0
 - Package Count: 1
 - LOC: 70
@@ -414,10 +414,10 @@ Execute all test projects to verify upgrade success.
 **Migration Steps**
 
 1. **Prerequisites**
-   - Mwh.Sample.Repository and Mwh.Sample.Domain must be upgraded (happens simultaneously in Big Bang)
+   - UISampleSpark.Data and UISampleSpark.Core must be upgraded (happens simultaneously in Big Bang)
 
 2. **Framework Update**
-   - Update `Mwh.Sample.Console.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
+   - Update `UISampleSpark.CLI.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
 
 3. **Package Updates**
 
@@ -448,12 +448,12 @@ Execute all test projects to verify upgrade success.
 
 ---
 
-### Project: Mwh.Sample.Domain.Tests
+### Project: UISampleSpark.Core.Tests
 
 **Current State**
 - Target Framework: net9.0
 - Project Type: DotNetCoreApp (Test Project)
-- Dependencies: 1 (Mwh.Sample.Domain)
+- Dependencies: 1 (UISampleSpark.Core)
 - Dependants: 0
 - Package Count: 4
 - LOC: 2,195
@@ -466,10 +466,10 @@ Execute all test projects to verify upgrade success.
 **Migration Steps**
 
 1. **Prerequisites**
-   - Mwh.Sample.Domain must be upgraded (happens simultaneously in Big Bang)
+   - UISampleSpark.Core must be upgraded (happens simultaneously in Big Bang)
 
 2. **Framework Update**
-   - Update `Mwh.Sample.Domain.Tests.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
+   - Update `UISampleSpark.Core.Tests.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
 
 3. **Package Updates**
 
@@ -504,12 +504,12 @@ Execute all test projects to verify upgrade success.
 
 ---
 
-### Project: Mwh.Sample.Repository.Tests
+### Project: UISampleSpark.Data.Tests
 
 **Current State**
 - Target Framework: net9.0
 - Project Type: DotNetCoreApp (Test Project)
-- Dependencies: 1 (Mwh.Sample.Repository)
+- Dependencies: 1 (UISampleSpark.Data)
 - Dependants: 0
 - Package Count: 5
 - LOC: 1,188
@@ -522,10 +522,10 @@ Execute all test projects to verify upgrade success.
 **Migration Steps**
 
 1. **Prerequisites**
-   - Mwh.Sample.Repository must be upgraded (happens simultaneously in Big Bang)
+   - UISampleSpark.Data must be upgraded (happens simultaneously in Big Bang)
 
 2. **Framework Update**
-   - Update `Mwh.Sample.Repository.Tests.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
+   - Update `UISampleSpark.Data.Tests.csproj`: Change `<TargetFramework>net9.0</TargetFramework>` to `<TargetFramework>net10.0</TargetFramework>`
 
 3. **Package Updates**
 
@@ -574,16 +574,16 @@ Execute all test projects to verify upgrade success.
 
 ### Project-Specific Package Updates
 
-**Mwh.Sample.Domain**:
+**UISampleSpark.Core**:
 - System.Drawing.Common: 9.0.8 → 10.0.0
 
-**Mwh.Sample.Repository**:
+**UISampleSpark.Data**:
 - Microsoft.EntityFrameworkCore.Sqlite: 9.0.8 → 10.0.0
 
-**Mwh.Sample.HttpClientFactory**:
+**UISampleSpark.HttpClientFactory**:
 - Microsoft.Extensions.Http: 9.0.8 → 10.0.0
 
-**Mwh.Sample.Web**:
+**UISampleSpark.UI**:
 - Microsoft.EntityFrameworkCore.SqlServer: 9.0.8 → 10.0.0
 - Microsoft.EntityFrameworkCore.Tools: 9.0.8 → 10.0.0
 - Microsoft.VisualStudio.Web.CodeGeneration.Design: 9.0.0 → 10.0.0-rc.1.25458.5
@@ -667,18 +667,18 @@ After atomic upgrade completes:
 
 #### Unit Testing (Automated)
 Execute all test projects:
-- [ ] **Mwh.Sample.Domain.Tests**: All domain logic tests pass
+- [ ] **UISampleSpark.Core.Tests**: All domain logic tests pass
   - 18 test files
   - 2,195 LOC
   - Focus: Domain model validation, business logic
-- [ ] **Mwh.Sample.Repository.Tests**: All repository tests pass
+- [ ] **UISampleSpark.Data.Tests**: All repository tests pass
   - 10 test files
   - 1,188 LOC
   - Focus: Data access, EF Core operations, mocking
 
 #### Integration Testing (Manual)
 Main application validation:
-- [ ] **Mwh.Sample.Web** (Blazor application):
+- [ ] **UISampleSpark.UI** (Blazor application):
   - Application starts without errors
   - Database initialization successful
   - Blazor components render correctly
@@ -689,7 +689,7 @@ Main application validation:
   - Application Insights telemetry active
   - Azure Key Vault configuration loads
 
-- [ ] **Mwh.Sample.Console**:
+- [ ] **UISampleSpark.CLI**:
   - Console application runs successfully
   - Expected output generated
   - Repository interactions work
@@ -707,25 +707,25 @@ Expected: 0 errors, 0 warnings
 
 **Step 2: Run Domain Tests**
 ```bash
-dotnet test Mwh.Sample.Domain.Tests\Mwh.Sample.Domain.Tests.csproj
+dotnet test UISampleSpark.Core.Tests\UISampleSpark.Core.Tests.csproj
 ```
 Expected: All tests pass
 
 **Step 3: Run Repository Tests**
 ```bash
-dotnet test Mwh.Sample.Repository.Tests\Mwh.Sample.Repository.Tests.csproj
+dotnet test UISampleSpark.Data.Tests\UISampleSpark.Data.Tests.csproj
 ```
 Expected: All tests pass
 
 **Step 4: Run Blazor Application**
 ```bash
-dotnet run --project Mwh.Sample.Web\Mwh.Sample.Web.csproj
+dotnet run --project UISampleSpark.UI\UISampleSpark.UI.csproj
 ```
 Expected: Application starts, navigate to https://localhost:5001 and verify functionality
 
 **Step 5: Run Console Application**
 ```bash
-dotnet run --project Mwh.Sample.Console\Mwh.Sample.Console.csproj
+dotnet run --project UISampleSpark.CLI\UISampleSpark.CLI.csproj
 ```
 Expected: Successful execution with expected output
 
@@ -852,13 +852,13 @@ Justification:
 
 | Project | Complexity | Changes | Estimated Time | Risk |
 |---------|------------|---------|----------------|------|
-| Mwh.Sample.Domain | Low | TFM + 1 package | 5 minutes | Low |
-| Mwh.Sample.Repository | Low | TFM + 3 packages | 10 minutes | Low |
-| Mwh.Sample.HttpClientFactory | Low | TFM + 2 packages | 5 minutes | Low |
-| Mwh.Sample.Web | Medium | TFM + 7 packages | 15 minutes | Low-Medium |
-| Mwh.Sample.Console | Low | TFM only | 5 minutes | Low |
-| Mwh.Sample.Domain.Tests | Low | TFM only | 5 minutes | Low |
-| Mwh.Sample.Repository.Tests | Low | TFM only | 5 minutes | Low |
+| UISampleSpark.Core | Low | TFM + 1 package | 5 minutes | Low |
+| UISampleSpark.Data | Low | TFM + 3 packages | 10 minutes | Low |
+| UISampleSpark.HttpClientFactory | Low | TFM + 2 packages | 5 minutes | Low |
+| UISampleSpark.UI | Medium | TFM + 7 packages | 15 minutes | Low-Medium |
+| UISampleSpark.CLI | Low | TFM only | 5 minutes | Low |
+| UISampleSpark.Core.Tests | Low | TFM only | 5 minutes | Low |
+| UISampleSpark.Data.Tests | Low | TFM only | 5 minutes | Low |
 
 **Note**: Times reflect individual project complexity; Big Bang executes all simultaneously.
 
@@ -915,13 +915,13 @@ Applications verified manually.
 Breaking changes: None identified.
 
 Projects upgraded:
-- Mwh.Sample.Domain
-- Mwh.Sample.Repository
-- Mwh.Sample.HttpClientFactory
-- Mwh.Sample.Web
-- Mwh.Sample.Console
-- Mwh.Sample.Domain.Tests
-- Mwh.Sample.Repository.Tests
+- UISampleSpark.Core
+- UISampleSpark.Data
+- UISampleSpark.HttpClientFactory
+- UISampleSpark.UI
+- UISampleSpark.CLI
+- UISampleSpark.Core.Tests
+- UISampleSpark.Data.Tests
 ```
 
 **Alternative: Separate Test Validation Commit** (if preferred):
@@ -962,7 +962,7 @@ Use conventional commits format:
 **PR Description Template**:
 ```markdown
 ## Description
-Upgrades the entire SampleMvcCRUD solution from .NET 9.0 to .NET 10.0 using the Big Bang migration strategy.
+Upgrades the entire UISampleSpark solution from .NET 9.0 to .NET 10.0 using the Big Bang migration strategy.
 
 ## Changes
 - ✅ All 7 projects updated to net10.0
@@ -1040,10 +1040,10 @@ Big Bang - all projects upgraded simultaneously in single atomic operation
   - [ ] No package dependency conflicts
 
 - [ ] **Testing Complete**
-  - [ ] Mwh.Sample.Domain.Tests: All tests pass
-  - [ ] Mwh.Sample.Repository.Tests: All tests pass
-  - [ ] Mwh.Sample.Web: Application starts and core functionality verified
-  - [ ] Mwh.Sample.Console: Runs successfully with expected output
+  - [ ] UISampleSpark.Core.Tests: All tests pass
+  - [ ] UISampleSpark.Data.Tests: All tests pass
+  - [ ] UISampleSpark.UI: Application starts and core functionality verified
+  - [ ] UISampleSpark.CLI: Runs successfully with expected output
   - [ ] Performance within acceptable thresholds (no degradation)
 
 ### 11.2 Big Bang Strategy Success Criteria
@@ -1141,9 +1141,9 @@ Big Bang - all projects upgraded simultaneously in single atomic operation
 
 ### 13.2 Project Resources
 
-- **Solution File**: `C:\GitHub\MarkHazleton\SampleMvcCRUD\Mwh.Sample.Web.sln`
-- **Assessment Report**: `C:\GitHub\MarkHazleton\SampleMvcCRUD\.github\upgrades\assessment.md`
-- **Migration Plan**: `C:\GitHub\MarkHazleton\SampleMvcCRUD\.github\upgrades\plan.md`
+- **Solution File**: `C:\GitHub\MarkHazleton\UISampleSpark\UISampleSpark.UI.sln`
+- **Assessment Report**: `C:\GitHub\MarkHazleton\UISampleSpark\.github\upgrades\assessment.md`
+- **Migration Plan**: `C:\GitHub\MarkHazleton\UISampleSpark\.github\upgrades\plan.md`
 - **Upgrade Branch**: `upgrade-to-NET10`
 - **Source Branch**: `main`
 
@@ -1160,13 +1160,13 @@ Big Bang - all projects upgraded simultaneously in single atomic operation
 
 All project files to be modified:
 
-1. `Mwh.Sample.Domain\Mwh.Sample.Domain.csproj`
-2. `Mwh.Sample.Repository\Mwh.Sample.Repository.csproj`
-3. `Mwh.Sample.HttpClientFactory\Mwh.Sample.HttpClientFactory.csproj`
-4. `Mwh.Sample.Web\Mwh.Sample.Web.csproj`
-5. `Mwh.Sample.Console\Mwh.Sample.Console.csproj`
-6. `Mwh.Sample.Domain.Tests\Mwh.Sample.Domain.Tests.csproj`
-7. `Mwh.Sample.Repository.Tests\Mwh.Sample.Repository.Tests.csproj`
+1. `UISampleSpark.Core\UISampleSpark.Core.csproj`
+2. `UISampleSpark.Data\UISampleSpark.Data.csproj`
+3. `UISampleSpark.HttpClientFactory\UISampleSpark.HttpClientFactory.csproj`
+4. `UISampleSpark.UI\UISampleSpark.UI.csproj`
+5. `UISampleSpark.CLI\UISampleSpark.CLI.csproj`
+6. `UISampleSpark.Core.Tests\UISampleSpark.Core.Tests.csproj`
+7. `UISampleSpark.Data.Tests\UISampleSpark.Data.Tests.csproj`
 
 ---
 
@@ -1193,17 +1193,17 @@ dotnet clean
 dotnet test
 
 # Run specific test project
-dotnet test Mwh.Sample.Domain.Tests\Mwh.Sample.Domain.Tests.csproj
-dotnet test Mwh.Sample.Repository.Tests\Mwh.Sample.Repository.Tests.csproj
+dotnet test UISampleSpark.Core.Tests\UISampleSpark.Core.Tests.csproj
+dotnet test UISampleSpark.Data.Tests\UISampleSpark.Data.Tests.csproj
 ```
 
 ### Run Commands
 ```bash
 # Run Blazor application
-dotnet run --project Mwh.Sample.Web\Mwh.Sample.Web.csproj
+dotnet run --project UISampleSpark.UI\UISampleSpark.UI.csproj
 
 # Run Console application
-dotnet run --project Mwh.Sample.Console\Mwh.Sample.Console.csproj
+dotnet run --project UISampleSpark.CLI\UISampleSpark.CLI.csproj
 ```
 
 ### Package Commands

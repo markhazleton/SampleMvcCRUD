@@ -4,7 +4,7 @@
       "Bash(gh run list:*)",
       "Bash(gh run view:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nFix failing GitHub Actions workflows\n\n- Remove check for non-existent Mwh.Sample.HttpClientFactory directory in Docker workflow\n- Add libgdiplus installation step for System.Drawing GDI+ tests in Azure workflow\n- Fix Trivy SARIF upload to only run when scan succeeds\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git commit -m \"$(cat <<''EOF''\nFix failing GitHub Actions workflows\n\n- Remove check for non-existent UISampleSpark.HttpClientFactory directory in Docker workflow\n- Add libgdiplus installation step for System.Drawing GDI+ tests in Azure workflow\n- Fix Trivy SARIF upload to only run when scan succeeds\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git push)",
       "Bash(dotnet restore:*)",
       "Bash(dotnet build:*)",
@@ -12,10 +12,12 @@
       "Bash(git commit -m \"$(cat <<''EOF''\nMigrate from System.Drawing to SkiaSharp for cross-platform image processing\n\n- Replace System.Drawing.Common with SkiaSharp (v3.116.0) for MIT-licensed, cross-platform image support\n- Update ImageExtensions to use SKBitmap and SKSamplingOptions APIs\n- Update BaseController image upload to use SkiaSharp encoding\n- Update ImageExtensionsTests to use SkiaSharp types\n- Remove libgdiplus dependency from Azure workflow (no longer needed)\n- All 192 tests now pass on both Windows and Linux without native library dependencies\n\nBenefits:\n- No more libgdiplus dependency issues on Linux\n- Pure cross-platform solution with native library bundles\n- MIT license (no commercial restrictions)\n- Modern API using SKSamplingOptions instead of deprecated SKFilterQuality\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git commit -m \"$(cat <<''EOF''\nAdd SkiaSharp.NativeAssets.Linux for cross-platform support\n\n- Add SkiaSharp.NativeAssets.Linux package to provide native libraries for Linux\n- Ensures SkiaSharp works on both Windows and Linux without additional dependencies\n- Fixes libSkiaSharp.so loading issues in CI/CD pipelines\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(for id in 191 192 193 194 195 196 197)",
-      "Bash(do gh api repos/markhazleton/SampleMvcCRUD/code-scanning/alerts/$id -X PATCH -f state=dismissed -f dismissed_reason=\"won''t fix\" -f dismissed_comment=\"Auto-generated code in obj/ folder - not actionable\" --jq '.number,.state')",
+      "Bash(do gh api repos/markhazleton/UISampleSpark/code-scanning/alerts/$id -X PATCH -f state=dismissed -f dismissed_reason=\"won''t fix\" -f dismissed_comment=\"Auto-generated code in obj/ folder - not actionable\" --jq '.number,.state')",
       "Bash(done)",
       "Bash(for id in 177 178 179 180 181 182)",
-      "Bash(do gh api repos/markhazleton/SampleMvcCRUD/code-scanning/alerts/$id -X PATCH -f state=dismissed -f dismissed_reason=\"won''t fix\" -f dismissed_comment=\"Educational project - no authentication by design per CLAUDE.md\" --jq '.number,.state')"
+      "Bash(do gh api repos/markhazleton/UISampleSpark/code-scanning/alerts/$id -X PATCH -f state=dismissed -f dismissed_reason=\"won''t fix\" -f dismissed_comment=\"Educational project - no authentication by design per CLAUDE.md\" --jq '.number,.state')",
+      "Bash(powershell.exe:*)",
+      "Bash(dotnet clean:*)"
     ],
     "deny": [],
     "ask": []

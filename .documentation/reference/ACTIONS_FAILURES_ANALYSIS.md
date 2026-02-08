@@ -1,7 +1,7 @@
 # GitHub Actions Failures - Analysis and Fixes
 
 **Date**: 2025-11-16  
-**Repository**: markhazleton/SampleMvcCRUD  
+**Repository**: markhazleton/UISampleSpark  
 **Analysis Performed**: Using GitHub CLI and GitHub Actions Logs
 
 ---
@@ -28,18 +28,18 @@ The repository has multiple GitHub Actions failures across two main categories:
 
 #### Problem
 ```
-ERROR: failed to calculate checksum: "/Mwh.Sample.HttpClientFactory/Mwh.Sample.HttpClientFactory.csproj": not found
+ERROR: failed to calculate checksum: "/UISampleSpark.HttpClientFactory/UISampleSpark.HttpClientFactory.csproj": not found
 ```
 
 #### Root Cause
-The Docker build was failing to find the `Mwh.Sample.HttpClientFactory` project during the COPY phase. This occurred because:
+The Docker build was failing to find the `UISampleSpark.HttpClientFactory` project during the COPY phase. This occurred because:
 - Docker Buildx cache was potentially corrupted
 - The COPY command structure wasn't explicit enough for all projects
 - Cache restoration from previous builds may have cached an invalid state
 
 #### Solution Implemented
 
-**Updated Dockerfile** (`Mwh.Sample.Web/Dockerfile`):
+**Updated Dockerfile** (`UISampleSpark.UI/Dockerfile`):
 - ? Added explicit solution file copy
 - ? Added wildcard patterns for all project files
 - ? Included all projects (Web, Repository, Domain, HttpClientFactory, Console, Tests)
@@ -105,19 +105,19 @@ This is a **GitHub infrastructure issue**. The Dependabot service cannot find it
 ### 3. Missing Dependabot Configuration
 
 #### Problem
-The `Mwh.Sample.HttpClientFactory` project is not monitored by Dependabot for NuGet package updates.
+The `UISampleSpark.HttpClientFactory` project is not monitored by Dependabot for NuGet package updates.
 
 #### Impact
 - Low severity - HttpClientFactory dependencies won't be automatically updated
 - Could lead to security vulnerabilities or missed bug fixes over time
 
 #### Solution
-Add the following to `.github/dependabot.yml` after the `/Mwh.Sample.Repository` section:
+Add the following to `.github/dependabot.yml` after the `/UISampleSpark.Data` section:
 
 ```yaml
   # NuGet dependencies for HttpClientFactory project
   - package-ecosystem: "nuget"
-    directory: "/Mwh.Sample.HttpClientFactory"
+    directory: "/UISampleSpark.HttpClientFactory"
     schedule:
       interval: "weekly"
       day: "tuesday"
@@ -141,7 +141,7 @@ pwsh .github/scripts/check-dependabot.ps1
 
 ## Files Modified
 
-### 1. `Mwh.Sample.Web/Dockerfile`
+### 1. `UISampleSpark.UI/Dockerfile`
 **Changes**:
 - Added solution file copy
 - Updated all COPY commands to use wildcards
@@ -150,15 +150,15 @@ pwsh .github/scripts/check-dependabot.ps1
 
 **Before**:
 ```dockerfile
-COPY ["Mwh.Sample.HttpClientFactory/Mwh.Sample.HttpClientFactory.csproj", "Mwh.Sample.HttpClientFactory/"]
+COPY ["UISampleSpark.HttpClientFactory/UISampleSpark.HttpClientFactory.csproj", "UISampleSpark.HttpClientFactory/"]
 ```
 
 **After**:
 ```dockerfile
-COPY ["Mwh.Sample.Web.sln", "./"]
+COPY ["UISampleSpark.UI.sln", "./"]
 COPY ["nuget.config", "./"]
-COPY ["Mwh.Sample.Web/*.csproj", "Mwh.Sample.Web/"]
-COPY ["Mwh.Sample.HttpClientFactory/*.csproj", "Mwh.Sample.HttpClientFactory/"]
+COPY ["UISampleSpark.UI/*.csproj", "UISampleSpark.UI/"]
+COPY ["UISampleSpark.HttpClientFactory/*.csproj", "UISampleSpark.HttpClientFactory/"]
 # ... all other projects
 ```
 
@@ -176,7 +176,7 @@ COPY ["Mwh.Sample.HttpClientFactory/*.csproj", "Mwh.Sample.HttpClientFactory/"]
 ```yaml
 - name: Debug - List workspace structure
   run: |
-    ls -la Mwh.Sample.HttpClientFactory/
+    ls -la UISampleSpark.HttpClientFactory/
     
 - name: Build and push
   uses: docker/build-push-action@v6  # Updated from v5
@@ -204,10 +204,10 @@ PowerShell script to verify and display dependabot configuration
 ### Pre-Merge Testing
 ```bash
 # 1. Verify Dockerfile syntax
-docker run --rm -i hadolint/hadolint < Mwh.Sample.Web/Dockerfile
+docker run --rm -i hadolint/hadolint < UISampleSpark.UI/Dockerfile
 
 # 2. Test Docker build locally (if Docker Desktop is running)
-docker build -f Mwh.Sample.Web/Dockerfile -t mwhsampleweb:test .
+docker build -f UISampleSpark.UI/Dockerfile -t uisamplespark:test .
 
 # 3. Verify GitHub Actions workflow syntax
 gh workflow view docker-markhazletonsample
@@ -222,14 +222,14 @@ gh run list --limit 5
 gh run watch
 
 # 2. Verify the Docker image was pushed
-docker pull markhazleton/mwhsampleweb:latest
+docker pull markhazleton/uisamplespark:latest
 
 # 3. Run the container locally
-docker run -d -p 8080:80 markhazleton/mwhsampleweb:latest
+docker run -d -p 8080:80 markhazleton/uisamplespark:latest
 curl http://localhost:8080
 
 # 4. Check Dependabot status
-gh api repos/markhazleton/SampleMvcCRUD/dependabot/alerts
+gh api repos/markhazleton/UISampleSpark/dependabot/alerts
 ```
 
 ---
@@ -293,8 +293,8 @@ The Dependabot Docker updater failures are external to this repository and will 
 ## Contact and Support
 
 For questions or issues:
-- GitHub Issues: https://github.com/markhazleton/SampleMvcCRUD/issues
-- GitHub Discussions: https://github.com/markhazleton/SampleMvcCRUD/discussions
+- GitHub Issues: https://github.com/markhazleton/UISampleSpark/issues
+- GitHub Discussions: https://github.com/markhazleton/UISampleSpark/discussions
 
 **Generated by**: GitHub Copilot Agent  
 **Analysis Date**: 2025-11-16  

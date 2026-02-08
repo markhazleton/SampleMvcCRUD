@@ -2,7 +2,7 @@
 
 ## Overview
 
-This scenario upgrades the entire SampleMvcCRUD solution (7 projects) from .NET 9.0 to .NET 10.0 using the Big Bang strategy. All framework and package updates are performed atomically, followed by unified testing and a single commit.
+This scenario upgrades the entire UISampleSpark solution (7 projects) from .NET 9.0 to .NET 10.0 using the Big Bang strategy. All framework and package updates are performed atomically, followed by unified testing and a single commit.
 
 **Progress**: 3/3 tasks complete (100%) ![100%](https://progress-bar.xyz/100)
 
@@ -20,7 +20,7 @@ This scenario upgrades the entire SampleMvcCRUD solution (7 projects) from .NET 
 ### [✓] TASK-002: Run full test suite *(Completed: 2025-11-16 12:59)*
 **References**: Plan §Phase 2, Plan §7.1, Plan §7.2
 
-- [✓] (1) Run tests in Mwh.Sample.Domain.Tests and Mwh.Sample.Repository.Tests projects
+- [✓] (1) Run tests in UISampleSpark.Core.Tests and UISampleSpark.Data.Tests projects
 - [✓] (2) Fix any test failures from upgrade (reference Plan §6 for common issues)
 - [✓] (3) Re-run tests after fixes
 - [✓] (4) All tests passed with 0 failures (**Verify**)

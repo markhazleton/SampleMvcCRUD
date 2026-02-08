@@ -4,7 +4,7 @@ Use this checklist to track the resolution of GitHub Actions failures.
 
 ## Pre-Commit Checklist
 
-- [ ] Reviewed changes in `Mwh.Sample.Web/Dockerfile`
+- [ ] Reviewed changes in `UISampleSpark.UI/Dockerfile`
 - [ ] Reviewed changes in `.github/workflows/docker-image.yml`
 - [ ] Read `GITHUB_ACTIONS_FIX_SUMMARY.md`
 - [ ] Read `.github/ACTIONS_FAILURES_ANALYSIS.md`
@@ -35,8 +35,8 @@ Use this checklist to track the resolution of GitHub Actions failures.
 
 ## Docker Image Testing (Optional)
 
-- [ ] Pull the new image: `docker pull markhazleton/mwhsampleweb:latest`
-- [ ] Run locally: `docker run -d -p 8080:80 markhazleton/mwhsampleweb:latest`
+- [ ] Pull the new image: `docker pull markhazleton/uisamplespark:latest`
+- [ ] Run locally: `docker run -d -p 8080:80 markhazleton/uisamplespark:latest`
 - [ ] Test endpoint: `curl http://localhost:8080`
 - [ ] Stop container: `docker stop <container-id>`
 - [ ] Clean up: `docker rm <container-id>`
@@ -152,10 +152,10 @@ gh run view <run-id> --log-failed
 gh run rerun <run-id> --failed
 
 # Pull Docker image
-docker pull markhazleton/mwhsampleweb:latest
+docker pull markhazleton/uisamplespark:latest
 
 # Test Docker image
-docker run -d -p 8080:80 markhazleton/mwhsampleweb:latest
+docker run -d -p 8080:80 markhazleton/uisamplespark:latest
 
 # Check Dependabot PRs
 gh pr list --author app/dependabot
@@ -178,6 +178,6 @@ This checklist is complete when:
 ---
 
 **Checklist Created**: 2025-11-16  
-**Project**: SampleMvcCRUD  
+**Project**: UISampleSpark  
 **Responsible**: Mark Hazleton  
 **Review Date**: _______________

@@ -41,7 +41,7 @@ We actively scan for vulnerabilities despite the educational scope:
 | **Dependabot** | Daily | Automated dependency update PRs |
 | **.NET Analyzers** | Every build | Built-in security rule violations (CA5xxx, CA3xxx) |
 
-View security scan results: [GitHub Security Tab](https://github.com/MarkHazleton/SampleMvcCRUD/security)
+View security scan results: [GitHub Security Tab](https://github.com/MarkHazleton/UISampleSpark/security)
 
 ---
 
@@ -62,8 +62,8 @@ We use GitHub issues to track vulnerabilities in this educational project.
 
 **To report a security issue**:
 
-1. **Public Issues**: For educational/demonstration vulnerabilities, [open a public issue](https://github.com/MarkHazleton/SampleMvcCRUD/issues/new?template=bug_report.md)
-2. **Private Disclosure**: For serious vulnerabilities in dependencies, use [GitHub Security Advisories](https://github.com/MarkHazleton/SampleMvcCRUD/security/advisories/new)
+1. **Public Issues**: For educational/demonstration vulnerabilities, [open a public issue](https://github.com/MarkHazleton/UISampleSpark/issues/new?template=bug_report.md)
+2. **Private Disclosure**: For serious vulnerabilities in dependencies, use [GitHub Security Advisories](https://github.com/MarkHazleton/UISampleSpark/security/advisories/new)
 
 **Response Time**: Best effort (this is not a production application)
 

@@ -7,9 +7,9 @@ I've successfully analyzed and resolved the failing GitHub Actions in your repos
 ## Issues Found and Resolved
 
 ### 1. ? Docker Build Failure - FIXED
-**Problem**: Build was failing to find `Mwh.Sample.HttpClientFactory` project
+**Problem**: Build was failing to find `UISampleSpark.HttpClientFactory` project
 **Solution**: 
-- Updated `Mwh.Sample.Web/Dockerfile` with:
+- Updated `UISampleSpark.UI/Dockerfile` with:
   - Explicit solution file copy
   - Wildcard patterns for all project files
   - All projects included explicitly
@@ -21,13 +21,13 @@ I've successfully analyzed and resolved the failing GitHub Actions in your repos
 **Action**: Monitor https://www.githubstatus.com/ - will resolve automatically
 
 ### 3. ?? Missing Dependabot Configuration - DOCUMENTED
-**Problem**: `Mwh.Sample.HttpClientFactory` not in dependabot.yml
+**Problem**: `UISampleSpark.HttpClientFactory` not in dependabot.yml
 **Status**: Documented, manual PR needed to update dependabot.yml
 **Location**: See `.github/ACTIONS_FAILURES_ANALYSIS.md` for the configuration
 
 ## Files Modified
 
-1. **Mwh.Sample.Web/Dockerfile**
+1. **UISampleSpark.UI/Dockerfile**
    - Fixed project copy commands
    - Added all projects explicitly
    - Enhanced build configuration
@@ -96,7 +96,7 @@ gh run list --limit 5
 gh run view $(gh run list --limit 1 --json databaseId --jq '.[0].databaseId')
 
 # Verify Docker image
-docker pull markhazleton/mwhsampleweb:latest
+docker pull markhazleton/uisamplespark:latest
 ```
 
 ## What to Expect

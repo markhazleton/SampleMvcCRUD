@@ -6,7 +6,7 @@
 - **Scope**: full
 - **Auditor**: speckit.site-audit
 - **Constitution Version**: v1.0.0 (Ratified 2026-02-05)
-- **Repository**: SampleMvcCRUD
+- **Repository**: UISampleSpark
 
 ## Executive Summary
 
@@ -55,12 +55,12 @@
 | ID | Principle | File:Line | Issue | Severity | Recommendation |
 |----|-----------|-----------|-------|----------|----------------|
 | CICD1 | VI. CI/CD & DevOps | .github/workflows/ | Missing test-build.yml workflow | CRITICAL | Create workflow that runs `dotnet test` on PRs and main |
-| ERR1 | III. Error Handling | Mwh.Sample.Web/Program.cs:74 | UseExceptionHandler without custom IExceptionHandler | CRITICAL | Implement IExceptionHandler for global error handling |
+| ERR1 | III. Error Handling | UISampleSpark.UI/Program.cs:74 | UseExceptionHandler without custom IExceptionHandler | CRITICAL | Implement IExceptionHandler for global error handling |
 | SEC1 | IV. Security Posture | SECURITY.md | Missing educational scope warning | HIGH | Update SECURITY.md to document "not production-ready" |
-| LOG1 | VII. Observability | Mwh.Sample.Repository/ | No ILogger<T> usage in Repository layer | HIGH | Add structured logging to Repository and Services |
-| DOC1 | VIII. Documentation | Mwh.Sample.Domain/ | Incomplete XML documentation | MEDIUM | Add XML docs to all public APIs |
-| DOC2 | VIII. Documentation | Mwh.Sample.Repository/ | No XML documentation | MEDIUM | Add XML docs to Repository classes |
-| DOC3 | VIII. Documentation | Mwh.Sample.Web/Controllers/ | Sparse XML documentation | MEDIUM | Add XML docs for Swagger integration |
+| LOG1 | VII. Observability | UISampleSpark.Data/ | No ILogger<T> usage in Repository layer | HIGH | Add structured logging to Repository and Services |
+| DOC1 | VIII. Documentation | UISampleSpark.Core/ | Incomplete XML documentation | MEDIUM | Add XML docs to all public APIs |
+| DOC2 | VIII. Documentation | UISampleSpark.Data/ | No XML documentation | MEDIUM | Add XML docs to Repository classes |
+| DOC3 | VIII. Documentation | UISampleSpark.UI/Controllers/ | Sparse XML documentation | MEDIUM | Add XML docs for Swagger integration |
 
 ## Security Findings
 
@@ -116,7 +116,7 @@
 
 **SEC2: JavaScript exec() Usage in Vendor Libraries (LOW)**
 - **Files**: 
-  - Mwh.Sample.Web/wwwroot/lib/jquery/jquery.js (16 occurrences)
+  - UISampleSpark.UI/wwwroot/lib/jquery/jquery.js (16 occurrences)
 - **Issue**: Third-party JavaScript libraries contain `exec()` calls (regex pattern matching, not eval-style execution)
 - **Risk**: Low - These are standard jQuery/DataTables regex operations, not arbitrary code execution
 - **Recommendation**: Accept risk (vendor libraries) but consider updating to latest versions in next maintenance cycle
@@ -136,7 +136,7 @@
 | Vulnerable | 0 |
 | Unused | 0 |
 
-#### Key Dependencies (Mwh.Sample.Web)
+#### Key Dependencies (UISampleSpark.UI)
 
 | Package | Version | Status |
 |---------|---------|--------|
@@ -181,12 +181,12 @@
 
 | Type | Count | Files |
 |------|-------|-------|
-| TODO (Source) | 1 | Mwh.Sample.Repository/Repository/EmployeeMock.cs |
+| TODO (Source) | 1 | UISampleSpark.Data/Repository/EmployeeMock.cs |
 | TODO (Vendor) | 4 | wwwroot/lib/datatables, jquery |
 | BUG (Vendor) | 14 | wwwroot/lib/jquery, jquery-validation |
 
 **Source Code TODO**:
-- **Line 254**, Mwh.Sample.Repository/Repository/EmployeeMock.cs: "Update Department"
+- **Line 254**, UISampleSpark.Data/Repository/EmployeeMock.cs: "Update Department"
   - **Severity**: LOW
   - **Recommendation**: Complete implementation or create GitHub issue to track
 
@@ -226,8 +226,8 @@
 ### Untested Areas
 
 **Web Layer** (Controllers, Pages):
-- ⚠️ Mwh.Sample.Web/Controllers/* - No controller tests (expected for educational scope)
-- ⚠️ Mwh.Sample.Web/Pages/* - No Razor Page tests (expected for educational scope)
+- ⚠️ UISampleSpark.UI/Controllers/* - No controller tests (expected for educational scope)
+- ⚠️ UISampleSpark.UI/Pages/* - No Razor Page tests (expected for educational scope)
 
 **Recommendation**: Coverage is excellent for Domain and Repository layers (the testable business logic). Web layer testing would be nice-to-have but not required per Constitution Principle V.
 
@@ -405,7 +405,7 @@ jobs:
 
 ### Dockerfile Compliance (Principle X)
 
-**File**: Mwh.Sample.Web/Dockerfile
+**File**: UISampleSpark.UI/Dockerfile
 
 | Requirement | Status | Evidence |
 |-------------|--------|----------|
@@ -592,7 +592,7 @@ Automated duplicate detection not performed (requires tools like SonarQube, ReSh
 
 6. **Complete EmployeeMock.cs TODO**
    - **Priority**: 🟡 MEDIUM
-   - **File**: Mwh.Sample.Repository/Repository/EmployeeMock.cs:254
+   - **File**: UISampleSpark.Data/Repository/EmployeeMock.cs:254
    - **Action**: Implement "Update Department" functionality or remove TODO
    - **Effort**: 1-2 hours
    - **Test**: Add unit test for department update logic
@@ -796,6 +796,6 @@ Automated duplicate detection not performed (requires tools like SonarQube, ReSh
 ---
 
 *Audit generated by speckit.site-audit v1.0*  
-*Constitution-driven codebase audit for SampleMvcCRUD*  
+*Constitution-driven codebase audit for UISampleSpark*  
 *Next audit recommended: 2026-02-12 (weekly cadence)*  
 *To re-run: `/speckit.site-audit` or `/speckit.site-audit --scope=constitution`*

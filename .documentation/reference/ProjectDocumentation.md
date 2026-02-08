@@ -35,7 +35,7 @@ Namespace: `Global`
   - /// Default Page for Employee Controller   ///
 ---
 ## Class: `EmployeePivotController`
-Namespace: `Mwh.Sample.Web.Controllers`
+Namespace: `UISampleSpark.UI.Controllers`
 
 ///   ///
 
@@ -50,7 +50,7 @@ Namespace: `Mwh.Sample.Web.Controllers`
   - /// GetEmployeeList     ///
 ---
 ## Class: `EmployeeReactController`
-Namespace: `Mwh.Sample.Web.Controllers`
+Namespace: `UISampleSpark.UI.Controllers`
 
 /// React-based Employee CRUD Controller ///
 
@@ -69,7 +69,7 @@ Namespace: `Mwh.Sample.Web.Controllers`
 - Features: sortable table, search/filter, pagination, modal forms, delete confirmation, toast notifications
 ---
 ## Class: `EmployeeSinglePageController`
-Namespace: `Mwh.Sample.Web.Controllers`
+Namespace: `UISampleSpark.UI.Controllers`
 
 /// Single Page Javascript Example Controller   ///
 
@@ -218,7 +218,7 @@ Namespace: `Global`
 
 ---
 ## Class: `ErrorModel`
-Namespace: `Mwh.Sample.Web.Pages`
+Namespace: `UISampleSpark.UI.Pages`
 
 ### Properties:
 
@@ -299,7 +299,7 @@ Namespace: `Global`
 
 ---
 ## Class: `CreateModel`
-Namespace: `Mwh.Sample.Web.Pages.EmployeeRazor`
+Namespace: `UISampleSpark.UI.Pages.EmployeeRazor`
 
 ### Properties:
 
@@ -311,7 +311,7 @@ Namespace: `Mwh.Sample.Web.Pages.EmployeeRazor`
 - `OnPostAsync()`: Returns `Task<IActionResult>`
 ---
 ## Class: `DeleteModel`
-Namespace: `Mwh.Sample.Web.Pages.EmployeeRazor`
+Namespace: `UISampleSpark.UI.Pages.EmployeeRazor`
 
 ### Properties:
 
@@ -323,7 +323,7 @@ Namespace: `Mwh.Sample.Web.Pages.EmployeeRazor`
 - `OnPostAsync(int? id)`: Returns `Task<IActionResult>`
 ---
 ## Class: `DetailsModel`
-Namespace: `Mwh.Sample.Web.Pages.EmployeeRazor`
+Namespace: `UISampleSpark.UI.Pages.EmployeeRazor`
 
 ### Properties:
 
@@ -334,7 +334,7 @@ Namespace: `Mwh.Sample.Web.Pages.EmployeeRazor`
 - `OnGetAsync(int? id)`: Returns `Task<IActionResult>`
 ---
 ## Class: `EditModel`
-Namespace: `Mwh.Sample.Web.Pages.EmployeeRazor`
+Namespace: `UISampleSpark.UI.Pages.EmployeeRazor`
 
 ### Properties:
 
@@ -347,7 +347,7 @@ Namespace: `Mwh.Sample.Web.Pages.EmployeeRazor`
 - `OnPostAsync()`: Returns `Task<IActionResult>`
 ---
 ## Class: `IndexModel`
-Namespace: `Mwh.Sample.Web.Pages.EmployeeRazor`
+Namespace: `UISampleSpark.UI.Pages.EmployeeRazor`
 
 ### Properties:
 
@@ -358,7 +358,7 @@ Namespace: `Mwh.Sample.Web.Pages.EmployeeRazor`
 - `OnGetAsync()`: Returns `Task`
 ---
 ## Class: `DepartmentApiController`
-Namespace: `Mwh.Sample.Web.Controllers.Api.Employee.v1`
+Namespace: `UISampleSpark.UI.Controllers.Api.Employee.v1`
 
 ///   ///
 

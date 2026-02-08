@@ -161,15 +161,15 @@ gh api users/:username/packages/container/:package-name
 
 ```bash
 # Build Docker image
-docker build -f Mwh.Sample.Web/Dockerfile -t mwhsampleweb:test .
+docker build -f UISampleSpark.UI/Dockerfile -t uisamplespark:test .
 
 # Build with build args
-docker build -f Mwh.Sample.Web/Dockerfile \
+docker build -f UISampleSpark.UI/Dockerfile \
   --build-arg BUILDKIT_INLINE_CACHE=1 \
-  -t mwhsampleweb:test .
+  -t uisamplespark:test .
 
 # Run container
-docker run -d -p 8080:80 mwhsampleweb:test
+docker run -d -p 8080:80 uisamplespark:test
 
 # View container logs
 docker logs <container-id>

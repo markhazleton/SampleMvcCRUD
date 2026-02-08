@@ -1,6 +1,6 @@
 # Dependency & Security Resolution Plan
 **Date**: February 3, 2026  
-**Repository**: markhazleton/SampleMvcCRUD
+**Repository**: markhazleton/UISampleSpark
 
 ## Executive Summary
 
@@ -165,7 +165,7 @@ dotnet build
 dotnet test
 
 # Check GitHub Actions runs:
-# Visit: https://github.com/markhazleton/SampleMvcCRUD/actions
+# Visit: https://github.com/markhazleton/UISampleSpark/actions
 # Verify latest runs on main branch pass
 
 # Check Azure deployment:

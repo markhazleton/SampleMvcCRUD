@@ -345,7 +345,7 @@ ASALocalRun/
 healthchecksdb
 
 # ==============================================================================
-# Project-Specific Ignores (SampleMvcCRUD)
+# Project-Specific Ignores (UISampleSpark)
 # ==============================================================================
 
 # Test Coverage Reports (modern .NET test tools)
