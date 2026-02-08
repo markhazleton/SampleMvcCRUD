@@ -62,7 +62,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/apt/* ~/.cache
 
 # Copy solution and nuget configuration
-COPY ["UISampleSpark.UI.sln", "./"]
+COPY ["UISampleSpark.sln", "./"]
 COPY ["nuget.config", "./"]
 
 # Copy all project files - ensuring proper directory structure
