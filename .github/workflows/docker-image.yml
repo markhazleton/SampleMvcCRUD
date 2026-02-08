@@ -98,10 +98,12 @@ jobs:
 
       - name: Test Docker image locally
         run: |
-          # Start container
-          docker run --rm -d --name test-container \
+          # Start container (without --rm so we can get logs after crash)
+          CONTAINER_ID=$(docker run -d --name test-container \
             -p 8080:8080 \
-            ${{ secrets.DOCKERHUB_USERNAME }}/uisamplespark:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/uisamplespark:latest)
+          
+          echo "Container ID: $CONTAINER_ID"
           
           # Wait for container to start
           sleep 10
@@ -114,19 +116,23 @@ jobs:
             # Try health check
             if curl -f http://localhost:8080; then
               echo "✓ Health check passed"
+              docker stop test-container
+              docker rm test-container
             else
-              echo "✗ Health check failed"
+              echo "✗ Health check failed but container is running"
               echo "Container logs:"
               docker logs test-container
-              docker stop test-container || true
+              docker stop test-container
+              docker rm test-container
               exit 1
             fi
-            
-            docker stop test-container
           else
             echo "✗ Container exited immediately"
-            echo "Container logs:"
-            docker logs test-container || echo "No logs available"
+            echo "Detailed container logs:"
+            docker logs test-container 2>&1 || echo "Could not retrieve logs"
+            echo "Container inspect:"
+            docker inspect test-container || echo "Could not inspect"
+            docker rm test-container || true
             exit 1
           fi
 
