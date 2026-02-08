@@ -98,12 +98,37 @@ jobs:
 
       - name: Test Docker image locally
         run: |
+          # Start container
           docker run --rm -d --name test-container \
             -p 8080:8080 \
             ${{ secrets.DOCKERHUB_USERNAME }}/uisamplespark:latest
+          
+          # Wait for container to start
           sleep 10
-          curl -f http://localhost:8080 || echo "Health check failed"
-          docker stop test-container
+          
+          # Check if container is still running
+          if docker ps | grep test-container; then
+            echo "✓ Container is running"
+            docker logs test-container
+            
+            # Try health check
+            if curl -f http://localhost:8080; then
+              echo "✓ Health check passed"
+            else
+              echo "✗ Health check failed"
+              echo "Container logs:"
+              docker logs test-container
+              docker stop test-container || true
+              exit 1
+            fi
+            
+            docker stop test-container
+          else
+            echo "✗ Container exited immediately"
+            echo "Container logs:"
+            docker logs test-container || echo "No logs available"
+            exit 1
+          fi
 
       - name: Run Trivy vulnerability scanner
         id: trivy-scan
