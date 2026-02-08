@@ -55,10 +55,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddServerSideBlazor();
 
 // Monitoring and diagnostics
-builder.Services.AddApplicationInsightsTelemetry(options =>
+var appInsightsConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+if (!string.IsNullOrWhiteSpace(appInsightsConnectionString))
 {
-    options.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
-});
+    builder.Services.AddApplicationInsightsTelemetry(options =>
+    {
+        options.ConnectionString = appInsightsConnectionString;
+    });
+}
 builder.Services.AddHealthChecks();
 
 // Problem details for standardized error responses
