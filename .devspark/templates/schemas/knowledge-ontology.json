@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bsw-devspark.bswhive.com/schemas/knowledge-ontology.json",
+  "title": "BSW.DevSpark Knowledge Ontology",
+  "description": "Authoritative machine-readable vocabulary for the Knowledge supply contract. Tooling, schemas, and prompts read this instead of restating the lists independently; a contract test proves it stays synchronized with build_knowledge_index.py, entity-node.schema.json, and taxonomy-registry.schema.json.",
+  "forms": {
+    "description": "Structural kind of a Knowledge artifact: what the artifact IS. Derived, never authored and never assignable by the taxonomy registry.",
+    "values": {
+      "flat-document": "A standalone Knowledge document under .knowledge/ that is not part of an entity.",
+      "entity-layer": "A facet document under .knowledge/entities/<id>/ describing one layer of an entity.",
+      "governance-decision": "A present-tense decision document under .knowledge/governance/decisions/."
+    },
+    "determination": {
+      "authored": false,
+      "persisted": "derived",
+      "rule": "Form is computed from artifact location and filename. Frontmatter may restate the resulting form but may not select it; a declared form that contradicts structure is a build error.",
+      "precedence": [
+        "1. recognized entity-layer location (.knowledge/entities/<id>/)",
+        "2. recognized governance-decision location (.knowledge/governance/decisions/), excluding navigational filenames",
+        "3. flat-document fallback"
+      ],
+      "navigationFilenames": ["README.md", "index.md"],
+      "navigationRule": "A file that indexes a directory is navigation, not a member of it. This is why .knowledge/governance/decisions/README.md is a flat-document rather than a decision, and it depends on the filename rather than on anything the document claims about itself."
+    }
+  },
+  "roles": {
+    "description": "The kind of truth an artifact carries: what the artifact SAYS. Each form draws its role from its own domain; no role name was invented for 7.8-A.",
+    "byForm": {
+      "flat-document": [
+        "authoritative-reference",
+        "engineering-pattern",
+        "reference-data",
+        "operations-runbook",
+        "research-or-context",
+        "architecture",
+        "governance"
+      ],
+      "entity-layer": [
+        "architecture",
+        "business",
+        "integration",
+        "operations",
+        "pattern",
+        "plan"
+      ],
+      "governance-decision": ["governance"]
+    },
+    "assignableByTaxonomy": "flat-document",
+    "bySource": {
+      "flat-document": {
+        "source": "explicit frontmatter `type`, otherwise the taxonomy registry, otherwise authoritative-reference",
+        "authorMayOverride": true
+      },
+      "entity-layer": {
+        "source": "the document's `layer` field",
+        "authorMayOverride": false
+      },
+      "governance-decision": {
+        "source": "always governance",
+        "authorMayOverride": false
+      }
+    },
+    "taxonomyResolution": "Most specific matching pattern wins regardless of declaration order. A repository mapping outranks a built-in default only as a tiebreak at equal specificity. Two same-origin mappings of equal specificity that disagree are ambiguous and fail loudly."
+  },
+  "canonicalFields": {
+    "description": "Which field a consumer MUST read for each concept. No 7.8 code should have to decide which meaning of `type` was intended.",
+    "form": {
+      "canonical": "node.form",
+      "compatibility": "node.type, when the node is not a flat document",
+      "newAuthorsUse": "nothing - form is derived"
+    },
+    "role": {
+      "canonical": "node.role",
+      "compatibility": "node.type, when the node is a flat document",
+      "newAuthorsUse": "frontmatter `type` on flat documents; `layer` on entity layers"
+    },
+    "entityType": {
+      "canonical": "entity.type",
+      "compatibility": "entity.type - unchanged, it was never overloaded",
+      "newAuthorsUse": "_entity.yaml `type`"
+    }
+  },
+  "entityTypes": {
+    "description": "Controlled semantic classification for an entity. Advisory: an entity type never requires a layer to exist.",
+    "values": {
+      "subsystem": "An internal capability of the system this repository builds.",
+      "domain": "A business/problem-space concept whose rules originate outside the code.",
+      "integration": "A boundary with an external system, protocol, or third-party service.",
+      "tooling": "Developer-facing automation that supports delivery rather than being shipped."
+    },
+    "unknownType": {
+      "behavior": "block-materialization",
+      "rule": "If evidence supports a concept but no entity type can be chosen confidently, the entity is not materialized. There is no fallback type. The concept may still exist as a discovery proposal or as flat Knowledge; what is blocked is minting an authoritative entity, not recognizing the idea."
+    },
+    "extensibility": {
+      "closedFor": "materialization",
+      "rule": "The vocabulary is closed to tools and open to deliberate schema change. No tool may invent a type at runtime.",
+      "requirementsToAdd": [
+        "repository evidence that the concept recurs",
+        "a semantic distinction no existing type already carries",
+        "no overlap with an existing type",
+        "schema update here and in entity-node.schema.json",
+        "contract tests covering the new value",
+        "Knowledge Framework Contract update"
+      ]
+    },
+    "layerIndependence": "Entity type and entity-layer role are independent axes that happen to share the name `integration`. An entity may BE a boundary (type=integration) or merely HAVE an integration facet (layer=integration). Neither implies the other."
+  },
+  "claimKinds": {
+    "description": "How a Knowledge artifact may reference a repository path. The two are never interchangeable: only ownership participates in ownership-overlap analysis.",
+    "values": {
+      "source_of_truth": "Evidence ownership - artifacts that materially implement, prove, or constrain this Knowledge, such that changing them may make it stale.",
+      "appliesTo": "Applicability scope - where this Knowledge governs, applies, or must be considered. Not ownership."
+    },
+    "ownershipTest": "If this source changed materially, could this Knowledge become stale or incorrect? If no, it is not source_of_truth.",
+    "eligibleAsOwnership": [
+      "production source",
+      "test source that materially proves or constrains the documented behavior",
+      "schemas",
+      "configuration that determines behavior",
+      "command templates and scripts",
+      "documentation that itself defines behavior"
+    ],
+    "ineligibleAsOwnership": [
+      "generated build output",
+      "temporary work artifacts under .devspark.work/",
+      "archived specs under .archive/",
+      "incidental references",
+      "files that merely mention the concept"
+    ],
+    "multipleOwners": "Not invalid. A genuinely cross-cutting file may implement more than one concept, so two owners is surfaced for review rather than prohibited.",
+    "behavior": {
+      "sourceNavigation": { "source_of_truth": true, "appliesTo": false },
+      "driftAndStaleness": { "source_of_truth": true, "appliesTo": false },
+      "ownershipOverlap": { "source_of_truth": true, "appliesTo": false },
+      "governanceApplicability": { "source_of_truth": false, "appliesTo": true },
+      "contextRelevance": { "source_of_truth": true, "appliesTo": true }
+    }
+  },
+  "entityModel": {
+    "relationships": "Semantic relationships belong to the entity, authored as `relations` in _entity.yaml. An entity layer may not author them; `links` on a layer is a build error rather than an ignored field.",
+    "hasLayer": "The entity -> layer edge is framework-derived composition, not an authored semantic relation.",
+    "layerIdentity": "A layer describes one facet of its parent entity and has no independent conceptual identity. It may carry aliases, because aliases are a retrieval affordance rather than graph identity.",
+    "flatVersusEntity": "Flat Knowledge is the default. An entity exists only when a durable concept benefits from multiple independently useful facets, graph identity, or distinct ownership and drift accounting. File count and directory spread are evidence, never justification on their own."
+  },
+  "integrityFindings": {
+    "meaning": "A finding represents a condition that deserves current attention.",
+    "acceptedOverride": "A valid authored role that differs from a broad taxonomy glob is the precedence rule working as designed, and is not a finding.",
+    "contradiction": "A valid authored role that differs from an exact-path taxonomy mapping is two deliberate statements disagreeing about one file, and is a finding."
+  },
+  "compatibility": {
+    "typeField": "Pre-7.8 consumers read a single `type` field. It is retained with its exact historical values - the role for a flat document, the form otherwise - and is compatibility-only. On a flat document an authored `type` means role and nothing else; it carries no structural meaning. `form` and `role` are canonical."
+  }
+}

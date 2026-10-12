@@ -1,0 +1,17 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        ".devspark.work/scripts/bash/": true,
+        ".devspark.work/scripts/powershell/": true
+    },
+    "json.schemas": [
+        {
+            "fileMatch": [".devspark.work/devspark.json"],
+            "url": "./.devspark/templates/devspark-config.schema.json"
+        },
+        {
+            "fileMatch": [".devspark.work/devspark.json", ".devspark.work/devspark.registry.json"],
+            "url": "./.devspark/templates/devspark-registry.schema.json"
+        }
+    ]
+}
+

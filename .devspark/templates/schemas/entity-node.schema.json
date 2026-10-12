@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bsw-devspark.bswhive.com/schemas/entity-node.schema.json",
+  "title": "BSW.DevSpark Knowledge Entity Node (_entity.yaml)",
+  "description": "Domain-entity node under .knowledge/entities/<id>/_entity.yaml. Declares the entity's identity, owner, relations to other entities, and any justified coverage overrides for missing layer documents.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "type", "owner"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[-_][a-z0-9]+)*$",
+      "description": "Must match the parent folder name under .knowledge/entities/."
+    },
+    "type": {
+      "enum": ["subsystem", "domain", "integration", "tooling"],
+      "description": "Controlled semantic classification of the entity - distinct from doc-level `layer`. Advisory only: it never requires a layer to exist, because layer coverage is evidence-driven. subsystem = an internal capability of the system this repository builds; domain = a business/problem-space concept whose rules originate outside the code; integration = a boundary with an external system or third-party service; tooling = developer-facing automation that supports delivery rather than being shipped."
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Team or role accountable for keeping this entity's layer docs current."
+    },
+    "relations": {
+      "type": "array",
+      "description": "Typed edges to other entities. Accepts either authored spelling: {object, predicate} or {to, rel}.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "anyOf": [{ "required": ["object"] }, { "required": ["to"] }],
+        "properties": {
+          "object": { "type": "string", "pattern": "^[a-z0-9]+(?:[-_][a-z0-9]+)*$" },
+          "to": { "type": "string", "pattern": "^[a-z0-9]+(?:[-_][a-z0-9]+)*$" },
+          "predicate": { "type": "string", "minLength": 1 },
+          "rel": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "coverage_overrides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["layer", "justification"],
+        "properties": {
+          "layer": {
+            "enum": ["architecture", "business", "integration", "operations", "pattern", "plan"]
+          },
+          "justification": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "constrained_by": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+      "description": "Lightweight pointer to .knowledge/governance/decisions/<id>.md docs that constrain this entity. Each id must also list this entity in its `constrains` array — the decision owns the reasoning, this is only a pointer."
+    }
+  }
+}

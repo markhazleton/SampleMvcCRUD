@@ -417,4 +417,3 @@ nul
 
 # DevSpark - personal overrides (never commit)
 .documentation/*/commands/
-.bold/.backup/

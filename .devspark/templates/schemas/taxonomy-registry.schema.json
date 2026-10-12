@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bsw-devspark.bswhive.com/schemas/taxonomy-registry.schema.json",
+  "title": "BSW.DevSpark Taxonomy Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["mappings"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "mappings": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/mapping" }
+    }
+  },
+  "definitions": {
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pathPattern"],
+      "properties": {
+        "pathPattern": { "type": "string", "minLength": 1 },
+        "nodeType": {
+          "description": "Semantic ROLE assigned to flat documents matching this pattern - the kind of truth they carry. Structural FORMS (entity-layer, governance-decision) are derived from a document's location and are deliberately not assignable here. More specific patterns win over broader ones regardless of declaration order.",
+          "enum": [
+            "authoritative-reference",
+            "engineering-pattern",
+            "reference-data",
+            "operations-runbook",
+            "research-or-context",
+            "architecture",
+            "governance"
+          ]
+        },
+        "workProductType": { "type": "string", "minLength": 1 },
+        "lifecycle": { "type": "string", "minLength": 1 }
+      },
+      "oneOf": [
+        {
+          "required": ["nodeType"],
+          "not": {
+            "anyOf": [
+              { "required": ["workProductType"] },
+              { "required": ["lifecycle"] }
+            ]
+          }
+        },
+        {
+          "required": ["workProductType"],
+          "not": { "required": ["nodeType"] }
+        }
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "pathPattern": { "pattern": "^\\.knowledge/" }
+            },
+            "required": ["pathPattern"]
+          },
+          "then": {
+            "required": ["nodeType"],
+            "not": {
+              "anyOf": [
+                { "required": ["workProductType"] },
+                { "required": ["lifecycle"] }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+product: BSW.DevSpark
+edition: BSW-internal
+version: 9.0.0
+installed: 2026-10-11
+method: claude-code-quickstart
+migrated-from: fresh
+

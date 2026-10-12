@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bsw-devspark.bswhive.com/schemas/agents-registry.schema.json",
+  "title": "BSW.DevSpark Agents Registry",
+  "description": "Schema for agents-registry.json — the canonical list of AI coding assistants BSW.DevSpark supports and how to install per-agent command shims for each.",
+  "type": "object",
+  "required": ["version", "agents"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "agents": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/agent" }
+    }
+  },
+  "$defs": {
+    "agent": {
+      "type": "object",
+      "required": [
+        "key",
+        "name",
+        "folder",
+        "context_file",
+        "requires_cli",
+        "install_url",
+        "release"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*$",
+          "description": "Unique, path-safe identifier for the agent."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "folder": {
+          "type": "string",
+          "minLength": 1
+        },
+        "context_file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requires_cli": {
+          "type": "boolean"
+        },
+        "install_url": {
+          "type": ["string", "null"],
+          "format": "uri"
+        },
+        "release": { "$ref": "#/$defs/release" }
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "oneOf": [
+        { "required": ["commands_dir", "extension", "arg_format"] },
+        { "required": ["skills_dir"] }
+      ],
+      "properties": {
+        "commands_dir": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extension": {
+          "type": "string",
+          "minLength": 1
+        },
+        "arg_format": {
+          "type": "string",
+          "minLength": 1
+        },
+        "skills_dir": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Directory that receives native Agent Skills (devspark-<command>/SKILL.md). Mutually exclusive with the entry-point form."
+        },
+        "support_files": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/support_file" }
+        }
+      }
+    },
+    "support_file": {
+      "type": "object",
+      "required": ["source", "destination"],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "destination": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

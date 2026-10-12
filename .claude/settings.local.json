@@ -17,7 +17,10 @@
       "Bash(for id in 177 178 179 180 181 182)",
       "Bash(do gh api repos/markhazleton/UISampleSpark/code-scanning/alerts/$id -X PATCH -f state=dismissed -f dismissed_reason=\"won''t fix\" -f dismissed_comment=\"Educational project - no authentication by design per CLAUDE.md\" --jq '.number,.state')",
       "Bash(powershell.exe:*)",
-      "Bash(dotnet clean:*)"
+      "Bash(dotnet clean:*)",
+      "PowerShell(Invoke-RestMethod*bsw-devspark.bswhive.com*)",
+      "PowerShell(Invoke-WebRequest*bsw-devspark.bswhive.com*)",
+      "PowerShell(Set-Location C:\\GitHub\\MakeBoldSolutions\\UISampleSpark*bsw-devspark.bswhive.com*)"
     ],
     "deny": [],
     "ask": []

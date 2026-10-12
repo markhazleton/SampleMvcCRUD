@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bsw-devspark.bswhive.com/schemas/devspark-config.schema.json",
+  "title": "BSW.DevSpark Repo Config",
+  "description": "Repository facts and team policy in .devspark.work/devspark.json. See templates/preamble/configuration.md section 7. This schema is separate from the multi-app registry at .devspark.work/devspark.registry.json.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "platform": {
+      "type": "string",
+      "enum": ["github", "azdo", "gitlab"],
+      "description": "Authoritative git host. Config wins over auto-detection."
+    },
+    "organization": {
+      "type": "string",
+      "description": "Azure DevOps organization name (used when platform is azdo)."
+    },
+    "project": {
+      "type": "string",
+      "description": "Azure DevOps project name (used when platform is azdo)."
+    },
+    "repository": {
+      "type": "string",
+      "description": "Azure DevOps repository name (used when platform is azdo)."
+    },
+    "policies": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "protect_main": {
+          "type": "boolean",
+          "description": "Team policy: when true, never commit or push directly to the default branch; branch first."
+        }
+      }
+    },
+    "work_tracking": {
+      "type": "object",
+      "description": "Optional Azure DevOps Boards settings. Presence of this block activates work-item commands; absence keeps them entirely inert. Organization and project are read from the top-level fields and must not be repeated here.",
+      "additionalProperties": false,
+      "required": ["default_area_path"],
+      "properties": {
+        "default_area_path": {
+          "type": "string",
+          "description": "Area path used when creating items and compared when reviewing them."
+        },
+        "default_iteration_path": {
+          "type": "string",
+          "description": "Iteration path applied on creation when it exists for the selected area."
+        },
+        "default_work_item_type": {
+          "type": "string",
+          "description": "Type proposed for new items. Always confirmed with the developer, never applied silently."
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Tags applied to created items in addition to the agent-generated marker tag."
+        },
+        "review_on_specify": {
+          "type": "boolean",
+          "default": true,
+          "description": "When false, /devspark.specify never offers a work-item review."
+        }
+      }
+    },
+    "pr_risk": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional PR risk digest settings. Absent by default.",
+      "properties": {
+        "tier_patterns": {
+          "type": "object",
+          "description": "Extra case-insensitive regexes matched against changed paths before the built-in table; keys are P0, P1, P2, P3. Tiers are a floor: reviewers may escalate, never lower.",
+          "additionalProperties": false,
+          "properties": {
+            "P0": { "type": "array", "items": { "type": "string" } },
+            "P1": { "type": "array", "items": { "type": "string" } },
+            "P2": { "type": "array", "items": { "type": "string" } },
+            "P3": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "knowledge_drift": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional content-claim drift detection settings. Absent entirely by default; presence never changes legacy stale_entities/--fail-on-stale behavior.",
+      "properties": {
+        "enforcement": {
+          "type": "string",
+          "description": "Sole enforcement opt-in. Only the exact value 'pinned-claims' enables pinned-unverified/drift semantics. Any other present value (including a typo or non-string) is a hard runtime configuration error (exit 2, zero findings) -- the generator never treats a malformed value as opt-out. Absent key keeps legacy behavior indefinitely."
+        }
+      }
+    }
+  }
+}

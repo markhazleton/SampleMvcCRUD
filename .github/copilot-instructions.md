@@ -1,10 +1,10 @@
 <!--
 GitHub Copilot Runtime Instructions for UISampleSpark
-This repo is built with Bold — see /AGENTS.md for the full command surface.
+This repo uses BSW.DevSpark — see /CLAUDE.md for the command surface.
 -->
 
 # GitHub Copilot Instructions
 
-This repo is built with [Bold](https://github.com/MakeBoldSolutions). See `AGENTS.md` for the full command surface. Required reading before any work: `bold-docs/backbone.md` (non-negotiable rules) and `bold-docs/project.json` (project facts).
+This repo uses BSW.DevSpark for spec-driven development. See `CLAUDE.md` for the command list. Required reading before any work: `.knowledge/governance/constitution.md` (non-negotiable principles).
 
-Migrated from DevSpark v2.6.0 on 2026-07-12 — see `.archive/index.md` for the migration record and historical DevSpark-era documentation.
+History: migrated from DevSpark v2.6.0 to Bold on 2026-07-12, then converted to BSW.DevSpark on 2026-10-11. See `.archive/index.md` for the earlier migration record.

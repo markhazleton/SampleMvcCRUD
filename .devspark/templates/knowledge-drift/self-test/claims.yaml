@@ -1,0 +1,16 @@
+controls:
+  - name: known-changed
+    source: sources/known-changed.py
+    baseline: sources/known-changed.baseline
+    profile: exact-text-v1
+    expected: drifted
+  - name: known-unchanged
+    source: sources/known-unchanged.py
+    baseline: sources/known-unchanged.baseline
+    profile: exact-text-v1
+    expected: unchanged
+  - name: invalid-canonicalization
+    source: sources/invalid-canonicalization.txt
+    baseline: sources/invalid-canonicalization.baseline
+    profile: unsupported-profile-v1
+    expected: error

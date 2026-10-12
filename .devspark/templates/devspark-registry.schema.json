@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bsw-devspark.bswhive.com/schemas/devspark-registry.schema.json",
+  "title": "BSW.DevSpark Multi-App Registry",
+  "description": "Multi-app registry at .devspark.work/devspark.registry.json. Validated by the /devspark.validate-registry command. Repository facts and team policy remain separate in .devspark.work/devspark.json.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["version", "mode"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1,
+      "description": "Registry schema version. Currently only 1 is supported."
+    },
+    "mode": {
+      "type": "string",
+      "const": "multi-app",
+      "description": "Marks this repository as operating in multi-app mode."
+    },
+    "profiles": {
+      "type": "object",
+      "description": "Reusable rule bundles applied to a class of applications, keyed by profile name.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "description": { "type": "string" },
+          "tags": { "type": "object", "additionalProperties": { "type": "string" } },
+          "rules": { "type": "array", "items": { "type": "string" } },
+          "hints": { "type": "object", "additionalProperties": { "type": "string" } }
+        }
+      }
+    },
+    "apps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "path"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_-]+$",
+            "description": "Unique, lowercase, path-safe application identifier."
+          },
+          "name": { "type": "string" },
+          "path": { "type": "string", "description": "Relative path from repo root." },
+          "kind": { "type": "string" },
+          "purpose": { "type": "string" },
+          "runtime": { "type": "string" },
+          "owner": { "type": "string" },
+          "criticality": { "type": "string", "enum": ["high", "medium", "low"] },
+          "deployable": { "type": "boolean" },
+          "inherits": { "type": "array", "items": { "type": "string" } },
+          "dependsOn": { "type": "array", "items": { "type": "string" } },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "platforms": { "type": "array", "items": { "type": "string" } },
+          "overrides": { "type": "object" }
+        }
+      }
+    }
+  }
+}

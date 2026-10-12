@@ -1,0 +1,182 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bsw-devspark.bswhive.com/schemas/knowledge-node.schema.json",
+  "title": "BSW.DevSpark Current Knowledge Node",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "type", "title"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "type": {
+      "enum": [
+        "authoritative-reference",
+        "engineering-pattern",
+        "reference-data",
+        "operations-runbook",
+        "research-or-context",
+        "architecture",
+        "governance",
+        "governance-decision",
+        "entity-layer"
+      ],
+      "description": "Authored classification. This single field spans both ontology axes for backward compatibility: for a flat document it names the semantic ROLE (the kind of truth it carries); for an entity layer or a decision it names the structural FORM. Use 'entity-layer' for docs under .knowledge/entities/<id>/ and set `layer` for the specific layer; use 'governance-decision' for docs under .knowledge/governance/decisions/. The builder derives separate canonical `form` and `role` fields from this plus location - see templates/schemas/knowledge-ontology.json. An explicit value here outranks path inference, so a navigational README beside a set of decisions may declare it is not one."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "layer": {
+      "enum": ["architecture", "business", "integration", "operations", "pattern", "plan"],
+      "description": "Entity-layer classification for docs under .knowledge/entities/<id>/. Optional — absent for non-entity knowledge (governance, reference)."
+    },
+    "source_of_truth": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "oneOf": [
+          { "type": "string", "minLength": 1 },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "digest", "baseline", "profile"],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^(?!/).+[^/]$",
+                "not": {
+                  "pattern": "(?:^|/)\\.devspark\\.work/specs/|(?:^|/)\\.archive/|(?:^|/)(?:FR-|T[0-9]{3}|spec[- _]?[0-9])"
+                },
+                "description": "Repository-relative regular file; never a directory or planning/archive path."
+              },
+              "digest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$",
+                "description": "SHA-256 over the claim's canonical comparison bytes."
+              },
+              "baseline": {
+                "type": "string",
+                "pattern": "^\\.knowledge/evidence/source-baselines/sha256/[0-9a-f]{2}/[0-9a-f]{64}\\.baseline$",
+                "description": "Content-addressed immutable baseline path; must be derivable from `digest`."
+              },
+              "profile": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[0-9]+$",
+                "description": "Versioned comparison profile, e.g. python-token-v1, exact-text-v1, binary-v1."
+              },
+              "region": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Optional symbolic region name resolved by the selected profile."
+              }
+            }
+          }
+        ]
+      },
+      "description": "Repo-relative paths (legacy strings, unchanged existing semantics) or additive object claims {path, digest, baseline, profile, region} this doc describes. Each must exist; required whenever `layer` is set. The tuple (path, profile, region) must be unique within the document; enforced by the generator, not this schema."
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": {
+          "enum": ["verified", "pinned-unverified"],
+          "description": "Applies to the document and all its object source claims. Migration and scaffolding may write only pinned-unverified; only a confirmed explain workflow may set verified."
+        },
+        "confirmed_on": {
+          "type": "string",
+          "format": "date",
+          "description": "Required only for state: verified; prohibited for pinned-unverified."
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "state": { "const": "verified" } }, "required": ["state"] },
+          "then": { "required": ["confirmed_on"] }
+        },
+        {
+          "if": { "properties": { "state": { "const": "pinned-unverified" } }, "required": ["state"] },
+          "then": { "not": { "required": ["confirmed_on"] } }
+        }
+      ]
+    },
+    "last_verified": {
+      "type": "string",
+      "format": "date",
+      "description": "Date this doc was last confirmed to match source_of_truth. Required whenever `layer` is set."
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "references": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        }
+      }
+    },
+    "appliesTo": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "not": {
+          "pattern": "(?:^|/)\\.devspark\\.work/specs/|(?:^|/)(?:FR-|T[0-9]{3}|spec[- _]?[0-9])"
+        }
+      }
+    },
+    "aliases": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Optional discovery-only search vocabulary: common developer phrasing that should reach this document. Aliases never alter taxonomy, identity, or ontology relationships, and are never a source of authoritative behavioral truth."
+    },
+    "constrains": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+      "description": "Required for type 'governance-decision': the entity ids this decision constrains. Each entity must carry a reciprocal `constrained_by` pointer."
+    },
+    "generated": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "by": { "type": "string", "minLength": 1 },
+        "at": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "not": {
+        "anyOf": [
+          { "required": ["status"] },
+          { "required": ["lifecycle"] },
+          { "required": ["supersedes"] },
+          { "required": ["superseded-by"] },
+          { "required": ["replaced"] },
+          { "required": ["obsolete"] }
+        ]
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "entity-layer" } }, "required": ["type"] },
+      "then": { "required": ["layer", "source_of_truth", "last_verified"] }
+    },
+    {
+      "if": { "properties": { "type": { "const": "governance-decision" } }, "required": ["type"] },
+      "then": { "required": ["constrains"] }
+    }
+  ]
+}

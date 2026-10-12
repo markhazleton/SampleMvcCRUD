@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "agents": [
+    {
+      "key": "copilot",
+      "name": "GitHub Copilot",
+      "folder": ".github/",
+      "context_file": "AGENTS.md",
+      "requires_cli": false,
+      "install_url": null,
+      "release": {
+        "skills_dir": ".github/skills",
+        "support_files": [
+          {
+            "source": "templates/vscode-settings.json",
+            "destination": ".vscode/settings.json"
+          }
+        ]
+      }
+    },
+    {
+      "key": "claude",
+      "name": "Claude Code",
+      "folder": ".claude/",
+      "context_file": "CLAUDE.md",
+      "requires_cli": true,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".claude/commands",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "gemini",
+      "name": "Gemini CLI",
+      "folder": ".gemini/",
+      "context_file": "GEMINI.md",
+      "requires_cli": true,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".gemini/commands",
+        "extension": "toml",
+        "arg_format": "{{args}}",
+        "support_files": [
+          {
+            "source": "agent_templates/gemini/GEMINI.md",
+            "destination": "GEMINI.md"
+          }
+        ]
+      }
+    },
+    {
+      "key": "cursor-agent",
+      "name": "Cursor",
+      "folder": ".cursor/",
+      "context_file": ".cursor/rules/devspark-rules.mdc",
+      "requires_cli": false,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".cursor/commands",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "qwen",
+      "name": "Qwen Code",
+      "folder": ".qwen/",
+      "context_file": "QWEN.md",
+      "requires_cli": true,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".qwen/commands",
+        "extension": "toml",
+        "arg_format": "{{args}}",
+        "support_files": [
+          {
+            "source": "agent_templates/qwen/QWEN.md",
+            "destination": "QWEN.md"
+          }
+        ]
+      }
+    },
+    {
+      "key": "opencode",
+      "name": "opencode",
+      "folder": ".opencode/",
+      "context_file": "AGENTS.md",
+      "requires_cli": true,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".opencode/command",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "codex",
+      "name": "Codex CLI",
+      "folder": ".codex/",
+      "context_file": "AGENTS.md",
+      "requires_cli": true,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".codex/prompts",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "windsurf",
+      "name": "Windsurf",
+      "folder": ".windsurf/",
+      "context_file": ".windsurf/rules/devspark-rules.md",
+      "requires_cli": false,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".windsurf/workflows",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "kilocode",
+      "name": "Kilo Code",
+      "folder": ".kilocode/",
+      "context_file": ".kilocode/rules/devspark-rules.md",
+      "requires_cli": false,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".kilocode/workflows",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "auggie",
+      "name": "Auggie CLI",
+      "folder": ".augment/",
+      "context_file": ".augment/rules/devspark-rules.md",
+      "requires_cli": true,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".augment/commands",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "roo",
+      "name": "Roo Code",
+      "folder": ".roo/",
+      "context_file": ".roo/rules/devspark-rules.md",
+      "requires_cli": false,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".roo/commands",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "codebuddy",
+      "name": "CodeBuddy",
+      "folder": ".codebuddy/",
+      "context_file": "CODEBUDDY.md",
+      "requires_cli": true,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".codebuddy/commands",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "qodercli",
+      "name": "Qoder CLI",
+      "folder": ".qoder/",
+      "context_file": "QODER.md",
+      "requires_cli": true,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".qoder/commands",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "q",
+      "name": "Amazon Q Developer CLI",
+      "folder": ".amazonq/",
+      "context_file": "AGENTS.md",
+      "requires_cli": true,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".amazonq/prompts",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "amp",
+      "name": "Amp",
+      "folder": ".agents/",
+      "context_file": "AGENTS.md",
+      "requires_cli": true,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".agents/commands",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "shai",
+      "name": "SHAI",
+      "folder": ".shai/",
+      "context_file": "SHAI.md",
+      "requires_cli": true,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".shai/commands",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "bob",
+      "name": "IBM Bob",
+      "folder": ".bob/",
+      "context_file": "AGENTS.md",
+      "requires_cli": false,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".bob/commands",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    },
+    {
+      "key": "antigravity",
+      "name": "Antigravity",
+      "folder": ".gemini/",
+      "context_file": "ANTIGRAVITY.md",
+      "requires_cli": false,
+      "install_url": null,
+      "release": {
+        "commands_dir": ".gemini/commands",
+        "extension": "md",
+        "arg_format": "$ARGUMENTS"
+      }
+    }
+  ]
+}
