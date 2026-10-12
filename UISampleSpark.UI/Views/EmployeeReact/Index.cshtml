@@ -1,7 +1,7 @@
 @{
     Layout = "~/Views/Shared/_LayoutReact.cshtml";
-    ViewBag.Title = "React Employee CRUD | Modern Component-Based UI";
-    ViewBag.MetaDescription = "A React-based Single Page Application demonstrating component-driven CRUD operations with hooks and functional components.";
+    ViewBag.Title = "React employee directory — components and hooks";
+    ViewBag.MetaDescription = "The UISampleSpark employee directory built as React components with hooks, calling the same REST API as every other pattern.";
     ViewBag.MetaKeywords = "React, JSX, Hooks, Components, REST API, CRUD operations, ASP.NET Core, SPA";
 }
 
@@ -96,13 +96,13 @@
                         <div className="modal-content">
                             <div className="modal-header bg-danger text-white">
                                 <h5 className="modal-title">
-                                    <i className="icon icon-triangle-alert me-2" aria-hidden="true"></i>Confirm Delete
+                                    <i className="icon icon-triangle-alert me-2" aria-hidden="true"></i>Delete employee
                                 </h5>
                                 <button type="button" className="btn-close btn-close-white" onClick={onCancel}></button>
                             </div>
                             <div className="modal-body">
-                                <p>Are you sure you want to delete <strong>{employee.name}</strong>?</p>
-                                <p className="text-muted mb-0">This action cannot be undone.</p>
+                                <p>Delete <strong>{employee.name}</strong> from the directory?</p>
+                                <p className="text-muted mb-0">You can't undo this.</p>
                             </div>
                             <div className="modal-footer bg-light">
                                 <button type="button" className="btn btn-secondary" onClick={onCancel}>
@@ -186,7 +186,7 @@
                         <div className="modal-content">
                             <div className="modal-header bg-light">
                                 <h5 className="modal-title">
-                                    {isEdit ? 'Update Employee' : 'Add Employee'}
+                                    {isEdit ? 'Edit employee' : 'Add employee'}
                                 </h5>
                                 <button type="button" className="btn-close" onClick={onClose}></button>
                             </div>
@@ -202,8 +202,8 @@
                                             <input type="text" className="form-control" id="name" name="name"
                                                    ref={nameRef}
                                                    value={form.name} onChange={handleChange}
-                                                   placeholder="Enter employee name" required />
-                                            <div className="invalid-feedback">Please enter a name</div>
+                                                   placeholder="Full name" required />
+                                            <div className="invalid-feedback">Enter a name.</div>
                                         </div>
                                     </div>
                                     <div className="mb-3">
@@ -212,12 +212,12 @@
                                             <span className="input-group-text"><i className="icon icon-venus-and-mars" aria-hidden="true"></i></span>
                                             <select className="form-select" id="gender" name="gender"
                                                     value={form.gender} onChange={handleChange} required>
-                                                <option value="" disabled>Select gender</option>
+                                                <option value="" disabled>Choose a gender</option>
                                                 <option value="0">Male</option>
                                                 <option value="1">Female</option>
-                                                <option value="2">Non-Binary</option>
+                                                <option value="2">Non-binary</option>
                                             </select>
-                                            <div className="invalid-feedback">Please select a gender</div>
+                                            <div className="invalid-feedback">Choose a gender.</div>
                                         </div>
                                     </div>
                                     <div className="mb-3">
@@ -226,8 +226,8 @@
                                             <span className="input-group-text"><i className="icon icon-calendar" aria-hidden="true"></i></span>
                                             <input type="number" className="form-control" id="age" name="age"
                                                    value={form.age} onChange={handleChange}
-                                                   placeholder="Enter age" min="18" required />
-                                            <div className="invalid-feedback">Please enter age (minimum 18)</div>
+                                                   placeholder="18 or over" min="18" required />
+                                            <div className="invalid-feedback">Enter an age of 18 or over.</div>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -237,8 +237,8 @@
                                                 <span className="input-group-text"><i className="icon icon-map-pin" aria-hidden="true"></i></span>
                                                 <input type="text" className="form-control" id="state" name="state"
                                                        value={form.state} onChange={handleChange}
-                                                       placeholder="Enter state" required />
-                                                <div className="invalid-feedback">Please enter state</div>
+                                                       placeholder="State" required />
+                                                <div className="invalid-feedback">Enter a state.</div>
                                             </div>
                                         </div>
                                         <div className="col-md-6 mb-3">
@@ -247,8 +247,8 @@
                                                 <span className="input-group-text"><i className="icon icon-globe" aria-hidden="true"></i></span>
                                                 <input type="text" className="form-control" id="country" name="country"
                                                        value={form.country} onChange={handleChange}
-                                                       placeholder="Enter country" required />
-                                                <div className="invalid-feedback">Please enter country</div>
+                                                       placeholder="Country" required />
+                                                <div className="invalid-feedback">Enter a country.</div>
                                             </div>
                                         </div>
                                     </div>
@@ -258,12 +258,12 @@
                                             <span className="input-group-text"><i className="icon icon-building-2" aria-hidden="true"></i></span>
                                             <select className="form-select" id="department" name="department"
                                                     value={form.department} onChange={handleChange} required>
-                                                <option value="" disabled>Select department</option>
+                                                <option value="" disabled>Choose a department</option>
                                                 {departments.map(d => (
                                                     <option key={d.id} value={d.id}>{d.name}</option>
                                                 ))}
                                             </select>
-                                            <div className="invalid-feedback">Please select a department</div>
+                                            <div className="invalid-feedback">Choose a department.</div>
                                         </div>
                                     </div>
                                 </form>
@@ -273,15 +273,15 @@
                                         className={`btn ${isEdit ? 'btn-success' : 'btn-primary'}`}
                                         disabled={saving}>
                                     {saving ? (
-                                        <><span className="spinner-border spinner-border-sm me-1"></span> Saving...</>
+                                        <><span className="spinner-border spinner-border-sm me-1"></span> Saving…</>
                                     ) : isEdit ? (
-                                        <><i className="icon icon-circle-check me-1" aria-hidden="true"></i> Update</>
+                                        <><i className="icon icon-circle-check me-1" aria-hidden="true"></i> Save changes</>
                                     ) : (
-                                        <><i className="icon icon-circle-plus me-1" aria-hidden="true"></i> Add</>
+                                        <><i className="icon icon-circle-plus me-1" aria-hidden="true"></i> Add employee</>
                                     )}
                                 </button>
                                 <button type="button" className="btn btn-secondary" onClick={onClose}>
-                                    <i className="icon icon-circle-x me-1" aria-hidden="true"></i> Close
+                                    <i className="icon icon-circle-x me-1" aria-hidden="true"></i> Cancel
                                 </button>
                             </div>
                         </div>
@@ -311,7 +311,7 @@
                         <div className="spinner-border text-primary" role="status">
                             <span className="visually-hidden">Loading...</span>
                         </div>
-                        <p className="text-muted mt-2">Loading employees...</p>
+                        <p className="text-muted mt-2">Loading the directory…</p>
                     </div>
                 );
             }
@@ -336,8 +336,8 @@
                                 <tr>
                                     <td colSpan="8" className="text-center text-muted py-4">
                                         {searchTerm
-                                            ? <><i className="icon icon-search me-2" aria-hidden="true"></i>No employees match your search.</>
-                                            : <><i className="icon icon-inbox me-2" aria-hidden="true"></i>No employees found.</>}
+                                            ? <><i className="icon icon-search me-2" aria-hidden="true"></i>No one matches that search.</>
+                                            : <><i className="icon icon-inbox me-2" aria-hidden="true"></i>No employees yet. Add the first one.</>}
                                     </td>
                                 </tr>
                             ) : employees.map(emp => (
@@ -448,7 +448,7 @@
                     const data = await api.getAll();
                     setEmployees(data);
                 } catch (err) {
-                    addToast('Error', err.message, 'danger');
+                    addToast('Something went wrong', err.message, 'danger');
                 }
             }, [addToast]);
 
@@ -457,7 +457,7 @@
                     const data = await api.getDepartments();
                     setDepartments(data);
                 } catch (err) {
-                    addToast('Error', err.message, 'danger');
+                    addToast('Something went wrong', err.message, 'danger');
                 }
             }, [addToast]);
 
@@ -512,7 +512,7 @@
                     setEditEmployee(result.resource);
                     setShowForm(true);
                 } catch (err) {
-                    addToast('Error', err.message, 'danger');
+                    addToast('Something went wrong', err.message, 'danger');
                 }
             };
 
@@ -520,16 +520,16 @@
                 try {
                     if (isEdit) {
                         await api.update(payload.id, payload);
-                        addToast('Success', 'Employee updated successfully', 'success');
+                        addToast('Done', 'Changes saved.', 'success');
                     } else {
                         await api.create(payload);
-                        addToast('Success', 'Employee added successfully', 'success');
+                        addToast('Done', 'Employee added.', 'success');
                     }
                     setShowForm(false);
                     setEditEmployee(null);
                     await loadEmployees();
                 } catch (err) {
-                    addToast('Error', err.message, 'danger');
+                    addToast('Something went wrong', err.message, 'danger');
                     throw err;
                 }
             };
@@ -537,11 +537,11 @@
             const handleDelete = async (id) => {
                 try {
                     await api.remove(id);
-                    addToast('Success', 'Employee deleted successfully', 'success');
+                    addToast('Done', 'Employee deleted.', 'success');
                     setDeleteTarget(null);
                     await loadEmployees();
                 } catch (err) {
-                    addToast('Error', err.message, 'danger');
+                    addToast('Something went wrong', err.message, 'danger');
                 }
             };
 
@@ -557,12 +557,12 @@
                             <div className="d-flex justify-content-between align-items-center mb-4">
                                 <div>
                                     <h1 className="h2 mb-0">
-                                        <i className="icon icon-file-code text-primary me-2" aria-hidden="true"></i>React Employee CRUD
+                                        <i className="icon icon-file-code text-primary me-2" aria-hidden="true"></i>React employee directory
                                     </h1>
-                                    <p className="text-muted">Component-based CRUD with React hooks and RESTful API</p>
+                                    <p className="text-muted">Pattern 06 · Components and hooks over the REST API.</p>
                                 </div>
                                 <button type="button" className="btn btn-primary" onClick={handleAddNew}>
-                                    <i className="icon icon-circle-plus me-2" aria-hidden="true"></i>Add Employee
+                                    <i className="icon icon-circle-plus me-2" aria-hidden="true"></i>Add employee
                                 </button>
                             </div>
 
@@ -586,7 +586,7 @@
                                             <div className="input-group input-group-sm">
                                                 <span className="input-group-text"><i className="icon icon-search" aria-hidden="true"></i></span>
                                                 <input type="text" className="form-control"
-                                                       placeholder="Search employees..."
+                                                       placeholder="Search the directory"
                                                        value={searchTerm}
                                                        onChange={e => setSearchTerm(e.target.value)} />
                                                 {searchTerm && (
@@ -632,24 +632,23 @@
                         <div className="col-md-12">
                             <div className="card shadow-sm rounded-3 border-0 mb-4">
                                 <div className="card-header bg-primary text-white">
-                                    <h3 className="mb-0"><i className="icon icon-info me-2" aria-hidden="true"></i>About React Implementation</h3>
+                                    <h3 className="mb-0"><i className="icon icon-info me-2" aria-hidden="true"></i>How this pattern works</h3>
                                 </div>
                                 <div className="card-body p-4">
                                     <p className="lead">
-                                        This implementation demonstrates a React-based SPA using functional components, hooks, and the Fetch API
-                                        to consume the same RESTful endpoints as the other CRUD implementations.
+                                        The directory is a tree of React components. Hooks hold the list in state, fetch from the same REST API every other pattern uses, and re-render on each change.
                                     </p>
 
                                     <div className="row g-4 mt-2">
                                         <div className="col-md-6">
                                             <div className="card h-100 bg-light border-0">
                                                 <div className="card-body">
-                                                    <h4 className="card-title"><i className="icon icon-sparkles text-warning me-2" aria-hidden="true"></i>React Advantages</h4>
+                                                    <h4 className="card-title"><i className="icon icon-sparkles text-warning me-2" aria-hidden="true"></i>Good for</h4>
                                                     <ul className="list-group list-group-flush">
-                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Component-based architecture for reusability</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Declarative UI with automatic DOM updates</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>React Hooks for clean state management</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Virtual DOM for efficient rendering</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Rich, highly interactive screens</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Reusing components across a large app</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Predictable state with hooks</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Hiring from the widest front-end talent pool</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -658,12 +657,12 @@
                                         <div className="col-md-6">
                                             <div className="card h-100 bg-light border-0">
                                                 <div className="card-body">
-                                                    <h4 className="card-title"><i className="icon icon-triangle-alert text-warning me-2" aria-hidden="true"></i>Considerations</h4>
+                                                    <h4 className="card-title"><i className="icon icon-triangle-alert text-warning me-2" aria-hidden="true"></i>Watch for</h4>
                                                     <ul className="list-group list-group-flush">
-                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Larger initial bundle size than vanilla JS</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Learning curve for React concepts</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>CDN + Babel adds runtime overhead (use build tools in production)</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Requires JavaScript to be enabled in browser</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>A bigger first download than plain JavaScript</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>More to learn: JSX, hooks and rendering rules</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>In-browser Babel is for teaching; use a build step in production</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Nothing works without JavaScript</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -671,13 +670,13 @@
                                     </div>
 
                                     <div className="mt-4">
-                                        <h4><i className="icon icon-code me-2" aria-hidden="true"></i>Technical Details</h4>
+                                        <h4><i className="icon icon-code me-2" aria-hidden="true"></i>How it's built</h4>
                                         <div className="row g-3 mt-1">
                                             <div className="col-md-4">
                                                 <div className="card bg-light border-0 h-100">
                                                     <div className="card-body">
                                                         <h6 className="fw-bold"><i className="icon icon-box me-1" aria-hidden="true"></i> React 18</h6>
-                                                        <p className="small text-muted mb-0">Loaded via CDN with Babel standalone for in-browser JSX transpilation. Isolated in a dedicated layout page.</p>
+                                                        <p className="small text-muted mb-0">Loaded from a CDN, with Babel compiling JSX in the browser. Its own layout keeps it apart from the rest of the site.</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -685,7 +684,7 @@
                                                 <div className="card bg-light border-0 h-100">
                                                     <div className="card-body">
                                                         <h6 className="fw-bold"><i className="icon icon-refresh-cw me-1" aria-hidden="true"></i> Hooks</h6>
-                                                        <p className="small text-muted mb-0">useState, useEffect, useRef, and useCallback for state management and side effects.</p>
+                                                        <p className="small text-muted mb-0">useState, useEffect, useRef and useCallback hold state and handle side effects.</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -693,7 +692,7 @@
                                                 <div className="card bg-light border-0 h-100">
                                                     <div className="card-body">
                                                         <h6 className="fw-bold"><i className="icon icon-cloud-upload me-1" aria-hidden="true"></i> Fetch API</h6>
-                                                        <p className="small text-muted mb-0">Native browser Fetch API for RESTful CRUD operations — no jQuery dependency.</p>
+                                                        <p className="small text-muted mb-0">Plain fetch calls to the REST API. No jQuery.</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -702,9 +701,9 @@
                                 </div>
                                 <div className="card-footer bg-light">
                                     <div className="d-flex justify-content-between align-items-center">
-                                        <span><i className="icon icon-wrench me-2" aria-hidden="true"></i>Implementation by Mark Hazleton</span>
+                                        <span><i className="icon icon-wrench me-2" aria-hidden="true"></i>Built by Mark Hazleton for Make Bold Spark</span>
                                         <a href="https://github.com/markhazleton/UISampleSpark" className="btn btn-outline-primary btn-sm" target="_blank" rel="noopener noreferrer">
-                                            <i className="icon icon-git-fork me-2" aria-hidden="true"></i>View Source Code
+                                            <i className="icon icon-git-fork me-2" aria-hidden="true"></i>Read the source
                                         </a>
                                     </div>
                                 </div>

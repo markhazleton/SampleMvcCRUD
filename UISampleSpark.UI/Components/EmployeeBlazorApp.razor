@@ -8,19 +8,19 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h1 class="h2 mb-0">
-                        <i class="icon icon-zap text-primary me-2" aria-hidden="true"></i>Blazor Employee CRUD
+                        <i class="icon icon-zap text-primary me-2" aria-hidden="true"></i>Blazor Server employee directory
                     </h1>
-                    <p class="text-muted">Real-time CRUD with Blazor Server and SignalR — pure C#, no JavaScript</p>
+                    <p class="text-muted">Pattern 09 · C# components, live over SignalR.</p>
                 </div>
                 <button type="button" class="btn btn-primary" @onclick="OpenAdd">
-                    <i class="icon icon-circle-plus me-2" aria-hidden="true"></i>Add Employee
+                    <i class="icon icon-circle-plus me-2" aria-hidden="true"></i>Add employee
                 </button>
             </div>
 
             @if (!string.IsNullOrEmpty(toastMessage))
             {
                 <div class="alert @(toastType == "success" ? "alert-success" : "alert-danger") alert-dismissible fade show" role="alert">
-                    <strong>@(toastType == "success" ? "Success" : "Error"):</strong> @toastMessage
+                    <strong>@(toastType == "success" ? "Done" : "Something went wrong"):</strong> @toastMessage
                     <button type="button" class="btn-close" @onclick="DismissToast"></button>
                 </div>
             }
@@ -44,7 +44,7 @@
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text"><i class="icon icon-search" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control"
-                                       placeholder="Search employees..."
+                                       placeholder="Search the directory"
                                        @bind="searchTerm" @bind:event="oninput" />
                                 @if (!string.IsNullOrEmpty(searchTerm))
                                 {
@@ -64,7 +64,7 @@
                             <div class="spinner-border text-primary" role="status">
                                 <span class="visually-hidden">Loading...</span>
                             </div>
-                            <p class="text-muted mt-2">Loading employees...</p>
+                            <p class="text-muted mt-2">Loading the directory…</p>
                         </div>
                     </div>
                 }
@@ -104,11 +104,11 @@
                                             <td colspan="8" class="text-center text-muted py-4">
                                                 @if (!string.IsNullOrEmpty(searchTerm))
                                                 {
-                                                    <i class="icon icon-search me-2" aria-hidden="true"></i>@:No employees match your search.
+                                                    <i class="icon icon-search me-2" aria-hidden="true"></i>@:No one matches that search.
                                                 }
                                                 else
                                                 {
-                                                    <i class="icon icon-inbox me-2" aria-hidden="true"></i>@:No employees found.
+                                                    <i class="icon icon-inbox me-2" aria-hidden="true"></i>@:No employees yet. Add the first one.
                                                 }
                                             </td>
                                         </tr>
@@ -199,7 +199,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header bg-light">
-                        <h5 class="modal-title">@(formEmployee.Id > 0 ? "Update Employee" : "Add Employee")</h5>
+                        <h5 class="modal-title">@(formEmployee.Id > 0 ? "Edit employee" : "Add employee")</h5>
                         <button type="button" class="btn-close" @onclick="CloseForm"></button>
                     </div>
                     <div class="modal-body">
@@ -209,7 +209,7 @@
                                 <label for="blazorName" class="form-label">Name</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="icon icon-user" aria-hidden="true"></i></span>
-                                    <InputText id="blazorName" class="form-control" @bind-Value="formEmployee.Name" placeholder="Enter employee name" />
+                                    <InputText id="blazorName" class="form-control" @bind-Value="formEmployee.Name" placeholder="Full name" />
                                 </div>
                                 <ValidationMessage For="() => formEmployee.Name" />
                             </div>
@@ -220,7 +220,7 @@
                                     <InputSelect id="blazorGender" class="form-select" @bind-Value="formEmployee.Gender">
                                         <option value="@GenderEnum.Male">Male</option>
                                         <option value="@GenderEnum.Female">Female</option>
-                                        <option value="@GenderEnum.Other">Non-Binary</option>
+                                        <option value="@GenderEnum.Other">Non-binary</option>
                                     </InputSelect>
                                 </div>
                             </div>
@@ -228,7 +228,7 @@
                                 <label for="blazorAge" class="form-label">Age</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="icon icon-calendar" aria-hidden="true"></i></span>
-                                    <InputNumber id="blazorAge" class="form-control" @bind-Value="formEmployee.Age" placeholder="Enter age" min="18" />
+                                    <InputNumber id="blazorAge" class="form-control" @bind-Value="formEmployee.Age" placeholder="18 or over" min="18" />
                                 </div>
                             </div>
                             <div class="row">
@@ -236,7 +236,7 @@
                                     <label for="blazorState" class="form-label">State</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="icon icon-map-pin" aria-hidden="true"></i></span>
-                                        <InputText id="blazorState" class="form-control" @bind-Value="formEmployee.State" placeholder="Enter state" />
+                                        <InputText id="blazorState" class="form-control" @bind-Value="formEmployee.State" placeholder="State" />
                                     </div>
                                     <ValidationMessage For="() => formEmployee.State" />
                                 </div>
@@ -244,7 +244,7 @@
                                     <label for="blazorCountry" class="form-label">Country</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="icon icon-globe" aria-hidden="true"></i></span>
-                                        <InputText id="blazorCountry" class="form-control" @bind-Value="formEmployee.Country" placeholder="Enter country" />
+                                        <InputText id="blazorCountry" class="form-control" @bind-Value="formEmployee.Country" placeholder="Country" />
                                     </div>
                                     <ValidationMessage For="() => formEmployee.Country" />
                                 </div>
@@ -254,7 +254,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="icon icon-building-2" aria-hidden="true"></i></span>
                                     <InputSelect id="blazorDepartment" class="form-select" @bind-Value="formEmployee.Department">
-                                        <option value="@EmployeeDepartmentEnum.Unknown" disabled>Select department</option>
+                                        <option value="@EmployeeDepartmentEnum.Unknown" disabled>Choose a department</option>
                                         @foreach (var dept in departments)
                                         {
                                             <option value="@((EmployeeDepartmentEnum)dept.Id)">@dept.Name</option>
@@ -268,19 +268,19 @@
                                         disabled="@saving">
                                     @if (saving)
                                     {
-                                        <span class="spinner-border spinner-border-sm me-1"></span> @:Saving...
+                                        <span class="spinner-border spinner-border-sm me-1"></span> @:Saving…
                                     }
                                     else if (formEmployee.Id > 0)
                                     {
-                                        <i class="icon icon-circle-check me-1" aria-hidden="true"></i> @:Update
+                                        <i class="icon icon-circle-check me-1" aria-hidden="true"></i> @:Save changes
                                     }
                                     else
                                     {
-                                        <i class="icon icon-circle-plus me-1" aria-hidden="true"></i> @:Add
+                                        <i class="icon icon-circle-plus me-1" aria-hidden="true"></i> @:Add employee
                                     }
                                 </button>
                                 <button type="button" class="btn btn-secondary" @onclick="CloseForm">
-                                    <i class="icon icon-circle-x me-1" aria-hidden="true"></i> Close
+                                    <i class="icon icon-circle-x me-1" aria-hidden="true"></i> Cancel
                                 </button>
                             </div>
                         </EditForm>
@@ -298,13 +298,13 @@
                 <div class="modal-content">
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">
-                            <i class="icon icon-triangle-alert me-2" aria-hidden="true"></i>Confirm Delete
+                            <i class="icon icon-triangle-alert me-2" aria-hidden="true"></i>Delete employee
                         </h5>
                         <button type="button" class="btn-close btn-close-white" @onclick="() => deleteTarget = null"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to delete <strong>@deleteTarget.Name</strong>?</p>
-                        <p class="text-muted mb-0">This action cannot be undone.</p>
+                        <p>Delete <strong>@deleteTarget.Name</strong> from the directory?</p>
+                        <p class="text-muted mb-0">You can't undo this.</p>
                     </div>
                     <div class="modal-footer bg-light">
                         <button type="button" class="btn btn-secondary" @onclick="() => deleteTarget = null">
@@ -324,25 +324,23 @@
         <div class="col-md-12">
             <div class="card shadow-sm rounded-3 border-0 mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0"><i class="icon icon-info me-2" aria-hidden="true"></i>About Blazor Server Implementation</h3>
+                    <h3 class="mb-0"><i class="icon icon-info me-2" aria-hidden="true"></i>How this pattern works</h3>
                 </div>
                 <div class="card-body p-4">
                     <p class="lead">
-                        This implementation demonstrates Blazor Server, which runs C# components on the server
-                        and updates the UI in real-time over a SignalR WebSocket connection. No JavaScript is
-                        required for CRUD logic.
+                        C# components run on the server. Each click travels over a SignalR connection, the server updates the component, and only the changes come back to the browser. The CRUD logic has no JavaScript at all.
                     </p>
 
                     <div class="row g-4 mt-2">
                         <div class="col-md-6">
                             <div class="card h-100 bg-light border-0">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="icon icon-sparkles text-warning me-2" aria-hidden="true"></i>Blazor Server Advantages</h4>
+                                    <h4 class="card-title"><i class="icon icon-sparkles text-warning me-2" aria-hidden="true"></i>Good for</h4>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Full C# — no JavaScript needed for UI logic</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Direct access to server-side services (no HTTP API round-trip)</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Thin client — minimal download, fast initial load</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Share models and validation between server and UI</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>One language, C#, from database to button</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Calling services directly, with no API in between</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>A small download and a fast first load</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Sharing models and validation with the server</li>
                                     </ul>
                                 </div>
                             </div>
@@ -351,12 +349,12 @@
                         <div class="col-md-6">
                             <div class="card h-100 bg-light border-0">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="icon icon-triangle-alert text-warning me-2" aria-hidden="true"></i>Considerations</h4>
+                                    <h4 class="card-title"><i class="icon icon-triangle-alert text-warning me-2" aria-hidden="true"></i>Watch for</h4>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Requires persistent WebSocket connection (SignalR)</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Every UI interaction is a server round-trip</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Server memory usage scales with connected users</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>No offline capability</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Every user needs a live connection</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Every interaction is a trip to the server</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Server memory grows with each connected user</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>No offline use</li>
                                     </ul>
                                 </div>
                             </div>
@@ -364,13 +362,13 @@
                     </div>
 
                     <div class="mt-4">
-                        <h4><i class="icon icon-code me-2" aria-hidden="true"></i>Technical Details</h4>
+                        <h4><i class="icon icon-code me-2" aria-hidden="true"></i>How it's built</h4>
                         <div class="row g-3 mt-1">
                             <div class="col-md-4">
                                 <div class="card bg-light border-0 h-100">
                                     <div class="card-body">
                                         <h6 class="fw-bold"><i class="icon icon-box me-1" aria-hidden="true"></i> Blazor Server</h6>
-                                        <p class="small text-muted mb-0">Components execute on the server. UI updates are sent to the browser via SignalR WebSocket in real-time.</p>
+                                        <p class="small text-muted mb-0">Components run on the server. SignalR sends UI changes to the browser as they happen.</p>
                                     </div>
                                 </div>
                             </div>
@@ -378,7 +376,7 @@
                                 <div class="card bg-light border-0 h-100">
                                     <div class="card-body">
                                         <h6 class="fw-bold"><i class="icon icon-refresh-cw me-1" aria-hidden="true"></i> Direct DI</h6>
-                                        <p class="small text-muted mb-0">Injects <code>IEmployeeService</code> directly — no HTTP API calls needed. Data access happens server-side.</p>
+                                        <p class="small text-muted mb-0">Injects <code>IEmployeeService</code> directly. Data access stays on the server, with no HTTP API in between.</p>
                                     </div>
                                 </div>
                             </div>
@@ -386,7 +384,7 @@
                                 <div class="card bg-light border-0 h-100">
                                     <div class="card-body">
                                         <h6 class="fw-bold"><i class="icon icon-radio me-1" aria-hidden="true"></i> SignalR</h6>
-                                        <p class="small text-muted mb-0">Built-in SignalR hub handles all client-server communication. No manual WebSocket management.</p>
+                                        <p class="small text-muted mb-0">The built-in hub carries every message between browser and server. No WebSocket code to write.</p>
                                     </div>
                                 </div>
                             </div>
@@ -395,9 +393,9 @@
                 </div>
                 <div class="card-footer bg-light">
                     <div class="d-flex justify-content-between align-items-center">
-                        <span><i class="icon icon-wrench me-2" aria-hidden="true"></i>Implementation by Mark Hazleton</span>
+                        <span><i class="icon icon-wrench me-2" aria-hidden="true"></i>Built by Mark Hazleton for Make Bold Spark</span>
                         <a href="https://github.com/markhazleton/UISampleSpark" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener noreferrer">
-                            <i class="icon icon-git-fork me-2" aria-hidden="true"></i>View Source Code
+                            <i class="icon icon-git-fork me-2" aria-hidden="true"></i>Read the source
                         </a>
                     </div>
                 </div>
@@ -546,12 +544,12 @@
             if (formEmployee.Id > 0)
             {
                 await EmployeeService.UpdateAsync(formEmployee.Id, formEmployee, cts.Token).ConfigureAwait(false);
-                ShowToast("Employee updated successfully", "success");
+                ShowToast("Changes saved.", "success");
             }
             else
             {
                 await EmployeeService.SaveAsync(formEmployee, cts.Token).ConfigureAwait(false);
-                ShowToast("Employee added successfully", "success");
+                ShowToast("Employee added.", "success");
             }
             showForm = false;
             await LoadData().ConfigureAwait(false);
@@ -571,7 +569,7 @@
         try
         {
             await EmployeeService.DeleteAsync(deleteTarget.Id, cts.Token).ConfigureAwait(false);
-            ShowToast("Employee deleted successfully", "success");
+            ShowToast("Employee deleted.", "success");
             deleteTarget = null;
             await LoadData().ConfigureAwait(false);
         }

@@ -1,16 +1,16 @@
 @model UISampleSpark.Core.Models.EmployeeDto
 
 @{
-    ViewBag.Title = $"Delete Employee - {Model.Name} | ASP.NET MVC CRUD Tutorial";
-    ViewBag.MetaDescription = $"Confirm deletion of employee {Model.Name}. Understand how the Employee Delete form integrates into the MVC Controller form approach in ASP.NET MVC.";
+    ViewBag.Title = $"Delete {Model.Name}? — Traditional MVC";
+    ViewBag.MetaDescription = $"Confirm before deleting {Model.Name}: a classic MVC pattern with one action to show and one to act.";
     ViewBag.MetaKeywords = "ASP.NET MVC, Employee Delete, UI patterns tutorial, MVC Forms, employee management, form handling, model binding";
 }
 
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h2 class="card-title text-center text-danger">Delete Employee - @Model.Name</h2>
-            <h3 class="text-center text-muted">Are you sure you want to delete this employee?</h3>
+            <h1 class="h2 card-title text-center text-danger">Delete @Model.Name?</h1>
+            <p class="lead text-center text-muted">This removes them from the directory. You can't undo it.</p>
             <div class="mt-4">
                 <dl class="row">
                     <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
@@ -38,8 +38,8 @@
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(model => model.Id)
                 <div class="d-flex justify-content-center mt-4">
-                    <input type="submit" value="Delete" class="btn btn-danger me-3" />
-                    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-secondary" })
+                    <input type="submit" value="Delete employee" class="btn btn-danger me-3" />
+                    @Html.ActionLink("Back to the directory", "Index", null, htmlAttributes: new { @class = "btn btn-secondary" })
                 </div>
             }
         </div>
@@ -49,13 +49,12 @@
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h3 class="card-title">About the Employee Delete Form</h3>
+            <h2 class="h3 card-title">How this page works</h2>
             <p class="card-text">
-                The Employee Delete form is a critical component of the MVC Controller form approach in ASP.NET MVC. It ensures secure and reliable deletion of employee records by using form validation and anti-forgery tokens.
-                This form approach maintains data integrity and provides a user-friendly interface for managing employee records, with appropriate confirmation and feedback mechanisms.
+                Deleting takes two steps on purpose. This page shows the record so you can check it, and only the form post, protected by an anti-forgery token, removes it.
             </p>
             <p class="card-text">
-                This form is built using Bootstrap 5, making it visually appealing and responsive. The use of MVC architecture ensures a clean separation of concerns, supporting maintainable and scalable applications.
+                That confirm-then-post shape is plain MVC: one GET action to show, one POST action to act.
             </p>
         </div>
     </div>

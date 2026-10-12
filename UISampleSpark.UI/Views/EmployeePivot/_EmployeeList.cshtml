@@ -1,9 +1,9 @@
 <!-- Loading indicator -->
 <div id="loading" class="text-center my-5">
     <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading employee data...</span>
+        <span class="visually-hidden">Loading employee data…</span>
     </div>
-    <p class="mt-2">Fetching employee data from server...</p>
+    <p class="mt-2">Loading employee data…</p>
     <small class="text-muted">Loading <span id="record-count">...</span> records</small>
 </div>
 
@@ -27,7 +27,7 @@
     $(document).ready(function() {
         // Ensure pivot library is loaded
         if (typeof $.fn.pivotUI === 'undefined') {
-            showError('PivotUI library not loaded. Please refresh the page.');
+            showError("The pivot library didn't load. Refresh the page to try again.");
             return;
         }
 
@@ -71,15 +71,15 @@
                     $("#output").removeClass('d-none');
 
                 } catch (error) {
-                    showError('Failed to initialize pivot table: ' + error.message);
+                    showError("Couldn't build the pivot table: " + error.message);
                 }
             },
             error: function(xhr, status, error) {
-                let errorMessage = 'Failed to load employee data from server.';
+                let errorMessage = "Couldn't load the employee data.";
                 if (xhr.status === 500) {
                     errorMessage += ' Server error: ' + (xhr.responseJSON?.error || error);
                 } else if (status === 'timeout') {
-                    errorMessage += ' Request timed out. Please try again.';
+                    errorMessage += " The request timed out. Try again in a moment.";
                 } else {
                     errorMessage += ' ' + error;
                 }

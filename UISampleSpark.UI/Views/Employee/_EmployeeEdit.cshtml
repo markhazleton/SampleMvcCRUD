@@ -6,7 +6,7 @@
 
 <div class="container">
 
-    <h2>Edit</h2>
+    <h2>Employee details</h2>
 
     @using (Html.BeginForm())
     {
@@ -66,7 +66,7 @@
 
             <div class="form-group mb-3">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Save employee" class="btn btn-primary" />
                 </div>
             </div>
 
@@ -74,6 +74,6 @@
     }
 
     <div class=" mb-3">
-        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-info" })
+        @Html.ActionLink("Back to the directory", "Index", null, htmlAttributes: new { @class = "btn btn-info" })
     </div>
 </div>

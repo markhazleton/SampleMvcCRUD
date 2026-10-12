@@ -1,7 +1,7 @@
 @{
     Layout = "~/Views/Shared/_LayoutHtmx.cshtml";
-    ViewBag.Title = "htmx Employee CRUD | Server-Driven Hypermedia";
-    ViewBag.MetaDescription = "An htmx-based approach to Employee CRUD demonstrating server-driven UI with HTML-over-the-wire and minimal JavaScript.";
+    ViewBag.Title = "htmx employee directory — HTML over the wire";
+    ViewBag.MetaDescription = "The UISampleSpark employee directory built with htmx: the server returns HTML fragments and htmx swaps them into the page.";
     ViewBag.MetaKeywords = "htmx, hypermedia, HTML over the wire, server-driven, CRUD operations, ASP.NET Core, HATEOAS";
 }
 
@@ -11,15 +11,15 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h1 class="h2 mb-0">
-                        <i class="icon icon-refresh-cw text-primary me-2" aria-hidden="true"></i>htmx Employee CRUD
+                        <i class="icon icon-refresh-cw text-primary me-2" aria-hidden="true"></i>htmx employee directory
                     </h1>
-                    <p class="text-muted">Server-driven CRUD with HTML-over-the-wire — minimal JavaScript</p>
+                    <p class="text-muted">Pattern 08 · HTML over the wire, with almost no JavaScript.</p>
                 </div>
                 <button type="button" class="btn btn-primary"
                         hx-get="/EmployeeHtmx/Edit"
                         hx-target="#form-container"
                         hx-swap="innerHTML">
-                    <i class="icon icon-circle-plus me-2" aria-hidden="true"></i>Add Employee
+                    <i class="icon icon-circle-plus me-2" aria-hidden="true"></i>Add employee
                 </button>
             </div>
 
@@ -48,7 +48,7 @@
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text"><i class="icon icon-search" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" id="searchInput" name="search"
-                                       placeholder="Search employees..."
+                                       placeholder="Search the directory"
                                        hx-get="/EmployeeHtmx/Table"
                                        hx-trigger="keyup changed delay:500ms"
                                        hx-target="#employee-table"
@@ -69,7 +69,7 @@
                         <div class="spinner-border text-primary" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        <p class="text-muted mt-2">Loading employees...</p>
+                        <p class="text-muted mt-2">Loading the directory…</p>
                     </div>
                 </div>
             </div>
@@ -89,24 +89,23 @@
         <div class="col-md-12">
             <div class="card shadow-sm rounded-3 border-0 mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0"><i class="icon icon-info me-2" aria-hidden="true"></i>About htmx Implementation</h3>
+                    <h3 class="mb-0"><i class="icon icon-info me-2" aria-hidden="true"></i>How this pattern works</h3>
                 </div>
                 <div class="card-body p-4">
                     <p class="lead">
-                        This implementation demonstrates a server-driven approach using htmx. Instead of exchanging JSON
-                        with a client-side framework, the server returns HTML fragments that htmx swaps into the DOM.
+                        The server stays in charge. Instead of JSON, it returns HTML fragments, and htmx swaps them into the page.
                     </p>
 
                     <div class="row g-4 mt-2">
                         <div class="col-md-6">
                             <div class="card h-100 bg-light border-0">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="icon icon-sparkles text-warning me-2" aria-hidden="true"></i>htmx Advantages</h4>
+                                    <h4 class="card-title"><i class="icon icon-sparkles text-warning me-2" aria-hidden="true"></i>Good for</h4>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Near-zero JavaScript required</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Server-rendered HTML — SEO friendly</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Tiny library footprint (~14KB gzipped)</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Leverages existing server-side templates</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Server-first teams who want a single-page feel</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Search engines, because the HTML is real</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>A small library, about 14 KB gzipped</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Reusing the Razor views you already have</li>
                                     </ul>
                                 </div>
                             </div>
@@ -115,12 +114,12 @@
                         <div class="col-md-6">
                             <div class="card h-100 bg-light border-0">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="icon icon-triangle-alert text-warning me-2" aria-hidden="true"></i>Considerations</h4>
+                                    <h4 class="card-title"><i class="icon icon-triangle-alert text-warning me-2" aria-hidden="true"></i>Watch for</h4>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Each interaction requires a server round-trip</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Complex client-side state is harder to manage</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Not suited for highly interactive offline-capable apps</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Partial view management can become complex at scale</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Every interaction is a trip to the server</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Complex state that lives in the browser</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Offline or highly interactive apps</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>A growing pile of partial views to manage</li>
                                     </ul>
                                 </div>
                             </div>
@@ -128,37 +127,37 @@
                     </div>
 
                     <div class="mt-4">
-                        <h4><i class="icon icon-code me-2" aria-hidden="true"></i>Technical Details</h4>
+                        <h4><i class="icon icon-code me-2" aria-hidden="true"></i>How it's built</h4>
                         <div class="row g-3 mt-1">
                             <div class="col-md-3">
                                 <div class="card bg-light border-0 h-100">
                                     <div class="card-body">
                                         <h6 class="fw-bold"><i class="icon icon-box me-1" aria-hidden="true"></i> htmx 2.0</h6>
-                                        <p class="small text-muted mb-0">Loaded via CDN. Uses <code>hx-get</code>, <code>hx-post</code>, <code>hx-delete</code> attributes for declarative AJAX.</p>
+                                        <p class="small text-muted mb-0">Loaded from a CDN. <code>hx-get</code>, <code>hx-post</code> and <code>hx-delete</code> attributes replace hand-written AJAX.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="card bg-light border-0 h-100">
                                     <div class="card-body">
-                                        <h6 class="fw-bold"><i class="icon icon-arrow-left-right me-1" aria-hidden="true"></i> HTML Fragments</h6>
-                                        <p class="small text-muted mb-0">Server returns partial views (HTML) instead of JSON. htmx swaps them into the DOM via <code>hx-target</code> and <code>hx-swap</code>.</p>
+                                        <h6 class="fw-bold"><i class="icon icon-arrow-left-right me-1" aria-hidden="true"></i> HTML fragments</h6>
+                                        <p class="small text-muted mb-0">The server returns partial views, and <code>hx-target</code> and <code>hx-swap</code> decide where they land.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="card bg-light border-0 h-100">
                                     <div class="card-body">
-                                        <h6 class="fw-bold"><i class="icon icon-radio me-1" aria-hidden="true"></i> Event Triggers</h6>
-                                        <p class="small text-muted mb-0">Uses <code>HX-Trigger</code> response headers to trigger table refresh after create, update, and delete operations.</p>
+                                        <h6 class="fw-bold"><i class="icon icon-radio me-1" aria-hidden="true"></i> Event triggers</h6>
+                                        <p class="small text-muted mb-0"><code>HX-Trigger</code> response headers refresh the table after every create, update and delete.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="card bg-light border-0 h-100">
                                     <div class="card-body">
-                                        <h6 class="fw-bold"><i class="icon icon-file me-1" aria-hidden="true"></i> Server Pagination</h6>
-                                        <p class="small text-muted mb-0">Server-side paging and filtering with live search (500ms debounce) for efficient data handling.</p>
+                                        <h6 class="fw-bold"><i class="icon icon-file me-1" aria-hidden="true"></i> Server paging</h6>
+                                        <p class="small text-muted mb-0">Paging and filtering happen on the server, with live search after a 500 ms pause.</p>
                                     </div>
                                 </div>
                             </div>
@@ -167,9 +166,9 @@
                 </div>
                 <div class="card-footer bg-light">
                     <div class="d-flex justify-content-between align-items-center">
-                        <span><i class="icon icon-wrench me-2" aria-hidden="true"></i>Implementation by Mark Hazleton</span>
+                        <span><i class="icon icon-wrench me-2" aria-hidden="true"></i>Built by Mark Hazleton for Make Bold Spark</span>
                         <a href="https://github.com/markhazleton/UISampleSpark" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener noreferrer">
-                            <i class="icon icon-git-fork me-2" aria-hidden="true"></i>View Source Code
+                            <i class="icon icon-git-fork me-2" aria-hidden="true"></i>Read the source
                         </a>
                     </div>
                 </div>

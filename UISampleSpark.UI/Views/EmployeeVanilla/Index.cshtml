@@ -1,6 +1,6 @@
 @{
-    ViewBag.Title = "Vanilla JavaScript | Pure Browser API CRUD";
-    ViewBag.MetaDescription = "Employee CRUD demo using zero JavaScript libraries — only the native fetch API, DOM APIs, and CSS from Bootstrap already on the page.";
+    ViewBag.Title = "Vanilla JavaScript employee directory — no libraries";
+    ViewBag.MetaDescription = "The UISampleSpark employee directory with no JavaScript libraries: just fetch, the DOM and the CSS already on the page.";
     ViewBag.MetaKeywords = "vanilla JavaScript, fetch API, no libraries, pure JS, DOM, CRUD, ASP.NET Core, REST API";
 }
 
@@ -10,12 +10,12 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h2 mb-0">
-                <i class="icon icon-braces text-warning me-2" aria-hidden="true"></i>Pure Vanilla JavaScript
+                <i class="icon icon-braces text-warning me-2" aria-hidden="true"></i>Vanilla JavaScript employee directory
             </h1>
-            <p class="text-muted mb-0">Zero libraries &mdash; fetch, DOM, and CSS only</p>
+            <p class="text-muted mb-0">Pattern 05 · No libraries. Fetch, the DOM and CSS, nothing else.</p>
         </div>
         <button type="button" class="btn btn-primary" id="btnOpenAdd">
-            <i class="icon icon-circle-plus me-1" aria-hidden="true"></i>Add Employee
+            <i class="icon icon-circle-plus me-1" aria-hidden="true"></i>Add employee
         </button>
     </div>
 
@@ -28,7 +28,7 @@
             <span class="fw-semibold">Employees</span>
             <div class="input-group" style="max-width:260px">
                 <span class="input-group-text"><i class="icon icon-search" aria-hidden="true"></i></span>
-                <input type="search" id="searchInput" class="form-control form-control-sm" placeholder="Filter…" aria-label="Filter employees">
+                <input type="search" id="searchInput" class="form-control form-control-sm" placeholder="Search the directory" aria-label="Search the directory">
             </div>
         </div>
         <div class="card-body p-0">
@@ -70,7 +70,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="dialogTitle">Add Employee</h5>
+                    <h5 class="modal-title" id="dialogTitle">Add employee</h5>
                     <button type="button" class="btn-close" id="btnDialogClose" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -80,53 +80,53 @@
                         <div class="mb-3">
                             <label for="fldName" class="form-label">Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="fldName" required minlength="1" autocomplete="name" placeholder="Full name">
-                            <div class="invalid-feedback">Name is required.</div>
+                            <div class="invalid-feedback">Enter a name.</div>
                         </div>
 
                         <div class="mb-3">
                             <label for="fldGender" class="form-label">Gender <span class="text-danger">*</span></label>
                             <select class="form-select" id="fldGender" required>
-                                <option value="" disabled selected>Select gender</option>
+                                <option value="" disabled selected>Choose a gender</option>
                                 <option value="0">Male</option>
                                 <option value="1">Female</option>
-                                <option value="2">Non-Binary</option>
+                                <option value="2">Non-binary</option>
                                 <option value="3">Other</option>
                             </select>
-                            <div class="invalid-feedback">Please select a gender.</div>
+                            <div class="invalid-feedback">Choose a gender.</div>
                         </div>
 
                         <div class="mb-3">
                             <label for="fldAge" class="form-label">Age <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" id="fldAge" required min="18" max="100" placeholder="Minimum 18">
-                            <div class="invalid-feedback">Age must be between 18 and 100.</div>
+                            <input type="number" class="form-control" id="fldAge" required min="18" max="100" placeholder="18 or over">
+                            <div class="invalid-feedback">Enter an age from 18 to 100.</div>
                         </div>
 
                         <div class="row g-3 mb-3">
                             <div class="col-6">
                                 <label for="fldState" class="form-label">State <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="fldState" required placeholder="State">
-                                <div class="invalid-feedback">State is required.</div>
+                                <div class="invalid-feedback">Enter a state.</div>
                             </div>
                             <div class="col-6">
                                 <label for="fldCountry" class="form-label">Country <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="fldCountry" required placeholder="Country">
-                                <div class="invalid-feedback">Country is required.</div>
+                                <div class="invalid-feedback">Enter a country.</div>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="fldDepartment" class="form-label">Department <span class="text-danger">*</span></label>
                             <select class="form-select" id="fldDepartment" required>
-                                <option value="" disabled selected>Select department</option>
+                                <option value="" disabled selected>Choose a department</option>
                             </select>
-                            <div class="invalid-feedback">Please select a department.</div>
+                            <div class="invalid-feedback">Choose a department.</div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="btnCancel">Cancel</button>
                     <button type="button" class="btn btn-primary" id="btnSave">
-                        <i class="icon icon-circle-check me-1" aria-hidden="true"></i><span id="btnSaveLabel">Add Employee</span>
+                        <i class="icon icon-circle-check me-1" aria-hidden="true"></i><span id="btnSaveLabel">Add employee</span>
                     </button>
                 </div>
             </div>
@@ -143,14 +143,13 @@
         </div>
         <div class="card-body">
             <p class="lead mb-3">
-                This page uses <strong>zero JavaScript libraries</strong>. Every interaction
-                is handled by APIs built into every modern browser.
+                This page uses <strong>no JavaScript libraries</strong>. Everything runs on APIs built into every modern browser.
             </p>
             <div class="row g-3 mb-3">
                 <div class="col-md-6">
                     <div class="card bg-light border-0 h-100">
                         <div class="card-body">
-                            <h5><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>What is used</h5>
+                            <h5><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>What it uses</h5>
                             <ul class="mb-0">
                                 <li><code>fetch()</code> — HTTP requests to the REST API</li>
                                 <li><code>document.querySelector()</code> / <code>getElementById()</code></li>
@@ -165,7 +164,7 @@
                 <div class="col-md-6">
                     <div class="card bg-light border-0 h-100">
                         <div class="card-body">
-                            <h5><i class="icon icon-circle-x text-danger me-2" aria-hidden="true"></i>What is NOT used</h5>
+                            <h5><i class="icon icon-circle-x text-danger me-2" aria-hidden="true"></i>What it leaves out</h5>
                             <ul class="mb-0">
                                 <li>jQuery (no <code>$</code>)</li>
                                 <li>DataTables</li>
@@ -177,7 +176,7 @@
                     </div>
                 </div>
             </div>
-            <h5><i class="icon icon-code me-2" aria-hidden="true"></i>Key patterns</h5>
+            <h5><i class="icon icon-code me-2" aria-hidden="true"></i>The core pattern</h5>
             <pre class="bg-light p-3 rounded small"><code>// GET — load employees
 const res = await fetch('/api/employee');
 const data = await res.json();
@@ -193,9 +192,9 @@ await fetch('/api/employee', {
 await fetch(`/api/employee/${id}`, { method: 'DELETE' });</code></pre>
         </div>
         <div class="card-footer d-flex justify-content-between align-items-center">
-            <span><i class="icon icon-wrench me-2" aria-hidden="true"></i>Implementation by Mark Hazleton</span>
+            <span><i class="icon icon-wrench me-2" aria-hidden="true"></i>Built by Mark Hazleton for Make Bold Spark</span>
             <a href="https://github.com/markhazleton/UISampleSpark" class="btn btn-outline-warning btn-sm" target="_blank" rel="noopener">
-                <i class="icon icon-git-fork me-2" aria-hidden="true"></i>View Source
+                <i class="icon icon-git-fork me-2" aria-hidden="true"></i>Read the source
             </a>
         </div>
     </div>
@@ -305,7 +304,7 @@ await fetch(`/api/employee/${id}`, { method: 'DELETE' });</code></pre>
         fldDepartment.add(opt);
       });
     } catch (err) {
-      showAlert('Could not load departments: ' + err.message, 'danger');
+      showAlert("Couldn't load departments: " + err.message, 'danger');
     }
   }
 
@@ -354,7 +353,7 @@ await fetch(`/api/employee/${id}`, { method: 'DELETE' });</code></pre>
     const slice = filtered.slice(start, start + PAGE_SIZE);
 
     if (slice.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted py-3">No employees found.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted py-3">No employees yet. Add the first one.</td></tr>`;
       tableInfo.textContent = '';
       pagination.innerHTML = '';
       return;
@@ -455,26 +454,26 @@ await fetch(`/api/employee/${id}`, { method: 'DELETE' });</code></pre>
     try {
       if (isNew) {
         await apiFetch('/api/employee', { method: 'POST', body: JSON.stringify(employee) });
-        showToast('Employee added successfully.', 'success');
+        showToast('Employee added.', 'success');
       } else {
         await apiFetch(`/api/employee/${id}`, { method: 'PUT', body: JSON.stringify(employee) });
-        showToast('Employee updated successfully.', 'success');
+        showToast('Changes saved.', 'success');
       }
       closeDialog();
       await loadEmployees();
     } catch (err) {
-      showToast((isNew ? 'Add' : 'Update') + ' failed: ' + err.message, 'danger');
+      showToast((isNew ? "Couldn't add the employee: " : "Couldn't save your changes: ") + err.message, 'danger');
     }
   }
 
   async function deleteEmployee(id, name) {
-    if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
+    if (!confirm(`Delete ${name} from the directory? You can't undo this.`)) return;
     try {
       await apiFetch(`/api/employee/${id}`, { method: 'DELETE' });
       showToast('Employee deleted.', 'success');
       await loadEmployees();
     } catch (err) {
-      showToast('Delete failed: ' + err.message, 'danger');
+      showToast("Couldn't delete: " + err.message, 'danger');
     }
   }
 
@@ -489,11 +488,11 @@ await fetch(`/api/employee/${id}`, { method: 'DELETE' });</code></pre>
       fldState.value   = emp.state ?? '';
       fldCountry.value = emp.country ?? '';
       fldDepartment.value = String(emp.department ?? '');
-      dialogTitle.textContent = 'Edit Employee';
-      btnSaveLabel.textContent = 'Save Changes';
+      dialogTitle.textContent = 'Edit employee';
+      btnSaveLabel.textContent = 'Save changes';
       openDialog();
     } catch (err) {
-      showToast('Could not load employee: ' + err.message, 'danger');
+      showToast("Couldn't load that employee: " + err.message, 'danger');
     }
   }
 
@@ -502,8 +501,8 @@ await fetch(`/api/employee/${id}`, { method: 'DELETE' });</code></pre>
     form.reset();
     form.classList.remove('was-validated');
     fldId.value = '0';
-    dialogTitle.textContent = 'Add Employee';
-    btnSaveLabel.textContent = 'Add Employee';
+    dialogTitle.textContent = 'Add employee';
+    btnSaveLabel.textContent = 'Add employee';
     openDialog();
   });
 

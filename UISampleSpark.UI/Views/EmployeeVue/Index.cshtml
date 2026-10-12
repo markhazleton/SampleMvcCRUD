@@ -1,7 +1,7 @@
 @{
     Layout = "~/Views/Shared/_LayoutVue.cshtml";
-    ViewBag.Title = "Vue Employee CRUD | Reactive Component-Based UI";
-    ViewBag.MetaDescription = "A Vue 3 Single Page Application demonstrating reactive CRUD operations with the Composition API and declarative templates.";
+    ViewBag.Title = "Vue employee directory — reactive templates";
+    ViewBag.MetaDescription = "The UISampleSpark employee directory built with Vue 3 and the Composition API, binding data straight into HTML templates.";
     ViewBag.MetaKeywords = "Vue.js, Vue 3, Composition API, Reactive, CRUD operations, ASP.NET Core, SPA";
 }
 
@@ -12,12 +12,12 @@
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
                         <h1 class="h2 mb-0">
-                            <i class="icon icon-file-code text-primary me-2" aria-hidden="true"></i>Vue Employee CRUD
+                            <i class="icon icon-file-code text-primary me-2" aria-hidden="true"></i>Vue employee directory
                         </h1>
-                        <p class="text-muted">Reactive CRUD with Vue 3 Composition API and RESTful API</p>
+                        <p class="text-muted">Pattern 07 · Reactive templates over the REST API.</p>
                     </div>
                     <button type="button" class="btn btn-primary" v-on:click="openAdd">
-                        <i class="icon icon-circle-plus me-2" aria-hidden="true"></i>Add Employee
+                        <i class="icon icon-circle-plus me-2" aria-hidden="true"></i>Add employee
                     </button>
                 </div>
 
@@ -40,7 +40,7 @@
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-text"><i class="icon icon-search" aria-hidden="true"></i></span>
                                     <input type="text" class="form-control"
-                                           placeholder="Search employees..."
+                                           placeholder="Search the directory"
                                            v-model="searchTerm" />
                                     <button class="btn btn-outline-secondary" v-if="searchTerm"
                                             v-on:click="searchTerm = ''" aria-label="Clear search">
@@ -57,7 +57,7 @@
                             <div class="spinner-border text-primary" role="status">
                                 <span class="visually-hidden">Loading...</span>
                             </div>
-                            <p class="text-muted mt-2">Loading employees...</p>
+                            <p class="text-muted mt-2">Loading the directory…</p>
                         </div>
                     </div>
 
@@ -93,10 +93,10 @@
                                     <tr v-if="paginated.length === 0">
                                         <td colspan="8" class="text-center text-muted py-4">
                                             <template v-if="searchTerm">
-                                                <i class="icon icon-search me-2" aria-hidden="true"></i>No employees match your search.
+                                                <i class="icon icon-search me-2" aria-hidden="true"></i>No one matches that search.
                                             </template>
                                             <template v-else>
-                                                <i class="icon icon-inbox me-2" aria-hidden="true"></i>No employees found.
+                                                <i class="icon icon-inbox me-2" aria-hidden="true"></i>No employees yet. Add the first one.
                                             </template>
                                         </td>
                                     </tr>
@@ -169,7 +169,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header bg-light">
-                        <h5 class="modal-title">{{ formEmployee.id > 0 ? 'Update Employee' : 'Add Employee' }}</h5>
+                        <h5 class="modal-title">{{ formEmployee.id > 0 ? 'Edit employee' : 'Add employee' }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
@@ -180,8 +180,8 @@
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="icon icon-user" aria-hidden="true"></i></span>
                                     <input type="text" class="form-control" id="vueName"
-                                           v-model="formEmployee.name" placeholder="Enter employee name" required />
-                                    <div class="invalid-feedback">Please enter a name</div>
+                                           v-model="formEmployee.name" placeholder="Full name" required />
+                                    <div class="invalid-feedback">Enter a name.</div>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -189,12 +189,12 @@
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="icon icon-venus-and-mars" aria-hidden="true"></i></span>
                                     <select class="form-select" id="vueGender" v-model="formEmployee.gender" required>
-                                        <option value="" disabled>Select gender</option>
+                                        <option value="" disabled>Choose a gender</option>
                                         <option :value="0">Male</option>
                                         <option :value="1">Female</option>
-                                        <option :value="2">Non-Binary</option>
+                                        <option :value="2">Non-binary</option>
                                     </select>
-                                    <div class="invalid-feedback">Please select a gender</div>
+                                    <div class="invalid-feedback">Choose a gender.</div>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -202,8 +202,8 @@
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="icon icon-calendar" aria-hidden="true"></i></span>
                                     <input type="number" class="form-control" id="vueAge"
-                                           v-model.number="formEmployee.age" placeholder="Enter age" min="18" required />
-                                    <div class="invalid-feedback">Please enter age (minimum 18)</div>
+                                           v-model.number="formEmployee.age" placeholder="18 or over" min="18" required />
+                                    <div class="invalid-feedback">Enter an age of 18 or over.</div>
                                 </div>
                             </div>
                             <div class="row">
@@ -212,8 +212,8 @@
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="icon icon-map-pin" aria-hidden="true"></i></span>
                                         <input type="text" class="form-control" id="vueState"
-                                               v-model="formEmployee.state" placeholder="Enter state" required />
-                                        <div class="invalid-feedback">Please enter state</div>
+                                               v-model="formEmployee.state" placeholder="State" required />
+                                        <div class="invalid-feedback">Enter a state.</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
@@ -221,8 +221,8 @@
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="icon icon-globe" aria-hidden="true"></i></span>
                                         <input type="text" class="form-control" id="vueCountry"
-                                               v-model="formEmployee.country" placeholder="Enter country" required />
-                                        <div class="invalid-feedback">Please enter country</div>
+                                               v-model="formEmployee.country" placeholder="Country" required />
+                                        <div class="invalid-feedback">Enter a country.</div>
                                     </div>
                                 </div>
                             </div>
@@ -231,10 +231,10 @@
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="icon icon-building-2" aria-hidden="true"></i></span>
                                     <select class="form-select" id="vueDepartment" v-model.number="formEmployee.department" required>
-                                        <option value="" disabled>Select department</option>
+                                        <option value="" disabled>Choose a department</option>
                                         <option v-for="d in departments" :key="d.id" :value="d.id">{{ d.name }}</option>
                                     </select>
-                                    <div class="invalid-feedback">Please select a department</div>
+                                    <div class="invalid-feedback">Choose a department.</div>
                                 </div>
                             </div>
                         </form>
@@ -244,7 +244,7 @@
                                 :class="'btn ' + (formEmployee.id > 0 ? 'btn-success' : 'btn-primary')"
                                 :disabled="saving">
                             <template v-if="saving">
-                                <span class="spinner-border spinner-border-sm me-1"></span> Saving...
+                                <span class="spinner-border spinner-border-sm me-1"></span> Saving…
                             </template>
                             <template v-else-if="formEmployee.id > 0">
                                 <i class="icon icon-circle-check me-1" aria-hidden="true"></i> Update
@@ -254,7 +254,7 @@
                             </template>
                         </button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="icon icon-circle-x me-1" aria-hidden="true"></i> Close
+                            <i class="icon icon-circle-x me-1" aria-hidden="true"></i> Cancel
                         </button>
                     </div>
                 </div>
@@ -267,13 +267,13 @@
                 <div class="modal-content">
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">
-                            <i class="icon icon-triangle-alert me-2" aria-hidden="true"></i>Confirm Delete
+                            <i class="icon icon-triangle-alert me-2" aria-hidden="true"></i>Delete employee
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to delete <strong>{{ deleteTarget?.name }}</strong>?</p>
-                        <p class="text-muted mb-0">This action cannot be undone.</p>
+                        <p>Delete <strong>{{ deleteTarget?.name }}</strong> from the directory?</p>
+                        <p class="text-muted mb-0">You can't undo this.</p>
                     </div>
                     <div class="modal-footer bg-light">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -307,25 +307,23 @@
             <div class="col-md-12">
                 <div class="card shadow-sm rounded-3 border-0 mb-4">
                     <div class="card-header bg-primary text-white">
-                        <h3 class="mb-0"><i class="icon icon-info me-2" aria-hidden="true"></i>About Vue Implementation</h3>
+                        <h3 class="mb-0"><i class="icon icon-info me-2" aria-hidden="true"></i>How this pattern works</h3>
                     </div>
                     <div class="card-body p-4">
                         <p class="lead">
-                            This implementation demonstrates a Vue 3 SPA using the Composition API loaded via CDN.
-                            It consumes the same RESTful endpoints as the React implementation but uses Vue's
-                            reactive data binding and declarative template syntax.
+                            Vue 3 with the Composition API, loaded from a CDN. It calls the same REST API as React, but binds data straight into HTML templates.
                         </p>
 
                         <div class="row g-4 mt-2">
                             <div class="col-md-6">
                                 <div class="card h-100 bg-light border-0">
                                     <div class="card-body">
-                                        <h4 class="card-title"><i class="icon icon-sparkles text-warning me-2" aria-hidden="true"></i>Vue Advantages</h4>
+                                        <h4 class="card-title"><i class="icon icon-sparkles text-warning me-2" aria-hidden="true"></i>Good for</h4>
                                         <ul class="list-group list-group-flush">
-                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Gentle learning curve with familiar HTML templates</li>
-                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Fine-grained reactivity system (no Virtual DOM diffing)</li>
-                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Composition API for clean, reusable logic</li>
-                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Two-way binding with v-model simplifies forms</li>
+                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Teams coming from server-rendered HTML</li>
+                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Fine-grained updates without a virtual DOM diff</li>
+                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Logic you can share as composables</li>
+                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Forms, where v-model keeps inputs and data in step</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -334,12 +332,12 @@
                             <div class="col-md-6">
                                 <div class="card h-100 bg-light border-0">
                                     <div class="card-body">
-                                        <h4 class="card-title"><i class="icon icon-triangle-alert text-warning me-2" aria-hidden="true"></i>Considerations</h4>
+                                        <h4 class="card-title"><i class="icon icon-triangle-alert text-warning me-2" aria-hidden="true"></i>Watch for</h4>
                                         <ul class="list-group list-group-flush">
-                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Smaller ecosystem than React</li>
-                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>CDN mode limits single-file component usage</li>
-                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Template compilation at runtime adds overhead</li>
-                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Requires JavaScript to be enabled in browser</li>
+                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>A smaller ecosystem than React</li>
+                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>CDN mode rules out single-file components</li>
+                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Templates compile in the browser, which slows the first load</li>
+                                            <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Nothing works without JavaScript</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -347,13 +345,13 @@
                         </div>
 
                         <div class="mt-4">
-                            <h4><i class="icon icon-code me-2" aria-hidden="true"></i>Technical Details</h4>
+                            <h4><i class="icon icon-code me-2" aria-hidden="true"></i>How it's built</h4>
                             <div class="row g-3 mt-1">
                                 <div class="col-md-4">
                                     <div class="card bg-light border-0 h-100">
                                         <div class="card-body">
                                             <h6 class="fw-bold"><i class="icon icon-box me-1" aria-hidden="true"></i> Vue 3</h6>
-                                            <p class="small text-muted mb-0">Loaded via CDN. Uses the global build with Composition API (<code>setup()</code>) for reactive state management.</p>
+                                            <p class="small text-muted mb-0">The global CDN build, with the Composition API (<code>setup()</code>) holding reactive state.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -361,7 +359,7 @@
                                     <div class="card bg-light border-0 h-100">
                                         <div class="card-body">
                                             <h6 class="fw-bold"><i class="icon icon-refresh-cw me-1" aria-hidden="true"></i> Reactivity</h6>
-                                            <p class="small text-muted mb-0"><code>ref()</code>, <code>computed()</code>, and <code>watch()</code> for fine-grained reactive state tracking without Virtual DOM.</p>
+                                            <p class="small text-muted mb-0"><code>ref()</code>, <code>computed()</code> and <code>watch()</code> track exactly what changed. No virtual DOM.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -369,7 +367,7 @@
                                     <div class="card bg-light border-0 h-100">
                                         <div class="card-body">
                                             <h6 class="fw-bold"><i class="icon icon-cloud-upload me-1" aria-hidden="true"></i> Fetch API</h6>
-                                            <p class="small text-muted mb-0">Native browser Fetch API for RESTful CRUD operations — no jQuery or Axios dependency.</p>
+                                            <p class="small text-muted mb-0">Plain fetch calls to the REST API. No jQuery or Axios.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -378,9 +376,9 @@
                     </div>
                     <div class="card-footer bg-light">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span><i class="icon icon-wrench me-2" aria-hidden="true"></i>Implementation by Mark Hazleton</span>
+                            <span><i class="icon icon-wrench me-2" aria-hidden="true"></i>Built by Mark Hazleton for Make Bold Spark</span>
                             <a href="https://github.com/markhazleton/UISampleSpark" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener noreferrer">
-                                <i class="icon icon-git-fork me-2" aria-hidden="true"></i>View Source Code
+                                <i class="icon icon-git-fork me-2" aria-hidden="true"></i>Read the source
                             </a>
                         </div>
                     </div>
@@ -432,14 +430,14 @@
                         const res = await fetch('/api/employee');
                         if (!res.ok) throw new Error('Failed to load employees');
                         employees.value = await res.json();
-                    } catch (err) { addToast('Error', err.message, 'danger'); }
+                    } catch (err) { addToast('Something went wrong', err.message, 'danger'); }
                 }
                 async function loadDepartments() {
                     try {
                         const res = await fetch('/api/department?IncludeEmployees=false');
                         if (!res.ok) throw new Error('Failed to load departments');
                         departments.value = await res.json();
-                    } catch (err) { addToast('Error', err.message, 'danger'); }
+                    } catch (err) { addToast('Something went wrong', err.message, 'danger'); }
                 }
 
                 // --- Sorting ---
@@ -527,7 +525,7 @@
                         formValidated.value = false;
                         saving.value = false;
                         formModal.show();
-                    } catch (err) { addToast('Error', err.message, 'danger'); }
+                    } catch (err) { addToast('Something went wrong', err.message, 'danger'); }
                 }
 
                 async function handleSave() {
@@ -559,11 +557,11 @@
                             const text = await res.text();
                             throw new Error(text || 'Failed to save employee');
                         }
-                        addToast('Success', isEdit ? 'Employee updated successfully' : 'Employee added successfully', 'success');
+                        addToast('Done', isEdit ? 'Changes saved.' : 'Employee added.', 'success');
                         formModal.hide();
                         await loadEmployees();
                     } catch (err) {
-                        addToast('Error', err.message, 'danger');
+                        addToast('Something went wrong', err.message, 'danger');
                     } finally {
                         saving.value = false;
                     }
@@ -584,12 +582,12 @@
                             const text = await res.text();
                             throw new Error(text || 'Failed to delete employee');
                         }
-                        addToast('Success', 'Employee deleted successfully', 'success');
+                        addToast('Done', 'Employee deleted.', 'success');
                         deleteModal.hide();
                         deleteTarget.value = null;
                         await loadEmployees();
                     } catch (err) {
-                        addToast('Error', err.message, 'danger');
+                        addToast('Something went wrong', err.message, 'danger');
                     }
                 }
 
