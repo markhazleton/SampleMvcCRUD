@@ -56,21 +56,6 @@ updates:
       prefix: "deps"
       include: "scope"
 
-  # NuGet dependencies for repository project
-  - package-ecosystem: "nuget"
-    directory: "/UISampleSpark.Data"
-    schedule:
-      interval: "weekly"
-      day: "tuesday"
-      time: "09:00"
-      timezone: "America/New_York"
-    labels:
-      - "dependencies"
-      - "nuget"
-    commit-message:
-      prefix: "deps"
-      include: "scope"
-
   # NuGet dependencies for console project
   - package-ecosystem: "nuget"
     directory: "/UISampleSpark.CLI"
@@ -103,7 +88,7 @@ updates:
       include: "scope"
 
   - package-ecosystem: "nuget"
-    directory: "/UISampleSpark.Data.Tests"
+    directory: "/UISampleSpark.UI.Tests"
     schedule:
       interval: "weekly"
       day: "tuesday"

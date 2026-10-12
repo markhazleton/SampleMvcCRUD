@@ -25,7 +25,7 @@ RUN apk update && \
     rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
 # Create non-root user for security
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN addgroup -S -g 10001 appgroup && adduser -S -u 10001 appuser -G appgroup
 WORKDIR /app
 EXPOSE 8080
 
@@ -45,8 +45,8 @@ RUN apt-get update && \
         curl \
         gnupg \
         ca-certificates && \
-    # Install Node.js 20
-    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    # Install Node.js 24
+    curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
     apt-get install -y --no-install-recommends nodejs && \
     npm install -g npm@latest && \
     # CRITICAL: Update OpenSSL and system libraries to fix CVEs
@@ -98,7 +98,7 @@ COPY --from=publish /app/publish .
 RUN chown -R appuser:appgroup /app
 
 # Switch to non-root user for security
-USER appuser
+USER 10001:10001
 
 # Configure ASP.NET Core for container environment
 ENV ASPNETCORE_URLS=http://+:8080
