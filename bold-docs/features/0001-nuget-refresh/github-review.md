@@ -37,3 +37,8 @@ Reviewed each PR's changed-file patches; no application logic edits or open-PR i
 Additional findings: Docker CI fails at Hadolint DL3066 (named user); fixed with explicit UID/GID 10001. Node build tooling moved to Node 24. Dependabot referenced deleted Data/Data.Tests projects; removed the former and replaced the latter with the actual UI.Tests project.
 
 Validation: clean Release build 0 warnings/errors, 246 passing tests, npm ci/build and legacy jQuery DataTables DOM smoke check pass, EF tool restore/version pass, Hadolint with the workflow's existing documented exceptions passes, npm/NuGet audits report no vulnerabilities. GitHub open security alerts initially empty. Local Docker daemon unavailable; hosted image build pending.
+
+## Resolution
+All 28 originally open PRs were closed after their replacements were published on main (cf701b8, 8bacb50, 33cd3d0). Dependabot opened PR #307 during refresh: its Bootstrap Icons 1.13.2 patch was reviewed, applied with regenerated CSS/fonts, validated and published as 7d7c39e, then closed. Total: 29 reviewed and resolved PRs.
+
+Final GitHub queries returned zero open PRs and zero open Dependabot security alerts. npm outdated returned no outdated direct npm dependencies. Hosted Test & Coverage run 38198905340 passed. CodeQL run 38198905343 passed setup and autobuild and is analyzing; Docker run 38198905367 passed lint and is building/pushing. Full hosted CodeQL/image results remain pending; local validations above passed. User explicitly requested main-only work; GitHub accepted direct pushes using the authenticated account's existing branch-rule bypass permission.
