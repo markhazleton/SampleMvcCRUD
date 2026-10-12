@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Add an employee — Traditional MVC";
-    ViewBag.MetaDescription = "Add an employee with a classic MVC form post: model binding maps the fields and the server validates before saving.";
+    ViewBag.MetaDescription = "Add an employee with a classic MVC form post: model binding maps the fields and the controller saves and redirects.";
     ViewBag.MetaKeywords = "ASP.NET MVC, Create Employee, UI patterns tutorial, MVC Forms, employee management, form handling, model binding";
 }
 
@@ -10,7 +10,7 @@
     <div class="card shadow-sm">
         <div class="card-body">
             <h1 class="h2 card-title text-center">Add employee</h1>
-            <p class="text-muted text-center">Fill in the details and save. The server checks everything before it's stored.</p>
+            <p class="text-muted text-center">Fill in the details and save. Each save is a full form post to the server.</p>
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
@@ -72,10 +72,10 @@
         <div class="card-body">
             <h2 class="h3 card-title">How this form works</h2>
             <p class="card-text">
-                The form posts to the controller's Create action. Model binding maps each field onto the employee, data annotations validate it, and the server sends you back to the list once it's saved.
+                The form posts to the controller's Create action, which binds the fields onto an employee and saves it through the employee client. When the save succeeds you land on that record's edit page; if it fails, you go back to the list.
             </p>
             <p class="card-text">
-                If anything fails validation, the same view comes back with your entries intact and the problems marked, so nothing is lost.
+                This demo keeps the flow deliberately simple and does not re-display the form with validation messages. A production form would check <code>ModelState</code> and return the view with your entries when something is wrong.
             </p>
         </div>
     </div>

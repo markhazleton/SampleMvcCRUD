@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = $"Edit {Model.Name} — Traditional MVC";
-    ViewBag.MetaDescription = $"Edit {Model.Name} with a classic MVC form post, validated on the server before it is saved.";
+    ViewBag.MetaDescription = $"Edit {Model.Name} with a classic MVC form post that saves and redirects back to the list.";
     ViewBag.MetaKeywords = "ASP.NET MVC, Employee Edit, UI patterns tutorial, MVC Forms, employee management, form handling, model binding";
 }
 
@@ -10,7 +10,7 @@
     <div class="card shadow-sm">
         <div class="card-body">
             <h1 class="h2 card-title text-center">Edit @Model.Name</h1>
-            <p class="text-muted text-center">Change what you need and save. The server checks everything again before it's stored.</p>
+            <p class="text-muted text-center">Change what you need and save. Each save is a full form post to the server.</p>
             @using (Html.BeginForm("Edit", "MvcEmployee", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
@@ -82,7 +82,7 @@
         <div class="card-body">
             <h2 class="h3 card-title">How this form works</h2>
             <p class="card-text">
-                The form posts to the Edit action. Model binding maps your changes onto the record, validation runs on the server, and you land back on the list once it's saved.
+                The form posts to the Edit action, which binds your changes onto the record and saves them through the employee client. When the save succeeds you return to the list; if it fails, the edit page reloads with the stored record.
             </p>
             <p class="card-text">
                 Because each step is a full page, the back button, bookmarks and history all behave the way people expect.
