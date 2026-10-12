@@ -111,6 +111,8 @@ public static class StringExtensions
     /// <returns>A list of successfully converted elements.</returns>
     public static List<T> SplitAndConvert<T>(this string value, char separator, out bool allConverted)
     {
+        ArgumentNullException.ThrowIfNull(value);
+
         var results = new List<T>();
         allConverted = true;
         foreach (string item in value.Split(separator))

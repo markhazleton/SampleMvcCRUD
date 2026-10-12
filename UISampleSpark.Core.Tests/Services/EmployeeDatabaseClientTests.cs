@@ -104,7 +104,7 @@ public class EmployeeDatabaseClientTests
         IEnumerable<DepartmentDto> result = await client.GetDepartmentsAsync(includeEmployees, cancellationToken);
 
         // Assert
-        Assert.AreEqual(departmentDtos, result);
+        Assert.AreSame(departmentDtos, result);
         serviceMock.Verify(s => s.GetDepartmentsAsync(includeEmployees, cancellationToken), Times.Once);
     }
 

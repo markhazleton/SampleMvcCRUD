@@ -1,0 +1,132 @@
+[
+  {
+    "id": "ApiTestSpark",
+    "latest": "2.1.0",
+    "latest10": null
+  },
+  {
+    "id": "Bogus",
+    "latest": "35.6.5",
+    "latest10": "10.0.1"
+  },
+  {
+    "id": "coverlet.collector",
+    "latest": "10.1.0",
+    "latest10": "10.1.0"
+  },
+  {
+    "id": "Microsoft.ApplicationInsights",
+    "latest": "3.2.0",
+    "latest10": null
+  },
+  {
+    "id": "Microsoft.ApplicationInsights.AspNetCore",
+    "latest": "3.2.0",
+    "latest10": null
+  },
+  {
+    "id": "Microsoft.AspNetCore.Mvc.Testing",
+    "latest": "10.0.12",
+    "latest10": "10.0.12"
+  },
+  {
+    "id": "Microsoft.AspNetCore.OpenApi",
+    "latest": "10.0.12",
+    "latest10": "10.0.12"
+  },
+  {
+    "id": "Microsoft.EntityFrameworkCore",
+    "latest": "10.0.12",
+    "latest10": "10.0.12"
+  },
+  {
+    "id": "Microsoft.EntityFrameworkCore.InMemory",
+    "latest": "10.0.12",
+    "latest10": "10.0.12"
+  },
+  {
+    "id": "Microsoft.EntityFrameworkCore.Sqlite",
+    "latest": "10.0.12",
+    "latest10": "10.0.12"
+  },
+  {
+    "id": "Microsoft.EntityFrameworkCore.SqlServer",
+    "latest": "10.0.12",
+    "latest10": "10.0.12"
+  },
+  {
+    "id": "Microsoft.EntityFrameworkCore.Tools",
+    "latest": "10.0.12",
+    "latest10": "10.0.12"
+  },
+  {
+    "id": "Microsoft.Extensions.ApiDescription.Server",
+    "latest": "10.0.12",
+    "latest10": "10.0.12"
+  },
+  {
+    "id": "Microsoft.NET.Test.Sdk",
+    "latest": "18.10.1",
+    "latest10": null
+  },
+  {
+    "id": "Microsoft.OpenApi",
+    "latest": "3.10.2",
+    "latest10": null
+  },
+  {
+    "id": "Moq",
+    "latest": "4.21.0",
+    "latest10": null
+  },
+  {
+    "id": "MSTest.TestAdapter",
+    "latest": "4.5.1",
+    "latest10": null
+  },
+  {
+    "id": "MSTest.TestFramework",
+    "latest": "4.5.1",
+    "latest10": null
+  },
+  {
+    "id": "OpenTelemetry.Api",
+    "latest": "1.19.1",
+    "latest10": null
+  },
+  {
+    "id": "OpenTelemetry.Exporter.OpenTelemetryProtocol",
+    "latest": "1.19.1",
+    "latest10": null
+  },
+  {
+    "id": "SkiaSharp",
+    "latest": "4.153.1",
+    "latest10": null
+  },
+  {
+    "id": "SkiaSharp.NativeAssets.Linux",
+    "latest": "4.153.1",
+    "latest10": null
+  },
+  {
+    "id": "SQLitePCLRaw.bundle_e_sqlite3",
+    "latest": "3.0.5",
+    "latest10": null
+  },
+  {
+    "id": "WebSpark.Bootswatch",
+    "latest": "2.5.1",
+    "latest10": null
+  },
+  {
+    "id": "WebSpark.HttpClientUtility",
+    "latest": "2.5.1",
+    "latest10": null
+  },
+  {
+    "id": "Westwind.AspNetCore.Markdown",
+    "latest": "3.41.0",
+    "latest10": null
+  }
+]

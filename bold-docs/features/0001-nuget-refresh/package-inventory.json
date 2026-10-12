@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "parameters": "--outdated",
+  "sources": [
+    "https://api.nuget.org/v3/index.json"
+  ],
+  "projects": [
+    {
+      "path": "C:/GitHub/MakeBoldSolutions/UISampleSpark/UISampleSpark.UI/UISampleSpark.UI.csproj",
+      "frameworks": [
+        {
+          "framework": "net10.0",
+          "topLevelPackages": [
+            {
+              "id": "Microsoft.OpenApi",
+              "requestedVersion": "2.12.2",
+              "resolvedVersion": "2.12.2",
+              "latestVersion": "3.10.2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "C:/GitHub/MakeBoldSolutions/UISampleSpark/UISampleSpark.Core/UISampleSpark.Core.csproj"
+    },
+    {
+      "path": "C:/GitHub/MakeBoldSolutions/UISampleSpark/UISampleSpark.Core.Tests/UISampleSpark.Core.Tests.csproj"
+    },
+    {
+      "path": "C:/GitHub/MakeBoldSolutions/UISampleSpark/UISampleSpark.CLI/UISampleSpark.CLI.csproj"
+    },
+    {
+      "path": "C:/GitHub/MakeBoldSolutions/UISampleSpark/UISampleSpark.UI.Tests/UISampleSpark.UI.Tests.csproj",
+      "frameworks": [
+        {
+          "framework": "net10.0",
+          "topLevelPackages": [
+            {
+              "id": "Microsoft.OpenApi",
+              "requestedVersion": "2.12.2",
+              "resolvedVersion": "2.12.2",
+              "latestVersion": "3.10.2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

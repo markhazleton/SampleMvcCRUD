@@ -43,6 +43,8 @@ public static class ExceptionHttpMapper
     /// </summary>
     public static string GetDetailMessage(Exception exception, bool isDevelopment)
     {
+        ArgumentNullException.ThrowIfNull(exception);
+
         if (isDevelopment)
         {
             return exception.Message;
