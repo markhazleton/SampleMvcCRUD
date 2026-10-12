@@ -2,15 +2,15 @@
 @model UISampleSpark.UI.Pages.EmployeeRazor.EditModel
 
 @{
-    ViewData["Title"] = $"Edit Employee - {Model.Employee.Name} | ASP.NET Core Razor Pages";
-    ViewData["Description"] = $"Edit the details of employee {Model.Employee.Name} using Razor Pages in ASP.NET Core. Learn how to manage employee information with tightly bound UI and backend logic.";
+    ViewData["Title"] = $"Edit {Model.Employee.Name} — Razor Pages";
+    ViewData["Description"] = $"Edit {Model.Employee.Name} with a Razor Pages form, validated and saved by the page model.";
     ViewData["Keywords"] = "ASP.NET Core, Razor Pages, Edit Employee, CRUD operations, Razor Pages tutorial, employee management, MVC vs Razor Pages";
 }
 
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h2 class="card-title text-center">Edit Employee - @Model.Employee.Name</h2>
+            <h1 class="h2 card-title text-center">Edit @Model.Employee.Name</h1>
             <hr />
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -50,8 +50,8 @@
                         </div>
                         <input type="hidden" asp-for="Employee.Id" />
                         <div class="form-group mt-4">
-                            <input type="submit" value="Save" class="btn btn-primary" />
-                            <a class="btn btn-secondary ms-3" asp-page="./Index">Back to List</a>
+                            <input type="submit" value="Save changes" class="btn btn-primary" />
+                            <a class="btn btn-secondary ms-3" asp-page="./Index">Back to the directory</a>
                         </div>
                     </form>
                 </div>
@@ -63,17 +63,15 @@
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h3 class="card-title">About Razor Pages Edit Form</h3>
+            <h2 class="h3 card-title">How this form works</h2>
             <p class="card-text">
-                The Razor Pages Edit form in ASP.NET Core allows you to update existing employee records with a tightly integrated UI and backend logic.
-                Razor Pages provide a simplified model for binding form data directly to the page model, ensuring smooth data handling and validation.
-                This approach promotes maintainability and clarity by encapsulating all page-specific logic in one place.
+                OnPost receives your changes through model binding, validates them and saves with Entity Framework. Everything this page does lives in one page model.
             </p>
-            <h4 class="card-title">Best Practices for Razor Pages</h4>
+            <h3 class="h4 card-title">Good habits</h3>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Use ViewModels:</strong> Keep your ViewModels separate from entities to maintain clean separation of concerns.</li>
-                <li class="list-group-item"><strong>Leverage Tag Helpers:</strong> Use Tag Helpers for consistent and reusable UI elements.</li>
-                <li class="list-group-item"><strong>Keep Code-Behind Simple:</strong> Avoid putting complex business logic in the code-behind, use services for that instead.</li>
+                <li class="list-group-item"><strong>Use view models:</strong> keep database entities out of your pages.</li>
+                <li class="list-group-item"><strong>Use tag helpers:</strong> they keep forms consistent and readable.</li>
+                <li class="list-group-item"><strong>Keep handlers thin:</strong> business logic belongs in services, not the page model.</li>
             </ul>
         </div>
     </div>

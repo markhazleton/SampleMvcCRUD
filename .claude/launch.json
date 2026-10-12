@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ui",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "UISampleSpark.UI/UISampleSpark.UI.csproj", "--no-build", "--urls", "http://localhost:5023", "--environment", "Development"],
+      "port": 5023
+    }
+  ]
+}

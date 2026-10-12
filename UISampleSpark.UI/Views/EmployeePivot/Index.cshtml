@@ -1,17 +1,16 @@
-﻿@{
+@{
     Layout = "_LayoutPivot";
-    ViewBag.Title = "Employee Pivot with PivotTables.js | Data Visualization and Analysis";
-    ViewBag.MetaDescription = "Explore how to visualize and analyze employee data using PivotTables.js in ASP.NET MVC. Learn the history, benefits, and customization options for this powerful tool.";
+    ViewBag.Title = "Pivot report — explore employee data with PivotTable.js";
+    ViewBag.MetaDescription = "Slice the UISampleSpark employee data any way you like with an interactive PivotTable.js report and Plotly charts.";
     ViewBag.MetaKeywords = "PivotTables.js, ASP.NET MVC, data visualization, employee data analysis, JavaScript pivot tables, data analytics, interactive tables";
 }
 
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h2 class="card-title text-center">Employee Data Visualization with PivotTables.js</h2>
+            <h1 class="h2 card-title text-center">Pivot report</h1>
             <p class="card-text">
-                This page demonstrates how to use PivotTables.js to visualize and analyze employee data in an interactive and dynamic manner.
-                PivotTables.js provides powerful features for data exploration, making it easier to uncover insights and trends.
+                Slice the same employee data any way you like. Drag fields into rows and columns, pick a summary, and switch to a chart.
             </p>
         </div>
     </div>
@@ -23,24 +22,23 @@
 <div class="container mt-5">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h3 class="card-title">About PivotTables.js</h3>
+            <h2 class="h3 card-title">How this report works</h2>
             <p class="card-text">
-                PivotTables.js is a JavaScript library that provides interactive pivot tables for data analysis and reporting.
-                Developed by Nicholas Kruchten, it has been widely adopted for its simplicity and flexibility. The project has a long life and remains relevant today due to its ease of customization and robust functionality.
+                PivotTable.js turns a JSON array into an interactive pivot table in the browser. Nicolas Kruchten created it, and it has stayed popular because it's simple to embed and easy to customize. Plotly renderers add the charts.
             </p>
-            <h4 class="card-subtitle mt-3">Pros of Using PivotTables.js:</h4>
+            <h3 class="h4 card-subtitle mt-3">Good for</h3>
             <ul class="list-group list-group-flush mb-3">
-                <li class="list-group-item"><strong>Interactive Data Analysis:</strong> Allows users to pivot, filter, and summarize large datasets with ease.</li>
-                <li class="list-group-item"><strong>Highly Customizable:</strong> Offers extensive customization options to fit specific reporting and visualization needs.</li>
-                <li class="list-group-item"><strong>Open Source and Actively Maintained:</strong> The library has a strong community and continuous updates, ensuring its relevance.</li>
+                <li class="list-group-item"><strong>Self-serve analysis:</strong> pivot, filter and summarize without writing a query.</li>
+                <li class="list-group-item"><strong>Customization:</strong> renderers, aggregators and options cover most reporting needs.</li>
+                <li class="list-group-item"><strong>Open source:</strong> MIT licensed, with a long track record.</li>
             </ul>
-            <h4 class="card-subtitle mt-3">Cons of Using PivotTables.js:</h4>
+            <h3 class="h4 card-subtitle mt-3">Watch for</h3>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Performance Issues:</strong> May struggle with very large datasets in the browser, impacting performance.</li>
-                <li class="list-group-item"><strong>JavaScript Dependency:</strong> Requires a solid understanding of JavaScript for advanced customizations.</li>
+                <li class="list-group-item"><strong>Large datasets:</strong> everything runs in the browser, so very big tables slow down.</li>
+                <li class="list-group-item"><strong>Custom work takes JavaScript:</strong> going past the defaults means writing code.</li>
             </ul>
             <p class="card-text mt-3">
-                Despite these limitations, PivotTables.js is an excellent choice for creating interactive and flexible data visualizations in web applications.
+                For quick, flexible exploration of modest datasets, it's hard to beat.
             </p>
         </div>
     </div>

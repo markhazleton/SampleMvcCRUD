@@ -2,16 +2,16 @@
 @model UISampleSpark.UI.Pages.EmployeeRazor.DeleteModel
 
 @{
-    ViewData["Title"] = $"Delete Employee - {Model.Employee.Name} | ASP.NET Core Razor Pages";
-    ViewData["Description"] = $"Confirm deletion of employee {Model.Employee.Name} using Razor Pages in ASP.NET Core. Ensure you want to delete this employee record.";
+    ViewData["Title"] = $"Delete {Model.Employee.Name}? — Razor Pages";
+    ViewData["Description"] = $"Confirm before deleting {Model.Employee.Name}: OnGet shows the record, and only OnPost removes it.";
     ViewData["Keywords"] = "ASP.NET Core, Razor Pages, Delete Employee, CRUD operations, Razor Pages tutorial, employee management, MVC vs Razor Pages";
 }
 
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h2 class="card-title text-center text-danger">Delete Employee - @Model.Employee.Name</h2>
-            <h4 class="text-center text-muted">Are you sure you want to delete this employee?</h4>
+            <h1 class="h2 card-title text-center text-danger">Delete @Model.Employee.Name?</h1>
+            <p class="lead text-center text-muted">This removes them from the directory. You can't undo it.</p>
             <hr />
             <dl class="row">
                 <dt class="col-sm-3 text-muted">@Html.DisplayNameFor(model => model.Employee.Name)</dt>
@@ -37,8 +37,8 @@
             </dl>
             <form method="post" class="text-center mt-4">
                 <input type="hidden" asp-for="Employee.Id" />
-                <input type="submit" value="Delete" class="btn btn-danger me-2" />
-                <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+                <input type="submit" value="Delete employee" class="btn btn-danger me-2" />
+                <a asp-page="./Index" class="btn btn-secondary">Back to the directory</a>
             </form>
         </div>
     </div>
@@ -47,16 +47,15 @@
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h3 class="card-title">About the Delete Employee Page</h3>
+            <h2 class="h3 card-title">How this page works</h2>
             <p class="card-text">
-                The Delete Employee page allows you to confirm the deletion of an employee record using Razor Pages in ASP.NET Core. This page displays all relevant information about the employee
-                to help you make an informed decision. Razor Pages simplify the process of handling CRUD operations by integrating both the UI and the backend logic in a single file.
+                OnGet shows the record so you can check it. Only the form post to OnPost removes it, so a stray link can never delete data.
             </p>
-            <h4 class="card-title">Best Practices:</h4>
+            <h3 class="h4 card-title">Good habits</h3>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Confirmation:</strong> Always confirm deletion actions with users to prevent accidental data loss.</li>
-                <li class="list-group-item"><strong>Use Anti-Forgery Tokens:</strong> Protect against CSRF attacks by including anti-forgery tokens in your forms.</li>
-                <li class="list-group-item"><strong>Display Important Details:</strong> Show all relevant information to help users make informed decisions.</li>
+                <li class="list-group-item"><strong>Confirm first:</strong> always show what's about to be deleted.</li>
+                <li class="list-group-item"><strong>Use anti-forgery tokens:</strong> Razor Pages add them to forms for you.</li>
+                <li class="list-group-item"><strong>Show the details:</strong> people should recognize the record before they remove it.</li>
             </ul>
         </div>
     </div>

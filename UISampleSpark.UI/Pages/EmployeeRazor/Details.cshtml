@@ -2,15 +2,15 @@
 @model UISampleSpark.UI.Pages.EmployeeRazor.DetailsModel
 
 @{
-    ViewData["Title"] = $"Employee Details - {Model.Employee.Name} | ASP.NET Core Razor Pages";
-    ViewData["Description"] = $"View detailed information for employee {Model.Employee.Name} using Razor Pages in ASP.NET Core. Understand the employee's role and department.";
+    ViewData["Title"] = $"{Model.Employee.Name} — Razor Pages";
+    ViewData["Description"] = $"Details for {Model.Employee.Name}, loaded by a Razor Pages OnGet handler.";
     ViewData["Keywords"] = "ASP.NET Core, Razor Pages, Employee Details, employee management, Razor Pages tutorial, MVC vs Razor Pages";
 }
 
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h2 class="card-title text-center">Employee Details - @Model.Employee.Name</h2>
+            <h1 class="h2 card-title text-center">@Model.Employee.Name</h1>
             <hr />
             <dl class="row">
                 <dt class="col-sm-3 text-muted">@Html.DisplayNameFor(model => model.Employee.Name)</dt>
@@ -36,7 +36,7 @@
             </dl>
             <div class="d-flex justify-content-center mt-4">
                 <a asp-page="./Edit" asp-route-id="@Model.Employee?.Id" class="btn btn-primary me-3">Edit</a>
-                <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+                <a asp-page="./Index" class="btn btn-secondary">Back to the directory</a>
             </div>
         </div>
     </div>
@@ -45,16 +45,15 @@
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h3 class="card-title">Understanding Razor Pages for Employee Details</h3>
+            <h2 class="h3 card-title">How this page works</h2>
             <p class="card-text">
-                Razor Pages provide a streamlined way to handle UI and data binding in a single file. This page displays detailed information about the selected employee using a page model and view components.
-                Razor Pages simplify the development process by keeping logic close to the page, making it easier to maintain and understand.
+                A read-only view of one employee. OnGet loads the record into the page model, and the page renders it. Nothing here changes data.
             </p>
-            <h4 class="card-title">Best Practices:</h4>
+            <h3 class="h4 card-title">Good habits</h3>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Use ViewModels:</strong> Avoid exposing entities directly to the view to keep data structures clean and secure.</li>
-                <li class="list-group-item"><strong>Leverage Tag Helpers:</strong> Use Tag Helpers for cleaner and more readable Razor markup.</li>
-                <li class="list-group-item"><strong>Validation:</strong> Implement proper validation to ensure data integrity.</li>
+                <li class="list-group-item"><strong>Use view models:</strong> keep database entities out of your pages.</li>
+                <li class="list-group-item"><strong>Use tag helpers:</strong> they keep Razor markup readable.</li>
+                <li class="list-group-item"><strong>One job per page:</strong> Edit and Delete live on their own pages, with their own handlers.</li>
             </ul>
         </div>
     </div>

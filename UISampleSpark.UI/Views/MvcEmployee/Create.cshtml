@@ -1,16 +1,16 @@
 @model UISampleSpark.Core.Models.EmployeeDto
 
 @{
-    ViewBag.Title = "Create New Employee | ASP.NET MVC CRUD Tutorial";
-    ViewBag.MetaDescription = "Create a new employee record using the MVC Controller form approach in ASP.NET MVC. Learn how to use model binding and validation for efficient data handling.";
+    ViewBag.Title = "Add an employee — Traditional MVC";
+    ViewBag.MetaDescription = "Add an employee with a classic MVC form post: model binding maps the fields and the controller saves and redirects.";
     ViewBag.MetaKeywords = "ASP.NET MVC, Create Employee, UI patterns tutorial, MVC Forms, employee management, form handling, model binding";
 }
 
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h2 class="card-title text-center">Create New Employee</h2>
-            <p class="text-muted text-center">Fill in the form below to add a new employee to the system.</p>
+            <h1 class="h2 card-title text-center">Add employee</h1>
+            <p class="text-muted text-center">Fill in the details and save. Each save is a full form post to the server.</p>
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
@@ -58,8 +58,8 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <input type="submit" value="Save" class="btn btn-primary" />
-                        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-secondary ms-2" })
+                        <input type="submit" value="Add employee" class="btn btn-primary" />
+                        @Html.ActionLink("Back to the directory", "Index", null, htmlAttributes: new { @class = "btn btn-secondary ms-2" })
                     </div>
                 </div>
             }
@@ -70,14 +70,12 @@
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h3 class="card-title">About the Employee Creation Form</h3>
+            <h2 class="h3 card-title">How this form works</h2>
             <p class="card-text">
-                The Employee Creation form is a fundamental part of the MVC Controller form approach in ASP.NET MVC. It uses model binding to capture user inputs and validation to ensure data integrity.
-                This approach allows for efficient handling of user-submitted data and provides a robust framework for creating new records in the system.
+                The form posts to the controller's Create action, which binds the fields onto an employee and saves it through the employee client. When the save succeeds you land on that record's edit page; if it fails, you go back to the list.
             </p>
             <p class="card-text">
-                Using Bootstrap 5 styles, the form is designed to be user-friendly and visually appealing, ensuring that the process of adding new employees is intuitive and efficient.
-                This form demonstrates the power of MVC architecture in building maintainable and scalable web applications.
+                This demo keeps the flow deliberately simple and does not re-display the form with validation messages. A production form would check <code>ModelState</code> and return the view with your entries when something is wrong.
             </p>
         </div>
     </div>

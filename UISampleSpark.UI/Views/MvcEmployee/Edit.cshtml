@@ -1,16 +1,16 @@
 @model UISampleSpark.Core.Models.EmployeeDto
 
 @{
-    ViewBag.Title = $"Edit Employee - {Model.Name} | ASP.NET MVC CRUD Tutorial";
-    ViewBag.MetaDescription = $"Edit details for employee {Model.Name}. Learn how the Employee Edit form fits into the MVC Controller form approach in ASP.NET MVC.";
+    ViewBag.Title = $"Edit {Model.Name} — Traditional MVC";
+    ViewBag.MetaDescription = $"Edit {Model.Name} with a classic MVC form post that saves and redirects back to the list.";
     ViewBag.MetaKeywords = "ASP.NET MVC, Employee Edit, UI patterns tutorial, MVC Forms, employee management, form handling, model binding";
 }
 
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h2 class="card-title text-center">Edit Employee - @Model.Name</h2>
-            <p class="text-muted text-center">Update the employee's information using the form below.</p>
+            <h1 class="h2 card-title text-center">Edit @Model.Name</h1>
+            <p class="text-muted text-center">Change what you need and save. Each save is a full form post to the server.</p>
             @using (Html.BeginForm("Edit", "MvcEmployee", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <input type="submit" value="Save changes" class="btn btn-primary" />
                         @Html.ActionLink("Details", "Details", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-info ms-2" })
                         @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning ms-2" })
                     </div>
@@ -80,14 +80,12 @@
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h3 class="card-title">About the Employee Edit Form</h3>
+            <h2 class="h3 card-title">How this form works</h2>
             <p class="card-text">
-                The Employee Edit form is an integral part of the MVC Controller form approach in ASP.NET MVC. It allows for efficient updating of employee information through model binding and form handling.
-                This approach ensures data integrity and provides a seamless user experience for managing employee data.
+                The form posts to the Edit action, which binds your changes onto the record and saves them through the employee client. When the save succeeds you return to the list; if it fails, the edit page reloads with the stored record.
             </p>
             <p class="card-text">
-                Using Bootstrap 5 styles, this form is not only functional but also visually appealing, ensuring that the user interface is intuitive and easy to use. The Edit form fits into the larger MVC architecture,
-                maintaining a clean separation of concerns and allowing for maintainable and scalable code.
+                Because each step is a full page, the back button, bookmarks and history all behave the way people expect.
             </p>
         </div>
     </div>

@@ -8,7 +8,7 @@
 
 <div class="modal-header bg-light">
     <h5 class="modal-title">
-        @(isEdit ? "Update Employee" : "Add Employee")
+        @(isEdit ? "Edit employee" : "Add employee")
     </h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
@@ -24,8 +24,8 @@
             <div class="input-group">
                 <span class="input-group-text"><i class="icon icon-user" aria-hidden="true"></i></span>
                 <input type="text" class="form-control" id="Name" name="Name"
-                       value="@Model?.Name" placeholder="Enter employee name" required />
-                <div class="invalid-feedback">Please enter a name</div>
+                       value="@Model?.Name" placeholder="Full name" required />
+                <div class="invalid-feedback">Enter a name.</div>
             </div>
         </div>
         <div class="mb-3">
@@ -35,10 +35,10 @@
                 <select class="form-select" id="Gender" name="Gender" required>
                     @{
                         var genderOptions = new[] {
-                            new { Value = "", Text = "Select gender", Selected = !isEdit, Disabled = true },
+                            new { Value = "", Text = "Choose a gender", Selected = !isEdit, Disabled = true },
                             new { Value = "0", Text = "Male", Selected = genderValue == GenderEnum.Male, Disabled = false },
                             new { Value = "1", Text = "Female", Selected = genderValue == GenderEnum.Female, Disabled = false },
-                            new { Value = "2", Text = "Non-Binary", Selected = genderValue == GenderEnum.Other, Disabled = false }
+                            new { Value = "2", Text = "Non-binary", Selected = genderValue == GenderEnum.Other, Disabled = false }
                         };
                     }
                     @foreach (var opt in genderOptions)
@@ -61,7 +61,7 @@
                         }
                     }
                 </select>
-                <div class="invalid-feedback">Please select a gender</div>
+                <div class="invalid-feedback">Choose a gender.</div>
             </div>
         </div>
         <div class="mb-3">
@@ -69,8 +69,8 @@
             <div class="input-group">
                 <span class="input-group-text"><i class="icon icon-calendar" aria-hidden="true"></i></span>
                 <input type="number" class="form-control" id="Age" name="Age"
-                       value="@Model?.Age" placeholder="Enter age" min="18" required />
-                <div class="invalid-feedback">Please enter age (minimum 18)</div>
+                       value="@Model?.Age" placeholder="18 or over" min="18" required />
+                <div class="invalid-feedback">Enter an age of 18 or over.</div>
             </div>
         </div>
         <div class="row">
@@ -79,8 +79,8 @@
                 <div class="input-group">
                     <span class="input-group-text"><i class="icon icon-map-pin" aria-hidden="true"></i></span>
                     <input type="text" class="form-control" id="State" name="State"
-                           value="@Model?.State" placeholder="Enter state" required />
-                    <div class="invalid-feedback">Please enter state</div>
+                           value="@Model?.State" placeholder="State" required />
+                    <div class="invalid-feedback">Enter a state.</div>
                 </div>
             </div>
             <div class="col-md-6 mb-3">
@@ -88,8 +88,8 @@
                 <div class="input-group">
                     <span class="input-group-text"><i class="icon icon-globe" aria-hidden="true"></i></span>
                     <input type="text" class="form-control" id="Country" name="Country"
-                           value="@Model?.Country" placeholder="Enter country" required />
-                    <div class="invalid-feedback">Please enter country</div>
+                           value="@Model?.Country" placeholder="Country" required />
+                    <div class="invalid-feedback">Enter a country.</div>
                 </div>
             </div>
         </div>
@@ -100,11 +100,11 @@
                 <select class="form-select" id="Department" name="Department" required>
                     @if (deptValue == EmployeeDepartmentEnum.Unknown)
                     {
-                        <option value="" disabled selected>Select department</option>
+                        <option value="" disabled selected>Choose a department</option>
                     }
                     else
                     {
-                        <option value="" disabled>Select department</option>
+                        <option value="" disabled>Choose a department</option>
                     }
                     @if (departments != null)
                     {
@@ -121,7 +121,7 @@
                         }
                     }
                 </select>
-                <div class="invalid-feedback">Please select a department</div>
+                <div class="invalid-feedback">Choose a department.</div>
             </div>
         </div>
     </form>
@@ -131,15 +131,15 @@
             class="btn @(isEdit ? "btn-success" : "btn-primary")">
         @if (isEdit)
         {
-            <i class="icon icon-circle-check me-1" aria-hidden="true"></i> @:Update
+            <i class="icon icon-circle-check me-1" aria-hidden="true"></i> @:Save changes
         }
         else
         {
-            <i class="icon icon-circle-plus me-1" aria-hidden="true"></i> @:Add
+            <i class="icon icon-circle-plus me-1" aria-hidden="true"></i> @:Add employee
         }
     </button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-        <i class="icon icon-circle-x me-1" aria-hidden="true"></i> Close
+        <i class="icon icon-circle-x me-1" aria-hidden="true"></i> Cancel
     </button>
 </div>
 

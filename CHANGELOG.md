@@ -25,6 +25,10 @@ built on the Make Bold Solutions design system.
   nine demos. `npm run build` generates `wwwroot/css/icons.css` from `lucide-static` as CSS masks
   (`<i class="icon icon-NAME">`), so icons work the same in Razor, React, Vue, Blazor, htmx and plain JS.
   Decorative icons are `aria-hidden`; icon-only pager, clear and edit/delete controls now have labels.
+- **Demo copy**: Rewrote all nine demos, their create/edit/details/delete pages and the pivot report in
+  the Make Bold Spark voice — sentence case, "we" to "you", plain claims. Each pattern now has a
+  numbered intro ("Pattern 06 · …"), "How this pattern works", "Good for", "Watch for" and "How it's
+  built" sections; buttons, validation, empty states, confirmations and toasts share one vocabulary.
 - **Favicon**: Replaced the WebSpark flame favicon set (ICO, PNGs, Apple and Android icons) with the
   Make Bold peak mark on cream; manifest, theme color and social share image updated to match.
 

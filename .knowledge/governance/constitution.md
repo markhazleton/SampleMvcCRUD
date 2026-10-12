@@ -1,3 +1,22 @@
+<!--
+Sync Impact Report
+- Version change: 1.0.0 (last recorded, 2026-02-05) → 1.1.0
+- Modified principles: none
+- Added principles: 18. Educational accuracy (adopting); 19. Genuine fixes (adopting)
+- Added sections: Governance — version, ratification and amendment dates; amendment and
+  versioning procedure
+- Removed sections: none
+- Applied Amendments:
+  - CAP-2026-001 → added Principle 18 (Educational accuracy)
+  - Direct instruction (no CAP) → added Principle 19 (Genuine fixes), offered by
+    /devspark-constitution and accepted by the maintainer
+- Templates: ✅ .devspark/templates/plan-template.md (Constitution Check reads this file
+  dynamically; no change); ✅ spec-template.md and tasks-template.md (no principle-specific
+  content); ✅ CLAUDE.md (points to this file; no change); ✅ .knowledge/decisions/ADR-001..003
+  (no contradiction)
+- Deferred TODOs: none
+-->
+
 # UISampleSpark Constitution
 
 ## Mission
@@ -35,7 +54,14 @@ Status: **enforced** = checked today; **adopting** = goal being worked toward.
 15. **Docker: multi-stage, Alpine, non-root, hadolint-clean** — aggressive package updates; documented hadolint exceptions allowed. *(enforced)*
 16. **AI-generated artifacts stay out of source directories** — session work, drafts, and audit reports live outside the source tree and project root. *(enforced)*
 17. **Priority order**: Security > Correctness > Educational Value > Performance > Cosmetics. *(enforced)*
+18. **Educational accuracy** — explanatory copy on each demo page (headings, "How this pattern works", "Good for" / "Watch for", "How it's built", form and validation messages) MUST describe the implementation as it actually is: claims about this app's behavior match the code serving that page, and claims about a framework match the version the page loads. A PR that changes either the copy or the behavior it describes MUST keep the other true. Where a demo deliberately simplifies, the page says so. *(adopting)*
+19. **Genuine fixes** — a fix MUST resolve the behavioral intent a check stands for (lint rule, analyzer warning, test, review finding), not merely satisfy the metric; suppressions, narrowed catches that still swallow errors, or code shuffled only to lower a count are not fixes. *(adopting)*
 
 ## Governance
 
-Amendment history: see `constitution-history.md`. Architecture decisions: `.knowledge/decisions/`.
+- **Version**: 1.1.0 · **Ratified**: 2026-02-05 · **Last Amended**: 2026-10-12
+- **Amendments**: proposed through `/devspark-evolve-constitution` (or direct maintainer instruction), approved by the maintainer, and applied only through `/devspark-constitution` in a reviewed PR.
+- **Versioning**: semantic — MAJOR for removing or redefining a principle, MINOR for adding a principle or materially expanding guidance, PATCH for wording and clarifications.
+- **Status**: *adopting* principles are cited in PR review but do not block merge on their own; *enforced* principles block. A principle moves from adopting to enforced by amendment.
+
+Amendment history: Git history of this file, plus `constitution-history.md` for pre-2026-07 context. Architecture decisions: `.knowledge/decisions/`.

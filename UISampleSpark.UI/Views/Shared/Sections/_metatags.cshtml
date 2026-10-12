@@ -25,7 +25,7 @@
     
     // Initialize meta tags with default values
     var Title = ViewData["Title"] as string ?? "UI Sample Spark";
-    var Description = ViewData["Description"] as string ?? enhancedDescription;
+    var Description = ViewData["Description"] as string ?? ViewData["MetaDescription"] as string ?? enhancedDescription;
     var Keywords = ViewData["Keywords"] as string ?? GenerateContextualKeywords(controllerName, actionName);
     
     // ViewData overrides for Title and Description

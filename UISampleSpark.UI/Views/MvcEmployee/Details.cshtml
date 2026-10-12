@@ -1,8 +1,8 @@
 @model UISampleSpark.Core.Models.EmployeeDto
 
 @{
-    ViewBag.Title = $"Employee Details - {Model.Name} | ASP.NET MVC CRUD Tutorial";
-    ViewBag.MetaDescription = $"View detailed information for employee {Model.Name}. Learn how the Employee Details form fits into the MVC Controller form approach in ASP.NET MVC.";
+    ViewBag.Title = $"{Model.Name} — Traditional MVC";
+    ViewBag.MetaDescription = $"Details for {Model.Name}, shown by a read-only MVC view.";
     ViewBag.MetaKeywords = "ASP.NET MVC, Employee Details, UI patterns tutorial, MVC Forms, employee management, form handling, model binding";
     
     var baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}";
@@ -16,7 +16,7 @@
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h2 class="card-title text-center">Employee Details for @Model.Name</h2>
+            <h1 class="h2 card-title text-center">@Model.Name</h1>
             <div class="row mt-4">
                 <div class="col-md-6">
                     <img src="~/images/@Model.ProfilePicture" class="rounded img-fluid" alt="@Model.Name's Profile Picture" />
@@ -44,13 +44,12 @@
 <div class="container mt-5">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h3 class="card-title">About the Employee Details Form</h3>
+            <h2 class="h3 card-title">How this page works</h2>
             <p class="card-text">
-                The Employee Details form is a crucial component in the MVC Controller form approach. It allows for viewing, editing, and deleting employee records efficiently, leveraging model binding and form handling capabilities provided by ASP.NET MVC.
-                This form showcases how data is retrieved from the model and displayed to the user, making it easy to manage employee information in a structured way.
+                A read-only view of one employee. The controller loads the record and hands it to the view; nothing on this page changes data.
             </p>
             <p class="card-text">
-                By using this structured approach, developers can ensure a clean separation of concerns, improve code maintainability, and provide a better user experience through streamlined data management operations.
+                Edit and Delete link to their own actions, so each job keeps its own URL, view and tests.
             </p>
         </div>
     </div>
