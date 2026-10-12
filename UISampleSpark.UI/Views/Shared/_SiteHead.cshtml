@@ -1,0 +1,16 @@
+@* Shared <head> content for every layout: meta tags, brand theme and the no-flash theme bootstrap. *@
+@await Html.PartialAsync("Sections/_metatags")
+<script>
+    (function () {
+        var theme = 'light';
+        try {
+            theme = localStorage.getItem('mbs-theme') ||
+                (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        } catch (e) { }
+        document.documentElement.setAttribute('data-bs-theme', theme);
+    })();
+</script>
+<link rel="preload" href="~/fonts/InterTight-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="~/fonts/BeVietnamPro-ExtraBold.ttf" as="font" type="font/ttf" crossorigin />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />

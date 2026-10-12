@@ -1,0 +1,73 @@
+@{
+    var path = Context.Request.Path.Value ?? "/";
+    bool IsActive(string route) => path.Equals(route, StringComparison.OrdinalIgnoreCase)
+        || path.StartsWith(route + "/", StringComparison.OrdinalIgnoreCase);
+
+    var patterns = new (string Num, string Name, string Route)[]
+    {
+        ("01", "Traditional MVC", "/MvcEmployee"),
+        ("02", "jQuery AJAX + MVC", "/Employee"),
+        ("03", "Razor Pages", "/EmployeeRazor"),
+        ("04", "jQuery SPA", "/EmployeeSinglePage"),
+        ("05", "Vanilla JavaScript", "/EmployeeVanilla"),
+        ("06", "React", "/EmployeeReact"),
+        ("07", "Vue", "/EmployeeVue"),
+        ("08", "htmx", "/EmployeeHtmx"),
+        ("09", "Blazor Server", "/EmployeeBlazor"),
+    };
+    var onPattern = patterns.Any(p => IsActive(p.Route));
+}
+<header class="site-header">
+    <nav class="navbar navbar-expand-lg" aria-label="Primary">
+        <div class="mb-container d-flex flex-wrap align-items-center justify-content-between">
+            <a class="brand-lockup" href="/">
+                <img src="~/images/brand/logo-mark.svg" alt="" width="44" height="22" />
+                <span>
+                    <span class="brand-name">UISample<span>Spark</span></span>
+                    <span class="brand-tag">A Make Bold Spark project</span>
+                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteNav"
+                aria-controls="siteNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="siteNav">
+                <ul class="navbar-nav align-items-lg-center gap-lg-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle @(onPattern ? "active" : "")" href="#" id="patternsMenu" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Patterns</a>
+                        <ul class="dropdown-menu dropdown-menu-end pattern-menu" aria-labelledby="patternsMenu">
+                            <li><a class="dropdown-item" href="/#patterns"><span class="num"></span>Compare all nine</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            @foreach (var p in patterns)
+                            {
+                                <li>
+                                    <a class="dropdown-item @(IsActive(p.Route) ? "active" : "")" href="@p.Route"
+                                        aria-current="@(IsActive(p.Route) ? "page" : null)">
+                                        <span class="num">@p.Num</span>@p.Name<span class="route">@p.Route</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(IsActive("/EmployeePivot") ? "active" : "")" href="/EmployeePivot"
+                            aria-current="@(IsActive("/EmployeePivot") ? "page" : null)">Reporting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(IsActive("/api-test-spark") ? "active" : "")" href="/api-test-spark">API</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center gap-2 py-2 py-lg-0 ms-lg-2">
+                        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch color theme">
+                            <svg class="icon-moon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                            <svg class="icon-sun" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+                        </button>
+                        <a class="btn btn-outline-primary btn-sm" href="https://github.com/markhazleton/UISampleSpark"
+                            target="_blank" rel="noopener">View on GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @await Html.PartialAsync("_Breadcrumb")
+</header>

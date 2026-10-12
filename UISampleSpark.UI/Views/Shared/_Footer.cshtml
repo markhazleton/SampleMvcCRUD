@@ -3,74 +3,37 @@
     var status = new ApplicationStatus(Assembly.GetExecutingAssembly());
 }
 
-<div class="container">
-    <div class="row gy-3">
-        <div class="col-lg-4 col-md-6">
-            <div class="d-flex align-items-center mb-2">
-                <i class="bi bi-info-circle me-2"></i>
-                <h5 class="mb-0">App Info</h5>
+<div class="mb-container pt-5 pb-4">
+    <div class="d-flex flex-wrap justify-content-between gap-5 pb-5">
+        <div style="flex: 1 1 340px; max-width: 30rem;">
+            <div class="footer-brand mb-3">
+                <img src="~/images/brand/logo-mark.svg" alt="" width="40" height="20" />
+                Make Bold Spark
             </div>
-            <p class="mb-1">
-                <span class="text-light-emphasis">Version:</span>
-                <span class="badge bg-secondary">@status.BuildVersion.ToString()</span>
-            </p>
-            <p class="mb-1">
-                <span class="text-light-emphasis">Last Built:</span>
-                <span>@status.BuildDate.ToLocalTime().ToString("MMM dd, yyyy")</span>
+            <p class="mb-0">
+                UISampleSpark is a Make Bold Spark project — the technical arm of Make Bold Solutions,
+                Wichita, Kansas. Open-source tools for when off-the-shelf software isn't enough.
             </p>
         </div>
-
-        <div class="col-lg-4 col-md-6 text-center">
-            <div class="d-flex align-items-center justify-content-center mb-2">
-                <i class="bi bi-code-slash me-2"></i>
-                <h5 class="mb-0">UI Sample Spark</h5>
-            </div>
-            <p>&copy; 2019-@currentYear All Rights Reserved</p>
-            <div class="d-flex justify-content-center gap-3 mt-3">
-                <a href="https://github.com/markhazleton/UISampleSpark" class="text-decoration-none" target="_blank"
-                    title="GitHub Repository">
-                    <i class="bi bi-github fs-4"></i>
-                </a>
-                <a href="https://markhazleton.com" class="text-decoration-none" target="_blank"
-                    title="Mark Hazleton, Lifelong Learner">
-                    <i class="bi bi-person-badge fs-4"></i>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-4 d-none d-lg-block">
-            <div class="d-flex align-items-center mb-2">
-                <i class="bi bi-link-45deg me-2"></i>
-                <h5 class="mb-0">Quick Links</h5>
-            </div>
-            <ul class="list-unstyled">
-                <li>
-                    <a href="/" class="text-decoration-none">
-                        <i class="bi bi-chevron-right"></i> Home
-                    </a>
-                </li>
-                <li>
-                    <a href="/api-test-spark" class="text-decoration-none">
-                        <i class="bi bi-chevron-right"></i> API Documentation
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/markhazleton/UISampleSpark" class="text-decoration-none"
-                        target="_blank">
-                        <i class="bi bi-chevron-right"></i> GitHub Repository
-                    </a>
-                </li>
+        <div>
+            <h2 class="mb-3">Explore</h2>
+            <ul class="footer-links">
+                <li><a href="/#patterns">The patterns</a></li>
+                <li><a href="https://github.com/markhazleton/UISampleSpark" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="/api-test-spark">API docs</a></li>
+                <li><a href="https://hub.docker.com/r/markhazleton/uisamplespark" target="_blank" rel="noopener">Docker Hub</a></li>
+                <li><a href="https://makeboldspark.com" target="_blank" rel="noopener">makeboldspark.com</a></li>
+                <li><a href="https://makeboldsolutions.com" target="_blank" rel="noopener">makeboldsolutions.com</a></li>
             </ul>
         </div>
-    </div>
-    <div class="row mt-3 border-top border-secondary pt-3">
-        <div class="col text-center small">
-            <a href="https://ui.makeboldspark.com" class="text-decoration-none">UISampleSpark</a> —
-            built by <a href="https://markhazleton.com" class="text-decoration-none">Mark Hazleton</a> ·
-            <a href="https://makeboldspark.com" class="text-decoration-none">MakeBoldSpark</a>
+        <div>
+            <h2 class="mb-3">Build</h2>
+            <p class="mb-1">Version @status.BuildVersion.ToString()</p>
+            <p class="mb-0">Built @status.BuildDate.ToLocalTime().ToString("MMM d, yyyy")</p>
         </div>
     </div>
+    <div class="footer-base d-flex flex-wrap justify-content-between gap-3 pt-4">
+        <span class="eyebrow">Big firm expertise. Small firm heart.</span>
+        <span>&copy; 2019–@currentYear Make Bold Solutions · Built by <a href="https://markhazleton.com" target="_blank" rel="noopener">Mark Hazleton</a> · MIT License</span>
+    </div>
 </div>
-
-       
-       

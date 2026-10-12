@@ -1,7 +1,6 @@
 using ApiTestSpark;
 using Microsoft.OpenApi;
 using UISampleSpark.UI.Middleware;
-using WebSpark.Bootswatch;
 using WebSpark.HttpClientUtility.RequestResult;
 using Westwind.AspNetCore.Markdown;
 using System.Threading.RateLimiting;
@@ -174,7 +173,6 @@ builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Application-specific services
 builder.Services.AddScoped<IHttpRequestResultService, HttpRequestResultService>();
-builder.Services.AddBootswatchThemeSwitcher();
 builder.Services.AddMarkdown();
 
 // Session and MVC configuration
@@ -228,7 +226,6 @@ app.MapApiTestSpark(options =>
 app.UseMyHttpContext();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseBootswatchAll();
 
 string[] configuredApiKeys = builder.Configuration
     .GetSection("ApiSecurity:ApiKeys")

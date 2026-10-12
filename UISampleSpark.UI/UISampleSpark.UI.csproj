@@ -56,7 +56,6 @@
     <PackageReference Include="Microsoft.OpenApi" Version="2.12.2" />
     <PackageReference Include="OpenTelemetry.Api" Version="1.19.1" />
     <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.19.1" />
-    <PackageReference Include="WebSpark.Bootswatch" Version="2.5.1" />
     <PackageReference Include="WebSpark.HttpClientUtility" Version="2.5.1" />
     <PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.41.0" />
   </ItemGroup>
