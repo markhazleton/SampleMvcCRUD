@@ -21,8 +21,16 @@ built on the Make Bold Solutions design system.
 - **Home page**: Rewritten in the brand voice — "One problem. Nine ways to build it." — with a filterable
   pattern grid, an under-the-hood section, run-it-locally instructions and a rust call-to-action band.
 
+- **Icons**: Replaced Bootstrap Icons with Lucide outline icons (2px stroke, per the brand system) in all
+  nine demos. `npm run build` generates `wwwroot/css/icons.css` from `lucide-static` as CSS masks
+  (`<i class="icon icon-NAME">`), so icons work the same in Razor, React, Vue, Blazor, htmx and plain JS.
+  Decorative icons are `aria-hidden`; icon-only pager, clear and edit/delete controls now have labels.
+- **Favicon**: Replaced the WebSpark flame favicon set (ICO, PNGs, Apple and Android icons) with the
+  Make Bold peak mark on cream; manifest, theme color and social share image updated to match.
+
 #### Removed
 
+- `bootstrap-icons` package and `wwwroot/lib/bootstrap-icons`.
 - `WebSpark.Bootswatch` package, its tag helper and middleware, and the legacy `wwwroot/css/site.css`.
 
 ### v10.2.0 — Consolidation & Vanilla JS Expansion *(Tag: v10.2.0, Jun 21 2026)*

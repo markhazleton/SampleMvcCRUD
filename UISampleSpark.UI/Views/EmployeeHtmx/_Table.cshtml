@@ -53,13 +53,13 @@
                                         hx-get="/EmployeeHtmx/Edit/@emp.Id"
                                         hx-target="#form-container"
                                         hx-swap="innerHTML">
-                                    <i class="bi bi-pencil-square"></i> Edit
+                                    <i class="icon icon-square-pen" aria-hidden="true"></i> Edit
                                 </button>
                                 <button class="btn btn-sm btn-outline-danger"
                                         hx-get="/EmployeeHtmx/DeleteConfirm/@emp.Id"
                                         hx-target="#form-container"
                                         hx-swap="innerHTML">
-                                    <i class="bi bi-trash"></i> Delete
+                                    <i class="icon icon-trash-2" aria-hidden="true"></i> Delete
                                 </button>
                             </div>
                         </td>
@@ -72,12 +72,12 @@
                     <td colspan="8" class="text-center text-muted py-4">
                         @if (hasSearch)
                         {
-                            <i class="bi bi-search me-2"></i>
+                            <i class="icon icon-search me-2" aria-hidden="true"></i>
                             <span>No employees match your search for "@search".</span>
                         }
                         else
                         {
-                            <i class="bi bi-inbox me-2"></i>
+                            <i class="icon icon-inbox me-2" aria-hidden="true"></i>
                             <span>No employees found.</span>
                         }
                     </td>
@@ -116,8 +116,8 @@
                                 hx-get="/EmployeeHtmx/Table?page=1&pageSize=@pageSize@(hasSearch ? "&search=" + Uri.EscapeDataString(search!) : "")"
                                 hx-target="#employee-table"
                                 hx-swap="innerHTML"
-                                @(currentPage == 1 ? "disabled" : "")>
-                            <i class="bi bi-chevron-double-left"></i>
+                                @(currentPage == 1 ? "disabled" : "") aria-label="First page">
+                            <i class="icon icon-chevrons-left" aria-hidden="true"></i>
                         </button>
                     </li>
 
@@ -127,8 +127,8 @@
                                 hx-get="/EmployeeHtmx/Table?page=@(currentPage - 1)&pageSize=@pageSize@(hasSearch ? "&search=" + Uri.EscapeDataString(search!) : "")"
                                 hx-target="#employee-table"
                                 hx-swap="innerHTML"
-                                @(currentPage == 1 ? "disabled" : "")>
-                            <i class="bi bi-chevron-left"></i>
+                                @(currentPage == 1 ? "disabled" : "") aria-label="Previous page">
+                            <i class="icon icon-chevron-left" aria-hidden="true"></i>
                         </button>
                     </li>
 
@@ -152,8 +152,8 @@
                                 hx-get="/EmployeeHtmx/Table?page=@(currentPage + 1)&pageSize=@pageSize@(hasSearch ? "&search=" + Uri.EscapeDataString(search!) : "")"
                                 hx-target="#employee-table"
                                 hx-swap="innerHTML"
-                                @(currentPage == totalPages ? "disabled" : "")>
-                            <i class="bi bi-chevron-right"></i>
+                                @(currentPage == totalPages ? "disabled" : "") aria-label="Next page">
+                            <i class="icon icon-chevron-right" aria-hidden="true"></i>
                         </button>
                     </li>
 
@@ -163,8 +163,8 @@
                                 hx-get="/EmployeeHtmx/Table?page=@totalPages&pageSize=@pageSize@(hasSearch ? "&search=" + Uri.EscapeDataString(search!) : "")"
                                 hx-target="#employee-table"
                                 hx-swap="innerHTML"
-                                @(currentPage == totalPages ? "disabled" : "")>
-                            <i class="bi bi-chevron-double-right"></i>
+                                @(currentPage == totalPages ? "disabled" : "") aria-label="Last page">
+                            <i class="icon icon-chevrons-right" aria-hidden="true"></i>
                         </button>
                     </li>
                 </ul>

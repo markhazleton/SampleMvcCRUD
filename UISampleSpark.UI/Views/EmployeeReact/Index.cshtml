@@ -96,7 +96,7 @@
                         <div className="modal-content">
                             <div className="modal-header bg-danger text-white">
                                 <h5 className="modal-title">
-                                    <i className="bi bi-exclamation-triangle me-2"></i>Confirm Delete
+                                    <i className="icon icon-triangle-alert me-2" aria-hidden="true"></i>Confirm Delete
                                 </h5>
                                 <button type="button" className="btn-close btn-close-white" onClick={onCancel}></button>
                             </div>
@@ -106,10 +106,10 @@
                             </div>
                             <div className="modal-footer bg-light">
                                 <button type="button" className="btn btn-secondary" onClick={onCancel}>
-                                    <i className="bi bi-x-circle me-1"></i> Cancel
+                                    <i className="icon icon-circle-x me-1" aria-hidden="true"></i> Cancel
                                 </button>
                                 <button type="button" className="btn btn-danger" onClick={() => onConfirm(employee.id)}>
-                                    <i className="bi bi-trash me-1"></i> Delete
+                                    <i className="icon icon-trash-2 me-1" aria-hidden="true"></i> Delete
                                 </button>
                             </div>
                         </div>
@@ -198,7 +198,7 @@
                                     <div className="mb-3">
                                         <label htmlFor="name" className="form-label">Name</label>
                                         <div className="input-group">
-                                            <span className="input-group-text"><i className="bi bi-person"></i></span>
+                                            <span className="input-group-text"><i className="icon icon-user" aria-hidden="true"></i></span>
                                             <input type="text" className="form-control" id="name" name="name"
                                                    ref={nameRef}
                                                    value={form.name} onChange={handleChange}
@@ -209,7 +209,7 @@
                                     <div className="mb-3">
                                         <label htmlFor="gender" className="form-label">Gender</label>
                                         <div className="input-group">
-                                            <span className="input-group-text"><i className="bi bi-gender-ambiguous"></i></span>
+                                            <span className="input-group-text"><i className="icon icon-venus-and-mars" aria-hidden="true"></i></span>
                                             <select className="form-select" id="gender" name="gender"
                                                     value={form.gender} onChange={handleChange} required>
                                                 <option value="" disabled>Select gender</option>
@@ -223,7 +223,7 @@
                                     <div className="mb-3">
                                         <label htmlFor="age" className="form-label">Age</label>
                                         <div className="input-group">
-                                            <span className="input-group-text"><i className="bi bi-calendar3"></i></span>
+                                            <span className="input-group-text"><i className="icon icon-calendar" aria-hidden="true"></i></span>
                                             <input type="number" className="form-control" id="age" name="age"
                                                    value={form.age} onChange={handleChange}
                                                    placeholder="Enter age" min="18" required />
@@ -234,7 +234,7 @@
                                         <div className="col-md-6 mb-3">
                                             <label htmlFor="state" className="form-label">State</label>
                                             <div className="input-group">
-                                                <span className="input-group-text"><i className="bi bi-geo-alt"></i></span>
+                                                <span className="input-group-text"><i className="icon icon-map-pin" aria-hidden="true"></i></span>
                                                 <input type="text" className="form-control" id="state" name="state"
                                                        value={form.state} onChange={handleChange}
                                                        placeholder="Enter state" required />
@@ -244,7 +244,7 @@
                                         <div className="col-md-6 mb-3">
                                             <label htmlFor="country" className="form-label">Country</label>
                                             <div className="input-group">
-                                                <span className="input-group-text"><i className="bi bi-globe"></i></span>
+                                                <span className="input-group-text"><i className="icon icon-globe" aria-hidden="true"></i></span>
                                                 <input type="text" className="form-control" id="country" name="country"
                                                        value={form.country} onChange={handleChange}
                                                        placeholder="Enter country" required />
@@ -255,7 +255,7 @@
                                     <div className="mb-3">
                                         <label htmlFor="department" className="form-label">Department</label>
                                         <div className="input-group">
-                                            <span className="input-group-text"><i className="bi bi-building"></i></span>
+                                            <span className="input-group-text"><i className="icon icon-building-2" aria-hidden="true"></i></span>
                                             <select className="form-select" id="department" name="department"
                                                     value={form.department} onChange={handleChange} required>
                                                 <option value="" disabled>Select department</option>
@@ -275,13 +275,13 @@
                                     {saving ? (
                                         <><span className="spinner-border spinner-border-sm me-1"></span> Saving...</>
                                     ) : isEdit ? (
-                                        <><i className="bi bi-check-circle me-1"></i> Update</>
+                                        <><i className="icon icon-circle-check me-1" aria-hidden="true"></i> Update</>
                                     ) : (
-                                        <><i className="bi bi-plus-circle me-1"></i> Add</>
+                                        <><i className="icon icon-circle-plus me-1" aria-hidden="true"></i> Add</>
                                     )}
                                 </button>
                                 <button type="button" className="btn btn-secondary" onClick={onClose}>
-                                    <i className="bi bi-x-circle me-1"></i> Close
+                                    <i className="icon icon-circle-x me-1" aria-hidden="true"></i> Close
                                 </button>
                             </div>
                         </div>
@@ -293,10 +293,10 @@
         // --- Employee Table Component ---
         function EmployeeTable({ employees, loading, sortConfig, onSort, onEdit, onDelete, searchTerm }) {
             const getSortIcon = (column) => {
-                if (sortConfig.key !== column) return <i className="bi bi-chevron-expand text-muted ms-1"></i>;
+                if (sortConfig.key !== column) return <i className="icon icon-chevrons-up-down text-muted ms-1" aria-hidden="true"></i>;
                 return sortConfig.direction === 'asc'
-                    ? <i className="bi bi-chevron-up ms-1"></i>
-                    : <i className="bi bi-chevron-down ms-1"></i>;
+                    ? <i className="icon icon-chevron-up ms-1" aria-hidden="true"></i>
+                    : <i className="icon icon-chevron-down ms-1" aria-hidden="true"></i>;
             };
 
             const sortableHeader = (column, label) => (
@@ -336,8 +336,8 @@
                                 <tr>
                                     <td colSpan="8" className="text-center text-muted py-4">
                                         {searchTerm
-                                            ? <><i className="bi bi-search me-2"></i>No employees match your search.</>
-                                            : <><i className="bi bi-inbox me-2"></i>No employees found.</>}
+                                            ? <><i className="icon icon-search me-2" aria-hidden="true"></i>No employees match your search.</>
+                                            : <><i className="icon icon-inbox me-2" aria-hidden="true"></i>No employees found.</>}
                                     </td>
                                 </tr>
                             ) : employees.map(emp => (
@@ -358,11 +358,11 @@
                                         <div className="btn-group" role="group">
                                             <button className="btn btn-sm btn-outline-primary"
                                                     onClick={() => onEdit(emp.id)}>
-                                                <i className="bi bi-pencil-square"></i> Edit
+                                                <i className="icon icon-square-pen" aria-hidden="true"></i> Edit
                                             </button>
                                             <button className="btn btn-sm btn-outline-danger"
                                                     onClick={() => onDelete(emp)}>
-                                                <i className="bi bi-trash"></i> Delete
+                                                <i className="icon icon-trash-2" aria-hidden="true"></i> Delete
                                             </button>
                                         </div>
                                     </td>
@@ -390,13 +390,13 @@
                 <nav aria-label="Employee pagination">
                     <ul className="pagination pagination-sm mb-0 justify-content-end">
                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                            <button className="page-link" onClick={() => onPageChange(1)}>
-                                <i className="bi bi-chevron-double-left"></i>
+                            <button className="page-link" onClick={() => onPageChange(1)} aria-label="First page">
+                                <i className="icon icon-chevrons-left" aria-hidden="true"></i>
                             </button>
                         </li>
                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                            <button className="page-link" onClick={() => onPageChange(currentPage - 1)}>
-                                <i className="bi bi-chevron-left"></i>
+                            <button className="page-link" onClick={() => onPageChange(currentPage - 1)} aria-label="Previous page">
+                                <i className="icon icon-chevron-left" aria-hidden="true"></i>
                             </button>
                         </li>
                         {pages.map(p => (
@@ -405,13 +405,13 @@
                             </li>
                         ))}
                         <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                            <button className="page-link" onClick={() => onPageChange(currentPage + 1)}>
-                                <i className="bi bi-chevron-right"></i>
+                            <button className="page-link" onClick={() => onPageChange(currentPage + 1)} aria-label="Next page">
+                                <i className="icon icon-chevron-right" aria-hidden="true"></i>
                             </button>
                         </li>
                         <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                            <button className="page-link" onClick={() => onPageChange(totalPages)}>
-                                <i className="bi bi-chevron-double-right"></i>
+                            <button className="page-link" onClick={() => onPageChange(totalPages)} aria-label="Last page">
+                                <i className="icon icon-chevrons-right" aria-hidden="true"></i>
                             </button>
                         </li>
                     </ul>
@@ -557,12 +557,12 @@
                             <div className="d-flex justify-content-between align-items-center mb-4">
                                 <div>
                                     <h1 className="h2 mb-0">
-                                        <i className="bi bi-filetype-jsx text-primary me-2"></i>React Employee CRUD
+                                        <i className="icon icon-file-code text-primary me-2" aria-hidden="true"></i>React Employee CRUD
                                     </h1>
                                     <p className="text-muted">Component-based CRUD with React hooks and RESTful API</p>
                                 </div>
                                 <button type="button" className="btn btn-primary" onClick={handleAddNew}>
-                                    <i className="bi bi-plus-circle me-2"></i>Add Employee
+                                    <i className="icon icon-circle-plus me-2" aria-hidden="true"></i>Add Employee
                                 </button>
                             </div>
 
@@ -571,7 +571,7 @@
                                     <div className="row mb-3">
                                         <div className="col-md-6">
                                             <div className="d-flex align-items-center">
-                                                <label className="me-2"><i className="bi bi-list-ul"></i></label>
+                                                <label className="me-2"><i className="icon icon-list" aria-hidden="true"></i></label>
                                                 <select className="form-select form-select-sm" style={{ width: 'auto' }}
                                                         value={pageSize}
                                                         onChange={e => setPageSize(Number(e.target.value))}>
@@ -584,15 +584,15 @@
                                         </div>
                                         <div className="col-md-6">
                                             <div className="input-group input-group-sm">
-                                                <span className="input-group-text"><i className="bi bi-search"></i></span>
+                                                <span className="input-group-text"><i className="icon icon-search" aria-hidden="true"></i></span>
                                                 <input type="text" className="form-control"
                                                        placeholder="Search employees..."
                                                        value={searchTerm}
                                                        onChange={e => setSearchTerm(e.target.value)} />
                                                 {searchTerm && (
                                                     <button className="btn btn-outline-secondary"
-                                                            onClick={() => setSearchTerm('')}>
-                                                        <i className="bi bi-x"></i>
+                                                            onClick={() => setSearchTerm('')} aria-label="Clear search">
+                                                        <i className="icon icon-x" aria-hidden="true"></i>
                                                     </button>
                                                 )}
                                             </div>
@@ -632,7 +632,7 @@
                         <div className="col-md-12">
                             <div className="card shadow-sm rounded-3 border-0 mb-4">
                                 <div className="card-header bg-primary text-white">
-                                    <h3 className="mb-0"><i className="bi bi-info-circle me-2"></i>About React Implementation</h3>
+                                    <h3 className="mb-0"><i className="icon icon-info me-2" aria-hidden="true"></i>About React Implementation</h3>
                                 </div>
                                 <div className="card-body p-4">
                                     <p className="lead">
@@ -644,12 +644,12 @@
                                         <div className="col-md-6">
                                             <div className="card h-100 bg-light border-0">
                                                 <div className="card-body">
-                                                    <h4 className="card-title"><i className="bi bi-stars text-warning me-2"></i>React Advantages</h4>
+                                                    <h4 className="card-title"><i className="icon icon-sparkles text-warning me-2" aria-hidden="true"></i>React Advantages</h4>
                                                     <ul className="list-group list-group-flush">
-                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-check-circle-fill text-success me-2"></i>Component-based architecture for reusability</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-check-circle-fill text-success me-2"></i>Declarative UI with automatic DOM updates</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-check-circle-fill text-success me-2"></i>React Hooks for clean state management</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-check-circle-fill text-success me-2"></i>Virtual DOM for efficient rendering</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Component-based architecture for reusability</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Declarative UI with automatic DOM updates</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>React Hooks for clean state management</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Virtual DOM for efficient rendering</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -658,12 +658,12 @@
                                         <div className="col-md-6">
                                             <div className="card h-100 bg-light border-0">
                                                 <div className="card-body">
-                                                    <h4 className="card-title"><i className="bi bi-exclamation-triangle text-warning me-2"></i>Considerations</h4>
+                                                    <h4 className="card-title"><i className="icon icon-triangle-alert text-warning me-2" aria-hidden="true"></i>Considerations</h4>
                                                     <ul className="list-group list-group-flush">
-                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-dash-circle text-danger me-2"></i>Larger initial bundle size than vanilla JS</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-dash-circle text-danger me-2"></i>Learning curve for React concepts</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-dash-circle text-danger me-2"></i>CDN + Babel adds runtime overhead (use build tools in production)</li>
-                                                        <li className="list-group-item bg-transparent border-0"><i className="bi bi-dash-circle text-danger me-2"></i>Requires JavaScript to be enabled in browser</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Larger initial bundle size than vanilla JS</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Learning curve for React concepts</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>CDN + Babel adds runtime overhead (use build tools in production)</li>
+                                                        <li className="list-group-item bg-transparent border-0"><i className="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Requires JavaScript to be enabled in browser</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -671,12 +671,12 @@
                                     </div>
 
                                     <div className="mt-4">
-                                        <h4><i className="bi bi-code-slash me-2"></i>Technical Details</h4>
+                                        <h4><i className="icon icon-code me-2" aria-hidden="true"></i>Technical Details</h4>
                                         <div className="row g-3 mt-1">
                                             <div className="col-md-4">
                                                 <div className="card bg-light border-0 h-100">
                                                     <div className="card-body">
-                                                        <h6 className="fw-bold"><i className="bi bi-box me-1"></i> React 18</h6>
+                                                        <h6 className="fw-bold"><i className="icon icon-box me-1" aria-hidden="true"></i> React 18</h6>
                                                         <p className="small text-muted mb-0">Loaded via CDN with Babel standalone for in-browser JSX transpilation. Isolated in a dedicated layout page.</p>
                                                     </div>
                                                 </div>
@@ -684,7 +684,7 @@
                                             <div className="col-md-4">
                                                 <div className="card bg-light border-0 h-100">
                                                     <div className="card-body">
-                                                        <h6 className="fw-bold"><i className="bi bi-arrow-repeat me-1"></i> Hooks</h6>
+                                                        <h6 className="fw-bold"><i className="icon icon-refresh-cw me-1" aria-hidden="true"></i> Hooks</h6>
                                                         <p className="small text-muted mb-0">useState, useEffect, useRef, and useCallback for state management and side effects.</p>
                                                     </div>
                                                 </div>
@@ -692,7 +692,7 @@
                                             <div className="col-md-4">
                                                 <div className="card bg-light border-0 h-100">
                                                     <div className="card-body">
-                                                        <h6 className="fw-bold"><i className="bi bi-cloud-arrow-up me-1"></i> Fetch API</h6>
+                                                        <h6 className="fw-bold"><i className="icon icon-cloud-upload me-1" aria-hidden="true"></i> Fetch API</h6>
                                                         <p className="small text-muted mb-0">Native browser Fetch API for RESTful CRUD operations — no jQuery dependency.</p>
                                                     </div>
                                                 </div>
@@ -702,9 +702,9 @@
                                 </div>
                                 <div className="card-footer bg-light">
                                     <div className="d-flex justify-content-between align-items-center">
-                                        <span><i className="bi bi-tools me-2"></i>Implementation by Mark Hazleton</span>
+                                        <span><i className="icon icon-wrench me-2" aria-hidden="true"></i>Implementation by Mark Hazleton</span>
                                         <a href="https://github.com/markhazleton/UISampleSpark" className="btn btn-outline-primary btn-sm" target="_blank" rel="noopener noreferrer">
-                                            <i className="bi bi-github me-2"></i>View Source Code
+                                            <i className="icon icon-git-fork me-2" aria-hidden="true"></i>View Source Code
                                         </a>
                                     </div>
                                 </div>

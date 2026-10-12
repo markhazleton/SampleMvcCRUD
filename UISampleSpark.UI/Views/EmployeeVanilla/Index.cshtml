@@ -10,12 +10,12 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h2 mb-0">
-                <i class="bi bi-braces text-warning me-2"></i>Pure Vanilla JavaScript
+                <i class="icon icon-braces text-warning me-2" aria-hidden="true"></i>Pure Vanilla JavaScript
             </h1>
             <p class="text-muted mb-0">Zero libraries &mdash; fetch, DOM, and CSS only</p>
         </div>
         <button type="button" class="btn btn-primary" id="btnOpenAdd">
-            <i class="bi bi-plus-circle me-1"></i>Add Employee
+            <i class="icon icon-circle-plus me-1" aria-hidden="true"></i>Add Employee
         </button>
     </div>
 
@@ -27,7 +27,7 @@
         <div class="card-header d-flex justify-content-between align-items-center py-2">
             <span class="fw-semibold">Employees</span>
             <div class="input-group" style="max-width:260px">
-                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                <span class="input-group-text"><i class="icon icon-search" aria-hidden="true"></i></span>
                 <input type="search" id="searchInput" class="form-control form-control-sm" placeholder="Filter…" aria-label="Filter employees">
             </div>
         </div>
@@ -37,12 +37,12 @@
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">Profile</th>
-                            <th scope="col" data-col="name" class="sortable" role="button" tabindex="0" aria-sort="none">Name <i class="bi bi-arrow-down-up ms-1 text-secondary small"></i></th>
-                            <th scope="col" data-col="genderName" class="sortable" role="button" tabindex="0" aria-sort="none">Gender <i class="bi bi-arrow-down-up ms-1 text-secondary small"></i></th>
-                            <th scope="col" data-col="age" class="sortable" role="button" tabindex="0" aria-sort="none">Age <i class="bi bi-arrow-down-up ms-1 text-secondary small"></i></th>
-                            <th scope="col" data-col="state" class="sortable" role="button" tabindex="0" aria-sort="none">State <i class="bi bi-arrow-down-up ms-1 text-secondary small"></i></th>
-                            <th scope="col" data-col="country" class="sortable" role="button" tabindex="0" aria-sort="none">Country <i class="bi bi-arrow-down-up ms-1 text-secondary small"></i></th>
-                            <th scope="col" data-col="departmentName" class="sortable" role="button" tabindex="0" aria-sort="none">Department <i class="bi bi-arrow-down-up ms-1 text-secondary small"></i></th>
+                            <th scope="col" data-col="name" class="sortable" role="button" tabindex="0" aria-sort="none">Name <i class="icon icon-arrow-down-up ms-1 text-secondary small" aria-hidden="true"></i></th>
+                            <th scope="col" data-col="genderName" class="sortable" role="button" tabindex="0" aria-sort="none">Gender <i class="icon icon-arrow-down-up ms-1 text-secondary small" aria-hidden="true"></i></th>
+                            <th scope="col" data-col="age" class="sortable" role="button" tabindex="0" aria-sort="none">Age <i class="icon icon-arrow-down-up ms-1 text-secondary small" aria-hidden="true"></i></th>
+                            <th scope="col" data-col="state" class="sortable" role="button" tabindex="0" aria-sort="none">State <i class="icon icon-arrow-down-up ms-1 text-secondary small" aria-hidden="true"></i></th>
+                            <th scope="col" data-col="country" class="sortable" role="button" tabindex="0" aria-sort="none">Country <i class="icon icon-arrow-down-up ms-1 text-secondary small" aria-hidden="true"></i></th>
+                            <th scope="col" data-col="departmentName" class="sortable" role="button" tabindex="0" aria-sort="none">Department <i class="icon icon-arrow-down-up ms-1 text-secondary small" aria-hidden="true"></i></th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -126,7 +126,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="btnCancel">Cancel</button>
                     <button type="button" class="btn btn-primary" id="btnSave">
-                        <i class="bi bi-check-circle me-1"></i><span id="btnSaveLabel">Add Employee</span>
+                        <i class="icon icon-circle-check me-1" aria-hidden="true"></i><span id="btnSaveLabel">Add Employee</span>
                     </button>
                 </div>
             </div>
@@ -139,7 +139,7 @@
     
     <div class="card shadow-sm border-0">
         <div class="card-header bg-warning text-dark">
-            <h3 class="mb-0 h5"><i class="bi bi-braces me-2"></i>About This Demo</h3>
+            <h3 class="mb-0 h5"><i class="icon icon-braces me-2" aria-hidden="true"></i>About This Demo</h3>
         </div>
         <div class="card-body">
             <p class="lead mb-3">
@@ -150,7 +150,7 @@
                 <div class="col-md-6">
                     <div class="card bg-light border-0 h-100">
                         <div class="card-body">
-                            <h5><i class="bi bi-check-circle-fill text-success me-2"></i>What is used</h5>
+                            <h5><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>What is used</h5>
                             <ul class="mb-0">
                                 <li><code>fetch()</code> — HTTP requests to the REST API</li>
                                 <li><code>document.querySelector()</code> / <code>getElementById()</code></li>
@@ -165,7 +165,7 @@
                 <div class="col-md-6">
                     <div class="card bg-light border-0 h-100">
                         <div class="card-body">
-                            <h5><i class="bi bi-x-circle-fill text-danger me-2"></i>What is NOT used</h5>
+                            <h5><i class="icon icon-circle-x text-danger me-2" aria-hidden="true"></i>What is NOT used</h5>
                             <ul class="mb-0">
                                 <li>jQuery (no <code>$</code>)</li>
                                 <li>DataTables</li>
@@ -177,7 +177,7 @@
                     </div>
                 </div>
             </div>
-            <h5><i class="bi bi-code-slash me-2"></i>Key patterns</h5>
+            <h5><i class="icon icon-code me-2" aria-hidden="true"></i>Key patterns</h5>
             <pre class="bg-light p-3 rounded small"><code>// GET — load employees
 const res = await fetch('/api/employee');
 const data = await res.json();
@@ -193,9 +193,9 @@ await fetch('/api/employee', {
 await fetch(`/api/employee/${id}`, { method: 'DELETE' });</code></pre>
         </div>
         <div class="card-footer d-flex justify-content-between align-items-center">
-            <span><i class="bi bi-tools me-2"></i>Implementation by Mark Hazleton</span>
+            <span><i class="icon icon-wrench me-2" aria-hidden="true"></i>Implementation by Mark Hazleton</span>
             <a href="https://github.com/markhazleton/UISampleSpark" class="btn btn-outline-warning btn-sm" target="_blank" rel="noopener">
-                <i class="bi bi-github me-2"></i>View Source
+                <i class="icon icon-git-fork me-2" aria-hidden="true"></i>View Source
             </a>
         </div>
     </div>
@@ -377,10 +377,10 @@ await fetch(`/api/employee/${id}`, { method: 'DELETE' });</code></pre>
         <td class="align-middle text-center">
           <div class="btn-group btn-group-sm" role="group">
             <button class="btn btn-outline-primary btn-edit" data-id="${e.id}" aria-label="Edit ${escHtml(e.name ?? '')}">
-              <i class="bi bi-pencil-square"></i> Edit
+              <i class="icon icon-square-pen" aria-hidden="true"></i> Edit
             </button>
             <button class="btn btn-outline-danger btn-delete" data-id="${e.id}" aria-label="Delete ${escHtml(e.name ?? '')}">
-              <i class="bi bi-trash"></i> Delete
+              <i class="icon icon-trash-2" aria-hidden="true"></i> Delete
             </button>
           </div>
         </td>
@@ -398,9 +398,9 @@ await fetch(`/api/employee/${id}`, { method: 'DELETE' });</code></pre>
     document.querySelectorAll('th.sortable').forEach(th => {
       const col = th.dataset.col;
       const icon = th.querySelector('i');
-      icon.className = 'ms-1 small bi ' + (col !== sortCol
-        ? 'bi-arrow-down-up text-secondary'
-        : sortAsc ? 'bi-arrow-up text-white' : 'bi-arrow-down text-white');
+      icon.className = 'ms-1 small icon ' + (col !== sortCol
+        ? 'icon-arrow-down-up text-secondary'
+        : sortAsc ? 'icon-arrow-up text-white' : 'icon-arrow-down text-white');
       th.setAttribute('aria-sort', col !== sortCol ? 'none' : sortAsc ? 'ascending' : 'descending');
     });
   }
@@ -418,11 +418,11 @@ await fetch(`/api/employee/${id}`, { method: 'DELETE' });</code></pre>
       return btn;
     };
 
-    pagination.appendChild(mkBtn('<i class="bi bi-chevron-left"></i>', page - 1, page === 1, false));
+    pagination.appendChild(mkBtn('<i class="icon icon-chevron-left" aria-hidden="true"></i>', page - 1, page === 1, false));
     for (let p = 1; p <= totalPages; p++) {
       pagination.appendChild(mkBtn(String(p), p, false, p === page));
     }
-    pagination.appendChild(mkBtn('<i class="bi bi-chevron-right"></i>', page + 1, page === totalPages, false));
+    pagination.appendChild(mkBtn('<i class="icon icon-chevron-right" aria-hidden="true"></i>', page + 1, page === totalPages, false));
   }
 
   // ── Alert banner ───────────────────────────────────────────────

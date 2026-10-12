@@ -10,12 +10,12 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h1 class="h2 mb-0">
-                        <i class="bi bi-file-earmark-text text-primary me-2"></i>Single Page Application
+                        <i class="icon icon-file-text text-primary me-2" aria-hidden="true"></i>Single Page Application
                     </h1>
                     <p class="text-muted">Modern CRUD operations with AJAX and RESTful API</p>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="clearTextBox();" data-bs-toggle="modal" data-bs-target="#myModal">
-                    <i class="bi bi-plus-circle me-2"></i>Add Employee
+                    <i class="icon icon-circle-plus me-2" aria-hidden="true"></i>Add Employee
                 </button>
             </div>
             
@@ -56,7 +56,7 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <span class="input-group-text"><i class="icon icon-user" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" id="name" placeholder="Enter employee name" required />
                                 <div class="invalid-feedback">Please enter a name</div>
                             </div>
@@ -64,7 +64,7 @@
                         <div class="mb-3">
                             <label for="gender" class="form-label">Gender</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-gender-ambiguous"></i></span>
+                                <span class="input-group-text"><i class="icon icon-venus-and-mars" aria-hidden="true"></i></span>
                                 <select class="form-select" id="gender" required>
                                     <option value="" selected disabled>Select gender</option>
                                     <option value="0">Male</option>
@@ -77,7 +77,7 @@
                         <div class="mb-3">
                             <label for="age" class="form-label">Age</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
+                                <span class="input-group-text"><i class="icon icon-calendar" aria-hidden="true"></i></span>
                                 <input type="number" class="form-control" id="age" placeholder="Enter age" required />
                                 <div class="invalid-feedback">Please enter age</div>
                             </div>
@@ -86,7 +86,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="state" class="form-label">State</label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                                    <span class="input-group-text"><i class="icon icon-map-pin" aria-hidden="true"></i></span>
                                     <input type="text" class="form-control" id="state" placeholder="Enter state" required />
                                     <div class="invalid-feedback">Please enter state</div>
                                 </div>
@@ -94,7 +94,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="country" class="form-label">Country</label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                                    <span class="input-group-text"><i class="icon icon-globe" aria-hidden="true"></i></span>
                                     <input type="text" class="form-control" id="country" placeholder="Enter country" required />
                                     <div class="invalid-feedback">Please enter country</div>
                                 </div>
@@ -103,7 +103,7 @@
                         <div class="mb-3">
                             <label for="department" class="form-label">Department</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-building"></i></span>
+                                <span class="input-group-text"><i class="icon icon-building-2" aria-hidden="true"></i></span>
                                 <select class="form-select" id="department" required>
                                     <option value="" selected disabled>Select department</option>
                                     <!-- Department options will be loaded dynamically -->
@@ -116,13 +116,13 @@
                 </div>
                 <div class="modal-footer bg-light">
                     <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">
-                        <i class="bi bi-plus-circle me-1"></i> Add
+                        <i class="icon icon-circle-plus me-1" aria-hidden="true"></i> Add
                     </button>
                     <button type="button" class="btn btn-success" id="btnUpdate" style="display:none;" onclick="Update();">
-                        <i class="bi bi-check-circle me-1"></i> Update
+                        <i class="icon icon-circle-check me-1" aria-hidden="true"></i> Update
                     </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        <i class="bi bi-x-circle me-1"></i> Close
+                        <i class="icon icon-circle-x me-1" aria-hidden="true"></i> Close
                     </button>
                 </div>
             </div>
@@ -134,7 +134,7 @@
         <div class="col-md-12">
             <div class="card shadow-sm rounded-3 border-0 mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0"><i class="bi bi-info-circle me-2"></i>About Single Page Applications</h3>
+                    <h3 class="mb-0"><i class="icon icon-info me-2" aria-hidden="true"></i>About Single Page Applications</h3>
                 </div>
                 <div class="card-body p-4">
                     <p class="lead">
@@ -145,12 +145,12 @@
                         <div class="col-md-6">
                             <div class="card h-100 bg-light border-0">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="bi bi-stars text-warning me-2"></i>Key Benefits</h4>
+                                    <h4 class="card-title"><i class="icon icon-sparkles text-warning me-2" aria-hidden="true"></i>Key Benefits</h4>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Improved user experience with no page reloads</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Reduced server load with partial data transfers</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Clean separation between frontend and backend</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Enhanced interactivity for better user engagement</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Improved user experience with no page reloads</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Reduced server load with partial data transfers</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Clean separation between frontend and backend</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Enhanced interactivity for better user engagement</li>
                                     </ul>
                                 </div>
                             </div>
@@ -159,12 +159,12 @@
                         <div class="col-md-6">
                             <div class="card h-100 bg-light border-0">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="bi bi-exclamation-triangle text-warning me-2"></i>Considerations</h4>
+                                    <h4 class="card-title"><i class="icon icon-triangle-alert text-warning me-2" aria-hidden="true"></i>Considerations</h4>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>Increased complexity in JavaScript code</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>SEO challenges for content loaded via AJAX</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>Dependency on JavaScript being enabled</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>Requires careful security implementation</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Increased complexity in JavaScript code</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>SEO challenges for content loaded via AJAX</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Dependency on JavaScript being enabled</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Requires careful security implementation</li>
                                     </ul>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                     </div>
                     
                     <div class="mt-4">
-                        <h4><i class="bi bi-code-slash me-2"></i>Technical Implementation</h4>
+                        <h4><i class="icon icon-code me-2" aria-hidden="true"></i>Technical Implementation</h4>
                         <p>
                             This SPA uses modern web development patterns to create a seamless user experience:
                         </p>
@@ -254,9 +254,9 @@ const validateForm = () => {
                 </div>
                 <div class="card-footer bg-light">
                     <div class="d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-tools me-2"></i>Implementation by Mark Hazleton</span>
+                        <span><i class="icon icon-wrench me-2" aria-hidden="true"></i>Implementation by Mark Hazleton</span>
                         <a href="https://github.com/markhazleton/UISampleSpark" class="btn btn-outline-primary btn-sm" target="_blank">
-                            <i class="bi bi-github me-2"></i>View Source Code
+                            <i class="icon icon-git-fork me-2" aria-hidden="true"></i>View Source Code
                         </a>
                     </div>
                 </div>
@@ -331,15 +331,15 @@ const validateForm = () => {
                         lengthMenu: [10, 25, 50, 100],
                         stateSave: true,
                         language: {
-                            search: "<i class='bi bi-search'></i> _INPUT_",
+                            search: "<i class='icon icon-search'></i> _INPUT_",
                             searchPlaceholder: "Search employees...",
-                            lengthMenu: "<i class='bi bi-list-ul'></i> _MENU_ per page",
+                            lengthMenu: "<i class='icon icon-list'></i> _MENU_ per page",
                             info: "Showing _START_ to _END_ of _TOTAL_ employees",
                             paginate: {
-                                first: "<i class='bi bi-chevron-double-left'></i>",
-                                last: "<i class='bi bi-chevron-double-right'></i>",
-                                next: "<i class='bi bi-chevron-right'></i>",
-                                previous: "<i class='bi bi-chevron-left'></i>"
+                                first: "<i class='icon icon-chevrons-left'></i>",
+                                last: "<i class='icon icon-chevrons-right'></i>",
+                                next: "<i class='icon icon-chevron-right'></i>",
+                                previous: "<i class='icon icon-chevron-left'></i>"
                             }
                         },
                         dom: '<"row mb-3"<"col-md-6"l><"col-md-6"f>><"row"<"col-md-12"tr>><"row"<"col-md-5"i><"col-md-7"p>>',
@@ -363,10 +363,10 @@ const validateForm = () => {
                                     return `
                                     <div class="btn-group" role="group">
                                         <button class="btn btn-sm btn-outline-primary" onclick="return getEmployeeByID(${data})">
-                                            <i class="bi bi-pencil-square"></i> Edit
+                                            <i class="icon icon-square-pen" aria-hidden="true"></i> Edit
                                         </button>
                                         <button class="btn btn-sm btn-outline-danger" onclick="Delete(${data})">
-                                            <i class="bi bi-trash"></i> Delete
+                                            <i class="icon icon-trash-2" aria-hidden="true"></i> Delete
                                         </button>
                                     </div>`;
                                 },

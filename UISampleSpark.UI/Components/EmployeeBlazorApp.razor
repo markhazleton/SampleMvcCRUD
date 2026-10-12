@@ -8,12 +8,12 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h1 class="h2 mb-0">
-                        <i class="bi bi-lightning text-primary me-2"></i>Blazor Employee CRUD
+                        <i class="icon icon-zap text-primary me-2" aria-hidden="true"></i>Blazor Employee CRUD
                     </h1>
                     <p class="text-muted">Real-time CRUD with Blazor Server and SignalR — pure C#, no JavaScript</p>
                 </div>
                 <button type="button" class="btn btn-primary" @onclick="OpenAdd">
-                    <i class="bi bi-plus-circle me-2"></i>Add Employee
+                    <i class="icon icon-circle-plus me-2" aria-hidden="true"></i>Add Employee
                 </button>
             </div>
 
@@ -30,7 +30,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="d-flex align-items-center">
-                                <label class="me-2"><i class="bi bi-list-ul"></i></label>
+                                <label class="me-2"><i class="icon icon-list" aria-hidden="true"></i></label>
                                 <select class="form-select form-select-sm" style="width: auto"
                                         @bind="pageSize">
                                     <option value="10">10 per page</option>
@@ -42,14 +42,14 @@
                         </div>
                         <div class="col-md-6">
                             <div class="input-group input-group-sm">
-                                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                <span class="input-group-text"><i class="icon icon-search" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control"
                                        placeholder="Search employees..."
                                        @bind="searchTerm" @bind:event="oninput" />
                                 @if (!string.IsNullOrEmpty(searchTerm))
                                 {
-                                    <button class="btn btn-outline-secondary" @onclick="() => searchTerm = string.Empty">
-                                        <i class="bi bi-x"></i>
+                                    <button class="btn btn-outline-secondary" @onclick="() => searchTerm = string.Empty" aria-label="Clear search">
+                                        <i class="icon icon-x" aria-hidden="true"></i>
                                     </button>
                                 }
                             </div>
@@ -104,11 +104,11 @@
                                             <td colspan="8" class="text-center text-muted py-4">
                                                 @if (!string.IsNullOrEmpty(searchTerm))
                                                 {
-                                                    <i class="bi bi-search me-2"></i>@:No employees match your search.
+                                                    <i class="icon icon-search me-2" aria-hidden="true"></i>@:No employees match your search.
                                                 }
                                                 else
                                                 {
-                                                    <i class="bi bi-inbox me-2"></i>@:No employees found.
+                                                    <i class="icon icon-inbox me-2" aria-hidden="true"></i>@:No employees found.
                                                 }
                                             </td>
                                         </tr>
@@ -134,11 +134,11 @@
                                                     <div class="btn-group" role="group">
                                                         <button class="btn btn-sm btn-outline-primary"
                                                                 @onclick="() => OpenEdit(emp.Id)">
-                                                            <i class="bi bi-pencil-square"></i> Edit
+                                                            <i class="icon icon-square-pen" aria-hidden="true"></i> Edit
                                                         </button>
                                                         <button class="btn btn-sm btn-outline-danger"
                                                                 @onclick="() => OpenDelete(emp)">
-                                                            <i class="bi bi-trash"></i> Delete
+                                                            <i class="icon icon-trash-2" aria-hidden="true"></i> Delete
                                                         </button>
                                                     </div>
                                                 </td>
@@ -165,10 +165,10 @@
                                 <nav aria-label="Employee pagination">
                                     <ul class="pagination pagination-sm mb-0 justify-content-end">
                                         <li class="page-item @(currentPage == 1 ? "disabled" : "")">
-                                            <button class="page-link" @onclick="() => currentPage = 1"><i class="bi bi-chevron-double-left"></i></button>
+                                            <button class="page-link" @onclick="() => currentPage = 1" aria-label="First page"><i class="icon icon-chevrons-left" aria-hidden="true"></i></button>
                                         </li>
                                         <li class="page-item @(currentPage == 1 ? "disabled" : "")">
-                                            <button class="page-link" @onclick="() => currentPage--"><i class="bi bi-chevron-left"></i></button>
+                                            <button class="page-link" @onclick="() => currentPage--" aria-label="Previous page"><i class="icon icon-chevron-left" aria-hidden="true"></i></button>
                                         </li>
                                         @foreach (var p in VisiblePages)
                                         {
@@ -177,10 +177,10 @@
                                             </li>
                                         }
                                         <li class="page-item @(currentPage == TotalPages ? "disabled" : "")">
-                                            <button class="page-link" @onclick="() => currentPage++"><i class="bi bi-chevron-right"></i></button>
+                                            <button class="page-link" @onclick="() => currentPage++" aria-label="Next page"><i class="icon icon-chevron-right" aria-hidden="true"></i></button>
                                         </li>
                                         <li class="page-item @(currentPage == TotalPages ? "disabled" : "")">
-                                            <button class="page-link" @onclick="() => currentPage = TotalPages"><i class="bi bi-chevron-double-right"></i></button>
+                                            <button class="page-link" @onclick="() => currentPage = TotalPages" aria-label="Last page"><i class="icon icon-chevrons-right" aria-hidden="true"></i></button>
                                         </li>
                                     </ul>
                                 </nav>
@@ -208,7 +208,7 @@
                             <div class="mb-3">
                                 <label for="blazorName" class="form-label">Name</label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <span class="input-group-text"><i class="icon icon-user" aria-hidden="true"></i></span>
                                     <InputText id="blazorName" class="form-control" @bind-Value="formEmployee.Name" placeholder="Enter employee name" />
                                 </div>
                                 <ValidationMessage For="() => formEmployee.Name" />
@@ -216,7 +216,7 @@
                             <div class="mb-3">
                                 <label for="blazorGender" class="form-label">Gender</label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-gender-ambiguous"></i></span>
+                                    <span class="input-group-text"><i class="icon icon-venus-and-mars" aria-hidden="true"></i></span>
                                     <InputSelect id="blazorGender" class="form-select" @bind-Value="formEmployee.Gender">
                                         <option value="@GenderEnum.Male">Male</option>
                                         <option value="@GenderEnum.Female">Female</option>
@@ -227,7 +227,7 @@
                             <div class="mb-3">
                                 <label for="blazorAge" class="form-label">Age</label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
+                                    <span class="input-group-text"><i class="icon icon-calendar" aria-hidden="true"></i></span>
                                     <InputNumber id="blazorAge" class="form-control" @bind-Value="formEmployee.Age" placeholder="Enter age" min="18" />
                                 </div>
                             </div>
@@ -235,7 +235,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="blazorState" class="form-label">State</label>
                                     <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                                        <span class="input-group-text"><i class="icon icon-map-pin" aria-hidden="true"></i></span>
                                         <InputText id="blazorState" class="form-control" @bind-Value="formEmployee.State" placeholder="Enter state" />
                                     </div>
                                     <ValidationMessage For="() => formEmployee.State" />
@@ -243,7 +243,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="blazorCountry" class="form-label">Country</label>
                                     <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                                        <span class="input-group-text"><i class="icon icon-globe" aria-hidden="true"></i></span>
                                         <InputText id="blazorCountry" class="form-control" @bind-Value="formEmployee.Country" placeholder="Enter country" />
                                     </div>
                                     <ValidationMessage For="() => formEmployee.Country" />
@@ -252,7 +252,7 @@
                             <div class="mb-3">
                                 <label for="blazorDepartment" class="form-label">Department</label>
                                 <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-building"></i></span>
+                                    <span class="input-group-text"><i class="icon icon-building-2" aria-hidden="true"></i></span>
                                     <InputSelect id="blazorDepartment" class="form-select" @bind-Value="formEmployee.Department">
                                         <option value="@EmployeeDepartmentEnum.Unknown" disabled>Select department</option>
                                         @foreach (var dept in departments)
@@ -272,15 +272,15 @@
                                     }
                                     else if (formEmployee.Id > 0)
                                     {
-                                        <i class="bi bi-check-circle me-1"></i> @:Update
+                                        <i class="icon icon-circle-check me-1" aria-hidden="true"></i> @:Update
                                     }
                                     else
                                     {
-                                        <i class="bi bi-plus-circle me-1"></i> @:Add
+                                        <i class="icon icon-circle-plus me-1" aria-hidden="true"></i> @:Add
                                     }
                                 </button>
                                 <button type="button" class="btn btn-secondary" @onclick="CloseForm">
-                                    <i class="bi bi-x-circle me-1"></i> Close
+                                    <i class="icon icon-circle-x me-1" aria-hidden="true"></i> Close
                                 </button>
                             </div>
                         </EditForm>
@@ -298,7 +298,7 @@
                 <div class="modal-content">
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title">
-                            <i class="bi bi-exclamation-triangle me-2"></i>Confirm Delete
+                            <i class="icon icon-triangle-alert me-2" aria-hidden="true"></i>Confirm Delete
                         </h5>
                         <button type="button" class="btn-close btn-close-white" @onclick="() => deleteTarget = null"></button>
                     </div>
@@ -308,10 +308,10 @@
                     </div>
                     <div class="modal-footer bg-light">
                         <button type="button" class="btn btn-secondary" @onclick="() => deleteTarget = null">
-                            <i class="bi bi-x-circle me-1"></i> Cancel
+                            <i class="icon icon-circle-x me-1" aria-hidden="true"></i> Cancel
                         </button>
                         <button type="button" class="btn btn-danger" @onclick="HandleDelete">
-                            <i class="bi bi-trash me-1"></i> Delete
+                            <i class="icon icon-trash-2 me-1" aria-hidden="true"></i> Delete
                         </button>
                     </div>
                 </div>
@@ -324,7 +324,7 @@
         <div class="col-md-12">
             <div class="card shadow-sm rounded-3 border-0 mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0"><i class="bi bi-info-circle me-2"></i>About Blazor Server Implementation</h3>
+                    <h3 class="mb-0"><i class="icon icon-info me-2" aria-hidden="true"></i>About Blazor Server Implementation</h3>
                 </div>
                 <div class="card-body p-4">
                     <p class="lead">
@@ -337,12 +337,12 @@
                         <div class="col-md-6">
                             <div class="card h-100 bg-light border-0">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="bi bi-stars text-warning me-2"></i>Blazor Server Advantages</h4>
+                                    <h4 class="card-title"><i class="icon icon-sparkles text-warning me-2" aria-hidden="true"></i>Blazor Server Advantages</h4>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Full C# — no JavaScript needed for UI logic</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Direct access to server-side services (no HTTP API round-trip)</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Thin client — minimal download, fast initial load</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-check-circle-fill text-success me-2"></i>Share models and validation between server and UI</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Full C# — no JavaScript needed for UI logic</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Direct access to server-side services (no HTTP API round-trip)</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Thin client — minimal download, fast initial load</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-check text-success me-2" aria-hidden="true"></i>Share models and validation between server and UI</li>
                                     </ul>
                                 </div>
                             </div>
@@ -351,12 +351,12 @@
                         <div class="col-md-6">
                             <div class="card h-100 bg-light border-0">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="bi bi-exclamation-triangle text-warning me-2"></i>Considerations</h4>
+                                    <h4 class="card-title"><i class="icon icon-triangle-alert text-warning me-2" aria-hidden="true"></i>Considerations</h4>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>Requires persistent WebSocket connection (SignalR)</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>Every UI interaction is a server round-trip</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>Server memory usage scales with connected users</li>
-                                        <li class="list-group-item bg-transparent border-0"><i class="bi bi-dash-circle text-danger me-2"></i>No offline capability</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Requires persistent WebSocket connection (SignalR)</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Every UI interaction is a server round-trip</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>Server memory usage scales with connected users</li>
+                                        <li class="list-group-item bg-transparent border-0"><i class="icon icon-circle-minus text-danger me-2" aria-hidden="true"></i>No offline capability</li>
                                     </ul>
                                 </div>
                             </div>
@@ -364,12 +364,12 @@
                     </div>
 
                     <div class="mt-4">
-                        <h4><i class="bi bi-code-slash me-2"></i>Technical Details</h4>
+                        <h4><i class="icon icon-code me-2" aria-hidden="true"></i>Technical Details</h4>
                         <div class="row g-3 mt-1">
                             <div class="col-md-4">
                                 <div class="card bg-light border-0 h-100">
                                     <div class="card-body">
-                                        <h6 class="fw-bold"><i class="bi bi-box me-1"></i> Blazor Server</h6>
+                                        <h6 class="fw-bold"><i class="icon icon-box me-1" aria-hidden="true"></i> Blazor Server</h6>
                                         <p class="small text-muted mb-0">Components execute on the server. UI updates are sent to the browser via SignalR WebSocket in real-time.</p>
                                     </div>
                                 </div>
@@ -377,7 +377,7 @@
                             <div class="col-md-4">
                                 <div class="card bg-light border-0 h-100">
                                     <div class="card-body">
-                                        <h6 class="fw-bold"><i class="bi bi-arrow-repeat me-1"></i> Direct DI</h6>
+                                        <h6 class="fw-bold"><i class="icon icon-refresh-cw me-1" aria-hidden="true"></i> Direct DI</h6>
                                         <p class="small text-muted mb-0">Injects <code>IEmployeeService</code> directly — no HTTP API calls needed. Data access happens server-side.</p>
                                     </div>
                                 </div>
@@ -385,7 +385,7 @@
                             <div class="col-md-4">
                                 <div class="card bg-light border-0 h-100">
                                     <div class="card-body">
-                                        <h6 class="fw-bold"><i class="bi bi-broadcast me-1"></i> SignalR</h6>
+                                        <h6 class="fw-bold"><i class="icon icon-radio me-1" aria-hidden="true"></i> SignalR</h6>
                                         <p class="small text-muted mb-0">Built-in SignalR hub handles all client-server communication. No manual WebSocket management.</p>
                                     </div>
                                 </div>
@@ -395,9 +395,9 @@
                 </div>
                 <div class="card-footer bg-light">
                     <div class="d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-tools me-2"></i>Implementation by Mark Hazleton</span>
+                        <span><i class="icon icon-wrench me-2" aria-hidden="true"></i>Implementation by Mark Hazleton</span>
                         <a href="https://github.com/markhazleton/UISampleSpark" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener noreferrer">
-                            <i class="bi bi-github me-2"></i>View Source Code
+                            <i class="icon icon-git-fork me-2" aria-hidden="true"></i>View Source Code
                         </a>
                     </div>
                 </div>
@@ -463,8 +463,8 @@
 
     private string SortIcon(string col)
     {
-        if (sortKey != col) return "bi bi-chevron-expand text-muted";
-        return sortDir == "asc" ? "bi bi-chevron-up" : "bi bi-chevron-down";
+        if (sortKey != col) return "icon icon-chevrons-up-down text-muted";
+        return sortDir == "asc" ? "icon icon-chevron-up" : "icon icon-chevron-down";
     }
 
     // --- Computed properties ---
