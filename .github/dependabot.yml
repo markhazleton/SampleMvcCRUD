@@ -89,6 +89,10 @@ updates:
 
   - package-ecosystem: "nuget"
     directory: "/UISampleSpark.UI.Tests"
+    ignore:
+      # ASP.NET Core 10 requires Microsoft.OpenApi 2.x; revisit with a framework upgrade.
+      - dependency-name: "Microsoft.OpenApi"
+        update-types: ["version-update:semver-major"]
     schedule:
       interval: "weekly"
       day: "tuesday"
