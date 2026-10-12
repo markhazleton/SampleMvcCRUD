@@ -1,7 +1,7 @@
 # NuGet refresh
 
 **Tier**: Feature
-**Status**: Complete
+**Status**: In Progress
 **Ratified**: 2026-10-11, user confirmed Feature and in-place implementation.
 
 ## Product Owner TL;DR
@@ -36,3 +36,10 @@ Revert the package/SDK edits if validation fails; no data migration or external 
 
 ## Waivers
 - Process override: Feature branch creation replaced by in-place work on main, explicitly requested by the user on 2026-10-11. No enforced backbone principle waived.
+
+## Follow-up: GitHub dependency backlog
+User authorized review and resolution of all repository PRs and Dependabot vulnerabilities in place on main. Scope includes remaining npm/tool/workflow updates, Docker lint repair, publishing validated commits and closing superseded dependency PRs.
+
+- [X] T5 Review every open PR diff and security alert; apply compatible outstanding changes.
+- [X] T6 Validate client assets, tools, clean build, tests, audits and Docker lint.
+- [ ] T7 Commit/push on main and resolve superseded PRs; verify GitHub state.
