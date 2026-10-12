@@ -1,0 +1,428 @@
+{
+  "generated": {
+    "by": "build-knowledge-index",
+    "at": "2026-10-12T03:49:18Z"
+  },
+  "roots": [
+    {
+      "path": ".devspark/",
+      "owner": "framework",
+      "purpose": "framework payload"
+    },
+    {
+      "path": ".devspark.work/",
+      "owner": "repo",
+      "purpose": "work products"
+    },
+    {
+      "path": ".knowledge/",
+      "owner": "repo",
+      "purpose": "current authoritative knowledge and published user-facing guidance"
+    },
+    {
+      "path": ".archive/",
+      "owner": "repo",
+      "purpose": "landing place for old work products, grouped by release"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "decisions-ADR-001",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/decisions/ADR-001.md",
+      "title": "ADR-001: Data-Core Project Consolidation",
+      "headings": [
+        "ADR-001: Data-Core Project Consolidation",
+        "Status",
+        "Context",
+        "Decision",
+        "Consequences",
+        "Positive",
+        "Negative",
+        "Source"
+      ]
+    },
+    {
+      "id": "decisions-ADR-002",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/decisions/ADR-002.md",
+      "title": "ADR-002: OpenAPI Tooling Migration — Swashbuckle to ApiTestSpark",
+      "headings": [
+        "ADR-002: OpenAPI Tooling Migration — Swashbuckle to ApiTestSpark",
+        "Status",
+        "Context",
+        "Decision",
+        "Consequences",
+        "Positive",
+        "Negative",
+        "Source"
+      ]
+    },
+    {
+      "id": "decisions-ADR-003",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/decisions/ADR-003.md",
+      "title": "ADR-003: Minimal API Migration in UISampleSpark.UI Host",
+      "headings": [
+        "ADR-003: Minimal API Migration in UISampleSpark.UI Host",
+        "Status",
+        "Context",
+        "Decision",
+        "Consequences",
+        "Positive",
+        "Negative",
+        "Source"
+      ]
+    },
+    {
+      "id": "governance-constitution-history",
+      "type": "governance",
+      "form": "flat-document",
+      "role": "governance",
+      "path": ".knowledge/governance/constitution-history.md",
+      "title": "Constitution History (migrated from `.documentation/memory/constitution.md`)",
+      "headings": [
+        "Constitution History (migrated from `.documentation/memory/constitution.md`)",
+        "Origin",
+        "Additional Patterns (Observed, not formalized as hard requirements)",
+        "Governance (as it stood under DevSpark)",
+        "Version History"
+      ]
+    },
+    {
+      "id": "governance-constitution",
+      "type": "governance",
+      "form": "flat-document",
+      "role": "governance",
+      "path": ".knowledge/governance/constitution.md",
+      "title": "UISampleSpark Constitution",
+      "headings": [
+        "UISampleSpark Constitution",
+        "Mission",
+        "Technology",
+        "Core Principles",
+        "Governance"
+      ]
+    },
+    {
+      "id": "guides-ACTIONS_FAILURES_ANALYSIS",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/guides/ACTIONS_FAILURES_ANALYSIS.md",
+      "title": "GitHub Actions Failures - Analysis and Fixes",
+      "headings": [
+        "GitHub Actions Failures - Analysis and Fixes",
+        "Executive Summary",
+        "Critical Findings",
+        "Detailed Analysis",
+        "1. Docker Build Failure",
+        "Problem",
+        "Root Cause",
+        "Solution Implemented",
+        "Verification",
+        "2. Dependabot Docker Updater Failures",
+        "Analysis",
+        "Recommended Actions",
+        "3. Missing Dependabot Configuration",
+        "Impact",
+        "Solution",
+        "Verification Script",
+        "Files Modified",
+        "1. `UISampleSpark.UI/Dockerfile`",
+        "2. `.github/workflows/docker-image.yml`",
+        "3. New Files Created",
+        "`.github/GITHUB_ACTIONS_TROUBLESHOOTING.md`",
+        "`.github/scripts/check-dependabot.ps1`",
+        "Testing Recommendations",
+        "Pre-Merge Testing",
+        "Post-Merge Verification",
+        "Next Steps",
+        "Immediate Actions Required",
+        "Follow-up Actions",
+        "Long-term Improvements",
+        "Resources and References",
+        "Documentation",
+        "Tools Used",
+        "Related Issues",
+        "Conclusion",
+        "Contact and Support"
+      ]
+    },
+    {
+      "id": "guides-ACTIONS_FIX_CHECKLIST",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/guides/ACTIONS_FIX_CHECKLIST.md",
+      "title": "GitHub Actions Fix Checklist",
+      "headings": [
+        "GitHub Actions Fix Checklist",
+        "Pre-Commit Checklist",
+        "Commit and Push",
+        "Post-Push Monitoring (First 10 minutes)",
+        "Post-Build Verification (After successful build)",
+        "Docker Image Testing (Optional)",
+        "Dependabot Issues",
+        "Docker Updater Issue (External - GitHub Infrastructure)",
+        "HttpClientFactory Dependabot Configuration",
+        "Follow-up Actions (Week 1)",
+        "Follow-up Actions (Month 1)",
+        "Long-term Improvements (Backlog)",
+        "Issues and Notes",
+        "Build Issues",
+        "Other Notes",
+        "Quick Reference Commands",
+        "Success Criteria"
+      ]
+    },
+    {
+      "id": "guides-CODEQL_MIGRATION",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/guides/CODEQL_MIGRATION.md",
+      "title": "CodeQL Action v3 to v4 Migration Status",
+      "headings": [
+        "CodeQL Action v3 to v4 Migration Status",
+        "Overview",
+        "Migration Status for This Repository",
+        "? Completed",
+        "? Not Applicable",
+        "What Changed in v4",
+        "Required Changes",
+        "Platform Requirements",
+        "GitHub.com and GHES 3.20+",
+        "GHES 3.19",
+        "GHES 3.18 and Older",
+        "Dependabot Configuration",
+        "Timeline",
+        "Current Workflow Analysis",
+        "docker-image.yml",
+        "main_samplecrud.yml",
+        "Benefits of v4",
+        "Testing Recommendations",
+        "References",
+        "Conclusion"
+      ]
+    },
+    {
+      "id": "guides-GITHUB_ACTIONS_TROUBLESHOOTING",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/guides/GITHUB_ACTIONS_TROUBLESHOOTING.md",
+      "title": "GitHub Actions Troubleshooting Guide",
+      "headings": [
+        "GitHub Actions Troubleshooting Guide",
+        "Current Issues Detected",
+        "1. Docker Build Failure - Missing HttpClientFactory Project",
+        "Option A: Verify .dockerignore (Recommended)",
+        "Option B: Update Dockerfile to Use Wildcard COPY",
+        "Option C: Simplify Dockerfile (Current Recommended Fix)",
+        "2. Dependabot Docker Updater Failures",
+        "3. Missing Dependabot Configuration for HttpClientFactory",
+        "Verification Steps",
+        "Check GitHub Actions Status",
+        "Verify Dependabot Configuration",
+        "Test Docker Build Locally",
+        "Recommended Actions",
+        "Additional Resources"
+      ]
+    },
+    {
+      "id": "guides-GITHUB_CLI_REFERENCE",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/guides/GITHUB_CLI_REFERENCE.md",
+      "title": "GitHub Actions Quick Reference",
+      "headings": [
+        "GitHub Actions Quick Reference",
+        "Installation",
+        "Authentication",
+        "Workflow Management",
+        "List Workflows",
+        "Runs",
+        "View Run Details",
+        "Trigger Workflows",
+        "Re-run Workflows",
+        "Download Artifacts",
+        "Repository Analysis",
+        "Check Repository Status",
+        "Dependabot",
+        "Security",
+        "Docker-Specific Commands",
+        "Docker Images on GitHub Container Registry",
+        "Local Docker Testing",
+        "Common Troubleshooting Workflows",
+        "Check Recent Failures",
+        "View Latest Failed Run",
+        "Monitor Current Run",
+        "Re-run All Failed Workflows",
+        "Check Workflow Syntax",
+        "View Job Logs",
+        "Advanced API Usage",
+        "Get Workflow Run Details (JSON)",
+        "List All Workflow Runs (with filters)",
+        "Cancel Running Workflow",
+        "Delete Workflow Run",
+        "Environment Variables",
+        "Set for Current Session",
+        "Common Environment Variables",
+        "Useful Aliases",
+        "PowerShell Profile",
+        "Bash/Zsh Profile",
+        "Tips and Best Practices",
+        "Related Documentation",
+        "Emergency Contacts"
+      ]
+    },
+    {
+      "id": "guides-ProjectDocumentation",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/guides/ProjectDocumentation.md",
+      "title": "Project Documentation",
+      "headings": [
+        "Project Documentation",
+        "Class: `BaseController`",
+        "Properties:",
+        "Methods:",
+        "Class: `EmployeeController`",
+        "Class: `EmployeePivotController`",
+        "Class: `EmployeeReactController`",
+        "Notes:",
+        "Class: `EmployeeSinglePageController`",
+        "Class: `HomeController`",
+        "Class: `MvcEmployeeController`",
+        "Class: `ConfigurationExtensions`",
+        "Class: `HttpContextExtensions`",
+        "Class: `MyHttpContext`",
+        "Class: `SeedDatabase`",
+        "Class: `ErrorViewModel`",
+        "Class: `KeyVaultOptions`",
+        "Class: `ErrorModel`",
+        "Class: `BaseApiController`",
+        "Class: `ErrorResource`",
+        "Class: `StatusController`",
+        "Class: `ApiExplorerModel`",
+        "Class: `ApiDescriptionModel`",
+        "Class: `CreateModel`",
+        "Class: `DeleteModel`",
+        "Class: `DetailsModel`",
+        "Class: `EditModel`",
+        "Class: `IndexModel`",
+        "Class: `DepartmentApiController`",
+        "Class: `EmployeeApiController`"
+      ]
+    },
+    {
+      "id": "history-0001-nuget-refresh-checklist",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/history/0001-nuget-refresh/checklist.md",
+      "title": "history-0001-nuget-refresh-checklist"
+    },
+    {
+      "id": "history-0001-nuget-refresh-gates-analyze",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/history/0001-nuget-refresh/gates/analyze.md",
+      "title": "Analysis gate",
+      "headings": [
+        "Analysis gate"
+      ]
+    },
+    {
+      "id": "history-0001-nuget-refresh-gates-critic",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/history/0001-nuget-refresh/gates/critic.md",
+      "title": "Critic gate",
+      "headings": [
+        "Critic gate"
+      ]
+    },
+    {
+      "id": "history-0001-nuget-refresh-github-review",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/history/0001-nuget-refresh/github-review.md",
+      "title": "GitHub dependency review",
+      "headings": [
+        "GitHub dependency review",
+        "Resolution"
+      ]
+    },
+    {
+      "id": "history-0001-nuget-refresh-results",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/history/0001-nuget-refresh/results.md",
+      "title": "Validation results",
+      "headings": [
+        "Validation results",
+        "Package changes",
+        "SDK and warning fixes",
+        "Verification",
+        "Scope and limitations"
+      ]
+    },
+    {
+      "id": "history-0001-nuget-refresh-spec",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/history/0001-nuget-refresh/spec.md",
+      "title": "NuGet refresh",
+      "headings": [
+        "NuGet refresh",
+        "Product Owner TL;DR",
+        "Intent",
+        "Acceptance criteria",
+        "Affected files",
+        "Tasks",
+        "Backbone coverage",
+        "Open questions",
+        "Rollback",
+        "Waivers",
+        "Follow-up: GitHub dependency backlog"
+      ]
+    },
+    {
+      "id": "testing-indexing-troubleshooting",
+      "type": "authoritative-reference",
+      "form": "flat-document",
+      "role": "authoritative-reference",
+      "path": ".knowledge/testing/indexing-troubleshooting.md",
+      "title": "Indexing Troubleshooting and Verification",
+      "headings": [
+        "Indexing Troubleshooting and Verification",
+        "Scope",
+        "Expected Behavior",
+        "Quick Verification",
+        "Manual Endpoint Checks",
+        "HTML Checks",
+        "Where to Look in Code",
+        "Common Failure Modes"
+      ]
+    }
+  ],
+  "edges": [],
+  "dangling_references": [],
+  "entities": [],
+  "stale_entities": []
+}
