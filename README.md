@@ -55,7 +55,7 @@ See the [CHANGELOG](CHANGELOG.md) for the full milestone timeline, and open `rep
 - API Endpoints:
   - REST endpoints for Employees & Departments (Swagger/OpenAPI enabled)
 - Theming & UX:
-  - Bootswatch theme switcher (light/dark, instant swap)
+  - Make Bold Spark brand theme (Make Bold Solutions design system) with a light (Cream) / dark (Ink) toggle
   - Bootstrap 5 + Bootstrap Icons
   - Modal-based forms
 - Data Layer:
@@ -77,12 +77,13 @@ See the [CHANGELOG](CHANGELOG.md) for the full milestone timeline, and open `rep
 - React 18 (CDN + Babel standalone for in-browser JSX)
 - Entity Framework Core (InMemory & SqlServer packages referenced for future use)
 - Swashbuckle (Swagger/OpenAPI)
-- Bootswatch theming (WebSpark.Bootswatch & WebSpark.HttpClientUtility)
+- Make Bold Spark theme (`wwwroot/css/makebold.css`) on Bootstrap 5.3; Be Vietnam Pro + Inter Tight self-hosted
+- WebSpark.HttpClientUtility
 - Markdown rendering (Westwind.AspNetCore.Markdown)
 
 ---
 ## HttpClient Usage
-HttpClient is utilized via `WebSpark.HttpClientUtility` package which provides `IHttpRequestResultService` for making HTTP requests. This is actively used by `WebSpark.Bootswatch` to fetch Bootswatch theme data from CDN sources, enabling the dynamic theme switcher functionality. The base `AddHttpClient()` factory registration is also available for future external API integrations.
+HttpClient is utilized via `WebSpark.HttpClientUtility` package which provides `IHttpRequestResultService` for making HTTP requests. The base `AddHttpClient()` factory registration is also available for future external API integrations.
 
 ---
 ## Getting Started
@@ -142,7 +143,7 @@ curl -H "X-API-Key: <your-key>" https://localhost:5001/api/employee
 
 ---
 ## Theme Switching
-Implemented via Bootswatch services and `<bootswatch-theme-switcher />` integration.
+The site uses the Make Bold Solutions design system: rust `#982407`, ember `#C6620C`, ink `#1E1E1E` and cream `#F8F6F2`, with Be Vietnam Pro headlines and Inter Tight body text. `wwwroot/css/makebold.css` maps these brand tokens onto Bootstrap 5.3 variables, so every demo restyles without markup changes. The header toggle switches `data-bs-theme` between light (Cream) and dark (Ink); the choice is stored in `localStorage` and defaults to the visitor's system preference. Shared chrome lives in `Views/Shared/_SiteHead.cshtml`, `_SiteHeader.cshtml` and `_Footer.cshtml`.
 
 ---
 ## Health & Status

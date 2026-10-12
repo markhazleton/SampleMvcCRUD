@@ -4,6 +4,27 @@ This document captures notable milestones extracted from the git history of `UIS
 
 ## 2026
 
+### Unreleased — Make Bold Spark redesign
+
+A complete visual and voice refresh so ui.makeboldspark.com reads as a Make Bold Spark property,
+built on the Make Bold Solutions design system.
+
+#### Changed
+
+- **Brand theme**: Replaced the Bootswatch theme switcher with `wwwroot/css/makebold.css`, which maps
+  Make Bold tokens (rust, ember, ink, cream; Be Vietnam Pro + Inter Tight) onto Bootstrap 5.3 so all
+  nine demos and the pivot report restyle without markup changes.
+- **Light / dark**: New Cream and Ink themes behind a header toggle (`wwwroot/js/theme.js`), remembered
+  per visitor and defaulting to the system preference, with no flash on load.
+- **Shared chrome**: All six layouts now use `_SiteHead`, `_SiteHeader` (Patterns menu, Reporting, API,
+  theme toggle) and a new Make Bold Spark footer; the fixed dark navbar and breadcrumb offsets are gone.
+- **Home page**: Rewritten in the brand voice — "One problem. Nine ways to build it." — with a filterable
+  pattern grid, an under-the-hood section, run-it-locally instructions and a rust call-to-action band.
+
+#### Removed
+
+- `WebSpark.Bootswatch` package, its tag helper and middleware, and the legacy `wwwroot/css/site.css`.
+
 ### v10.2.0 — Consolidation & Vanilla JS Expansion *(Tag: v10.2.0, Jun 21 2026)*
 
 A consolidation and feature-expansion release delivering Data-Core project merge, OpenAPI

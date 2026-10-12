@@ -6,7 +6,7 @@ A .NET 10 ASP.NET Core application showcasing multiple CRUD UI strategies (MVC, 
 - MVC, Razor Pages, and Single Page style (AJAX + partial views)
 - PivotTable.js employee data analysis
 - Swagger/OpenAPI at `/swagger`
-- Bootswatch theme switching (light/dark)
+- Make Bold Spark brand theme with light (Cream) / dark (Ink) toggle
 - In-memory EF Core data store
 - Health check at `/health`
 - Optional Azure Key Vault integration (via `VaultUri` env var)
@@ -15,11 +15,12 @@ A .NET 10 ASP.NET Core application showcasing multiple CRUD UI strategies (MVC, 
 - .NET 10 / ASP.NET Core
 - Entity Framework Core (InMemory)
 - Swashbuckle (Swagger)
-- Bootswatch (WebSpark.Bootswatch & WebSpark.HttpClientUtility)
+- Make Bold Spark theme (`css/makebold.css`) on Bootstrap 5.3; brand fonts in `fonts/`
+- WebSpark.HttpClientUtility
 - Markdown rendering (Westwind)
 
 ## HttpClient
-HttpClient is used via `WebSpark.HttpClientUtility` to fetch Bootswatch themes from CDN sources for the dynamic theme switcher. Base `AddHttpClient()` is also registered for future external API use.
+HttpClient is available via `WebSpark.HttpClientUtility`. Base `AddHttpClient()` is also registered for future external API use.
 
 ## Run Locally
 ```pwsh
