@@ -73,7 +73,26 @@ jobs:
       uses: github/codeql-action/analyze@v4.38.3
       with:
         category: "/language:${{matrix.language}}"
-        upload: true
+        upload: false
+        output: sarif-results
+
+    # paths-ignore in codeql-config.yml has no effect for compiled languages, so
+    # CodeQL still reports on Razor source-generator output under obj/. Drop
+    # those results before upload; authored code is unaffected.
+    - name: Filter generated code from results
+      uses: advanced-security/filter-sarif@v1.1
+      with:
+        patterns: |
+          +**/*
+          -**/obj/**
+        input: sarif-results/${{ matrix.language }}.sarif
+        output: sarif-results/${{ matrix.language }}.sarif
+
+    - name: Upload CodeQL results
+      uses: github/codeql-action/upload-sarif@v4.38.3
+      with:
+        sarif_file: sarif-results/${{ matrix.language }}.sarif
+        category: "/language:${{matrix.language}}"
 
     - name: Generate analysis summary
       if: always()
